@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "grateblocks:block/grate_soul_sand_side_1",
+    "south": "grateblocks:block/grate_soul_sand_side_1",
+    "east": "grateblocks:block/grate_soul_sand_side_2",
+    "west": "grateblocks:block/grate_soul_sand_side_2",
+    "up": "grateblocks:block/grate_soul_sand_top",
+    "down": "minecraft:block/soul_sand",
+    "particle": "minecraft:block/soul_sand"
+  }
+}

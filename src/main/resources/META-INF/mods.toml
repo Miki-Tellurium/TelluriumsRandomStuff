@@ -1,0 +1,26 @@
+modLoader="javafml" #mandatory
+loaderVersion="[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="MIT License"
+[[mods]] #mandatory
+modId="grateblocks" #mandatory
+version="1.0.0" #mandatory
+displayName="Grate Blocks" #mandatory
+issueTrackerURL="https://github.com/Miki-Tellurium/GrateBlocks/issues/"
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+displayURL="https://github.com/Miki-Tellurium/GrateBlocks/" #optional
+logoFile="grateblockslogo.png" #optional
+authors="Miki Tellurium" #optional
+description='''
+Add a variant of the Magma Block and Soul Sand with a grate '''
+[[dependencies.grateblocks]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[40,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.grateblocks]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
