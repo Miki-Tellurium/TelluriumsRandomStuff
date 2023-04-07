@@ -1,0 +1,38 @@
+{
+  "creativemodetab.telluriumsrandomstuff_creative_tab": "Tellurium's Random Stuff",
+
+  "item.telluriumsrandomstuff.soul_lava_bucket": "Soul Lava Bucket",
+
+  "block.telluriumsrandomstuff.grate_magma_block": "Magma Block with Grate",
+  "block.telluriumsrandomstuff.grate_soul_sand": "Soul Sand with Grate",
+  "block.telluriumsrandomstuff.hydrodynamic_rail": "Hydrodynamic Rail",
+  "block.telluriumsrandomstuff.opal": "Opal",
+  "block.telluriumsrandomstuff.opal_cobblestone": "Opal Cobblestone",
+  "block.telluriumsrandomstuff.opal_bricks": "Opal Bricks",
+  "block.telluriumsrandomstuff.cut_opal_bricks": "Cut Opal Bricks",
+  "block.telluriumsrandomstuff.chiseled_opal_bricks": "Chiseled Opal Bricks",
+  "block.telluriumsrandomstuff.cracked_opal_bricks": "Cracked Opal Bricks",
+  "block.telluriumsrandomstuff.cracked_cut_opal_bricks": "Cracked Cut Opal Bricks",
+  "block.telluriumsrandomstuff.opal_slab": "Opal Slab",
+  "block.telluriumsrandomstuff.opal_cobblestone_slab": "Opal Cobblestone Slab",
+  "block.telluriumsrandomstuff.opal_brick_slab": "Opal Brick Slab",
+  "block.telluriumsrandomstuff.cut_opal_brick_slab": "Cut Opal Brick Slab",
+  "block.telluriumsrandomstuff.cracked_opal_brick_slab": "Cracked Opal Brick Slab",
+  "block.telluriumsrandomstuff.cracked_cut_opal_brick_slab": "Cracked Cut Opal Brick Slab",
+  "block.telluriumsrandomstuff.opal_stairs": "Opal Stairs",
+  "block.telluriumsrandomstuff.opal_cobblestone_stairs": "Opal Cobblestone Stairs",
+  "block.telluriumsrandomstuff.opal_brick_stairs": "Opal Brick Stairs",
+  "block.telluriumsrandomstuff.cut_opal_brick_stairs": "Cut Opal Brick Stairs",
+  "block.telluriumsrandomstuff.cracked_opal_brick_stairs": "Cracked Opal Brick Stairs",
+  "block.telluriumsrandomstuff.cracked_cut_opal_brick_stairs": "Cracked Cut Opal Brick Stairs",
+  "block.telluriumsrandomstuff.opal_wall": "Opal Wall",
+  "block.telluriumsrandomstuff.opal_cobblestone_wall": "Opal Cobblestone Wall",
+  "block.telluriumsrandomstuff.opal_brick_wall": "Opal Brick Wall",
+  "block.telluriumsrandomstuff.cut_opal_brick_wall": "Cut Opal Brick Wall",
+  "block.telluriumsrandomstuff.cracked_opal_brick_wall": "Cracked Opal Brick Wall",
+  "block.telluriumsrandomstuff.cracked_cut_opal_brick_wall": "Cracked Cut Opal Brick Wall",
+  "block.telluriumsrandomstuff.opal_pressure_plate": "Opal Pressure Plate",
+  "block.telluriumsrandomstuff.opal_button": "Opal Button",
+
+  "fluid_type.telluriumsrandomstuff.soul_lava_fluid": "Soul Lava"
+}

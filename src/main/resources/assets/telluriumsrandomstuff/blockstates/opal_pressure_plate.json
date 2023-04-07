@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "telluriumsrandomstuff:block/opal_pressure_plate"
+    },
+    "powered=true": {
+      "model": "telluriumsrandomstuff:block/opal_pressure_plate_down"
+    }
+  }
+}

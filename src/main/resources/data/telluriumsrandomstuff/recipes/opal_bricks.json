@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:opal"
+    }
+  },
+  "result": {
+    "item": "telluriumsrandomstuff:opal_bricks",
+    "count": 4
+  }
+}

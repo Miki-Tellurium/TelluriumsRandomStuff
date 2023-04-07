@@ -1,0 +1,6 @@
+{
+  "parent": "telluriumsrandomstuff:block/pressure_plate_up_tinted",
+  "textures": {
+    "texture": "telluriumsrandomstuff:block/opal"
+  }
+}

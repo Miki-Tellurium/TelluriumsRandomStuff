@@ -1,0 +1,46 @@
+{
+  "variants": {
+    "waterlogged=false,shape=ascending_east": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_raised_ne",
+      "y": 90
+    },
+    "waterlogged=false,shape=ascending_north": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_raised_ne"
+    },
+    "waterlogged=false,shape=ascending_south": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_raised_sw"
+    },
+    "waterlogged=false,shape=ascending_west": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_raised_sw",
+      "y": 90
+    },
+    "waterlogged=false,shape=east_west": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail",
+      "y": 90
+    },
+    "waterlogged=false,shape=north_south": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail"
+    },
+    "waterlogged=true,shape=ascending_east": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_on_raised_ne",
+      "y": 90
+    },
+    "waterlogged=true,shape=ascending_north": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_on_raised_ne"
+    },
+    "waterlogged=true,shape=ascending_south": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_on_raised_sw"
+    },
+    "waterlogged=true,shape=ascending_west": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_on_raised_sw",
+      "y": 90
+    },
+    "waterlogged=true,shape=east_west": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_on",
+      "y": 90
+    },
+    "waterlogged=true,shape=north_south": {
+      "model": "telluriumsrandomstuff:block/hydrodynamic_rail_on"
+    }
+  }
+}

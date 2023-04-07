@@ -1,0 +1,8 @@
+{
+  "parent": "telluriumsrandomstuff:block/inner_stairs_tinted",
+  "textures": {
+    "bottom": "telluriumsrandomstuff:block/opal",
+    "top": "telluriumsrandomstuff:block/opal",
+    "side": "telluriumsrandomstuff:block/opal"
+  }
+}

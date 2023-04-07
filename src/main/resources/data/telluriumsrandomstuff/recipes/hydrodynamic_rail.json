@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XLX",
+    "X#X",
+    "XPX"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "P": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "item": "telluriumsrandomstuff:hydrodynamic_rail",
+    "count": 12
+  }
+}

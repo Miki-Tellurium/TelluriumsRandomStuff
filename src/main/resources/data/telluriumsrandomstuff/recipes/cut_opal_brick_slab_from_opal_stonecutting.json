@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "telluriumsrandomstuff:opal"
+  },
+  "result": "telluriumsrandomstuff:cut_opal_brick_slab",
+  "count": 2
+}

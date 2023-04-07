@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/rail_flat",
+  "render_type": "cutout",
+  "textures": {
+    "rail": "telluriumsrandomstuff:block/hydrodynamic_rail"
+  }
+}

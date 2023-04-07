@@ -1,0 +1,8 @@
+{
+  "parent": "telluriumsrandomstuff:block/slab_top_tinted",
+  "textures": {
+    "bottom": "telluriumsrandomstuff:block/cracked_cut_opal_bricks",
+    "top": "telluriumsrandomstuff:block/cracked_cut_opal_bricks",
+    "side": "telluriumsrandomstuff:block/cracked_cut_opal_bricks"
+  }
+}
