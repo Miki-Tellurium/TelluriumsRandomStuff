@@ -1,14 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
-import com.sun.jna.platform.win32.WinBase;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 
 import java.awt.*;
 
 public class ColorsUtil {
 
-    public static int getRainbowColor(BlockPos pos) {
+    public static int getOpalRainbowColor(BlockPos pos) {
         int waveSize = 75; // How big are the color waves
         Color color = Color.getHSBColor(
                 (((pos.getX() + pos.getZ() + pos.getY() * 1.05f)) / waveSize) % 1.0f,
@@ -25,4 +23,17 @@ public class ColorsUtil {
         return color.getRGB();
     }
     */
+
+    public static float soulRedColor() {
+        return 50f / 255f;
+    }
+
+    public static float soulGreenColor() {
+        return 253f / 255f;
+    }
+
+    public static float soulBlueColor() {
+        return 253f / 255f;
+    }
+
 }

@@ -4,10 +4,13 @@ import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
+import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
@@ -73,6 +76,9 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
 
             }
         }
+        if (entity.getLevel().getBlockState(entity.getOnPos().below()).is(Blocks.SOUL_SAND)) {
+            System.out.println("SoulSand");
+        }
         Vec3 v = entity.getDeltaMovement().multiply(0.4, 0.75, 0.4);
         entity.setDeltaMovement(v);
         return false;
@@ -83,17 +89,23 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         BlockPos blockpos = pPos.above();
         if (pLevel.getBlockState(blockpos).isAir() && !pLevel.getBlockState(blockpos).isSolidRender(pLevel, blockpos)) {
             if (pRandom.nextInt(100) == 0) {
-                double d0 = (double)pPos.getX() + pRandom.nextDouble();
-                double d1 = (double)pPos.getY() + 1.0D;
-                double d2 = (double)pPos.getZ() + pRandom.nextDouble();
-                pLevel.addParticle(ParticleTypes.LAVA, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-                pLevel.playLocalSound(d0, d1, d2, SoundEvents.LAVA_POP, SoundSource.BLOCKS, 0.2F + pRandom.nextFloat() * 0.2F, 0.9F + pRandom.nextFloat() * 0.15F, false);
+                double pX = pPos.getX() + pRandom.nextDouble();
+                double pY = pPos.above().getY() + (pRandom.nextDouble() * 0.25d);
+                double pZ = pPos.getZ() + pRandom.nextDouble();
+                pLevel.addParticle(ParticleTypes.SOUL, pX, pY, pZ, 0.0D, 0.0D, 0.0D);
+                SoundEvent sound = pRandom.nextInt(3) == 0 ? SoundEvents.SOUL_ESCAPE : SoundEvents.LAVA_POP;
+                pLevel.playLocalSound(pX, pY, pZ, sound, SoundSource.BLOCKS, 0.2F + pRandom.nextFloat() * 0.2F, 0.9F + pRandom.nextFloat() * 0.15F, false);
             }
 
             if (pRandom.nextInt(200) == 0) {
-                pLevel.playLocalSound((double)pPos.getX(), (double)pPos.getY(), (double)pPos.getZ(), SoundEvents.LAVA_AMBIENT, SoundSource.BLOCKS, 0.2F + pRandom.nextFloat() * 0.2F, 0.9F + pRandom.nextFloat() * 0.15F, false);
+                pLevel.playLocalSound(pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.LAVA_AMBIENT, SoundSource.BLOCKS, 0.2F + pRandom.nextFloat() * 0.2F, 0.9F + pRandom.nextFloat() * 0.15F, false);
             }
         }
+
+        if (pLevel.isRaining()) {
+            LevelUtils.handleRainParticles(pLevel, pPos, pState, pRandom);
+        }
+
     }
 
     @Override
@@ -152,7 +164,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     @Nullable
     @Override
     protected ParticleOptions getDripParticle() {
-        return ParticleTypes.DRIPPING_LAVA;
+        return ModParticles.SOUL_LAVA_HANG.get();
     }
 
     @Override

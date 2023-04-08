@@ -1,13 +1,14 @@
 package com.mikitellurium.telluriumsrandomstuff;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModCauldronInteraction;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.item.GrateBlocksCreativeTab;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.worldgen.ModPlacedFeatures;
+import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -30,8 +31,9 @@ public class TelluriumsRandomStuffMod {
 
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
-        ModFluidTypes.register(eventBus);
+        ModFluidTypes.registerSoulLavaType(eventBus);
         ModFluids.register(eventBus);
+        ModParticles.register(eventBus);
 
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::addCreative);
@@ -40,7 +42,7 @@ public class TelluriumsRandomStuffMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.info("LET ME COOK");
+        CauldronInteraction.bootStrap();
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {

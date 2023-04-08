@@ -2,13 +2,20 @@ package com.mikitellurium.telluriumsrandomstuff.fluid.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -66,6 +73,25 @@ public class SoulLavaBlock extends LiquidBlock {
 
     private void fizz(LevelAccessor pLevel, BlockPos pPos) {
         pLevel.levelEvent(1501, pPos, 0);
+    }
+
+    @Override
+    public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
+        if (pEntity instanceof ItemEntity) {
+
+            if (!pEntity.fireImmune()) {
+                pEntity.setRemainingFireTicks(pEntity.getRemainingFireTicks() + 1);
+                if (pEntity.getRemainingFireTicks() == 0) {
+                    pEntity.setSecondsOnFire(8);
+                }
+            }
+
+            pEntity.hurt(DamageSource.IN_FIRE, 2.0f);
+            if (pEntity.wasOnFire) {
+                pEntity.playSound(SoundEvents.FIRE_EXTINGUISH, 0.5F, 2.6f);
+            }
+            super.entityInside(pState, pLevel, pPos, pEntity);
+        }
     }
 
 }
