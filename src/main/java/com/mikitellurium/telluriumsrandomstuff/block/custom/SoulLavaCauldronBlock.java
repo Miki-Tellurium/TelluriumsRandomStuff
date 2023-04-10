@@ -16,15 +16,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LavaCauldronBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class SoulLavaCauldronBlock extends AbstractCauldronBlock {
-
-    private LavaCauldronBlock v;
 
     public SoulLavaCauldronBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.LAVA_CAULDRON), CauldronInteraction.EMPTY);
