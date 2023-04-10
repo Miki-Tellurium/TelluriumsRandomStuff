@@ -22,12 +22,6 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> SOUL_LAVA_LAND =
             PARTICLE_TYPES.register("soul_lava_land", () -> new SimpleParticleType(true));
 
-    public static final RegistryObject<SimpleParticleType> DRIPSTONE_SOUL_LAVA_FALL =
-            PARTICLE_TYPES.register("dripstone_soul_lava_fall", () -> new SimpleParticleType(true));
-
-    public static final RegistryObject<SimpleParticleType> DRIPSTONE_SOUL_LAVA_HANG =
-            PARTICLE_TYPES.register("dripstone_soul_lava_hang", () -> new SimpleParticleType(true));
-
     public static void register(IEventBus eventBus) {
         PARTICLE_TYPES.register(eventBus);
     }

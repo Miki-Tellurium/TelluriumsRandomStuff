@@ -15,8 +15,6 @@ public class SetupEvents {
         event.register(ModParticles.SOUL_LAVA_FALL.get(), SoulLavaDripParticle.SoulLavaFallProvider::new);
         event.register(ModParticles.SOUL_LAVA_HANG.get(), SoulLavaDripParticle.SoulLavaHangProvider::new);
         event.register(ModParticles.SOUL_LAVA_LAND.get(), SoulLavaDripParticle.SoulLavaLandProvider::new);
-        event.register(ModParticles.DRIPSTONE_SOUL_LAVA_FALL.get(), SoulLavaDripParticle.DripstoneLavaFallProvider::new);
-        event.register(ModParticles.DRIPSTONE_SOUL_LAVA_HANG.get(), SoulLavaDripParticle.DripstoneLavaHangProvider::new);
     }
 
 }

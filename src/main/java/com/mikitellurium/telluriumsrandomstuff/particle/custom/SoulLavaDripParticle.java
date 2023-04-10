@@ -133,55 +133,6 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
     }
 
     @OnlyIn(Dist.CLIENT)
-    static class DripstoneFallAndLandParticle extends SoulLavaDripParticle.FallAndLandParticle {
-        DripstoneFallAndLandParticle(ClientLevel clientLevel, double pX, double pY, double pZ, Fluid fluid, ParticleOptions particleOptions) {
-            super(clientLevel, pX, pY, pZ, fluid, particleOptions);
-        }
-
-        protected void postMoveUpdate() {
-            if (this.onGround) {
-                this.remove();
-                this.level.addParticle(this.landParticle, this.x, this.y, this.z, 0.0D, 0.0D, 0.0D);
-                SoundEvent soundevent = SoundEvents.POINTED_DRIPSTONE_DRIP_LAVA;
-                float f = Mth.randomBetween(this.random, 0.3F, 1.0F);
-                this.level.playLocalSound(this.x, this.y, this.z, soundevent, SoundSource.BLOCKS, f, 1.0F, false);
-            }
-
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static class DripstoneLavaFallProvider implements ParticleProvider<SimpleParticleType> {
-        protected final SpriteSet sprite;
-
-        public DripstoneLavaFallProvider(SpriteSet pSprites) {
-            this.sprite = pSprites;
-        }
-
-        public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-            SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.DripstoneFallAndLandParticle(pLevel, pX, pY, pZ, ModFluids.SOUL_LAVA_SOURCE.get(), ModParticles.SOUL_LAVA_LAND.get());
-            dripParticle.setColor(ColorsUtil.soulRedColor(), ColorsUtil.soulGreenColor(), ColorsUtil.soulBlueColor());
-            dripParticle.pickSprite(this.sprite);
-            return dripParticle;
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static class DripstoneLavaHangProvider implements ParticleProvider<SimpleParticleType> {
-        protected final SpriteSet sprite;
-
-        public DripstoneLavaHangProvider(SpriteSet pSprites) {
-            this.sprite = pSprites;
-        }
-
-        public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-            SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.CoolingDripHangParticle(pLevel, pX, pY, pZ, ModFluids.SOUL_LAVA_SOURCE.get(), ModParticles.DRIPSTONE_SOUL_LAVA_FALL.get());
-            dripParticle.pickSprite(this.sprite);
-            return dripParticle;
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
     static class CoolingDripHangParticle extends SoulLavaDripParticle.DripHangParticle {
         CoolingDripHangParticle(ClientLevel clientLevel, double pX, double pY, double pZ, Fluid fluid, ParticleOptions particleOptions) {
             super(clientLevel, pX, pY, pZ, fluid, particleOptions);
