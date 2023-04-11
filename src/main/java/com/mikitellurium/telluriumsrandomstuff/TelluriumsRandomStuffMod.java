@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.item.GrateBlocksCreativeTab;
@@ -40,6 +41,7 @@ public class TelluriumsRandomStuffMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        ModCauldronInteractions.register();
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
