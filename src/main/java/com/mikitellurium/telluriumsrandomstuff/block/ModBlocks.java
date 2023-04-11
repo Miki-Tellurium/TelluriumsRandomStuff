@@ -42,7 +42,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> HYDRODYNAMIC_RAIL = registerBlock("hydrodynamic_rail", HydrodynamicRailBlock::new);
 
-    public static final RegistryObject<Block> SOUL_LAVA_CAULDRON_BLOCK = registerBlock("soul_lava_cauldron", SoulLavaCauldronBlock::new);
+    public static final RegistryObject<Block> SOUL_LAVA_CAULDRON_BLOCK = BLOCKS.register("soul_lava_cauldron", SoulLavaCauldronBlock::new);
 
     public static final RegistryObject<Block> OPAL = registerBlock("opal", OpalBlock::new);
 
@@ -90,12 +90,6 @@ public class ModBlocks {
 
     public static final RegistryObject<LiquidBlock> SOUL_LAVA_BLOCK = BLOCKS.register("soul_lava_block",
             () -> new SoulLavaBlock(ModFluids.SOUL_LAVA_SOURCE));
-
-    public static Boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) { return true; }
-
-    public static Boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
-        return true;
-    }
 
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
