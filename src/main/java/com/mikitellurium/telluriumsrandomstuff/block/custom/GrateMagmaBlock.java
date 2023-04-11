@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -29,7 +30,8 @@ public class GrateMagmaBlock extends MagmaBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public GrateMagmaBlock() {
-        super(Properties.copy(Blocks.MAGMA_BLOCK));
+        super(Properties.copy(Blocks.MAGMA_BLOCK)
+                .emissiveRendering((blockState, blockGetter, blockPos) -> true));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
@@ -61,4 +63,5 @@ public class GrateMagmaBlock extends MagmaBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING);
     }
+
 }
