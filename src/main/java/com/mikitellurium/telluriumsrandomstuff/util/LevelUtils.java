@@ -1,7 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
+import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import net.minecraft.client.main.Main;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.npc.WanderingTraderSpawner;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -21,6 +25,25 @@ public class LevelUtils {
 
     private static final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK =
             Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
+
+    public static boolean isBubbleColumnGenerator(BlockState blockState) {
+        return blockState.is(ModBlocks.GRATE_MAGMA_BLOCK.get()) ||
+                blockState.is(ModBlocks.GRATE_SOUL_SAND.get()) ||
+                blockState.is(ModBlocks.SOUL_MAGMA_BLOCK.get());
+    }
+
+    public static boolean isBubbleColumnDragDown(BlockState blockState) {
+        return blockState.is(ModBlocks.GRATE_MAGMA_BLOCK.get()) ||
+                blockState.is(ModBlocks.SOUL_MAGMA_BLOCK.get());
+    }
+
+    public static boolean isBubbleColumnLiftUp(BlockState blockState) {
+        return blockState.is(ModBlocks.GRATE_SOUL_SAND.get());
+    }
+
+    public static boolean isSoulMagmaBlockValidSpawn(EntityType entityType) {
+        return entityType.equals(EntityType.WITHER_SKELETON);
+    }
 
     @Nullable
     public static BlockPos findFillableCauldronBelow(Level pLevel, BlockPos pPos) {

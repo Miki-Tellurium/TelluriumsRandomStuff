@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.block.custom;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -52,10 +53,10 @@ public class CustomBubbleColumnBlock extends BubbleColumnBlock {
     private static BlockState getColumnState(BlockState pBlockState) {
         if (pBlockState.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
             return pBlockState;
-        } else if (pBlockState.is(ModBlocks.GRATE_SOUL_SAND.get())) {
+        } else if (LevelUtils.isBubbleColumnLiftUp(pBlockState)) {
             return ModBlocks.CUSTOM_BUBBLE_COLUMN.get().defaultBlockState().setValue(DRAG_DOWN, Boolean.valueOf(false));
         } else {
-            return pBlockState.is(ModBlocks.GRATE_MAGMA_BLOCK.get()) ? ModBlocks.CUSTOM_BUBBLE_COLUMN.get().defaultBlockState().setValue(DRAG_DOWN, Boolean.valueOf(true)) : Blocks.WATER.defaultBlockState();
+            return LevelUtils.isBubbleColumnDragDown(pBlockState) ? ModBlocks.CUSTOM_BUBBLE_COLUMN.get().defaultBlockState().setValue(DRAG_DOWN, Boolean.valueOf(true)) : Blocks.WATER.defaultBlockState();
         }
     }
 
@@ -66,7 +67,7 @@ public class CustomBubbleColumnBlock extends BubbleColumnBlock {
     @Override
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         BlockState blockstate = pLevel.getBlockState(pPos.below());
-        return blockstate.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get()) || blockstate.is(ModBlocks.GRATE_MAGMA_BLOCK.get()) || blockstate.is(ModBlocks.GRATE_SOUL_SAND.get());
+        return blockstate.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get()) || LevelUtils.isBubbleColumnGenerator(blockstate);
     }
 
     @Override
