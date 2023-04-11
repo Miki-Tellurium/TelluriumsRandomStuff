@@ -38,7 +38,7 @@ public class LevelUtils {
         return blockState.is(ModBlocks.GRATE_SOUL_SAND.get());
     }
 
-    public static boolean isSoulMagmaBlockValidSpawn(EntityType entityType) {
+    public static boolean isSoulBlockValidSpawn(EntityType entityType) {
         return entityType.equals(EntityType.SKELETON) || entityType.equals(EntityType.WITHER_SKELETON);
     }
 

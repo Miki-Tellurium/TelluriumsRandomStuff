@@ -17,7 +17,7 @@ public class SoulMagmaBlock extends MagmaBlock {
 
     public SoulMagmaBlock() {
         super(Properties.copy(Blocks.MAGMA_BLOCK)
-                .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> LevelUtils.isSoulMagmaBlockValidSpawn(entityType))
+                .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> LevelUtils.isSoulBlockValidSpawn(entityType))
                 .lightLevel((blockState) -> 2)
                 .emissiveRendering((blockState, blockGetter, blockPos) -> true));
     }

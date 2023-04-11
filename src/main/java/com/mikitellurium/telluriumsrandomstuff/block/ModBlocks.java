@@ -5,29 +5,16 @@ import com.mikitellurium.telluriumsrandomstuff.block.custom.*;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.fluid.custom.SoulLavaBlock;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.cauldron.CauldronInteraction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.Map;
 import java.util.function.Supplier;
-
-import static net.minecraft.core.cauldron.CauldronInteraction.fillBucket;
 
 public class ModBlocks {
 
@@ -45,6 +32,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> SOUL_MAGMA_BLOCK = registerBlock("soul_magma_block", SoulMagmaBlock::new);
 
     public static final RegistryObject<Block> GRATE_SOUL_MAGMA_BLOCK = registerBlock("grate_soul_magma_block", GrateSoulMagmaBlock::new);
+
+    public static final RegistryObject<Block> SOUL_MAGMA_BRICKS = registerBlock("soul_magma_bricks", SoulMagmaBricksBlock::new);
 
     public static final RegistryObject<Block> SOUL_LAVA_CAULDRON_BLOCK = BLOCKS.register("soul_lava_cauldron", SoulLavaCauldronBlock::new);
 

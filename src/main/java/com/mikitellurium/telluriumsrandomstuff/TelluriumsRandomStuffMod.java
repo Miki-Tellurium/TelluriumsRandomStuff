@@ -52,6 +52,7 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.SOUL_LAVA_BUCKET.get());
             event.accept(ModBlocks.SOUL_MAGMA_BLOCK.get());
             event.accept(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get());
+            event.accept(ModBlocks.SOUL_MAGMA_BRICKS.get());
             event.accept(ModBlocks.OPAL.get());
             event.accept(ModBlocks.OPAL_COBBLESTONE.get());
             event.accept(ModBlocks.OPAL_BRICKS.get());

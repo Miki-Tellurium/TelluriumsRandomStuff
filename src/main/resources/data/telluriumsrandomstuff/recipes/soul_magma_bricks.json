@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:soul_magma_block"
+    }
+  },
+  "result": {
+    "item": "telluriumsrandomstuff:soul_magma_bricks",
+    "count": 4
+  }
+}
