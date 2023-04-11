@@ -25,7 +25,7 @@ public abstract class LiquidBlockMixin {
         if (level.getFluidState(pos).is(Fluids.LAVA) && (level.getBlockState(pos.below()).is(Blocks.SOUL_SAND) ||
                 level.getBlockState(pos.below()).is(ModBlocks.GRATE_SOUL_SAND.get()))) {
 
-            if (random.nextFloat() < 0.00420f) {
+            if (random.nextFloat() < 0.0024f) {
                 BlockPos blockPos1 = LevelUtils.findFillableCauldronBelow(level, pos.below()); // Find empty cauldron under soul sand
                 if (blockPos1 != null) {
                     level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
