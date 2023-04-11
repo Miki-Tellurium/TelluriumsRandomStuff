@@ -1,12 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.block.custom;
 
-import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
-import com.mikitellurium.telluriumsrandomstuff.sounds.ModSoundTypes;
-import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
+import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -19,12 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class GrateSoulSandBlock extends SoulSandBlock {
 
@@ -48,7 +40,7 @@ public class GrateSoulSandBlock extends SoulSandBlock {
         }
 
         if (level.isRaining()) {
-            LevelUtils.handleRainParticles(level, pos, state, random);
+            ParticleUtils.handleRainParticles(level, pos, state, random);
         }
     }
 
@@ -72,4 +64,5 @@ public class GrateSoulSandBlock extends SoulSandBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING);
     }
+
 }

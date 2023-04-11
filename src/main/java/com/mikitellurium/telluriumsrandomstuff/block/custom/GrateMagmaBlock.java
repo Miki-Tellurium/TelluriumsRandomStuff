@@ -1,15 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.block.custom;
 
-import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
-import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
+import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -18,12 +15,7 @@ import net.minecraft.world.level.block.MagmaBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class GrateMagmaBlock extends MagmaBlock {
 
@@ -49,7 +41,7 @@ public class GrateMagmaBlock extends MagmaBlock {
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
         if (pLevel.isRaining()) {
-            LevelUtils.handleRainParticles(pLevel, pPos, pState, pRandom);
+            ParticleUtils.handleRainParticles(pLevel, pPos, pState, pRandom);
         }
     }
 

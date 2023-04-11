@@ -5,7 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
-import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
+import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -104,7 +104,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         }
 
         if (pLevel.isRaining()) {
-            LevelUtils.handleRainParticles(pLevel, pPos, pState, pRandom);
+            ParticleUtils.handleRainParticles(pLevel, pPos, pState, pRandom);
         }
 
     }
