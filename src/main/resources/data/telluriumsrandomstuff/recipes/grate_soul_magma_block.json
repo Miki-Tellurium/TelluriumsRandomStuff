@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "X"
+
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_bars"
+    },
+    "X": {
+      "item": "telluriumsrandomstuff:soul_magma_block"
+    }
+  },
+  "result": {
+    "item": "telluriumsrandomstuff:grate_soul_magma_block"
+  }
+}

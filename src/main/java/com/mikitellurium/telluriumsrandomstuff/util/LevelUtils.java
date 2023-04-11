@@ -30,7 +30,8 @@ public class LevelUtils {
 
     public static boolean isBubbleColumnDragDown(BlockState blockState) {
         return blockState.is(ModBlocks.GRATE_MAGMA_BLOCK.get()) ||
-                blockState.is(ModBlocks.SOUL_MAGMA_BLOCK.get());
+                blockState.is(ModBlocks.SOUL_MAGMA_BLOCK.get()) ||
+                blockState.is(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get());
     }
 
     public static boolean isBubbleColumnLiftUp(BlockState blockState) {

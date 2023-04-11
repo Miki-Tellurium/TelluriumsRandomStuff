@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "telluriumsrandomstuff:block/grate_soul_magma_block_side_1",
+    "south": "telluriumsrandomstuff:block/grate_soul_magma_block_side_1",
+    "east": "telluriumsrandomstuff:block/grate_soul_magma_block_side_2",
+    "west": "telluriumsrandomstuff:block/grate_soul_magma_block_side_2",
+    "up": "telluriumsrandomstuff:block/grate_soul_magma_block_top",
+    "down": "telluriumsrandomstuff:block/soul_magma_block",
+    "particle": "telluriumsrandomstuff:block/soul_magma_block"
+  }
+}
