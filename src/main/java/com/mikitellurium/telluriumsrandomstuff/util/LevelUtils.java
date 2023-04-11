@@ -1,16 +1,13 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
-import net.minecraft.client.main.Main;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.npc.WanderingTraderSpawner;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
