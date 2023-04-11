@@ -20,7 +20,7 @@ public class SoulSandBlockMixin extends Block {
 
     @Override
     public void animateTick(@NotNull BlockState state, Level level, BlockPos pos, @NotNull RandomSource random) {
-        if (level.getFluidState(pos.above()).is(Fluids.LAVA)) {
+        if (level.getFluidState(pos.above()).is(Fluids.LAVA) && level.isEmptyBlock(pos.below())) {
             if (random.nextInt(12) == 0) {
                 double d0 = pos.getX() + random.nextDouble();
                 double d1 = pos.getY() - 0.05d;
