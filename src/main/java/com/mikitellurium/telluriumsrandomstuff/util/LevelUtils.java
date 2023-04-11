@@ -10,6 +10,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -27,9 +28,7 @@ public class LevelUtils {
             Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
 
     public static boolean isBubbleColumnGenerator(BlockState blockState) {
-        return blockState.is(ModBlocks.GRATE_MAGMA_BLOCK.get()) ||
-                blockState.is(ModBlocks.GRATE_SOUL_SAND.get()) ||
-                blockState.is(ModBlocks.SOUL_MAGMA_BLOCK.get());
+        return  isBubbleColumnLiftUp(blockState)|| isBubbleColumnDragDown(blockState);
     }
 
     public static boolean isBubbleColumnDragDown(BlockState blockState) {
@@ -42,7 +41,7 @@ public class LevelUtils {
     }
 
     public static boolean isSoulMagmaBlockValidSpawn(EntityType entityType) {
-        return entityType.equals(EntityType.WITHER_SKELETON);
+        return entityType.equals(EntityType.SKELETON) || entityType.equals(EntityType.WITHER_SKELETON);
     }
 
     @Nullable

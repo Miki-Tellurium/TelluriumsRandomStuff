@@ -8,6 +8,7 @@ import com.mikitellurium.telluriumsrandomstuff.item.GrateBlocksCreativeTab;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
