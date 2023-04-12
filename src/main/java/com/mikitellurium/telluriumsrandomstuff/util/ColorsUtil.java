@@ -8,11 +8,13 @@ public class ColorsUtil {
 
     public static int getOpalRainbowColor(BlockPos pos) {
         int waveSize = 75; // How big are the color waves
+
         Color color = Color.getHSBColor(
                 (((pos.getX() + pos.getZ() + pos.getY() * 1.05f)) / waveSize) % 1.0f,
                 0.65F, 0.8F);
         return color.getRGB();
     }
+
     /*
     public static int legacyGetOpalColor(BlockPos pos) {
         Color color = Color.getHSBColor((((
