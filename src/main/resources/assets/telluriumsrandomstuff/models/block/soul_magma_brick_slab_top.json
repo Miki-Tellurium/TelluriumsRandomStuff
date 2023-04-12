@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "telluriumsrandomstuff:block/soul_magma_bricks",
+    "top": "telluriumsrandomstuff:block/soul_magma_bricks",
+    "side": "telluriumsrandomstuff:block/soul_magma_bricks"
+  }
+}
