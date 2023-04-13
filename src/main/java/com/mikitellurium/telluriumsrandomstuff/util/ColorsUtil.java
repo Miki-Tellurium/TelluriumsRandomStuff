@@ -27,15 +27,15 @@ public class ColorsUtil {
     */
 
     public static float soulRedColor() {
-        return 50f / 255f;
+        return 37f / 255f;
     }
 
     public static float soulGreenColor() {
-        return 253f / 255f;
+        return 244f / 255f;
     }
 
     public static float soulBlueColor() {
-        return 253f / 255f;
+        return 255f / 255f;
     }
 
 }
