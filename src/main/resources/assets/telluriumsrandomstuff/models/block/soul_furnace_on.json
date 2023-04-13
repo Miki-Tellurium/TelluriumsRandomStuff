@@ -4,6 +4,6 @@
     "front": "telluriumsrandomstuff:block/soul_furnace_front_on",
     "side": "telluriumsrandomstuff:block/soul_furnace_side",
     "top": "telluriumsrandomstuff:block/soul_furnace_top",
-    "bottom": "telluriumsrandomstuff:block/soul_furnace_bottom"
+    "bottom": "minecraft:block/obsidian"
   }
 }
