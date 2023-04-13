@@ -33,6 +33,8 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GRATE_SOUL_MAGMA_BLOCK = registerBlock("grate_soul_magma_block", GrateSoulMagmaBlock::new);
 
+    public static final RegistryObject<Block> SOUL_FURNACE = registerBlock("soul_furnace", SoulFurnaceBlock::new);
+
     public static final RegistryObject<Block> SOUL_MAGMA_BRICKS = registerBlock("soul_magma_bricks", SoulMagmaBricksBlock::new);
 
     public static final RegistryObject<Block> SOUL_MAGMA_BRICK_SLAB = registerBlock("soul_magma_brick_slab", SoulMagmaBrickSlabBlock::new);
