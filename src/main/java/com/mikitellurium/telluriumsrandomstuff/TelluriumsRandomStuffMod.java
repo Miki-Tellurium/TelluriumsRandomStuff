@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModCauldronInteractions;
+import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.item.GrateBlocksCreativeTab;
@@ -30,6 +31,7 @@ public class TelluriumsRandomStuffMod {
 
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
+        ModBlockEntities.register(eventBus);
         ModFluidTypes.registerSoulLavaType(eventBus);
         ModFluids.register(eventBus);
         ModParticles.register(eventBus);
