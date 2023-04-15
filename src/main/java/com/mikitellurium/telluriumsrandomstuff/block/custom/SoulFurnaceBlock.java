@@ -1,8 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.block.custom;
 
+import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.blockentity.custom.SoulFurnaceBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -13,9 +16,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 public class SoulFurnaceBlock extends AbstractFurnaceBlock {
@@ -28,17 +34,14 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel.isClientSide()) {
-            return InteractionResult.SUCCESS;
-        } else {
-            if (pState.getValue(LIT)) {
-                pLevel.setBlock(pPos, pState.setValue(LIT, false), 2);
-            } else {
-                pLevel.setBlock(pPos, pState.setValue(LIT, true), 2);
+        if (!pLevel.isClientSide()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof SoulFurnaceBlockEntity) {
+                NetworkHooks.openScreen((ServerPlayer)pPlayer, (SoulFurnaceBlockEntity)blockEntity, pPos);
             }
-           System.out.println(pState.getValue(LIT));
-           return InteractionResult.CONSUME;
         }
+
+        return  InteractionResult.sidedSuccess(pLevel.isClientSide);
     }
 
     @Override
@@ -70,7 +73,26 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return null;
+        return new SoulFurnaceBlockEntity(pPos, pState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState,
+                                                                  BlockEntityType<T> pBlockEntityType) {
+        return createTickerHelper(pBlockEntityType, ModBlockEntities.SOUL_FURNACE.get(),
+                SoulFurnaceBlockEntity::tick);
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof SoulFurnaceBlockEntity) {
+                ((SoulFurnaceBlockEntity) blockEntity).dropItemsOnBreak();
+            }
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
     public static int getLightLevel(BlockState state) {

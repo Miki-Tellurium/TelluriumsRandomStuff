@@ -5,10 +5,13 @@ import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModCauldronInte
 import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
+import com.mikitellurium.telluriumsrandomstuff.gui.ModMenuTypes;
+import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceGui;
 import com.mikitellurium.telluriumsrandomstuff.item.GrateBlocksCreativeTab;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -35,6 +38,7 @@ public class TelluriumsRandomStuffMod {
         ModFluidTypes.registerSoulLavaType(eventBus);
         ModFluids.register(eventBus);
         ModParticles.register(eventBus);
+        ModMenuTypes.register(eventBus);
 
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::addCreative);
@@ -87,7 +91,7 @@ public class TelluriumsRandomStuffMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            MenuScreens.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceGui::new);
         }
     }
 

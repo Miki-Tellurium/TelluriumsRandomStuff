@@ -39,5 +39,7 @@
   "block.telluriumsrandomstuff.opal_pressure_plate": "Opal Pressure Plate",
   "block.telluriumsrandomstuff.opal_button": "Opal Button",
 
+  "telluriumsrandomstuff.blockentity.soul_furnace": "Soul Furnace",
+
   "fluid_type.telluriumsrandomstuff.soul_lava_fluid": "Soul Lava"
 }
