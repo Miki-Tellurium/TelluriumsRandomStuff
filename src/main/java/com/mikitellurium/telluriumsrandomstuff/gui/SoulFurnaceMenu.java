@@ -2,6 +2,8 @@ package com.mikitellurium.telluriumsrandomstuff.gui;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.custom.SoulFurnaceBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.FluidSyncS2CPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -10,16 +12,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class SoulFurnaceMenu extends AbstractContainerMenu {
 
     private final SoulFurnaceBlockEntity blockEntity;
     private final Level level;
-    ContainerData data;
+    private final ContainerData data;
+    private FluidStack fluidStack;
 
     protected SoulFurnaceMenu(int id, Inventory inventory, FriendlyByteBuf data) {
-        this(id, inventory, inventory.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(2));
+        this(id, inventory, inventory.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(4));
     }
 
     public SoulFurnaceMenu(int id, Inventory inventory, BlockEntity entity, ContainerData data) {
@@ -28,6 +32,7 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
         blockEntity = (SoulFurnaceBlockEntity)entity;
         this.level = inventory.player.level;
         this.data = data;
+        this.fluidStack = ((SoulFurnaceBlockEntity) entity).getFluid();
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -39,6 +44,7 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
         });
 
         addDataSlots(data);
+        ModMessages.sendToClients(new FluidSyncS2CPacket(blockEntity.getFluid(), blockEntity.getBlockPos()));
     }
 
     public boolean isCrafting() {
@@ -47,10 +53,18 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
 
     public int getScaledProgress() {
         int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 24; // This is the height in pixels of your arrow
+        int maxProgress = this.data.get(1);
+        int progressArrowSize = 24;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public int getScaledLitTime() {
+        int litTime = this.data.get(2);
+        int maxlitTime = this.data.get(3);
+        int progressFireSize = 13;
+
+        return maxlitTime != 0 && litTime != 0 ? litTime * progressFireSize / maxlitTime : 0;
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -126,6 +140,18 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
 
     public SoulFurnaceBlockEntity getBlockEntity() {
         return blockEntity;
+    }
+
+    public boolean isLit() {
+        return this.data.get(2) > 0;
+    }
+
+    public void setFluid(FluidStack fluidStack) {
+        this.fluidStack = fluidStack;
+    }
+
+    public FluidStack getFluidStack() {
+        return fluidStack;
     }
 
 }

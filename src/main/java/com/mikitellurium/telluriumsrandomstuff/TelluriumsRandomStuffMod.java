@@ -9,6 +9,7 @@ import com.mikitellurium.telluriumsrandomstuff.gui.ModMenuTypes;
 import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceGui;
 import com.mikitellurium.telluriumsrandomstuff.item.GrateBlocksCreativeTab;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -39,6 +40,7 @@ public class TelluriumsRandomStuffMod {
         ModFluids.register(eventBus);
         ModParticles.register(eventBus);
         ModMenuTypes.register(eventBus);
+        ModMessages.register();
 
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::addCreative);
