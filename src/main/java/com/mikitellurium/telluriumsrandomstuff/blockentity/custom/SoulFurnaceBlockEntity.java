@@ -7,6 +7,7 @@ import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.FluidSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.util.WrappedHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -37,6 +38,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+
 public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider {
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
@@ -47,13 +50,12 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            if (slot == BUCKET_SLOT) {
-                return stack.is(ModItems.SOUL_LAVA_BUCKET.get());
-            } else if (slot == OUTPUT_SLOT) {
-                return false;
-            } else {
-                return true;
-            }
+            return switch (slot) {
+                case (BUCKET_SLOT) -> stack.is(ModItems.SOUL_LAVA_BUCKET.get());
+                case (INPUT_SLOT) -> true;
+                case (OUTPUT_SLOT) -> false;
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
@@ -71,6 +73,29 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    // Handle item transportation trough other blocks
+    // Credit to Kaupenjoe
+    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
+            Map.of(Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler,
+                            (i) -> i == this.INPUT_SLOT,
+                            (i, s) -> true)),
+                    Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler,
+                            (i) -> i == this.OUTPUT_SLOT || hasEmptyBucket(i, itemHandler),
+                            (i, s) -> false)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
+                            (i) -> i == this.BUCKET_SLOT,
+                            (i, s) -> itemHandler.isItemValid(this.BUCKET_SLOT, s))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
+                            (i) -> i == this.BUCKET_SLOT,
+                            (i, s) -> itemHandler.isItemValid(this.BUCKET_SLOT, s))),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler,
+                            (i) -> i == this.BUCKET_SLOT,
+                            (i, s) -> itemHandler.isItemValid(this.BUCKET_SLOT, s))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler,
+                            (i) -> i == this.BUCKET_SLOT,
+                            (i, s) -> itemHandler.isItemValid(this.BUCKET_SLOT, s)))
+            );
+
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
 
     private final int BUCKET_SLOT = 0;
@@ -219,6 +244,11 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         return inventory;
     }
 
+    private static boolean hasEmptyBucket(int slot, ItemStackHandler handler) {
+        final int BUCKET_SLOT = 0;
+        return slot == BUCKET_SLOT && handler.getStackInSlot(BUCKET_SLOT).is(Items.BUCKET);
+    }
+
     public void setFluid(FluidStack fluid) {
         this.fluidTank.setFluid(fluid);
     }
@@ -249,11 +279,29 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         return new SoulFurnaceMenu(pContainerId, pPlayerInventory, this, this.containerData);
     }
 
-    // NBT stuff
+    // Capability stuff
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
+            if(side == null) {
+                return lazyItemHandler.cast();
+            }
+            // Return capability based on side
+            if(directionWrappedHandlerMap.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(SoulFurnaceBlock.FACING);
+
+                if(side == Direction.UP || side == Direction.DOWN) {
+                    return directionWrappedHandlerMap.get(side).cast();
+                }
+                // Get the correct direction based on the furnace FACING property
+                return switch (localDir) {
+                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
+                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                };
+            }
+
         } else if (cap == ForgeCapabilities.FLUID_HANDLER) {
             return lazyFluidHandler.cast();
         }
@@ -261,6 +309,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         return super.getCapability(cap, side);
     }
 
+    // NBT stuff
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         super.deserializeNBT(nbt);
