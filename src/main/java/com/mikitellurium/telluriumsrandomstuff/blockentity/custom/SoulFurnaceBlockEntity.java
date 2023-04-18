@@ -147,6 +147,16 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         if (level.isClientSide) {
             return;
         }
+
+        // Test
+        ItemStack guiTest = furnace.itemHandler.getStackInSlot(furnace.INPUT_SLOT);
+        if (guiTest.is(Items.BUCKET)) {
+            furnace.fluidTank.drain(10, IFluidHandler.FluidAction.EXECUTE);
+        } else if (guiTest.is(ModItems.SOUL_LAVA_BUCKET.get())) {
+            furnace.fluidTank.fill(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 10), IFluidHandler.FluidAction.EXECUTE);
+        }
+
+
         // For some reason half the time the input item is air, accounting for that
         if (!furnace.itemHandler.getStackInSlot(furnace.INPUT_SLOT).is(Items.AIR)) {
             // Check if the input item is the same as last tick

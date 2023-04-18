@@ -9,6 +9,7 @@ issueTrackerURL="https://github.com/Miki-Tellurium/TelluriumsRandomStuff/issues/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 displayURL="https://github.com/Miki-Tellurium/TelluriumsRandomStuff" #optional
 logoFile= "telluriumsrandomstufflogo.png" #optional
+credits="Thanks to Kaupenjoe, KingLemming and the CoFH Team for some code I used" #optional
 authors="Miki Tellurium" #optional
 description='''A collection of random additions'''
 [[dependencies.telluriumsrandomstuff]] #optional

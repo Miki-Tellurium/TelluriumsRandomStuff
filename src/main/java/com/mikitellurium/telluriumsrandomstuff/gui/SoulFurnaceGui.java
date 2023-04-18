@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.gui;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.gui.render.FluidTankRenderer;
+import com.mikitellurium.telluriumsrandomstuff.gui.render.FluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -21,7 +21,6 @@ public class SoulFurnaceGui extends AbstractContainerScreen<SoulFurnaceMenu> {
             new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/soul_furnace_gui.png");
 
     private Rect2i soulLavaStorage;
-    private FluidTankRenderer fluidRenderer;
 
     public SoulFurnaceGui(SoulFurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -33,7 +32,6 @@ public class SoulFurnaceGui extends AbstractContainerScreen<SoulFurnaceMenu> {
         int xPos = this.leftPos;
         int yPos = this.topPos + 2;
         soulLavaStorage = new Rect2i(xPos + 8, yPos + 8, 16, 48);
-        fluidRenderer = new FluidTankRenderer(menu.getBlockEntity().getMaxFluidCapacity(), true, 16, 48);
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
         this.inventoryLabelX = 28;
     }
@@ -51,7 +49,7 @@ public class SoulFurnaceGui extends AbstractContainerScreen<SoulFurnaceMenu> {
 
         renderFire(pPoseStack, xPos, yPos);
         renderProgressArrow(pPoseStack, xPos, yPos);
-        renderSoulLavaStorage(pPoseStack, xPos, yPos);
+        renderSoulLavaStorage(soulLavaStorage.getX(), soulLavaStorage.getY());
         renderGlass(pPoseStack, xPos, yPos);
     }
 
@@ -84,13 +82,15 @@ public class SoulFurnaceGui extends AbstractContainerScreen<SoulFurnaceMenu> {
         }
     }
 
-    private void renderSoulLavaStorage(PoseStack poseStack, int xPos, int yPos) {
-        fluidRenderer.render(poseStack, xPos + 8, yPos + 8, menu.getFluidStack());
+    private void renderSoulLavaStorage(int xPos, int yPos) {
+        FluidRenderer.drawBackground(xPos, yPos, this.menu.getFluidStack(), this.menu.getBlockEntity().getMaxFluidCapacity(),
+                soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
         RenderSystem.setShaderTexture(0, GUI_TEXTURE);
     }
 
     private void renderGlass(PoseStack poseStack, int xPos, int yPos) {
-        this.blit(poseStack, xPos + 8, yPos + 8, 176, 31, 16, 48);
+        this.blit(poseStack, soulLavaStorage.getX(), soulLavaStorage.getY(), 176, 31,
+                soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
     }
 
     private void renderFluidAreaTooltips(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
