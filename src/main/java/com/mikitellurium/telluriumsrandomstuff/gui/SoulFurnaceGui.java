@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class SoulFurnaceGui extends AbstractContainerScreen<SoulFurnaceMenu> {
 
-    private static final ResourceLocation GUI_TEXTURE =
+    public static final ResourceLocation GUI_TEXTURE =
             new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/soul_furnace_gui.png");
 
     private Rect2i soulLavaStorage;
