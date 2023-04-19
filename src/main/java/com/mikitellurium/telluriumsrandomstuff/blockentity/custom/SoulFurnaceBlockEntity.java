@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
@@ -205,12 +206,17 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     private static void smeltItem(Level level, SoulFurnaceBlockEntity furnace) {
-        furnace.itemHandler.extractItem(INPUT_SLOT, 1, false);
         Recipe<?> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,
                 new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
         if (recipe != null) {
-            furnace.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(recipe.getResultItem().getItem(),
-                    furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + 1));
+            Item outputItem = recipe.getResultItem().getItem();
+            furnace.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
+            ItemStack outputStack = furnace.itemHandler.getStackInSlot(OUTPUT_SLOT);
+            if (outputStack.isEmpty()) {
+                furnace.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(outputItem, 1));
+            } else {
+                furnace.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(outputItem, outputStack.getCount() + 1));
+            }
         }
     }
 
