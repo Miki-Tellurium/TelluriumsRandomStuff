@@ -16,7 +16,7 @@ public class ModMenuTypes {
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, TelluriumsRandomStuffMod.MOD_ID);
 
     public static final RegistryObject<MenuType<SoulFurnaceMenu>> SOUL_FURNACE_MENU =
-            registerMenuType(SoulFurnaceMenu::new, "turtle_charging_station_gui");
+            registerMenuType(SoulFurnaceMenu::new, "soul_furnace_menu");
 
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,

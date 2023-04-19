@@ -44,7 +44,6 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
         });
 
         addDataSlots(data);
-        ModMessages.sendToClients(new FluidSyncS2CPacket(blockEntity.getFluid(), blockEntity.getBlockPos()));
     }
 
     public boolean isCrafting() {

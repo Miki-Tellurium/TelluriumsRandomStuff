@@ -77,32 +77,32 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     // Credit to Kaupenjoe
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             Map.of(Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                            (i) -> i == this.INPUT_SLOT,
+                            (i) -> i == INPUT_SLOT,
                             (i, s) -> true)),
                     Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                            (i) -> i == this.OUTPUT_SLOT || hasEmptyBucket(i, itemHandler),
+                            (i) -> i == OUTPUT_SLOT || hasEmptyBucket(i, itemHandler),
                             (i, s) -> false)),
                     Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                            (i) -> i == this.BUCKET_SLOT,
-                            (i, s) -> itemHandler.isItemValid(this.BUCKET_SLOT, s))),
+                            (i) -> i == BUCKET_SLOT,
+                            (i, s) -> i == BUCKET_SLOT && itemHandler.isItemValid(BUCKET_SLOT, s))),
                     Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                            (i) -> i == this.BUCKET_SLOT,
-                            (i, s) -> itemHandler.isItemValid(this.BUCKET_SLOT, s))),
+                            (i) -> i == BUCKET_SLOT,
+                            (i, s) -> i == BUCKET_SLOT && itemHandler.isItemValid(BUCKET_SLOT, s))),
                     Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                            (i) -> i == this.BUCKET_SLOT,
-                            (i, s) -> itemHandler.isItemValid(this.BUCKET_SLOT, s))),
+                            (i) -> i == BUCKET_SLOT,
+                            (i, s) -> i == BUCKET_SLOT && itemHandler.isItemValid(BUCKET_SLOT, s))),
                     Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                            (i) -> i == this.BUCKET_SLOT,
-                            (i, s) -> itemHandler.isItemValid(this.BUCKET_SLOT, s)))
+                            (i) -> i == BUCKET_SLOT,
+                            (i, s) -> i == BUCKET_SLOT && itemHandler.isItemValid(BUCKET_SLOT, s)))
             );
 
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
 
-    private final int BUCKET_SLOT = 0;
-    private final int INPUT_SLOT = 1;
-    private final int OUTPUT_SLOT = 2;
-    private final int soulLavaConsumed = 50; // How much soul lava is used per operation
-    private final int itemSmelted = 8; // How many item get smelted per operation
+    private static final int BUCKET_SLOT = 0;
+    private static final int INPUT_SLOT = 1;
+    private static final int OUTPUT_SLOT = 2;
+    private static final int soulLavaConsumed = 50; // How much soul lava is used per operation
+    private static final int itemSmelted = 8; // How many item get smelted per operation
     private int progress = 0;
     private int maxProgress = 100;
     private int litTime = 0;
@@ -148,25 +148,16 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
             return;
         }
 
-        // Test
-        ItemStack guiTest = furnace.itemHandler.getStackInSlot(furnace.INPUT_SLOT);
-        if (guiTest.is(Items.BUCKET)) {
-            furnace.fluidTank.drain(10, IFluidHandler.FluidAction.EXECUTE);
-        } else if (guiTest.is(ModItems.SOUL_LAVA_BUCKET.get())) {
-            furnace.fluidTank.fill(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 10), IFluidHandler.FluidAction.EXECUTE);
-        }
-
-
         // For some reason half the time the input item is air, accounting for that
-        if (!furnace.itemHandler.getStackInSlot(furnace.INPUT_SLOT).is(Items.AIR)) {
+        if (!furnace.itemHandler.getStackInSlot(INPUT_SLOT).is(Items.AIR)) {
             // Check if the input item is the same as last tick
-            if (furnace.itemHandler.getStackInSlot(furnace.INPUT_SLOT).getItem() != itemCheck.getItem()) {
+            if (furnace.itemHandler.getStackInSlot(INPUT_SLOT).getItem() != itemCheck.getItem()) {
                 furnace.resetProgress();
             }
-            itemCheck = furnace.itemHandler.getStackInSlot(furnace.INPUT_SLOT);
+            itemCheck = furnace.itemHandler.getStackInSlot(INPUT_SLOT);
         }
         // Handle tank refill
-        if (furnace.itemHandler.getStackInSlot(furnace.BUCKET_SLOT).is(ModItems.SOUL_LAVA_BUCKET.get()) &&
+        if (furnace.itemHandler.getStackInSlot(BUCKET_SLOT).is(ModItems.SOUL_LAVA_BUCKET.get()) &&
                 canRefillFluidTank(furnace.fluidTank)) {
             refillFluidTank(furnace);
         }
@@ -174,7 +165,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         if (hasValidRecipe(level, furnace)) {
             // Lit if furnace is not lit
             if (!isLit(furnace) && hasEnoughFuel(furnace)) {
-                furnace.fluidTank.drain(furnace.soulLavaConsumed, IFluidHandler.FluidAction.EXECUTE);
+                furnace.fluidTank.drain(soulLavaConsumed, IFluidHandler.FluidAction.EXECUTE);
                 furnace.litTime = furnace.maxLitTime;
             }
             // If furnace is lit start smelting item
@@ -201,25 +192,25 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     private static boolean hasValidRecipe(Level level, SoulFurnaceBlockEntity furnace) {
-        if (furnace.itemHandler.getStackInSlot(furnace.INPUT_SLOT).isEmpty()) return false;
-        if (furnace.itemHandler.getStackInSlot(furnace.OUTPUT_SLOT).getCount() >=
-                furnace.itemHandler.getStackInSlot(furnace.OUTPUT_SLOT).getMaxStackSize()) return false;
+        if (furnace.itemHandler.getStackInSlot(INPUT_SLOT).isEmpty()) return false;
+        if (furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() >=
+                furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
 
         Recipe<?> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,
-                new SimpleContainer(furnace.itemHandler.getStackInSlot(furnace.INPUT_SLOT)), level).orElse(null);
+                new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
         if (recipe == null) return false;
-        if (!furnace.itemHandler.getStackInSlot(furnace.OUTPUT_SLOT).isEmpty() &&
-                recipe.getResultItem().getItem() != furnace.itemHandler.getStackInSlot(furnace.OUTPUT_SLOT).getItem()) return false;
+        if (!furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() &&
+                recipe.getResultItem().getItem() != furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getItem()) return false;
         return true;
     }
 
     private static void smeltItem(Level level, SoulFurnaceBlockEntity furnace) {
-        furnace.itemHandler.extractItem(furnace.INPUT_SLOT, 1, false);
+        furnace.itemHandler.extractItem(INPUT_SLOT, 1, false);
         Recipe<?> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,
-                new SimpleContainer(furnace.itemHandler.getStackInSlot(furnace.INPUT_SLOT)), level).orElse(null);
+                new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
         if (recipe != null) {
-            furnace.itemHandler.setStackInSlot(furnace.OUTPUT_SLOT, new ItemStack(recipe.getResultItem().getItem(),
-                    furnace.itemHandler.getStackInSlot(furnace.OUTPUT_SLOT).getCount() + 1));
+            furnace.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(recipe.getResultItem().getItem(),
+                    furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + 1));
         }
     }
 
@@ -228,7 +219,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     private static boolean hasEnoughFuel(SoulFurnaceBlockEntity furnace) {
-        return furnace.fluidTank.getFluidAmount() >= furnace.soulLavaConsumed;
+        return furnace.fluidTank.getFluidAmount() >= soulLavaConsumed;
     }
 
     private static boolean canRefillFluidTank(FluidTank fluidTank) {
@@ -236,7 +227,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     private static void refillFluidTank(SoulFurnaceBlockEntity furnace) {
-        furnace.itemHandler.setStackInSlot(furnace.BUCKET_SLOT, Items.BUCKET.getDefaultInstance());
+        furnace.itemHandler.setStackInSlot(BUCKET_SLOT, Items.BUCKET.getDefaultInstance());
         FluidStack fluidStack = new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 1000);
         furnace.fluidTank.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
     }

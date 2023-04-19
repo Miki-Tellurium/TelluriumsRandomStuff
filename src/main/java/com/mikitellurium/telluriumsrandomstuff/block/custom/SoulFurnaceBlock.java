@@ -2,15 +2,19 @@ package com.mikitellurium.telluriumsrandomstuff.block.custom;
 
 import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.custom.SoulFurnaceBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.FluidSyncS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
@@ -34,19 +38,28 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
+        if (!pLevel.isClientSide) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof SoulFurnaceBlockEntity) {
-                NetworkHooks.openScreen((ServerPlayer)pPlayer, (SoulFurnaceBlockEntity)blockEntity, pPos);
+            if (blockEntity instanceof SoulFurnaceBlockEntity && pPlayer instanceof ServerPlayer) {
+                this.openContainer(pLevel, pPos, pPlayer);
+            } else {
+                throw new IllegalStateException("Container provider or player is missing");
             }
         }
 
-        return  InteractionResult.sidedSuccess(pLevel.isClientSide);
+        return InteractionResult.sidedSuccess(pLevel.isClientSide);
     }
 
     @Override
     protected void openContainer(Level pLevel, BlockPos pPos, Player pPlayer) {
-
+        NetworkHooks.openScreen((ServerPlayer)pPlayer, (SoulFurnaceBlockEntity)pLevel.getBlockEntity(pPos), pPos);
+        SoulFurnaceBlockEntity blockEntity = (SoulFurnaceBlockEntity) pLevel.getBlockEntity(pPos);
+        // Update the fluid data on the client
+        if (blockEntity != null) {
+            ModMessages.sendToClients(new FluidSyncS2CPacket(blockEntity.getFluid(), blockEntity.getBlockPos()));
+        } else {
+            throw new IllegalStateException("Container provider is missing");
+        }
     }
 
     @Override

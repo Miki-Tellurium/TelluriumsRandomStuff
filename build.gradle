@@ -14,7 +14,7 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.0.0-1.19.3'
+version = "${project.mod_version}-${project.mc_version}"
 group = 'com.mikitellurium.telluriumsrandomstuff'
 archivesBaseName = 'telluriumsrandomstuff'
 
@@ -154,7 +154,7 @@ jar {
         attributes([
                 "Specification-Title"     : "Tellurium's Random Stuff",
                 "Specification-Vendor"    : "Miki Tellurium",
-                "Specification-Version"   : "1.0.0-1.19.3",
+                "Specification-Version"   : "${mod_version}-${mc_version}",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "Miki Tellurium",
