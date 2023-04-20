@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModDispenserBehaviours;
+import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
@@ -50,6 +51,7 @@ public class TelluriumsRandomStuffMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        ModFluidInteractions.register();
         ModCauldronInteractions.register();
         ModDispenserBehaviours.register();
     }

@@ -16,7 +16,7 @@ import static net.minecraft.core.cauldron.CauldronInteraction.fillBucket;
 public class ModCauldronInteractions {
 
     public static Map<Item, CauldronInteraction> SOUL_LAVA = CauldronInteraction.newInteractionMap();
-    public static CauldronInteraction FILL_SOUL_LAVA = (blockState, level, blockPos, player, interactionHand, itemStack) ->
+    private static final CauldronInteraction FILL_SOUL_LAVA = (blockState, level, blockPos, player, interactionHand, itemStack) ->
             emptyBucket(level, blockPos, player, interactionHand, itemStack, ModBlocks.SOUL_LAVA_CAULDRON_BLOCK.get().defaultBlockState(),
             SoundEvents.BUCKET_EMPTY_LAVA);
 

@@ -29,8 +29,7 @@ public abstract class LiquidBlockMixin {
         if (level.getFluidState(pos).is(Fluids.LAVA) && (level.getBlockState(pos.below()).is(Blocks.SOUL_SAND) ||
                 level.getBlockState(pos.below()).is(ModBlocks.GRATE_SOUL_SAND.get()))) {
 
-            float r = random.nextFloat();
-            if (r < soulLavaDripChance) {
+            if (random.nextFloat() < soulLavaDripChance) {
                 BlockPos blockPos1 = LevelUtils.findFillableCauldronBelow(level, pos.below()); // Find empty cauldron under soul sand
                 if (blockPos1 != null) {
                     level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
@@ -38,7 +37,6 @@ public abstract class LiquidBlockMixin {
                     level.playSound(null, blockPos1, SoundEvents.SOUL_ESCAPE, SoundSource.BLOCKS, 0.8f, 1.0f);
                 }
             }
-            System.out.println(r);
         }
     }
 

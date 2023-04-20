@@ -77,9 +77,6 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
 
             }
         }
-        if (entity.getLevel().getBlockState(entity.getOnPos().below()).is(Blocks.SOUL_SAND)) {
-            System.out.println("SoulSand");
-        }
         Vec3 v = entity.getDeltaMovement().multiply(0.4, 0.75, 0.4);
         entity.setDeltaMovement(v);
         return false;
@@ -183,11 +180,6 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     @Override
-    protected int getSpreadDelay(Level pLevel, BlockPos pPos, FluidState fluidState, FluidState fluidState1) {
-        return super.getSpreadDelay(pLevel, pPos, fluidState, fluidState1);
-    }
-
-    @Override
     protected int getSlopeFindDistance(LevelReader level) {
         return level.dimensionType().ultraWarm() ? 4 : 2;
     }
@@ -214,7 +206,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
 
     @Override
     public boolean canBeReplacedWith(FluidState pFluidState, BlockGetter pBlockReader, BlockPos pPos, Fluid pFluid, Direction pDirection) {
-        return pFluidState.getHeight(pBlockReader, pPos) >= 0.44444445F && pFluid.is(FluidTags.WATER);
+        return pFluidState.getHeight(pBlockReader, pPos) >= 0.44444445F && (pFluid.is(FluidTags.WATER) || pFluid.is(FluidTags.LAVA));
     }
 
     @Override
