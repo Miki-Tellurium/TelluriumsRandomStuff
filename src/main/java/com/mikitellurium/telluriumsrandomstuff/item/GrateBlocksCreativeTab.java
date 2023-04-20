@@ -17,8 +17,10 @@ public class GrateBlocksCreativeTab {
 
     @SubscribeEvent
     public static void registerCreativeModeTabs(CreativeModeTabEvent.Register event) {
-        TAB_TELLURIUMSRANDOMSTUFF = event.registerCreativeModeTab(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "telluriumsrandomstuff_creative_tab"),
+        TAB_TELLURIUMSRANDOMSTUFF = event.registerCreativeModeTab(
+                new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "telluriumsrandomstuff_creative_tab"),
                 builder -> builder.icon(() -> new ItemStack(ModBlocks.GRATE_MAGMA_BLOCK.get()))
                         .title(Component.translatable("creativemodetab.telluriumsrandomstuff_creative_tab")));
     }
+
 }

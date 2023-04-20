@@ -201,7 +201,8 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
                 new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
         if (recipe == null) return false;
         if (!furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() &&
-                recipe.getResultItem().getItem() != furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getItem()) return false;
+                recipe.getResultItem(level.registryAccess()).getItem() !=
+                        furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getItem()) return false;
         return true;
     }
 
@@ -209,7 +210,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         Recipe<?> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,
                 new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
         if (recipe != null) {
-            Item outputItem = recipe.getResultItem().getItem();
+            Item outputItem = recipe.getResultItem(level.registryAccess()).getItem();
             furnace.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
             ItemStack outputStack = furnace.itemHandler.getStackInSlot(OUTPUT_SLOT);
             if (outputStack.isEmpty()) {

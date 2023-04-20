@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.BlockGetter;
@@ -48,7 +49,7 @@ public class SoulLavaBlock extends LiquidBlock {
                 }
             }
 
-            pEntity.hurt(DamageSource.IN_FIRE, 2.0f);
+            pEntity.hurt(pLevel.damageSources().inFire(), 2.0f);
             if (pEntity.wasOnFire) {
                 pEntity.playSound(SoundEvents.FIRE_EXTINGUISH, 0.5F, 2.6f);
             }

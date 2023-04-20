@@ -14,8 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
 
-import java.util.Random;
-
 public class CustomBubbleColumnBlock extends BubbleColumnBlock {
 
     public CustomBubbleColumnBlock() {

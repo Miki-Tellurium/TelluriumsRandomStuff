@@ -53,7 +53,7 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
                 this.xd *= 0.98F;
                 this.yd *= 0.98F;
                 this.zd *= 0.98F;
-                BlockPos blockpos = new BlockPos(this.x, this.y, this.z);
+                BlockPos blockpos = new BlockPos((int)this.x, (int)this.y, (int)this.z);
                 FluidState fluidstate = this.level.getFluidState(blockpos);
                 if (fluidstate.getType() == this.type && this.y < (double)((float)blockpos.getY() + fluidstate.getHeight(this.level, blockpos))) {
                     this.remove();

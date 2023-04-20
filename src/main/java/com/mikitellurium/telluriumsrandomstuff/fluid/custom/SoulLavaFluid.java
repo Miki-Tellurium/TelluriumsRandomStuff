@@ -71,7 +71,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
                     entity.extinguishFire();
                 }
 
-                if (entity.hurt(DamageSource.LAVA, 4.0F)) {
+                if (entity.hurt(entity.damageSources().inFire(), 4.0F)) {
                     entity.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + entity.getRandom().nextFloat() * 0.4F);
                 }
 

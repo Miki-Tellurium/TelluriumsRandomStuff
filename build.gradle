@@ -22,8 +22,8 @@ mixin {
 }
 
 minecraft {
-    //mappings channel: 'official', version: mc_version
-    mappings channel: 'parchment', version: '2023.03.12-1.19.3'
+    mappings channel: 'official', version: mc_version
+    //mappings channel: 'parchment', version: '1.19.3-2023.03.12-1.19.4'
 
     runs {
         client {
@@ -98,9 +98,9 @@ repositories {
         minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
         annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-        compileOnly fg.deobf("mezz.jei:jei-1.19.3-common-api:${jei_version}")
-        compileOnly fg.deobf("mezz.jei:jei-1.19.3-forge-api:${jei_version}")
-        runtimeOnly fg.deobf("mezz.jei:jei-1.19.3-forge:${jei_version}")  // at runtime, use the full JEI jar
+        compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+        compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+        runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")  // at runtime, use the full JEI jar
         implementation fg.deobf(project.dependencies.create("mcjty.theoneprobe:theoneprobe:${top_version}") {
             transitive = false
         })
