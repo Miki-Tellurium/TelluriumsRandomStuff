@@ -8,7 +8,9 @@ public class SoulMagmaBrickSlabBlock extends SlabBlock {
 
     public SoulMagmaBrickSlabBlock() {
         super(BlockBehaviour.Properties.copy(ModBlocks.SOUL_MAGMA_BRICKS.get())
-                .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false));
+                .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false)
+                .lightLevel((blockState) -> 2)
+                .emissiveRendering((blockState, blockGetter, blockPos) -> true));
     }
 
 }

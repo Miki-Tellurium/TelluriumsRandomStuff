@@ -47,11 +47,6 @@ public class GrateSoulSandBlock extends SoulSandBlock {
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        return super.getSoundType(state, level, pos, entity);
-    }
-
-    @Override
     public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
         CustomBubbleColumnBlock.updateColumn(pLevel, pPos.above(), pState);
     }
