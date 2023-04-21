@@ -1,0 +1,11 @@
+{
+  "type": "telluriumsrandomstuff:soul_furnace_smelting",
+  "ingredient": [
+    {
+      "item": "minecraft:sand"
+    }
+  ],
+  "result": {
+    "item": "minecraft:soul_sand"
+  }
+}

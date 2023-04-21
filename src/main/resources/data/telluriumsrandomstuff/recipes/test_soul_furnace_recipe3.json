@@ -1,0 +1,11 @@
+{
+  "type": "telluriumsrandomstuff:soul_furnace_smelting",
+  "ingredient": [
+    {
+      "item": "minecraft:magma_block"
+    }
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:soul_magma_block"
+  }
+}
