@@ -40,7 +40,7 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((itemHandler) -> {
             this.addSlot(new SlotItemHandler(itemHandler, 0, 8, 62));
             this.addSlot(new SlotItemHandler(itemHandler, 1, 56, 32));
-            this.addSlot(new SlotItemHandler(itemHandler, 2, 116, 33));
+            this.addSlot(new SlotItemHandler(itemHandler, 2, 116, 32));
         });
 
         addDataSlots(data);

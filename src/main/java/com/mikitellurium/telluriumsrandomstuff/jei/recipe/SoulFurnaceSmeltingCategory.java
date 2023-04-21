@@ -55,7 +55,7 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SoulFurnaceRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 56, 30).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 31).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 30).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
     }
 

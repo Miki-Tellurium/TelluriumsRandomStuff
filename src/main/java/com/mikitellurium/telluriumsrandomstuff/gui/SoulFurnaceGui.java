@@ -5,6 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.gui.render.FluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.Rect2i;
@@ -71,14 +72,14 @@ public class SoulFurnaceGui extends AbstractContainerScreen<SoulFurnaceMenu> {
     private void renderFire(PoseStack pPoseStack, int xPos, int yPos) {
         if (this.menu.isLit()) {
             int time = this.menu.getScaledLitTime();
-            this.blit(pPoseStack, xPos + 58, yPos + 62 - time, 176, 12 - time, 14, time + 1);
+            blit(pPoseStack, xPos + 58, yPos + 62 - time, 176, 12 - time, 14, time + 1);
         }
     }
 
     private void renderProgressArrow(PoseStack poseStack, int xPos, int yPos) {
         if (this.menu.isCrafting()) {
             int progress = this.menu.getScaledProgress();
-            this.blit(poseStack, xPos + 79, yPos + 30, 176, 14, progress + 1, 16);
+            blit(poseStack, xPos + 79, yPos + 29, 176, 14, progress + 1, 16);
         }
     }
 
@@ -89,7 +90,7 @@ public class SoulFurnaceGui extends AbstractContainerScreen<SoulFurnaceMenu> {
     }
 
     private void renderGlass(PoseStack poseStack, int xPos, int yPos) {
-        this.blit(poseStack, soulLavaStorage.getX(), soulLavaStorage.getY(), 176, 31,
+        blit(poseStack, soulLavaStorage.getX(), soulLavaStorage.getY(), 176, 31,
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
     }
 
