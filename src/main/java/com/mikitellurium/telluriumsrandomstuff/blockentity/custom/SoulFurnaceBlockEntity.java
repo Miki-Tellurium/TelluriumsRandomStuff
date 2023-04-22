@@ -103,8 +103,8 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     private static final int BUCKET_SLOT = 0;
     private static final int INPUT_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
-    private static final int soulLavaConsumed = 50; // How much soul lava is used per operation
-    private static final int itemSmelted = 8; // How many item get smelted per operation
+    private static final int litFurnaceCost = 50; // How much soul lava is consumed to lit the furnace
+    private static final int itemSmelted = 8; // How many item get smelted with a full "lit"
     private int progress = 0;
     private int maxProgress = 100;
     private int litTime = 0;
@@ -169,7 +169,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         if (hasValidRecipe(level, furnace)) {
             // Lit if furnace is not lit
             if (!isLit(furnace) && hasEnoughFuel(furnace)) {
-                furnace.fluidTank.drain(soulLavaConsumed, IFluidHandler.FluidAction.EXECUTE);
+                furnace.fluidTank.drain(litFurnaceCost, IFluidHandler.FluidAction.EXECUTE);
                 furnace.litTime = furnace.maxLitTime;
             }
             // If furnace is lit start smelting item
@@ -235,7 +235,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     private static boolean hasEnoughFuel(SoulFurnaceBlockEntity furnace) {
-        return furnace.fluidTank.getFluidAmount() >= soulLavaConsumed;
+        return furnace.fluidTank.getFluidAmount() >= litFurnaceCost;
     }
 
     private static boolean canRefillFluidTank(FluidTank fluidTank) {
