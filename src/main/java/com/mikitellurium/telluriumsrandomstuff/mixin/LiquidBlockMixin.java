@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LiquidBlock.class)
 public abstract class LiquidBlockMixin {
 
-    private static final float soulLavaDripChance = 0.042f;
+    private static final float soulLavaDripChance = 0.032f;
 
     @Inject(method = "randomTick", at = @At(value = "TAIL"))
     private void randomConvertLavaToSoulLava(BlockState state, ServerLevel level, BlockPos pos,
