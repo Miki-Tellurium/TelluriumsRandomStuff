@@ -41,8 +41,8 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
     private final IDrawable tankGlass;
     private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
     private final int smeltingTime = 100;
-    protected final IDrawableStatic staticFlame;
-    protected final IDrawableAnimated animatedFlame;
+    private final IDrawableStatic staticFlame;
+    private final IDrawableAnimated animatedFlame;
 
     public SoulFurnaceSmeltingCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(GUI_TEXTURE, 0, 0, 120, 72);
@@ -93,13 +93,14 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SoulFurnaceRecipe recipe, IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 4, 54).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
         builder.addSlot(RecipeIngredientRole.INPUT, 35, 24).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 24).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 4, 2)
                 .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 3000)))
                 .setFluidRenderer(4000, false, 16, 48)
                 .setOverlay(tankGlass, 0, 0);
-        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 50);
     }
 
 }
