@@ -1,7 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.jei.recipe;
 
-import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -12,19 +13,19 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
 
     private final ResourceLocation id;
     private final ItemStack output;
-    private final NonNullList<Ingredient> ingredients;
+    private final Ingredient ingredient;
 
-    public SoulFurnaceRecipe(ResourceLocation id, ItemStack output,
-                                    NonNullList<Ingredient> ingredients) {
+    public SoulFurnaceRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient) {
         this.id = id;
         this.output = output;
-        this.ingredients = ingredients;
+        this.ingredient = ingredient;
     }
 
     @Override
@@ -33,12 +34,14 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
             return false;
         }
 
-        return ingredients.get(0).test(pContainer.getItem(0));
+        return ingredient.test(pContainer.getItem(0));
     }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return ingredients;
+        NonNullList<Ingredient> list = NonNullList.create();
+        list.add(ingredient);
+        return list;
     }
 
     @Override
@@ -84,34 +87,32 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public SoulFurnaceRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
-
-            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredient");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+            JsonElement jsonelement = GsonHelper.isArrayNode(pSerializedRecipe, "ingredient") ?
+                    GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredient") : GsonHelper.getAsJsonObject(pSerializedRecipe, "ingredient");
+            Ingredient ingredient = Ingredient.fromJson(jsonelement);
+            if (!pSerializedRecipe.has("result")) throw new JsonSyntaxException("Missing result, expected to find a string or object");
+            ItemStack output;
+            if (pSerializedRecipe.get("result").isJsonObject()) {
+                output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
+            } else {
+                String s1 = GsonHelper.getAsString(pSerializedRecipe, "result");
+                ResourceLocation resourcelocation = new ResourceLocation(s1);
+                output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
             }
 
-            return new SoulFurnaceRecipe(pRecipeId, output, inputs);
+            return new SoulFurnaceRecipe(pRecipeId, output, ingredient);
         }
 
         @Override
         public @Nullable SoulFurnaceRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromNetwork(buf));
-            }
-
+            Ingredient ingredient = Ingredient.fromNetwork(buf);
             ItemStack output = buf.readItem();
-            return new SoulFurnaceRecipe(id, output, inputs);
+
+            return new SoulFurnaceRecipe(id, output, ingredient);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, SoulFurnaceRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
-
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }

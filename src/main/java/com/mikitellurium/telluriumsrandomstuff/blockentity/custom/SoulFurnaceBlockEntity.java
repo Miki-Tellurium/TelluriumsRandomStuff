@@ -5,7 +5,6 @@ import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.jei.Test;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulFurnaceRecipe;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.FluidSyncS2CPacket;
@@ -153,12 +152,6 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
             return;
         }
 
-        if (test) {
-            Test.testRecipes(level.getRecipeManager());
-            test = false;
-        }
-
-
         // For some reason half the time the input item is air, accounting for that
         if (!furnace.itemHandler.getStackInSlot(INPUT_SLOT).is(Items.AIR)) {
             // Check if the input item is the same as last tick
@@ -207,8 +200,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         if (furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() >=
                 furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
 
-        Recipe<?> recipe = level.getRecipeManager().getRecipeFor(SoulFurnaceRecipe.Type.INSTANCE,
-                new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
+        Recipe<?> recipe = getRecipe(level, furnace);
         if (recipe == null) return false;
         if (!furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() &&
                 recipe.getResultItem(level.registryAccess()).getItem() !=
@@ -217,8 +209,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     private static void smeltItem(Level level, SoulFurnaceBlockEntity furnace) {
-        Recipe<?> recipe = level.getRecipeManager().getRecipeFor(SoulFurnaceRecipe.Type.INSTANCE,
-                new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
+        Recipe<?> recipe = getRecipe(level, furnace);
         if (recipe != null) {
             Item outputItem = recipe.getResultItem(level.registryAccess()).getItem();
             furnace.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
@@ -229,6 +220,14 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
                 furnace.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(outputItem, outputStack.getCount() + 1));
             }
         }
+    }
+
+    private static Recipe<?> getRecipe(Level level, SoulFurnaceBlockEntity furnace) {
+        Recipe<?> soulFurnaceRecipe = level.getRecipeManager().getRecipeFor(SoulFurnaceRecipe.Type.INSTANCE,
+                new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
+        if (soulFurnaceRecipe != null) return soulFurnaceRecipe;
+        return level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,
+                new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
     }
 
     private void resetProgress() {

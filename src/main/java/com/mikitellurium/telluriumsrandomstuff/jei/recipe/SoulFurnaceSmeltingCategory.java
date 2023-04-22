@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.jei.recipe;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.jei.JeiIntegration;
 import mezz.jei.api.constants.VanillaTypes;
@@ -57,6 +58,7 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
         builder.addSlot(RecipeIngredientRole.INPUT, 56, 30).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 30).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
+        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 50);
     }
 
 }

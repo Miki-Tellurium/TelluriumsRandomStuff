@@ -4,19 +4,21 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceGui;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulFurnaceRecipe;
+import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulFurnaceRecipeManager;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulFurnaceSmeltingCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.registration.*;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
+import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -43,8 +45,12 @@ public class JeiIntegration implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 
-        List<SoulFurnaceRecipe> recipesInfusing = recipeManager.getAllRecipesFor(SoulFurnaceRecipe.Type.INSTANCE);
-        registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, recipesInfusing);
+        List<SmeltingRecipe> vanillaRecipes = recipeManager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
+        List<SoulFurnaceRecipe> convertedRecipes = SoulFurnaceRecipeManager.getConvertedVanillaRecipes(vanillaRecipes);
+        List<SoulFurnaceRecipe> soulFurnaceRecipes = recipeManager.getAllRecipesFor(SoulFurnaceRecipe.Type.INSTANCE);
+
+        registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, convertedRecipes);
+        registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, soulFurnaceRecipes);
     }
 
     @Override

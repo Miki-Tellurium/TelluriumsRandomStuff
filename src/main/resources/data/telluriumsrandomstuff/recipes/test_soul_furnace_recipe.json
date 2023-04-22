@@ -1,10 +1,8 @@
 {
   "type": "telluriumsrandomstuff:soul_furnace_smelting",
-  "ingredient": [
-    {
-      "item": "minecraft:coal"
-    }
-  ],
+  "ingredient": {
+    "item": "minecraft:coal"
+  },
   "result": {
     "item": "minecraft:diamond"
   }
