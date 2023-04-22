@@ -97,7 +97,7 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
         builder.addSlot(RecipeIngredientRole.INPUT, 35, 24).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 24).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 4, 2)
-                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 3000)))
+                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 2500)))
                 .setFluidRenderer(4000, false, 16, 48)
                 .setOverlay(tankGlass, 0, 0);
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 50);
