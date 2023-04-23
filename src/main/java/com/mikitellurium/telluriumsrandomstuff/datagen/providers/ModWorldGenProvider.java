@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.datagen;
+package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.worldgen.ModConfiguredFeatures;

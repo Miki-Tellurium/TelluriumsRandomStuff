@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.datagen.providers.ModWorldGenProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -21,4 +22,5 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
     }
+
 }
