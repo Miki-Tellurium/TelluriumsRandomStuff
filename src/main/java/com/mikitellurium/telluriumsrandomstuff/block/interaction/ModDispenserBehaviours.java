@@ -1,10 +1,13 @@
 package com.mikitellurium.telluriumsrandomstuff.block.interaction;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.block.interaction.dispenserbehavior.DispenseCauldronBehavior;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
@@ -12,12 +15,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ModDispenserBehaviours {
 
-    protected static final Map<Item, Block> DISPENSER_CAULDRON_INTERACTIONS = new HashMap<>();
+    public static final Map<Item, Block> DISPENSER_CAULDRON_INTERACTIONS = new HashMap<>();
 
     private static final DefaultDispenseItemBehavior SOUL_LAVA_DISPENSER_BEHAVIOR = new DefaultDispenseItemBehavior() {
         private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
@@ -38,11 +42,11 @@ public class ModDispenserBehaviours {
 
     public static void register() {
         DispenserBlock.registerBehavior(ModItems.SOUL_LAVA_BUCKET.get(), SOUL_LAVA_DISPENSER_BEHAVIOR);
-        registerCauldronInteraction(Items.BUCKET, Blocks.CAULDRON);
-        registerCauldronInteraction(Items.WATER_BUCKET, Blocks.WATER_CAULDRON);
-        registerCauldronInteraction(Items.LAVA_BUCKET, Blocks.LAVA_CAULDRON);
-        registerCauldronInteraction(Items.POWDER_SNOW_BUCKET, Blocks.POWDER_SNOW_CAULDRON);
-        registerCauldronInteraction(ModItems.SOUL_LAVA_BUCKET.get(), ModBlocks.SOUL_LAVA_CAULDRON_BLOCK.get());
+        registerCauldronInteraction(Items.BUCKET, Blocks.CAULDRON, SoundEvents.DISPENSER_DISPENSE);
+        registerCauldronInteraction(Items.WATER_BUCKET, Blocks.WATER_CAULDRON, SoundEvents.BUCKET_EMPTY);
+        registerCauldronInteraction(Items.LAVA_BUCKET, Blocks.LAVA_CAULDRON, SoundEvents.BUCKET_EMPTY_LAVA);
+        registerCauldronInteraction(Items.POWDER_SNOW_BUCKET, Blocks.POWDER_SNOW_CAULDRON, SoundEvents.BUCKET_EMPTY_POWDER_SNOW);
+        registerCauldronInteraction(ModItems.SOUL_LAVA_BUCKET.get(), ModBlocks.SOUL_LAVA_CAULDRON_BLOCK.get(), SoundEvents.BUCKET_EMPTY_LAVA);
     }
 
     /**
@@ -50,18 +54,19 @@ public class ModDispenserBehaviours {
      * <p>
      * Call this during the mod common setup phase.
      * @param bucket The bucket used to fill the cauldron
-     * @param cauldron The cauldron block to add the interaction to
+     * @param cauldron The cauldron block resulting from the interaction
+     * @param bucketEmptySound The sound that the dispenser should make when using the bucket
      * @throws IllegalArgumentException If the item passed is not a {@link BucketItem}/{@link SolidBucketItem}
      * or if the block passed is not a {@link AbstractCauldronBlock}
      */
-    public static void registerCauldronInteraction(Item bucket, Block cauldron) {
+    public static void registerCauldronInteraction(Item bucket, Block cauldron, SoundEvent bucketEmptySound) {
         if (!(cauldron instanceof AbstractCauldronBlock)) {
             throw new IllegalArgumentException("Block is not a valid cauldron block");
         } else if (!(bucket instanceof BucketItem || bucket instanceof SolidBucketItem)) {
             throw new IllegalArgumentException("Item is not a valid bucket");
         }
         DISPENSER_CAULDRON_INTERACTIONS.put(bucket, cauldron);
-        DispenserBlock.registerBehavior(bucket, new DispenserCauldronBehavior());
+        DispenserBlock.registerBehavior(bucket, new DispenseCauldronBehavior(bucketEmptySound));
     }
 
 }
