@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.block.interaction;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.dispenserbehavior.DispenseCauldronBehavior;
+import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
@@ -60,13 +61,15 @@ public class ModDispenserBehaviours {
      * or if the block passed is not a {@link AbstractCauldronBlock}
      */
     public static void registerCauldronInteraction(Item bucket, Block cauldron, SoundEvent bucketEmptySound) {
-        if (!(cauldron instanceof AbstractCauldronBlock)) {
-            throw new IllegalArgumentException("Block is not a valid cauldron block");
-        } else if (!(bucket instanceof BucketItem || bucket instanceof SolidBucketItem)) {
-            throw new IllegalArgumentException("Item is not a valid bucket");
+        if (ModCommonConfig.ENABLE_MOD_DISPENSER_BEHAVIOR.get()) {
+            if (!(cauldron instanceof AbstractCauldronBlock)) {
+                throw new IllegalArgumentException("Block is not a valid cauldron block");
+            } else if (!(bucket instanceof BucketItem || bucket instanceof SolidBucketItem)) {
+                throw new IllegalArgumentException("Item is not a valid bucket");
+            }
+            DISPENSER_CAULDRON_INTERACTIONS.put(bucket, cauldron);
+            DispenserBlock.registerBehavior(bucket, new DispenseCauldronBehavior(bucketEmptySound));
         }
-        DISPENSER_CAULDRON_INTERACTIONS.put(bucket, cauldron);
-        DispenserBlock.registerBehavior(bucket, new DispenseCauldronBehavior(bucketEmptySound));
     }
 
 }

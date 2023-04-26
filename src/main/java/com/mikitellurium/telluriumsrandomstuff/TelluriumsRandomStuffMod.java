@@ -5,6 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModCauldronInte
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.gui.ModMenuTypes;
@@ -27,7 +28,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(TelluriumsRandomStuffMod.MOD_ID)
 public class TelluriumsRandomStuffMod {
     public static final String MOD_ID = "telluriumsrandomstuff";
@@ -45,6 +45,7 @@ public class TelluriumsRandomStuffMod {
         ModMenuTypes.register(eventBus);
         ModRecipes.register(eventBus);
         ModMessages.register();
+        ModCommonConfig.registerCommonConfig();
 
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::addCreative);
