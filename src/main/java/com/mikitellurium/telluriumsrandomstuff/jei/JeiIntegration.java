@@ -6,6 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceGui;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulFurnaceRecipe;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulFurnaceRecipeManager;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulFurnaceSmeltingCategory;
+import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulLavaInfoCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -21,6 +22,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +31,9 @@ public class JeiIntegration implements IModPlugin {
 
     public static RecipeType<SoulFurnaceRecipe> SOUL_FURNACE_RECIPE_TYPE =
             new RecipeType<>(SoulFurnaceSmeltingCategory.UID, SoulFurnaceRecipe.class);
+    public static final RecipeType<SoulLavaInfoCategory.Recipe> SOUL_LAVA_INFO_TYPE =
+            new RecipeType<>(SoulLavaInfoCategory.UID, SoulLavaInfoCategory.Recipe.class);
+
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
@@ -39,6 +44,7 @@ public class JeiIntegration implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(new SoulFurnaceSmeltingCategory(guiHelper));
+        registration.addRecipeCategories(new SoulLavaInfoCategory(guiHelper));
     }
 
     @Override
@@ -51,6 +57,11 @@ public class JeiIntegration implements IModPlugin {
 
         registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, convertedRecipes);
         registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, soulFurnaceRecipes);
+
+        List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = new ArrayList<>();
+        soulLavaInfoRecipes.add(new SoulLavaInfoCategory.Recipe());
+
+        registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
     }
 
     @Override

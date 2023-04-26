@@ -25,6 +25,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
     public final static ResourceLocation UID =
             new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_furnace_smelting");
     public final static ResourceLocation GUI_TEXTURE =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/jei/jei_soul_furnace_gui.png");
+            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/jei_gui.png");
 
     private final IDrawable background;
     private final IDrawable icon;
@@ -96,7 +97,7 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
         builder.addSlot(RecipeIngredientRole.INPUT, 4, 54).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
         builder.addSlot(RecipeIngredientRole.INPUT, 35, 24).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 24).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
-        builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 4, 2)
+        builder.addSlot(RecipeIngredientRole.CATALYST, 4, 2)
                 .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 2500)))
                 .setFluidRenderer(4000, false, 16, 48)
                 .setOverlay(tankGlass, 0, 0);
