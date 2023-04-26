@@ -61,41 +61,41 @@ public class TelluriumsRandomStuffMod {
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == GrateBlocksCreativeTab.TAB_TELLURIUMSRANDOMSTUFF) {
-            event.accept(ModBlocks.GRATE_MAGMA_BLOCK.get());
-            event.accept(ModBlocks.GRATE_SOUL_SAND.get());
-            event.accept(ModBlocks.HYDRODYNAMIC_RAIL.get());
-            event.accept(ModItems.SOUL_LAVA_BUCKET.get());
-            event.accept(ModBlocks.SOUL_MAGMA_BLOCK.get());
-            event.accept(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get());
-            event.accept(ModBlocks.SOUL_FURNACE.get());
-            event.accept(ModBlocks.SOUL_MAGMA_BRICKS.get());
-            event.accept(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get());
-            event.accept(ModBlocks.OPAL.get());
-            event.accept(ModBlocks.OPAL_COBBLESTONE.get());
-            event.accept(ModBlocks.OPAL_BRICKS.get());
-            event.accept(ModBlocks.CUT_OPAL_BRICKS.get());
-            event.accept(ModBlocks.CRACKED_OPAL_BRICKS.get());
-            event.accept(ModBlocks.CRACKED_CUT_OPAL_BRICKS.get());
-            event.accept(ModBlocks.CHISELED_OPAL_BRICKS.get());
-            event.accept(ModBlocks.OPAL_SLAB.get());
-            event.accept(ModBlocks.OPAL_COBBLESTONE_SLAB.get());
-            event.accept(ModBlocks.OPAL_BRICK_SLAB.get());
-            event.accept(ModBlocks.CUT_OPAL_BRICK_SLAB.get());
-            event.accept(ModBlocks.CRACKED_OPAL_BRICK_SLAB.get());
-            event.accept(ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get());
-            event.accept(ModBlocks.OPAL_STAIRS.get());
-            event.accept(ModBlocks.OPAL_COBBLESTONE_STAIRS.get());
-            event.accept(ModBlocks.OPAL_BRICK_STAIRS.get());
-            event.accept(ModBlocks.CUT_OPAL_BRICK_STAIRS.get());
-            event.accept(ModBlocks.OPAL_COBBLESTONE_WALL.get());
-            event.accept(ModBlocks.OPAL_BRICK_WALL.get());
-            event.accept(ModBlocks.CUT_OPAL_BRICK_WALL.get());
-            event.accept(ModBlocks.OPAL_PRESSURE_PLATE.get());
-            event.accept(ModBlocks.OPAL_BUTTON.get());
+            event.accept(ModBlocks.GRATE_MAGMA_BLOCK);
+            event.accept(ModBlocks.GRATE_SOUL_SAND);
+            event.accept(ModBlocks.HYDRODYNAMIC_RAIL);
+            event.accept(ModItems.SOUL_LAVA_BUCKET);
+            event.accept(ModBlocks.SOUL_MAGMA_BLOCK);
+            event.accept(ModBlocks.GRATE_SOUL_MAGMA_BLOCK);
+            event.accept(ModBlocks.SOUL_FURNACE);
+            event.accept(ModBlocks.SOUL_MAGMA_BRICKS);
+            event.accept(ModBlocks.SOUL_MAGMA_BRICK_SLAB);
+            event.accept(ModItems.MYSTIC_POTATO);
+            event.accept(ModBlocks.OPAL);
+            event.accept(ModBlocks.OPAL_COBBLESTONE);
+            event.accept(ModBlocks.OPAL_BRICKS);
+            event.accept(ModBlocks.CUT_OPAL_BRICKS);
+            event.accept(ModBlocks.CRACKED_OPAL_BRICKS);
+            event.accept(ModBlocks.CRACKED_CUT_OPAL_BRICKS);
+            event.accept(ModBlocks.CHISELED_OPAL_BRICKS);
+            event.accept(ModBlocks.OPAL_SLAB);
+            event.accept(ModBlocks.OPAL_COBBLESTONE_SLAB);
+            event.accept(ModBlocks.OPAL_BRICK_SLAB);
+            event.accept(ModBlocks.CUT_OPAL_BRICK_SLAB);
+            event.accept(ModBlocks.CRACKED_OPAL_BRICK_SLAB);
+            event.accept(ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB);
+            event.accept(ModBlocks.OPAL_STAIRS);
+            event.accept(ModBlocks.OPAL_COBBLESTONE_STAIRS);
+            event.accept(ModBlocks.OPAL_BRICK_STAIRS);
+            event.accept(ModBlocks.CUT_OPAL_BRICK_STAIRS);
+            event.accept(ModBlocks.OPAL_COBBLESTONE_WALL);
+            event.accept(ModBlocks.OPAL_BRICK_WALL);
+            event.accept(ModBlocks.CUT_OPAL_BRICK_WALL);
+            event.accept(ModBlocks.OPAL_PRESSURE_PLATE);
+            event.accept(ModBlocks.OPAL_BUTTON);
         }
     }
 
-    // Registering static method with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent

@@ -2,6 +2,9 @@
   "creativemodetab.telluriumsrandomstuff_creative_tab": "Tellurium's Random Stuff",
 
   "item.telluriumsrandomstuff.soul_lava_bucket": "Soul Lava Bucket",
+  "item.telluriumsrandomstuff.mystic_potato": "Mystic Potato",
+
+  "item.description.telluriumsrandomstuff.mystic_potato": "Tastes like victory!",
 
   "block.telluriumsrandomstuff.grate_magma_block": "Magma Block with Grate",
   "block.telluriumsrandomstuff.grate_soul_sand": "Soul Sand with Grate",
