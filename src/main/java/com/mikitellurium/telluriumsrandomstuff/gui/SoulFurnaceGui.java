@@ -107,4 +107,8 @@ public class SoulFurnaceGui extends AbstractContainerScreen<SoulFurnaceMenu> {
                 Component.literal( menu.getFluidStack().getAmount() + "/" + menu.getBlockEntity().getMaxFluidCapacity()));
     }
 
+    public Rect2i getSoulLavaStorage() {
+        return soulLavaStorage;
+    }
+
 }
