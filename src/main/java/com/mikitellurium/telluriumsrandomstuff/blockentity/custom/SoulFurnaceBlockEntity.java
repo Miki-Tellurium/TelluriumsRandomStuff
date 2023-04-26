@@ -204,6 +204,9 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
 
         Recipe<?> recipe = getRecipe(level, furnace);
         if (recipe == null) return false;
+        if (recipe instanceof SoulFurnaceRecipe) {
+            if (((SoulFurnaceRecipe) recipe).getRecipeCost() > furnace.fluidTank.getFluidAmount()) return false;
+        }
         if (!furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() &&
                 recipe.getResultItem(level.registryAccess()).getItem() !=
                         furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getItem()) return false;
@@ -213,6 +216,10 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     private static void smeltItem(Level level, SoulFurnaceBlockEntity furnace) {
         Recipe<?> recipe = getRecipe(level, furnace);
         if (recipe != null) {
+            if (recipe instanceof SoulFurnaceRecipe) {
+                int recipeCost = ((SoulFurnaceRecipe) recipe).getRecipeCost();
+                furnace.fluidTank.drain(recipeCost, IFluidHandler.FluidAction.EXECUTE);
+            }
             Item outputItem = recipe.getResultItem(level.registryAccess()).getItem();
             furnace.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
             ItemStack outputStack = furnace.itemHandler.getStackInSlot(OUTPUT_SLOT);

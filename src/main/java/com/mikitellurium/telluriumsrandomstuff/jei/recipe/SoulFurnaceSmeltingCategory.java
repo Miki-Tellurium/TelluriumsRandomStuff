@@ -21,6 +21,10 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -37,6 +41,8 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
     public final static ResourceLocation GUI_TEXTURE =
             new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/jei_gui.png");
 
+    private final Font font = Minecraft.getInstance().font;
+    private final int textColor = 0xFF808080;
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawable tankGlass;
@@ -68,6 +74,9 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
 
     @Override
     public void draw(SoulFurnaceRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
+        Component translatable = Component.translatable("jei.telluriumsrandomstuff.soul_furnace_recipe_extra_cost")
+                .append(": " + recipe.getRecipeCost());
+        font.draw(poseStack, translatable, 25, 2, textColor);
         animatedFlame.draw(poseStack, 37, 43);
         getArrow().draw(poseStack, 58, 24);
     }

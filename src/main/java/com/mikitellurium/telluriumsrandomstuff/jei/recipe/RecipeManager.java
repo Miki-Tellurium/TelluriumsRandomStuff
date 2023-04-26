@@ -28,7 +28,7 @@ public class RecipeManager {
 
         Ingredient ingredient = recipe.getIngredients().get(0);
         ItemStack output = recipe.getResultItem(RegistryAccess.EMPTY);
-        return new SoulFurnaceRecipe(id, output, ingredient);
+        return new SoulFurnaceRecipe(id, output, ingredient, 0);
     }
 
 }

@@ -21,11 +21,13 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final Ingredient ingredient;
+    private final int recipeCost;
 
-    public SoulFurnaceRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient) {
+    public SoulFurnaceRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient, int recipeCost) {
         this.id = id;
         this.output = output;
         this.ingredient = ingredient;
+        this.recipeCost = recipeCost;
     }
 
     @Override
@@ -46,7 +48,7 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public ItemStack assemble(SimpleContainer container, RegistryAccess registryAccess) {
-        return null;
+        return output;
     }
 
     @Override
@@ -57,6 +59,10 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
     @Override
     public ItemStack getResultItem(RegistryAccess registryAccess) {
         return output;
+    }
+
+    public int getRecipeCost() {
+        return recipeCost;
     }
 
     @Override
@@ -99,16 +105,18 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
                 ResourceLocation resourcelocation = new ResourceLocation(s1);
                 output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
             }
+            int recipeCost = GsonHelper.getAsInt(pSerializedRecipe, "cost");
 
-            return new SoulFurnaceRecipe(pRecipeId, output, ingredient);
+            return new SoulFurnaceRecipe(pRecipeId, output, ingredient, recipeCost);
         }
 
         @Override
         public @Nullable SoulFurnaceRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             Ingredient ingredient = Ingredient.fromNetwork(buf);
             ItemStack output = buf.readItem();
+            int recipeCost = buf.readInt();
 
-            return new SoulFurnaceRecipe(id, output, ingredient);
+            return new SoulFurnaceRecipe(id, output, ingredient, recipeCost);
         }
 
         @Override
@@ -117,6 +125,7 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
                 ing.toNetwork(buf);
             }
             buf.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
+            buf.writeInt(recipe.getRecipeCost());
         }
     }
 
