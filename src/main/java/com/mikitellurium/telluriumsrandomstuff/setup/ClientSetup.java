@@ -34,7 +34,8 @@ public class ClientSetup {
                 ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
                 ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
                 ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
-                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPALIUM_ORE.get(), ModBlocks.RAW_OPALIUM_BLOCK.get());
+                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPALIUM_ORE.get(), ModBlocks.RAW_OPALIUM_BLOCK.get(),
+                ModBlocks.OPALIUM_BLOCK.get());
     }
 
     @SubscribeEvent
@@ -56,7 +57,7 @@ public class ClientSetup {
                 ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
                 ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
                 ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPALIUM_ORE.get(), ModItems.RAW_OPALIUM.get(),
-                ModBlocks.RAW_OPALIUM_BLOCK.get());
+                ModItems.OPALIUM_INGOT.get(), ModBlocks.RAW_OPALIUM_BLOCK.get(), ModBlocks.OPALIUM_BLOCK.get());
     }
 
     @SubscribeEvent

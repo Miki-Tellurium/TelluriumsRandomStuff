@@ -8,7 +8,9 @@ import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -85,6 +87,15 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> OPAL_BUTTON = registerBlock("opal_button", OpalButtonBlock::new);
 
+    public static final RegistryObject<Block> OPALIUM_ORE = registerBlock("opalium_ore",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
+
+    public static final RegistryObject<Block> RAW_OPALIUM_BLOCK = registerBlock("raw_opalium_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK)));
+
+    public static final RegistryObject<Block> OPALIUM_BLOCK = registerBlock("opalium_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
     public static final RegistryObject<LiquidBlock> SOUL_LAVA_BLOCK = BLOCKS.register("soul_lava_block",
             () -> new SoulLavaBlock(ModFluids.SOUL_LAVA_SOURCE));
 
@@ -103,4 +114,5 @@ public class ModBlocks {
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
+
 }

@@ -93,6 +93,11 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModBlocks.CUT_OPAL_BRICK_WALL);
             event.accept(ModBlocks.OPAL_PRESSURE_PLATE);
             event.accept(ModBlocks.OPAL_BUTTON);
+            event.accept(ModBlocks.OPALIUM_BLOCK);
+            event.accept(ModBlocks.OPALIUM_ORE);
+            event.accept(ModBlocks.RAW_OPALIUM_BLOCK);
+            event.accept(ModItems.RAW_OPALIUM);
+            event.accept(ModItems.OPALIUM_INGOT);
         }
     }
 

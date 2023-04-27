@@ -29,6 +29,9 @@
     "telluriumsrandomstuff:opal_brick_wall",
     "telluriumsrandomstuff:cut_opal_brick_wall",
     "telluriumsrandomstuff:opal_pressure_plate",
-    "telluriumsrandomstuff:opal_button"
+    "telluriumsrandomstuff:opal_button",
+    "telluriumsrandomstuff:opalium_ore",
+    "telluriumsrandomstuff:raw_opalium_block",
+    "telluriumsrandomstuff:opalium_block"
   ]
 }

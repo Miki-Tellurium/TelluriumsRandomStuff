@@ -3,6 +3,8 @@
 
   "item.telluriumsrandomstuff.soul_lava_bucket": "Soul Lava Bucket",
   "item.telluriumsrandomstuff.mystic_potato": "Mystic Potato",
+  "item.telluriumsrandomstuff.raw_opalium": "Raw Opalium",
+  "item.telluriumsrandomstuff.opalium_ingot": "Opalium Ingot",
 
   "item.description.telluriumsrandomstuff.mystic_potato": "Tastes like victory!",
 
@@ -41,6 +43,9 @@
   "block.telluriumsrandomstuff.cracked_cut_opal_brick_wall": "Cracked Cut Opal Brick Wall",
   "block.telluriumsrandomstuff.opal_pressure_plate": "Opal Pressure Plate",
   "block.telluriumsrandomstuff.opal_button": "Opal Button",
+  "block.telluriumsrandomstuff.opalium_ore": "Opalium Ore",
+  "block.telluriumsrandomstuff.raw_opalium_block": "Raw Opalium Block",
+  "block.telluriumsrandomstuff.opalium_block": "Opalium Block",
 
   "telluriumsrandomstuff.blockentity.soul_furnace": "Soul Furnace",
 

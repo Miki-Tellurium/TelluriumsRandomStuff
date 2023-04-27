@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "telluriumsrandomstuff:opalium_ore",
+    "telluriumsrandomstuff:raw_opalium_block",
+    "telluriumsrandomstuff:opalium_block"
+  ]
+}

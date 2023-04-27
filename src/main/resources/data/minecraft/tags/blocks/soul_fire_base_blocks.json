@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "telluriumsrandomstuff:soul_magma_block",
+    "telluriumsrandomstuff:grate_soul_magma_block",
+    "telluriumsrandomstuff:soul_magma_bricks",
+    "telluriumsrandomstuff:soul_magma_brick_slab",
+    "telluriumsrandomstuff:soul_furnace"
+  ]
+}
