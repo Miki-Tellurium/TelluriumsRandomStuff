@@ -2,11 +2,13 @@ package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
 import com.mikitellurium.telluriumsrandomstuff.particle.custom.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,16 +34,18 @@ public class ClientSetup {
                 ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
                 ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
                 ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
-                ModBlocks.OPAL_BUTTON.get());
+                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPALIUM_ORE.get(), ModBlocks.RAW_OPALIUM_BLOCK.get());
     }
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.getItemColors().register((stack, tintIndex) -> {
                     Player player = Minecraft.getInstance().player;
-                    if (player != null) {
-                        BlockPos pos = player.getOnPos();
-                        return ColorsUtil.getOpalRainbowColor(pos);
+                    ItemEntity itemEntity = (ItemEntity) stack.getEntityRepresentation();
+                    if (itemEntity != null) {
+                        return ColorsUtil.getOpalRainbowColor(itemEntity.getOnPos());
+                    } else if (player != null) {
+                        return ColorsUtil.getOpalRainbowColor(player.getOnPos());
                     }
                     return 0xFFFFFF;},
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
@@ -51,7 +55,8 @@ public class ClientSetup {
                 ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
                 ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
                 ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
-                ModBlocks.OPAL_BUTTON.get());
+                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPALIUM_ORE.get(), ModItems.RAW_OPALIUM.get(),
+                ModBlocks.RAW_OPALIUM_BLOCK.get());
     }
 
     @SubscribeEvent
