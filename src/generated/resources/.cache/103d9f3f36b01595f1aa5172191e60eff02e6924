@@ -1,3 +1,7 @@
-// 1.19.4	2023-04-22T13:22:16.5918026	Registries
+// 1.19.4	2023-04-27T19:56:16.3077693	Registries
+d26b092604a98fd2792764cf331152b8203f9694 data/telluriumsrandomstuff/worldgen/configured_feature/opalium_ore_large.json
+f4a8cc46f107ab0ffedd00c318e57a88c04646d2 data/telluriumsrandomstuff/worldgen/configured_feature/opalium_ore_small.json
 078a779201edc9e8bf5f68b66dda853142c4a7bd data/telluriumsrandomstuff/worldgen/configured_feature/opal_cluster.json
+cc44ec95351a5c8b880b0a9ab6466a5600b66592 data/telluriumsrandomstuff/worldgen/placed_feature/opalium_ore_large_placed.json
+1347a5020f39a8cf7e65ce0f408b245b835f0e64 data/telluriumsrandomstuff/worldgen/placed_feature/opalium_ore_small_placed.json
 a8107ee4efa0dc9567fac782e76f4741f8e8ba44 data/telluriumsrandomstuff/worldgen/placed_feature/opal_cluster_placed.json
