@@ -29,10 +29,10 @@ public class ModPlacedFeatures {
                         VerticalAnchor.absolute(-60), VerticalAnchor.absolute(128))));
 
         register(context, OPALIUM_ORE_SMALL_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPALIUM_ORE_SMALL),
-                OrePlacementUtils.commonOrePlacement(15, HeightRangePlacement.uniform(
+                OrePlacementUtils.commonOrePlacement(25, HeightRangePlacement.uniform(
                         VerticalAnchor.absolute(-60), VerticalAnchor.absolute(128))));
         register(context, OPALIUM_ORE_LARGE_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPALIUM_ORE_LARGE),
-                OrePlacementUtils.commonOrePlacement(15, HeightRangePlacement.uniform(
+                OrePlacementUtils.commonOrePlacement(20, HeightRangePlacement.uniform(
                         VerticalAnchor.absolute(-60), VerticalAnchor.absolute(128))));
     }
 

@@ -39,7 +39,7 @@ public class ModConfiguredFeatures {
 
         register(context, OVERWORLD_OPAL_CLUSTER, Feature.ORE, new OreConfiguration(overworldOpalCluster,64));
         register(context, OVERWORLD_OPALIUM_ORE_SMALL, Feature.ORE, new OreConfiguration(overworldOpaliumOre,4));
-        register(context, OVERWORLD_OPALIUM_ORE_LARGE, Feature.ORE, new OreConfiguration(overworldOpaliumOre,12));
+        register(context, OVERWORLD_OPALIUM_ORE_LARGE, Feature.ORE, new OreConfiguration(overworldOpaliumOre,8));
     }
 
 
