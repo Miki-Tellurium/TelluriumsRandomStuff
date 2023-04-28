@@ -11,7 +11,7 @@ public class ColorsUtil {
 
         Color color = Color.getHSBColor(
                 (((pos.getX() + pos.getZ() + pos.getY() * 1.05f)) / waveSize) % 1.0f,
-                0.65F, 0.8F);
+                0.65F, 0.9F);
         return color.getRGB();
     }
 
