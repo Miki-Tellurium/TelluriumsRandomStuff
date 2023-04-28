@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    " x ",
+    " x "
+  ],
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:opalium_ingot"
+    },
+    "x": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "telluriumsrandomstuff:opalium_pickaxe"
+  }
+}

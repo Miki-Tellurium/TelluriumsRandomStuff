@@ -6,7 +6,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -16,6 +15,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class ModItems {
+
+    private static int opaliumToolsDurability = 2000;
 
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TelluriumsRandomStuffMod.MOD_ID);
 
@@ -36,6 +37,51 @@ public class ModItems {
 
     public static final RegistryObject<Item> OPALIUM_INGOT = ITEMS.register("opalium_ingot",
             () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> OPALIUM_SWORD = ITEMS.register("opalium_sword",
+            () -> new SwordItem(Tiers.DIAMOND, 3, -2.4F, new Item.Properties()
+                    .defaultDurability(opaliumToolsDurability)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                }
+            });
+
+    public static final RegistryObject<Item> OPALIUM_SHOVEL = ITEMS.register("opalium_shovel",
+            () -> new ShovelItem(Tiers.DIAMOND, 1.5F, -3.0F, new Item.Properties()
+                    .defaultDurability(opaliumToolsDurability)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                }
+            });
+
+    public static final RegistryObject<Item> OPALIUM_PICKAXE = ITEMS.register("opalium_pickaxe",
+            () -> new PickaxeItem(Tiers.DIAMOND, 1, -2.8F, new Item.Properties()
+                    .defaultDurability(opaliumToolsDurability)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                }
+            });
+
+    public static final RegistryObject<Item> OPALIUM_AXE = ITEMS.register("opalium_axe",
+            () -> new AxeItem(Tiers.DIAMOND, 5.0F, -3.0F, new Item.Properties()
+                    .defaultDurability(opaliumToolsDurability)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                }
+            });
+
+    public static final RegistryObject<Item> OPALIUM_HOE = ITEMS.register("opalium_hoe",
+            () -> new HoeItem(Tiers.DIAMOND, -3, 0.0F, new Item.Properties()
+                    .defaultDurability(opaliumToolsDurability)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                }
+            });
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

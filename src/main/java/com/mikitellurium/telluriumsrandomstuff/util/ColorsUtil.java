@@ -1,6 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
+import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
 
@@ -13,6 +16,18 @@ public class ColorsUtil {
                 (((pos.getX() + pos.getZ() + pos.getY() * 1.05f)) / waveSize) % 1.0f,
                 saturation, brightness);
         return color.getRGB();
+    }
+
+    public static boolean isMaterialOpalium(ItemStack itemStack) {
+        return  itemStack.is(ModItems.RAW_OPALIUM.get()) ||
+                itemStack.is(ModBlocks.RAW_OPALIUM_BLOCK.get().asItem()) ||
+                itemStack.is(ModItems.OPALIUM_INGOT.get()) ||
+                itemStack.is(ModBlocks.OPALIUM_BLOCK.get().asItem()) ||
+                itemStack.is(ModItems.OPALIUM_SWORD.get()) ||
+                itemStack.is(ModItems.OPALIUM_SHOVEL.get()) ||
+                itemStack.is(ModItems.OPALIUM_PICKAXE.get()) ||
+                itemStack.is(ModItems.OPALIUM_AXE.get()) ||
+                itemStack.is(ModItems.OPALIUM_HOE.get());
     }
 
     /*

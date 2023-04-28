@@ -98,6 +98,11 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModBlocks.RAW_OPALIUM_BLOCK);
             event.accept(ModItems.RAW_OPALIUM);
             event.accept(ModItems.OPALIUM_INGOT);
+            event.accept(ModItems.OPALIUM_SHOVEL);
+            event.accept(ModItems.OPALIUM_PICKAXE);
+            event.accept(ModItems.OPALIUM_AXE);
+            event.accept(ModItems.OPALIUM_HOE);
+            event.accept(ModItems.OPALIUM_SWORD);
         }
     }
 
