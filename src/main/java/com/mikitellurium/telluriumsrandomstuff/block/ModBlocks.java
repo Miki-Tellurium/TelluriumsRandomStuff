@@ -5,12 +5,12 @@ import com.mikitellurium.telluriumsrandomstuff.block.custom.*;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.fluid.custom.SoulLavaBlock;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -37,55 +37,86 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SOUL_FURNACE = registerBlock("soul_furnace", SoulFurnaceBlock::new);
 
-    public static final RegistryObject<Block> SOUL_MAGMA_BRICKS = registerBlock("soul_magma_bricks", SoulMagmaBricksBlock::new);
+    public static final RegistryObject<Block> SOUL_MAGMA_BRICKS = registerBlock("soul_magma_bricks",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)
+                    .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> LevelUtils.isSoulBlockValidSpawn(entityType))
+                    .lightLevel((blockState) -> 2)
+                    .emissiveRendering((blockState, blockGetter, blockPos) -> true)));
 
-    public static final RegistryObject<Block> SOUL_MAGMA_BRICK_SLAB = registerBlock("soul_magma_brick_slab", SoulMagmaBrickSlabBlock::new);
+    public static final RegistryObject<Block> SOUL_MAGMA_BRICK_SLAB = registerBlock("soul_magma_brick_slab",
+            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.SOUL_MAGMA_BRICKS.get())
+                    .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false)
+                    .lightLevel((blockState) -> 2)
+                    .emissiveRendering((blockState, blockGetter, blockPos) -> true)));
 
     public static final RegistryObject<Block> SOUL_LAVA_CAULDRON_BLOCK = BLOCKS.register("soul_lava_cauldron", SoulLavaCauldronBlock::new);
 
-    public static final RegistryObject<Block> OPAL = registerBlock("opal", OpalBlock::new);
+    public static final RegistryObject<Block> OPAL = registerBlock("opal",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> OPAL_COBBLESTONE = registerBlock("opal_cobblestone", OpalCobblestoneBlock::new);
+    public static final RegistryObject<Block> OPAL_COBBLESTONE = registerBlock("opal_cobblestone",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
 
-    public static final RegistryObject<Block> OPAL_BRICKS = registerBlock("opal_bricks", OpalBlock::new);
+    public static final RegistryObject<Block> OPAL_BRICKS = registerBlock("opal_bricks",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> CUT_OPAL_BRICKS = registerBlock("cut_opal_bricks", OpalBlock::new);
+    public static final RegistryObject<Block> CUT_OPAL_BRICKS = registerBlock("cut_opal_bricks",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> CHISELED_OPAL_BRICKS = registerBlock("chiseled_opal_bricks", OpalBlock::new);
+    public static final RegistryObject<Block> CHISELED_OPAL_BRICKS = registerBlock("chiseled_opal_bricks",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> CRACKED_OPAL_BRICKS = registerBlock("cracked_opal_bricks", OpalBlock::new);
+    public static final RegistryObject<Block> CRACKED_OPAL_BRICKS = registerBlock("cracked_opal_bricks",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> CRACKED_CUT_OPAL_BRICKS = registerBlock("cracked_cut_opal_bricks", OpalBlock::new);
+    public static final RegistryObject<Block> CRACKED_CUT_OPAL_BRICKS = registerBlock("cracked_cut_opal_bricks",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> OPAL_SLAB = registerBlock("opal_slab", OpalSlabBlock::new);
+    public static final RegistryObject<Block> OPAL_SLAB = registerBlock("opal_slab",
+            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
-    public static final RegistryObject<Block> OPAL_COBBLESTONE_SLAB = registerBlock("opal_cobblestone_slab", OpalSlabBlock::new);
+    public static final RegistryObject<Block> OPAL_COBBLESTONE_SLAB = registerBlock("opal_cobblestone_slab",
+            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
-    public static final RegistryObject<Block> OPAL_BRICK_SLAB = registerBlock("opal_brick_slab", OpalSlabBlock::new);
+    public static final RegistryObject<Block> OPAL_BRICK_SLAB = registerBlock("opal_brick_slab",
+            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
-    public static final RegistryObject<Block> CUT_OPAL_BRICK_SLAB = registerBlock("cut_opal_brick_slab", OpalSlabBlock::new);
+    public static final RegistryObject<Block> CUT_OPAL_BRICK_SLAB = registerBlock("cut_opal_brick_slab",
+            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
-    public static final RegistryObject<Block> CRACKED_OPAL_BRICK_SLAB = registerBlock("cracked_opal_brick_slab", OpalSlabBlock::new);
+    public static final RegistryObject<Block> CRACKED_OPAL_BRICK_SLAB = registerBlock("cracked_opal_brick_slab",
+            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
-    public static final RegistryObject<Block> CRACKED_CUT_OPAL_BRICK_SLAB = registerBlock("cracked_cut_opal_brick_slab", OpalSlabBlock::new);
+    public static final RegistryObject<Block> CRACKED_CUT_OPAL_BRICK_SLAB = registerBlock("cracked_cut_opal_brick_slab",
+            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
-    public static final RegistryObject<Block> OPAL_STAIRS = registerBlock("opal_stairs", OpalStairBlock::new);
+    public static final RegistryObject<Block> OPAL_STAIRS = registerBlock("opal_stairs",
+            ()-> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> OPAL_COBBLESTONE_STAIRS = registerBlock("opal_cobblestone_stairs", OpalCobblestoneStairBlock::new);
+    public static final RegistryObject<Block> OPAL_COBBLESTONE_STAIRS = registerBlock("opal_cobblestone_stairs",
+            () -> new StairBlock(Blocks.COBBLESTONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
 
-    public static final RegistryObject<Block> OPAL_BRICK_STAIRS = registerBlock("opal_brick_stairs", OpalStairBlock::new);
+    public static final RegistryObject<Block> OPAL_BRICK_STAIRS = registerBlock("opal_brick_stairs",
+            ()-> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> CUT_OPAL_BRICK_STAIRS = registerBlock("cut_opal_brick_stairs", OpalStairBlock::new);
+    public static final RegistryObject<Block> CUT_OPAL_BRICK_STAIRS = registerBlock("cut_opal_brick_stairs",
+            ()-> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> OPAL_COBBLESTONE_WALL = registerBlock("opal_cobblestone_wall", OpalCobblestoneWallBlock::new);
+    public static final RegistryObject<Block> OPAL_COBBLESTONE_WALL = registerBlock("opal_cobblestone_wall",
+            ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
 
-    public static final RegistryObject<Block> OPAL_BRICK_WALL = registerBlock("opal_brick_wall", OpalWallBlock::new);
+    public static final RegistryObject<Block> OPAL_BRICK_WALL = registerBlock("opal_brick_wall",
+            ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> CUT_OPAL_BRICK_WALL = registerBlock("cut_opal_brick_wall", OpalWallBlock::new);
+    public static final RegistryObject<Block> CUT_OPAL_BRICK_WALL = registerBlock("cut_opal_brick_wall",
+            ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryObject<Block> OPAL_PRESSURE_PLATE = registerBlock("opal_pressure_plate", OpalPressurePlateBlock::new);
+    public static final RegistryObject<Block> OPAL_PRESSURE_PLATE = registerBlock("opal_pressure_plate",
+            ()-> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS,
+                    BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE), BlockSetType.STONE));
 
-    public static final RegistryObject<Block> OPAL_BUTTON = registerBlock("opal_button", OpalButtonBlock::new);
+    public static final RegistryObject<Block> OPAL_BUTTON = registerBlock("opal_button",
+            ()-> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON), BlockSetType.STONE, 20, false));
 
     public static final RegistryObject<Block> OPALIUM_ORE = registerBlock("opalium_ore",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
