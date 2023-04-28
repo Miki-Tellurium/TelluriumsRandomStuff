@@ -6,12 +6,12 @@ import java.awt.*;
 
 public class ColorsUtil {
 
-    public static int getOpalRainbowColor(BlockPos pos) {
+    public static int getOpalRainbowColor(BlockPos pos, float saturation, float brightness) {
         int waveSize = 75; // How big are the color waves
 
         Color color = Color.getHSBColor(
                 (((pos.getX() + pos.getZ() + pos.getY() * 1.05f)) / waveSize) % 1.0f,
-                0.65F, 0.9F);
+                saturation, brightness);
         return color.getRGB();
     }
 

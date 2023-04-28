@@ -24,7 +24,7 @@ public class ClientSetup {
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.getBlockColors().register((state, world, pos, tintIndex) -> {
                     if (world != null && pos != null) {
-                        return ColorsUtil.getOpalRainbowColor(pos);
+                        return ColorsUtil.getOpalRainbowColor(pos, 0.65f, 0.9f);
                     }
                     return 0xFFFFFF;},
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
@@ -44,9 +44,9 @@ public class ClientSetup {
                     Player player = Minecraft.getInstance().player;
                     ItemEntity itemEntity = (ItemEntity) stack.getEntityRepresentation();
                     if (itemEntity != null) {
-                        return ColorsUtil.getOpalRainbowColor(itemEntity.getOnPos());
+                        return ColorsUtil.getOpalRainbowColor(itemEntity.getOnPos(), 0.65f, 0.9f);
                     } else if (player != null) {
-                        return ColorsUtil.getOpalRainbowColor(player.getOnPos());
+                        return ColorsUtil.getOpalRainbowColor(player.getOnPos(), 0.65f, 0.9f);
                     }
                     return 0xFFFFFF;},
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
