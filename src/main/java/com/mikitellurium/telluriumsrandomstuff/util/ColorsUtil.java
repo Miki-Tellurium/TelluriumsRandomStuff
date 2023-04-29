@@ -21,28 +21,6 @@ public class ColorsUtil {
         return color.getRGB();
     }
 
-    public static int getOpaliumRainbowColor(BlockPos pos, float saturation, float brightness) {
-        int waveSize = 150; // How big are the color waves
-        int x = pos.getX() + 10;
-        int z = pos.getZ() + 10;
-
-        Color color = Color.getHSBColor(
-                (((x + pos.getY() + z * 1.05f)) / waveSize) % 1.0f,
-                saturation, brightness);
-        return color.getRGB();
-    }
-
-    public static int testColor(Level level, BlockPos pos) {
-        if (level instanceof ClientLevel) {
-            System.out.println("Client");
-            Color color = Color.getHSBColor(level.getTimeOfDay(1.0f) % 255, 1.0f, 1.0f);
-            return color.getRGB();
-        } else if (level instanceof ServerLevel){
-            System.out.println("Server");
-        }
-        return 0xFFFFFF;
-    }
-
     public static boolean isMaterialOpalium(ItemStack itemStack) {
         return  itemStack.is(ModItems.RAW_OPALIUM.get()) ||
                 itemStack.is(ModBlocks.RAW_OPALIUM_BLOCK.get().asItem()) ||

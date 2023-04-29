@@ -24,7 +24,7 @@ public class ClientSetup {
         event.getBlockColors().register((state, world, pos, tintIndex) -> {
                     if (world != null && pos != null) {
                         if (ColorsUtil.isMaterialOpalium(state.getBlock().asItem().getDefaultInstance())) {
-                            return ColorsUtil.getOpaliumRainbowColor(pos, 0.8f, 1.0f);
+                            return ColorsUtil.getOpalRainbowColor(pos, 0.8f, 1.0f);
                         }
 
                         return ColorsUtil.getOpalRainbowColor(pos, 0.65f, 0.9f);
@@ -49,7 +49,7 @@ public class ClientSetup {
                     // If the item is dropped in the world
                     if (itemEntity != null) {
                         if (ColorsUtil.isMaterialOpalium(stack)) {
-                            return tintIndex == 0 ? ColorsUtil.getOpaliumRainbowColor(
+                            return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
                                     itemEntity.getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
                         }
 
@@ -57,7 +57,7 @@ public class ClientSetup {
                     // If the item is inside a inventory
                     } else if (player != null) {
                         if (ColorsUtil.isMaterialOpalium(stack)) {
-                            return tintIndex == 0 ? ColorsUtil.getOpaliumRainbowColor(
+                            return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
                                     player.getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
                         }
 
