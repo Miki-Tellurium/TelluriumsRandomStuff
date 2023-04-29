@@ -25,6 +25,8 @@ public class SoulHarvestingEnchantment extends Enchantment {
     private final Method dropFromLootTable = ObfuscationReflectionHelper.findMethod(LivingEntity.class,
             "dropFromLootTable", DamageSource.class, boolean.class);
 
+    private final float lootChance = 0.0125f;
+
     public SoulHarvestingEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {
         super(rarity, EnchantmentCategory.WEAPON, equipmentSlots);
         dropFromLootTable.setAccessible(true);
@@ -33,22 +35,25 @@ public class SoulHarvestingEnchantment extends Enchantment {
     @Override
     public void doPostAttack(LivingEntity attacker, Entity target, int level) {
         if (!attacker.level.isClientSide) {
-            if (target instanceof LivingEntity livingTarget) {
-                DamageSource damageSource = livingTarget.getLastDamageSource();
-                int i = ForgeHooks.getLootingLevel(livingTarget, attacker, damageSource);
-                livingTarget.captureDrops(new ArrayList<>());
+            float chance = lootChance * level;
+            if (attacker.getRandom().nextFloat() < chance) {
+                if (target instanceof LivingEntity livingTarget) {
+                    DamageSource damageSource = livingTarget.getLastDamageSource();
+                    int i = ForgeHooks.getLootingLevel(livingTarget, attacker, damageSource);
+                    livingTarget.captureDrops(new ArrayList<>());
 
-                try {
-                    if (this.shouldDropLoot(livingTarget) && attacker.level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
-                        this.dropFromLootTable.invoke(livingTarget, damageSource, true);
+                    try {
+                        if (this.shouldDropLoot(livingTarget) && attacker.level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+                            this.dropFromLootTable.invoke(livingTarget, damageSource, true);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
-                Collection<ItemEntity> drops = livingTarget.captureDrops(null);
-                if (!ForgeHooks.onLivingDrops(livingTarget, damageSource, drops, i, true))
-                    drops.forEach(e -> attacker.level.addFreshEntity(e));
+                    Collection<ItemEntity> drops = livingTarget.captureDrops(null);
+                    if (!ForgeHooks.onLivingDrops(livingTarget, damageSource, drops, i, true))
+                        drops.forEach(e -> attacker.level.addFreshEntity(e));
+                }
             }
         }
 
