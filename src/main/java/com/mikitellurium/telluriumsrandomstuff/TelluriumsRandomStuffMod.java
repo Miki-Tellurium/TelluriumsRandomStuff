@@ -6,6 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModDispenserBeh
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
+import com.mikitellurium.telluriumsrandomstuff.enchantment.ModEnchantments;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.gui.ModMenuTypes;
@@ -44,6 +45,7 @@ public class TelluriumsRandomStuffMod {
         ModParticles.register(eventBus);
         ModMenuTypes.register(eventBus);
         ModRecipes.register(eventBus);
+        ModEnchantments.register(eventBus);
         ModMessages.register();
         ModCommonConfig.registerCommonConfig();
 

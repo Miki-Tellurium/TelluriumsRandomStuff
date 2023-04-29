@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ModItems {
 
-    private static int opaliumToolsDurability = 2000;
+    private static final int opaliumToolsDurability = 2000;
 
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TelluriumsRandomStuffMod.MOD_ID);
 
