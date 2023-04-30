@@ -23,7 +23,7 @@ import java.util.Set;
 public class SoulHarvestingEnchantment extends Enchantment {
 
     private final Method dropFromLootTable = ObfuscationReflectionHelper.findMethod(LivingEntity.class,
-            "dropFromLootTable", DamageSource.class, boolean.class);
+            "m_7625_", DamageSource.class, boolean.class);
 
     private final float lootChance = 0.0125f;
 
@@ -72,11 +72,6 @@ public class SoulHarvestingEnchantment extends Enchantment {
     @Override
     public int getMaxLevel() {
         return 3;
-    }
-
-    @Override
-    protected boolean checkCompatibility(Enchantment enchantment) {
-        return super.checkCompatibility(enchantment) && enchantment != Enchantments.SWEEPING_EDGE;
     }
 
     @Override
