@@ -30,6 +30,7 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
 
     public SoulFurnaceBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.BLAST_FURNACE)
+                .explosionResistance(1200.0f)
                 .lightLevel(SoulFurnaceBlock::getLightLevel)
                 .emissiveRendering((blockState, blockGetter, blockPos) -> true));
     }
