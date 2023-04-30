@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.jei.recipe;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -12,9 +13,14 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+import java.util.Optional;
 
 public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
 
@@ -92,22 +98,23 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
                 new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_furnace_smelting");
 
         @Override
-        public SoulFurnaceRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            JsonElement jsonelement = GsonHelper.isArrayNode(pSerializedRecipe, "ingredient") ?
-                    GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredient") : GsonHelper.getAsJsonObject(pSerializedRecipe, "ingredient");
-            Ingredient ingredient = Ingredient.fromJson(jsonelement);
-            if (!pSerializedRecipe.has("result")) throw new JsonSyntaxException("Missing result, expected to find a string or object");
+        public SoulFurnaceRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
+            JsonObject ingredientJson = GsonHelper.getAsJsonObject(serializedRecipe, "ingredient");
+            Ingredient ingredient = Ingredient.of(CraftingHelper.getItemStack(ingredientJson, true, true));
+
+            if (!serializedRecipe.has("result")) throw new JsonSyntaxException("Missing result, expected to find a string or object");
             ItemStack output;
-            if (pSerializedRecipe.get("result").isJsonObject()) {
-                output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
+            if (serializedRecipe.get("result").isJsonObject()) {
+                JsonObject resultJson = GsonHelper.getAsJsonObject(serializedRecipe, "result");
+                output = ShapedRecipe.itemStackFromJson(resultJson);
             } else {
-                String s1 = GsonHelper.getAsString(pSerializedRecipe, "result");
-                ResourceLocation resourcelocation = new ResourceLocation(s1);
+                String result = GsonHelper.getAsString(serializedRecipe, "result");
+                ResourceLocation resourcelocation = new ResourceLocation(result);
                 output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
             }
-            int recipeCost = GsonHelper.getAsInt(pSerializedRecipe, "cost");
+            int recipeCost = GsonHelper.getAsInt(serializedRecipe, "cost");
 
-            return new SoulFurnaceRecipe(pRecipeId, output, ingredient, recipeCost);
+            return new SoulFurnaceRecipe(recipeId, output, ingredient, recipeCost);
         }
 
         @Override

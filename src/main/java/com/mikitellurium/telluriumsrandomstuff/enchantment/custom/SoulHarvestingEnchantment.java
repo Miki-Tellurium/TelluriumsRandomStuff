@@ -95,13 +95,8 @@ public class SoulHarvestingEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean isTradeable() {
-        return false;
-    }
-
-    @Override
-    public boolean isDiscoverable() {
-        return false;
+    public boolean isTreasureOnly() {
+        return true;
     }
 
 }
