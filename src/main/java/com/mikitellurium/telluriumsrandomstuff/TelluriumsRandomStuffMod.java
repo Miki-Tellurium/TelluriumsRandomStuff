@@ -11,7 +11,7 @@ import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.gui.ModMenuTypes;
 import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceGui;
-import com.mikitellurium.telluriumsrandomstuff.item.GrateBlocksCreativeTab;
+import com.mikitellurium.telluriumsrandomstuff.setup.ModCreativeTab;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.ModRecipes;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
@@ -22,7 +22,6 @@ import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -74,7 +73,7 @@ public class TelluriumsRandomStuffMod {
         EnchantedBookItem.addEnchantment(soulHarvestingII, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 2));
         EnchantedBookItem.addEnchantment(soulHarvestingIII, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 3));
 
-        if (event.getTab() == GrateBlocksCreativeTab.TAB_TELLURIUMSRANDOMSTUFF) {
+        if (event.getTab() == ModCreativeTab.TAB_TELLURIUMSRANDOMSTUFF) {
             event.accept(ModBlocks.GRATE_MAGMA_BLOCK);
             event.accept(ModBlocks.GRATE_SOUL_SAND);
             event.accept(ModBlocks.HYDRODYNAMIC_RAIL);
