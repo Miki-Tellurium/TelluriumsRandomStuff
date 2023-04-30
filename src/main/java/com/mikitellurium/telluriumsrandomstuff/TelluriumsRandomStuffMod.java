@@ -18,6 +18,11 @@ import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -62,6 +67,13 @@ public class TelluriumsRandomStuffMod {
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
+        ItemStack soulHarvestingI = new ItemStack(Items.ENCHANTED_BOOK);
+        ItemStack soulHarvestingII = soulHarvestingI.copy();
+        ItemStack soulHarvestingIII = soulHarvestingI.copy();
+        EnchantedBookItem.addEnchantment(soulHarvestingI, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 1));
+        EnchantedBookItem.addEnchantment(soulHarvestingII, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 2));
+        EnchantedBookItem.addEnchantment(soulHarvestingIII, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 3));
+
         if (event.getTab() == GrateBlocksCreativeTab.TAB_TELLURIUMSRANDOMSTUFF) {
             event.accept(ModBlocks.GRATE_MAGMA_BLOCK);
             event.accept(ModBlocks.GRATE_SOUL_SAND);
@@ -73,6 +85,9 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModBlocks.SOUL_MAGMA_BRICKS);
             event.accept(ModBlocks.SOUL_MAGMA_BRICK_SLAB);
             event.accept(ModItems.MYSTIC_POTATO);
+            event.accept(soulHarvestingI);
+            event.accept(soulHarvestingII);
+            event.accept(soulHarvestingIII);
             event.accept(ModBlocks.OPAL);
             event.accept(ModBlocks.OPAL_COBBLESTONE);
             event.accept(ModBlocks.OPAL_BRICKS);
