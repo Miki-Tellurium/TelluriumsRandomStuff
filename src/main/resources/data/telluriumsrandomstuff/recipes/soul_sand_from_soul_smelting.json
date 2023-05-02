@@ -1,8 +1,0 @@
-{
-  "type": "telluriumsrandomstuff:soul_furnace_smelting",
-  "ingredient": {
-    "item": "minecraft:sand"
-  },
-  "cost": 20,
-  "result": "minecraft:soul_sand"
-}
