@@ -64,7 +64,6 @@ public class JeiIntegration implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         IVanillaRecipeFactory recipeFactory = registration.getVanillaRecipeFactory();
-        IIngredientManager ingredientManager = registration.getIngredientManager();
 
         // Convert vanilla smelting recipes in soul furnace recipes
         List<SmeltingRecipe> vanillaRecipes = recipeManager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
