@@ -75,14 +75,15 @@ public class JeiIntegration implements IModPlugin {
         List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = new ArrayList<>();
         soulLavaInfoRecipes.add(new SoulLavaInfoCategory.Recipe());
 
+        IJeiAnvilRecipe soulHarvestingAnvilRecipe = recipeFactory.createAnvilRecipe(
+                ModItems.OPALIUM_SWORD.get().getDefaultInstance(),
+                RecipeUtils.soulHarvestingBooks,
+                RecipeUtils.soulHarvestingSwords);
+
         registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, convertedRecipes);
         registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, soulFurnaceRecipes);
-        registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
 
-        IJeiAnvilRecipe soulHarvestingAnvilRecipe = recipeFactory.createAnvilRecipe(
-                        ModItems.OPALIUM_SWORD.get().getDefaultInstance(),
-                        RecipeUtils.soulHarvestingBooks,
-                        RecipeUtils.soulHarvestingSwords);
+        registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
 
         registration.addRecipes(RecipeTypes.ANVIL, List.of(soulHarvestingAnvilRecipe));
         registration.addRecipes(RecipeTypes.ANVIL, RecipeUtils.getAnvilRecipes(recipeFactory));
