@@ -44,24 +44,37 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.getItemColors().register((stack, tintIndex) -> {
-            Player player = Minecraft.getInstance().player;
-            ItemEntity itemEntity = (ItemEntity) stack.getEntityRepresentation();
-                    // If the item is dropped in the world
-                    if (itemEntity != null) {
-                        if (ColorsUtil.isMaterialOpalium(stack)) {
-                            return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
-                                    itemEntity.getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
+                    Player player = Minecraft.getInstance().player;
+                    if (player != null) {
+                        //Check if the item is in item frame
+                        if (stack.isFramed()) {
+                            if (ColorsUtil.isMaterialOpalium(stack)) {
+                                return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
+                                        stack.getEntityRepresentation().getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
+                            }
+
+                            return ColorsUtil.getOpalRainbowColor(stack.getEntityRepresentation().getOnPos(),
+                                    0.65f, 0.9f);
                         }
 
-                        return ColorsUtil.getOpalRainbowColor(itemEntity.getOnPos(), 0.65f, 0.9f);
-                    // If the item is inside a inventory
-                    } else if (player != null) {
-                        if (ColorsUtil.isMaterialOpalium(stack)) {
-                            return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
-                                    player.getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
-                        }
+                        ItemEntity itemEntity = (ItemEntity) stack.getEntityRepresentation();
+                        // Check if the item is dropped in the world
+                        if (itemEntity != null) {
+                            if (ColorsUtil.isMaterialOpalium(stack)) {
+                                return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
+                                        itemEntity.getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
+                            }
 
-                        return ColorsUtil.getOpalRainbowColor(player.getOnPos(), 0.65f, 0.9f);
+                            return ColorsUtil.getOpalRainbowColor(itemEntity.getOnPos(), 0.65f, 0.9f);
+                        } else {
+                            // If the item is inside a inventory
+                            if (ColorsUtil.isMaterialOpalium(stack)) {
+                                return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
+                                        player.getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
+                            }
+
+                            return ColorsUtil.getOpalRainbowColor(player.getOnPos(), 0.65f, 0.9f);
+                        }
                     }
                     return 0xFFFFFF;},
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
