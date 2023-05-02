@@ -3,7 +3,7 @@ loaderVersion="[45,)" #mandatory This is typically bumped every Minecraft versio
 license="MIT License"
 [[mods]] #mandatory
 modId="telluriumsrandomstuff" #mandatory
-version="1.2.0-1.19.4" #mandatory
+version="1.2.1-1.19.4" #mandatory
 displayName="Tellurium's Random Stuff" #mandatory
 issueTrackerURL="https://github.com/Miki-Tellurium/TelluriumsRandomStuff/issues/"
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
