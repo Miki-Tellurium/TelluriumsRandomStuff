@@ -34,13 +34,6 @@ public class RecipeUtils {
             RecipeUtils.addEnchantment(ModItems.OPALIUM_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
             RecipeUtils.addEnchantment(ModItems.OPALIUM_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
     );
-    public static final List<ItemStack> opaliumTools = List.of(
-            ModItems.OPALIUM_SWORD.get().getDefaultInstance(),
-            ModItems.OPALIUM_AXE.get().getDefaultInstance(),
-            ModItems.OPALIUM_PICKAXE.get().getDefaultInstance(),
-            ModItems.OPALIUM_SHOVEL.get().getDefaultInstance(),
-            ModItems.OPALIUM_HOE.get().getDefaultInstance()
-    );
     private static final RepairData opaliumRepairData = new RepairData(Ingredient.of(ModItems.OPALIUM_INGOT.get()),
             ModItems.OPALIUM_SWORD.get().getDefaultInstance(),
             ModItems.OPALIUM_AXE.get().getDefaultInstance(),
@@ -77,14 +70,10 @@ public class RecipeUtils {
     }
 
     /*
-     *   Anvil recipe helper copied from JEI Code, credit to mezz and the JEI developers
+     *   Anvil recipe helper code taken from JEI Code, credit to mezz and the JEI developers
      */
     public static List<IJeiAnvilRecipe> getAnvilRecipes(IVanillaRecipeFactory vanillaRecipeFactory) {
-        return getRepairRecipes(vanillaRecipeFactory).toList();
-    }
-
-    private static Stream<IJeiAnvilRecipe> getRepairRecipes(IVanillaRecipeFactory vanillaRecipeFactory) {
-        return getRepairRecipes(opaliumRepairData, vanillaRecipeFactory);
+        return getRepairRecipes(opaliumRepairData, vanillaRecipeFactory).toList();
     }
 
     private static Stream<IJeiAnvilRecipe> getRepairRecipes(RepairData repairData, IVanillaRecipeFactory vanillaRecipeFactory) {
