@@ -2,17 +2,22 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 
 import java.awt.*;
 
 public class ColorsUtil {
 
-    public static int getOpalRainbowColor(BlockPos pos, float saturation, float brightness) {
+    public static int getMaterialColor(ItemStack stack, int tintIndex, BlockPos pos) {
+        if (ColorsUtil.isMaterialOpalium(stack)) {
+            return tintIndex == 0 ? ColorsUtil.getRainbowColor(pos, 0.8f, 1.0f) : 0xFFFFFF;
+        }
+
+        return ColorsUtil.getRainbowColor(pos, 0.65f, 0.9f);
+    }
+
+    public static int getRainbowColor(BlockPos pos, float saturation, float brightness) {
         int waveSize = 75; // How big are the color waves
 
         Color color = Color.getHSBColor(

@@ -7,9 +7,9 @@ import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
 import com.mikitellurium.telluriumsrandomstuff.particle.custom.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -23,11 +23,8 @@ public class ClientSetup {
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.getBlockColors().register((state, world, pos, tintIndex) -> {
                     if (world != null && pos != null) {
-                        if (ColorsUtil.isMaterialOpalium(state.getBlock().asItem().getDefaultInstance())) {
-                            return ColorsUtil.getOpalRainbowColor(pos, 0.8f, 1.0f);
-                        }
-
-                        return ColorsUtil.getOpalRainbowColor(pos, 0.65f, 0.9f);
+                        return ColorsUtil.getMaterialColor(state.getBlock().asItem().getDefaultInstance(),
+                                tintIndex, pos);
                     }
                     return 0xFFFFFF;},
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
@@ -44,39 +41,21 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.getItemColors().register((stack, tintIndex) -> {
-                    Player player = Minecraft.getInstance().player;
-                    if (player != null) {
-                        //Check if the item is in item frame
-                        if (stack.isFramed()) {
-                            if (ColorsUtil.isMaterialOpalium(stack)) {
-                                return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
-                                        stack.getEntityRepresentation().getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
-                            }
+                    BlockPos pos;
 
-                            return ColorsUtil.getOpalRainbowColor(stack.getEntityRepresentation().getOnPos(),
-                                    0.65f, 0.9f);
-                        }
-
-                        ItemEntity itemEntity = (ItemEntity) stack.getEntityRepresentation();
-                        // Check if the item is dropped in the world
-                        if (itemEntity != null) {
-                            if (ColorsUtil.isMaterialOpalium(stack)) {
-                                return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
-                                        itemEntity.getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
-                            }
-
-                            return ColorsUtil.getOpalRainbowColor(itemEntity.getOnPos(), 0.65f, 0.9f);
+                        if (stack.isFramed()) { //Check if the item is in item frame
+                           pos = stack.getFrame().getPos();
+                        } else if (stack.getEntityRepresentation() != null) { // Check if the item is dropped in the world
+                            pos = stack.getEntityRepresentation().getOnPos();
                         } else {
-                            // If the item is inside a inventory
-                            if (ColorsUtil.isMaterialOpalium(stack)) {
-                                return tintIndex == 0 ? ColorsUtil.getOpalRainbowColor(
-                                        player.getOnPos(), 0.8f, 1.0f) : 0xFFFFFF;
+                            Player player = Minecraft.getInstance().player;
+                            if (player != null) {
+                                pos = player.getOnPos();
+                            } else {
+                                pos = new BlockPos(0, 0, 0);
                             }
-
-                            return ColorsUtil.getOpalRainbowColor(player.getOnPos(), 0.65f, 0.9f);
                         }
-                    }
-                    return 0xFFFFFF;},
+                    return ColorsUtil.getMaterialColor(stack, tintIndex, pos); },
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
                 ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
