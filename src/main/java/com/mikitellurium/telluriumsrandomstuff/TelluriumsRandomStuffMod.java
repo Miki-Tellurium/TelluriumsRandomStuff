@@ -83,6 +83,7 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModBlocks.SOUL_FURNACE);
             event.accept(ModBlocks.SOUL_MAGMA_BRICKS);
             event.accept(ModBlocks.SOUL_MAGMA_BRICK_SLAB);
+            event.accept(ModBlocks.SOUL_OBSIDIAN_BLOCK);
             event.accept(ModItems.MYSTIC_POTATO);
             event.accept(soulHarvestingI);
             event.accept(soulHarvestingII);

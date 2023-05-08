@@ -31,6 +31,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> HYDRODYNAMIC_RAIL = registerBlock("hydrodynamic_rail", HydrodynamicRailBlock::new);
 
+    public static final RegistryObject<LiquidBlock> SOUL_LAVA_BLOCK = BLOCKS.register("soul_lava_block",
+            () -> new SoulLavaBlock(ModFluids.SOUL_LAVA_SOURCE));
+
     public static final RegistryObject<Block> SOUL_MAGMA_BLOCK = registerBlock("soul_magma_block", SoulMagmaBlock::new);
 
     public static final RegistryObject<Block> GRATE_SOUL_MAGMA_BLOCK = registerBlock("grate_soul_magma_block", GrateSoulMagmaBlock::new);
@@ -127,8 +130,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> OPALIUM_BLOCK = registerBlock("opalium_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
 
-    public static final RegistryObject<LiquidBlock> SOUL_LAVA_BLOCK = BLOCKS.register("soul_lava_block",
-            () -> new SoulLavaBlock(ModFluids.SOUL_LAVA_SOURCE));
+    public static final RegistryObject<Block> SOUL_OBSIDIAN_BLOCK = registerBlock("soul_obsidian", SoulObsidianBlock::new);
 
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
