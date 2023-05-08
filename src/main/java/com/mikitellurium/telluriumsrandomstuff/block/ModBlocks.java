@@ -132,6 +132,8 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SOUL_OBSIDIAN_BLOCK = registerBlock("soul_obsidian", SoulObsidianBlock::new);
 
+    public static final RegistryObject<Block> SOUL_ANCHOR_BLOCK = registerBlock("soul_anchor", SoulAnchorBlock::new);
+
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

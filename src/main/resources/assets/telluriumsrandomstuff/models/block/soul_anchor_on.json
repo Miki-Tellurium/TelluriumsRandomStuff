@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "telluriumsrandomstuff:block/soul_obsidian",
+    "side": "telluriumsrandomstuff:block/soul_anchor_side_on",
+    "top": "telluriumsrandomstuff:block/soul_anchor_top_on"
+  }
+}
