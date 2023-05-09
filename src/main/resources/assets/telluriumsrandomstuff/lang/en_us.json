@@ -54,7 +54,8 @@
   "block.telluriumsrandomstuff.soul_obsidian": "Soul Obsidian",
   "block.telluriumsrandomstuff.soul_anchor": "Soul Anchor",
 
-  "telluriumsrandomstuff.blockentity.soul_furnace": "Soul Furnace",
+  "blockentity.telluriumsrandomstuff.soul_furnace": "Soul Furnace",
+  "blockentity.telluriumsrandomstuff.soul_anchor": "Soul Anchor",
 
   "fluid_type.telluriumsrandomstuff.soul_lava_fluid": "Soul Lava",
 

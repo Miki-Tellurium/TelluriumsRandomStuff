@@ -1,9 +1,8 @@
-package com.mikitellurium.telluriumsrandomstuff.gui;
+package com.mikitellurium.telluriumsrandomstuff.gui.menu;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.custom.SoulFurnaceBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
-import com.mikitellurium.telluriumsrandomstuff.networking.packets.FluidSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.gui.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +21,7 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
     private final ContainerData data;
     private FluidStack fluidStack;
 
-    protected SoulFurnaceMenu(int id, Inventory inventory, FriendlyByteBuf data) {
+    public SoulFurnaceMenu(int id, Inventory inventory, FriendlyByteBuf data) {
         this(id, inventory, inventory.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(4));
     }
 
@@ -120,7 +119,7 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.SOUL_FURNACE.get());
+                pPlayer, ModBlocks.SOUL_FURNACE_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

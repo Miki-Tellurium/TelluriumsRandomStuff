@@ -3,7 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.blockentity.custom;
 import com.mikitellurium.telluriumsrandomstuff.block.custom.SoulFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
-import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceMenu;
+import com.mikitellurium.telluriumsrandomstuff.gui.menu.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulFurnaceRecipe;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
@@ -145,7 +145,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
 
     private static ItemStack itemCheck = ItemStack.EMPTY;
 
-    private static boolean test = true;
+    //private static boolean test = true;
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, SoulFurnaceBlockEntity furnace) {
         if (level.isClientSide) {
@@ -294,7 +294,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     // Gui stuff
     @Override
     public Component getDisplayName() {
-        return Component.translatable("telluriumsrandomstuff.blockentity.soul_furnace");
+        return Component.translatable("blockentity.telluriumsrandomstuff.soul_furnace");
     }
 
     @Nullable

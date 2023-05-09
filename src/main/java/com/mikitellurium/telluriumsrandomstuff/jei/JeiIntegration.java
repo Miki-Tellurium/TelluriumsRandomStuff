@@ -2,9 +2,8 @@ package com.mikitellurium.telluriumsrandomstuff.jei;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
-import com.mikitellurium.telluriumsrandomstuff.enchantment.ModEnchantments;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
-import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceGui;
+import com.mikitellurium.telluriumsrandomstuff.gui.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.*;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
@@ -29,7 +28,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraftforge.fluids.FluidStack;
@@ -90,18 +88,18 @@ public class JeiIntegration implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), SOUL_FURNACE_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE_BLOCK.get()), SOUL_FURNACE_RECIPE_TYPE);
     }
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(SoulFurnaceGui.class, 77, 28, 28, 21, SOUL_FURNACE_RECIPE_TYPE);
+        registration.addRecipeClickArea(SoulFurnaceScreen.class, 77, 28, 28, 21, SOUL_FURNACE_RECIPE_TYPE);
 
         IIngredientManager ingredientManager = registration.getJeiHelpers().getIngredientManager();
         // Make the soul lava tank clickable
-        registration.addGuiContainerHandler(SoulFurnaceGui.class, new IGuiContainerHandler<>() {
+        registration.addGuiContainerHandler(SoulFurnaceScreen.class, new IGuiContainerHandler<>() {
             @Override
-            public Optional<IClickableIngredient<?>> getClickableIngredientUnderMouse(SoulFurnaceGui containerScreen, double mouseX, double mouseY) {
+            public Optional<IClickableIngredient<?>> getClickableIngredientUnderMouse(SoulFurnaceScreen containerScreen, double mouseX, double mouseY) {
                 Rect2i area = containerScreen.getSoulLavaStorage();
                 ITypedIngredient<FluidStack> soulLava =
                         ingredientManager.createTypedIngredient(ForgeTypes.FLUID_STACK, new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 10)).get();

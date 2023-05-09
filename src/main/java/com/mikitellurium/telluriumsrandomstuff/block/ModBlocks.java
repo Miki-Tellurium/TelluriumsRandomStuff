@@ -38,7 +38,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GRATE_SOUL_MAGMA_BLOCK = registerBlock("grate_soul_magma_block", GrateSoulMagmaBlock::new);
 
-    public static final RegistryObject<Block> SOUL_FURNACE = registerBlock("soul_furnace", SoulFurnaceBlock::new);
+    public static final RegistryObject<Block> SOUL_FURNACE_BLOCK = registerBlock("soul_furnace", SoulFurnaceBlock::new);
 
     public static final RegistryObject<Block> SOUL_MAGMA_BRICKS = registerBlock("soul_magma_bricks",
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)

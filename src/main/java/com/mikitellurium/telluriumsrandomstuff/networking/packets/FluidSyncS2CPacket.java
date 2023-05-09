@@ -1,8 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.networking.packets;
 
 import com.mikitellurium.telluriumsrandomstuff.blockentity.custom.SoulFurnaceBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
-import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceMenu;
+import com.mikitellurium.telluriumsrandomstuff.gui.menu.SoulFurnaceMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;

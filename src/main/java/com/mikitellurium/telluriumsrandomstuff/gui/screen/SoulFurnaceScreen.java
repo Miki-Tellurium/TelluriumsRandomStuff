@@ -1,11 +1,11 @@
-package com.mikitellurium.telluriumsrandomstuff.gui;
+package com.mikitellurium.telluriumsrandomstuff.gui.screen;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.gui.menu.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.gui.render.FluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.Rect2i;
@@ -16,14 +16,14 @@ import net.minecraft.world.entity.player.Inventory;
 import java.util.List;
 import java.util.Optional;
 
-public class SoulFurnaceGui extends AbstractContainerScreen<SoulFurnaceMenu> {
+public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> {
 
     public static final ResourceLocation GUI_TEXTURE =
             new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/soul_furnace_gui.png");
 
     private Rect2i soulLavaStorage;
 
-    public SoulFurnaceGui(SoulFurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public SoulFurnaceScreen(SoulFurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 

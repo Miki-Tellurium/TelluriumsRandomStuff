@@ -10,7 +10,8 @@ import com.mikitellurium.telluriumsrandomstuff.enchantment.ModEnchantments;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.gui.ModMenuTypes;
-import com.mikitellurium.telluriumsrandomstuff.gui.SoulFurnaceGui;
+import com.mikitellurium.telluriumsrandomstuff.gui.screen.SoulAnchorScreen;
+import com.mikitellurium.telluriumsrandomstuff.gui.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.setup.ModCreativeTab;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.ModRecipes;
@@ -80,7 +81,7 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.SOUL_LAVA_BUCKET);
             event.accept(ModBlocks.SOUL_MAGMA_BLOCK);
             event.accept(ModBlocks.GRATE_SOUL_MAGMA_BLOCK);
-            event.accept(ModBlocks.SOUL_FURNACE);
+            event.accept(ModBlocks.SOUL_FURNACE_BLOCK);
             event.accept(ModBlocks.SOUL_MAGMA_BRICKS);
             event.accept(ModBlocks.SOUL_MAGMA_BRICK_SLAB);
             event.accept(ModBlocks.SOUL_OBSIDIAN_BLOCK);
@@ -128,8 +129,10 @@ public class TelluriumsRandomStuffMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            MenuScreens.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceGui::new);
+            MenuScreens.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
+            MenuScreens.register(ModMenuTypes.SOUL_ANCHOR_MENU.get(), SoulAnchorScreen::new);
         }
+
     }
 
 }
