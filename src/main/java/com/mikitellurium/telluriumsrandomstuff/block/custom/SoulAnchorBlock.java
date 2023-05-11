@@ -97,12 +97,6 @@ public class SoulAnchorBlock extends BaseEntityBlock {
     }
 
     private void openContainer(Level level, BlockPos pos, Player player) {
-        player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
-            System.out.println("inventory " + soulAnchor.hasSavedInventory());
-            System.out.println("has died " + soulAnchor.hasRecentlyDied());
-            System.out.println("has charged " + soulAnchor.hasChargedAnchor());
-        });
-
         SoulAnchorBlockEntity soulAnchor = (SoulAnchorBlockEntity)level.getBlockEntity(pos);
         if (player != null && soulAnchor != null) {
             NetworkHooks.openScreen((ServerPlayer) player, soulAnchor, pos);
