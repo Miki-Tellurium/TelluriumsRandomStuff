@@ -3,16 +3,24 @@ package com.mikitellurium.telluriumsrandomstuff.event;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.block.custom.CustomBubbleColumnBlock;
+import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorCapabilityProvider;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.village.VillageSiegeEvent;
-import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -56,6 +64,56 @@ public class ModEvents {
         if (entity.level.getBlockState(new BlockPos((int)entity.getX(), (int)entity.getEyeY(), (int)entity.getZ())).is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
             if (entity.getAirSupply() < entity.getMaxAirSupply()) {
                 entity.setAirSupply(Math.min(entity.getAirSupply() + 5, entity.getMaxAirSupply()));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerDeath(LivingDeathEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+                if (soulAnchor.hasChargedAnchor()) {
+                    soulAnchor.saveInventory(player.getInventory());
+                    soulAnchor.setRecentlyDied(true);
+                }
+            });
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerDropInventory(LivingDropsEvent event) {
+        if (!event.getEntity().level.isClientSide) {
+            if (event.getEntity() instanceof Player player) {
+                player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+                    if (soulAnchor.hasChargedAnchor()) {
+                        event.setCanceled(true);
+                    }
+                });
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onAttachPlayerCapabilities(AttachCapabilitiesEvent<Entity> event) {
+        if (event.getObject() instanceof Player player) {
+            if (!player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).isPresent()) {
+                event.addCapability(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "properties"),
+                        new SoulAnchorCapabilityProvider());
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerCloned(PlayerEvent.Clone event) {
+        if (!event.getEntity().getLevel().isClientSide) {
+            if (event.isWasDeath()) {
+                event.getOriginal().reviveCaps();
+                event.getOriginal().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((old) -> {
+                    event.getEntity().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((newClone) -> {
+                        newClone.copyFrom(old);
+                    });
+                });
+                event.getOriginal().invalidateCaps();
             }
         }
     }

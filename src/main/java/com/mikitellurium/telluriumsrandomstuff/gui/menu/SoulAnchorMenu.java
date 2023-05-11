@@ -33,21 +33,21 @@ public class SoulAnchorMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((itemHandler) -> {
             // Armor slots
-            this.addSlot(new SlotItemHandler(itemHandler, 0, 8, -9));
-            this.addSlot(new SlotItemHandler(itemHandler, 1, 26, -9));
-            this.addSlot(new SlotItemHandler(itemHandler, 2, 44, -9));
-            this.addSlot(new SlotItemHandler(itemHandler, 3, 62, -9));
+            this.addSlot(new SlotItemHandler(itemHandler, 36, 8, -9));
+            this.addSlot(new SlotItemHandler(itemHandler, 37, 26, -9));
+            this.addSlot(new SlotItemHandler(itemHandler, 38, 44, -9));
+            this.addSlot(new SlotItemHandler(itemHandler, 39, 62, -9));
             // Off-Hand Slot
-            this.addSlot(new SlotItemHandler(itemHandler, 4, 98, -9));
+            this.addSlot(new SlotItemHandler(itemHandler, 40, 98, -9));
             // Inventory slots
             for (int i = 0; i < 3; ++i) {
                 for (int l = 0; l < 9; ++l) {
-                    this.addSlot(new SlotItemHandler(itemHandler, l + i * 9 + 5, 8 + l * 18, 11 + i * 18));
+                    this.addSlot(new SlotItemHandler(itemHandler, l + i * 9 + 9, 8 + l * 18, 11 + i * 18));
                 }
             }
             // HotBar slots
             for (int i = 0; i < 9; ++i) {
-                this.addSlot(new SlotItemHandler(itemHandler, 32 + i, 8 + i * 18, 67));
+                this.addSlot(new SlotItemHandler(itemHandler, i, 8 + i * 18, 67));
             }
         });
     }

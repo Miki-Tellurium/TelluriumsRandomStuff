@@ -12,9 +12,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -35,7 +33,7 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-           return false;
+           return true;
         }
     };
 
@@ -45,11 +43,26 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
         super(ModBlockEntities.SOUL_ANCHOR.get(), pos, state);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, SoulAnchorBlockEntity anchor) {
-        if (level.isClientSide) {
-            return;
+    private SimpleContainer getInventory() {
+        SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
 
+        return inventory;
+    }
+
+    public void savePlayerInventory(SimpleContainer playerInventory) {
+        for (int i = 0; i < playerInventory.getContainerSize(); i++) {
+            ItemStack stack = playerInventory.getItem(i);
+            itemHandler.setStackInSlot(i, stack.copy());
+        }
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public void dropItemsOnBreak() {
+        SimpleContainer inventory = getInventory();
+        Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
     // Gui stuff
@@ -64,26 +77,13 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
         return new SoulAnchorMenu(containerId, playerInventory, this);
     }
 
-    private SimpleContainer getInventory() {
-        SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
-        }
-
-        return inventory;
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    public void dropItemsOnBreak() {
-        SimpleContainer inventory = getInventory();
-        Containers.dropContents(this.level, this.worldPosition, inventory);
-    }
-
     // Capability stuff
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
+            if (side == null) {
+                return lazyItemHandler.cast();
+            }
         }
 
         return super.getCapability(cap, side);
