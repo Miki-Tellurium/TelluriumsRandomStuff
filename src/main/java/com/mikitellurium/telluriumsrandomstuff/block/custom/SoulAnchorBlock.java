@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.block.custom;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.custom.SoulAnchorBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorCapabilityProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -13,7 +14,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -144,6 +147,21 @@ public class SoulAnchorBlock extends BaseEntityBlock {
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    }
+
+    @Override
+    public boolean isSignalSource(BlockState blockState) {
+        return true;
+    }
+
+    @Override
+    public int getSignal(BlockState blockState, BlockGetter blockGetter, BlockPos pos, Direction direction) {
+        return blockState.getValue(CHARGED) ? 5 : 0;
+    }
+
+    @Override
+    public void onNeighborChange(BlockState state, LevelReader level, BlockPos pos, BlockPos neighbor) {
+        super.onNeighborChange(state, level, pos, neighbor);
     }
 
     public static int getSoulAnchorLightLevel(BlockState blockState) {
