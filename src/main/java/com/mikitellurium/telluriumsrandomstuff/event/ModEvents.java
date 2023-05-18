@@ -4,6 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.block.custom.CustomBubbleColumnBlock;
 import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorLevelData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -11,16 +12,20 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -114,6 +119,21 @@ public class ModEvents {
                     });
                 });
                 event.getOriginal().invalidateCaps();
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerJoinLevel(EntityJoinLevelEvent event) {
+        if (event.getLevel().isClientSide) {
+            return;
+        }
+        if (event.getEntity() instanceof Player player) {
+            if(SoulAnchorLevelData.get(event.getLevel()).removePlayer(player)) {
+                player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+                    soulAnchor.setChargedAnchor(false);
+                    soulAnchor.clearInventory();
+                });
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.blockentity.custom;
 
 import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.capability.CachedPlayer;
 import com.mikitellurium.telluriumsrandomstuff.gui.menu.SoulAnchorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -22,6 +24,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -38,6 +42,7 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private CachedPlayer savedPlayer = new CachedPlayer();
 
     public SoulAnchorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SOUL_ANCHOR.get(), pos, state);
@@ -55,7 +60,9 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     public void savePlayerInventory(SimpleContainer playerInventory) {
         for (int i = 0; i < playerInventory.getContainerSize(); i++) {
             ItemStack stack = playerInventory.getItem(i);
-            itemHandler.setStackInSlot(i, stack.copy());
+            if (!EnchantmentHelper.hasVanishingCurse(stack)) {
+                itemHandler.setStackInSlot(i, stack.copy());
+            }
         }
     }
 
@@ -63,6 +70,18 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     public void dropItemsOnBreak() {
         SimpleContainer inventory = getInventory();
         Containers.dropContents(this.level, this.worldPosition, inventory);
+    }
+
+    public void setSavedPlayer(UUID player) {
+        savedPlayer.set(player);
+    }
+
+    public UUID getSavedPlayer() {
+        return savedPlayer.get();
+    }
+
+    public void clearSavedPlayer() {
+        savedPlayer.clear();
     }
 
     // Gui stuff
@@ -110,6 +129,9 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
+        if (savedPlayer.get() != null) {
+            tag.putUUID("savedPlayer", savedPlayer.get());
+        }
         super.saveAdditional(tag);
     }
 
@@ -117,6 +139,7 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     public void load(CompoundTag tag) {
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("inventory"));
+        savedPlayer.set(tag.getUUID("savedPlayer"));
     }
 
 }

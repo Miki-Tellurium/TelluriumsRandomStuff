@@ -5,12 +5,15 @@ import com.mikitellurium.telluriumsrandomstuff.blockentity.custom.SoulAnchorBloc
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 
 @AutoRegisterCapability
@@ -56,13 +59,21 @@ public class SoulAnchorCapability {
         this.hasRecentlyDied = b;
     }
 
-    public void charge(Entity entity, Level level, BlockPos pos, BlockState state) {
-        SoulAnchorBlock.charge(entity, level, pos, state);
+    public void charge(Entity entity, Level level, BlockPos pos, BlockState blockState) {
+        level.setBlockAndUpdate(pos, blockState.setValue(SoulAnchorBlock.CHARGED, true));
+        level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(entity, blockState));
+        level.playSound(null, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D,
+                (double)pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS,
+                1.0F, 1.0F);
         setChargedAnchor(true);
     }
 
-    public void discharge(Entity entity, Level level, BlockPos pos, BlockState state) {
-        SoulAnchorBlock.discharge(entity, level, pos, state);
+    public void discharge(Entity entity, Level level, BlockPos pos, BlockState blockState) {
+        level.setBlockAndUpdate(pos, blockState.setValue(SoulAnchorBlock.CHARGED, false));
+        level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(entity, blockState));
+        level.playSound(null, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D,
+                (double)pos.getZ() + 0.5D, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS,
+                1.0F, 1.0F);
         setChargedAnchor(false);
     }
 
