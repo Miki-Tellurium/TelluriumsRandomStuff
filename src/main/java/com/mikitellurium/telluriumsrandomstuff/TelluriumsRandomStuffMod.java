@@ -122,6 +122,7 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.OPALIUM_AXE);
             event.accept(ModItems.OPALIUM_HOE);
             event.accept(ModItems.OPALIUM_SWORD);
+            event.accept(ModItems.FILTER);
             event.accept(ModBlocks.EXTRACTOR_BLOCK);
         }
     }
