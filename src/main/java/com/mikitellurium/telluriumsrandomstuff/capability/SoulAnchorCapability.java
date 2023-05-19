@@ -4,6 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.block.custom.SoulAnchorBlock;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.custom.SoulAnchorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -21,8 +22,37 @@ public class SoulAnchorCapability {
 
     private final int playerInventorySize = 41;
     private boolean hasChargedAnchor;
-    private SimpleContainer inventory = new SimpleContainer(playerInventorySize);
     private boolean hasRecentlyDied;
+    private SimpleContainer inventory = new SimpleContainer(playerInventorySize) {
+        @Override
+        public ListTag createTag() {
+            ListTag listTag = new ListTag();
+            for(int i = 0; i < this.getContainerSize(); ++i) {
+                CompoundTag tag = new CompoundTag();
+                ItemStack itemstack = this.getItem(i);
+                if (!itemstack.isEmpty()) {
+                    tag.putInt("index", i);
+                    itemstack.save(tag);
+                    listTag.add(tag);
+                }
+            }
+
+            return listTag;
+        }
+
+        @Override
+        public void fromTag(ListTag listTag) {
+            this.clearContent();
+            for(int i = 0; i < listTag.size(); ++i) {
+                CompoundTag tag = listTag.getCompound(i);
+                int slot = tag.getInt("index");
+                ItemStack itemstack = ItemStack.of(tag);
+                if (!itemstack.isEmpty()) {
+                    this.setItem(slot, itemstack);
+                }
+            }
+        }
+    };
 
     public boolean hasChargedAnchor() {
         return hasChargedAnchor;
