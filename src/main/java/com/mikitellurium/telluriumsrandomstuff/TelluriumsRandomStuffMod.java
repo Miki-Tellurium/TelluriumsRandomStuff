@@ -10,6 +10,7 @@ import com.mikitellurium.telluriumsrandomstuff.enchantment.ModEnchantments;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.gui.ModMenuTypes;
+import com.mikitellurium.telluriumsrandomstuff.gui.screen.ExtractorScreen;
 import com.mikitellurium.telluriumsrandomstuff.gui.screen.SoulAnchorScreen;
 import com.mikitellurium.telluriumsrandomstuff.gui.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.setup.ModCreativeTab;
@@ -133,6 +134,7 @@ public class TelluriumsRandomStuffMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
             MenuScreens.register(ModMenuTypes.SOUL_ANCHOR_MENU.get(), SoulAnchorScreen::new);
+            MenuScreens.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
         }
 
     }

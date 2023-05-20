@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.gui;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.gui.menu.ExtractorMenu;
 import com.mikitellurium.telluriumsrandomstuff.gui.menu.SoulAnchorMenu;
 import com.mikitellurium.telluriumsrandomstuff.gui.menu.SoulFurnaceMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -23,6 +24,8 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<SoulAnchorMenu>> SOUL_ANCHOR_MENU =
             registerMenuType(SoulAnchorMenu::new, "soul_anchor_menu");
 
+    public static final RegistryObject<MenuType<ExtractorMenu>> EXTRACTOR_MENU =
+            registerMenuType(ExtractorMenu::new, "extractor_menu");
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                   String name) {
