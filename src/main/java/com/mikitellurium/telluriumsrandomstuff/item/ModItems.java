@@ -5,6 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -84,7 +85,12 @@ public class ModItems {
             });
 
     public static final RegistryObject<Item> FILTER = ITEMS.register("filter",
-            () -> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties()) {
+                @Override
+                public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+                    return 200;
+                }
+            });
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
