@@ -88,7 +88,7 @@ public class ModItems {
             () -> new Item(new Item.Properties()) {
                 @Override
                 public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
-                    return 200;
+                    return 100;
                 }
             });
 
