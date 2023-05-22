@@ -6,7 +6,8 @@
   "mixins": [
     "LiquidBlockMixin",
     "PointedDripstoneBlockMixin",
-    "SoulSandBlockMixin"
+    "SoulSandBlockMixin",
+    "ZombieHorseMixin"
   ],
   "client": [
   ],

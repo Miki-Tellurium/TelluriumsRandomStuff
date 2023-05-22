@@ -6,17 +6,24 @@ import com.mikitellurium.telluriumsrandomstuff.block.custom.CustomBubbleColumnBl
 import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorLevelData;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityEvent;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.horse.ZombieHorse;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -24,6 +31,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.village.VillageSiegeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -134,6 +142,33 @@ public class ModEvents {
                     soulAnchor.setChargedAnchor(false);
                     soulAnchor.clearInventory();
                 });
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onZombieSiegeSpawn(VillageSiegeEvent event) {
+        if (event.getLevel().isClientSide) {
+            return;
+        }
+
+        ServerLevel level = (ServerLevel) event.getLevel();
+        RandomSource random = level.random;
+        if (random.nextInt(100) < 25) {
+            Vec3 vec = event.getAttemptedSpawnPos();
+            BlockPos spawnPos = new BlockPos((int) vec.x, (int) vec.y, (int) vec.z).above();
+            Zombie rider = EntityType.ZOMBIE.spawn(level, spawnPos, MobSpawnType.EVENT);
+            ZombieHorse steed = EntityType.ZOMBIE_HORSE.spawn(level, spawnPos, MobSpawnType.EVENT);
+            if (rider != null && steed != null) {
+                ItemStack helmet = new ItemStack(Items.IRON_HELMET);
+                ItemStack weapon = new ItemStack(Items.IRON_SWORD);
+                helmet.enchant(Enchantments.THORNS, 3);
+                EnchantmentHelper.enchantItem(level.random, weapon, 5 + random.nextInt(25), false);
+                rider.setItemSlot(EquipmentSlot.HEAD, helmet);
+                rider.setItemSlot(EquipmentSlot.MAINHAND, weapon);
+                steed.setTamed(true);
+                rider.startRiding(steed);
+                level.addFreshEntityWithPassengers(steed);
             }
         }
     }
