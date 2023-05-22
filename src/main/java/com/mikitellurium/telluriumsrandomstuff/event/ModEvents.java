@@ -1,10 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.event;
 
+import com.google.gson.JsonParseException;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.block.custom.CustomBubbleColumnBlock;
 import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorLevelData;
+import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -24,6 +26,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -36,6 +39,8 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import javax.swing.*;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModEvents {
@@ -154,7 +159,7 @@ public class ModEvents {
 
         ServerLevel level = (ServerLevel) event.getLevel();
         RandomSource random = level.random;
-        if (random.nextInt(100) < 25) {
+        if (random.nextInt(100) + 1 < ModCommonConfig.ZOMBIE_RIDER_SPAWN_CHANCE.get()) {
             Vec3 vec = event.getAttemptedSpawnPos();
             BlockPos spawnPos = new BlockPos((int) vec.x, (int) vec.y, (int) vec.z).above();
             Zombie rider = EntityType.ZOMBIE.spawn(level, spawnPos, MobSpawnType.EVENT);

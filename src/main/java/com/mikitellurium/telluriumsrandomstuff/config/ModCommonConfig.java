@@ -9,6 +9,8 @@ public class ModCommonConfig {
 
     public static ForgeConfigSpec.BooleanValue ENABLE_MOD_DISPENSER_BEHAVIOR;
 
+    public static ForgeConfigSpec.IntValue ZOMBIE_RIDER_SPAWN_CHANCE; // The spawn chance of zombie rider in village sieges
+
     public static void registerCommonConfig() {
         ForgeConfigSpec.Builder CONFIG_BUILDER = new ForgeConfigSpec.Builder();
         registerConfig(CONFIG_BUILDER);
@@ -21,6 +23,10 @@ public class ModCommonConfig {
         ENABLE_MOD_DISPENSER_BEHAVIOR = builder
                 .comment("Enable dispenser interactions with cauldrons.")
                 .define("enableDispenserCauldronInteractions", true);
+        ZOMBIE_RIDER_SPAWN_CHANCE = builder
+                .comment("The chance of a zombie riding a zombie horse spawning in a village zombie siege.",
+                         "100 to always spawn, 0 to never spawn.")
+                .defineInRange("zombieRiderSpawnChance", 25, 0, 100);
 
         builder.pop();
     }
