@@ -31,6 +31,11 @@ public class ModItems {
                     components.add(Component.translatable("item.description.telluriumsrandomstuff.mystic_potato")
                             .withStyle(ChatFormatting.DARK_AQUA));
                 }
+
+                @Override
+                public boolean isFoil(ItemStack itemStack) {
+                    return true;
+                }
             });
 
     public static final RegistryObject<Item> RAW_OPALIUM = ITEMS.register("raw_opalium",
