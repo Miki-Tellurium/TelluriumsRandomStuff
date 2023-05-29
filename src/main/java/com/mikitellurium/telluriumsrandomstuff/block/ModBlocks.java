@@ -121,13 +121,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> OPAL_BUTTON = registerBlock("opal_button",
             ()-> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON), BlockSetType.STONE, 20, false));
 
-    public static final RegistryObject<Block> OPALIUM_ORE = registerBlock("opalium_ore",
+    public static final RegistryObject<Block> OPAL_CRYSTAL_ORE = registerBlock("opal_crystal_ore",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
 
-    public static final RegistryObject<Block> RAW_OPALIUM_BLOCK = registerBlock("raw_opalium_block",
+    public static final RegistryObject<Block> RAW_OPAL_CRYSTAL_BLOCK = registerBlock("raw_opal_crystal_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK)));
 
-    public static final RegistryObject<Block> OPALIUM_BLOCK = registerBlock("opalium_block",
+    public static final RegistryObject<Block> OPAL_CRYSTAL_BLOCK = registerBlock("opal_crystal_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
 
     public static final RegistryObject<Block> SOUL_OBSIDIAN_BLOCK = registerBlock("soul_obsidian", SoulObsidianBlock::new);

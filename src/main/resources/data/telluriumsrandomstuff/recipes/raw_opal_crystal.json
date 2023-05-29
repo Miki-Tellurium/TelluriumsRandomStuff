@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "telluriumsrandomstuff:opalium_block"
+      "item": "telluriumsrandomstuff:raw_opal_crystal_block"
     }
   ],
   "result": {
     "count": 9,
-    "item": "telluriumsrandomstuff:opalium_ingot"
+    "item": "telluriumsrandomstuff:raw_opal_crystal"
   }
 }

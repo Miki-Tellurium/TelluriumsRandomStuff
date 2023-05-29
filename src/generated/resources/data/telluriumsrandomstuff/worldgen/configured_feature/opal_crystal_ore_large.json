@@ -2,11 +2,11 @@
   "type": "minecraft:ore",
   "config": {
     "discard_chance_on_air_exposure": 0.0,
-    "size": 12,
+    "size": 8,
     "targets": [
       {
         "state": {
-          "Name": "telluriumsrandomstuff:opalium_ore"
+          "Name": "telluriumsrandomstuff:opal_crystal_ore"
         },
         "target": {
           "block": "telluriumsrandomstuff:opal",

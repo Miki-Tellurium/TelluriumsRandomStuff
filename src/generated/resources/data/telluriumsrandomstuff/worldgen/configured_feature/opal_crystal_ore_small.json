@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "telluriumsrandomstuff:opalium_ore"
+          "Name": "telluriumsrandomstuff:opal_crystal_ore"
         },
         "target": {
           "block": "telluriumsrandomstuff:opal",

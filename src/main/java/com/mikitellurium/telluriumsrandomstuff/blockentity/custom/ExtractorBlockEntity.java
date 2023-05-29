@@ -75,7 +75,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
         if (blockEntity == null) return false;
         return blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).isPresent();
     }
-    // TODO: add dispense inside container like dropper
+
     @SuppressWarnings("ConstantConditions")
     public void dispenseItem(BlockEntity blockEntity, BlockSourceImpl blockSource, DispenseItemBehavior behavior) {
         blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((inventory) -> {

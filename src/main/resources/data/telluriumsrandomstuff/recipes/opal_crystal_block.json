@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "telluriumsrandomstuff:opalium_ingot"
+      "item": "telluriumsrandomstuff:opal_crystal"
     }
   },
   "pattern": [
@@ -11,7 +11,7 @@
     "###"
   ],
   "result": {
-    "item": "telluriumsrandomstuff:opalium_block"
+    "item": "telluriumsrandomstuff:opal_crystal_block"
   },
   "show_notification": true
 }

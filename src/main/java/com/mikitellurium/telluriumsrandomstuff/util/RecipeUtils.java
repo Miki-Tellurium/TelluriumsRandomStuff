@@ -34,7 +34,7 @@ public class RecipeUtils {
             RecipeUtils.addEnchantment(ModItems.OPALIUM_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
             RecipeUtils.addEnchantment(ModItems.OPALIUM_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
     );
-    private static final RepairData opaliumRepairData = new RepairData(Ingredient.of(ModItems.OPALIUM_INGOT.get()),
+    private static final RepairData opaliumRepairData = new RepairData(Ingredient.of(ModItems.OPAL_CRYSTAL.get()),
             ModItems.OPALIUM_SWORD.get().getDefaultInstance(),
             ModItems.OPALIUM_AXE.get().getDefaultInstance(),
             ModItems.OPALIUM_PICKAXE.get().getDefaultInstance(),

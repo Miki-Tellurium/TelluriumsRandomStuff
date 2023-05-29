@@ -38,10 +38,10 @@ public class ModItems {
                 }
             });
 
-    public static final RegistryObject<Item> RAW_OPALIUM = ITEMS.register("raw_opalium",
+    public static final RegistryObject<Item> RAW_OPAL_CRYSTAL = ITEMS.register("raw_opal_crystal",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> OPALIUM_INGOT = ITEMS.register("opalium_ingot",
+    public static final RegistryObject<Item> OPAL_CRYSTAL = ITEMS.register("opal_crystal",
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> OPALIUM_SWORD = ITEMS.register("opalium_sword",
@@ -49,7 +49,7 @@ public class ModItems {
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
 
@@ -58,7 +58,7 @@ public class ModItems {
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
 
@@ -67,7 +67,7 @@ public class ModItems {
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
 
@@ -76,7 +76,7 @@ public class ModItems {
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
 
@@ -85,7 +85,7 @@ public class ModItems {
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPALIUM_INGOT.get());
+                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
 

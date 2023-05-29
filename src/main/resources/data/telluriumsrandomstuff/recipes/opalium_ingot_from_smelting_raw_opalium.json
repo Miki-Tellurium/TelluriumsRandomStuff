@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "telluriumsrandomstuff:raw_opalium"
-  },
-  "result": "telluriumsrandomstuff:opalium_ingot",
-  "experience": 1.0,
-  "cookingtime": 200
-}

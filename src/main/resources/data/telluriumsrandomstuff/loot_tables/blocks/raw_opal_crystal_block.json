@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "telluriumsrandomstuff:raw_opalium_block"
+          "name": "telluriumsrandomstuff:raw_opal_crystal_block"
         }
       ],
       "conditions": [

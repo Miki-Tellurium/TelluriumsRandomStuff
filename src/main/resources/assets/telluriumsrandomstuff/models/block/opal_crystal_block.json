@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "telluriumsrandomstuff:block/opalium_block",
-    "particle": "telluriumsrandomstuff:block/opalium_block"
+    "all": "telluriumsrandomstuff:block/opal_crystal_block",
+    "particle": "telluriumsrandomstuff:block/opal_crystal_block"
   }, "elements": [
   {   "from": [ 0, 0, 0 ],
     "to": [ 16, 16, 16 ],

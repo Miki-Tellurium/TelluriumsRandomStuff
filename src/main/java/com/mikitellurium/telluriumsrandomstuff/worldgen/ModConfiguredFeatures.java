@@ -23,10 +23,10 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_OPAL_CLUSTER =
             registerKey("opal_cluster");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_OPALIUM_ORE_SMALL =
-            registerKey("opalium_ore_small");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_OPALIUM_ORE_LARGE =
-            registerKey("opalium_ore_large");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_OPAL_CRYSTAL_ORE_SMALL =
+            registerKey("opal_crystal_ore_small");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_OPAL_CRYSTAL_ORE_LARGE =
+            registerKey("opal_crystal_ore_large");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD);
@@ -34,12 +34,12 @@ public class ModConfiguredFeatures {
 
         List<OreConfiguration.TargetBlockState> overworldOpalCluster = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.OPAL.get().defaultBlockState()));
-        List<OreConfiguration.TargetBlockState> overworldOpaliumOre = List.of(
-                OreConfiguration.target(opalClusterReplaceable, ModBlocks.OPALIUM_ORE.get().defaultBlockState()));
+        List<OreConfiguration.TargetBlockState> overworldOpalCrystalOre = List.of(
+                OreConfiguration.target(opalClusterReplaceable, ModBlocks.OPAL_CRYSTAL_ORE.get().defaultBlockState()));
 
         register(context, OVERWORLD_OPAL_CLUSTER, Feature.ORE, new OreConfiguration(overworldOpalCluster,64));
-        register(context, OVERWORLD_OPALIUM_ORE_SMALL, Feature.ORE, new OreConfiguration(overworldOpaliumOre,4));
-        register(context, OVERWORLD_OPALIUM_ORE_LARGE, Feature.ORE, new OreConfiguration(overworldOpaliumOre,8));
+        register(context, OVERWORLD_OPAL_CRYSTAL_ORE_SMALL, Feature.ORE, new OreConfiguration(overworldOpalCrystalOre,4));
+        register(context, OVERWORLD_OPAL_CRYSTAL_ORE_LARGE, Feature.ORE, new OreConfiguration(overworldOpalCrystalOre,8));
     }
 
 

@@ -2,13 +2,11 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -21,8 +19,8 @@ public class ColorsUtil {
     private static final int blank = 0xFFFFFF;
 
     public static int getMaterialColor(ItemStack stack, int tintIndex, int lightLevel) {
-        if (ColorsUtil.isMaterialOpalium(stack)) {
-            return tintIndex == 0 ? ColorsUtil.getRainbowColor(lightLevel, 0.6f, 1.0f, true) : blank;
+        if (ColorsUtil.isCrystal(stack)) {
+            return tintIndex == 0 ? ColorsUtil.getRainbowColor(lightLevel, 0.75f, 1.0f, true) : blank;
         }
 
         return ColorsUtil.getRainbowColor(lightLevel, 0.5f, 0.9f, false);
@@ -72,11 +70,11 @@ public class ColorsUtil {
         return color.getRGB();
     }*/
 
-    public static boolean isMaterialOpalium(ItemStack itemStack) {
-        return  itemStack.is(ModItems.RAW_OPALIUM.get()) ||
-                itemStack.is(ModBlocks.RAW_OPALIUM_BLOCK.get().asItem()) ||
-                itemStack.is(ModItems.OPALIUM_INGOT.get()) ||
-                itemStack.is(ModBlocks.OPALIUM_BLOCK.get().asItem()) ||
+    public static boolean isCrystal(ItemStack itemStack) {
+        return  itemStack.is(ModItems.RAW_OPAL_CRYSTAL.get()) ||
+                itemStack.is(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get().asItem()) ||
+                itemStack.is(ModItems.OPAL_CRYSTAL.get()) ||
+                itemStack.is(ModBlocks.OPAL_CRYSTAL_BLOCK.get().asItem()) ||
                 itemStack.is(ModItems.OPALIUM_SWORD.get()) ||
                 itemStack.is(ModItems.OPALIUM_SHOVEL.get()) ||
                 itemStack.is(ModItems.OPALIUM_PICKAXE.get()) ||

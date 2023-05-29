@@ -18,8 +18,8 @@ public class ModPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> OPAL_CLUSTER_PLACED = createKey("opal_cluster_placed");
 
-    public static final ResourceKey<PlacedFeature> OPALIUM_ORE_SMALL_PLACED = createKey("opalium_ore_small_placed");
-    public static final ResourceKey<PlacedFeature> OPALIUM_ORE_LARGE_PLACED = createKey("opalium_ore_large_placed");
+    public static final ResourceKey<PlacedFeature> OPAL_CRYSTAL_ORE_SMALL_PLACED = createKey("opal_crystal_ore_small_placed");
+    public static final ResourceKey<PlacedFeature> OPAL_CRYSTAL_ORE_LARGE_PLACED = createKey("opal_crystal_ore_large_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -28,10 +28,10 @@ public class ModPlacedFeatures {
                 OrePlacementUtils.rareOrePlacement(10, HeightRangePlacement.uniform(
                         VerticalAnchor.absolute(-60), VerticalAnchor.absolute(128))));
 
-        register(context, OPALIUM_ORE_SMALL_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPALIUM_ORE_SMALL),
+        register(context, OPAL_CRYSTAL_ORE_SMALL_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPAL_CRYSTAL_ORE_SMALL),
                 OrePlacementUtils.commonOrePlacement(25, HeightRangePlacement.uniform(
                         VerticalAnchor.absolute(-60), VerticalAnchor.absolute(128))));
-        register(context, OPALIUM_ORE_LARGE_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPALIUM_ORE_LARGE),
+        register(context, OPAL_CRYSTAL_ORE_LARGE_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPAL_CRYSTAL_ORE_LARGE),
                 OrePlacementUtils.commonOrePlacement(20, HeightRangePlacement.uniform(
                         VerticalAnchor.absolute(-60), VerticalAnchor.absolute(128))));
     }

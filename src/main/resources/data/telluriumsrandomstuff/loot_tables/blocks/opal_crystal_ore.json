@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "telluriumsrandomstuff:opalium_ore"
+              "name": "telluriumsrandomstuff:opal_crystal_ore"
             },
             {
               "type": "minecraft:item",
@@ -38,7 +38,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "telluriumsrandomstuff:raw_opalium"
+              "name": "telluriumsrandomstuff:raw_opal_crystal"
             }
           ]
         }

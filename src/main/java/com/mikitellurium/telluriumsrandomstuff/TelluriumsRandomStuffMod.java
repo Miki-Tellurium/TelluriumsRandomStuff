@@ -25,6 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -37,8 +38,14 @@ import org.slf4j.Logger;
 
 @Mod(TelluriumsRandomStuffMod.MOD_ID)
 public class TelluriumsRandomStuffMod {
+
     public static final String MOD_ID = "telluriumsrandomstuff";
     private static final Logger LOGGER = LogUtils.getLogger();
+
+    // TODO: change opalium into a crystal
+    // TODO: soul anchor doesn't replace item if slot is empty
+    // TODO: add soul anchor void chance
+    // TODO: add opal materials color interface
 
     public TelluriumsRandomStuffMod() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -113,11 +120,11 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModBlocks.CUT_OPAL_BRICK_WALL);
             event.accept(ModBlocks.OPAL_PRESSURE_PLATE);
             event.accept(ModBlocks.OPAL_BUTTON);
-            event.accept(ModBlocks.OPALIUM_ORE);
-            event.accept(ModBlocks.OPALIUM_BLOCK);
-            event.accept(ModBlocks.RAW_OPALIUM_BLOCK);
-            event.accept(ModItems.RAW_OPALIUM);
-            event.accept(ModItems.OPALIUM_INGOT);
+            event.accept(ModBlocks.OPAL_CRYSTAL_ORE);
+            event.accept(ModBlocks.OPAL_CRYSTAL_BLOCK);
+            event.accept(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK);
+            event.accept(ModItems.RAW_OPAL_CRYSTAL);
+            event.accept(ModItems.OPAL_CRYSTAL);
             event.accept(ModItems.OPALIUM_SHOVEL);
             event.accept(ModItems.OPALIUM_PICKAXE);
             event.accept(ModItems.OPALIUM_AXE);
