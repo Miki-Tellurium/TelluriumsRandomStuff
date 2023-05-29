@@ -47,7 +47,8 @@ public class ColorsUtil {
 
         for (Direction direction : Direction.values()) {
             BlockPos sidePos = pos.relative(direction);
-            if (level.getBlockState(sidePos).isFaceSturdy(level, pos, direction.getOpposite())) {
+            BlockState adjacentBlock = level.getBlockState(sidePos);
+            if (adjacentBlock.isFaceSturdy(level, pos, direction.getOpposite()) && adjacentBlock.isViewBlocking(level, pos)) {
                 continue; // If this face face is obstructed skip this direction
             }
 
