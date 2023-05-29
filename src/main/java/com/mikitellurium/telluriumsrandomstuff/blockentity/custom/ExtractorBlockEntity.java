@@ -9,7 +9,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -20,6 +22,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -72,7 +75,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
         if (blockEntity == null) return false;
         return blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).isPresent();
     }
-
+    // TODO: add dispense inside container like dropper
     @SuppressWarnings("ConstantConditions")
     public void dispenseItem(BlockEntity blockEntity, BlockSourceImpl blockSource, DispenseItemBehavior behavior) {
         blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((inventory) -> {
@@ -108,9 +111,35 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
                 }
             }
 
-            // Dispense the item from the chosen slot
+            Direction front = blockSource.getBlockState().getValue(ExtractorBlock.FACING);
+            BlockEntity container = blockSource.getLevel().getBlockEntity(blockSource.getPos().relative(front));
             ItemStack itemStack = inventory.getStackInSlot(slot);
-            behavior.dispense(blockSource, itemStack);
+            if (container == null) {
+                // Dispense the item from the chosen slot
+                behavior.dispense(blockSource, itemStack);
+            } else if (container.getCapability(ForgeCapabilities.ITEM_HANDLER).isPresent()) {
+                this.dispenseInContainer(container, itemStack);
+            }
+        });
+    }
+
+    private void dispenseInContainer(BlockEntity container, ItemStack itemStack) {
+        container.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((inventory) -> {
+            // Search an available slot in the container
+            for (int i = 0; i < inventory.getSlots(); i++) {
+                if (!inventory.isItemValid(i, itemStack)) continue; // If this slot is invalid skip it
+
+                ItemStack containerStack = inventory.getStackInSlot(i);
+                // Check if itemStack can be inserted in this slot
+                if (containerStack.isEmpty() || (containerStack.getItem() == itemStack.getItem() &&
+                        containerStack.getCount() < containerStack.getMaxStackSize())) {
+                    inventory.insertItem(i, new ItemStack(itemStack.getItem(), 1), false);
+                    itemStack.shrink(1);
+                    return;
+                }
+            }
+
+            this.dispenseFailed();
         });
     }
 
