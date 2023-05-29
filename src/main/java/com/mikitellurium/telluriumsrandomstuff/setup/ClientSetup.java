@@ -10,6 +10,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -24,7 +26,7 @@ public class ClientSetup {
         event.getBlockColors().register((state, world, pos, tintIndex) -> {
                     if (world != null && pos != null) {
                         return ColorsUtil.getMaterialColor(state.getBlock().asItem().getDefaultInstance(),
-                                tintIndex, pos);
+                                tintIndex, ColorsUtil.getHighestLightLevel(world, pos));
                     }
                     return 0xFFFFFF;},
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
@@ -55,7 +57,8 @@ public class ClientSetup {
                                 pos = new BlockPos(0, 0, 0);
                             }
                         }
-                    return ColorsUtil.getMaterialColor(stack, tintIndex, pos); },
+                    return ColorsUtil.getMaterialColor(stack, tintIndex,
+                            Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, pos.above())); },
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
                 ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),

@@ -2,29 +2,74 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.awt.*;
 
 public class ColorsUtil {
 
-    public static int getMaterialColor(ItemStack stack, int tintIndex, BlockPos pos) {
+    private static final int opalBaseColor = FastColor.ABGR32.color(255, 180, 210, 210);
+    private static final int opaliumBaseColor = FastColor.ABGR32.color(255, 170, 255, 255);
+    private static final int blank = 0xFFFFFF;
+
+    public static int getMaterialColor(ItemStack stack, int tintIndex, int lightLevel) {
         if (ColorsUtil.isMaterialOpalium(stack)) {
-            return tintIndex == 0 ? ColorsUtil.getRainbowColor(pos, 0.8f, 1.0f) : 0xFFFFFF;
+            return tintIndex == 0 ? ColorsUtil.getRainbowColor(lightLevel, 0.6f, 1.0f, true) : blank;
         }
 
-        return ColorsUtil.getRainbowColor(pos, 0.65f, 0.9f);
+        return ColorsUtil.getRainbowColor(lightLevel, 0.5f, 0.9f, false);
     }
 
-    public static int getRainbowColor(BlockPos pos, float saturation, float brightness) {
+    // test
+    public static int getRainbowColor(int lightLevel, float saturation, float brightness, boolean isMetal) {
+        // Return base color if lightLevel is 0
+        if (lightLevel == 0) {
+            return isMetal ? opaliumBaseColor : opalBaseColor;
+        }
+
+        int inverted = 15 - lightLevel;
+        float hue = ((float) inverted / 15) * 0.575f; // Adjust the multiplier to control the spectrum range
+
+        Color color = Color.getHSBColor(hue, saturation, brightness);
+        return color.getRGB();
+    }
+
+    public static int getHighestLightLevel(BlockAndTintGetter level, BlockPos pos) {
+        int highestLightLevel = 0;
+
+        for (Direction direction : Direction.values()) {
+            BlockPos sidePos = pos.relative(direction);
+            if (level.getBlockState(sidePos).isFaceSturdy(level, pos, direction.getOpposite())) {
+                continue; // If this face face is obstructed skip this direction
+            }
+
+            int lightLevel = level.getBrightness(LightLayer.BLOCK, sidePos);
+
+            if (lightLevel > highestLightLevel) {
+                highestLightLevel = lightLevel;
+            }
+        }
+
+        return highestLightLevel;
+    }
+
+    /*
+    public static int getLegacyRainbowColor(BlockPos pos, float saturation, float brightness) {
         int waveSize = 75; // How big are the color waves
 
         Color color = Color.getHSBColor(
                 (((pos.getX() + pos.getZ() + pos.getY() * 1.05f)) / waveSize) % 1.0f,
                 saturation, brightness);
         return color.getRGB();
-    }
+    }*/
 
     public static boolean isMaterialOpalium(ItemStack itemStack) {
         return  itemStack.is(ModItems.RAW_OPALIUM.get()) ||
@@ -37,17 +82,6 @@ public class ColorsUtil {
                 itemStack.is(ModItems.OPALIUM_AXE.get()) ||
                 itemStack.is(ModItems.OPALIUM_HOE.get());
     }
-
-    /*
-    public static int legacyGetOpalColor(BlockPos pos) {
-        Color color = Color.getHSBColor((((
-                        pos.getX() + Mth.sin(((float)pos.getY() + (float)pos.getZ()) / 20) +
-                                pos.getZ() + Mth.cos(((float)pos.getX() + (float)pos.getY()) / 20)
-                                * 10) % 65) / 65) ,
-                0.5F, 0.8F);
-        return color.getRGB();
-    }
-    */
 
     public static float soulRedColor() {
         return 37f / 255f;
