@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.capability;
+package com.mikitellurium.telluriumsrandomstuff.util;
 
 import net.minecraft.world.entity.player.Player;
 
