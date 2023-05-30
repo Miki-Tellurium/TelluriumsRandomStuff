@@ -21,7 +21,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -83,7 +82,7 @@ public class ModEvents {
             player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
                 if (soulAnchor.hasChargedAnchor()) {
                     soulAnchor.saveInventory(player.getInventory());
-                    soulAnchor.setRecentlyDied(true);
+                    soulAnchor.setCanRecoverInventory(true);
                 }
             });
         }
