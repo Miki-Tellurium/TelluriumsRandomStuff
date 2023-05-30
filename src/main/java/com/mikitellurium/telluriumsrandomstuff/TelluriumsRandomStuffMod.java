@@ -5,6 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModCauldronInte
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.command.TelluriumsRandomStuffCommand;
 import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.enchantment.ModEnchantments;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
@@ -28,6 +29,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -42,10 +44,7 @@ public class TelluriumsRandomStuffMod {
     public static final String MOD_ID = "telluriumsrandomstuff";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    // TODO: change opalium into a crystal
-    // TODO: soul anchor doesn't replace item if slot is empty
     // TODO: add soul anchor void chance
-    // TODO: add opal materials color interface
 
     public TelluriumsRandomStuffMod() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -133,6 +132,11 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.FILTER);
             event.accept(ModBlocks.EXTRACTOR_BLOCK);
         }
+    }
+
+    @SubscribeEvent
+    public void registerCommands(RegisterCommandsEvent event){
+        TelluriumsRandomStuffCommand.register(event.getDispatcher());
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
