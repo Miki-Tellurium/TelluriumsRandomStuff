@@ -37,7 +37,7 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-           return true;
+           return false;
         }
     };
 
