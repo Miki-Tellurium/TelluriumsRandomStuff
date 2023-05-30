@@ -68,7 +68,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                                 soulAnchorBlockEntity.setSavedPlayer(player.getUUID());
                                 if (soulAnchor.hasSavedInventory()) {
                                     soulAnchor.clearInventory();
-                                    soulAnchor.setRecentlyDied(false);
+                                    soulAnchor.setCanRecoverInventory(false);
                                 }
                             } else {
                                 player.sendSystemMessage(Component.literal("You already have a charged soul anchor"));
@@ -82,12 +82,12 @@ public class SoulAnchorBlock extends BaseEntityBlock {
             } else {
                 if (blockEntity instanceof SoulAnchorBlockEntity soulAnchorBlockEntity && player instanceof ServerPlayer) {
                     player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
-                            if (soulAnchor.hasSavedInventory() && soulAnchor.hasRecentlyDied() &&
+                            if (soulAnchor.hasSavedInventory() && soulAnchor.canRecoverInventory() &&
                             player.getUUID().equals(soulAnchorBlockEntity.getSavedPlayer())) {
                                 // Fill the soul anchor with the saved inventory then clear it
                                 soulAnchor.putInventoryInAnchor(soulAnchorBlockEntity);
                                 soulAnchor.clearInventory();
-                                soulAnchor.setRecentlyDied(false);
+                                soulAnchor.setCanRecoverInventory(false);
                                 soulAnchor.discharge(player, level, pos, blockState);
                                 soulAnchorBlockEntity.clearSavedPlayer();
                             }

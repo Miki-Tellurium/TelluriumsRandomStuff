@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.blockentity.custom;
 
 import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
-import com.mikitellurium.telluriumsrandomstuff.capability.CachedPlayer;
+import com.mikitellurium.telluriumsrandomstuff.util.CachedPlayer;
 import com.mikitellurium.telluriumsrandomstuff.gui.menu.SoulAnchorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -37,7 +37,7 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-           return false;
+           return true;
         }
     };
 
@@ -48,7 +48,7 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
         super(ModBlockEntities.SOUL_ANCHOR.get(), pos, state);
     }
 
-    private SimpleContainer getInventory() {
+    public SimpleContainer getInventory() {
         SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
@@ -60,8 +60,10 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     public void savePlayerInventory(SimpleContainer playerInventory) {
         for (int i = 0; i < playerInventory.getContainerSize(); i++) {
             ItemStack stack = playerInventory.getItem(i);
-            if (!EnchantmentHelper.hasVanishingCurse(stack)) {
-                itemHandler.setStackInSlot(i, stack.copy());
+            if (!stack.isEmpty()) {
+                if (!EnchantmentHelper.hasVanishingCurse(stack)) {
+                    itemHandler.setStackInSlot(i, stack.copy());
+                }
             }
         }
     }
@@ -139,7 +141,11 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     public void load(CompoundTag tag) {
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("inventory"));
-        savedPlayer.set(tag.getUUID("savedPlayer"));
+        try {
+            savedPlayer.set(tag.getUUID("savedPlayer"));
+        } catch (NullPointerException e) {
+            // No player was saved
+        }
     }
 
 }

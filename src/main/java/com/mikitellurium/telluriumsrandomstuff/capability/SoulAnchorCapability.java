@@ -22,7 +22,7 @@ public class SoulAnchorCapability {
 
     private final int playerInventorySize = 41;
     private boolean hasChargedAnchor;
-    private boolean hasRecentlyDied;
+    private boolean canRecoverInventory;
     private SimpleContainer inventory = new SimpleContainer(playerInventorySize) {
         @Override
         public ListTag createTag() {
@@ -81,12 +81,12 @@ public class SoulAnchorCapability {
         return !inventory.isEmpty();
     }
 
-    public boolean hasRecentlyDied() {
-        return hasRecentlyDied;
+    public boolean canRecoverInventory() {
+        return canRecoverInventory;
     }
 
-    public void setRecentlyDied(boolean b) {
-        this.hasRecentlyDied = b;
+    public void setCanRecoverInventory(boolean b) {
+        this.canRecoverInventory = b;
     }
 
     public void charge(Entity entity, Level level, BlockPos pos, BlockState blockState) {
@@ -110,19 +110,19 @@ public class SoulAnchorCapability {
     public void copyFrom(SoulAnchorCapability source) {
         this.hasChargedAnchor = source.hasChargedAnchor;
         this.inventory = source.inventory;
-        this.hasRecentlyDied = source.hasRecentlyDied;
+        this.canRecoverInventory = source.canRecoverInventory;
     }
 
     public void saveNBTDAta(CompoundTag nbt) {
         nbt.putBoolean("hasChargedAnchor", hasChargedAnchor);
         nbt.put("inventory", inventory.createTag());
-        nbt.putBoolean("hasRecentlyDied", hasRecentlyDied);
+        nbt.putBoolean("canRecoverInventory", canRecoverInventory);
     }
 
     public void loadNBTData(CompoundTag nbt) {
         hasChargedAnchor = nbt.getBoolean("hasChargedAnchor");
         inventory.fromTag(nbt.getList("inventory", Tag.TAG_COMPOUND));
-        hasRecentlyDied = nbt.getBoolean("hasRecentlyDied");
+        canRecoverInventory = nbt.getBoolean("canRecoverInventory");
     }
 
 }
