@@ -4,6 +4,8 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.jei.JeiIntegration;
+import com.mikitellurium.telluriumsrandomstuff.util.BlockRendering;
+import com.mikitellurium.telluriumsrandomstuff.util.FluidBlockRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
@@ -15,7 +17,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.locale.Language;
@@ -25,8 +26,9 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
@@ -71,8 +73,8 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     @Override
     public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
         downArrow.draw(poseStack, 120, 44);
-        drawSplitString(this.font, Component.translatable("jei.telluriumsrandomstuff.soul_lava_crafting")
-                        .withStyle(ChatFormatting.DARK_AQUA), poseStack, 0, 5, 110, 0);
+        drawSplitString(this.font, Component.translatable("jei.telluriumsrandomstuff.soul_lava_crafting"),
+                poseStack, 0, 5, 110, 0);
     }
 
     private List<FormattedText> splitComponent(Font font, FormattedText text, int width) {
@@ -88,11 +90,11 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 120, 10)
-                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(Fluids.LAVA, 1000)))
-                .setFluidRenderer(1000, false, 16, 16);
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, 26)
                 .addItemStack(recipe.getSoulSand());
+        builder.addSlot(RecipeIngredientRole.INPUT, 120, 19)
+                .addFluidStack(recipe.getLava(), 1000)
+                .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, 68)
                 .addItemStack(recipe.getCauldron());
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(Items.LAVA_BUCKET));
@@ -102,17 +104,17 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
 
     public static class Recipe {
 
-        private final FluidStack lava;
+        private final Fluid lava;
         private final ItemStack soulSand;
         private final ItemStack cauldron;
 
         public Recipe() {
-            this.lava = new FluidStack(Fluids.LAVA, 0);
+            this.lava = Fluids.LAVA;
             this.soulSand = Items.SOUL_SAND.getDefaultInstance();
             this.cauldron = Items.CAULDRON.getDefaultInstance();
         }
 
-        public FluidStack getLava() {
+        public Fluid getLava() {
             return lava;
         }
 
