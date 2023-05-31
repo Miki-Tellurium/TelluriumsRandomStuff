@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -78,6 +79,9 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
+        if (event.getEntity().level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+            return;
+        }
         if (event.getEntity() instanceof Player player) {
             player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
                 if (soulAnchor.hasChargedAnchor()) {
@@ -91,6 +95,9 @@ public class ModEvents {
     @SubscribeEvent
     public static void onPlayerDropInventory(LivingDropsEvent event) {
         if (!event.getEntity().level.isClientSide) {
+            if (event.getEntity().level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+                return;
+            }
             if (event.getEntity() instanceof Player player) {
                 player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
                     if (soulAnchor.hasChargedAnchor()) {
@@ -131,6 +138,10 @@ public class ModEvents {
         if (event.getLevel().isClientSide) {
             return;
         }
+        if (event.getLevel().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+            return;
+        }
+
         if (event.getEntity() instanceof Player player) {
             if(SoulAnchorLevelData.get(event.getLevel()).removePlayer(player)) {
                 player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
