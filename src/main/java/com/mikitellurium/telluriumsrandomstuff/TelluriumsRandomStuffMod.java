@@ -44,8 +44,6 @@ public class TelluriumsRandomStuffMod {
     public static final String MOD_ID = "telluriumsrandomstuff";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    // TODO: add soul anchor void chance
-
     public TelluriumsRandomStuffMod() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
