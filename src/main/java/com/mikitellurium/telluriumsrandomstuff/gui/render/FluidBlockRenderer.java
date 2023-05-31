@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.util;
+package com.mikitellurium.telluriumsrandomstuff.gui.render;
 
 import java.util.List;
 

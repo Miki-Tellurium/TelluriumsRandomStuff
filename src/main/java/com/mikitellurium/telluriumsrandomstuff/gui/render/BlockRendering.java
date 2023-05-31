@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.util;
+package com.mikitellurium.telluriumsrandomstuff.gui.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
@@ -22,6 +22,12 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import org.joml.Quaternionf;
 
+/* CREDIT the Team Applied Energistics for this class.
+ * This class is made from copy-pasted code from Applied Energistic 2
+ * mod, I just modified some stuff I needed.
+ *
+ * LICENSE : https://github.com/AppliedEnergistics/Applied-Energistics-2#license
+ */
 public final class BlockRendering {
 
     private BlockRendering() {
