@@ -14,8 +14,8 @@ import java.awt.*;
 
 public class ColorsUtil {
 
-    private static final int opalBaseColor = FastColor.ABGR32.color(255, 180, 210, 210);
-    private static final int opaliumBaseColor = FastColor.ABGR32.color(255, 170, 255, 255);
+    private static final int opalBaseColor = FastColor.ABGR32.color(255, 160, 210, 210);
+    private static final int opalCrystalBaseColor = FastColor.ABGR32.color(255, 140, 255, 255);
     private static final int blank = 0xFFFFFF;
 
     public static int getMaterialColor(ItemStack stack, int tintIndex, int lightLevel) {
@@ -23,17 +23,17 @@ public class ColorsUtil {
             return tintIndex == 0 ? ColorsUtil.getRainbowColor(lightLevel, 0.75f, 1.0f, true) : blank;
         }
 
-        return ColorsUtil.getRainbowColor(lightLevel, 0.5f, 0.9f, false);
+        return ColorsUtil.getRainbowColor(lightLevel, 0.55f, 0.9f, false);
     }
 
     // test
     public static int getRainbowColor(int lightLevel, float saturation, float brightness, boolean isMetal) {
         // Return base color if lightLevel is 0
         if (lightLevel == 0) {
-            return isMetal ? opaliumBaseColor : opalBaseColor;
+            return isMetal ? opalCrystalBaseColor : opalBaseColor;
         }
 
-        int inverted = 15 - lightLevel;
+        double inverted = 15.5D - lightLevel;
         float hue = ((float) inverted / 15) * 0.575f; // Adjust the multiplier to control the spectrum range
 
         Color color = Color.getHSBColor(hue, saturation, brightness);
