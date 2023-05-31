@@ -122,11 +122,11 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK);
             event.accept(ModItems.RAW_OPAL_CRYSTAL);
             event.accept(ModItems.OPAL_CRYSTAL);
-            event.accept(ModItems.OPALIUM_SHOVEL);
-            event.accept(ModItems.OPALIUM_PICKAXE);
-            event.accept(ModItems.OPALIUM_AXE);
-            event.accept(ModItems.OPALIUM_HOE);
-            event.accept(ModItems.OPALIUM_SWORD);
+            event.accept(ModItems.OPAL_CRYSTAL_SHOVEL);
+            event.accept(ModItems.OPAL_CRYSTAL_PICKAXE);
+            event.accept(ModItems.OPAL_CRYSTAL_AXE);
+            event.accept(ModItems.OPAL_CRYSTAL_HOE);
+            event.accept(ModItems.OPAL_CRYSTAL_SWORD);
             event.accept(ModItems.FILTER);
             event.accept(ModBlocks.EXTRACTOR_BLOCK);
         }

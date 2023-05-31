@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "telluriumsrandomstuff:item/opalium_hoe_overlay",
-    "layer1": "telluriumsrandomstuff:item/opalium_pickaxe_hoe_handle"
-  }
-}

@@ -75,11 +75,11 @@ public class ColorsUtil {
                 itemStack.is(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get().asItem()) ||
                 itemStack.is(ModItems.OPAL_CRYSTAL.get()) ||
                 itemStack.is(ModBlocks.OPAL_CRYSTAL_BLOCK.get().asItem()) ||
-                itemStack.is(ModItems.OPALIUM_SWORD.get()) ||
-                itemStack.is(ModItems.OPALIUM_SHOVEL.get()) ||
-                itemStack.is(ModItems.OPALIUM_PICKAXE.get()) ||
-                itemStack.is(ModItems.OPALIUM_AXE.get()) ||
-                itemStack.is(ModItems.OPALIUM_HOE.get());
+                itemStack.is(ModItems.OPAL_CRYSTAL_SWORD.get()) ||
+                itemStack.is(ModItems.OPAL_CRYSTAL_SHOVEL.get()) ||
+                itemStack.is(ModItems.OPAL_CRYSTAL_PICKAXE.get()) ||
+                itemStack.is(ModItems.OPAL_CRYSTAL_AXE.get()) ||
+                itemStack.is(ModItems.OPAL_CRYSTAL_HOE.get());
     }
 
     public static float soulRedColor() {

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "## ",
+    "###",
     " x ",
     " x "
   ],
@@ -14,6 +14,6 @@
     }
   },
   "result": {
-    "item": "telluriumsrandomstuff:opalium_hoe"
+    "item": "telluriumsrandomstuff:opal_crystal_pickaxe"
   }
 }

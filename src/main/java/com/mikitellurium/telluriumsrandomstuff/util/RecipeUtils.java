@@ -30,16 +30,16 @@ public class RecipeUtils {
             RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
     );
     public static final List<ItemStack> soulHarvestingSwords = List.of(
-            RecipeUtils.addEnchantment(ModItems.OPALIUM_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 1),
-            RecipeUtils.addEnchantment(ModItems.OPALIUM_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
-            RecipeUtils.addEnchantment(ModItems.OPALIUM_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
+            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 1),
+            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
+            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
     );
     private static final RepairData opaliumRepairData = new RepairData(Ingredient.of(ModItems.OPAL_CRYSTAL.get()),
-            ModItems.OPALIUM_SWORD.get().getDefaultInstance(),
-            ModItems.OPALIUM_AXE.get().getDefaultInstance(),
-            ModItems.OPALIUM_PICKAXE.get().getDefaultInstance(),
-            ModItems.OPALIUM_SHOVEL.get().getDefaultInstance(),
-            ModItems.OPALIUM_HOE.get().getDefaultInstance()
+            ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(),
+            ModItems.OPAL_CRYSTAL_AXE.get().getDefaultInstance(),
+            ModItems.OPAL_CRYSTAL_PICKAXE.get().getDefaultInstance(),
+            ModItems.OPAL_CRYSTAL_SHOVEL.get().getDefaultInstance(),
+            ModItems.OPAL_CRYSTAL_HOE.get().getDefaultInstance()
             );
 
     public static List<SoulFurnaceRecipe> getConvertedVanillaRecipes(List<SmeltingRecipe> smeltingRecipes) {

@@ -49,7 +49,7 @@ public class ModItems {
     public static final RegistryObject<Item> OPAL_CRYSTAL = ITEMS.register("opal_crystal",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> OPALIUM_SWORD = ITEMS.register("opalium_sword",
+    public static final RegistryObject<Item> OPAL_CRYSTAL_SWORD = ITEMS.register("opal_crystal_sword",
             () -> new SwordItem(Tiers.DIAMOND, 3, -2.4F, new Item.Properties()
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override
@@ -58,7 +58,7 @@ public class ModItems {
                 }
             });
 
-    public static final RegistryObject<Item> OPALIUM_SHOVEL = ITEMS.register("opalium_shovel",
+    public static final RegistryObject<Item> OPAL_CRYSTAL_SHOVEL = ITEMS.register("opal_crystal_shovel",
             () -> new ShovelItem(Tiers.DIAMOND, 1.5F, -3.0F, new Item.Properties()
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override
@@ -67,7 +67,7 @@ public class ModItems {
                 }
             });
 
-    public static final RegistryObject<Item> OPALIUM_PICKAXE = ITEMS.register("opalium_pickaxe",
+    public static final RegistryObject<Item> OPAL_CRYSTAL_PICKAXE = ITEMS.register("opal_crystal_pickaxe",
             () -> new PickaxeItem(Tiers.DIAMOND, 1, -2.8F, new Item.Properties()
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override
@@ -76,7 +76,7 @@ public class ModItems {
                 }
             });
 
-    public static final RegistryObject<Item> OPALIUM_AXE = ITEMS.register("opalium_axe",
+    public static final RegistryObject<Item> OPAL_CRYSTAL_AXE = ITEMS.register("opal_crystal_axe",
             () -> new AxeItem(Tiers.DIAMOND, 5.0F, -3.0F, new Item.Properties()
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override
@@ -85,7 +85,7 @@ public class ModItems {
                 }
             });
 
-    public static final RegistryObject<Item> OPALIUM_HOE = ITEMS.register("opalium_hoe",
+    public static final RegistryObject<Item> OPAL_CRYSTAL_HOE = ITEMS.register("opal_crystal_hoe",
             () -> new HoeItem(Tiers.DIAMOND, -3, 0.0F, new Item.Properties()
                     .defaultDurability(opaliumToolsDurability)) {
                 @Override

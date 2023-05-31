@@ -73,7 +73,7 @@ public class JeiIntegration implements IModPlugin {
         soulLavaInfoRecipes.add(new SoulLavaInfoCategory.Recipe());
 
         IJeiAnvilRecipe soulHarvestingAnvilRecipe = recipeFactory.createAnvilRecipe(
-                ModItems.OPALIUM_SWORD.get().getDefaultInstance(),
+                ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(),
                 RecipeUtils.soulHarvestingBooks,
                 RecipeUtils.soulHarvestingSwords);
 
