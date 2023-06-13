@@ -15,11 +15,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.horse.SkeletonHorse;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Stray;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
@@ -60,26 +58,44 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         return ModFluidTypes.SOUL_LAVA_FLUID_TYPE.get();
     }
 
-    @Override
-    public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
-        if (!(entity instanceof Skeleton || entity instanceof SkeletonHorse || entity instanceof Stray)) {
-            if (!entity.fireImmune()) {
-
-                if (!entity.level().isRaining()) {
-                    entity.setSecondsOnFire(15);
-                } else {
-                    entity.extinguishFire();
-                }
-
-                if (entity.hurt(entity.damageSources().inFire(), 4.0F)) {
-                    entity.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + entity.getRandom().nextFloat() * 0.4F);
-                }
-
-            }
+    public static boolean applyMovementLogic(LivingEntity entity, Vec3 vec3, double gravity) {
+        boolean flag = entity.getDeltaMovement().y <= 0.0D;;
+        double d8 = entity.getY();
+        entity.moveRelative(0.02F, vec3);
+        entity.move(MoverType.SELF, entity.getDeltaMovement());
+        if (entity.getFluidHeight(FluidTags.LAVA) <= entity.getFluidJumpThreshold()) {
+            entity.setDeltaMovement(entity.getDeltaMovement().multiply(0.5D, (double)0.8F, 0.5D));
+            Vec3 vec33 = entity.getFluidFallingAdjustedMovement(gravity, flag, entity.getDeltaMovement());
+            entity.setDeltaMovement(vec33);
+        } else {
+            entity.setDeltaMovement(entity.getDeltaMovement().scale(0.5D));
         }
-        Vec3 v = entity.getDeltaMovement().multiply(0.4, 0.75, 0.4);
-        entity.setDeltaMovement(v);
-        return false;
+
+        if (!entity.isNoGravity()) {
+            entity.setDeltaMovement(entity.getDeltaMovement().add(0.0D, - gravity / 4.0D, 0.0D));
+        }
+
+        Vec3 vec34 = entity.getDeltaMovement();
+        if (entity.horizontalCollision && entity.isFree(vec34.x, vec34.y + (double)0.6F - entity.getY() + d8, vec34.z)) {
+            entity.setDeltaMovement(vec34.x, (double)0.3F, vec34.z);
+        }
+
+        return true;
+    }
+
+    public static void soulLavaHurt(LivingEntity entity) {
+        entity.lavaHurt();
+//        if (entity.fireImmune()) {
+//            return false;
+//        } else {
+//            entity.setSecondsOnFire(15);
+//            if (entity.hurt(entity.damageSources().lava(), 4.0F)) {
+//                entity.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + entity.getRandom().nextFloat() * 0.4F);
+//                return true;
+//            }
+//        }
+//
+//        return false;
     }
 
     @Override

@@ -6,6 +6,8 @@ import com.mikitellurium.telluriumsrandomstuff.block.custom.CustomBubbleColumnBl
 import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorLevelData;
 import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
+import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
+import com.mikitellurium.telluriumsrandomstuff.fluid.custom.SoulLavaFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -67,13 +69,17 @@ public class ModEvents {
     }
 
     @SubscribeEvent
-    public static void insideBubbleColumnBreathing(LivingEvent.LivingTickEvent event) {
+    public static void livingTickEvent(LivingEvent.LivingTickEvent event) {
         // Increase entity air supply when inside bubble column
         LivingEntity entity = event.getEntity();
         if (entity.level().getBlockState(new BlockPos((int)entity.getX(), (int)entity.getEyeY(), (int)entity.getZ())).is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
             if (entity.getAirSupply() < entity.getMaxAirSupply()) {
                 entity.setAirSupply(Math.min(entity.getAirSupply() + 5, entity.getMaxAirSupply()));
             }
+        }
+        // Damage entity in soul lava
+        if (entity.getMaxHeightFluidType() == ModFluidTypes.SOUL_LAVA_TYPE) {
+            SoulLavaFluid.soulLavaHurt(entity);
         }
     }
 

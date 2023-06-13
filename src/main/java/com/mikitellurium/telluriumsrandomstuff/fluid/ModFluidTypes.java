@@ -1,10 +1,13 @@
 package com.mikitellurium.telluriumsrandomstuff.fluid;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.fluid.custom.SoulLavaFluid;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -27,19 +30,19 @@ public class ModFluidTypes {
             .density(3000)
             .viscosity(6000)
             .temperature(1300)
-            .canSwim(true)
+            .canSwim(false)
             .canDrown(false)
             .canExtinguish(false)
             .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
             .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA);
 
-    public static final BaseFluidType SOUL_LAVA_BASE = new BaseFluidType(SOUL_LAVA_STILL_RL, SOUL_LAVA_FLOWING_RL, SOUL_LAVA_FLOWING_RL,
+    public static final BaseFluidType SOUL_LAVA_TYPE = new BaseFluidType(SOUL_LAVA_STILL_RL, SOUL_LAVA_FLOWING_RL, SOUL_LAVA_FLOWING_RL,
             null, 0xFFFFFFFF, 0.05f, 0.8f,
             new Vector3f(0f / 255f, 206 / 255f, 242f / 255f), SOUL_LAVA_PROPERTIES) {
 
         @Override
         public double motionScale(Entity entity) {
-            return entity.level().dimensionType().ultraWarm() ? 0.007D : 0.0023333333333333335D;
+            return entity.level().dimensionType().ultraWarm() ? 0.007 : 0.0023333333333333335;
         }
 
         @Override
@@ -47,9 +50,14 @@ public class ModFluidTypes {
             Vec3 vec3 = entity.getDeltaMovement();
             entity.setDeltaMovement(vec3.x * (double)0.95F, vec3.y + (double)(vec3.y < (double)0.06F ? 5.0E-4F : 0.0F), vec3.z * (double)0.95F);
         }
+
+        @Override
+        public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
+            return SoulLavaFluid.applyMovementLogic(entity, movementVector, gravity);
+        }
     };
 
-    public static final RegistryObject<FluidType> SOUL_LAVA_FLUID_TYPE = registerFluidType("soul_lava_fluid", SOUL_LAVA_BASE);
+    public static final RegistryObject<FluidType> SOUL_LAVA_FLUID_TYPE = registerFluidType("soul_lava_fluid", SOUL_LAVA_TYPE);
 
     public static RegistryObject<FluidType> registerFluidType(String name, FluidType fluidType) {
         return FLUID_TYPES.register(name, ()-> fluidType);
