@@ -26,9 +26,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,22 +44,23 @@ public class TelluriumsRandomStuffMod {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public TelluriumsRandomStuffMod() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(eventBus);
-        ModBlocks.register(eventBus);
-        ModBlockEntities.register(eventBus);
-        ModFluidTypes.registerSoulLavaType(eventBus);
-        ModFluids.register(eventBus);
-        ModParticles.register(eventBus);
-        ModMenuTypes.register(eventBus);
-        ModRecipes.register(eventBus);
-        ModEnchantments.register(eventBus);
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModCreativeTab.register(modEventBus);
+        ModFluidTypes.registerSoulLavaType(modEventBus);
+        ModFluids.register(modEventBus);
+        ModParticles.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
+        ModRecipes.register(modEventBus);
+        ModEnchantments.register(modEventBus);
         ModMessages.register();
         ModCommonConfig.registerCommonConfig();
 
-        eventBus.addListener(this::commonSetup);
-        eventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::addCreativeTab);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -71,7 +71,7 @@ public class TelluriumsRandomStuffMod {
         ModDispenserBehaviours.register();
     }
 
-    private void addCreative(CreativeModeTabEvent.BuildContents event) {
+    private void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
         ItemStack soulHarvestingI = new ItemStack(Items.ENCHANTED_BOOK);
         ItemStack soulHarvestingII = soulHarvestingI.copy();
         ItemStack soulHarvestingIII = soulHarvestingI.copy();
@@ -79,7 +79,7 @@ public class TelluriumsRandomStuffMod {
         EnchantedBookItem.addEnchantment(soulHarvestingII, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 2));
         EnchantedBookItem.addEnchantment(soulHarvestingIII, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 3));
 
-        if (event.getTab() == ModCreativeTab.TAB_TELLURIUMSRANDOMSTUFF) {
+        if (event.getTab() == ModCreativeTab.TAB_TELLURIUMSRANDOMSTUFF.get()) {
             event.accept(ModBlocks.GRATE_MAGMA_BLOCK);
             event.accept(ModBlocks.GRATE_SOUL_SAND);
             event.accept(ModBlocks.HYDRODYNAMIC_RAIL);

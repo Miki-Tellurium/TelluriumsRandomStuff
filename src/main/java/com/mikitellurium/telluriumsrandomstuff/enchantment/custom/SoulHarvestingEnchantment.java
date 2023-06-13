@@ -36,7 +36,7 @@ public class SoulHarvestingEnchantment extends Enchantment {
 
     @Override
     public void doPostAttack(LivingEntity attacker, Entity target, int level) {
-        if (!attacker.level.isClientSide) {
+        if (!attacker.level().isClientSide) {
             float chance = lootChance * level;
             if (attacker.getRandom().nextFloat() < chance) {
                 if (target instanceof LivingEntity livingTarget) {
@@ -45,7 +45,7 @@ public class SoulHarvestingEnchantment extends Enchantment {
                     livingTarget.captureDrops(new ArrayList<>());
 
                     try {
-                        if (this.shouldDropLoot(livingTarget) && attacker.level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+                        if (this.shouldDropLoot(livingTarget) && attacker.level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
                             this.dropFromLootTable.invoke(livingTarget, damageSource, true);
                         }
                     } catch (Exception e) {
@@ -54,7 +54,7 @@ public class SoulHarvestingEnchantment extends Enchantment {
 
                     Collection<ItemEntity> drops = livingTarget.captureDrops(null);
                     if (!ForgeHooks.onLivingDrops(livingTarget, damageSource, drops, i, true))
-                        drops.forEach(e -> attacker.level.addFreshEntity(e));
+                        drops.forEach(e -> attacker.level().addFreshEntity(e));
                 }
             }
         }

@@ -42,8 +42,8 @@ public class ModEvents {
     public static void onBubbleColumnEnterSoundEvent(TickEvent.PlayerTickEvent event) {
         // Play a sound when entering bubble columns
         if (event.phase != TickEvent.Phase.START || event.player == null) return;
-        if (event.player.level.isClientSide) {
-            BlockState blockstate = event.player.level.getBlockStatesIfLoaded(event.player.getBoundingBox().inflate(0.0D, -0.4F, 0.0D)
+        if (event.player.level().isClientSide) {
+            BlockState blockstate = event.player.level().getBlockStatesIfLoaded(event.player.getBoundingBox().inflate(0.0D, -0.4F, 0.0D)
                             .deflate(1.0E-6D)).filter((block) -> block.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get()))
                     .findFirst().orElse(null);
             if (blockstate != null) {
@@ -70,7 +70,7 @@ public class ModEvents {
     public static void insideBubbleColumnBreathing(LivingEvent.LivingTickEvent event) {
         // Increase entity air supply when inside bubble column
         LivingEntity entity = event.getEntity();
-        if (entity.level.getBlockState(new BlockPos((int)entity.getX(), (int)entity.getEyeY(), (int)entity.getZ())).is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
+        if (entity.level().getBlockState(new BlockPos((int)entity.getX(), (int)entity.getEyeY(), (int)entity.getZ())).is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
             if (entity.getAirSupply() < entity.getMaxAirSupply()) {
                 entity.setAirSupply(Math.min(entity.getAirSupply() + 5, entity.getMaxAirSupply()));
             }
@@ -79,7 +79,7 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
-        if (event.getEntity().level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+        if (event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
             return;
         }
         if (event.getEntity() instanceof Player player) {
@@ -94,8 +94,8 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onPlayerDropInventory(LivingDropsEvent event) {
-        if (!event.getEntity().level.isClientSide) {
-            if (event.getEntity().level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+        if (!event.getEntity().level().isClientSide) {
+            if (event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
                 return;
             }
             if (event.getEntity() instanceof Player player) {
@@ -120,7 +120,7 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
-        if (!event.getEntity().getLevel().isClientSide) {
+        if (!event.getEntity().level().isClientSide) {
             if (event.isWasDeath()) {
                 event.getOriginal().reviveCaps();
                 event.getOriginal().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((old) -> {

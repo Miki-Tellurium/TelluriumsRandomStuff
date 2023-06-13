@@ -65,7 +65,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         if (!(entity instanceof Skeleton || entity instanceof SkeletonHorse || entity instanceof Stray)) {
             if (!entity.fireImmune()) {
 
-                if (!entity.getLevel().isRaining()) {
+                if (!entity.level().isRaining()) {
                     entity.setSecondsOnFire(15);
                 } else {
                     entity.extinguishFire();
@@ -125,7 +125,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
                             pLevel.setBlockAndUpdate(blockpos, ForgeEventFactory.fireFluidPlaceBlockEvent(pLevel, blockpos, pPos, Blocks.FIRE.defaultBlockState()));
                             return;
                         }
-                    } else if (blockstate.getMaterial().blocksMotion()) {
+                    } else if (blockstate.blocksMotion()) {
                         return;
                     }
                 }

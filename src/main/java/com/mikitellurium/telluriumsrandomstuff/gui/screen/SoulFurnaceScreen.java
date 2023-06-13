@@ -5,7 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.gui.menu.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.gui.render.FluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.Rect2i;
@@ -38,48 +38,49 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
     }
 
     @Override
-    protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
+    protected void renderBg(GuiGraphics graphics, float pPartialTick, int pMouseX, int pMouseY) {
         int xPos = this.leftPos;
         int yPos = this.topPos + 2;
         int textureWidth = 176;
         int textureHeight = 166;
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, GUI_TEXTURE);
-        blit(pPoseStack, xPos, yPos, 0, 0, textureWidth, textureHeight);
+        graphics.blit(GUI_TEXTURE, xPos, yPos, 0, 0, textureWidth, textureHeight);
 
-        renderFire(pPoseStack, xPos, yPos);
-        renderProgressArrow(pPoseStack, xPos, yPos);
+        renderFire(graphics, xPos, yPos);
+        renderProgressArrow(graphics, xPos, yPos);
         renderSoulLavaStorage(soulLavaStorage.getX(), soulLavaStorage.getY());
-        renderGlass(pPoseStack, xPos, yPos);
+        renderGlass(graphics, xPos, yPos);
     }
 
     @Override
-    public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(pPoseStack);
-        super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        renderTooltip(pPoseStack, pMouseX, pMouseY);
+    public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+        renderBackground(graphics);
+        super.render(graphics, pMouseX, pMouseY, pPartialTick);
+        renderTooltip(graphics, pMouseX, pMouseY);
     }
 
     @Override
-    protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
-        super.renderLabels(pPoseStack, pMouseX, pMouseY);
+    protected void renderLabels(GuiGraphics graphics, int pMouseX, int pMouseY) {
+        super.renderLabels(graphics, pMouseX, pMouseY);
         int xPos = this.leftPos;
         int yPos = this.topPos + 2;
-        renderFluidAreaTooltips(pPoseStack, pMouseX, pMouseY, xPos, yPos);
+        renderFluidAreaTooltips(graphics, pMouseX, pMouseY, xPos, yPos);
     }
 
-    private void renderFire(PoseStack pPoseStack, int xPos, int yPos) {
+    private void renderFire(GuiGraphics graphics, int xPos, int yPos) {
         if (this.menu.isLit()) {
             int time = this.menu.getScaledLitTime();
-            blit(pPoseStack, xPos + 58, yPos + 62 - time, 176, 12 - time, 14, time + 1);
+            graphics.blit(GUI_TEXTURE, xPos + 58, yPos + 62 - time, 176,
+                    12 - time, 14, time + 1);
         }
     }
 
-    private void renderProgressArrow(PoseStack poseStack, int xPos, int yPos) {
+    private void renderProgressArrow(GuiGraphics graphics, int xPos, int yPos) {
         if (this.menu.isCrafting()) {
             int progress = this.menu.getScaledProgress();
-            blit(poseStack, xPos + 79, yPos + 29, 176, 14, progress + 1, 16);
+            graphics.blit(GUI_TEXTURE, xPos + 79, yPos + 29, 176, 14,
+                    progress + 1, 16);
         }
     }
 
@@ -89,15 +90,15 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
         RenderSystem.setShaderTexture(0, GUI_TEXTURE);
     }
 
-    private void renderGlass(PoseStack poseStack, int xPos, int yPos) {
-        blit(poseStack, soulLavaStorage.getX(), soulLavaStorage.getY(), 176, 31,
+    private void renderGlass(GuiGraphics graphics, int xPos, int yPos) {
+        graphics.blit(GUI_TEXTURE, soulLavaStorage.getX(), soulLavaStorage.getY(), 176, 31,
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
     }
 
-    private void renderFluidAreaTooltips(PoseStack pPoseStack, int pMouseX, int pMouseY, int x, int y) {
+    private void renderFluidAreaTooltips(GuiGraphics graphics, int pMouseX, int pMouseY, int x, int y) {
         if(MouseUtils.isAboveArea(pMouseX, pMouseY, soulLavaStorage.getX(), soulLavaStorage.getY(),
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight())) {
-            renderTooltip(pPoseStack, this.getTooltips(),
+            graphics.renderTooltip(this.font, this.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }

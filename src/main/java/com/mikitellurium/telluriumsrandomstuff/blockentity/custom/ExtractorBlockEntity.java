@@ -9,9 +9,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -22,7 +19,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -146,7 +142,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
     @SuppressWarnings("ConstantConditions")
     private void dispenseFailed() {
         this.level.levelEvent(1001, this.worldPosition, 0);
-        this.level.gameEvent(null, GameEvent.DISPENSE_FAIL, this.worldPosition);
+        level.gameEvent(GameEvent.BLOCK_ACTIVATE, this.worldPosition, GameEvent.Context.of(level.getBlockState(this.worldPosition)));
     }
 
     public boolean isInventoryEmpty(IItemHandler inventory) {

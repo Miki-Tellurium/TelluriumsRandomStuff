@@ -39,7 +39,7 @@ public class ModFluidTypes {
 
         @Override
         public double motionScale(Entity entity) {
-            return entity.level.dimensionType().ultraWarm() ? 0.007D : 0.0023333333333333335D;
+            return entity.level().dimensionType().ultraWarm() ? 0.007D : 0.0023333333333333335D;
         }
 
         @Override

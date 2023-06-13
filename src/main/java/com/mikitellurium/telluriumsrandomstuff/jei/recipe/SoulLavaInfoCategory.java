@@ -18,6 +18,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
@@ -69,19 +70,19 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     }
 
     @Override
-    public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
-        downArrow.draw(poseStack, 120, 44);
+    public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        downArrow.draw(graphics, 120, 44);
         drawSplitString(this.font, Component.translatable("jei.telluriumsrandomstuff.soul_lava_crafting"),
-                poseStack, 0, 5, 110, 0);
+                graphics, 0, 5, 110, 0);
     }
 
     private List<FormattedText> splitComponent(Font font, FormattedText text, int width) {
         return font.getSplitter().splitLines(text, width, Style.EMPTY);
     }
 
-    public void drawSplitString(Font font, FormattedText text, PoseStack poseStack, float x, float y, int width, int colour) {
+    public void drawSplitString(Font font, FormattedText text, GuiGraphics graphics, int x, int y, int width, int colour) {
         for (FormattedText s : splitComponent(font, text, width)) {
-            font.draw(poseStack, Language.getInstance().getVisualOrder(s), x, y, colour);
+            graphics.drawString(this.font, Language.getInstance().getVisualOrder(s), x, y , colour, false);
             y += font.lineHeight;
         }
     }

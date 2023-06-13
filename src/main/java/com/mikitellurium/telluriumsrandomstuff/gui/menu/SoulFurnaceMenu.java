@@ -22,14 +22,14 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
     private FluidStack fluidStack;
 
     public SoulFurnaceMenu(int id, Inventory inventory, FriendlyByteBuf data) {
-        this(id, inventory, inventory.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(4));
+        this(id, inventory, inventory.player.level().getBlockEntity(data.readBlockPos()), new SimpleContainerData(4));
     }
 
     public SoulFurnaceMenu(int id, Inventory inventory, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.SOUL_FURNACE_MENU.get(), id);
         checkContainerSize(inventory, 3);
         blockEntity = (SoulFurnaceBlockEntity)entity;
-        this.level = inventory.player.level;
+        this.level = inventory.player.level();
         this.data = data;
         this.fluidStack = ((SoulFurnaceBlockEntity) entity).getFluid();
 

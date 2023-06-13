@@ -23,6 +23,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -70,12 +71,12 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
     }
 
     @Override
-    public void draw(SoulFurnaceRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
+    public void draw(SoulFurnaceRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
         Component translatable = Component.translatable("jei.telluriumsrandomstuff.soul_furnace_recipe_extra_cost")
                 .append(": " + recipe.getRecipeCost());
-        font.draw(poseStack, translatable, 25, 2, textColor);
-        animatedFlame.draw(poseStack, 37, 43);
-        getArrow().draw(poseStack, 58, 24);
+        graphics.drawString(this.font, translatable, 25, 2, textColor, false);
+        animatedFlame.draw(graphics, 37, 43);
+        getArrow().draw(graphics, 58, 24);
     }
 
     @Override

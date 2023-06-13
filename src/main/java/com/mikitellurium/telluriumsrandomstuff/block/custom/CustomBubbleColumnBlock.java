@@ -12,12 +12,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BubbleColumnBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
 
 public class CustomBubbleColumnBlock extends BubbleColumnBlock {
 
     public CustomBubbleColumnBlock() {
-        super(Properties.of(Material.BUBBLE_COLUMN)
+        super(Properties.of()
+                .mapColor(MapColor.WATER)
                 .noCollission()
                 .noLootTable());
     }

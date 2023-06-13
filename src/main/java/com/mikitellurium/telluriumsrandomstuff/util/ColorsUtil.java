@@ -46,11 +46,15 @@ public class ColorsUtil {
         for (Direction direction : Direction.values()) {
             BlockPos sidePos = pos.relative(direction);
             BlockState adjacentBlock = level.getBlockState(sidePos);
-            if (adjacentBlock.isFaceSturdy(level, pos, direction.getOpposite()) && adjacentBlock.isViewBlocking(level, pos)) {
-                continue; // If this face face is obstructed skip this direction
-            }
 
-            int lightLevel = level.getBrightness(LightLayer.BLOCK, sidePos);
+            int lightLevel;
+            if (adjacentBlock.getLightEmission() > 0) {
+                lightLevel = adjacentBlock.getLightEmission();
+            } else if (adjacentBlock.isFaceSturdy(level, pos, direction.getOpposite()) && adjacentBlock.isViewBlocking(level, pos)) {
+                continue; // If this face face is obstructed skip this direction
+            } else {
+                lightLevel = level.getBrightness(LightLayer.BLOCK, sidePos);
+            }
 
             if (lightLevel > highestLightLevel) {
                 highestLightLevel = lightLevel;

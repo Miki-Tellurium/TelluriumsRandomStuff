@@ -56,7 +56,7 @@ public class TelluriumsRandomStuffCommand {
             player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY)
                     .ifPresent((SoulAnchorCapability::clearInventory));
         }
-        source.sendSuccess(Component.literal("Cleared saved inventory for " + players.iterator().next().getScoreboardName()),
+        source.sendSuccess(() -> Component.literal("Cleared saved inventory for " + players.iterator().next().getScoreboardName()),
                 true);
         return 1;
     }
@@ -71,7 +71,7 @@ public class TelluriumsRandomStuffCommand {
             player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY)
                     .ifPresent((soulAnchorCapability -> soulAnchorCapability.setChargedAnchor(b)));
         }
-        source.sendSuccess(Component.literal("Set hasChargedAnchor to " + b + " for " +
+        source.sendSuccess(() -> Component.literal("Set hasChargedAnchor to " + b + " for " +
                 players.iterator().next().getScoreboardName()), true);
         return 1;
     }
@@ -86,7 +86,7 @@ public class TelluriumsRandomStuffCommand {
             player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY)
                     .ifPresent((soulAnchorCapability -> soulAnchorCapability.setCanRecoverInventory(b)));
         }
-        source.sendSuccess(Component.literal("Set canRecoverInventory to " + b + " for " +
+        source.sendSuccess(() -> Component.literal("Set canRecoverInventory to " + b + " for " +
                 players.iterator().next().getScoreboardName()), true);
         return 1;
     }

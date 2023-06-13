@@ -22,14 +22,14 @@ public class ExtractorMenu extends AbstractContainerMenu {
     private final Level level;
 
     public ExtractorMenu(int id, Inventory inventory, FriendlyByteBuf data) {
-        this(id, inventory, inventory.player.level.getBlockEntity(data.readBlockPos()));
+        this(id, inventory, inventory.player.level().getBlockEntity(data.readBlockPos()));
     }
 
     public ExtractorMenu(int id, Inventory inventory, BlockEntity entity) {
         super(ModMenuTypes.EXTRACTOR_MENU.get(), id);
         checkContainerSize(inventory, 3);
         blockEntity = (ExtractorBlockEntity) entity;
-        this.level = inventory.player.level;
+        this.level = inventory.player.level();
 
         addPlayerHotbar(inventory);
         addPlayerInventory(inventory);

@@ -5,6 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.gui.menu.ExtractorMenu;
 import com.mikitellurium.telluriumsrandomstuff.gui.menu.SoulAnchorMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -31,25 +32,24 @@ public class ExtractorScreen extends AbstractContainerScreen<ExtractorMenu> {
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         int xPos = this.leftPos;
         int yPos = this.topPos;
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, GUI_TEXTURE);
-        blit(poseStack, xPos, yPos, 0, 0, imageWidth, imageHeight);
+        graphics.blit(GUI_TEXTURE, xPos, yPos, 0, 0, imageWidth, imageHeight);
     }
 
     @Override
-    public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(pPoseStack);
-        super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        renderTooltip(pPoseStack, pMouseX, pMouseY);
+    public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+        renderBackground(graphics);
+        super.render(graphics, pMouseX, pMouseY, pPartialTick);
+        renderTooltip(graphics, pMouseX, pMouseY);
     }
 
     @Override
-    protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
-        super.renderLabels(pPoseStack, pMouseX, pMouseY);
+    protected void renderLabels(GuiGraphics graphics, int pMouseX, int pMouseY) {
+        super.renderLabels(graphics, pMouseX, pMouseY);
     }
 
 }

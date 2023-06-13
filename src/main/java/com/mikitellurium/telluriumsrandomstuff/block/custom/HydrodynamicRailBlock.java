@@ -4,14 +4,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.RailShape;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 
 public class HydrodynamicRailBlock extends BaseRailBlock implements SimpleWaterloggedBlock {
@@ -19,7 +17,7 @@ public class HydrodynamicRailBlock extends BaseRailBlock implements SimpleWaterl
     public static final EnumProperty<RailShape> SHAPE = BlockStateProperties.RAIL_SHAPE_STRAIGHT;
 
     public HydrodynamicRailBlock() {
-        super(true, Properties.of(Material.DECORATION)
+        super(true, Properties.of()
                 .noCollission()
                 .strength(0.7F)
                 .sound(SoundType.METAL));

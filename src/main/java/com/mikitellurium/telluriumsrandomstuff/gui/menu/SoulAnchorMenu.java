@@ -19,14 +19,14 @@ public class SoulAnchorMenu extends AbstractContainerMenu {
     private final Level level;
 
     public SoulAnchorMenu(int id, Inventory inventory, FriendlyByteBuf data) {
-        this(id, inventory, inventory.player.level.getBlockEntity(data.readBlockPos()));
+        this(id, inventory, inventory.player.level().getBlockEntity(data.readBlockPos()));
     }
 
     public SoulAnchorMenu(int id, Inventory inventory, BlockEntity entity) {
         super(ModMenuTypes.SOUL_ANCHOR_MENU.get(), id);
         checkContainerSize(inventory, 41);
         blockEntity = (SoulAnchorBlockEntity)entity;
-        this.level = inventory.player.level;
+        this.level = inventory.player.level();
 
         addPlayerHotbar(inventory);
         addPlayerInventory(inventory);
