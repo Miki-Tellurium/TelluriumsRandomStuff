@@ -7,11 +7,14 @@ import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorCapabilityPr
 import com.mikitellurium.telluriumsrandomstuff.capability.SoulAnchorLevelData;
 import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
+import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.fluid.custom.SoulLavaFluid;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.horse.ZombieHorse;
@@ -23,7 +26,12 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -33,6 +41,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.VillageSiegeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -76,10 +85,6 @@ public class ModEvents {
             if (entity.getAirSupply() < entity.getMaxAirSupply()) {
                 entity.setAirSupply(Math.min(entity.getAirSupply() + 5, entity.getMaxAirSupply()));
             }
-        }
-        // Damage entity in soul lava
-        if (entity.getMaxHeightFluidType() == ModFluidTypes.SOUL_LAVA_TYPE) {
-            SoulLavaFluid.soulLavaHurt(entity);
         }
     }
 
