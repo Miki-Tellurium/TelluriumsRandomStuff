@@ -90,7 +90,7 @@ public class ExtractorBlock extends DispenserBlock {
             }
         }
     }
-    //todo check exctractor fail event
+
     private void dispenseFailed(Level level, BlockPos blockPos) {
         level.levelEvent(1001, blockPos, 0);
         level.gameEvent(GameEvent.BLOCK_ACTIVATE, blockPos, GameEvent.Context.of(level.getBlockState(blockPos)));
