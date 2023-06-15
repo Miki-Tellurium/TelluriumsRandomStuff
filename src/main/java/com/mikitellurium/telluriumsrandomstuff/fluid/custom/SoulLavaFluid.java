@@ -19,12 +19,19 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.SkeletonHorse;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Stray;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -38,7 +45,11 @@ import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.UUID;
+
 public class SoulLavaFluid extends ForgeFlowingFluid {
+
+    private static final UUID SPEED_MODIFIER_SOUL_SPEED_UUID = UUID.fromString("87f46a96-686f-4796-b035-22e16ee9e038");
 
     public SoulLavaFluid(Properties properties) {
         super(properties);
@@ -66,13 +77,19 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
 
     public static boolean applyMovementLogic(LivingEntity entity, Vec3 vec3, double gravity) {
         boolean flag = entity.getDeltaMovement().y <= 0.0D;
-        double d8 = entity.getY();
-        entity.moveRelative(0.02F, vec3);
+        double dY = entity.getY();
+
+        float f = 0.02F;
+        int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.SOUL_SPEED, entity);
+        if (i > 0) {
+            f = f + (i * 0.05f); // Apply soul speed multiplier
+        }
+        entity.moveRelative(f, vec3);
         entity.move(MoverType.SELF, entity.getDeltaMovement());
         if (entity.getFluidTypeHeight(ModFluidTypes.SOUL_LAVA_TYPE) <= entity.getFluidJumpThreshold()) {
             entity.setDeltaMovement(entity.getDeltaMovement().multiply(0.5D, 0.8F, 0.5D));
-            Vec3 vec33 = entity.getFluidFallingAdjustedMovement(gravity, flag, entity.getDeltaMovement());
-            entity.setDeltaMovement(vec33);
+            Vec3 fluidVec3 = entity.getFluidFallingAdjustedMovement(gravity, flag, entity.getDeltaMovement());
+            entity.setDeltaMovement(fluidVec3);
         } else {
             entity.setDeltaMovement(entity.getDeltaMovement().scale(0.5D));
         }
@@ -81,9 +98,9 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
             entity.setDeltaMovement(entity.getDeltaMovement().add(0.0D, - gravity / 4.0D, 0.0D));
         }
 
-        Vec3 vec34 = entity.getDeltaMovement();
-        if (entity.horizontalCollision && entity.isFree(vec34.x, vec34.y + (double)0.6F - entity.getY() + d8, vec34.z)) {
-            entity.setDeltaMovement(vec34.x, 0.3F, vec34.z);
+        Vec3 entityVec3 = entity.getDeltaMovement();
+        if (entity.horizontalCollision && entity.isFree(entityVec3.x, entityVec3.y + (double)0.6F - entity.getY() + dY, entityVec3.z)) {
+            entity.setDeltaMovement(entityVec3.x, 0.3F, entityVec3.z);
         }
 
         return true;
@@ -103,6 +120,19 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
                     entity.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + entity.getRandom().nextFloat() * 0.4F);
                 }
 
+            }
+        }
+    }
+
+    private static void tryAddSoulSpeed(LivingEntity entity, Vec3 vec3) {
+        int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.SOUL_SPEED, entity);
+        if (i > 0) {
+
+            if (entity.getRandom().nextFloat() < 0.04F) {
+                ItemStack itemstack = entity.getItemBySlot(EquipmentSlot.FEET);
+                itemstack.hurtAndBreak(1, entity, (livingEntity) -> {
+                    livingEntity.broadcastBreakEvent(EquipmentSlot.FEET);
+                });
             }
         }
     }
