@@ -9,13 +9,17 @@ import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.fluid.custom.SoulLavaFluid;
+import com.mojang.blaze3d.shaders.FogShape;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.horse.ZombieHorse;
 import net.minecraft.world.entity.monster.Zombie;
@@ -24,13 +28,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.event.RenderBlockScreenEffectEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
@@ -43,12 +50,16 @@ import net.minecraftforge.event.village.VillageSiegeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fml.common.Mod;
+import org.joml.Vector3f;
+
+import java.util.Arrays;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModEvents {
     private static boolean wasInBubbleColumn;
     private static boolean firstTick = true;
 
+    // Custom bubble columns
     @SubscribeEvent
     public static void onBubbleColumnEnterSoundEvent(TickEvent.PlayerTickEvent event) {
         // Play a sound when entering bubble columns
@@ -88,6 +99,7 @@ public class ModEvents {
         }
     }
 
+    // Soul anchor
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
         if (event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
@@ -163,6 +175,7 @@ public class ModEvents {
         }
     }
 
+    // Zombie rider
     @SubscribeEvent
     public static void onZombieSiegeSpawn(VillageSiegeEvent event) {
         if (event.getLevel().isClientSide) {
@@ -188,6 +201,56 @@ public class ModEvents {
                 level.addFreshEntityWithPassengers(steed);
             }
         }
+    }
+
+    // Soul lava fog
+    @SubscribeEvent
+    public static void setFogPlane(ViewportEvent.RenderFog event) {
+        if (isInSoulLava(event.getCamera())) {
+            event.setCanceled(true);
+        }
+        if (event.isCanceled()) {
+            Entity entity = event.getCamera().getEntity();
+
+            if (entity.isSpectator()) {
+                event.setNearPlaneDistance(-8.0F);
+                event.setFarPlaneDistance(event.getRenderer().getRenderDistance() * 0.5F);
+            } else if (entity instanceof LivingEntity && ((LivingEntity) entity).hasEffect(MobEffects.FIRE_RESISTANCE)) {
+                event.setNearPlaneDistance(0.0F);
+                event.setFarPlaneDistance(3.0F);
+            } else {
+                event.setNearPlaneDistance(0.25f);
+                event.setFarPlaneDistance(1.0f);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void setFogColor(ViewportEvent.ComputeFogColor event) {
+        if (isInSoulLava(event.getCamera())) {
+            Vector3f soulLavaFogColor = new Vector3f(0f / 255f, 210f / 255f, 225f / 255f);
+            event.setRed(soulLavaFogColor.x);
+            event.setGreen(soulLavaFogColor.y);
+            event.setBlue(soulLavaFogColor.z);
+        }
+    }
+
+    private static boolean isInSoulLava(Camera camera) {
+        Camera.NearPlane nearPlane = camera.getNearPlane();
+        BlockGetter blockGetter = Minecraft.getInstance().level;
+        for(Vec3 vec3 : Arrays.asList(new Vec3(camera.getLookVector()).scale(0.05F), nearPlane.getTopLeft(),
+                nearPlane.getTopRight(), nearPlane.getBottomLeft(), nearPlane.getBottomRight())) {
+            Vec3 vec31 = camera.getPosition().add(vec3);
+            BlockPos blockpos = BlockPos.containing(vec31);
+            FluidState fluidstate1 = blockGetter.getFluidState(blockpos);
+            if (fluidstate1.getFluidType() == ModFluidTypes.SOUL_LAVA_TYPE) {
+                if (vec31.y <= (double)(fluidstate1.getHeight(blockGetter, blockpos) + (float)blockpos.getY())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 }

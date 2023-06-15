@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class LivingEntityMixin {
 
     @ModifyVariable(method = "travel", at = @At("STORE"), ordinal = 0)
-    private FluidState injected(FluidState fluidState) {
+    private FluidState getCorrectSoulLavaState(FluidState fluidState) {
         LivingEntity entity = (LivingEntity) (Object) this;
 
-        if (entity.getMaxHeightFluidType() != ModFluidTypes.SOUL_LAVA_TYPE) {
+        if (entity.getMaxHeightFluidType() != ModFluidTypes.SOUL_LAVA_TYPE) { // Check if entity is inside soul lava
             return fluidState; // Vanilla behaviour
         } else {
             BlockPos pos = entity.blockPosition();

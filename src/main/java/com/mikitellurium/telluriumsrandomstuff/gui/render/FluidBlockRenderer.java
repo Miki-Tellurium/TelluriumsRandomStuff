@@ -17,7 +17,7 @@ public class FluidBlockRenderer implements IIngredientRenderer<FluidStack> {
         var fluid = ingredient.getFluid();
         BlockRendering.renderFluid(graphics, fluid, 3, 1, 10, 11);
     }
-//todo soul lava rendering
+
     @Override
     public List<Component> getTooltip(FluidStack ingredient, TooltipFlag tooltipFlag) {
         return List.of(ingredient.getDisplayName());

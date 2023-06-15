@@ -38,7 +38,7 @@ public class ModFluidTypes {
 
     public static final BaseFluidType SOUL_LAVA_TYPE = new BaseFluidType(SOUL_LAVA_STILL_RL, SOUL_LAVA_FLOWING_RL, SOUL_LAVA_FLOWING_RL,
             null, 0xFFFFFFFF, 0.05f, 0.8f,
-            new Vector3f(0f / 255f, 206 / 255f, 242f / 255f), SOUL_LAVA_PROPERTIES) {
+            new Vector3f(0f / 255f, 210f / 255f, 225f / 255f), SOUL_LAVA_PROPERTIES) {
 
         @Override
         public double motionScale(Entity entity) {

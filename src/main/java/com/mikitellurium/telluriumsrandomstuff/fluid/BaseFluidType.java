@@ -7,6 +7,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
@@ -30,8 +33,8 @@ import java.util.function.Consumer;
         private final ResourceLocation overlayTexture;
         private final ResourceLocation renderOverlayTexture;
         private final int tintColor;
-        private final float fogStart;
-        private final float fogEnd;
+        private float fogStart;
+        private float fogEnd;
         private final Vector3f fogColor;
 
         public BaseFluidType(final ResourceLocation stillTexture, final ResourceLocation flowingTexture, final ResourceLocation overlayTexture,
@@ -104,13 +107,6 @@ import java.util.function.Consumer;
                 public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level,
                                                         int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
                     return fogColor;
-                }
-
-                @Override
-                public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick,
-                                            float nearDistance, float farDistance, FogShape shape) {
-                    RenderSystem.setShaderFogStart(fogStart);
-                    RenderSystem.setShaderFogEnd(fogEnd);
                 }
             });
         }
