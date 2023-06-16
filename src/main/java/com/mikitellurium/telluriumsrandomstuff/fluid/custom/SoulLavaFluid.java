@@ -79,13 +79,15 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         boolean flag = entity.getDeltaMovement().y <= 0.0D;
         double dY = entity.getY();
 
-        float f = 0.02F;
+        float speed = 0.02F;
         int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.SOUL_SPEED, entity);
         if (i > 0) {
-            f = f + (i * 0.05f); // Apply soul speed multiplier
+            speed = speed + (i * 0.055f); // Apply soul speed multiplier
         }
-        entity.moveRelative(f, vec3);
+
+        entity.moveRelative(speed, vec3);
         entity.move(MoverType.SELF, entity.getDeltaMovement());
+
         if (entity.getFluidTypeHeight(ModFluidTypes.SOUL_LAVA_TYPE) <= entity.getFluidJumpThreshold()) {
             entity.setDeltaMovement(entity.getDeltaMovement().multiply(0.5D, 0.8F, 0.5D));
             Vec3 fluidVec3 = entity.getFluidFallingAdjustedMovement(gravity, flag, entity.getDeltaMovement());
