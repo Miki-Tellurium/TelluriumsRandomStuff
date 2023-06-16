@@ -6,6 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.fluid.custom.SoulLavaBlock;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -135,6 +136,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> SOUL_ANCHOR_BLOCK = registerBlock("soul_anchor", SoulAnchorBlock::new);
 
     public static final RegistryObject<Block> EXTRACTOR_BLOCK = registerBlock("extractor", ExtractorBlock::new);
+
+    public static final RegistryObject<Block> BRIGHT_TORCHFLOWER = registerBlock("torchflower",
+            () -> new FlowerBlock(() -> MobEffects.NIGHT_VISION, 5, BlockBehaviour.Properties.copy(Blocks.TORCHFLOWER)
+                    .lightLevel((blockState) -> 15)));
 
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

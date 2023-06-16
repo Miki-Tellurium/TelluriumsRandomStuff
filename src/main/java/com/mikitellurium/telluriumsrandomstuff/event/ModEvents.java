@@ -14,6 +14,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -30,6 +31,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
@@ -46,6 +48,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.village.VillageSiegeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidType;
@@ -200,6 +203,15 @@ public class ModEvents {
                 rider.startRiding(steed);
                 level.addFreshEntityWithPassengers(steed);
             }
+        }
+    }
+
+    // test
+    @SubscribeEvent
+    public static void onPlayerPlaceBlock(BlockEvent.EntityPlaceEvent event) {
+        if (event.getPlacedBlock().getBlock() == Blocks.TORCHFLOWER) {
+            event.getLevel().setBlock(event.getBlockSnapshot().getPos(),
+                    ModBlocks.BRIGHT_TORCHFLOWER.get().defaultBlockState(), 3);
         }
     }
 
