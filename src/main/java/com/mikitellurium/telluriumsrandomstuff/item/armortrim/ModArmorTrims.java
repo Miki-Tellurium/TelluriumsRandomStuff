@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.armortrim;
+package com.mikitellurium.telluriumsrandomstuff.item.armortrim;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
@@ -30,7 +30,8 @@ public class ModArmorTrims {
         createMaterial(bootstapContext, resourceKey, item, style, f, Map.of());
     }
 
-    private static void createMaterial(BootstapContext<TrimMaterial> bootstapContext, ResourceKey<TrimMaterial> resourceKey, Item item, Style style, float f, Map<ArmorMaterials, String> map) {
+    private static void createMaterial(BootstapContext<TrimMaterial> bootstapContext, ResourceKey<TrimMaterial> resourceKey,
+                                       Item item, Style style, float f, Map<ArmorMaterials, String> map) {
         TrimMaterial trimMaterial = TrimMaterial.create(resourceKey.location().getPath(), item, f,
                 Component.translatable(Util.makeDescriptionId("trim_material", resourceKey.location())).withStyle(style), map);
         bootstapContext.register(resourceKey, trimMaterial);

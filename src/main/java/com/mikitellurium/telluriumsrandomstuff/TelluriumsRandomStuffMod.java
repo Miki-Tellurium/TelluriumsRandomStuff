@@ -1,6 +1,5 @@
 package com.mikitellurium.telluriumsrandomstuff;
 
-import com.mikitellurium.telluriumsrandomstuff.armortrim.ModArmorTrims;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModDispenserBehaviours;

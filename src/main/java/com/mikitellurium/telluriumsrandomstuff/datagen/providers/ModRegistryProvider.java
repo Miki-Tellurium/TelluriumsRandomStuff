@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.armortrim.ModArmorTrims;
+import com.mikitellurium.telluriumsrandomstuff.item.armortrim.ModArmorTrims;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
