@@ -1,0 +1,8 @@
+{
+  "type": "telluriumsrandomstuff:soul_furnace_smelting",
+  "ingredient": {
+    "item": "minecraft:wheat"
+  },
+  "cost": 10,
+  "result": "minecraft:bread"
+}
