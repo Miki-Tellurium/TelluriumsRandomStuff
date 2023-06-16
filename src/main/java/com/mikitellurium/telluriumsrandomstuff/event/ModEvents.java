@@ -206,15 +206,6 @@ public class ModEvents {
         }
     }
 
-    // test
-    @SubscribeEvent
-    public static void onPlayerPlaceBlock(BlockEvent.EntityPlaceEvent event) {
-        if (event.getPlacedBlock().getBlock() == Blocks.TORCHFLOWER) {
-            event.getLevel().setBlock(event.getBlockSnapshot().getPos(),
-                    ModBlocks.BRIGHT_TORCHFLOWER.get().defaultBlockState(), 3);
-        }
-    }
-
     // Soul lava fog
     @SubscribeEvent
     public static void setFogPlane(ViewportEvent.RenderFog event) {

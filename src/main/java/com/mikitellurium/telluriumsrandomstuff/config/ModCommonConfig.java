@@ -9,8 +9,7 @@ import net.minecraftforge.fml.config.ModConfig;
 public class ModCommonConfig {
 
     public static ForgeConfigSpec.BooleanValue ENABLE_MOD_DISPENSER_BEHAVIOR;
-
-    public static ForgeConfigSpec.IntValue ZOMBIE_RIDER_SPAWN_CHANCE; // The spawn chance of zombie rider in village sieges
+    public static ForgeConfigSpec.IntValue ZOMBIE_RIDER_SPAWN_CHANCE;
 
     public static void registerCommonConfig() {
         ForgeConfigSpec.Builder CONFIG_BUILDER = new ForgeConfigSpec.Builder();

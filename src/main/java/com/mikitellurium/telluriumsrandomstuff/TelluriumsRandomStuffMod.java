@@ -25,6 +25,8 @@ import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -69,6 +71,8 @@ public class TelluriumsRandomStuffMod {
         ModFluidInteractions.register();
         ModCauldronInteractions.register();
         ModDispenserBehaviours.register();
+        ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.BRIGHT_TORCHFLOWER.getId(), ModBlocks.POTTED_BRIGHT_TORCHFLOWER);
+        ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.SOUL_TORCHFLOWER.getId(), ModBlocks.POTTED_SOUL_TORCHFLOWER);
     }
 
     private void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
@@ -129,6 +133,8 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.OPAL_CRYSTAL_SWORD);
             event.accept(ModItems.FILTER);
             event.accept(ModBlocks.EXTRACTOR_BLOCK);
+            event.accept(ModBlocks.BRIGHT_TORCHFLOWER);
+            event.accept(ModBlocks.SOUL_TORCHFLOWER);
         }
     }
 

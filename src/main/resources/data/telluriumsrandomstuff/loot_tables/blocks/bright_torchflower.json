@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:torchflower"
+          "name": "telluriumsrandomstuff:bright_torchflower"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "minecraft:blocks/torchflower"
+  "random_sequence": "telluriumsrandomstuff:blocks/bright_torchflower"
 }

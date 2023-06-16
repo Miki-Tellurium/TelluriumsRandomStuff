@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cross",
   "render_type": "cutout",
   "textures": {
-    "cross": "minecraft:block/torchflower"
+    "cross": "telluriumsrandomstuff:block/bright_torchflower"
   }
 }

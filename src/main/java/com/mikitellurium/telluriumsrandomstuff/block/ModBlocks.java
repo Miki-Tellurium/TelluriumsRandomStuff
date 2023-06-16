@@ -2,16 +2,22 @@ package com.mikitellurium.telluriumsrandomstuff.block;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.block.custom.*;
+import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.fluid.custom.SoulLavaBlock;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -137,9 +143,21 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> EXTRACTOR_BLOCK = registerBlock("extractor", ExtractorBlock::new);
 
-    public static final RegistryObject<Block> BRIGHT_TORCHFLOWER = registerBlock("torchflower",
+    public static final RegistryObject<Block> BRIGHT_TORCHFLOWER = registerBlock("bright_torchflower",
             () -> new FlowerBlock(() -> MobEffects.NIGHT_VISION, 5, BlockBehaviour.Properties.copy(Blocks.TORCHFLOWER)
                     .lightLevel((blockState) -> 15)));
+
+    public static RegistryObject<Block> POTTED_BRIGHT_TORCHFLOWER = BLOCKS.register("potted_bright_torchflower",
+            () -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, BRIGHT_TORCHFLOWER,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_TORCHFLOWER).lightLevel((blockState) -> 15)));
+
+    public static final RegistryObject<Block> SOUL_TORCHFLOWER = registerBlock("soul_torchflower",
+            () -> new FlowerBlock(() -> MobEffects.FIRE_RESISTANCE, 5, BlockBehaviour.Properties.copy(Blocks.TORCHFLOWER)
+                    .lightLevel((blockState) -> 15)));
+
+    public static RegistryObject<Block> POTTED_SOUL_TORCHFLOWER = BLOCKS.register("potted_soul_torchflower",
+            () -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, SOUL_TORCHFLOWER,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_TORCHFLOWER).lightLevel((blockState) -> 15)));
 
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
