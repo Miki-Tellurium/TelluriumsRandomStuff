@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -147,17 +148,23 @@ public class ModBlocks {
             () -> new FlowerBlock(() -> MobEffects.NIGHT_VISION, 5, BlockBehaviour.Properties.copy(Blocks.TORCHFLOWER)
                     .lightLevel((blockState) -> 15)));
 
-    public static RegistryObject<Block> POTTED_BRIGHT_TORCHFLOWER = BLOCKS.register("potted_bright_torchflower",
+    public static final RegistryObject<Block> POTTED_BRIGHT_TORCHFLOWER = BLOCKS.register("potted_bright_torchflower",
             () -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, BRIGHT_TORCHFLOWER,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_TORCHFLOWER).lightLevel((blockState) -> 15)));
+
+    public static final RegistryObject<Block> BRIGHT_TORCHFLOWER_CROP = BLOCKS.register("bright_torchflower_crop",
+            BrightTorchflowerCropBlock::new);
 
     public static final RegistryObject<Block> SOUL_TORCHFLOWER = registerBlock("soul_torchflower",
             () -> new FlowerBlock(() -> MobEffects.FIRE_RESISTANCE, 5, BlockBehaviour.Properties.copy(Blocks.TORCHFLOWER)
                     .lightLevel((blockState) -> 15)));
 
-    public static RegistryObject<Block> POTTED_SOUL_TORCHFLOWER = BLOCKS.register("potted_soul_torchflower",
+    public static final RegistryObject<Block> POTTED_SOUL_TORCHFLOWER = BLOCKS.register("potted_soul_torchflower",
             () -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, SOUL_TORCHFLOWER,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_TORCHFLOWER).lightLevel((blockState) -> 15)));
+
+    public static final RegistryObject<Block> SOUL_TORCHFLOWER_CROP = BLOCKS.register("soul_torchflower_crop",
+            SoulTorchFlowerCropBlock::new);
 
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

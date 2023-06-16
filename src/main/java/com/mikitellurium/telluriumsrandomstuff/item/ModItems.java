@@ -1,12 +1,14 @@
 package com.mikitellurium.telluriumsrandomstuff.item;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -101,6 +103,12 @@ public class ModItems {
                     return 100;
                 }
             });
+
+    public static final RegistryObject<Item> BRIGHT_TORCHFLOWER_SEEDS = ITEMS.register("bright_torchflower_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.BRIGHT_TORCHFLOWER_CROP.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SOUL_TORCHFLOWER_SEEDS = ITEMS.register("soul_torchflower_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.SOUL_TORCHFLOWER_CROP.get(), new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

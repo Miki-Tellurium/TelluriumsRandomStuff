@@ -134,7 +134,9 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.FILTER);
             event.accept(ModBlocks.EXTRACTOR_BLOCK);
             event.accept(ModBlocks.BRIGHT_TORCHFLOWER);
+            event.accept(ModItems.BRIGHT_TORCHFLOWER_SEEDS);
             event.accept(ModBlocks.SOUL_TORCHFLOWER);
+            event.accept(ModItems.SOUL_TORCHFLOWER_SEEDS);
         }
     }
 
