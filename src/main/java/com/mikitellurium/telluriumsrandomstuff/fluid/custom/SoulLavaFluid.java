@@ -213,7 +213,8 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     private boolean isFlammable(LevelReader level, BlockPos pos, Direction face) {
-        return (pos.getY() < level.getMinBuildHeight() || pos.getY() >= level.getMaxBuildHeight() || level.hasChunkAt(pos)) && level.getBlockState(pos).isFlammable(level, pos, face);
+        return (pos.getY() < level.getMinBuildHeight() || pos.getY() >= level.getMaxBuildHeight() ||
+                level.hasChunkAt(pos)) && level.getBlockState(pos).isFlammable(level, pos, face);
     }
 
     @Nullable
@@ -263,7 +264,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
 
     @Override
     public boolean canBeReplacedWith(FluidState pFluidState, BlockGetter pBlockReader, BlockPos pPos, Fluid pFluid, Direction pDirection) {
-        return pFluidState.getHeight(pBlockReader, pPos) >= 0.44444445F && (pFluid.is(FluidTags.WATER) || pFluid.is(FluidTags.LAVA));
+        return pFluidState.getHeight(pBlockReader, pPos) >= 0.44444445F && (pFluid.is(FluidTags.WATER));
     }
 
     @Override
