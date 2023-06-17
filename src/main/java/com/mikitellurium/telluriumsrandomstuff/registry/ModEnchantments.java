@@ -15,7 +15,7 @@ public class ModEnchantments {
             ForgeRegistries.ENCHANTMENTS, TelluriumsRandomStuffMod.MOD_ID);
 
     public static RegistryObject<Enchantment> SOUL_HARVESTING = ENCHANTMENTS.register("soul_harvesting",
-            ()-> new SoulHarvestingEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
+            ()-> new SoulHarvestingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND));
 
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);

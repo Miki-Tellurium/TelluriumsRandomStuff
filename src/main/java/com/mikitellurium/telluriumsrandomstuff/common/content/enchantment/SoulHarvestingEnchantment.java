@@ -78,7 +78,7 @@ public class SoulHarvestingEnchantment extends Enchantment {
 
     @Override
     public boolean canEnchant(ItemStack itemStack) {
-        return itemStack.getItem() instanceof SwordItem ? true : super.canEnchant(itemStack);
+        return itemStack.getItem() instanceof SwordItem || super.canEnchant(itemStack);
     }
 
     @Override
