@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:soul_sand_valley",
+  "features": "telluriumsrandomstuff:blue_glowstone_placed",
+  "step": "underground_decoration"
+}

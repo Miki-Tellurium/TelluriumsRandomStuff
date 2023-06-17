@@ -19,6 +19,7 @@ import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.jei.recipe.ModRecipes;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
+import com.mikitellurium.telluriumsrandomstuff.worldgen.feature.ModFeatures;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.EnchantedBookItem;
@@ -58,6 +59,7 @@ public class TelluriumsRandomStuffMod {
         ModMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModEnchantments.register(modEventBus);
+        ModFeatures.register(modEventBus);
         ModMessages.register();
         ModCommonConfig.registerCommonConfig();
 
@@ -137,6 +139,8 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.BRIGHT_TORCHFLOWER_SEEDS);
             event.accept(ModBlocks.SOUL_TORCHFLOWER);
             event.accept(ModItems.SOUL_TORCHFLOWER_SEEDS);
+            event.accept(ModBlocks.BLUE_GLOWSTONE);
+            event.accept(ModItems.BLUE_GLOWSTONE_DUST);
         }
     }
 

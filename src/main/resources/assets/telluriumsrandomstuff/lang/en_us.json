@@ -15,6 +15,7 @@
   "item.telluriumsrandomstuff.bright_torchflower_seeds": "Bright Torchflower Seeds",
   "item.telluriumsrandomstuff.soul_torchflower": "Soul Torchflower",
   "item.telluriumsrandomstuff.soul_torchflower_seeds": "Soul Torchflower Seeds",
+  "item.telluriumsrandomstuff.blue_glowstone_dust": "Blue Glowstone Dust",
 
   "item.description.telluriumsrandomstuff.mystic_potato": "Tastes like victory!",
 
@@ -61,6 +62,7 @@
   "block.telluriumsrandomstuff.extractor": "Extractor",
   "block.telluriumsrandomstuff.bright_torchflower": "Bright Torchflower",
   "block.telluriumsrandomstuff.soul_torchflower": "Soul Torchflower",
+  "block.telluriumsrandomstuff.blue_glowstone": "Blue Glowstone",
 
   "blockentity.telluriumsrandomstuff.soul_furnace": "Soul Furnace",
   "blockentity.telluriumsrandomstuff.soul_anchor": "Soul Anchor",

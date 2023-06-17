@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.worldgen;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.worldgen.feature.ModFeatures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -28,6 +29,9 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_OPAL_CRYSTAL_ORE_LARGE =
             registerKey("opal_crystal_ore_large");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NETHER_BLUE_GLOWSTONE =
+            registerKey("blue_glowstone");
+
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD);
         RuleTest opalClusterReplaceable = new BlockMatchTest(ModBlocks.OPAL.get());
@@ -40,8 +44,8 @@ public class ModConfiguredFeatures {
         register(context, OVERWORLD_OPAL_CLUSTER, Feature.ORE, new OreConfiguration(overworldOpalCluster,64));
         register(context, OVERWORLD_OPAL_CRYSTAL_ORE_SMALL, Feature.ORE, new OreConfiguration(overworldOpalCrystalOre,4));
         register(context, OVERWORLD_OPAL_CRYSTAL_ORE_LARGE, Feature.ORE, new OreConfiguration(overworldOpalCrystalOre,8));
+        register(context, NETHER_BLUE_GLOWSTONE, ModFeatures.BLUE_GLOWSTONE_BLOB.get(), FeatureConfiguration.NONE);
     }
-
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, name));
