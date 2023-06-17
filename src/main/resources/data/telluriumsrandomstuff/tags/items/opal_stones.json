@@ -1,0 +1,27 @@
+{
+  "values": [
+    "telluriumsrandomstuff:opal",
+    "telluriumsrandomstuff:opal_cobblestone",
+    "telluriumsrandomstuff:opal_bricks",
+    "telluriumsrandomstuff:cut_opal_bricks",
+    "telluriumsrandomstuff:chiseled_opal_bricks",
+    "telluriumsrandomstuff:cracked_opal_bricks",
+    "telluriumsrandomstuff:cracked_cut_opal_bricks",
+    "telluriumsrandomstuff:opal_slab",
+    "telluriumsrandomstuff:opal_cobblestone_slab",
+    "telluriumsrandomstuff:opal_brick_slab",
+    "telluriumsrandomstuff:cut_opal_brick_slab",
+    "telluriumsrandomstuff:cracked_opal_brick_slab",
+    "telluriumsrandomstuff:cracked_cut_opal_brick_slab",
+    "telluriumsrandomstuff:opal_stairs",
+    "telluriumsrandomstuff:opal_cobblestone_stairs",
+    "telluriumsrandomstuff:opal_brick_stairs",
+    "telluriumsrandomstuff:cut_opal_brick_stairs",
+    "telluriumsrandomstuff:opal_cobblestone_wall",
+    "telluriumsrandomstuff:opal_brick_wall",
+    "telluriumsrandomstuff:cut_opal_brick_wall",
+    "telluriumsrandomstuff:opal_pressure_plate",
+    "telluriumsrandomstuff:opal_button",
+    "telluriumsrandomstuff:opal_crystal_ore"
+  ]
+}

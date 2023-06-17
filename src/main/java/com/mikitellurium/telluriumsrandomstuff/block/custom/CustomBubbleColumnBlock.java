@@ -1,10 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.block.custom;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.tag.ModTags;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -49,13 +51,13 @@ public class CustomBubbleColumnBlock extends BubbleColumnBlock {
         }
     }
 
-    private static BlockState getColumnState(BlockState pBlockState) {
-        if (pBlockState.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
-            return pBlockState;
-        } else if (LevelUtils.isBubbleColumnLiftUp(pBlockState)) {
+    private static BlockState getColumnState(BlockState blockState) {
+        if (blockState.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
+            return blockState;
+        } else if (blockState.is(ModTags.Blocks.BUBBLE_COLUMN_LIFT_UP)) {
             return ModBlocks.CUSTOM_BUBBLE_COLUMN.get().defaultBlockState().setValue(DRAG_DOWN, Boolean.valueOf(false));
         } else {
-            return LevelUtils.isBubbleColumnDragDown(pBlockState) ? ModBlocks.CUSTOM_BUBBLE_COLUMN.get().defaultBlockState().setValue(DRAG_DOWN, Boolean.valueOf(true)) : Blocks.WATER.defaultBlockState();
+            return blockState.is(ModTags.Blocks.BUBBLE_COLUMN_DRAG_DOWN) ? ModBlocks.CUSTOM_BUBBLE_COLUMN.get().defaultBlockState().setValue(DRAG_DOWN, Boolean.valueOf(true)) : Blocks.WATER.defaultBlockState();
         }
     }
 
@@ -66,7 +68,7 @@ public class CustomBubbleColumnBlock extends BubbleColumnBlock {
     @Override
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         BlockState blockstate = pLevel.getBlockState(pPos.below());
-        return blockstate.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get()) || LevelUtils.isBubbleColumnGenerator(blockstate);
+        return blockstate.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get()) || blockstate.is(ModTags.Blocks.BUBBLE_COLUMN_GENERATOR);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
+import com.mikitellurium.telluriumsrandomstuff.tag.ModTags;
 import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -48,8 +49,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 public class SoulLavaFluid extends ForgeFlowingFluid {
-
-    private static final UUID SPEED_MODIFIER_SOUL_SPEED_UUID = UUID.fromString("87f46a96-686f-4796-b035-22e16ee9e038");
 
     public SoulLavaFluid(Properties properties) {
         super(properties);
@@ -109,7 +108,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     public static void soulLavaHurt(LivingEntity entity) {
-        if (!(entity instanceof Skeleton || entity instanceof SkeletonHorse || entity instanceof Stray)) {
+        if (!entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE)) {
             if (!entity.fireImmune()) {
 
                 if (!entity.level().isRaining()) {
@@ -122,19 +121,6 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
                     entity.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + entity.getRandom().nextFloat() * 0.4F);
                 }
 
-            }
-        }
-    }
-
-    private static void tryAddSoulSpeed(LivingEntity entity, Vec3 vec3) {
-        int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.SOUL_SPEED, entity);
-        if (i > 0) {
-
-            if (entity.getRandom().nextFloat() < 0.04F) {
-                ItemStack itemstack = entity.getItemBySlot(EquipmentSlot.FEET);
-                itemstack.hurtAndBreak(1, entity, (livingEntity) -> {
-                    livingEntity.broadcastBreakEvent(EquipmentSlot.FEET);
-                });
             }
         }
     }

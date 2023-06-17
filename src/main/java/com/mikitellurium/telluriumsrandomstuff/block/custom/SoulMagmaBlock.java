@@ -1,9 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.block.custom;
 
+import com.mikitellurium.telluriumsrandomstuff.tag.ModTags;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.horse.SkeletonHorse;
@@ -17,28 +19,27 @@ public class SoulMagmaBlock extends MagmaBlock {
 
     public SoulMagmaBlock() {
         super(Properties.copy(Blocks.MAGMA_BLOCK)
-                .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> LevelUtils.isSoulBlockValidSpawn(entityType))
+                .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> entityType.is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE))
                 .lightLevel((blockState) -> 2)
                 .emissiveRendering((blockState, blockGetter, blockPos) -> true));
     }
 
     @Override
-    public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-        // Wither skeleton already immune to fire damage
-        if (!(pEntity instanceof Skeleton || pEntity instanceof SkeletonHorse)) {
-            super.stepOn(pLevel, pPos, pState, pEntity);
+    public void stepOn(Level level, BlockPos pos, BlockState blockState, Entity entity) {
+        if (entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE)) {
+            super.stepOn(level, pos, blockState, entity);
         }
     }
 
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        CustomBubbleColumnBlock.updateColumn(pLevel, pPos.above(), pState);
+    public void tick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
+        CustomBubbleColumnBlock.updateColumn(level, pos.above(), blockState);
     }
 
     @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (pLevel.isRaining()) {
-            ParticleUtils.handleRainParticles(pLevel, pPos, pState, pRandom);
+    public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource random) {
+        if (level.isRaining()) {
+            ParticleUtils.handleRainParticles(level, pos, blockState, random);
         }
     }
 

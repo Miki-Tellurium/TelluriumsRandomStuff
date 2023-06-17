@@ -133,7 +133,7 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
         }
 
         protected void preMoveUpdate() {
-            this.setColor(ColorsUtil.soulRedColor(), ColorsUtil.soulGreenColor(), ColorsUtil.soulBlueColor());
+            this.setColor(ColorsUtil.SoulColor.getRed(), ColorsUtil.SoulColor.getGreen(), ColorsUtil.SoulColor.getBlue());
             super.preMoveUpdate();
         }
     }
@@ -167,7 +167,7 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
         @Override
         public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
             SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.FallAndLandParticle(pLevel, pX, pY, pZ, ModFluids.SOUL_LAVA_SOURCE.get(), ModParticles.SOUL_LAVA_LAND.get());
-            dripParticle.setColor(ColorsUtil.soulRedColor(), ColorsUtil.soulGreenColor(), ColorsUtil.soulBlueColor());
+            dripParticle.setColor(ColorsUtil.SoulColor.getRed(), ColorsUtil.SoulColor.getGreen(), ColorsUtil.SoulColor.getBlue());
             dripParticle.pickSprite(this.sprite);
             return dripParticle;
         }
@@ -199,7 +199,7 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
 
         public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
             SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.DripLandParticle(pLevel, pX, pY, pZ, ModFluids.SOUL_LAVA_SOURCE.get());
-            dripParticle.setColor(ColorsUtil.soulRedColor(), ColorsUtil.soulGreenColor(), ColorsUtil.soulBlueColor());
+            dripParticle.setColor(ColorsUtil.SoulColor.getRed(), ColorsUtil.SoulColor.getGreen(), ColorsUtil.SoulColor.getBlue());
             dripParticle.pickSprite(this.sprite);
             return dripParticle;
         }

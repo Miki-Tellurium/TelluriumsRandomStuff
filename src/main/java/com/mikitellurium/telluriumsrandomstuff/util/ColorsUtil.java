@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
-import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
-import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.tag.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.FastColor;
@@ -19,7 +18,7 @@ public class ColorsUtil {
     private static final int blank = 0xFFFFFF;
 
     public static int getMaterialColor(ItemStack stack, int tintIndex, int lightLevel) {
-        if (ColorsUtil.isCrystal(stack)) {
+        if (stack.is(ModTags.Items.OPAL_CRYSTALS)) {
             return tintIndex == 0 ? ColorsUtil.getRainbowColor(lightLevel, 0.75f, 1.0f, true) : blank;
         }
 
@@ -27,10 +26,10 @@ public class ColorsUtil {
     }
 
     // test
-    public static int getRainbowColor(int lightLevel, float saturation, float brightness, boolean isMetal) {
+    public static int getRainbowColor(int lightLevel, float saturation, float brightness, boolean isCrystal) {
         // Return base color if lightLevel is 0
         if (lightLevel == 0) {
-            return isMetal ? opalCrystalBaseColor : opalBaseColor;
+            return isCrystal ? opalCrystalBaseColor : opalBaseColor;
         }
 
         double inverted = 15.5D - lightLevel;
@@ -74,28 +73,21 @@ public class ColorsUtil {
         return color.getRGB();
     }*/
 
-    public static boolean isCrystal(ItemStack itemStack) {
-        return  itemStack.is(ModItems.RAW_OPAL_CRYSTAL.get()) ||
-                itemStack.is(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get().asItem()) ||
-                itemStack.is(ModItems.OPAL_CRYSTAL.get()) ||
-                itemStack.is(ModBlocks.OPAL_CRYSTAL_BLOCK.get().asItem()) ||
-                itemStack.is(ModItems.OPAL_CRYSTAL_SWORD.get()) ||
-                itemStack.is(ModItems.OPAL_CRYSTAL_SHOVEL.get()) ||
-                itemStack.is(ModItems.OPAL_CRYSTAL_PICKAXE.get()) ||
-                itemStack.is(ModItems.OPAL_CRYSTAL_AXE.get()) ||
-                itemStack.is(ModItems.OPAL_CRYSTAL_HOE.get());
-    }
+    public static class SoulColor {
+        private static final Color soulColor = new Color(37f / 255f, 244f / 255f, 255f / 255f);
 
-    public static float soulRedColor() {
-        return 37f / 255f;
-    }
+        public static float getRed() {
+            return soulColor.getRed() / 255f;
+        }
 
-    public static float soulGreenColor() {
-        return 244f / 255f;
-    }
+        public static float getGreen() {
+            return soulColor.getGreen() / 255f;
+        }
 
-    public static float soulBlueColor() {
-        return 255f / 255f;
+        public static float getBlue() {
+            return soulColor.getBlue() / 255f;
+        }
+
     }
 
 }

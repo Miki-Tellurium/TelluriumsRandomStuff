@@ -1,8 +1,14 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.tag.ModTags;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.EntityTypePredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -13,6 +19,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -23,24 +31,6 @@ public class LevelUtils {
 
     private static final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK =
             Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
-
-    public static boolean isBubbleColumnGenerator(BlockState blockState) {
-        return  isBubbleColumnLiftUp(blockState)|| isBubbleColumnDragDown(blockState);
-    }
-
-    public static boolean isBubbleColumnDragDown(BlockState blockState) {
-        return blockState.is(ModBlocks.GRATE_MAGMA_BLOCK.get()) ||
-                blockState.is(ModBlocks.SOUL_MAGMA_BLOCK.get()) ||
-                blockState.is(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get());
-    }
-
-    public static boolean isBubbleColumnLiftUp(BlockState blockState) {
-        return blockState.is(ModBlocks.GRATE_SOUL_SAND.get());
-    }
-
-    public static boolean isSoulBlockValidSpawn(EntityType entityType) {
-        return entityType.equals(EntityType.SKELETON) || entityType.equals(EntityType.WITHER_SKELETON);
-    }
 
     @Nullable
     public static BlockPos findFillableCauldronBelow(Level pLevel, BlockPos pPos) {

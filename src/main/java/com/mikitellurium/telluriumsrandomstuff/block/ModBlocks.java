@@ -5,7 +5,9 @@ import com.mikitellurium.telluriumsrandomstuff.block.custom.*;
 import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.fluid.custom.SoulLavaBlock;
 import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.tag.ModTags;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -43,7 +45,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SOUL_MAGMA_BRICKS = registerBlockWithItem("soul_magma_bricks",
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)
-                    .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> LevelUtils.isSoulBlockValidSpawn(entityType))
+                    .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> entityType.is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE))
                     .lightLevel((blockState) -> 2)
                     .emissiveRendering((blockState, blockGetter, blockPos) -> true)));
 

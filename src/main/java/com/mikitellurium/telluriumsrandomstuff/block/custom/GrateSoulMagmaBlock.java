@@ -22,7 +22,7 @@ public class GrateSoulMagmaBlock extends SoulMagmaBlock {
     }
 
     @Override
-    public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
+    public void stepOn(Level level, BlockPos pos, BlockState blockState, Entity entity) {
         //super.stepOn(pLevel, pPos, pState, pEntity);
     }
 
