@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
-import com.mikitellurium.telluriumsrandomstuff.tag.ModTags;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.FastColor;

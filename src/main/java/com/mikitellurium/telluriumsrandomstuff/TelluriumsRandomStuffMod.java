@@ -1,30 +1,17 @@
 package com.mikitellurium.telluriumsrandomstuff;
 
-import com.mikitellurium.telluriumsrandomstuff.block.ModBlocks;
-import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModCauldronInteractions;
-import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModDispenserBehaviours;
-import com.mikitellurium.telluriumsrandomstuff.block.interaction.ModFluidInteractions;
-import com.mikitellurium.telluriumsrandomstuff.blockentity.ModBlockEntities;
-import com.mikitellurium.telluriumsrandomstuff.command.TelluriumsRandomStuffCommand;
-import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
-import com.mikitellurium.telluriumsrandomstuff.enchantment.ModEnchantments;
-import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluidTypes;
-import com.mikitellurium.telluriumsrandomstuff.fluid.ModFluids;
-import com.mikitellurium.telluriumsrandomstuff.gui.ModMenuTypes;
-import com.mikitellurium.telluriumsrandomstuff.gui.screen.ExtractorScreen;
-import com.mikitellurium.telluriumsrandomstuff.gui.screen.SoulAnchorScreen;
-import com.mikitellurium.telluriumsrandomstuff.gui.screen.SoulFurnaceScreen;
-import com.mikitellurium.telluriumsrandomstuff.setup.ModCreativeTab;
-import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.jei.recipe.ModRecipes;
-import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
-import com.mikitellurium.telluriumsrandomstuff.particle.ModParticles;
-import com.mikitellurium.telluriumsrandomstuff.tag.ModTags;
-import com.mikitellurium.telluriumsrandomstuff.worldgen.feature.ModFeatures;
+import com.mikitellurium.telluriumsrandomstuff.registry.*;
+import com.mikitellurium.telluriumsrandomstuff.common.content.block.interaction.ModCauldronInteractions;
+import com.mikitellurium.telluriumsrandomstuff.common.content.block.interaction.ModDispenserBehaviours;
+import com.mikitellurium.telluriumsrandomstuff.common.content.block.interaction.ModFluidInteractions;
+import com.mikitellurium.telluriumsrandomstuff.common.command.TelluriumsRandomStuffCommand;
+import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulAnchorScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
+import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.core.Holder;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -52,24 +39,11 @@ public class TelluriumsRandomStuffMod {
     public TelluriumsRandomStuffMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(modEventBus);
-        ModBlocks.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
-        ModCreativeTab.register(modEventBus);
-        ModFluidTypes.registerSoulLavaType(modEventBus);
-        ModFluids.register(modEventBus);
-        ModParticles.register(modEventBus);
-        ModMenuTypes.register(modEventBus);
-        ModRecipes.register(modEventBus);
-        ModEnchantments.register(modEventBus);
-        ModFeatures.register(modEventBus);
-        ModMessages.register();
-        ModCommonConfig.registerCommonConfig();
-
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreativeTab);
-
         MinecraftForge.EVENT_BUS.register(this);
+
+        Registries.init(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -150,17 +124,6 @@ public class TelluriumsRandomStuffMod {
     @SubscribeEvent
     public void registerCommands(RegisterCommandsEvent event){
         TelluriumsRandomStuffCommand.register(event.getDispatcher());
-    }
-
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            MenuScreens.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
-            MenuScreens.register(ModMenuTypes.SOUL_ANCHOR_MENU.get(), SoulAnchorScreen::new);
-            MenuScreens.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
-        }
-
     }
 
 }

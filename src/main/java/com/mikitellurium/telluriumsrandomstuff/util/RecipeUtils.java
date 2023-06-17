@@ -1,12 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.enchantment.ModEnchantments;
-import com.mikitellurium.telluriumsrandomstuff.item.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.jei.recipe.SoulFurnaceRecipe;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModEnchantments;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.SoulFurnaceRecipe;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
-import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
