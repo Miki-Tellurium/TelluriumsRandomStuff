@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "telluriumsrandomstuff:opal_crystal_ore"
+  },
+  "result": "telluriumsrandomstuff:opal_crystal"
+}

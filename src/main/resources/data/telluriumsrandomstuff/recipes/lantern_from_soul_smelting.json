@@ -1,8 +1,0 @@
-{
-  "type": "telluriumsrandomstuff:soul_furnace_smelting",
-  "ingredient": {
-    "item": "minecraft:lantern"
-  },
-  "cost": 10,
-  "result": "minecraft:soul_lantern"
-}

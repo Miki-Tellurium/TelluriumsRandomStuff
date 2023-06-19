@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:obsidian"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "F": {
+      "item": "minecraft:blast_furnace"
+    },
+    "X": {
+      "item": "telluriumsrandomstuff:soul_magma_block"
+    }
+  },
+  "pattern": [
+    "XBX",
+    "XFX",
+    "###"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:soul_furnace"
+  },
+  "show_notification": true
+}

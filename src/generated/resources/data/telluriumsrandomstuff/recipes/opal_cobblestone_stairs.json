@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stone_stairs",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:opal_cobblestone"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "telluriumsrandomstuff:opal_cobblestone_stairs"
+  },
+  "show_notification": true
+}

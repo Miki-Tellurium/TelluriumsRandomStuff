@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:opal_brick_slab"
+    }
+  },
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:chiseled_opal_bricks"
+  },
+  "show_notification": true
+}

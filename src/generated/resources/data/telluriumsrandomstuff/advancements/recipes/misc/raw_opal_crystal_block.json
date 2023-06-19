@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_opal_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "telluriumsrandomstuff:raw_opal_crystal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "telluriumsrandomstuff:raw_opal_crystal_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_opal_crystal",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "telluriumsrandomstuff:raw_opal_crystal_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

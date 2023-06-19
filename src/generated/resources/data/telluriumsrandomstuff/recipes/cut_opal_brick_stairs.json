@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stone_stairs",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:cut_opal_bricks"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "telluriumsrandomstuff:cut_opal_brick_stairs"
+  },
+  "show_notification": true
+}

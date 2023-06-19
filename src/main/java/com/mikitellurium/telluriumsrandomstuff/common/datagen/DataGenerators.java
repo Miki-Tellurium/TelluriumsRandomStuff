@@ -1,6 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.common.datagen;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.ModRecipeProvider;
+import com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.ModRegistryProvider;
 import com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.ModWorldGenProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -21,6 +23,9 @@ public class DataGenerators {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new ModRecipeProvider(generator));
+
+        // Armor trim stuff
         //generator.addProvider(event.includeServer(), new ModRegistryProvider(packOutput, lookupProvider));
     }
 

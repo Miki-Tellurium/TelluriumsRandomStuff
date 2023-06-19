@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:opal_cobblestone"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "telluriumsrandomstuff:opal_cobblestone_slab"
+  },
+  "show_notification": true
+}

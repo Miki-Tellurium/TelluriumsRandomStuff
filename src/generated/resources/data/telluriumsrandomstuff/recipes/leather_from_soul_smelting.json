@@ -1,0 +1,8 @@
+{
+  "type": "telluriumsrandomstuff:soul_furnace_smelting",
+  "cost": 30,
+  "ingredient": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "result": "minecraft:leather"
+}

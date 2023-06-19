@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "telluriumsrandomstuff:opal_bricks"
+  },
+  "result": "telluriumsrandomstuff:cracked_opal_bricks"
+}

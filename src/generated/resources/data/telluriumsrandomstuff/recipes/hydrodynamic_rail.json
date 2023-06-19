@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "P": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "X": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "XLX",
+    "X#X",
+    "XPX"
+  ],
+  "result": {
+    "count": 12,
+    "item": "telluriumsrandomstuff:hydrodynamic_rail"
+  },
+  "show_notification": true
+}

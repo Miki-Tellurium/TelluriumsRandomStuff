@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "telluriumsrandomstuff:opal_crystal_ore"
-  },
-  "result": "telluriumsrandomstuff:opal_crystal",
-  "experience": 1.0,
-  "cookingtime": 200
-}

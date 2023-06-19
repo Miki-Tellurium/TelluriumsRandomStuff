@@ -1,0 +1,8 @@
+{
+  "type": "telluriumsrandomstuff:soul_furnace_smelting",
+  "cost": 20,
+  "ingredient": {
+    "item": "minecraft:glowstone_dust"
+  },
+  "result": "telluriumsrandomstuff:blue_glowstone_dust"
+}

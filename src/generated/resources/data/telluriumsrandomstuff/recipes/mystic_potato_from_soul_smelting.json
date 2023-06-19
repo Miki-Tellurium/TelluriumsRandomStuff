@@ -1,0 +1,8 @@
+{
+  "type": "telluriumsrandomstuff:soul_furnace_smelting",
+  "cost": 800,
+  "ingredient": {
+    "item": "minecraft:poisonous_potato"
+  },
+  "result": "telluriumsrandomstuff:mystic_potato"
+}

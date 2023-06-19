@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_bars"
+    },
+    "X": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "pattern": [
+    "#",
+    "X"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:grate_soul_sand"
+  },
+  "show_notification": true
+}

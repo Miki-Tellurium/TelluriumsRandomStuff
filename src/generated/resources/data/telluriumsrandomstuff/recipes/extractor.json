@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:hopper"
+    },
+    "D": {
+      "item": "minecraft:dropper"
+    },
+    "F": {
+      "item": "telluriumsrandomstuff:filter"
+    },
+    "X": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "#FD",
+    "XXX"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:extractor"
+  },
+  "show_notification": true
+}

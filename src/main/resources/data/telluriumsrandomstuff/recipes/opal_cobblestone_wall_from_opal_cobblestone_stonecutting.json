@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "telluriumsrandomstuff:opal_cobblestone"
-  },
-  "result": "telluriumsrandomstuff:opal_cobblestone_wall",
-  "count": 1
-}

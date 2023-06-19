@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "telluriumsrandomstuff:opal"
+    }
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:opal_button"
+  }
+}
