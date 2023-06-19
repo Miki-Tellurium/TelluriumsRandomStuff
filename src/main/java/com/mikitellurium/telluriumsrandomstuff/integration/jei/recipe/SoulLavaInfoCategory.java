@@ -37,6 +37,8 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     public final static ResourceLocation GUI_TEXTURE =
             new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/jei_gui.png");
 
+    private final int suggestionRenderY = -10;
+
     private final Font font = Minecraft.getInstance().font;
     private final IDrawable icon;
     private final IDrawable background;
@@ -70,7 +72,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
 
     @Override
     public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        downArrow.draw(graphics, 120, 44);
+        downArrow.draw(graphics, 120, suggestionRenderY + 39);
         drawSplitString(this.font, Component.translatable("jei.telluriumsrandomstuff.soul_lava_crafting"),
                 graphics, 0, 5, 110, 0);
     }
@@ -88,12 +90,12 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.CATALYST, 120, 26)
+        builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 21)
                 .addItemStack(recipe.getSoulSand());
-        builder.addSlot(RecipeIngredientRole.INPUT, 120, 19)
+        builder.addSlot(RecipeIngredientRole.INPUT, 120, suggestionRenderY + 14)
                 .addFluidStack(recipe.getLava(), 1000)
                 .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
-        builder.addSlot(RecipeIngredientRole.CATALYST, 120, 68)
+        builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 63)
                 .addItemStack(recipe.getCauldron());
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(Items.LAVA_BUCKET));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
