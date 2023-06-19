@@ -29,7 +29,8 @@ public class ModTranslationProvider extends LanguageProvider {
         add("item.telluriumsrandomstuff.soul_torchflower", "Soul Torchflower");
         add("item.telluriumsrandomstuff.soul_torchflower_seeds", "Soul Torchflower Seeds");
         add("item.telluriumsrandomstuff.blue_glowstone_dust", "Blue Glowstone Dust");
-        add("item.description.telluriumsrandomstuff.mystic_potato", "Tastes like victory!");
+
+        add("item.description.telluriumsrandomstuff.mystic_potato", "Experience the tuber of Victory!");
 
         add("block.telluriumsrandomstuff.grate_magma_block", "Magma Block with Grate");
         add("block.telluriumsrandomstuff.grate_soul_sand", "Soul Sand with Grate");
