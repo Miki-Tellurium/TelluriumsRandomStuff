@@ -1,10 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.datagen;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.ModLootTableProvider;
-import com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.ModRecipeProvider;
-import com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.ModRegistryProvider;
-import com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.ModWorldGenProvider;
+import com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -27,6 +24,7 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
         generator.addProvider(true, new ModRecipeProvider(generator));
         generator.addProvider(true, ModLootTableProvider.create(packOutput));
+        generator.addProvider(true, new ModTranslationProvider(packOutput, "en_us"));
 
         // Armor trim stuff
         //generator.addProvider(event.includeServer(), new ModRegistryProvider(packOutput, lookupProvider));
