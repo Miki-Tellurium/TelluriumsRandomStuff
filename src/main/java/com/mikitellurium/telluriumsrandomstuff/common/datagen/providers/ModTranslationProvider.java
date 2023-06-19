@@ -86,9 +86,10 @@ public class ModTranslationProvider extends LanguageProvider {
 
         add("trim_material.telluriumsrandomstuff.opal_crystal", "Opal Crystal Material");
 
-        add("jei.telluriumsrandomstuff.soul_lava_crafting", "To make soul lava, put some lava over soul sand and" +
-                " a cauldron underneath. After some time the lava will drip trough and the cauldron will be filled" +
-                " with soul lava.");
+        add("jei.telluriumsrandomstuff.soul_lava_crafting", "Where the fire meets the spectral plains,\n" +
+                "Find the nexus where souls remain.\n" +
+                "Above, let lava and winds entwine,\n" +
+                "Below, a vessel waits to define.");
         add("jei.telluriumsrandomstuff.soul_furnace_recipe_extra_cost", "Extra cost");
     }
 
