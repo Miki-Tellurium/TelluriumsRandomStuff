@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -32,8 +33,12 @@ public class ModItems {
             () -> new Item(new Item.Properties().fireResistant().food(ModFoods.MYSTIC_POTATO)) {
                 @Override
                 public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
-                    components.add(Component.translatable("item.description.telluriumsrandomstuff.mystic_potato")
-                            .withStyle(ChatFormatting.DARK_AQUA));
+                    if (Screen.hasShiftDown()) {
+                        components.add(Component.translatable("item.description.telluriumsrandomstuff.mystic_potato")
+                                .withStyle(ChatFormatting.DARK_AQUA));
+                    } else {
+                        components.add(Component.literal("<Shift>"));
+                    }
                 }
 
                 @Override
