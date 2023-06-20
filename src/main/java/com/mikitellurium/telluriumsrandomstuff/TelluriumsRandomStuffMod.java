@@ -36,6 +36,8 @@ public class TelluriumsRandomStuffMod {
     public static final String MOD_ID = "telluriumsrandomstuff";
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    //todo: strider soul lava goal
+
     public TelluriumsRandomStuffMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 

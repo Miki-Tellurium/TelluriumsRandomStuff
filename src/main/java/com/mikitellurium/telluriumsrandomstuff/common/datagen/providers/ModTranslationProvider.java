@@ -6,8 +6,8 @@ import net.minecraftforge.common.data.LanguageProvider;
 
 public class ModTranslationProvider extends LanguageProvider {
 
-    public ModTranslationProvider(PackOutput output, String locale) {
-        super(output, TelluriumsRandomStuffMod.MOD_ID, locale);
+    public ModTranslationProvider(PackOutput output) {
+        super(output, TelluriumsRandomStuffMod.MOD_ID, "en_us");
     }
 
     @Override
