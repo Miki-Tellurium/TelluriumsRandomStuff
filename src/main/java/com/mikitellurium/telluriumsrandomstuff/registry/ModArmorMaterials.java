@@ -19,7 +19,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
         map.put(ArmorItem.Type.CHESTPLATE, 1);
         map.put(ArmorItem.Type.HELMET, 1);
     }), 5, SoundEvents.ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
-            () -> Ingredient.of(Items.GLASS));
+            () -> Ingredient.of(Items.AMETHYST_SHARD));
 
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class),
             (map) -> {
