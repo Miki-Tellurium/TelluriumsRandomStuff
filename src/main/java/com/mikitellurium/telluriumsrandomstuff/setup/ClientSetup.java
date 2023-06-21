@@ -20,7 +20,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -94,7 +93,7 @@ public class ClientSetup {
     }
 
     @SubscribeEvent
-    public static void registerOverlay(RegisterGuiOverlaysEvent event) {
+    public static void registerOverlays(RegisterGuiOverlaysEvent event) {
         event.registerBelowAll(TelluriumsRandomStuffMod.MOD_ID, new LavaGooglesOverlay());
     }
 
