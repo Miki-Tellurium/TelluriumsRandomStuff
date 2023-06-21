@@ -50,6 +50,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer, modResourceLocation("soul_torch_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get()), ModItems.SOUL_TORCHFLOWER_SEEDS.get(), 20)
                 .save(consumer, modResourceLocation("soul_torchflower_seeds_from_soul_smelting"));
+        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.AMETHYST_SHARD), ModItems.MOLTEN_AMETHYST.get(), 70)
+                .save(consumer, modResourceLocation("molten_amethyst_from_soul_smelting"));
     }
 
     private void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {
@@ -319,6 +321,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModBlocks.SOUL_MAGMA_BLOCK.get())
                 .unlockedBy("has_soul_magma_block", has(ModBlocks.SOUL_MAGMA_BLOCK.get()))
                 .save(consumer, modResourceLocation("soul_magma_bricks"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LAVA_GOOGLES.get(), 1)
+                .pattern("sLs")
+                .pattern("#X#")
+                .define('X', Blocks.ORANGE_STAINED_GLASS)
+                .define('#', ModItems.AMETHYST_LENS.get())
+                .define('s', Items.STRING)
+                .define('L', Items.LEATHER)
+                .unlockedBy("has_amethyst_lens", has(ModItems.AMETHYST_LENS.get()))
+                .save(consumer, modResourceLocation("lava_googles"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

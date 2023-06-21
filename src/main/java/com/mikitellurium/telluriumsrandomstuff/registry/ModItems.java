@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
+import com.mikitellurium.telluriumsrandomstuff.common.content.item.MoltenAmethystItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -118,8 +119,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> LAVA_GOOGLES = ITEMS.register("lava_googles", LavaGooglesItem::new);
 
-    public static final RegistryObject<Item> MOLTEN_AMETHYST = ITEMS.register("molten_amethyst",
-            () -> new Item(new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> MOLTEN_AMETHYST = ITEMS.register("molten_amethyst", MoltenAmethystItem::new);
 
     public static final RegistryObject<Item> AMETHYST_LENS = ITEMS.register("amethyst_lens",
             () -> new Item(new Item.Properties().fireResistant()));
