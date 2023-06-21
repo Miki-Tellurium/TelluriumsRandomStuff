@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:amethyst_lens"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "X": {
+      "item": "minecraft:orange_stained_glass"
+    },
+    "s": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "sLs",
+    "#X#"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:lava_googles"
+  },
+  "show_notification": true
+}
