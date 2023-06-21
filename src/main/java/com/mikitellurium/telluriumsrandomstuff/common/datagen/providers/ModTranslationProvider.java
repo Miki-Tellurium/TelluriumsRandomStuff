@@ -30,6 +30,8 @@ public class ModTranslationProvider extends LanguageProvider {
         add("item.telluriumsrandomstuff.soul_torchflower_seeds", "Soul Torchflower Seeds");
         add("item.telluriumsrandomstuff.blue_glowstone_dust", "Blue Glowstone Dust");
         add("item.telluriumsrandomstuff.lava_googles", "Lava Googles");
+        add("item.telluriumsrandomstuff.molten_amethyst", "Molten Amethyst");
+        add("item.telluriumsrandomstuff.amethyst_lens", "Amethyst Lens");
 
         add("item.description.telluriumsrandomstuff.mystic_potato", "Experience the tuber of Victory!");
 

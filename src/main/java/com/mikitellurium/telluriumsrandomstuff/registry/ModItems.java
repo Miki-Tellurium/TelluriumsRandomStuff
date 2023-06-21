@@ -118,6 +118,12 @@ public class ModItems {
 
     public static final RegistryObject<Item> LAVA_GOOGLES = ITEMS.register("lava_googles", LavaGooglesItem::new);
 
+    public static final RegistryObject<Item> MOLTEN_AMETHYST = ITEMS.register("molten_amethyst",
+            () -> new Item(new Item.Properties().fireResistant()));
+
+    public static final RegistryObject<Item> AMETHYST_LENS = ITEMS.register("amethyst_lens",
+            () -> new Item(new Item.Properties().fireResistant()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
