@@ -4,6 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulAnchorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.render.LavaGooglesOverlay;
 import com.mikitellurium.telluriumsrandomstuff.common.content.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -17,7 +18,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -90,6 +93,10 @@ public class ClientSetup {
         event.registerSpriteSet(ModParticles.SOUL_LAVA_LAND.get(), SoulLavaDripParticle.SoulLavaLandProvider::new);
     }
 
+    @SubscribeEvent
+    public static void registerOverlay(RegisterGuiOverlaysEvent event) {
+        event.registerBelowAll(TelluriumsRandomStuffMod.MOD_ID, new LavaGooglesOverlay());
+    }
 
     // todo: translucent armor
 //    @SubscribeEvent
