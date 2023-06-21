@@ -1,10 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.ClickableIngredient;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.SoulFurnaceRecipe;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.SoulFurnaceSmeltingCategory;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.SoulLavaInfoCategory;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.*;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
@@ -49,6 +46,8 @@ public class JeiIntegration implements IModPlugin {
             new RecipeType<>(SoulFurnaceSmeltingCategory.UID, SoulFurnaceRecipe.class);
     public static final RecipeType<SoulLavaInfoCategory.Recipe> SOUL_LAVA_INFO_TYPE =
             new RecipeType<>(SoulLavaInfoCategory.UID, SoulLavaInfoCategory.Recipe.class);
+    public static final RecipeType<AmethystLensInfoCategory.Recipe> AMETHYST_LENS_INFO_TYPE =
+            new RecipeType<>(AmethystLensInfoCategory.UID, AmethystLensInfoCategory.Recipe.class);
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
@@ -58,9 +57,10 @@ public class JeiIntegration implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
-        IPlatformFluidHelper<?> fluidHelper = registration.getJeiHelpers().getPlatformFluidHelper();
+        //IPlatformFluidHelper<?> fluidHelper = registration.getJeiHelpers().getPlatformFluidHelper();
         registration.addRecipeCategories(new SoulFurnaceSmeltingCategory(guiHelper));
         registration.addRecipeCategories(new SoulLavaInfoCategory(guiHelper));
+        registration.addRecipeCategories(new AmethystLensInfoCategory(guiHelper));
     }
 
     @Override
@@ -77,10 +77,14 @@ public class JeiIntegration implements IModPlugin {
         List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = new ArrayList<>();
         soulLavaInfoRecipes.add(new SoulLavaInfoCategory.Recipe());
 
+        List<AmethystLensInfoCategory.Recipe> amethystLensInfoRecipes = new ArrayList<>();
+        amethystLensInfoRecipes.add(new AmethystLensInfoCategory.Recipe());
+
         registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, convertedRecipes);
         registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, soulFurnaceRecipes);
 
         registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
+        registration.addRecipes(AMETHYST_LENS_INFO_TYPE, amethystLensInfoRecipes);
 
         registration.addRecipes(RecipeTypes.ANVIL, RecipeUtils.getAnvilRecipes(recipeFactory));
     }

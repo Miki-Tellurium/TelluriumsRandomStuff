@@ -90,10 +90,11 @@ public class ModTranslationProvider extends LanguageProvider {
 
         add("trim_material.telluriumsrandomstuff.opal_crystal", "Opal Crystal Material");
 
-        add("jei.telluriumsrandomstuff.soul_lava_crafting", "Where the fire meets the spectral plains,\n" +
-                "Find the nexus where souls remain.\n" +
-                "Above, let lava and winds entwine,\n" +
-                "Below, a vessel waits to define.");
+        add("jei.telluriumsrandomstuff.soul_lava_crafting", """
+                Where the fire meets the spectral plains,
+                Find the nexus where souls remain.
+                Above, let lava and winds entwine,
+                Below, a vessel waits to define.""");
         add("jei.telluriumsrandomstuff.soul_furnace_recipe_extra_cost", "Extra cost");
     }
 
