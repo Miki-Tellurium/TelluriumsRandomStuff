@@ -4,8 +4,8 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorLevelData;
 import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.CustomBubbleColumnBlock;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluidTypes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -195,7 +195,7 @@ public class GameplayEvents {
     // Soul lava fog
     @SubscribeEvent
     public static void setFogPlane(ViewportEvent.RenderFog event) {
-        if (isInSoulLava(event.getCamera())) {
+        if (isCameraInSoulLava(event.getCamera())) {
             event.setCanceled(true);
         }
         if (event.isCanceled()) {
@@ -216,7 +216,7 @@ public class GameplayEvents {
 
     @SubscribeEvent
     public static void setFogColor(ViewportEvent.ComputeFogColor event) {
-        if (isInSoulLava(event.getCamera())) {
+        if (isCameraInSoulLava(event.getCamera())) {
             Vector3f soulLavaFogColor = new Vector3f(0f / 255f, 210f / 255f, 225f / 255f);
             event.setRed(soulLavaFogColor.x);
             event.setGreen(soulLavaFogColor.y);
@@ -224,7 +224,7 @@ public class GameplayEvents {
         }
     }
 
-    private static boolean isInSoulLava(Camera camera) {
+    private static boolean isCameraInSoulLava(Camera camera) {
         Camera.NearPlane nearPlane = camera.getNearPlane();
         BlockGetter blockGetter = Minecraft.getInstance().level;
         for(Vec3 vec3 : Arrays.asList(new Vec3(camera.getLookVector()).scale(0.05F), nearPlane.getTopLeft(),

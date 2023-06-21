@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -114,6 +115,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> BLUE_GLOWSTONE_DUST = ITEMS.register("blue_glowstone_dust",
             () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> LAVA_GOOGLES = ITEMS.register("lava_googles", LavaGooglesItem::new);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

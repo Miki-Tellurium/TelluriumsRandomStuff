@@ -4,11 +4,11 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulAnchorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
+import com.mikitellurium.telluriumsrandomstuff.common.content.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModParticles;
-import com.mikitellurium.telluriumsrandomstuff.common.content.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -89,5 +89,26 @@ public class ClientSetup {
         event.registerSpriteSet(ModParticles.SOUL_LAVA_HANG.get(), SoulLavaDripParticle.SoulLavaHangProvider::new);
         event.registerSpriteSet(ModParticles.SOUL_LAVA_LAND.get(), SoulLavaDripParticle.SoulLavaLandProvider::new);
     }
+
+
+    // todo: translucent armor
+//    @SubscribeEvent
+//    public static void addLayers(EntityRenderersEvent.AddLayers event) {
+//        for (EntityType<?> entityType : ForgeRegistries.ENTITY_TYPES) {
+//            try {
+//            LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer =
+//                    event.getRenderer((EntityType<LivingEntity>) entityType);
+//                if (renderer != null) {
+//                    renderer.addLayer(new LavaGooglesLayer<>(renderer, renderer.getModel()));
+//                    TelluriumsRandomStuffMod.LOGGER.info("Render layer correctly added for " + entityType);
+//                } else {
+//                    TelluriumsRandomStuffMod.LOGGER.error("Could not apply render layer to " + entityType);
+//                }
+//            } catch (ClassCastException e) {
+//                TelluriumsRandomStuffMod.LOGGER.error("Cannot apply render layer to non-humanoid model: " + entityType);
+//            }
+//        }
+//    }
+
 
 }

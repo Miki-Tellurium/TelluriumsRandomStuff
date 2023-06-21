@@ -34,9 +34,7 @@ import org.slf4j.Logger;
 public class TelluriumsRandomStuffMod {
 
     public static final String MOD_ID = "telluriumsrandomstuff";
-    private static final Logger LOGGER = LogUtils.getLogger();
-
-    //todo: strider soul lava goal
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public TelluriumsRandomStuffMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -120,6 +118,7 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.SOUL_TORCHFLOWER_SEEDS);
             event.accept(ModBlocks.BLUE_GLOWSTONE);
             event.accept(ModItems.BLUE_GLOWSTONE_DUST);
+            event.accept(ModItems.LAVA_GOOGLES);
         }
     }
 
