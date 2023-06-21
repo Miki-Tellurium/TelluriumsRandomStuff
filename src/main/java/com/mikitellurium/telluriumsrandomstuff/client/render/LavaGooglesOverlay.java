@@ -20,7 +20,7 @@ public class LavaGooglesOverlay implements IGuiOverlay {
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
-            if (player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.LAVA_GOOGLES.get())) {
+            if (player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.LAVA_GOOGLES.get()) && !player.isSpectator()) {
                 RenderSystem.enableBlend();
                 guiGraphics.blit(OVERLAY_TEXTURE, 0, 0, -90, 0.0F, 0.0F,
                         screenWidth, screenHeight, screenWidth, screenHeight);

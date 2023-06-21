@@ -7,6 +7,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.CustomBubbleColumnBlock;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluidTypes;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -195,9 +197,26 @@ public class GameplayEvents {
     // Soul lava fog
     @SubscribeEvent
     public static void setFogPlane(ViewportEvent.RenderFog event) {
-        if (isCameraInSoulLava(event.getCamera())) {
+        if (Minecraft.getInstance().player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.LAVA_GOOGLES.get())) {
             event.setCanceled(true);
+            setLavaGooglesFogPlane(event, event.getCamera(), event.getCamera().getEntity().isSpectator());
+        } else if (isCameraInSoulLava(event.getCamera())) {
+            event.setCanceled(true);
+            setSoulLavaFogPlane(event);
         }
+    }
+
+    @SubscribeEvent
+    public static void setFogColor(ViewportEvent.ComputeFogColor event) {
+        if (isCameraInSoulLava(event.getCamera())) {
+            Vector3f soulLavaFogColor = new Vector3f(0f / 255f, 210f / 255f, 225f / 255f);
+            event.setRed(soulLavaFogColor.x);
+            event.setGreen(soulLavaFogColor.y);
+            event.setBlue(soulLavaFogColor.z);
+        }
+    }
+
+    private static void setSoulLavaFogPlane(ViewportEvent.RenderFog event) {
         if (event.isCanceled()) {
             Entity entity = event.getCamera().getEntity();
 
@@ -214,13 +233,12 @@ public class GameplayEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void setFogColor(ViewportEvent.ComputeFogColor event) {
-        if (isCameraInSoulLava(event.getCamera())) {
-            Vector3f soulLavaFogColor = new Vector3f(0f / 255f, 210f / 255f, 225f / 255f);
-            event.setRed(soulLavaFogColor.x);
-            event.setGreen(soulLavaFogColor.y);
-            event.setBlue(soulLavaFogColor.z);
+    private static void setLavaGooglesFogPlane(ViewportEvent.RenderFog event, Camera camera, boolean isSpectator) {
+        if (event.isCanceled()) {
+            if ((camera.getFluidInCamera() == FogType.LAVA || isCameraInSoulLava(camera)) && !isSpectator) {
+                event.setNearPlaneDistance(-8.0F);
+                event.setFarPlaneDistance(event.getRenderer().getRenderDistance() * 0.2F);
+            }
         }
     }
 
