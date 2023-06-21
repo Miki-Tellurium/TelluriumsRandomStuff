@@ -237,7 +237,7 @@ public class GameplayEvents {
         if (event.isCanceled()) {
             if ((camera.getFluidInCamera() == FogType.LAVA || isCameraInSoulLava(camera)) && !isSpectator) {
                 event.setNearPlaneDistance(-8.0F);
-                event.setFarPlaneDistance(event.getRenderer().getRenderDistance() * 0.2F);
+                event.setFarPlaneDistance(event.getRenderer().getRenderDistance() * 0.25F);
             }
         }
     }
