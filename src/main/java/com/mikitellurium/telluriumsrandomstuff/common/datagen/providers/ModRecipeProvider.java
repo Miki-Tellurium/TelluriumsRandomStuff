@@ -50,7 +50,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer, modResourceLocation("soul_torch_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get()), ModItems.SOUL_TORCHFLOWER_SEEDS.get(), 20)
                 .save(consumer, modResourceLocation("soul_torchflower_seeds_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.AMETHYST_SHARD), ModItems.MOLTEN_AMETHYST.get(), 70)
+        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.AMETHYST_SHARD), ModItems.MOLTEN_AMETHYST.get(), 80)
                 .save(consumer, modResourceLocation("molten_amethyst_from_soul_smelting"));
     }
 
