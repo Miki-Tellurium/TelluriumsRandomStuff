@@ -94,7 +94,7 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiOverlaysEvent event) {
-        event.registerBelowAll(TelluriumsRandomStuffMod.MOD_ID, new LavaGooglesOverlay());
+        event.registerBelowAll(TelluriumsRandomStuffMod.MOD_ID + "_lava_googles_overlay", new LavaGooglesOverlay());
     }
 
     // todo: translucent armor
