@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.content.enchantment;
 
+import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -49,7 +50,7 @@ public class SoulHarvestingEnchantment extends Enchantment {
                             this.dropFromLootTable.invoke(livingTarget, damageSource, true);
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        TelluriumsRandomStuffMod.LOGGER.error("Could not call dropFromLootTable for entity: " + target.getName());
                     }
 
                     Collection<ItemEntity> drops = livingTarget.captureDrops(null);
