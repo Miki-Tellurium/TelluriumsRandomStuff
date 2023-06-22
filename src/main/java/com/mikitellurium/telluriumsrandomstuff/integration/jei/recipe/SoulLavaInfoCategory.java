@@ -47,7 +47,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     public SoulLavaInfoCategory(IGuiHelper guiHelper) {
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
         this.background = guiHelper.createBlankDrawable(140, 100);
-        this.downArrow = guiHelper.createDrawable(GUI_TEXTURE, 240, 0, 16, 24);
+        this.downArrow = guiHelper.createDrawable(GUI_TEXTURE, 239, 0, 16, 24);
     }
 
     @Override
