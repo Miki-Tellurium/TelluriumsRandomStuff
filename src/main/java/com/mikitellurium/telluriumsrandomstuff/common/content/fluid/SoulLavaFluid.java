@@ -40,7 +40,7 @@ import java.lang.reflect.Field;
 
 public class SoulLavaFluid extends ForgeFlowingFluid {
 
-    private static final Field jumping = ObfuscationReflectionHelper.findField(LivingEntity.class, "jumping");
+    private static final Field jumping = ObfuscationReflectionHelper.findField(LivingEntity.class, "f_20899_");
 
     public SoulLavaFluid(Properties properties) {
         super(properties);
