@@ -82,16 +82,12 @@ public class GameplayCommonEvents {
 
     @SubscribeEvent
     public static void livingTickEvent(LivingEvent.LivingTickEvent event) {
-        // Increase entity air supply when inside bubble column
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide) {
             return;
         }
-        if (entity instanceof Player player) {
-            System.out.println(player.getOnPos());
-        }
-
-        BlockPos pos = BlockPos.containing((int) entity.getX(), (int) entity.getEyeY(), (int) entity.getZ());
+        // Increase entity air supply when inside bubble column
+        BlockPos pos = BlockPos.containing(entity.blockPosition().getX(), (int) entity.getEyeY(), entity.blockPosition().getZ());
         if (entity.level().getBlockState(pos).is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
             entity.setAirSupply(Math.min(entity.getAirSupply() + 5, entity.getMaxAirSupply()));
         }
