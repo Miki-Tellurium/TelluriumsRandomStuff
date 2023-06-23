@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[47,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion="[46,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 license="MIT License"
 [[mods]] #mandatory
 modId="telluriumsrandomstuff" #mandatory
@@ -15,7 +15,7 @@ description='''A collection of random additions'''
 [[dependencies.telluriumsrandomstuff]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[47,)" #mandatory
+    versionRange="[46,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.telluriumsrandomstuff]]
