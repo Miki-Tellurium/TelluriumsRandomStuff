@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
@@ -46,16 +47,16 @@ import org.joml.Vector3f;
 import java.util.Arrays;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class GameplayEvents {
+public class GameplayCommonEvents {
     private static boolean wasInBubbleColumn;
     private static boolean firstTick = true;
 
     // Custom bubble columns
     @SubscribeEvent
     public static void onBubbleColumnEnterSoundEvent(TickEvent.PlayerTickEvent event) {
-        // Play a sound when entering bubble columns
         if (event.phase != TickEvent.Phase.START || event.player == null) return;
         if (event.player.level().isClientSide) {
+            // Play a sound when entering bubble columns
             BlockState blockstate = event.player.level().getBlockStatesIfLoaded(event.player.getBoundingBox().inflate(0.0D, -0.4F, 0.0D)
                             .deflate(1.0E-6D)).filter((block) -> block.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get()))
                     .findFirst().orElse(null);
@@ -83,11 +84,18 @@ public class GameplayEvents {
     public static void livingTickEvent(LivingEvent.LivingTickEvent event) {
         // Increase entity air supply when inside bubble column
         LivingEntity entity = event.getEntity();
-        if (entity.level().getBlockState(new BlockPos((int)entity.getX(), (int)entity.getEyeY(), (int)entity.getZ())).is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
-            if (entity.getAirSupply() < entity.getMaxAirSupply()) {
-                entity.setAirSupply(Math.min(entity.getAirSupply() + 5, entity.getMaxAirSupply()));
-            }
+        if (entity.level().isClientSide) {
+            return;
         }
+        if (entity instanceof Player player) {
+            System.out.println(player.getOnPos());
+        }
+
+        BlockPos pos = BlockPos.containing((int) entity.getX(), (int) entity.getEyeY(), (int) entity.getZ());
+        if (entity.level().getBlockState(pos).is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
+            entity.setAirSupply(Math.min(entity.getAirSupply() + 5, entity.getMaxAirSupply()));
+        }
+
     }
 
     // Soul anchor
@@ -108,17 +116,19 @@ public class GameplayEvents {
 
     @SubscribeEvent
     public static void onPlayerDropInventory(LivingDropsEvent event) {
-        if (!event.getEntity().level().isClientSide) {
-            if (event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
-                return;
-            }
-            if (event.getEntity() instanceof Player player) {
-                player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
-                    if (soulAnchor.hasChargedAnchor()) {
-                        event.setCanceled(true);
-                    }
-                });
-            }
+        if (event.getEntity().level().isClientSide) {
+            return;
+        }
+        if (event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+            return;
+        }
+        if (event.getEntity() instanceof Player player) {
+            player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+                if (soulAnchor.hasChargedAnchor()) {
+                    event.setCanceled(true);
+                }
+            });
+
         }
     }
 
@@ -134,17 +144,19 @@ public class GameplayEvents {
 
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
-        if (!event.getEntity().level().isClientSide) {
-            if (event.isWasDeath()) {
-                event.getOriginal().reviveCaps();
-                event.getOriginal().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((old) -> {
-                    event.getEntity().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((newClone) -> {
-                        newClone.copyFrom(old);
-                    });
-                });
-                event.getOriginal().invalidateCaps();
-            }
+        if (event.getEntity().level().isClientSide) {
+            return;
         }
+        if (event.isWasDeath()) {
+            event.getOriginal().reviveCaps();
+            event.getOriginal().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((old) -> {
+                event.getEntity().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((newClone) -> {
+                    newClone.copyFrom(old);
+                });
+            });
+            event.getOriginal().invalidateCaps();
+        }
+
     }
 
     @SubscribeEvent
@@ -192,72 +204,6 @@ public class GameplayEvents {
                 level.addFreshEntityWithPassengers(steed);
             }
         }
-    }
-
-    // Soul lava fog
-    @SubscribeEvent
-    public static void setFogPlane(ViewportEvent.RenderFog event) {
-        if (Minecraft.getInstance().player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.LAVA_GOOGLES.get())) {
-            event.setCanceled(true);
-            setLavaGooglesFogPlane(event, event.getCamera(), event.getCamera().getEntity().isSpectator());
-        } else if (isCameraInSoulLava(event.getCamera())) {
-            event.setCanceled(true);
-            setSoulLavaFogPlane(event);
-        }
-    }
-
-    @SubscribeEvent
-    public static void setFogColor(ViewportEvent.ComputeFogColor event) {
-        if (isCameraInSoulLava(event.getCamera())) {
-            Vector3f soulLavaFogColor = new Vector3f(0f / 255f, 210f / 255f, 225f / 255f);
-            event.setRed(soulLavaFogColor.x);
-            event.setGreen(soulLavaFogColor.y);
-            event.setBlue(soulLavaFogColor.z);
-        }
-    }
-
-    private static void setSoulLavaFogPlane(ViewportEvent.RenderFog event) {
-        if (event.isCanceled()) {
-            Entity entity = event.getCamera().getEntity();
-
-            if (entity.isSpectator()) {
-                event.setNearPlaneDistance(-8.0F);
-                event.setFarPlaneDistance(event.getRenderer().getRenderDistance() * 0.5F);
-            } else if (entity instanceof LivingEntity && ((LivingEntity) entity).hasEffect(MobEffects.FIRE_RESISTANCE)) {
-                event.setNearPlaneDistance(0.0F);
-                event.setFarPlaneDistance(3.0F);
-            } else {
-                event.setNearPlaneDistance(0.25f);
-                event.setFarPlaneDistance(1.0f);
-            }
-        }
-    }
-
-    private static void setLavaGooglesFogPlane(ViewportEvent.RenderFog event, Camera camera, boolean isSpectator) {
-        if (event.isCanceled()) {
-            if ((camera.getFluidInCamera() == FogType.LAVA || isCameraInSoulLava(camera)) && !isSpectator) {
-                event.setNearPlaneDistance(-8.0F);
-                event.setFarPlaneDistance(event.getRenderer().getRenderDistance() * 0.25F);
-            }
-        }
-    }
-
-    private static boolean isCameraInSoulLava(Camera camera) {
-        Camera.NearPlane nearPlane = camera.getNearPlane();
-        BlockGetter blockGetter = Minecraft.getInstance().level;
-        for(Vec3 vec3 : Arrays.asList(new Vec3(camera.getLookVector()).scale(0.05F), nearPlane.getTopLeft(),
-                nearPlane.getTopRight(), nearPlane.getBottomLeft(), nearPlane.getBottomRight())) {
-            Vec3 vec31 = camera.getPosition().add(vec3);
-            BlockPos blockpos = BlockPos.containing(vec31);
-            FluidState fluidstate1 = blockGetter.getFluidState(blockpos);
-            if (fluidstate1.getFluidType() == ModFluidTypes.SOUL_LAVA_TYPE) {
-                if (vec31.y <= (double)(fluidstate1.getHeight(blockGetter, blockpos) + (float)blockpos.getY())) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
 }

@@ -22,7 +22,7 @@ public class SoulMagmaBlock extends MagmaBlock {
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState blockState, Entity entity) {
-        if (entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE)) {
+        if (!entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE)) {
             super.stepOn(level, pos, blockState, entity);
         }
     }
