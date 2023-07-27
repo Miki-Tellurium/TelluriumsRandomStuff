@@ -1,9 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
+import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.LightLayer;
@@ -16,6 +18,16 @@ public class ColorsUtil {
     private static final int opalBaseColor = FastColor.ABGR32.color(255, 160, 210, 210);
     private static final int opalCrystalBaseColor = FastColor.ABGR32.color(255, 140, 255, 255);
     private static final int blank = 0xFFFFFF;
+    private static final int alpha0 = FastColor.ABGR32.color(0, 255, 255, 255);
+
+    public static int getGooglesColor(ItemStack stack, int tintIndex) {
+        if (tintIndex == 1) {
+            DyeColor color = LavaGooglesItem.getColor(stack);
+            return color == null ? alpha0: color.getTextColor();
+        } else {
+            return blank;
+        }
+    }
 
     public static int getMaterialColor(ItemStack stack, int tintIndex, int lightLevel) {
         if (stack.is(ModTags.Items.OPAL_CRYSTALS)) {
