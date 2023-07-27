@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.worldgen;
+package com.mikitellurium.telluriumsrandomstuff.common.content.worldgen;
 
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;

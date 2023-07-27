@@ -5,7 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.SoulFurnaceRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.FluidSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.util.WrappedHandler;

@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.common.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.worldgen.ModConfiguredFeatures;
-import com.mikitellurium.telluriumsrandomstuff.common.worldgen.ModPlacedFeatures;
+import com.mikitellurium.telluriumsrandomstuff.common.content.worldgen.ModConfiguredFeatures;
+import com.mikitellurium.telluriumsrandomstuff.common.content.worldgen.ModPlacedFeatures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;

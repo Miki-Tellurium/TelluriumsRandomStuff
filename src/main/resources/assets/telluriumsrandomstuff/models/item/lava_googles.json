@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "telluriumsrandomstuff:item/lava_googles"
+    "layer0": "telluriumsrandomstuff:item/lava_googles_frame",
+    "layer1": "telluriumsrandomstuff:item/lava_googles_color_layer"
   }
 }

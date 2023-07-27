@@ -1,8 +1,7 @@
-package com.mikitellurium.telluriumsrandomstuff.util;
+package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
 import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.SoulFurnaceRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipes;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.FinishedRecipe;

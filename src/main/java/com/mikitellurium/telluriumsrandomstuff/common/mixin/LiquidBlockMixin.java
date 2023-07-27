@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LiquidBlockMixin {
 
     private static final float soulLavaDripChance = 0.032f;
-
+    //todo: add game event
     @Inject(method = "randomTick", at = @At(value = "TAIL"))
     private void randomConvertLavaToSoulLava(BlockState state, ServerLevel level, BlockPos pos,
                                              RandomSource random, CallbackInfo ci) {

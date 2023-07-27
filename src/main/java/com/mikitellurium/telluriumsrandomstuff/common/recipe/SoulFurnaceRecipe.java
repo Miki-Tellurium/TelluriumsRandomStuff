@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe;
+package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;

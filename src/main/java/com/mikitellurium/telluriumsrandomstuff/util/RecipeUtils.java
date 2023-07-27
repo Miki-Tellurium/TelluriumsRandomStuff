@@ -3,7 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModEnchantments;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.SoulFurnaceRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import net.minecraft.core.NonNullList;

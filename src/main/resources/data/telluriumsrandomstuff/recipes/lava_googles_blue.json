@@ -1,6 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "type": "telluriumsrandomstuff:dyeable_shaped",
   "key": {
     "#": {
       "item": "telluriumsrandomstuff:amethyst_lens"
@@ -9,7 +8,7 @@
       "item": "minecraft:leather"
     },
     "X": {
-      "item": "minecraft:glass"
+      "item": "minecraft:blue_stained_glass"
     },
     "s": {
       "item": "minecraft:string"
@@ -20,7 +19,10 @@
     "#X#"
   ],
   "result": {
-    "item": "telluriumsrandomstuff:lava_googles"
-  },
-  "show_notification": true
+    "type": "minecraft:item_nbt",
+    "item": "telluriumsrandomstuff:lava_googles",
+    "nbt": {
+      "color": 11
+      }
+    }
 }

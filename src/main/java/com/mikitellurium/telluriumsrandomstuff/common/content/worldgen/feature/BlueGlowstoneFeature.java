@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.worldgen.feature;
+package com.mikitellurium.telluriumsrandomstuff.common.content.worldgen.feature;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mojang.serialization.Codec;

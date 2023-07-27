@@ -3,7 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.datagen.providers;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.util.SoulSmeltingRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulSmeltingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -324,7 +324,7 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LAVA_GOOGLES.get(), 1)
                 .pattern("sLs")
                 .pattern("#X#")
-                .define('X', Blocks.ORANGE_STAINED_GLASS)
+                .define('X', Blocks.GLASS)
                 .define('#', ModItems.AMETHYST_LENS.get())
                 .define('s', Items.STRING)
                 .define('L', Items.LEATHER)
