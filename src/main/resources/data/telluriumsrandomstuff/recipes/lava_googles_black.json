@@ -22,7 +22,7 @@
     "type": "minecraft:item_nbt",
     "item": "telluriumsrandomstuff:lava_googles",
     "nbt": {
-      "color": 8
+      "color": 15
       }
     }
 }
