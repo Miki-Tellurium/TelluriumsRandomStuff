@@ -1,5 +1,5 @@
 {
-  "type": "telluriumsrandomstuff:dyeable_shaped",
+  "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
       "item": "telluriumsrandomstuff:amethyst_lens"

@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.LavaGooglesRecipeSerializer;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;

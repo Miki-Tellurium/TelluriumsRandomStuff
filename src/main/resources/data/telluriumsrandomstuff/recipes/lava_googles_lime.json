@@ -1,5 +1,5 @@
 {
-  "type": "telluriumsrandomstuff:dyeable_shaped",
+  "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
       "item": "telluriumsrandomstuff:amethyst_lens"
@@ -8,7 +8,7 @@
       "item": "minecraft:leather"
     },
     "X": {
-      "item": "minecraft:blue_stained_glass"
+      "item": "minecraft:lime_stained_glass"
     },
     "s": {
       "item": "minecraft:string"
