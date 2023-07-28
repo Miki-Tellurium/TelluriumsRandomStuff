@@ -89,9 +89,6 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
-    maven {
-        url "https://cursemaven.com"
-    }
 
     dependencies {
         minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
@@ -100,8 +97,6 @@ repositories {
         compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
         compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
         runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")  // at runtime, use the full JEI jar
-
-        compileOnly fg.deobf("curse.maven:BlockArmor-247329:3592495")
     }
 
     jar {
