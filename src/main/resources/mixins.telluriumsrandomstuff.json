@@ -11,6 +11,7 @@
     "ZombieHorseMixin"
   ],
   "client": [
+    "CustomHeadLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

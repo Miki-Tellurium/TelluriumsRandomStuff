@@ -22,8 +22,8 @@ mixin {
 }
 
 minecraft {
-    mappings channel: 'official', version: mc_version
-    //mappings channel: 'parchment', version: '1.19.3-2023.03.12-1.19.4'
+    //mappings channel: 'official', version: mc_version
+    mappings channel: 'parchment', version: '2023.06.26-1.20.1'
 
     runs {
         client {
@@ -89,6 +89,9 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    maven {
+        url "https://cursemaven.com"
+    }
 
     dependencies {
         minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
@@ -98,6 +101,7 @@ repositories {
         compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
         runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")  // at runtime, use the full JEI jar
 
+        compileOnly fg.deobf("curse.maven:BlockArmor-247329:3592495")
     }
 
     jar {

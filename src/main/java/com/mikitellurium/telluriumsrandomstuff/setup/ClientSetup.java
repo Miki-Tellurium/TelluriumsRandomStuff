@@ -4,8 +4,9 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulAnchorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.render.LavaGooglesLayer;
+import com.mikitellurium.telluriumsrandomstuff.client.render.LavaGooglesModel;
 import com.mikitellurium.telluriumsrandomstuff.client.render.LavaGooglesOverlay;
-import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.content.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -14,21 +15,25 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModParticles;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.model.HumanoidArmorModel;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.FastColor;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.client.event.RenderTooltipEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-
-import java.awt.*;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
@@ -109,24 +114,51 @@ public class ClientSetup {
         event.registerBelowAll(TelluriumsRandomStuffMod.MOD_ID + "_lava_googles_overlay", new LavaGooglesOverlay());
     }
 
-    // todo: translucent armor
-//    @SubscribeEvent
-//    public static void addLayers(EntityRenderersEvent.AddLayers event) {
-//        for (EntityType<?> entityType : ForgeRegistries.ENTITY_TYPES) {
-//            try {
-//            LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer =
-//                    event.getRenderer((EntityType<LivingEntity>) entityType);
-//                if (renderer != null) {
-//                    renderer.addLayer(new LavaGooglesLayer<>(renderer, renderer.getModel()));
-//                    TelluriumsRandomStuffMod.LOGGER.info("Render layer correctly added for " + entityType);
-//                } else {
-//                    TelluriumsRandomStuffMod.LOGGER.error("Could not apply render layer to " + entityType);
-//                }
-//            } catch (ClassCastException e) {
-//                TelluriumsRandomStuffMod.LOGGER.error("Cannot apply render layer to non-humanoid model: " + entityType);
-//            }
-//        }
-//    }
+    @SuppressWarnings("unchecked")
+    @SubscribeEvent
+    public static void addLayers(EntityRenderersEvent.AddLayers event) {
+        for (EntityType<?> entityType : ForgeRegistries.ENTITY_TYPES) {
+            try {
+                if (entityType == EntityType.PLAYER) {
+                    continue; // Exclude player, we add them later
+                }
 
+            LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer =
+                    event.getRenderer((EntityType<LivingEntity>) entityType);
+                addLayerToRenderer(renderer, entityType, event.getContext().getModelSet());
+            } catch (ClassCastException e) {
+                // Non living entities can't be casted to LivingEntity,
+                // no need to do anything
+            }
+        }
+        // Player
+        event.getSkins().forEach((skin) -> {
+            PlayerRenderer playerRenderer = event.getSkin(skin);
+            if (playerRenderer != null) {
+                playerRenderer.addLayer(new LavaGooglesLayer<>(playerRenderer, event.getContext().getModelSet()));
+                TelluriumsRandomStuffMod.LOGGER.info("Render layer added to player model: " + skin);
+            } else {
+                TelluriumsRandomStuffMod.LOGGER.error("Could not apply render layer to player model: " + skin);
+            }
+        });
+    }
+
+    @SubscribeEvent
+    public static void addModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(LavaGooglesModel.LAVA_GOOGLES, LavaGooglesModel::createLayerDefinition);
+    }
+
+    private static void addLayerToRenderer(LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer,
+                                           EntityType<?> entityType, EntityModelSet modelSet) {
+        try {
+            if (renderer instanceof HumanoidMobRenderer || entityType == EntityType.ARMOR_STAND ||
+                    entityType == EntityType.GIANT) {
+                renderer.addLayer(new LavaGooglesLayer<>(renderer, modelSet));
+                TelluriumsRandomStuffMod.LOGGER.info("Render layer correctly added to " + entityType.toShortString());
+            }
+        } catch (Exception e) {
+            TelluriumsRandomStuffMod.LOGGER.error("Could not add layer to " + entityType.toShortString());
+        }
+    }
 
 }

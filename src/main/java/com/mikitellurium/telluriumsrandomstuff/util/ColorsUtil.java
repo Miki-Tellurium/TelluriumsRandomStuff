@@ -23,7 +23,7 @@ public class ColorsUtil {
     public static int getGooglesColor(ItemStack stack, int tintIndex) {
         if (tintIndex == 1) {
             DyeColor color = LavaGooglesItem.getColor(stack);
-            return color == null ? alpha0: color.getTextColor();
+            return color == null ? alpha0 : getIntDyeColor(color);
         } else {
             return blank;
         }
@@ -73,6 +73,14 @@ public class ColorsUtil {
         }
 
         return highestLightLevel;
+    }
+
+    public static int getIntDyeColor(DyeColor dyeColor) {
+        float[] floats = dyeColor.getTextureDiffuseColors();
+        int r = (int) (floats[0] * 255.0f);
+        int g = (int) (floats[1] * 255.0f);
+        int b = (int) (floats[2] * 255.0f);
+        return FastColor.ABGR32.color(255, r, g, b);
     }
 
     /*
