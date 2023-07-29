@@ -12,7 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Collection;
 
-public class TelluriumsRandomStuffCommand {
+public class SoulAnchorCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal(TelluriumsRandomStuffMod.MOD_ID)
