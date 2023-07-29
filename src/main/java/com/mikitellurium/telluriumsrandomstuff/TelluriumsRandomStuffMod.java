@@ -1,32 +1,24 @@
 package com.mikitellurium.telluriumsrandomstuff;
 
+import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.interaction.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.interaction.ModFluidInteractions;
-import com.mikitellurium.telluriumsrandomstuff.common.command.TelluriumsRandomStuffCommand;
-import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulAnchorScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
+import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -127,7 +119,8 @@ public class TelluriumsRandomStuffMod {
 
     @SubscribeEvent
     public void registerCommands(RegisterCommandsEvent event){
-        TelluriumsRandomStuffCommand.register(event.getDispatcher());
+        SoulAnchorCommand.register(event.getDispatcher());
+        LavaGooglesCommand.register(event.getDispatcher());
     }
 
 }
