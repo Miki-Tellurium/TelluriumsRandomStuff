@@ -4,20 +4,28 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.AgeableListModel;
+import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.HumanoidArmorModel;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.monster.Drowned;
 
 public class LavaGooglesModel<T extends LivingEntity> extends AgeableListModel<T> {
 
     public static final ModelLayerLocation LAVA_GOOGLES = new ModelLayerLocation(
             new ResourceLocation("minecraft:player"), "lava_googles");
     private final ModelPart googles;
+    public float swimAmount;
 
     public LavaGooglesModel(ModelPart modelPart) {
         super(true, 16.0f, 0.0f);
@@ -27,6 +35,12 @@ public class LavaGooglesModel<T extends LivingEntity> extends AgeableListModel<T
     public static LayerDefinition createLayerDefinition() {
         return LayerDefinition.create(HumanoidArmorModel.createBodyLayer(
                 new CubeDeformation(1.0f)), 64, 32);
+    }
+
+    @Override
+    public void prepareMobModel(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick) {
+        this.swimAmount = pEntity.getSwimAmount(pPartialTick);
+        super.prepareMobModel(pEntity, pLimbSwing, pLimbSwingAmount, pPartialTick);
     }
 
     @Override
@@ -42,17 +56,29 @@ public class LavaGooglesModel<T extends LivingEntity> extends AgeableListModel<T
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw,
                           float headPitch) {
-        boolean isArmorStand = entity instanceof ArmorStand;
-        boolean isElytraFliyng = entity.getFallFlyingTicks() > 4;
-        boolean isSwimming = entity.getSwimAmount(ageInTicks) > 0.0f && entity.isVisuallySwimming();
-
-        if (!isArmorStand) { // Googles always point south on armor stand otherwise
-            this.googles.yRot = headYaw * ((float) Math.PI / 180F);
+        if (entity instanceof ArmorStand armorStand) {
+            this.googles.xRot = ((float)Math.PI / 180F) * armorStand.getHeadPose().getX();
+            this.googles.yRot = ((float)Math.PI / 180F) * armorStand.getHeadPose().getY();
+            this.googles.zRot = ((float)Math.PI / 180F) * armorStand.getHeadPose().getZ();
+            return;
         }
-        if (isElytraFliyng || isSwimming) {
-            this.googles.xRot = (-(float) Math.PI / 4F);
+
+        boolean isElytraFlying = entity.getFallFlyingTicks() > 4;
+        boolean isSwimming = entity.isVisuallySwimming();
+        this.googles.yRot = headYaw * ((float)Math.PI / 180F);
+        if (isElytraFlying) {
+            this.googles.xRot = (-(float)Math.PI / 4F);
+        } else if (this.swimAmount > 0.0F) {
+            if (isSwimming) {
+                this.googles.xRot = this.rotlerpRad(this.swimAmount, this.googles.xRot, (-(float)Math.PI / 4F));
+            } else {
+                this.googles.xRot = this.rotlerpRad(this.swimAmount, this.googles.xRot, headPitch * ((float)Math.PI / 180F));
+            }
+
+            if (entity instanceof Drowned) this.googles.xRot = 0.0F; // Fix drowned swim animation
+
         } else {
-            this.googles.xRot = headPitch * ((float) Math.PI / 180F);
+            this.googles.xRot = headPitch * ((float)Math.PI / 180F);
         }
 
         if (entity.isCrouching()) {
@@ -60,6 +86,19 @@ public class LavaGooglesModel<T extends LivingEntity> extends AgeableListModel<T
         } else {
             this.googles.y = 0.0F;
         }
+    }
+
+    protected float rotlerpRad(float angle, float maxAngle, float mul) {
+        float f = (mul - maxAngle) % ((float)Math.PI * 2F);
+        if (f < -(float)Math.PI) {
+            f += ((float)Math.PI * 2F);
+        }
+
+        if (f >= (float)Math.PI) {
+            f -= ((float)Math.PI * 2F);
+        }
+
+        return maxAngle + angle * f;
     }
 
 }

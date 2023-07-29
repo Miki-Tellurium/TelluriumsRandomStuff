@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -48,12 +49,14 @@ public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> 
                 glassToRender = GOOGLES_COLORED_TEXTURE;
             }
 
+
             poseStack.pushPose();
 
-            if (livingEntity instanceof Piglin || livingEntity instanceof ZombifiedPiglin) {
+            if (livingEntity instanceof AbstractPiglin || livingEntity instanceof ZombifiedPiglin) {
                 poseStack.scale(1.1f, 1.0f, 1.05f); // Handle piglin larger head
             }
 
+            lavaGooglesModel.prepareMobModel(livingEntity, limbSwing, limbSwingAmount, partialTick);
             this.getParentModel().copyPropertiesTo(this.lavaGooglesModel);
             this.lavaGooglesModel.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             boolean isFoil = itemStack.hasFoil();
