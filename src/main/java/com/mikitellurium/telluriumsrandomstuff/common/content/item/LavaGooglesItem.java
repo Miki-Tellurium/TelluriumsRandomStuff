@@ -8,6 +8,7 @@ import net.minecraft.client.model.Model;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -22,6 +23,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.json.JsonObject;
 import java.util.List;
 
 public class LavaGooglesItem extends Item implements Equipable {
@@ -58,20 +60,22 @@ public class LavaGooglesItem extends Item implements Equipable {
                                 TooltipFlag isAdvanced) {
         DyeColor dyeColor = getColor(itemStack);
         if (dyeColor != null) {
-            MutableComponent colorString = Component.literal(dyeColor.getSerializedName())
+            MutableComponent colorString = Component.literal(dyeColor.getName())
                     .withStyle((style -> style.withColor(dyeColor.getTextColor())));
             components.add(Component.literal("Color: ").append(colorString));
         }
     }
 
-    public static void setColor(ItemStack itemStack, DyeColor dyeColor) {
-        itemStack.getOrCreateTag().putInt(tag_color, dyeColor.getId());
+    public static ItemStack setColor(ItemStack itemStack, DyeColor dyeColor) {
+        itemStack.getOrCreateTag().putString(tag_color, dyeColor.getSerializedName());
+        return itemStack;
     }
 
     public static DyeColor getColor(ItemStack itemStack) {
         CompoundTag tag = itemStack.getTag();
         if (tag != null && tag.contains(tag_color)) {
-            return DyeColor.byId(tag.getInt(tag_color));
+            String colorName = tag.getString(tag_color);
+            return DyeColor.byName(colorName, DyeColor.byId(tag.getInt(tag_color)));
         } else {
             return null;
         }
