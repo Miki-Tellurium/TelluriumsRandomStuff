@@ -5,12 +5,14 @@ import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapab
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorLevelData;
 import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.CustomBubbleColumnBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -18,8 +20,13 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.horse.ZombieHorse;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
+import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -41,6 +48,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.ChunkEvent;
@@ -55,8 +63,10 @@ import java.util.function.BiPredicate;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class GameplayCommonEvents {
+
     private static boolean wasInBubbleColumn;
     private static boolean firstTick = true;
+    private static final int spawnWithGooglesChance = 256;
 
     // Custom bubble columns
     @SubscribeEvent
@@ -172,7 +182,7 @@ public class GameplayCommonEvents {
         }
 
         if (event.getEntity() instanceof Player player) {
-            if(SoulAnchorLevelData.get(event.getLevel()).removePlayer(player)) {
+            if (SoulAnchorLevelData.get(event.getLevel()).removePlayer(player)) {
                 player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
                     soulAnchor.setChargedAnchor(false);
                     soulAnchor.clearInventory();
@@ -205,6 +215,23 @@ public class GameplayCommonEvents {
                 steed.setTamed(true);
                 rider.startRiding(steed);
                 level.addFreshEntityWithPassengers(steed);
+            }
+        }
+    }
+
+    // Randomly give lava googles to mob
+    @SubscribeEvent
+    public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
+        if (event.getLevel().isClientSide) {
+            return;
+        }
+        RandomSource random = event.getLevel().getRandom();
+        if (random.nextInt(spawnWithGooglesChance) == 0) {
+            Entity entity = event.getEntity();
+            if (entity instanceof Zombie || entity instanceof AbstractSkeleton || entity instanceof AbstractPiglin) {
+                ItemStack googles = new ItemStack(ModItems.LAVA_GOOGLES.get());
+                LavaGooglesItem.setColor(googles, DyeColor.byId(random.nextInt(16)));
+                entity.setItemSlot(EquipmentSlot.HEAD, googles);
             }
         }
     }
