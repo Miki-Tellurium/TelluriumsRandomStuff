@@ -65,7 +65,7 @@ public class ModFluidTypes {
         return FLUID_TYPES.register(name, ()-> fluidType);
     }
 
-    public static void registerSoulLavaType(IEventBus eventBus) {
+    public static void register(IEventBus eventBus) {
         FLUID_TYPES.register(eventBus);
     }
 

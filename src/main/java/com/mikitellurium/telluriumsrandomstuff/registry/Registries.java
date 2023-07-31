@@ -11,15 +11,15 @@ public class Registries {
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModCreativeTab.register(modEventBus);
-        ModFluidTypes.registerSoulLavaType(modEventBus);
+        ModFluidTypes.register(modEventBus);
         ModFluids.register(modEventBus);
         ModParticles.register(modEventBus);
         ModMenuTypes.register(modEventBus);
-        ModRecipes.register(modEventBus);
+        ModRecipeSerializers.register(modEventBus);
         ModEnchantments.register(modEventBus);
         ModFeatures.register(modEventBus);
         ModMessages.register();
-        ModCommonConfig.registerCommonConfig();
+        ModCommonConfig.register();
     }
 
 }

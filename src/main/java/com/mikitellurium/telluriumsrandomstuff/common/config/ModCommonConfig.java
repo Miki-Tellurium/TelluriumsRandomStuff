@@ -11,7 +11,7 @@ public class ModCommonConfig {
     public static ForgeConfigSpec.BooleanValue ENABLE_MOD_DISPENSER_BEHAVIOR;
     public static ForgeConfigSpec.IntValue ZOMBIE_RIDER_SPAWN_CHANCE;
 
-    public static void registerCommonConfig() {
+    public static void register() {
         ForgeConfigSpec.Builder CONFIG_BUILDER = new ForgeConfigSpec.Builder();
         registerConfig(CONFIG_BUILDER);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CONFIG_BUILDER.build());

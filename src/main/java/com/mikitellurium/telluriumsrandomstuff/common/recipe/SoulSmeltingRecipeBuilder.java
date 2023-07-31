@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
 import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipes;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeSerializers;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -31,7 +31,7 @@ public class SoulSmeltingRecipeBuilder implements RecipeBuilder {
     }
 
     public static SoulSmeltingRecipeBuilder addRecipe(Ingredient ingredient, ItemLike result, int extraCost) {
-        return new SoulSmeltingRecipeBuilder(ingredient, result, extraCost, ModRecipes.SOUL_FURNACE_SMELTING_SERIALIZER.get());
+        return new SoulSmeltingRecipeBuilder(ingredient, result, extraCost, ModRecipeSerializers.SOUL_FURNACE_SMELTING_SERIALIZER.get());
     }
 
     @Override
