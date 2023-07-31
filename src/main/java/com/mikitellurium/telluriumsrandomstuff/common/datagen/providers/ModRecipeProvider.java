@@ -1,19 +1,21 @@
 package com.mikitellurium.telluriumsrandomstuff.common.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.LavaGooglesRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulSmeltingRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.util.RecipeUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider {
@@ -333,6 +335,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('L', Items.LEATHER)
                 .unlockedBy("has_amethyst_lens", has(ModItems.AMETHYST_LENS.get()))
                 .save(consumer, modResourceLocation("lava_googles"));
+
+        for (Map.Entry<Block, DyeColor> entry : RecipeUtils.getStainedGlassSet()) {
+            LavaGooglesRecipeBuilder.googles(entry.getKey())
+                    .save(consumer, modResourceLocation(entry.getValue().getSerializedName() + "_lava_googles"));
+        }
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

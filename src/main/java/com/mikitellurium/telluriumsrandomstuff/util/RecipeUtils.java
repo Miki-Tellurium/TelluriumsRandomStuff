@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModEnchantments;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
@@ -9,30 +8,61 @@ import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class RecipeUtils {
 
-    public static final List<ItemStack> soulHarvestingBooks = List.of(
-            RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 1),
-            RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
-            RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
-    );
-    public static final List<ItemStack> soulHarvestingSwords = List.of(
-            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 1),
-            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
-            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
-    );
+    private static final Map<Block, DyeColor> glassColors = new HashMap<>();
+    static {
+        glassColors.put(Blocks.BLACK_STAINED_GLASS, DyeColor.BLACK);
+        glassColors.put(Blocks.BLUE_STAINED_GLASS, DyeColor.BLUE);
+        glassColors.put(Blocks.BROWN_STAINED_GLASS, DyeColor.BROWN);
+        glassColors.put(Blocks.CYAN_STAINED_GLASS, DyeColor.CYAN);
+        glassColors.put(Blocks.GRAY_STAINED_GLASS, DyeColor.GRAY);
+        glassColors.put(Blocks.GREEN_STAINED_GLASS, DyeColor.GREEN);
+        glassColors.put(Blocks.LIGHT_BLUE_STAINED_GLASS, DyeColor.LIGHT_BLUE);
+        glassColors.put(Blocks.LIGHT_GRAY_STAINED_GLASS, DyeColor.LIGHT_GRAY);
+        glassColors.put(Blocks.LIME_STAINED_GLASS, DyeColor.LIME);
+        glassColors.put(Blocks.MAGENTA_STAINED_GLASS, DyeColor.MAGENTA);
+        glassColors.put(Blocks.ORANGE_STAINED_GLASS, DyeColor.ORANGE);
+        glassColors.put(Blocks.PINK_STAINED_GLASS, DyeColor.PINK);
+        glassColors.put(Blocks.PURPLE_STAINED_GLASS, DyeColor.PURPLE);
+        glassColors.put(Blocks.RED_STAINED_GLASS, DyeColor.RED);
+        glassColors.put(Blocks.WHITE_STAINED_GLASS, DyeColor.WHITE);
+        glassColors.put(Blocks.YELLOW_STAINED_GLASS, DyeColor.YELLOW);
+    }
+
+//    public static final List<ItemStack> soulHarvestingBooks = List.of(
+//            RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 1),
+//            RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
+//            RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
+//    );
+//    public static final List<ItemStack> soulHarvestingSwords = List.of(
+//            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 1),
+//            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
+//            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
+//    );
+
+    public static DyeColor getGlassColor(Block glass) {
+        return glassColors.get(glass);
+    }
+
+    public static Set<Map.Entry<Block, DyeColor>> getStainedGlassSet() {
+        return glassColors.entrySet();
+    }
+
     private static final RepairData opaliumRepairData = new RepairData(Ingredient.of(ModItems.OPAL_CRYSTAL.get()),
             ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(),
             ModItems.OPAL_CRYSTAL_AXE.get().getDefaultInstance(),
@@ -59,14 +89,14 @@ public class RecipeUtils {
         return new SoulFurnaceRecipe(id, output, ingredient, 0);
     }
 
-    private static ItemStack addEnchantment(ItemStack itemStack, Enchantment enchantment, int level) {
-        if (itemStack.is(Items.ENCHANTED_BOOK)) {
-            EnchantedBookItem.addEnchantment(itemStack, new EnchantmentInstance(enchantment, level));
-        } else {
-            itemStack.enchant(enchantment, level);
-        }
-        return itemStack;
-    }
+//    private static ItemStack addEnchantment(ItemStack itemStack, Enchantment enchantment, int level) {
+//        if (itemStack.is(Items.ENCHANTED_BOOK)) {
+//            EnchantedBookItem.addEnchantment(itemStack, new EnchantmentInstance(enchantment, level));
+//        } else {
+//            itemStack.enchant(enchantment, level);
+//        }
+//        return itemStack;
+//    }
 
     /*
      *   Anvil recipe helper code taken from JEI Code, credit to mezz and the JEI developers
