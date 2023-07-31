@@ -39,6 +39,7 @@ public class DataGenerators {
         generator.addProvider(true, modBlockTagsProvider);
         generator.addProvider(true, new ModTagProvider.Items(packOutput, lookupProvider, modBlockTagsProvider.contentsGetter(), existingFileHelper));
         generator.addProvider(true, new ModTagProvider.EntityTypes(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(true, new ModLootModifierProvider(packOutput));
 
         // Armor trim stuff
         //generator.addProvider(event.includeServer(), new ModRegistryProvider(packOutput, lookupProvider));

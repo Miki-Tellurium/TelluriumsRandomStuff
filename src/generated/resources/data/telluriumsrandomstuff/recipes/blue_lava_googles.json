@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "lava_googles",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:amethyst_lens"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "X": {
+      "item": "minecraft:blue_stained_glass"
+    },
+    "s": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "sLs",
+    "#X#"
+  ],
+  "result": {
+    "type": "minecraft:item_nbt",
+    "item": "telluriumsrandomstuff:lava_googles",
+    "nbt": {
+      "color": "blue"
+    }
+  },
+  "show_notification": true
+}
