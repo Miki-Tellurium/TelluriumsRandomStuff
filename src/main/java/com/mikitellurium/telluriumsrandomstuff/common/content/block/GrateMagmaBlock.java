@@ -28,32 +28,32 @@ public class GrateMagmaBlock extends MagmaBlock {
     }
 
     @Override
-    public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-        //super.stepOn(pLevel, pPos, pState, pEntity);
+    public void stepOn(Level level, BlockPos pos, BlockState blockState, Entity entity) {
+        //super.stepOn(level, pos, blockState, entity);
         // Disabling the magma block stepOn method damage
     }
 
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        CustomBubbleColumnBlock.updateColumn(pLevel, pPos.above(), pState);
+    public void tick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
+        CustomBubbleColumnBlock.updateColumn(level, pos.above(), blockState);
     }
 
     @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (pLevel.isRaining()) {
-            ParticleUtils.handleRainParticles(pLevel, pPos, pState, pRandom);
+    public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource random) {
+        if (level.isRaining()) {
+            ParticleUtils.handleRainParticles(level, pos, blockState, random);
         }
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
     }
 
 }
