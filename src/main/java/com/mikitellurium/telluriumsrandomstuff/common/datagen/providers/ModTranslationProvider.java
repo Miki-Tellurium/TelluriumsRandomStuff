@@ -80,6 +80,12 @@ public class ModTranslationProvider extends LanguageProvider {
         add("block.telluriumsrandomstuff.soul_torchflower", "Soul Torchflower");
         add("block.telluriumsrandomstuff.blue_glowstone", "Blue Glowstone");
         add("block.telluriumsrandomstuff.blue_redstone_lamp", "Blue Redstone Lamp");
+        add("block.telluriumsrandomstuff.awakened_sculk_shrieker", "Awakened Sculk Shrieker");
+
+        add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning",
+                "Warning!");
+        add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.message",
+                "This can spawn a Warden anywhere. Use with caution.");
 
         add("blockentity.telluriumsrandomstuff.soul_furnace", "Soul Furnace");
         add("blockentity.telluriumsrandomstuff.soul_anchor", "Soul Anchor");

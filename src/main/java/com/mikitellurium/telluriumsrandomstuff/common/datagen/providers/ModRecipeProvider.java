@@ -57,6 +57,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer, modResourceLocation("soul_torchflower_seeds_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.AMETHYST_SHARD), ModItems.MOLTEN_AMETHYST.get(), 80)
                 .save(consumer, modResourceLocation("molten_amethyst_from_soul_smelting"));
+        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.SCULK_SHRIEKER), ModBlocks.AWAKENED_SCULK_SHRIEKER.get(), 400)
+                .save(consumer, modResourceLocation("awakened_sculk_shrieker_from_soul_smelting"));
     }
 
     private void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {

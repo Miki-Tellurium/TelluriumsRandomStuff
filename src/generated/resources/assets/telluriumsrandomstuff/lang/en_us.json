@@ -1,4 +1,7 @@
 {
+  "block.description.telluriumsrandomstuff.awakened_sculk_shrieker.message": "This can spawn a Warden anywhere. Use with caution.",
+  "block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning": "Warning!",
+  "block.telluriumsrandomstuff.awakened_sculk_shrieker": "Awakened Sculk Shrieker",
   "block.telluriumsrandomstuff.blue_glowstone": "Blue Glowstone",
   "block.telluriumsrandomstuff.blue_redstone_lamp": "Blue Redstone Lamp",
   "block.telluriumsrandomstuff.bright_torchflower": "Bright Torchflower",

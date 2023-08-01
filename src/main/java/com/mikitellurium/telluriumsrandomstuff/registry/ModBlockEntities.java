@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.AwakenedSculkShriekerBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.ExtractorBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.SoulAnchorBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.SoulFurnaceBlockEntity;
@@ -26,6 +27,11 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<ExtractorBlockEntity>> EXTRACTOR = BLOCK_ENTITIES.register(
             "extractor", () -> BlockEntityType.Builder.of(ExtractorBlockEntity::new,
                     ModBlocks.EXTRACTOR_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<AwakenedSculkShriekerBlockEntity>> AWAKENED_SCULK_SHRIEKER =
+            BLOCK_ENTITIES.register(
+            "awakened_sculk_shrieker", () -> BlockEntityType.Builder.of(AwakenedSculkShriekerBlockEntity::new,
+                    ModBlocks.AWAKENED_SCULK_SHRIEKER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

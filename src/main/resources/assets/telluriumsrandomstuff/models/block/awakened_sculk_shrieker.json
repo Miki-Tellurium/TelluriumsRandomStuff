@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/template_sculk_shrieker",
+  "render_type": "cutout",
+  "textures": {
+    "bottom": "telluriumsrandomstuff:block/awakened_sculk_shrieker_bottom",
+    "inner_top": "minecraft:block/sculk_shrieker_can_summon_inner_top",
+    "particle": "telluriumsrandomstuff:block/awakened_sculk_shrieker_bottom",
+    "side": "telluriumsrandomstuff:block/awakened_sculk_shrieker_side",
+    "top": "minecraft:block/sculk_shrieker_top"
+  }
+}

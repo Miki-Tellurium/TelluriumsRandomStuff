@@ -162,6 +162,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLUE_REDSTONE_LAMP = registerBlockWithItem("blue_redstone_lamp",
             ()-> new RedstoneLampBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
 
+    public static final RegistryObject<Block> AWAKENED_SCULK_SHRIEKER = registerBlockWithItem("awakened_sculk_shrieker",
+            AwakenedSculkShriekerBlock::new);
+
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
