@@ -111,6 +111,7 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.SOUL_TORCHFLOWER_SEEDS);
             event.accept(ModBlocks.BLUE_GLOWSTONE);
             event.accept(ModItems.BLUE_GLOWSTONE_DUST);
+            event.accept(ModBlocks.BLUE_REDSTONE_LAMP);
             event.accept(ModItems.MOLTEN_AMETHYST);
             event.accept(ModItems.AMETHYST_LENS);
             event.accept(ModItems.LAVA_GOOGLES);

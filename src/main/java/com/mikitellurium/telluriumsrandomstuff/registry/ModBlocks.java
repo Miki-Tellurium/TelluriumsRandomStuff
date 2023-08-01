@@ -159,6 +159,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLUE_GLOWSTONE = registerBlockWithItem("blue_glowstone",
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.GLOWSTONE)));
 
+    public static final RegistryObject<Block> BLUE_REDSTONE_LAMP = registerBlockWithItem("blue_redstone_lamp",
+            ()-> new RedstoneLampBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

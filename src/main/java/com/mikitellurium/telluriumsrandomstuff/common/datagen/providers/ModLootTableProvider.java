@@ -88,6 +88,7 @@ public class ModLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.SOUL_TORCHFLOWER.get());
         this.add(ModBlocks.SOUL_TORCHFLOWER_CROP.get(), this.applyExplosionDecay(ModBlocks.SOUL_TORCHFLOWER_CROP.get(),
                 LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.SOUL_TORCHFLOWER_SEEDS.get())))));
+        this.dropSelf(ModBlocks.BLUE_REDSTONE_LAMP.get());
     }
 
     @Override

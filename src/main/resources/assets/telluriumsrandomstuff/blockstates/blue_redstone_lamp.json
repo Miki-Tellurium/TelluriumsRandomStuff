@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "telluriumsrandomstuff:block/blue_redstone_lamp"
+    },
+    "lit=true": {
+      "model": "telluriumsrandomstuff:block/blue_redstone_lamp_on"
+    }
+  }
+}

@@ -79,6 +79,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("block.telluriumsrandomstuff.bright_torchflower", "Bright Torchflower");
         add("block.telluriumsrandomstuff.soul_torchflower", "Soul Torchflower");
         add("block.telluriumsrandomstuff.blue_glowstone", "Blue Glowstone");
+        add("block.telluriumsrandomstuff.blue_redstone_lamp", "Blue Redstone Lamp");
 
         add("blockentity.telluriumsrandomstuff.soul_furnace", "Soul Furnace");
         add("blockentity.telluriumsrandomstuff.soul_anchor", "Soul Anchor");

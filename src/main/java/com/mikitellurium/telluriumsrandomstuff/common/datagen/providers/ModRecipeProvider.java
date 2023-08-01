@@ -349,6 +349,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModItems.BLUE_GLOWSTONE_DUST.get())
                 .unlockedBy("has_blue_glowstone_dust", has(ModItems.BLUE_GLOWSTONE_DUST.get()))
                 .save(consumer, modResourceLocation("spectral_arrows_with_blue_glowstone_dust"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModBlocks.BLUE_REDSTONE_LAMP.get(), 1)
+                .pattern(" # ")
+                .pattern("#g#")
+                .pattern(" # ")
+                .define('g', ModBlocks.BLUE_GLOWSTONE.get())
+                .define('#', Items.REDSTONE)
+                .unlockedBy("has_blue_glowstone", has(ModBlocks.BLUE_GLOWSTONE.get()))
+                .save(consumer, modResourceLocation("blue_redstone_lamp"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

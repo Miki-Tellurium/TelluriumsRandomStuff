@@ -1,5 +1,6 @@
-// 1.20.1	2023-06-23T15:42:01.39962	Loot Tables
+// 1.20.1	2023-08-01T11:58:03.5063952	Loot Tables
 3074b73cb5812b9f1be6fd51ea9f2f3e8502a312 data/telluriumsrandomstuff/loot_tables/blocks/blue_glowstone.json
+02b26b510ddb0499cf51118b2924038b1a7a26f3 data/telluriumsrandomstuff/loot_tables/blocks/blue_redstone_lamp.json
 c2848f1029da7c57b2e47572e4cde315662d4260 data/telluriumsrandomstuff/loot_tables/blocks/bright_torchflower.json
 08f1ef9e8233d5607e17f470b19d9f99db932b8a data/telluriumsrandomstuff/loot_tables/blocks/bright_torchflower_crop.json
 08552b613c21b1d6824769159f118c1fff9f75db data/telluriumsrandomstuff/loot_tables/blocks/chiseled_opal_bricks.json
