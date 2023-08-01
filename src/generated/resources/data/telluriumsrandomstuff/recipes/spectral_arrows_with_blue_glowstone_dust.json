@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:blue_glowstone_dust"
+    },
+    "a": {
+      "item": "minecraft:arrow"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#a#",
+    " # "
+  ],
+  "result": {
+    "count": 4,
+    "item": "minecraft:spectral_arrow"
+  },
+  "show_notification": true
+}

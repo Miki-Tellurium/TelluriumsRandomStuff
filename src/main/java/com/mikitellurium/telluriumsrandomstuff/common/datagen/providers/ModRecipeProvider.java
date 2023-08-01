@@ -340,6 +340,15 @@ public class ModRecipeProvider extends RecipeProvider {
             LavaGooglesRecipeBuilder.googles(entry.getKey())
                     .save(consumer, modResourceLocation(entry.getValue().getSerializedName() + "_lava_googles"));
         }
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, Items.SPECTRAL_ARROW, 4)
+                .pattern(" # ")
+                .pattern("#a#")
+                .pattern(" # ")
+                .define('a', Items.ARROW)
+                .define('#', ModItems.BLUE_GLOWSTONE_DUST.get())
+                .unlockedBy("has_blue_glowstone_dust", has(ModItems.BLUE_GLOWSTONE_DUST.get()))
+                .save(consumer, modResourceLocation("spectral_arrows_with_blue_glowstone_dust"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
