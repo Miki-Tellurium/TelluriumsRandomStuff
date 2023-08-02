@@ -46,10 +46,7 @@ import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.event.village.VillageSiegeEvent;
@@ -219,7 +216,17 @@ public class GameplayCommonEvents {
         }
     }
 
-    // Randomly give lava googles to mob
+    // Lava googles
+    @SubscribeEvent
+    public static void onEntityHurt(LivingHurtEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            ItemStack itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
+            if (itemStack.getItem() instanceof LavaGooglesItem) {
+                LavaGooglesItem.hurtGoogles(itemStack, player, event.getSource(), event.getAmount());
+            }
+        }
+    }
+
     @SubscribeEvent
     public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
         if (event.getLevel().isClientSide) {
