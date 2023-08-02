@@ -10,6 +10,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,11 +29,13 @@ public abstract class LiquidBlockMixin {
                 level.getBlockState(pos.below()).is(ModBlocks.GRATE_SOUL_SAND.get()))) {
 
             if (random.nextFloat() < soulLavaDripChance) {
-                BlockPos blockPos1 = LevelUtils.findFillableCauldronBelow(level, pos.below()); // Find empty cauldron under soul sand
-                if (blockPos1 != null) {
+                BlockPos maybeCauldronPos = LevelUtils.findFillableCauldronBelow(level, pos.below()); // Find empty cauldron under soul sand
+                if (maybeCauldronPos != null) {
+                    BlockState soulLavaCauldron = ModBlocks.SOUL_LAVA_CAULDRON_BLOCK.get().defaultBlockState();
                     level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-                    level.setBlockAndUpdate(blockPos1, ModBlocks.SOUL_LAVA_CAULDRON_BLOCK.get().defaultBlockState());
-                    level.playSound(null, blockPos1, SoundEvents.SOUL_ESCAPE, SoundSource.BLOCKS, 0.8f, 1.0f);
+                    level.setBlockAndUpdate(maybeCauldronPos, soulLavaCauldron);
+                    level.gameEvent(GameEvent.BLOCK_CHANGE, maybeCauldronPos, GameEvent.Context.of(soulLavaCauldron));
+                    level.playSound(null, maybeCauldronPos, SoundEvents.SOUL_ESCAPE, SoundSource.BLOCKS, 0.8f, 1.0f);
                 }
             }
         }
