@@ -1,3 +1,4 @@
-// 1.20.1	2023-07-31T22:08:32.642854	Global Loot Modifiers : telluriumsrandomstuff
-62f89d9123b0aa11a58b652310204b58625904e0 data/forge/loot_modifiers/global_loot_modifiers.json
-288da5df6af56b8479927f74455499d0f8109f5a data/telluriumsrandomstuff/loot_modifiers/lava_googles_in_nether_fortress.json
+// 1.20.1	2023-08-02T21:24:51.3437146	Global Loot Modifiers : telluriumsrandomstuff
+d76a5f460ff4f42257c0d1cce79f0f1e2652eb2c data/forge/loot_modifiers/global_loot_modifiers.json
+ea5ec06d34dbc3e8ff8898e8f2df9a42c44321d7 data/telluriumsrandomstuff/loot_modifiers/lava_googles_in_nether_fortress.json
+d96d679e68a3a7fcee874f9d46923309f414e0de data/telluriumsrandomstuff/loot_modifiers/soul_jack_o_lantern_in_ancient_city.json

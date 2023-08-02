@@ -1,5 +1,5 @@
 {
-  "type": "telluriumsrandomstuff:add_item",
+  "type": "telluriumsrandomstuff:add_lava_googles",
   "conditions": [
     {
       "condition": "forge:loot_table_id",
