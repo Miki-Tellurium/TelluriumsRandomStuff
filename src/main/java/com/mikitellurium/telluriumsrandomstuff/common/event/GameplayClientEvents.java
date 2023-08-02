@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.event;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -10,11 +11,14 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderBlockScreenEffectEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,15 +29,26 @@ import java.util.Arrays;
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class GameplayClientEvents {
 
+    @SubscribeEvent
+    public static void onOverlayRender(RenderBlockScreenEffectEvent event) {
+        if (event.getPlayer().getItemBySlot(EquipmentSlot.HEAD).is(ModItems.LAVA_GOOGLES.get()) &&
+                event.getOverlayType() == RenderBlockScreenEffectEvent.OverlayType.FIRE) {
+            PoseStack poseStack = event.getPoseStack();
+            poseStack.translate(0.0f, -0.3f, 0.0f);
+        }
+    }
+
     // Soul lava fog
     @SubscribeEvent
     public static void setFogPlane(ViewportEvent.RenderFog event) {
-        if (Minecraft.getInstance().player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.LAVA_GOOGLES.get())) {
-            event.setCanceled(true);
-            setLavaGooglesFogPlane(event, event.getCamera(), event.getCamera().getEntity().isSpectator());
-        } else if (isCameraInSoulLava(event.getCamera())) {
-            event.setCanceled(true);
-            setSoulLavaFogPlane(event);
+        if (event.getCamera().getEntity() instanceof LivingEntity entity) {
+            if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.LAVA_GOOGLES.get())) {
+                event.setCanceled(true);
+                setLavaGooglesFogPlane(event, event.getCamera(), event.getCamera().getEntity().isSpectator());
+            } else if (isCameraInSoulLava(event.getCamera())) {
+                event.setCanceled(true);
+                setSoulLavaFogPlane(event);
+            }
         }
     }
 
