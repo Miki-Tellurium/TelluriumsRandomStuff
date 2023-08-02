@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:carved_pumpkin"
+    },
+    "I": {
+      "item": "minecraft:soul_torch"
+    }
+  },
+  "pattern": [
+    "#",
+    "I"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:soul_jack_o_lantern"
+  },
+  "show_notification": true
+}

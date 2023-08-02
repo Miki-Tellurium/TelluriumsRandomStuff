@@ -59,6 +59,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer, modResourceLocation("molten_amethyst_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.SCULK_SHRIEKER), ModBlocks.AWAKENED_SCULK_SHRIEKER.get(), 400)
                 .save(consumer, modResourceLocation("awakened_sculk_shrieker_from_soul_smelting"));
+        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.JACK_O_LANTERN), ModBlocks.SOUL_JACK_O_LANTERN.get(), 50)
+                .save(consumer, modResourceLocation("soul_jack_o_lantern_from_soul_smelting"));
     }
 
     private void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {
@@ -359,6 +361,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', Items.REDSTONE)
                 .unlockedBy("has_blue_glowstone", has(ModBlocks.BLUE_GLOWSTONE.get()))
                 .save(consumer, modResourceLocation("blue_redstone_lamp"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModBlocks.SOUL_JACK_O_LANTERN.get(), 1)
+                .pattern("#")
+                .pattern("I")
+                .define('I', Blocks.SOUL_TORCH)
+                .define('#', Blocks.CARVED_PUMPKIN)
+                .unlockedBy("has_soul_torch", has(Blocks.SOUL_TORCH))
+                .unlockedBy("has_carved_pumpkin", has(Blocks.CARVED_PUMPKIN))
+                .save(consumer, modResourceLocation("soul_jack_o_lantern"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

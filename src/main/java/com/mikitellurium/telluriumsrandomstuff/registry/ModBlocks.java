@@ -165,6 +165,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> AWAKENED_SCULK_SHRIEKER = registerBlockWithItem("awakened_sculk_shrieker",
             AwakenedSculkShriekerBlock::new);
 
+    public static final RegistryObject<Block> SOUL_JACK_O_LANTERN = registerBlockWithItem("soul_jack_o_lantern",
+            () -> new CarvedPumpkinBlock(BlockBehaviour.Properties.copy(Blocks.JACK_O_LANTERN).lightLevel((state) -> 10)));
+
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

@@ -116,6 +116,7 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.AMETHYST_LENS);
             event.accept(ModItems.LAVA_GOOGLES);
             event.accept(ModBlocks.AWAKENED_SCULK_SHRIEKER);
+            event.accept(ModBlocks.SOUL_JACK_O_LANTERN);
         }
     }
 
