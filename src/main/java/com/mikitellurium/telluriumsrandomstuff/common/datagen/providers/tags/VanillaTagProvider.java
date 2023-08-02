@@ -65,6 +65,9 @@ public class VanillaTagProvider {
             this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                     .add(ModBlocks.GRATE_SOUL_SAND.get());
 
+            this.tag(BlockTags.MINEABLE_WITH_HOE)
+                    .add(ModBlocks.AWAKENED_SCULK_SHRIEKER.get());
+
             this.tag(BlockTags.BUTTONS)
                     .add(ModBlocks.OPAL_BUTTON.get());
 
