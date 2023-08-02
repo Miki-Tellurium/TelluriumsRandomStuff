@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.datagen.providers;
+package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.content.loot.ItemLootModifier;

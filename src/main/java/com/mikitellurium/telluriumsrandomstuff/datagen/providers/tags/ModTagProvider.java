@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.tags;
+package com.mikitellurium.telluriumsrandomstuff.datagen.providers.tags;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
