@@ -6,8 +6,6 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -22,17 +20,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class ItemLootModifier extends LootModifier {
+public class LavaGooglesLootModifier extends LootModifier {
 
-    public static final Supplier<Codec<ItemLootModifier>> CODEC = Suppliers.memoize(()
+    public static final Supplier<Codec<LavaGooglesLootModifier>> CODEC = Suppliers.memoize(()
             -> RecordCodecBuilder.create(
             inst -> codecStart(inst).and(ForgeRegistries.ITEMS.getCodec().fieldOf("item")
-                    .forGetter(modifier -> modifier.itemLike.asItem())).apply(inst, ItemLootModifier::new)));
+                    .forGetter(modifier -> modifier.itemLike.asItem())).apply(inst, LavaGooglesLootModifier::new)));
 
     private static final int lootChance = 8;
     private final ItemLike itemLike;
 
-    public ItemLootModifier(LootItemCondition[] conditionsIn, ItemLike itemLike) {
+    public LavaGooglesLootModifier(LootItemCondition[] conditionsIn, ItemLike itemLike) {
         super(conditionsIn);
         this.itemLike = itemLike;
     }
