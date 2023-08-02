@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.datagen.providers.*;
 import com.mikitellurium.telluriumsrandomstuff.datagen.providers.*;
 import com.mikitellurium.telluriumsrandomstuff.datagen.providers.tags.ModTagProvider;
 import com.mikitellurium.telluriumsrandomstuff.datagen.providers.tags.VanillaTagProvider;
