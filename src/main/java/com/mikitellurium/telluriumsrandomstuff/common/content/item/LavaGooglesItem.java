@@ -8,9 +8,11 @@ import net.minecraft.client.model.Model;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -44,6 +46,14 @@ public class LavaGooglesItem extends Item implements Equipable {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         return this.swapWithEquipmentSlot(this, level, player, hand);
+    }
+
+    public static void hurtGoogles(ItemStack googles, Player player, DamageSource source, float damage) {
+        if (!source.is(DamageTypeTags.IS_FIRE) && googles.getItem() instanceof LavaGooglesItem) {
+            googles.hurtAndBreak((int)damage, player, (player1) -> {
+                player1.broadcastBreakEvent(EquipmentSlot.HEAD);
+            });
+        }
     }
 
     @Override
