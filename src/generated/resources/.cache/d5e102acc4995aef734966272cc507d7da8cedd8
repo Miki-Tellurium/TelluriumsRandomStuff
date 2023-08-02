@@ -1,10 +1,11 @@
-// 1.20.1	2023-06-23T15:42:01.4006199	Tags for minecraft:block mod id minecraft
+// 1.20.1	2023-08-02T19:53:23.8075566	Tags for minecraft:block mod id minecraft
 acf26b9c767586076a6d49ba14284b11cfd751ee data/minecraft/tags/blocks/buttons.json
 466c180ae08afe001b958042f0d1d411fc400231 data/minecraft/tags/blocks/cauldrons.json
 610d3a4212b8c38ad4f8927640e482faae4fa6f9 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
 42e0c021fc974eb590acd8607349e14e50195e22 data/minecraft/tags/blocks/flower_pots.json
 c7008fa9cc0a105a6ff628595dbbc80827c8d6ef data/minecraft/tags/blocks/infiniburn_overworld.json
 a86ad5868b9a000f1c226ccebffb92306f648fa3 data/minecraft/tags/blocks/maintains_farmland.json
+f61509dc1b3444efbebde01a46b4c22aa19ab647 data/minecraft/tags/blocks/mineable/hoe.json
 587c5d087611981e3c8bdf23c9198e9dd835f4bc data/minecraft/tags/blocks/mineable/pickaxe.json
 a3011c81a4b546136f6576a307e9206effa649c5 data/minecraft/tags/blocks/mineable/shovel.json
 8b6682a0f70756a105de0a6d812f1df2b4c141b1 data/minecraft/tags/blocks/needs_diamond_tool.json
