@@ -1,5 +1,5 @@
-// 1.20.1	2023-08-03T11:49:41.7915302	Global Loot Modifiers : telluriumsrandomstuff
+// 1.20.1	2023-08-03T14:26:37.4680735	Global Loot Modifiers : telluriumsrandomstuff
 ce4ebac8fc693b90a077ee7509a450749625947e data/forge/loot_modifiers/global_loot_modifiers.json
-700515bd87fb5aedba64aa8c6426265a6b1a4a71 data/telluriumsrandomstuff/loot_modifiers/add_lava_googles_to_bastion_other.json
-3496e8c066b21d1f791e2acc6f06017e4c5d64be data/telluriumsrandomstuff/loot_modifiers/add_lava_googles_to_nether_bridge.json
+5b6e8fb78633b6ce1b51c0ad279bcfd1ed03e57f data/telluriumsrandomstuff/loot_modifiers/add_lava_googles_to_bastion_other.json
+d158d91b6429bfccdd9e5a55f3421c7dd1fb85d5 data/telluriumsrandomstuff/loot_modifiers/add_lava_googles_to_nether_bridge.json
 bd450ba9a497446aa384eae56b5d498e0a84bac2 data/telluriumsrandomstuff/loot_modifiers/add_soul_jack_o_lantern_to_ancient_city.json

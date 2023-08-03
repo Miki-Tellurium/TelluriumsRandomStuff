@@ -1,6 +1,6 @@
 {
   "type": "telluriumsrandomstuff:add_lava_googles",
-  "chance": 10,
+  "chance": 20,
   "conditions": [
     {
       "condition": "forge:loot_table_id",

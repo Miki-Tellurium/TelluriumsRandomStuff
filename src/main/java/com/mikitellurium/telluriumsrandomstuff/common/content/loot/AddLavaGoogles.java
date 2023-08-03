@@ -30,7 +30,7 @@ public class AddLavaGoogles extends ItemLootModifier{
             ).apply(instance, AddLavaGoogles::new)));
 
     public AddLavaGoogles(ResourceLocation lootTable) {
-        this(ItemLootModifier.getLootConditions(lootTable), ModItems.LAVA_GOOGLES.get(), 10);
+        this(ItemLootModifier.getLootConditions(lootTable), ModItems.LAVA_GOOGLES.get(), 20);
     }
 
     public AddLavaGoogles(LootItemCondition[] conditionsIn, ItemLike itemLike, int chance) {
