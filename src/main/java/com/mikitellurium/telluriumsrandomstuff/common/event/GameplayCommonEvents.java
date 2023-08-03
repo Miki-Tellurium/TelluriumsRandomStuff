@@ -238,7 +238,7 @@ public class GameplayCommonEvents {
             if (entity instanceof Zombie || entity instanceof AbstractSkeleton || entity instanceof AbstractPiglin) {
                 ItemStack googles = new ItemStack(ModItems.LAVA_GOOGLES.get());
                 LavaGooglesItem.setColor(googles, DyeColor.byId(random.nextInt(16)));
-                if (random.nextFloat() < 0.25f) {
+                if (random.nextFloat() < 0.40f) {
                     EnchantmentHelper.enchantItem(random, googles, 10 + random.nextInt(20), true);
                 }
                 entity.setItemSlot(EquipmentSlot.HEAD, googles);
