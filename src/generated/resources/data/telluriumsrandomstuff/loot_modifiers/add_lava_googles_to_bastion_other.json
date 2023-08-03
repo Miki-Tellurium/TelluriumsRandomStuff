@@ -1,9 +1,10 @@
 {
   "type": "telluriumsrandomstuff:add_lava_googles",
+  "chance": 10,
   "conditions": [
     {
       "condition": "forge:loot_table_id",
-      "loot_table_id": "minecraft:chests/nether_bridge"
+      "loot_table_id": "minecraft:chests/bastion_other"
     }
   ],
   "item": "telluriumsrandomstuff:lava_googles"

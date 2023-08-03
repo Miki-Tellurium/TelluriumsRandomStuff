@@ -6,6 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -14,41 +15,41 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class LavaGooglesLootModifier extends LootModifier {
+public class AddLavaGoogles extends ItemLootModifier{
 
-    public static final Supplier<Codec<LavaGooglesLootModifier>> CODEC = Suppliers.memoize(()
+    public static final Supplier<Codec<AddLavaGoogles>> CODEC = Suppliers.memoize(()
             -> RecordCodecBuilder.create(
-            inst -> codecStart(inst).and(ForgeRegistries.ITEMS.getCodec().fieldOf("item")
-                    .forGetter(modifier -> modifier.itemLike.asItem())).apply(inst, LavaGooglesLootModifier::new)));
+            instance -> codecStart(instance).and(instance.group(
+                    ForgeRegistries.ITEMS.getCodec().fieldOf("item").forGetter(modifier -> modifier.getItem().asItem()),
+                    Codec.INT.fieldOf("chance").forGetter(AddLavaGoogles::getChance))
+            ).apply(instance, AddLavaGoogles::new)));
 
-    private static final int lootChance = 8;
-    private final ItemLike itemLike;
+    public AddLavaGoogles(ResourceLocation lootTable) {
+        this(ItemLootModifier.getLootConditions(lootTable), ModItems.LAVA_GOOGLES.get(), 10);
+    }
 
-    public LavaGooglesLootModifier(LootItemCondition[] conditionsIn, ItemLike itemLike) {
-        super(conditionsIn);
-        this.itemLike = itemLike;
+    public AddLavaGoogles(LootItemCondition[] conditionsIn, ItemLike itemLike, int chance) {
+        super(conditionsIn, itemLike, chance);
     }
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         RandomSource random = context.getRandom();
-        if(random.nextInt(100) < lootChance) {
-            if (itemLike.asItem() == ModItems.LAVA_GOOGLES.get()) {
+        if(random.nextInt(100) < this.getChance()) {
+            if (this.getItem().asItem() == ModItems.LAVA_GOOGLES.get()) {
                 ItemStack googles = LavaGooglesItem.setColor(new ItemStack(ModItems.LAVA_GOOGLES.get()),
                         DyeColor.byId(random.nextInt(16)));
-                if (random.nextFloat() < 0.25f) {
+                if (random.nextFloat() < 0.40f) {
                     EnchantmentHelper.enchantItem(random, googles, 10 + random.nextInt(20), true);
                 }
                 generatedLoot.add(googles);
             }
         }
-
         return generatedLoot;
     }
 

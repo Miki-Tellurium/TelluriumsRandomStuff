@@ -1,7 +1,8 @@
 {
   "entries": [
-    "telluriumsrandomstuff:soul_jack_o_lantern_in_ancient_city",
-    "telluriumsrandomstuff:lava_googles_in_nether_fortress"
+    "telluriumsrandomstuff:add_lava_googles_to_bastion_other",
+    "telluriumsrandomstuff:add_lava_googles_to_nether_bridge",
+    "telluriumsrandomstuff:add_soul_jack_o_lantern_to_ancient_city"
   ],
   "replace": false
 }

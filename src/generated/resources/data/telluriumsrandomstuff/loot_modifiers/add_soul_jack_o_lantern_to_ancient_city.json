@@ -1,5 +1,6 @@
 {
   "type": "telluriumsrandomstuff:add_soul_jack_o_lantern",
+  "chance": 10,
   "conditions": [
     {
       "condition": "forge:loot_table_id",
