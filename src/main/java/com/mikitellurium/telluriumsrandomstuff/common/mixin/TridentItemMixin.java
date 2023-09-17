@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.mixin;
 
+import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -20,12 +21,14 @@ public class TridentItemMixin {
     shift = At.Shift.AFTER), cancellable = true)
     private void onUseTrident(Level level, Player player, InteractionHand hand,
                               CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-        if (!level.isClientSide) {
-            ItemStack itemstack = player.getItemInHand(hand);
-            if (EnchantmentHelper.getRiptide(itemstack) > 0 &&
-                    LevelUtils.isInsideWaterCauldron(level, player)) {
-                player.startUsingItem(hand);
-                cir.setReturnValue(InteractionResultHolder.consume(itemstack));
+        if (ModCommonConfig.ENABLE_USING_TRIDENT_IN_WATER_CAULDRON.get()) {
+            if (!level.isClientSide) {
+                ItemStack itemstack = player.getItemInHand(hand);
+                if (EnchantmentHelper.getRiptide(itemstack) > 0 &&
+                        LevelUtils.isInsideWaterCauldron(level, player)) {
+                    player.startUsingItem(hand);
+                    cir.setReturnValue(InteractionResultHolder.consume(itemstack));
+                }
             }
         }
     }

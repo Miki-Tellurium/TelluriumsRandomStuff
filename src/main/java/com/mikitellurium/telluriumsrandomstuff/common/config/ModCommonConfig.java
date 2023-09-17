@@ -10,6 +10,7 @@ public class ModCommonConfig {
 
     public static ForgeConfigSpec.BooleanValue ENABLE_MOD_DISPENSER_BEHAVIOR;
     public static ForgeConfigSpec.IntValue ZOMBIE_RIDER_SPAWN_CHANCE;
+    public static ForgeConfigSpec.BooleanValue ENABLE_USING_TRIDENT_IN_WATER_CAULDRON;
 
     public static void register() {
         ForgeConfigSpec.Builder CONFIG_BUILDER = new ForgeConfigSpec.Builder();
@@ -32,6 +33,10 @@ public class ModCommonConfig {
         SoulAnchorBlockEntity.ITEM_VOID_CHANCE = builder
                 .comment("The chance of a stack getting lost when recovering the inventory with a soul anchor")
                 .defineInRange("soulAnchorItemVoidChance", 0, 0, 100);
+
+        ENABLE_USING_TRIDENT_IN_WATER_CAULDRON = builder
+                .comment("Allows for trident to be used when inside a water cauldron.")
+                .define("enableUseTridentInWaterCauldron", true);
 
         builder.pop();
     }
