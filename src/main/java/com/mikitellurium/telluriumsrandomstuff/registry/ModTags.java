@@ -28,6 +28,7 @@ public class ModTags {
 
         public static final TagKey<Item> OPAL_STONES = create("opal_stones");
         public static final TagKey<Item> OPAL_CRYSTALS = create("opal_crystals");
+        public static final TagKey<Item> ALLAY_DUPLICATION_ITEMS = create("allay_duplication_items");
 
         public static TagKey<Item> create(String name) {
             return ItemTags.create(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, name));

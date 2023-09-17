@@ -4,6 +4,7 @@
   "package": "com.mikitellurium.telluriumsrandomstuff.common.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AllayMixin",
     "LiquidBlockMixin",
     "LivingEntityMixin",
     "PointedDripstoneBlockMixin",
