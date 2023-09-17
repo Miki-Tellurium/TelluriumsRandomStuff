@@ -9,13 +9,17 @@ import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesIt
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -244,6 +248,52 @@ public class GameplayCommonEvents {
                 entity.setItemSlot(EquipmentSlot.HEAD, googles);
             }
         }
+    }
+
+    // Trident behaviour
+    @SubscribeEvent
+    public static void onStopUsingItem(LivingEntityUseItemEvent.Stop event) {
+        Level level = event.getEntity().level();
+        ItemStack itemStack = event.getItem();
+        if (event.getEntity() instanceof Player player && itemStack.is(Items.TRIDENT)) {
+            if (LevelUtils.isInsideWaterCauldron(level, player)) {
+                int riptideLevel = EnchantmentHelper.getRiptide(itemStack);
+                if (riptideLevel > 0) {
+                    launchPlayer(level, player, riptideLevel);
+                }
+            }
+        }
+    }
+
+    private static void launchPlayer(Level level, Player player, int riptideLevel) {
+        Vec3 playerPos = player.blockPosition().above().getCenter();
+        player.setPos(playerPos.subtract(0.0D, 0.25D, 0.0D)); // Avoid the player getting stuck on the cauldron
+        float f7 = player.getYRot();
+        float f = player.getXRot();
+        float f1 = -Mth.sin(f7 * ((float)Math.PI / 180F)) * Mth.cos(f * ((float)Math.PI / 180F));
+        float f2 = -Mth.sin(f * ((float)Math.PI / 180F));
+        float f3 = Mth.cos(f7 * ((float)Math.PI / 180F)) * Mth.cos(f * ((float)Math.PI / 180F));
+        float f4 = Mth.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
+        float f5 = 3.0F * ((1.0F + (float)riptideLevel) / 4.0F);
+        f1 *= f5 / f4;
+        f2 *= f5 / f4;
+        f3 *= f5 / f4;
+        player.push(f1, f2, f3);
+        player.startAutoSpinAttack(20);
+        if (player.onGround()) {
+            player.move(MoverType.SELF, new Vec3(0.0D, 1.1999999F, 0.0D));
+        }
+
+        SoundEvent soundevent;
+        if (riptideLevel >= 3) {
+            soundevent = SoundEvents.TRIDENT_RIPTIDE_3;
+        } else if (riptideLevel == 2) {
+            soundevent = SoundEvents.TRIDENT_RIPTIDE_2;
+        } else {
+            soundevent = SoundEvents.TRIDENT_RIPTIDE_1;
+        }
+
+        level.playSound(null, player, soundevent, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
 }

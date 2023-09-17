@@ -4,6 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.*;
 import com.mikitellurium.telluriumsrandomstuff.common.content.fluid.SoulLavaBlock;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
