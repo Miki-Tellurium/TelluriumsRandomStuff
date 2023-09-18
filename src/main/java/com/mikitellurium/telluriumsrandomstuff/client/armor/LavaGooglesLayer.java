@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.render;
+package com.mikitellurium.telluriumsrandomstuff.client.armor;
 
 import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -16,7 +16,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
-import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 
