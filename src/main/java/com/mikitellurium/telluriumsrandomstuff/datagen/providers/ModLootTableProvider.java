@@ -54,7 +54,7 @@ public class ModLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.CUT_OPAL_BRICK_STAIRS.get());
         this.dropSelf(ModBlocks.CUT_OPAL_BRICK_WALL.get());
         this.dropSelf(ModBlocks.CUT_OPAL_BRICKS.get());
-        this.dropSelf(ModBlocks.EXTRACTOR_BLOCK.get());
+        this.dropSelf(ModBlocks.EXTRACTOR.get());
         this.dropSelf(ModBlocks.GRATE_MAGMA_BLOCK.get());
         this.dropSelf(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get());
         this.dropSelf(ModBlocks.GRATE_SOUL_SAND.get());
@@ -77,19 +77,20 @@ public class ModLootTableProvider extends BlockLootSubProvider {
         this.dropPottedContents(ModBlocks.POTTED_BRIGHT_TORCHFLOWER.get());
         this.dropPottedContents(ModBlocks.POTTED_SOUL_TORCHFLOWER.get());
         this.dropSelf(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get());
-        this.dropSelf(ModBlocks.SOUL_ANCHOR_BLOCK.get());
-        this.dropSelf(ModBlocks.SOUL_FURNACE_BLOCK.get());
-        this.dropOther(ModBlocks.SOUL_LAVA_CAULDRON_BLOCK.get(), Blocks.CAULDRON);
+        this.dropSelf(ModBlocks.SOUL_ANCHOR.get());
+        this.dropSelf(ModBlocks.SOUL_FURNACE.get());
+        this.dropOther(ModBlocks.SOUL_LAVA_CAULDRON.get(), Blocks.CAULDRON);
         this.dropSelf(ModBlocks.SOUL_MAGMA_BLOCK.get());
         this.add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(ModBlocks.SOUL_MAGMA_BRICKS.get());
-        this.dropSelf(ModBlocks.SOUL_OBSIDIAN_BLOCK.get());
+        this.dropSelf(ModBlocks.SOUL_OBSIDIAN.get());
         this.dropSelf(ModBlocks.SOUL_TORCHFLOWER.get());
         this.add(ModBlocks.SOUL_TORCHFLOWER_CROP.get(), this.applyExplosionDecay(ModBlocks.SOUL_TORCHFLOWER_CROP.get(),
                 LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.SOUL_TORCHFLOWER_SEEDS.get())))));
         this.dropSelf(ModBlocks.BLUE_REDSTONE_LAMP.get());
         this.dropWhenSilkTouch(ModBlocks.AWAKENED_SCULK_SHRIEKER.get());
         this.dropSelf(ModBlocks.SOUL_JACK_O_LANTERN.get());
+        this.dropSelf(ModBlocks.STONE_ITEM_PEDESTAL.get());
     }
 
     @Override

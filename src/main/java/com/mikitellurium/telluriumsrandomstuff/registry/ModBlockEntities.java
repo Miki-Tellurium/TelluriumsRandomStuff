@@ -18,15 +18,15 @@ public class ModBlockEntities {
 
     public static final RegistryObject<BlockEntityType<SoulFurnaceBlockEntity>> SOUL_FURNACE = BLOCK_ENTITIES.register(
             "soul_furnace", () -> BlockEntityType.Builder.of(SoulFurnaceBlockEntity::new,
-                    ModBlocks.SOUL_FURNACE_BLOCK.get()).build(null));
+                    ModBlocks.SOUL_FURNACE.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<SoulAnchorBlockEntity>> SOUL_ANCHOR = BLOCK_ENTITIES.register(
             "soul_anchor", () -> BlockEntityType.Builder.of(SoulAnchorBlockEntity::new,
-                    ModBlocks.SOUL_ANCHOR_BLOCK.get()).build(null));
+                    ModBlocks.SOUL_ANCHOR.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<ExtractorBlockEntity>> EXTRACTOR = BLOCK_ENTITIES.register(
             "extractor", () -> BlockEntityType.Builder.of(ExtractorBlockEntity::new,
-                    ModBlocks.EXTRACTOR_BLOCK.get()).build(null));
+                    ModBlocks.EXTRACTOR.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<AwakenedSculkShriekerBlockEntity>> AWAKENED_SCULK_SHRIEKER =
             BLOCK_ENTITIES.register(

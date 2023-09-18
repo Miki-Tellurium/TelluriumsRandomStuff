@@ -51,7 +51,7 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
 
     public SoulFurnaceSmeltingCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(GUI_TEXTURE, 0, 0, 120, 72);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_FURNACE_BLOCK.get()));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_FURNACE.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(25)
                 .build(new CacheLoader<>() {

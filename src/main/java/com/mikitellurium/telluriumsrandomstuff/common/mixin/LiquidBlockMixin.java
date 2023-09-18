@@ -30,7 +30,7 @@ public abstract class LiquidBlockMixin {
             if (random.nextFloat() < soulLavaDripChance) {
                 BlockPos maybeCauldronPos = LevelUtils.findFillableCauldronBelow(level, pos.below()); // Find empty cauldron under soul sand
                 if (maybeCauldronPos != null) {
-                    BlockState soulLavaCauldron = ModBlocks.SOUL_LAVA_CAULDRON_BLOCK.get().defaultBlockState();
+                    BlockState soulLavaCauldron = ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState();
                     level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                     level.setBlockAndUpdate(maybeCauldronPos, soulLavaCauldron);
                     level.gameEvent(GameEvent.BLOCK_CHANGE, maybeCauldronPos, GameEvent.Context.of(soulLavaCauldron));

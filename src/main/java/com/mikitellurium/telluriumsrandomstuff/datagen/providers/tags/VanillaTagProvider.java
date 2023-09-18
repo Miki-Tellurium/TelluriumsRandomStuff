@@ -30,7 +30,7 @@ public class VanillaTagProvider {
                     .add(ModBlocks.HYDRODYNAMIC_RAIL.get())
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())
                     .add(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get())
-                    .add(ModBlocks.SOUL_FURNACE_BLOCK.get())
+                    .add(ModBlocks.SOUL_FURNACE.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICKS.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get())
                     .add(ModBlocks.OPAL.get())
@@ -58,9 +58,10 @@ public class VanillaTagProvider {
                     .add(ModBlocks.OPAL_CRYSTAL_ORE.get())
                     .add(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get())
                     .add(ModBlocks.OPAL_CRYSTAL_BLOCK.get())
-                    .add(ModBlocks.SOUL_OBSIDIAN_BLOCK.get())
-                    .add(ModBlocks.SOUL_ANCHOR_BLOCK.get())
-                    .add(ModBlocks.EXTRACTOR_BLOCK.get());
+                    .add(ModBlocks.SOUL_OBSIDIAN.get())
+                    .add(ModBlocks.SOUL_ANCHOR.get())
+                    .add(ModBlocks.EXTRACTOR.get())
+                    .add(ModBlocks.STONE_ITEM_PEDESTAL.get());
 
             this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                     .add(ModBlocks.GRATE_SOUL_SAND.get());
@@ -78,7 +79,7 @@ public class VanillaTagProvider {
                     .add(ModBlocks.OPAL_BUTTON.get());
 
             this.tag(BlockTags.CAULDRONS)
-                    .add(ModBlocks.SOUL_LAVA_CAULDRON_BLOCK.get());
+                    .add(ModBlocks.SOUL_LAVA_CAULDRON.get());
 
             this.tag(BlockTags.DRIPSTONE_REPLACEABLE)
                     .add(ModBlocks.OPAL.get());
@@ -88,8 +89,8 @@ public class VanillaTagProvider {
                     .add(ModBlocks.POTTED_SOUL_TORCHFLOWER.get());
 
             this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
-                    .add(ModBlocks.SOUL_OBSIDIAN_BLOCK.get())
-                    .add(ModBlocks.SOUL_ANCHOR_BLOCK.get());
+                    .add(ModBlocks.SOUL_OBSIDIAN.get())
+                    .add(ModBlocks.SOUL_ANCHOR.get());
 
             this.tag(BlockTags.NEEDS_IRON_TOOL)
                     .add(ModBlocks.OPAL_CRYSTAL_ORE.get())
@@ -120,8 +121,8 @@ public class VanillaTagProvider {
                     .add(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICKS.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get())
-                    .add(ModBlocks.SOUL_FURNACE_BLOCK.get())
-                    .add(ModBlocks.SOUL_OBSIDIAN_BLOCK.get());
+                    .add(ModBlocks.SOUL_FURNACE.get())
+                    .add(ModBlocks.SOUL_OBSIDIAN.get());
 
             this.tag(BlockTags.SOUL_SPEED_BLOCKS)
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())

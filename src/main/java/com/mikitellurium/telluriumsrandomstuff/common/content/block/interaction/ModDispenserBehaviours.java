@@ -46,7 +46,7 @@ public class ModDispenserBehaviours {
         registerCauldronInteraction(Items.WATER_BUCKET, Blocks.WATER_CAULDRON, SoundEvents.BUCKET_EMPTY);
         registerCauldronInteraction(Items.LAVA_BUCKET, Blocks.LAVA_CAULDRON, SoundEvents.BUCKET_EMPTY_LAVA);
         registerCauldronInteraction(Items.POWDER_SNOW_BUCKET, Blocks.POWDER_SNOW_CAULDRON, SoundEvents.BUCKET_EMPTY_POWDER_SNOW);
-        registerCauldronInteraction(ModItems.SOUL_LAVA_BUCKET.get(), ModBlocks.SOUL_LAVA_CAULDRON_BLOCK.get(), SoundEvents.BUCKET_EMPTY_LAVA);
+        registerCauldronInteraction(ModItems.SOUL_LAVA_BUCKET.get(), ModBlocks.SOUL_LAVA_CAULDRON.get(), SoundEvents.BUCKET_EMPTY_LAVA);
         DispenserBlock.registerBehavior(ModItems.LAVA_GOOGLES.get(), ArmorItem.DISPENSE_ITEM_BEHAVIOR);
     }
 

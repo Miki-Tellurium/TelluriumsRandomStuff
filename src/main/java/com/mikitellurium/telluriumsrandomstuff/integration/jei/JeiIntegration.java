@@ -89,7 +89,7 @@ public class JeiIntegration implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE_BLOCK.get()), SOUL_FURNACE_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), SOUL_FURNACE_RECIPE_TYPE);
     }
 
     @Override

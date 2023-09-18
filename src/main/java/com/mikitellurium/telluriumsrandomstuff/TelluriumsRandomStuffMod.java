@@ -62,11 +62,11 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.SOUL_LAVA_BUCKET);
             event.accept(ModBlocks.SOUL_MAGMA_BLOCK);
             event.accept(ModBlocks.GRATE_SOUL_MAGMA_BLOCK);
-            event.accept(ModBlocks.SOUL_FURNACE_BLOCK);
+            event.accept(ModBlocks.SOUL_FURNACE);
             event.accept(ModBlocks.SOUL_MAGMA_BRICKS);
             event.accept(ModBlocks.SOUL_MAGMA_BRICK_SLAB);
-            event.accept(ModBlocks.SOUL_OBSIDIAN_BLOCK);
-            event.accept(ModBlocks.SOUL_ANCHOR_BLOCK);
+            event.accept(ModBlocks.SOUL_OBSIDIAN);
+            event.accept(ModBlocks.SOUL_ANCHOR);
             event.accept(ModItems.MYSTIC_POTATO);
             event.accept(soulHarvestingI);
             event.accept(soulHarvestingII);
@@ -104,7 +104,7 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.OPAL_CRYSTAL_HOE);
             event.accept(ModItems.OPAL_CRYSTAL_SWORD);
             event.accept(ModItems.FILTER);
-            event.accept(ModBlocks.EXTRACTOR_BLOCK);
+            event.accept(ModBlocks.EXTRACTOR);
             event.accept(ModBlocks.BRIGHT_TORCHFLOWER);
             event.accept(ModItems.BRIGHT_TORCHFLOWER_SEEDS);
             event.accept(ModBlocks.SOUL_TORCHFLOWER);
@@ -117,6 +117,7 @@ public class TelluriumsRandomStuffMod {
             event.accept(ModItems.LAVA_GOOGLES);
             event.accept(ModBlocks.AWAKENED_SCULK_SHRIEKER);
             event.accept(ModBlocks.SOUL_JACK_O_LANTERN);
+            event.accept(ModBlocks.STONE_ITEM_PEDESTAL);
         }
     }
 

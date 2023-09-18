@@ -4,7 +4,6 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.*;
 import com.mikitellurium.telluriumsrandomstuff.common.content.fluid.SoulLavaBlock;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -37,7 +36,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GRATE_SOUL_MAGMA_BLOCK = registerBlockWithItem("grate_soul_magma_block", GrateSoulMagmaBlock::new);
 
-    public static final RegistryObject<Block> SOUL_FURNACE_BLOCK = registerBlockWithItem("soul_furnace", SoulFurnaceBlock::new);
+    public static final RegistryObject<Block> SOUL_FURNACE = registerBlockWithItem("soul_furnace", SoulFurnaceBlock::new);
 
     public static final RegistryObject<Block> SOUL_MAGMA_BRICKS = registerBlockWithItem("soul_magma_bricks",
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)
@@ -51,7 +50,7 @@ public class ModBlocks {
                     .lightLevel((blockState) -> 2)
                     .emissiveRendering((blockState, blockGetter, blockPos) -> true)));
 
-    public static final RegistryObject<Block> SOUL_LAVA_CAULDRON_BLOCK = BLOCKS.register("soul_lava_cauldron", SoulLavaCauldronBlock::new);
+    public static final RegistryObject<Block> SOUL_LAVA_CAULDRON = BLOCKS.register("soul_lava_cauldron", SoulLavaCauldronBlock::new);
 
     public static final RegistryObject<Block> OPAL = registerBlockWithItem("opal",
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
@@ -129,11 +128,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> OPAL_CRYSTAL_BLOCK = registerBlockWithItem("opal_crystal_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
 
-    public static final RegistryObject<Block> SOUL_OBSIDIAN_BLOCK = registerBlockWithItem("soul_obsidian", SoulObsidianBlock::new);
+    public static final RegistryObject<Block> SOUL_OBSIDIAN = registerBlockWithItem("soul_obsidian", SoulObsidianBlock::new);
 
-    public static final RegistryObject<Block> SOUL_ANCHOR_BLOCK = registerBlockWithItem("soul_anchor", SoulAnchorBlock::new);
+    public static final RegistryObject<Block> SOUL_ANCHOR = registerBlockWithItem("soul_anchor", SoulAnchorBlock::new);
 
-    public static final RegistryObject<Block> EXTRACTOR_BLOCK = registerBlockWithItem("extractor", ExtractorBlock::new);
+    public static final RegistryObject<Block> EXTRACTOR = registerBlockWithItem("extractor", ExtractorBlock::new);
 
     public static final RegistryObject<Block> BRIGHT_TORCHFLOWER = registerBlockWithItem("bright_torchflower",
             () -> new FlowerBlock(() -> MobEffects.NIGHT_VISION, 5, BlockBehaviour.Properties.copy(Blocks.TORCHFLOWER)
@@ -168,6 +167,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SOUL_JACK_O_LANTERN = registerBlockWithItem("soul_jack_o_lantern",
             () -> new CarvedPumpkinBlock(BlockBehaviour.Properties.copy(Blocks.JACK_O_LANTERN).lightLevel((state) -> 10)));
+
+    public static final RegistryObject<Block> STONE_ITEM_PEDESTAL = registerBlockWithItem("stone_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {

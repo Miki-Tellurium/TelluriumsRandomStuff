@@ -106,7 +106,7 @@ public class SoulAnchorMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, ModBlocks.SOUL_ANCHOR_BLOCK.get());
+                player, ModBlocks.SOUL_ANCHOR.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
