@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.mixin;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -25,9 +26,7 @@ public abstract class LiquidBlockMixin {
     @Inject(method = "randomTick", at = @At(value = "TAIL"))
     private void randomConvertLavaToSoulLava(BlockState state, ServerLevel level, BlockPos pos,
                                              RandomSource random, CallbackInfo ci) {
-        if (level.getFluidState(pos).is(Fluids.LAVA) && (level.getBlockState(pos.below()).is(Blocks.SOUL_SAND) ||
-                level.getBlockState(pos.below()).is(ModBlocks.GRATE_SOUL_SAND.get()))) {
-
+        if (level.getFluidState(pos).is(Fluids.LAVA) && level.getBlockState(pos.below()).is(ModTags.Blocks.SOUL_LAVA_CONVERTER)) {
             if (random.nextFloat() < soulLavaDripChance) {
                 BlockPos maybeCauldronPos = LevelUtils.findFillableCauldronBelow(level, pos.below()); // Find empty cauldron under soul sand
                 if (maybeCauldronPos != null) {

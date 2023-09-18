@@ -15,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -44,6 +45,10 @@ public class ModTagProvider {
             this.tag(ModTags.Blocks.BUBBLE_COLUMN_GENERATOR)
                     .addTag(ModTags.Blocks.BUBBLE_COLUMN_DRAG_DOWN)
                     .addTag(ModTags.Blocks.BUBBLE_COLUMN_LIFT_UP);
+
+            this.tag(ModTags.Blocks.SOUL_LAVA_CONVERTER)
+                    .add(net.minecraft.world.level.block.Blocks.SOUL_SAND)
+                    .add(ModBlocks.GRATE_SOUL_SAND.get());
         }
     }
 
