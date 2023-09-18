@@ -1,31 +1,25 @@
 package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulAnchorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.render.LavaGooglesLayer;
-import com.mikitellurium.telluriumsrandomstuff.client.render.LavaGooglesModel;
-import com.mikitellurium.telluriumsrandomstuff.client.render.LavaGooglesOverlay;
+import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesLayer;
+import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesModel;
+import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesOverlay;
 import com.mikitellurium.telluriumsrandomstuff.common.content.particle.SoulLavaDripParticle;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModParticles;
+import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -43,6 +37,11 @@ public class ClientSetup {
         MenuScreens.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
         MenuScreens.register(ModMenuTypes.SOUL_ANCHOR_MENU.get(), SoulAnchorScreen::new);
         MenuScreens.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
+    }
+
+    @SubscribeEvent
+    public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlockEntities.ITEM_PEDESTAL.get(), ItemPedestalRenderer::new);
     }
 
     @SubscribeEvent
@@ -116,7 +115,7 @@ public class ClientSetup {
 
     @SuppressWarnings("unchecked")
     @SubscribeEvent
-    public static void addLayers(EntityRenderersEvent.AddLayers event) {
+    public static void addEntityModelLayers(EntityRenderersEvent.AddLayers event) {
         for (EntityType<?> entityType : ForgeRegistries.ENTITY_TYPES) {
             try {
                 if (entityType == EntityType.PLAYER) {
@@ -144,7 +143,7 @@ public class ClientSetup {
     }
 
     @SubscribeEvent
-    public static void addModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
+    public static void registerModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(LavaGooglesModel.LAVA_GOOGLES, LavaGooglesModel::createLayerDefinition);
     }
 

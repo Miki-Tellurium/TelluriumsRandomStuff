@@ -1,10 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.AwakenedSculkShriekerBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.ExtractorBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.SoulAnchorBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.SoulFurnaceBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,6 +29,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register(
             "awakened_sculk_shrieker", () -> BlockEntityType.Builder.of(AwakenedSculkShriekerBlockEntity::new,
                     ModBlocks.AWAKENED_SCULK_SHRIEKER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ItemPedestalBlockEntity>> ITEM_PEDESTAL =
+            BLOCK_ENTITIES.register("item_pedestal", () -> BlockEntityType.Builder.of(ItemPedestalBlockEntity::new,
+                    ModBlocks.STONE_ITEM_PEDESTAL.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
