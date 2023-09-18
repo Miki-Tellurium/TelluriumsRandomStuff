@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.render;
+package com.mikitellurium.telluriumsrandomstuff.client.armor;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
