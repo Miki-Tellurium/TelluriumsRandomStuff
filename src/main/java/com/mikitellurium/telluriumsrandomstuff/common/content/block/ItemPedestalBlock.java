@@ -53,14 +53,10 @@ public class ItemPedestalBlock extends BaseEntityBlock {
             if (itemPedestal.isEmpty()) {
                 if (itemPedestal.insertItem(itemStack, !player.isCreative())) {
                     level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                    LogUtils.sendChatMessage("Inserted item");
-                } else {
-                    LogUtils.sendChatMessage("Could not insert item");
                 }
             } else {
                 itemPedestal.removeItem();
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                LogUtils.sendChatMessage("Removed item");
             }
             return InteractionResult.SUCCESS;
         }

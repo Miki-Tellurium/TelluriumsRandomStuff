@@ -80,7 +80,6 @@ public class ItemPedestalBlockEntity extends BlockEntity {
 
     public void syncItems(ItemStack itemStack) {
         this.itemHandler.setStackInSlot(0, itemStack);
-        LogUtils.sendChatMessage("Synched item with client");
     }
 
     // Capability stuff
