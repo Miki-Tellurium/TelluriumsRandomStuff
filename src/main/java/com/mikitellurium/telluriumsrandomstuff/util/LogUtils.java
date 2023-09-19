@@ -5,7 +5,7 @@ import net.minecraft.network.chat.Component;
 
 public class LogUtils {
 
-    public static void sendChatMessage(String message) {
+    public static void chatMessage(String message) {
         Minecraft.getInstance().player.sendSystemMessage(Component.literal(message));
     }
 

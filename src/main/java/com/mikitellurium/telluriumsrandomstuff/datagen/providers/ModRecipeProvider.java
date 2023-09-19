@@ -1,10 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.common.content.block.ItemPedestalBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.LavaGooglesRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulSmeltingRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
@@ -369,15 +371,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_soul_torch", has(Blocks.SOUL_TORCH))
                 .unlockedBy("has_carved_pumpkin", has(Blocks.CARVED_PUMPKIN))
                 .save(consumer, modResourceLocation("soul_jack_o_lantern"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STONE_ITEM_PEDESTAL.get(), 2)
-                .pattern(" I ")
-                .pattern(" # ")
-                .pattern("###")
-                .define('#', Blocks.STONE)
-                .define('I', Items.ITEM_FRAME)
-                .unlockedBy("has_stone", has(Blocks.STONE))
-                .unlockedBy("has_item_frame", has(Items.ITEM_FRAME))
-                .save(consumer, modResourceLocation("stone_item_pedestal"));
+        this.itemPedestalShaped(consumer, "stone_item_pedestal", (ItemPedestalBlock)ModBlocks.STONE_ITEM_PEDESTAL.get(),
+                Blocks.STONE);
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
@@ -559,6 +554,18 @@ public class ModRecipeProvider extends RecipeProvider {
                         ModBlocks.SOUL_MAGMA_BRICKS.get(), 1)
                 .unlockedBy("has_soul_magma_block", has(ModBlocks.SOUL_MAGMA_BLOCK.get()))
                 .save(consumer, modResourceLocation("soul_magma_bricks_from_stone_magma_blocks_stonecutting"));
+    }
+
+    public void itemPedestalShaped(Consumer<FinishedRecipe> consumer, String id, ItemPedestalBlock itemPedestal, Block material) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, itemPedestal, 2)
+                .pattern(" I ")
+                .pattern(" # ")
+                .pattern("###")
+                .define('#', material)
+                .define('I', Items.ITEM_FRAME)
+                .unlockedBy("has_" + id, has(material))
+                .unlockedBy("has_item_frame", has(Items.ITEM_FRAME))
+                .save(consumer, modResourceLocation(id));
     }
 
     private ResourceLocation modResourceLocation(String id) {
