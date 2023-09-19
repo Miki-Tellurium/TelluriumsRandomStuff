@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.content.blockentity;
 
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
+import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.DisplayNameSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.ItemStackSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.RotOffsetSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
@@ -42,9 +43,12 @@ public class ItemPedestalBlockEntity extends BlockEntity {
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private static final String tag_inventory = "inventory";
+    private static final String tag_alwaysDisplayName = "alwaysDisplayName";
     private final int itemRotationTime = 125;
     private int rotTick = 0;
     private float rotOffset = Mth.PI * 2;
+    private boolean alwaysDisplayName = false;
 
     public ItemPedestalBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ITEM_PEDESTAL.get(), pos, state);
@@ -117,6 +121,20 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         this.rotOffset = f;
     }
 
+    public boolean alwaysDisplayName() {
+        return alwaysDisplayName;
+    }
+
+    public void syncAlwaysDisplayName(boolean alwaysDisplayName) {
+        this.alwaysDisplayName = alwaysDisplayName;
+    }
+
+    public void setAlwaysDisplayName() {
+        this.alwaysDisplayName = true;
+        ModMessages.sendToClients(new DisplayNameSyncS2CPacket(alwaysDisplayName, worldPosition));
+        this.setChanged();
+    }
+
     // Capability stuff
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -153,14 +171,16 @@ public class ItemPedestalBlockEntity extends BlockEntity {
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
-        tag.put("inventory", itemHandler.serializeNBT());
+        tag.put(tag_inventory, itemHandler.serializeNBT());
+        tag.putBoolean(tag_alwaysDisplayName, alwaysDisplayName);
         super.saveAdditional(tag);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        itemHandler.deserializeNBT(tag.getCompound("inventory"));
+        itemHandler.deserializeNBT(tag.getCompound(tag_inventory));
+        alwaysDisplayName = tag.getBoolean(tag_alwaysDisplayName);
     }
 
 }

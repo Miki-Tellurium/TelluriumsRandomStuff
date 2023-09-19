@@ -47,7 +47,7 @@ public class ItemPedestalRenderer implements BlockEntityRenderer<ItemPedestalBlo
             BlockPos pos = itemPedestal.getBlockPos();
             boolean isInDisplayDistance = pos.closerToCenterThan(
                     Minecraft.getInstance().player.blockPosition().getCenter(), 6.0D) && itemStack.hasCustomHoverName();
-            if (isInDisplayDistance) {
+            if (isInDisplayDistance || itemPedestal.alwaysDisplayName()) {
                 poseStack.pushPose();
                 Component text = itemStack.getHoverName();
                 int textColor = itemStack.getRarity().getStyleModifier().apply(text.getStyle()).getColor().getValue();

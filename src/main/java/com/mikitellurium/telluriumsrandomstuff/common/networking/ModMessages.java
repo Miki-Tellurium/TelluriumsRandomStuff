@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.networking;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.DisplayNameSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.FluidSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.ItemStackSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.RotOffsetSyncS2CPacket;
@@ -44,6 +45,11 @@ public class ModMessages {
                 .decoder(RotOffsetSyncS2CPacket::new)
                 .encoder(RotOffsetSyncS2CPacket::toBytes)
                 .consumerMainThread(RotOffsetSyncS2CPacket::handle)
+                .add();
+        net.messageBuilder(DisplayNameSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(DisplayNameSyncS2CPacket::new)
+                .encoder(DisplayNameSyncS2CPacket::toBytes)
+                .consumerMainThread(DisplayNameSyncS2CPacket::handle)
                 .add();
     }
     
