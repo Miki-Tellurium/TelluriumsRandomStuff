@@ -171,6 +171,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> STONE_ITEM_PEDESTAL = registerBlockWithItem("stone_item_pedestal",
             () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryObject<Block> STONE_BRICK_ITEM_PEDESTAL = registerBlockWithItem("stone_brick_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

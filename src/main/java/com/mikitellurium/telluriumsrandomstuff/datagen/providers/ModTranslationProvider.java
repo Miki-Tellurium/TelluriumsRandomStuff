@@ -83,6 +83,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("block.telluriumsrandomstuff.awakened_sculk_shrieker", "Awakened Sculk Shrieker");
         add("block.telluriumsrandomstuff.soul_jack_o_lantern", "Soul Jack o'Lantern");
         add("block.telluriumsrandomstuff.stone_item_pedestal", "Stone Item Pedestal");
+        add("block.telluriumsrandomstuff.stone_brick_item_pedestal", "Stone Brick Item Pedestal");
 
         add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning",
                 "Warning!");

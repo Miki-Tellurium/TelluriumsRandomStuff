@@ -373,6 +373,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer, modResourceLocation("soul_jack_o_lantern"));
         this.itemPedestalShaped(consumer, "stone_item_pedestal", (ItemPedestalBlock)ModBlocks.STONE_ITEM_PEDESTAL.get(),
                 Blocks.STONE);
+        this.itemPedestalShaped(consumer, "stone_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.STONE_BRICK_ITEM_PEDESTAL.get(),
+                Blocks.STONE_BRICKS);
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

@@ -91,6 +91,7 @@ public class ModLootTableProvider extends BlockLootSubProvider {
         this.dropWhenSilkTouch(ModBlocks.AWAKENED_SCULK_SHRIEKER.get());
         this.dropSelf(ModBlocks.SOUL_JACK_O_LANTERN.get());
         this.dropSelf(ModBlocks.STONE_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.STONE_BRICK_ITEM_PEDESTAL.get());
     }
 
     @Override
