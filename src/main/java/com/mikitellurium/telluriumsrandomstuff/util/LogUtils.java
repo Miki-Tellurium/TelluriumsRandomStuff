@@ -9,7 +9,7 @@ public class LogUtils {
         Minecraft.getInstance().player.sendSystemMessage(Component.literal(message));
     }
 
-    public static void consoleLogMessage(String message) {
+    public static <T> void consoleLogMessage(T message) {
         System.out.println(message);
     }
 
