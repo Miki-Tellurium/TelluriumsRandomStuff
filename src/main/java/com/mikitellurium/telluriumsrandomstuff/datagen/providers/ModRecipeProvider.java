@@ -6,7 +6,6 @@ import com.mikitellurium.telluriumsrandomstuff.common.recipe.LavaGooglesRecipeBu
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulSmeltingRecipeBuilder;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
@@ -375,6 +374,20 @@ public class ModRecipeProvider extends RecipeProvider {
                 Blocks.STONE);
         this.itemPedestalShaped(consumer, "stone_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.STONE_BRICK_ITEM_PEDESTAL.get(),
                 Blocks.STONE_BRICKS);
+        this.itemPedestalShaped(consumer, "mossy_stone_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.MOSSY_STONE_BRICK_ITEM_PEDESTAL.get(),
+                Blocks.MOSSY_STONE_BRICKS);
+        this.itemPedestalShaped(consumer, "polished_granite_item_pedestal", (ItemPedestalBlock)ModBlocks.POLISHED_GRANITE_ITEM_PEDESTAL.get(),
+                Blocks.POLISHED_GRANITE);
+        this.itemPedestalShaped(consumer, "polished_diorite_item_pedestal", (ItemPedestalBlock)ModBlocks.POLISHED_DIORITE_ITEM_PEDESTAL.get(),
+                Blocks.POLISHED_DIORITE);
+        this.itemPedestalShaped(consumer, "polished_andesite_item_pedestal", (ItemPedestalBlock)ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL.get(),
+                Blocks.POLISHED_ANDESITE);
+        this.itemPedestalShaped(consumer, "polished_deepslate_item_pedestal", (ItemPedestalBlock)ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL.get(),
+                Blocks.POLISHED_DEEPSLATE);
+        this.itemPedestalShaped(consumer, "deepslate_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL.get(),
+                Blocks.DEEPSLATE_BRICKS);
+        this.itemPedestalShaped(consumer, "deepslate_tile_item_pedestal", (ItemPedestalBlock)ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get(),
+                Blocks.DEEPSLATE_TILES);
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

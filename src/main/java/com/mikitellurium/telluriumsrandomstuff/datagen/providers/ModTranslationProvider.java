@@ -84,6 +84,13 @@ public class ModTranslationProvider extends LanguageProvider {
         add("block.telluriumsrandomstuff.soul_jack_o_lantern", "Soul Jack o'Lantern");
         add("block.telluriumsrandomstuff.stone_item_pedestal", "Stone Item Pedestal");
         add("block.telluriumsrandomstuff.stone_brick_item_pedestal", "Stone Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.mossy_stone_brick_item_pedestal", "Mossy Stone Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.polished_granite_item_pedestal", "Polished Granite Item Pedestal");
+        add("block.telluriumsrandomstuff.polished_diorite_item_pedestal", "Polished Diorite Item Pedestal");
+        add("block.telluriumsrandomstuff.polished_andesite_item_pedestal", "Polished Andesite Item Pedestal");
+        add("block.telluriumsrandomstuff.polished_deepslate_item_pedestal", "Polished Deepslate Item Pedestal");
+        add("block.telluriumsrandomstuff.deepslate_brick_item_pedestal", "Deepslate Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.deepslate_tile_item_pedestal", "Deepslate Tile Item Pedestal");
 
         add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning",
                 "Warning!");

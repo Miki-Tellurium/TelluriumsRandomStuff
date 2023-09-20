@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
@@ -50,9 +49,9 @@ public class ModCreativeTab {
                 event.accept(ModItems.SOUL_LAVA_BUCKET);
                 event.accept(ModBlocks.SOUL_MAGMA_BLOCK);
                 event.accept(ModBlocks.GRATE_SOUL_MAGMA_BLOCK);
-                event.accept(ModBlocks.SOUL_FURNACE);
                 event.accept(ModBlocks.SOUL_MAGMA_BRICKS);
                 event.accept(ModBlocks.SOUL_MAGMA_BRICK_SLAB);
+                event.accept(ModBlocks.SOUL_FURNACE);
                 event.accept(ModBlocks.SOUL_OBSIDIAN);
                 event.accept(ModBlocks.SOUL_ANCHOR);
                 event.accept(ModItems.MYSTIC_POTATO);
@@ -107,6 +106,13 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.SOUL_JACK_O_LANTERN);
                 event.accept(ModBlocks.STONE_ITEM_PEDESTAL);
                 event.accept(ModBlocks.STONE_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.MOSSY_STONE_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.POLISHED_GRANITE_ITEM_PEDESTAL);
+                event.accept(ModBlocks.POLISHED_DIORITE_ITEM_PEDESTAL);
+                event.accept(ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL);
+                event.accept(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL);
+                event.accept(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL);
             }
         }
     }

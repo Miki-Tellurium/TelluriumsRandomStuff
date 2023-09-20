@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:deepslate_tiles"
+    },
+    "I": {
+      "item": "minecraft:item_frame"
+    }
+  },
+  "pattern": [
+    " I ",
+    " # ",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "item": "telluriumsrandomstuff:deepslate_tile_item_pedestal"
+  },
+  "show_notification": true
+}

@@ -62,7 +62,14 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_ANCHOR.get())
                     .add(ModBlocks.EXTRACTOR.get())
                     .add(ModBlocks.STONE_ITEM_PEDESTAL.get())
-                    .add(ModBlocks.STONE_BRICK_ITEM_PEDESTAL.get());
+                    .add(ModBlocks.STONE_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.MOSSY_STONE_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.POLISHED_GRANITE_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.POLISHED_DIORITE_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get());
 
             this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                     .add(ModBlocks.GRATE_SOUL_SAND.get());

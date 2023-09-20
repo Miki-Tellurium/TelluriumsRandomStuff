@@ -92,6 +92,13 @@ public class ModLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.SOUL_JACK_O_LANTERN.get());
         this.dropSelf(ModBlocks.STONE_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.STONE_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.MOSSY_STONE_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.POLISHED_GRANITE_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.POLISHED_DIORITE_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get());
     }
 
     @Override

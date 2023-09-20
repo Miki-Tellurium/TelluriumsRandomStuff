@@ -1,0 +1,6 @@
+{
+  "parent": "telluriumsrandomstuff:block/item_pedestal",
+  "textures": {
+    "texture": "minecraft:block/mossy_stone_bricks"
+  }
+}

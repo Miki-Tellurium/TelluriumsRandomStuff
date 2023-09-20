@@ -36,6 +36,13 @@
     "telluriumsrandomstuff:soul_anchor",
     "telluriumsrandomstuff:extractor",
     "telluriumsrandomstuff:stone_item_pedestal",
-    "telluriumsrandomstuff:stone_brick_item_pedestal"
+    "telluriumsrandomstuff:stone_brick_item_pedestal",
+    "telluriumsrandomstuff:mossy_stone_brick_item_pedestal",
+    "telluriumsrandomstuff:polished_granite_item_pedestal",
+    "telluriumsrandomstuff:polished_diorite_item_pedestal",
+    "telluriumsrandomstuff:polished_andesite_item_pedestal",
+    "telluriumsrandomstuff:polished_deepslate_item_pedestal",
+    "telluriumsrandomstuff:deepslate_brick_item_pedestal",
+    "telluriumsrandomstuff:deepslate_tile_item_pedestal"
   ]
 }

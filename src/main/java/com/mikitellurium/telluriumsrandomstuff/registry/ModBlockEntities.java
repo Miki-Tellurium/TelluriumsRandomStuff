@@ -32,7 +32,12 @@ public class ModBlockEntities {
 
     public static final RegistryObject<BlockEntityType<ItemPedestalBlockEntity>> ITEM_PEDESTAL =
             BLOCK_ENTITIES.register("item_pedestal", () -> BlockEntityType.Builder.of(ItemPedestalBlockEntity::new,
-                    ModBlocks.STONE_ITEM_PEDESTAL.get(), ModBlocks.STONE_BRICK_ITEM_PEDESTAL.get()).build(null));
+                            ModBlocks.STONE_ITEM_PEDESTAL.get(), ModBlocks.STONE_BRICK_ITEM_PEDESTAL.get(),
+                            ModBlocks.MOSSY_STONE_BRICK_ITEM_PEDESTAL.get(), ModBlocks.POLISHED_GRANITE_ITEM_PEDESTAL.get(),
+                            ModBlocks.POLISHED_DIORITE_ITEM_PEDESTAL.get(), ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL.get(),
+                            ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL.get(), ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL.get(),
+                            ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get())
+                    .build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
