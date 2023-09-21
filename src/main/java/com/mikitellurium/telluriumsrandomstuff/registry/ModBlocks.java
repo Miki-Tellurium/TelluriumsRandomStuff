@@ -45,10 +45,7 @@ public class ModBlocks {
                     .emissiveRendering((blockState, blockGetter, blockPos) -> true)));
 
     public static final RegistryObject<Block> SOUL_MAGMA_BRICK_SLAB = registerBlockWithItem("soul_magma_brick_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.SOUL_MAGMA_BRICKS.get())
-                    .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false)
-                    .lightLevel((blockState) -> 2)
-                    .emissiveRendering((blockState, blockGetter, blockPos) -> true)));
+            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.SOUL_MAGMA_BRICKS.get())));
 
     public static final RegistryObject<Block> SOUL_LAVA_CAULDRON = BLOCKS.register("soul_lava_cauldron", SoulLavaCauldronBlock::new);
 
