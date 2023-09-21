@@ -26,6 +26,8 @@ public class DataGenerators {
 
         VanillaTagProvider.Blocks vanillaBlockTagsProvider = new VanillaTagProvider.Blocks(packOutput, lookupProvider, existingFileHelper);
         ModTagProvider.Blocks modBlockTagsProvider = new ModTagProvider.Blocks(packOutput, lookupProvider, existingFileHelper);
+        generator.addProvider(true, new ModBlockModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(true, new ModItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
         generator.addProvider(true, new ModRecipeProvider(generator));
         generator.addProvider(true, ModLootTableProvider.create(packOutput));
