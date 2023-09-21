@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "north": "telluriumsrandomstuff:block/grate_magma_block_side_1",
-    "south": "telluriumsrandomstuff:block/grate_magma_block_side_1",
-    "east": "telluriumsrandomstuff:block/grate_magma_block_side_2",
-    "west": "telluriumsrandomstuff:block/grate_magma_block_side_2",
-    "up": "telluriumsrandomstuff:block/grate_magma_block_top",
     "down": "minecraft:block/magma",
-    "particle": "minecraft:block/magma"
+    "east": "telluriumsrandomstuff:block/grate_magma_block_side_2",
+    "north": "telluriumsrandomstuff:block/grate_magma_block_side_1",
+    "particle": "minecraft:block/magma",
+    "south": "telluriumsrandomstuff:block/grate_magma_block_side_1",
+    "up": "telluriumsrandomstuff:block/grate_magma_block_top",
+    "west": "telluriumsrandomstuff:block/grate_magma_block_side_2"
   }
 }

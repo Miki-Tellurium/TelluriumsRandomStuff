@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
+    "bottom": "minecraft:block/obsidian",
     "front": "telluriumsrandomstuff:block/soul_furnace_front_off",
     "side": "telluriumsrandomstuff:block/soul_furnace_side",
-    "top": "telluriumsrandomstuff:block/soul_furnace_top",
-    "bottom": "minecraft:block/obsidian"
+    "top": "telluriumsrandomstuff:block/soul_furnace_top"
   }
 }

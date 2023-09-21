@@ -2,17 +2,19 @@
   "variants": {
     "facing=east,lit=false": {
       "model": "telluriumsrandomstuff:block/soul_furnace",
-      "y": 90
+      "y": 450
     },
     "facing=east,lit=true": {
       "model": "telluriumsrandomstuff:block/soul_furnace_on",
-      "y": 90
+      "y": 450
     },
     "facing=north,lit=false": {
-      "model": "telluriumsrandomstuff:block/soul_furnace"
+      "model": "telluriumsrandomstuff:block/soul_furnace",
+      "y": 360
     },
     "facing=north,lit=true": {
-      "model": "telluriumsrandomstuff:block/soul_furnace_on"
+      "model": "telluriumsrandomstuff:block/soul_furnace_on",
+      "y": 360
     },
     "facing=south,lit=false": {
       "model": "telluriumsrandomstuff:block/soul_furnace",

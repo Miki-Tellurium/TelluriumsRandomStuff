@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "telluriumsrandomstuff:block/soul_magma_bricks",
-    "top": "telluriumsrandomstuff:block/soul_magma_bricks",
-    "side": "telluriumsrandomstuff:block/soul_magma_bricks"
+    "side": "telluriumsrandomstuff:block/soul_magma_bricks",
+    "top": "telluriumsrandomstuff:block/soul_magma_bricks"
   }
 }

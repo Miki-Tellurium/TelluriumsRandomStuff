@@ -2,18 +2,18 @@
   "variants": {
     "facing=east": {
       "model": "telluriumsrandomstuff:block/grate_soul_magma_block",
-      "y": 90
+      "y": 270
     },
     "facing=north": {
-      "model": "telluriumsrandomstuff:block/grate_soul_magma_block"
-    },
-    "facing=south": {
       "model": "telluriumsrandomstuff:block/grate_soul_magma_block",
       "y": 180
     },
+    "facing=south": {
+      "model": "telluriumsrandomstuff:block/grate_soul_magma_block"
+    },
     "facing=west": {
       "model": "telluriumsrandomstuff:block/grate_soul_magma_block",
-      "y": 270
+      "y": 90
     }
   }
 }

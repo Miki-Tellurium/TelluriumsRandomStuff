@@ -1,0 +1,7 @@
+{
+  "parent": "telluriumsrandomstuff:block/cube_all_tinted",
+  "textures": {
+    "all": "telluriumsrandomstuff:block/cracked_cut_opal_bricks",
+    "particle": "telluriumsrandomstuff:block/cracked_cut_opal_bricks"
+  }
+}

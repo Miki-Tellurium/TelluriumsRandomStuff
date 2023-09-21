@@ -1,0 +1,7 @@
+{
+  "parent": "telluriumsrandomstuff:block/cube_all_tinted",
+  "textures": {
+    "all": "telluriumsrandomstuff:block/opal",
+    "particle": "telluriumsrandomstuff:block/opal"
+  }
+}
