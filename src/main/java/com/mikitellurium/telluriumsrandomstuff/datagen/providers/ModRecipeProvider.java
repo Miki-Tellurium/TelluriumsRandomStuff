@@ -388,6 +388,34 @@ public class ModRecipeProvider extends RecipeProvider {
                 Blocks.DEEPSLATE_BRICKS);
         this.itemPedestalShaped(consumer, "deepslate_tile_item_pedestal", (ItemPedestalBlock)ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get(),
                 Blocks.DEEPSLATE_TILES);
+        this.itemPedestalShaped(consumer, "cut_sandstone_item_pedestal", (ItemPedestalBlock)ModBlocks.CUT_SANDSTONE_ITEM_PEDESTAL.get(),
+                Blocks.CUT_SANDSTONE);
+        this.itemPedestalShaped(consumer, "cut_red_sandstone_item_pedestal", (ItemPedestalBlock)ModBlocks.CUT_RED_SANDSTONE_ITEM_PEDESTAL.get(),
+                Blocks.CUT_RED_SANDSTONE);
+        this.itemPedestalShaped(consumer, "prismarine_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.PRISMARINE_BRICK_ITEM_PEDESTAL.get(),
+                Blocks.PRISMARINE_BRICKS);
+        this.itemPedestalShaped(consumer, "nether_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.NETHER_BRICK_ITEM_PEDESTAL.get(),
+                Blocks.NETHER_BRICKS);
+        this.itemPedestalShaped(consumer, "red_nether_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL.get(),
+                Blocks.RED_NETHER_BRICKS);
+        this.itemPedestalShaped(consumer, "polished_blackstone_item_pedestal", (ItemPedestalBlock)ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL.get(),
+                Blocks.POLISHED_BLACKSTONE);
+        this.itemPedestalShaped(consumer, "polished_blackstone_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL.get(),
+                Blocks.POLISHED_BLACKSTONE_BRICKS);
+        this.itemPedestalShaped(consumer, "end_stone_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL.get(),
+                Blocks.END_STONE_BRICKS);
+        this.itemPedestalShaped(consumer, "purpur_item_pedestal", (ItemPedestalBlock)ModBlocks.PURPUR_ITEM_PEDESTAL.get(),
+                Blocks.PURPUR_BLOCK);
+        this.itemPedestalShaped(consumer, "quartz_item_pedestal", (ItemPedestalBlock)ModBlocks.QUARTZ_ITEM_PEDESTAL.get(),
+                Blocks.QUARTZ_BLOCK);
+        this.itemPedestalShaped(consumer, "soul_magma_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get(),
+                ModBlocks.SOUL_MAGMA_BRICKS.get());
+        this.itemPedestalShaped(consumer, "opal_item_pedestal", (ItemPedestalBlock)ModBlocks.OPAL_ITEM_PEDESTAL.get(),
+                ModBlocks.OPAL.get());
+        this.itemPedestalShaped(consumer, "opal_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
+                ModBlocks.OPAL_BRICKS.get());
+        this.itemPedestalShaped(consumer, "cut_opal_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get(),
+                ModBlocks.CUT_OPAL_BRICKS.get());
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

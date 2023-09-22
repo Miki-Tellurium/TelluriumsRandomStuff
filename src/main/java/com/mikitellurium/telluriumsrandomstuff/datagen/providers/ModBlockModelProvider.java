@@ -267,6 +267,20 @@ public class ModBlockModelProvider extends BlockStateProvider {
         this.itemPedestalWithItem(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL, mcLoc("block/polished_deepslate"));
         this.itemPedestalWithItem(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL, mcLoc("block/deepslate_bricks"));
         this.itemPedestalWithItem(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL, mcLoc("block/deepslate_tiles"));
+        this.itemPedestalWithItem(ModBlocks.CUT_SANDSTONE_ITEM_PEDESTAL, mcLoc("block/cut_sandstone"));
+        this.itemPedestalWithItem(ModBlocks.CUT_RED_SANDSTONE_ITEM_PEDESTAL, mcLoc("block/cut_red_sandstone"));
+        this.itemPedestalWithItem(ModBlocks.PRISMARINE_BRICK_ITEM_PEDESTAL, mcLoc("block/prismarine_bricks"));
+        this.itemPedestalWithItem(ModBlocks.NETHER_BRICK_ITEM_PEDESTAL, mcLoc("block/nether_bricks"));
+        this.itemPedestalWithItem(ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL, mcLoc("block/red_nether_bricks"));
+        this.itemPedestalWithItem(ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL, mcLoc("block/polished_blackstone"));
+        this.itemPedestalWithItem(ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL, mcLoc("block/polished_blackstone_bricks"));
+        this.itemPedestalWithItem(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL, mcLoc("block/end_stone_bricks"));
+        this.itemPedestalWithItem(ModBlocks.PURPUR_ITEM_PEDESTAL, mcLoc("block/purpur_block"));
+        this.itemPedestalWithItem(ModBlocks.QUARTZ_ITEM_PEDESTAL, mcLoc("block/quartz_block_top"));
+        this.itemPedestalWithItem(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL, modLoc("block/soul_magma_bricks"));
+        this.tintedItemPedestalWithItem(ModBlocks.OPAL_ITEM_PEDESTAL, modLoc("block/opal"));
+        this.tintedItemPedestalWithItem(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL, modLoc("block/opal_bricks"));
+        this.tintedItemPedestalWithItem(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL, modLoc("block/cut_opal_bricks"));
     }
 
     private void blockItemModelFromParent(RegistryObject<Block> block, ResourceLocation parent) {
@@ -351,6 +365,13 @@ public class ModBlockModelProvider extends BlockStateProvider {
     private void itemPedestalWithItem(RegistryObject<Block> pedestal, ResourceLocation texture) {
         this.simpleBlockWithItem(pedestal.get(), this.models()
                 .withExistingParent(pedestal.getId().getPath(), modLoc("block/item_pedestal"))
+                .texture("texture", texture));
+        this.blockItemModelFromParent(pedestal, modLoc("block/" + pedestal.getId().getPath()));
+    }
+
+    private void tintedItemPedestalWithItem(RegistryObject<Block> pedestal, ResourceLocation texture) {
+        this.simpleBlockWithItem(pedestal.get(), this.models()
+                .withExistingParent(pedestal.getId().getPath(), modLoc("block/item_pedestal_tinted"))
                 .texture("texture", texture));
         this.blockItemModelFromParent(pedestal, modLoc("block/" + pedestal.getId().getPath()));
     }

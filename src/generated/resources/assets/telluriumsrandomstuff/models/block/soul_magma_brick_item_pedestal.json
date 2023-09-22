@@ -1,0 +1,6 @@
+{
+  "parent": "telluriumsrandomstuff:block/item_pedestal",
+  "textures": {
+    "texture": "telluriumsrandomstuff:block/soul_magma_bricks"
+  }
+}

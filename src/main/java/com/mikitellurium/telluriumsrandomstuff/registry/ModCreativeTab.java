@@ -113,6 +113,20 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL);
                 event.accept(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL);
                 event.accept(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL);
+                event.accept(ModBlocks.CUT_SANDSTONE_ITEM_PEDESTAL);
+                event.accept(ModBlocks.CUT_RED_SANDSTONE_ITEM_PEDESTAL);
+                event.accept(ModBlocks.PRISMARINE_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.NETHER_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL);
+                event.accept(ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.PURPUR_ITEM_PEDESTAL);
+                event.accept(ModBlocks.QUARTZ_ITEM_PEDESTAL);
+                event.accept(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.OPAL_ITEM_PEDESTAL);
+                event.accept(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL);
             }
         }
     }

@@ -36,7 +36,14 @@ public class ModBlockEntities {
                             ModBlocks.MOSSY_STONE_BRICK_ITEM_PEDESTAL.get(), ModBlocks.POLISHED_GRANITE_ITEM_PEDESTAL.get(),
                             ModBlocks.POLISHED_DIORITE_ITEM_PEDESTAL.get(), ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL.get(),
                             ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL.get(), ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL.get(),
-                            ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get())
+                            ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get(), ModBlocks.CUT_SANDSTONE_ITEM_PEDESTAL.get(),
+                            ModBlocks.CUT_RED_SANDSTONE_ITEM_PEDESTAL.get(), ModBlocks.PRISMARINE_BRICK_ITEM_PEDESTAL.get(),
+                            ModBlocks.NETHER_BRICK_ITEM_PEDESTAL.get(), ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL.get(),
+                            ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL.get(), ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL.get(),
+                            ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL.get(), ModBlocks.PURPUR_ITEM_PEDESTAL.get(),
+                            ModBlocks.QUARTZ_ITEM_PEDESTAL.get(), ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get(),
+                            ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
+                            ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
                     .build(null));
 
     public static void register(IEventBus eventBus) {

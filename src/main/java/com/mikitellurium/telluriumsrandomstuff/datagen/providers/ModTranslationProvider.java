@@ -91,6 +91,20 @@ public class ModTranslationProvider extends LanguageProvider {
         add("block.telluriumsrandomstuff.polished_deepslate_item_pedestal", "Polished Deepslate Item Pedestal");
         add("block.telluriumsrandomstuff.deepslate_brick_item_pedestal", "Deepslate Brick Item Pedestal");
         add("block.telluriumsrandomstuff.deepslate_tile_item_pedestal", "Deepslate Tile Item Pedestal");
+        add("block.telluriumsrandomstuff.cut_sandstone_item_pedestal", "Cut Sandstone Item Pedestal");
+        add("block.telluriumsrandomstuff.cut_red_sandstone_item_pedestal", "Cut Red Sandstone Item Pedestal");
+        add("block.telluriumsrandomstuff.prismarine_brick_item_pedestal", "Prismarine Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.nether_brick_item_pedestal", "Nether Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.red_nether_brick_item_pedestal", "Red Nether Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.polished_blackstone_item_pedestal", "Polished Blackstone Item Pedestal");
+        add("block.telluriumsrandomstuff.polished_blackstone_brick_item_pedestal", "Polished Blackstone Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.end_stone_brick_item_pedestal", "End Stone Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.purpur_item_pedestal", "Purpur Item Pedestal");
+        add("block.telluriumsrandomstuff.quartz_item_pedestal", "Quartz Item Pedestal");
+        add("block.telluriumsrandomstuff.soul_magma_brick_item_pedestal", "Soul Magma Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.opal_item_pedestal", "Opal Item Pedestal");
+        add("block.telluriumsrandomstuff.opal_brick_item_pedestal", "Opal Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.cut_opal_brick_item_pedestal", "Cut Opal Brick Item Pedestal");
 
         add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning",
                 "Warning!");

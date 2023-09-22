@@ -192,6 +192,48 @@ public class ModBlocks {
     public static final RegistryObject<Block> DEEPSLATE_TILE_ITEM_PEDESTAL = registerBlockWithItem("deepslate_tile_item_pedestal",
             () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_TILES)));
 
+    public static final RegistryObject<Block> CUT_SANDSTONE_ITEM_PEDESTAL = registerBlockWithItem("cut_sandstone_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.CUT_SANDSTONE)));
+
+    public static final RegistryObject<Block> CUT_RED_SANDSTONE_ITEM_PEDESTAL = registerBlockWithItem("cut_red_sandstone_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.CUT_RED_SANDSTONE)));
+
+    public static final RegistryObject<Block> PRISMARINE_BRICK_ITEM_PEDESTAL = registerBlockWithItem("prismarine_brick_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.PRISMARINE_BRICKS)));
+
+    public static final RegistryObject<Block> NETHER_BRICK_ITEM_PEDESTAL = registerBlockWithItem("nether_brick_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)));
+
+    public static final RegistryObject<Block> RED_NETHER_BRICK_ITEM_PEDESTAL = registerBlockWithItem("red_nether_brick_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.RED_NETHER_BRICKS)));
+
+    public static final RegistryObject<Block> POLISHED_BLACKSTONE_ITEM_PEDESTAL = registerBlockWithItem("polished_blackstone_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_BLACKSTONE)));
+
+    public static final RegistryObject<Block> POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL = registerBlockWithItem("polished_blackstone_brick_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_BLACKSTONE_BRICKS)));
+
+    public static final RegistryObject<Block> END_STONE_BRICK_ITEM_PEDESTAL = registerBlockWithItem("end_stone_brick_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.END_STONE_BRICKS)));
+
+    public static final RegistryObject<Block> PURPUR_ITEM_PEDESTAL = registerBlockWithItem("purpur_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.PURPUR_BLOCK)));
+
+    public static final RegistryObject<Block> QUARTZ_ITEM_PEDESTAL = registerBlockWithItem("quartz_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
+
+    public static final RegistryObject<Block> SOUL_MAGMA_BRICK_ITEM_PEDESTAL = registerBlockWithItem("soul_magma_brick_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(SOUL_MAGMA_BRICKS.get())));
+
+    public static final RegistryObject<Block> OPAL_ITEM_PEDESTAL = registerBlockWithItem("opal_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(OPAL.get())));
+
+    public static final RegistryObject<Block> OPAL_BRICK_ITEM_PEDESTAL = registerBlockWithItem("opal_brick_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(OPAL_BRICKS.get())));
+
+    public static final RegistryObject<Block> CUT_OPAL_BRICK_ITEM_PEDESTAL = registerBlockWithItem("cut_opal_brick_item_pedestal",
+            () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(CUT_OPAL_BRICKS.get())));
+
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

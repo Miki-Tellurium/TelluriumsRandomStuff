@@ -99,6 +99,20 @@ public class ModLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.CUT_SANDSTONE_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.CUT_RED_SANDSTONE_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.PRISMARINE_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.NETHER_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.PURPUR_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.QUARTZ_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.OPAL_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
     }
 
     @Override

@@ -69,7 +69,21 @@ public class VanillaTagProvider {
                     .add(ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL.get())
                     .add(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL.get())
                     .add(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL.get())
-                    .add(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get());
+                    .add(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.CUT_SANDSTONE_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.CUT_RED_SANDSTONE_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.PRISMARINE_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.NETHER_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.PURPUR_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.QUARTZ_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.OPAL_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
 
             this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                     .add(ModBlocks.GRATE_SOUL_SAND.get());

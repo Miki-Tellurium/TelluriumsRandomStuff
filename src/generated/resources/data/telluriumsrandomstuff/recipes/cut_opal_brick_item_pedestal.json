@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:cut_opal_bricks"
+    },
+    "I": {
+      "item": "minecraft:item_frame"
+    }
+  },
+  "pattern": [
+    " I ",
+    " # ",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "item": "telluriumsrandomstuff:cut_opal_brick_item_pedestal"
+  },
+  "show_notification": true
+}

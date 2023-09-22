@@ -60,7 +60,8 @@ public class ClientSetup {
                 ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
                 ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
                 ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_CRYSTAL_ORE.get(), ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(),
-                ModBlocks.OPAL_CRYSTAL_BLOCK.get());
+                ModBlocks.OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
+                ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
     }
 
     @SubscribeEvent
@@ -98,7 +99,9 @@ public class ClientSetup {
                 ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_CRYSTAL_ORE.get(), ModItems.RAW_OPAL_CRYSTAL.get(),
                 ModItems.OPAL_CRYSTAL.get(), ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_CRYSTAL_BLOCK.get(),
                 ModItems.OPAL_CRYSTAL_SWORD.get(), ModItems.OPAL_CRYSTAL_PICKAXE.get(), ModItems.OPAL_CRYSTAL_SHOVEL.get(),
-                ModItems.OPAL_CRYSTAL_AXE.get(), ModItems.OPAL_CRYSTAL_HOE.get(), ModItems.LAVA_GOOGLES.get());
+                ModItems.OPAL_CRYSTAL_AXE.get(), ModItems.OPAL_CRYSTAL_HOE.get(), ModItems.LAVA_GOOGLES.get(),
+                ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
+                ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
     }
 
     @SubscribeEvent

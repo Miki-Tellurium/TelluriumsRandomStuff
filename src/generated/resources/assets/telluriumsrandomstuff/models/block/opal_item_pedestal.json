@@ -1,0 +1,6 @@
+{
+  "parent": "telluriumsrandomstuff:block/item_pedestal_tinted",
+  "textures": {
+    "texture": "telluriumsrandomstuff:block/opal"
+  }
+}

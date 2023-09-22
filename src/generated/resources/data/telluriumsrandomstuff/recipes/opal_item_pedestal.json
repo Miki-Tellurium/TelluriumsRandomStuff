@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:opal"
+    },
+    "I": {
+      "item": "minecraft:item_frame"
+    }
+  },
+  "pattern": [
+    " I ",
+    " # ",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "item": "telluriumsrandomstuff:opal_item_pedestal"
+  },
+  "show_notification": true
+}
