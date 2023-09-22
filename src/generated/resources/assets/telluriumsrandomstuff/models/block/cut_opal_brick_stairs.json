@@ -1,0 +1,8 @@
+{
+  "parent": "telluriumsrandomstuff:block/stairs_tinted",
+  "textures": {
+    "bottom": "telluriumsrandomstuff:block/cut_opal_bricks",
+    "side": "telluriumsrandomstuff:block/cut_opal_bricks",
+    "top": "telluriumsrandomstuff:block/cut_opal_bricks"
+  }
+}

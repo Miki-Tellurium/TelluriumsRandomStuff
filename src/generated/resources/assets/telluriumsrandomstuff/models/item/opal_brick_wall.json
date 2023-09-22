@@ -1,0 +1,6 @@
+{
+  "parent": "telluriumsrandomstuff:block/wall_inventory_tinted",
+  "textures": {
+    "wall": "telluriumsrandomstuff:block/opal_bricks"
+  }
+}
