@@ -235,20 +235,25 @@ public class ModBlockModelProvider extends BlockStateProvider {
                             .build();
                 });
         this.blockItemModelFromParent(ModBlocks.BLUE_REDSTONE_LAMP, modLoc("block/blue_redstone_lamp"));
-        ModelFile awakenedSculkShriekerModel = this.models().withExistingParent(ModBlocks.AWAKENED_SCULK_SHRIEKER.getId().getPath(),
-                        mcLoc("block/template_sculk_shrieker"))
-                .renderType("cutout")
-                .texture("bottom", modLoc("block/awakened_sculk_shrieker_bottom"))
-                .texture("side", modLoc("block/awakened_sculk_shrieker_side"))
-                .texture("top", mcLoc("block/sculk_shrieker_top"))
-                .texture("inner_top", mcLoc("block/sculk_shrieker_can_summon_inner_top"))
-                .texture("particle", modLoc("block/awakened_sculk_shrieker_bottom"));
         this.getVariantBuilder(ModBlocks.AWAKENED_SCULK_SHRIEKER.get())
-                .forAllStatesExcept((state) -> ConfiguredModel.builder()
-                        .modelFile(state.getValue(AwakenedSculkShriekerBlock.CAN_SUMMON) ? awakenedSculkShriekerModel :
-                                this.models().getExistingFile(mcLoc("block/sculk_shrieker")))
-                        .build(), AwakenedSculkShriekerBlock.SHRIEKING, AwakenedSculkShriekerBlock.WATERLOGGED);
-        this.blockItemModelFromParent(ModBlocks.AWAKENED_SCULK_SHRIEKER, modLoc("block/awakened_sculk_shrieker"));
+                .forAllStatesExcept((state) -> {
+                    ResourceLocation innerTopTexture = state.getValue(AwakenedSculkShriekerBlock.CAN_SUMMON) ?
+                            mcLoc("block/sculk_shrieker_can_summon_inner_top") : modLoc("block/awakened_sculk_shrieker_inner_top");
+                    String model = ModBlocks.AWAKENED_SCULK_SHRIEKER.getId().getPath();
+                    if (state.getValue(AwakenedSculkShriekerBlock.CAN_SUMMON)) {
+                        model = model + "_can_summon";
+                    }
+                    return ConfiguredModel.builder()
+                            .modelFile(this.models().withExistingParent(model, mcLoc("block/template_sculk_shrieker"))
+                                    .renderType("cutout")
+                                    .texture("bottom", modLoc("block/awakened_sculk_shrieker_bottom"))
+                                    .texture("side", modLoc("block/awakened_sculk_shrieker_side"))
+                                    .texture("top", mcLoc("block/sculk_shrieker_top"))
+                                    .texture("inner_top", innerTopTexture)
+                                    .texture("particle", modLoc("block/awakened_sculk_shrieker_bottom")))
+                            .build();
+                }, AwakenedSculkShriekerBlock.SHRIEKING, AwakenedSculkShriekerBlock.WATERLOGGED);
+        this.blockItemModelFromParent(ModBlocks.AWAKENED_SCULK_SHRIEKER, modLoc("block/awakened_sculk_shrieker_can_summon"));
         this.getVariantBuilder(ModBlocks.SOUL_JACK_O_LANTERN.get())
                 .forAllStates((state) -> ConfiguredModel.builder().modelFile(this.models()
                                 .orientable(ModBlocks.SOUL_JACK_O_LANTERN.getId().getPath(),
