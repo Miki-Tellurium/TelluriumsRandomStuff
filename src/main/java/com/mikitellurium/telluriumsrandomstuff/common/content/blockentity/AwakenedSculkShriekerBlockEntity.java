@@ -31,6 +31,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SculkShriekerBlock;
+import net.minecraft.world.level.block.SculkSpreader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SculkShriekerBlockEntity;
@@ -44,6 +45,7 @@ import net.minecraft.world.phys.Vec3;
 import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 public class AwakenedSculkShriekerBlockEntity extends BlockEntity implements GameEventListener.Holder<VibrationSystem.Listener>, VibrationSystem {
@@ -65,9 +67,11 @@ public class AwakenedSculkShriekerBlockEntity extends BlockEntity implements Gam
     private final VibrationSystem.User vibrationUser = new AwakenedSculkShriekerBlockEntity.VibrationUser();
     private VibrationSystem.Data vibrationData = new VibrationSystem.Data();
     private final VibrationSystem.Listener vibrationListener = new VibrationSystem.Listener(this);
+    private final SculkSpreader sculkSpreader;
 
     public AwakenedSculkShriekerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get(), pPos, pBlockState);
+        this.sculkSpreader = SculkSpreader.createLevelSpreader();
     }
 
     public VibrationSystem.Data getVibrationData() {
@@ -188,11 +192,22 @@ public class AwakenedSculkShriekerBlockEntity extends BlockEntity implements Gam
     }
 
     private boolean trySummonWarden(ServerLevel pLevel) {
-        return this.warningLevel < 4 ? false : SpawnUtil.trySpawnMob(EntityType.WARDEN, MobSpawnType.TRIGGERED, pLevel, this.getBlockPos(), 20, 5, 6, SpawnUtil.Strategy.ON_TOP_OF_COLLIDER).isPresent();
+        if (this.warningLevel < 4) {
+            return false;
+        }
+        Optional<Warden> warden = SpawnUtil.trySpawnMob(EntityType.WARDEN, MobSpawnType.TRIGGERED, pLevel, this.getBlockPos(),
+                    20, 5, 6, SpawnUtil.Strategy.ON_TOP_OF_COLLIDER);
+        boolean hasSpawned = warden.isPresent();
+        if (hasSpawned) sculkSpreader.addCursors(warden.get().blockPosition(), 1);
+        return hasSpawned;
     }
 
     public VibrationSystem.Listener getListener() {
         return this.vibrationListener;
+    }
+
+    public SculkSpreader getSculkSpreader() {
+        return sculkSpreader;
     }
 
     class VibrationUser implements VibrationSystem.User {

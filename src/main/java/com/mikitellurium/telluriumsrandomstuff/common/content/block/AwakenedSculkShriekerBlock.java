@@ -88,9 +88,10 @@ public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
                                                                   BlockEntityType<T> blockEntityType) {
         return !level.isClientSide ? BaseEntityBlock.createTickerHelper(blockEntityType,
                 ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get(),
-                (level1, pos, blockState1, shrieker) ->
-                        VibrationSystem.Ticker.tick(level1, shrieker.getVibrationData(),
-                                shrieker.getVibrationUser())) : null;
+                (level1, pos, blockState1, shrieker) -> {
+                        VibrationSystem.Ticker.tick(level1, shrieker.getVibrationData(), shrieker.getVibrationUser());
+                        shrieker.getSculkSpreader().updateCursors(level1, pos, level1.random, true);
+        }) : null;
     }
 
     @Override
