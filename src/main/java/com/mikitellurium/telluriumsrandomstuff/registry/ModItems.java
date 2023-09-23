@@ -124,10 +124,10 @@ public class ModItems {
     public static final RegistryObject<Item> AMETHYST_LENS = ITEMS.register("amethyst_lens",
             () -> new Item(new Item.Properties().fireResistant()));
 
-    public static final RegistryObject<Item> SOUL_FRAGMENT = ITEMS.register("soul_fragment",
+    public static final RegistryObject<Item> SMALL_SOUL_FRAGMENT = ITEMS.register("small_soul_fragment",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> SMALL_SOUL_FRAGMENT = ITEMS.register("small_soul_fragment",
+    public static final RegistryObject<Item> SOUL_FRAGMENT = ITEMS.register("soul_fragment",
             () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

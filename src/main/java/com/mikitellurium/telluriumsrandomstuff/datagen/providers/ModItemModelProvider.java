@@ -43,8 +43,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer1", modLoc("item/lava_googles_color_layer"));
         this.simpleItem(ModItems.MOLTEN_AMETHYST);
         this.simpleItem(ModItems.AMETHYST_LENS);
-        this.simpleItem(ModItems.SOUL_FRAGMENT);
         this.simpleItem(ModItems.SMALL_SOUL_FRAGMENT);
+        this.simpleItem(ModItems.SOUL_FRAGMENT);
     }
 
     private void simpleItem(RegistryObject<Item> item) {
