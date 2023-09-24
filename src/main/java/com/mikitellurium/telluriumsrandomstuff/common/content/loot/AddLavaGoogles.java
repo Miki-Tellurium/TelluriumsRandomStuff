@@ -33,7 +33,7 @@ public class AddLavaGoogles extends ItemLootModifier{
         this(ItemLootModifier.getLootConditions(lootTable), ModItems.LAVA_GOOGLES.get(), 20);
     }
 
-    public AddLavaGoogles(LootItemCondition[] conditionsIn, ItemLike itemLike, int chance) {
+    private AddLavaGoogles(LootItemCondition[] conditionsIn, ItemLike itemLike, int chance) {
         super(conditionsIn, itemLike, chance);
     }
 

@@ -17,7 +17,7 @@ public class ItemLootModifier extends LootModifier {
     private final ItemLike itemLike;
     private final int chance;
 
-    public ItemLootModifier(LootItemCondition[] conditionsIn, ItemLike itemLike, int chance) {
+    protected ItemLootModifier(LootItemCondition[] conditionsIn, ItemLike itemLike, int chance) {
         super(conditionsIn);
         this.itemLike = itemLike;
         this.chance = chance;
