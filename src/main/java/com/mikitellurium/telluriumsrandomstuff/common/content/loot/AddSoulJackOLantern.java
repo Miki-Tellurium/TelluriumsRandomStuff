@@ -40,10 +40,10 @@ public class AddSoulJackOLantern extends ItemLootModifier {
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         RandomSource random = context.getRandom();
-        for (int i = 0; i < addLootAttempts ;i++) {
+        for (int i = 0; i < addLootAttempts ; i++) {
             if (random.nextInt(100) < this.getChance() + random.nextInt(25)) {
-                ItemStack lantern = new ItemStack(ModBlocks.SOUL_JACK_O_LANTERN.get());
-                generatedLoot.add(lantern);
+                ItemStack itemStack = new ItemStack(this.getItem());
+                generatedLoot.add(itemStack);
             }
         }
         return generatedLoot;

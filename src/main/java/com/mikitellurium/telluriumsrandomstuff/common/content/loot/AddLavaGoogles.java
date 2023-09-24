@@ -41,7 +41,7 @@ public class AddLavaGoogles extends ItemLootModifier{
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         RandomSource random = context.getRandom();
         if(random.nextInt(100) < this.getChance()) {
-            ItemStack googles = LavaGooglesItem.setColor(new ItemStack(ModItems.LAVA_GOOGLES.get()),
+            ItemStack googles = LavaGooglesItem.setColor(new ItemStack(this.getItem()),
                     DyeColor.byId(random.nextInt(16)));
             if (random.nextFloat() < 0.40f) {
                 EnchantmentHelper.enchantItem(random, googles, 10 + random.nextInt(20), true);
