@@ -23,15 +23,15 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.List;
 import java.util.Set;
 
-public class ModLootTableProvider extends BlockLootSubProvider {
+public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
-    private ModLootTableProvider() {
+    private ModBlockLootTableProvider() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
     public static LootTableProvider create(PackOutput packOutput) {
         return new LootTableProvider(packOutput, Set.of(),
-                List.of(new LootTableProvider.SubProviderEntry(ModLootTableProvider::new, LootContextParamSets.BLOCK)));
+                List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)));
     }
 
     @Override
