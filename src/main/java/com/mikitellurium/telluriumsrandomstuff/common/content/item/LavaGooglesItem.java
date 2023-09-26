@@ -4,6 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -73,6 +74,10 @@ public class LavaGooglesItem extends Item implements Equipable {
     public static ItemStack setColor(ItemStack itemStack, DyeColor dyeColor) {
         itemStack.getOrCreateTag().putString(tag_color, dyeColor.getSerializedName());
         return itemStack;
+    }
+
+    public static ItemStack setRandomColor(ItemStack itemStack, RandomSource random) {
+        return setColor(itemStack, DyeColor.byId(random.nextInt(16)));
     }
 
     public static DyeColor getColor(ItemStack itemStack) {
