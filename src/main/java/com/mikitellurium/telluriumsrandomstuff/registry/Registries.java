@@ -21,6 +21,7 @@ public class Registries {
         ModMessages.register();
         ModCommonConfig.register();
         ModLootModifiers.register(modEventBus);
+        ModLootItemFunctions.register(modEventBus);
     }
 
 }

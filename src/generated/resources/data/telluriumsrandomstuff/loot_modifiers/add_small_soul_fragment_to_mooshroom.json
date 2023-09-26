@@ -1,0 +1,10 @@
+{
+  "type": "telluriumsrandomstuff:add_small_soul_fragment",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/mooshroom"
+    }
+  ],
+  "loot_table": "telluriumsrandomstuff:entities/small_soul_fragment_other"
+}

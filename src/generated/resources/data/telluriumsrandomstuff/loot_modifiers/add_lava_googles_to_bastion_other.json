@@ -1,11 +1,10 @@
 {
-  "type": "telluriumsrandomstuff:add_lava_googles",
-  "chance": 20,
+  "type": "telluriumsrandomstuff:add_soul_jack_o_lantern",
   "conditions": [
     {
       "condition": "forge:loot_table_id",
       "loot_table_id": "minecraft:chests/bastion_other"
     }
   ],
-  "item": "telluriumsrandomstuff:lava_googles"
+  "loot_table": "telluriumsrandomstuff:chests/lava_googles"
 }
