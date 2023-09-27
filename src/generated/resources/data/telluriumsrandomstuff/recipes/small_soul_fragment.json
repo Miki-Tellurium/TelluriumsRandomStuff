@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:small_soul_fragment"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:soul_fragment"
+  },
+  "show_notification": true
+}
