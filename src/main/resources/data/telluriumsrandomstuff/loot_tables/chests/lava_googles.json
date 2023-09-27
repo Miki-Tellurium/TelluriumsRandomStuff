@@ -15,7 +15,13 @@
           "name": "telluriumsrandomstuff:lava_googles",
           "functions": [
             {
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "min": 10.0,
+                "max": 30.0
+              },
+              "treasure": true
             },
             {
               "function": "telluriumsrandomstuff:set_random_googles_color"
