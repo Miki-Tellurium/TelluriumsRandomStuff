@@ -29,7 +29,7 @@ public class GrateSoulSandBlock extends SoulSandBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource random) {
         if (level.getFluidState(pos.above()).is(Fluids.LAVA)) {
             if (random.nextInt(12) == 0) {
                 double d0 = pos.getX() + random.nextDouble();
@@ -38,26 +38,22 @@ public class GrateSoulSandBlock extends SoulSandBlock {
                 level.addParticle(ModParticles.SOUL_LAVA_HANG.get(), d0, d1, d2, 0.0D, 0.0D, 0.0D);
             }
         }
-
-        if (level.isRaining()) {
-            ParticleUtils.handleRainParticles(level, pos, state, random);
-        }
     }
 
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        CustomBubbleColumnBlock.updateColumn(pLevel, pPos.above(), pState);
+    public void tick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
+        CustomBubbleColumnBlock.updateColumn(level, pos.above(), blockState);
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
     }
 
 }
