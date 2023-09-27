@@ -129,6 +129,7 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL);
                 event.accept(ModItems.SMALL_SOUL_FRAGMENT);
                 event.accept(ModItems.SOUL_FRAGMENT);
+                event.accept(ModBlocks.INFUSED_SOUL_SAND);
             }
         }
     }

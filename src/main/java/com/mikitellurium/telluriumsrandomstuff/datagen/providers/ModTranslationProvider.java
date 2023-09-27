@@ -107,6 +107,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("block.telluriumsrandomstuff.opal_item_pedestal", "Opal Item Pedestal");
         add("block.telluriumsrandomstuff.opal_brick_item_pedestal", "Opal Brick Item Pedestal");
         add("block.telluriumsrandomstuff.cut_opal_brick_item_pedestal", "Cut Opal Brick Item Pedestal");
+        add("block.telluriumsrandomstuff.infused_soul_sand", "Infused Soul Sand");
 
         add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning",
                 "Warning!");

@@ -234,6 +234,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> CUT_OPAL_BRICK_ITEM_PEDESTAL = registerBlockWithItem("cut_opal_brick_item_pedestal",
             () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(CUT_OPAL_BRICKS.get())));
 
+    public static final RegistryObject<Block> INFUSED_SOUL_SAND = registerBlockWithItem("infused_soul_sand",
+            InfusedSoulSandBlock::new);
+
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

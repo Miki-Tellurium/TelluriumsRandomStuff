@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-22T19:12:20.8642537	Loot Tables
+// 1.20.1	2023-09-27T12:36:21.2269125	Loot Tables
 aad2eb4ccc191064ab597f6b62589bd61a0e8603 data/telluriumsrandomstuff/loot_tables/blocks/awakened_sculk_shrieker.json
 3074b73cb5812b9f1be6fd51ea9f2f3e8502a312 data/telluriumsrandomstuff/loot_tables/blocks/blue_glowstone.json
 02b26b510ddb0499cf51118b2924038b1a7a26f3 data/telluriumsrandomstuff/loot_tables/blocks/blue_redstone_lamp.json
@@ -24,6 +24,7 @@ c710391fd7e9bb6acac7fe5f0fbd763c76f75e8f data/telluriumsrandomstuff/loot_tables/
 8b02ab9fb3f0d005930b688fd4965c0d9502b82d data/telluriumsrandomstuff/loot_tables/blocks/grate_soul_magma_block.json
 d82b7d180dd91a190e9195ddad2f951569c204c9 data/telluriumsrandomstuff/loot_tables/blocks/grate_soul_sand.json
 5915b90fa9889b321d6b772f36b356d2fff1417a data/telluriumsrandomstuff/loot_tables/blocks/hydrodynamic_rail.json
+8ad6f33e685895253646844d3ff299ddbbe53369 data/telluriumsrandomstuff/loot_tables/blocks/infused_soul_sand.json
 38311e4e5421066b340ea13441d1467391daf8a9 data/telluriumsrandomstuff/loot_tables/blocks/mossy_stone_brick_item_pedestal.json
 fb2fdbc05f6399a10d0f694cd902d3f15578a92d data/telluriumsrandomstuff/loot_tables/blocks/nether_brick_item_pedestal.json
 cc5ada0d1752d7724769bb36878e6d92b66bc8ea data/telluriumsrandomstuff/loot_tables/blocks/opal.json

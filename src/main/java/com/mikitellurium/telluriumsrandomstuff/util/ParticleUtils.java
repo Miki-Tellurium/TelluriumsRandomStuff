@@ -10,7 +10,7 @@ import net.minecraft.world.level.material.FluidState;
 
 public class ParticleUtils {
 
-    public static void handleRainParticles(Level level, BlockPos pos, FluidState state, RandomSource random) {
+    public static void spawnRainParticles(Level level, BlockPos pos, FluidState state, RandomSource random) {
         if (level.canSeeSky(pos.above())) {
             double d0 = random.nextDouble();
             double d1 = random.nextDouble();
@@ -21,7 +21,7 @@ public class ParticleUtils {
         }
     }
 
-    public static void handleRainParticles(Level level, BlockPos pos, BlockState state, RandomSource random) {
+    public static void spawnRainParticles(Level level, BlockPos pos, BlockState state, RandomSource random) {
         if (level.canSeeSky(pos.above())) {
             FluidState fluidState = level.getFluidState(pos.above());
             double d0 = random.nextDouble();

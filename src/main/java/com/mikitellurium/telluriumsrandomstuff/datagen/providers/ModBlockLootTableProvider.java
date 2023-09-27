@@ -113,6 +113,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.OPAL_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.INFUSED_SOUL_SAND.get());
     }
 
     @Override
