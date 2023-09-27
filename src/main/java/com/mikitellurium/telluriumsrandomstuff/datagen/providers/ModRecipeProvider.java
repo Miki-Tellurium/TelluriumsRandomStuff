@@ -416,6 +416,13 @@ public class ModRecipeProvider extends RecipeProvider {
                 ModBlocks.OPAL_BRICKS.get());
         this.itemPedestalShaped(consumer, "cut_opal_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get());
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_FRAGMENT.get(), 1)
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .define('#', ModItems.SMALL_SOUL_FRAGMENT.get())
+                .unlockedBy("has_small_soul_fragment", has(ModItems.SMALL_SOUL_FRAGMENT.get()))
+                .save(consumer, modResourceLocation("small_soul_fragment"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
