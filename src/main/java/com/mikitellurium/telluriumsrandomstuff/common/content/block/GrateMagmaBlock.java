@@ -41,7 +41,7 @@ public class GrateMagmaBlock extends MagmaBlock {
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource random) {
         if (level.isRaining()) {
-            ParticleUtils.handleRainParticles(level, pos, blockState, random);
+            ParticleUtils.spawnRainParticles(level, pos, blockState, random);
         }
     }
 

@@ -158,7 +158,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         }
 
         if (pLevel.isRaining()) {
-            ParticleUtils.handleRainParticles(pLevel, pPos, pState, pRandom);
+            ParticleUtils.spawnRainParticles(pLevel, pPos, pState, pRandom);
         }
 
     }
