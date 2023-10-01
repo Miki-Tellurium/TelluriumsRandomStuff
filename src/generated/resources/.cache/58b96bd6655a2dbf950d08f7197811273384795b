@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-27T12:36:21.2329146	Block States: telluriumsrandomstuff
+// 1.20.1	2023-09-27T12:45:30.5798478	Block States: telluriumsrandomstuff
 5ddff5ac8fa1b14577950c557e26d1f2b031cbb8 assets/telluriumsrandomstuff/blockstates/awakened_sculk_shrieker.json
 a5967e21ec39c7048311b2e54a73374469fa5232 assets/telluriumsrandomstuff/blockstates/blue_glowstone.json
 0a1975ee90750856ca81290d28a79b3b1e95a6c8 assets/telluriumsrandomstuff/blockstates/blue_redstone_lamp.json
@@ -201,6 +201,7 @@ aa5071a97ae066f8486b028a2f442ae31ab19aa2 assets/telluriumsrandomstuff/models/ite
 5007366ba22badb557d0e2b1f18f7a234c4e45b0 assets/telluriumsrandomstuff/models/item/grate_magma_block.json
 7b1b1fa94bab40054c28d347245a41967f28bbcb assets/telluriumsrandomstuff/models/item/grate_soul_magma_block.json
 4c0ed97114a7fe33ea59025e82a00891f92f5478 assets/telluriumsrandomstuff/models/item/grate_soul_sand.json
+18a6f28b940da831725541a8dec51b8d60ebb75d assets/telluriumsrandomstuff/models/item/infused_soul_sand.json
 b52675c58cdec0cab0036113501651a2b4fc5ec7 assets/telluriumsrandomstuff/models/item/mossy_stone_brick_item_pedestal.json
 8214f9131b78df2a7b0b56bc92cf963ccc5f11dc assets/telluriumsrandomstuff/models/item/nether_brick_item_pedestal.json
 f62c6b7507f7ab83021bc714ffa6da378556aeda assets/telluriumsrandomstuff/models/item/opal.json
