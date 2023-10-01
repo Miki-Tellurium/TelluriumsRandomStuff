@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
@@ -46,7 +47,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
 
     public SoulLavaInfoCategory(IGuiHelper guiHelper) {
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
-        this.background = guiHelper.createBlankDrawable(140, 100);
+        this.background = guiHelper.createBlankDrawable(140, 80);
         this.downArrow = guiHelper.createDrawable(GUI_TEXTURE, 239, 0, 16, 24);
     }
 
@@ -91,7 +92,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 21)
-                .addItemStack(recipe.getSoulSand());
+                .addItemStack(recipe.getInfusedSoulSand());
         builder.addSlot(RecipeIngredientRole.INPUT, 120, suggestionRenderY + 14)
                 .addFluidStack(recipe.getLava(), 1000)
                 .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
@@ -110,7 +111,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
 
         public Recipe() {
             this.lava = Fluids.LAVA;
-            this.soulSand = Items.SOUL_SAND.getDefaultInstance();
+            this.soulSand = ModBlocks.INFUSED_SOUL_SAND.get().asItem().getDefaultInstance();
             this.cauldron = Items.CAULDRON.getDefaultInstance();
         }
 
@@ -118,7 +119,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
             return lava;
         }
 
-        public ItemStack getSoulSand() {
+        public ItemStack getInfusedSoulSand() {
             return soulSand;
         }
 
