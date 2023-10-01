@@ -46,11 +46,6 @@ public class ModTagProvider {
             this.tag(ModTags.Blocks.BUBBLE_COLUMN_GENERATOR)
                     .addTag(ModTags.Blocks.BUBBLE_COLUMN_DRAG_DOWN)
                     .addTag(ModTags.Blocks.BUBBLE_COLUMN_LIFT_UP);
-
-            this.tag(ModTags.Blocks.SOUL_LAVA_CONVERTER)
-                    .add(net.minecraft.world.level.block.Blocks.SOUL_SAND)
-                    .add(ModBlocks.GRATE_SOUL_SAND.get())
-                    .add(ModBlocks.INFUSED_SOUL_SAND.get());
         }
     }
 
