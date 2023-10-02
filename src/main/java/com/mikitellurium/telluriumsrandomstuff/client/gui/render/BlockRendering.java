@@ -8,12 +8,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,6 +25,7 @@ import net.minecraft.world.level.lighting.LevelLightEngine;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.client.RenderTypeHelper;
 import org.joml.Quaternionf;
 
 /* CREDIT the Team Applied Energistics for this class.
@@ -30,13 +35,6 @@ import org.joml.Quaternionf;
  * LICENSE : https://github.com/AppliedEnergistics/Applied-Energistics-2#license
  */
 public final class BlockRendering {
-
-    private BlockRendering() {
-    }
-
-    public static void renderBlock(PoseStack poseStack, BlockState blockState, int x, int y)     {
-        // Todo render block
-    }
 
     public static void renderFluid(GuiGraphics graphics, Fluid fluid, int x, int y, int width, int height) {
         var fluidState = fluid.defaultFluidState();
@@ -148,7 +146,7 @@ public final class BlockRendering {
         @Override
         public BlockState getBlockState(BlockPos blockPos) {
             if (blockPos.equals(BlockPos.ZERO)) {
-                return fluidState.createLegacyBlock();
+                return this.fluidState.createLegacyBlock();
             } else {
                 return Blocks.AIR.defaultBlockState();
             }
@@ -157,7 +155,7 @@ public final class BlockRendering {
         @Override
         public FluidState getFluidState(BlockPos blockPos) {
             if (blockPos.equals(BlockPos.ZERO)) {
-                return fluidState;
+                return this.fluidState;
             } else {
                 return Fluids.EMPTY.defaultFluidState();
             }
