@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.ItemPedestalBlock;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.LavaGooglesRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulLavaTransmutationRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulSmeltingRecipeBuilder;
@@ -28,6 +29,7 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         buildSoulSmeltingRecipes(consumer);
+        buildSoulLavaTransmutationRecipe(consumer);
         buildShapedRecipes(consumer);
         buildShapelessRecipes(consumer);
         buildSmeltingRecipes(consumer);
@@ -37,31 +39,38 @@ public class ModRecipeProvider extends RecipeProvider {
 
     private void buildSoulSmeltingRecipes(Consumer<FinishedRecipe> consumer) {
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.GLOWSTONE_DUST), ModItems.BLUE_GLOWSTONE_DUST.get(), 20)
-                .save(consumer, modResourceLocation("blue_glowstone_dust_from_soul_smelting"));
+                .save(consumer, modLoc("blue_glowstone_dust_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.WHEAT), Items.BREAD,10)
-                .save(consumer, modResourceLocation("bread_from_soul_smelting"));
+                .save(consumer, modLoc("bread_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.LANTERN), Blocks.SOUL_LANTERN,10)
-                .save(consumer, modResourceLocation("soul_lantern_from_soul_smelting"));
+                .save(consumer, modLoc("soul_lantern_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.ROTTEN_FLESH), Items.LEATHER,30)
-                .save(consumer, modResourceLocation("leather_from_soul_smelting"));
+                .save(consumer, modLoc("leather_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.POISONOUS_POTATO), ModItems.MYSTIC_POTATO.get(), 800)
-                .save(consumer, modResourceLocation("mystic_potato_from_soul_smelting"));
+                .save(consumer, modLoc("mystic_potato_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.CAMPFIRE), Blocks.SOUL_CAMPFIRE, 250)
-                .save(consumer, modResourceLocation("soul_campfire_from_soul_smelting"));
+                .save(consumer, modLoc("soul_campfire_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.MAGMA_BLOCK), ModBlocks.SOUL_MAGMA_BLOCK.get(), 100)
-                .save(consumer, modResourceLocation("soul_magma_block_from_soul_smelting"));
+                .save(consumer, modLoc("soul_magma_block_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.CRYING_OBSIDIAN), ModBlocks.SOUL_OBSIDIAN.get(), 500)
-                .save(consumer, modResourceLocation("soul_obsidian_from_soul_smelting"));
+                .save(consumer, modLoc("soul_obsidian_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.TORCH), Blocks.SOUL_TORCH, 5)
-                .save(consumer, modResourceLocation("soul_torch_from_soul_smelting"));
+                .save(consumer, modLoc("soul_torch_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get()), ModItems.SOUL_TORCHFLOWER_SEEDS.get(), 20)
-                .save(consumer, modResourceLocation("soul_torchflower_seeds_from_soul_smelting"));
+                .save(consumer, modLoc("soul_torchflower_seeds_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.AMETHYST_SHARD), ModItems.MOLTEN_AMETHYST.get(), 80)
-                .save(consumer, modResourceLocation("molten_amethyst_from_soul_smelting"));
+                .save(consumer, modLoc("molten_amethyst_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.SCULK_SHRIEKER), ModBlocks.AWAKENED_SCULK_SHRIEKER.get(), 400)
-                .save(consumer, modResourceLocation("awakened_sculk_shrieker_from_soul_smelting"));
+                .save(consumer, modLoc("awakened_sculk_shrieker_from_soul_smelting"));
         SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.JACK_O_LANTERN), ModBlocks.SOUL_JACK_O_LANTERN.get(), 50)
-                .save(consumer, modResourceLocation("soul_jack_o_lantern_from_soul_smelting"));
+                .save(consumer, modLoc("soul_jack_o_lantern_from_soul_smelting"));
+    }
+
+    private void buildSoulLavaTransmutationRecipe(Consumer<FinishedRecipe> consumer) {
+        SoulLavaTransmutationRecipeBuilder.addRecipe(Ingredient.of(Blocks.MAGMA_BLOCK), ModBlocks.SOUL_MAGMA_BLOCK.get())
+                .save(consumer, modLoc("soul_magma_block_from_transmutation"));
+        SoulLavaTransmutationRecipeBuilder.addRecipe(Ingredient.of(Blocks.CRYING_OBSIDIAN), ModBlocks.SOUL_OBSIDIAN.get())
+                .save(consumer, modLoc("soul_obsidian_from_transmutation"));
     }
 
     private void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {
@@ -70,34 +79,34 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("##")
                 .define('#', ModItems.BLUE_GLOWSTONE_DUST.get())
                 .unlockedBy("has_blue_glowstone_dust", has(ModItems.BLUE_GLOWSTONE_DUST.get()))
-                .save(consumer, modResourceLocation("blue_glowstone"));
+                .save(consumer, modLoc("blue_glowstone"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_OPAL_BRICKS.get(), 1)
                 .pattern("#")
                 .pattern("#")
                 .define('#', ModBlocks.CUT_OPAL_BRICK_SLAB.get())
                 .unlockedBy("has_cut_opal_bricks_slab", has(ModBlocks.CUT_OPAL_BRICK_SLAB.get()))
-                .save(consumer, modResourceLocation("chiseled_opal_bricks_with_cut_opal_brick_slab"));
+                .save(consumer, modLoc("chiseled_opal_bricks_with_cut_opal_brick_slab"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_OPAL_BRICKS.get(), 1)
                 .pattern("#")
                 .pattern("#")
                 .define('#', ModBlocks.OPAL_BRICK_SLAB.get())
                 .unlockedBy("has_opal_bricks_slab", has(ModBlocks.OPAL_BRICK_SLAB.get()))
-                .save(consumer, modResourceLocation("chiseled_opal_bricks_with_opal_brick_slab"));
+                .save(consumer, modLoc("chiseled_opal_bricks_with_opal_brick_slab"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), 6)
                 .pattern("###")
                 .define('#', ModBlocks.CRACKED_CUT_OPAL_BRICKS.get())
                 .unlockedBy("has_cracked_cut_opal_bricks", has(ModBlocks.CRACKED_CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cracked_cut_opal_brick_slab"));
+                .save(consumer, modLoc("cracked_cut_opal_brick_slab"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(), 6)
                 .pattern("###")
                 .define('#', ModBlocks.CRACKED_OPAL_BRICKS.get())
                 .unlockedBy("has_cracked_opal_bricks", has(ModBlocks.CRACKED_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cracked_opal_brick_slab"));
+                .save(consumer, modLoc("cracked_opal_brick_slab"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_OPAL_BRICK_SLAB.get(), 6)
                 .pattern("###")
                 .define('#', ModBlocks.CUT_OPAL_BRICKS.get())
                 .unlockedBy("has_cut_opal_bricks", has(ModBlocks.CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_slab"));
+                .save(consumer, modLoc("cut_opal_brick_slab"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), 4)
                 .pattern("#  ")
                 .pattern("## ")
@@ -105,13 +114,13 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModBlocks.CUT_OPAL_BRICKS.get())
                 .group("stone_stairs")
                 .unlockedBy("has_cut_opal_bricks", has(ModBlocks.CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_stairs"));
+                .save(consumer, modLoc("cut_opal_brick_stairs"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_OPAL_BRICK_WALL.get(), 6)
                 .pattern("###")
                 .pattern("###")
                 .define('#', ModBlocks.CUT_OPAL_BRICKS.get())
                 .unlockedBy("has_cut_opal_bricks", has(ModBlocks.CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_wall"));
+                .save(consumer, modLoc("cut_opal_brick_wall"));
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModBlocks.EXTRACTOR.get(), 1)
                 .pattern("XXX")
                 .pattern("#FD")
@@ -122,7 +131,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', Blocks.COBBLESTONE)
                 .unlockedBy("has_dropper", has(Blocks.DROPPER))
                 .unlockedBy("has_hopper", has(Blocks.HOPPER))
-                .save(consumer, modResourceLocation("extractor"));
+                .save(consumer, modLoc("extractor"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.FILTER.get(), 1)
                 .pattern("X#X")
                 .pattern("# #")
@@ -131,7 +140,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', Items.STICK)
                 .unlockedBy("has_dropper", has(Blocks.DROPPER))
                 .unlockedBy("has_hopper", has(Blocks.HOPPER))
-                .save(consumer, modResourceLocation("filter"));
+                .save(consumer, modLoc("filter"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GRATE_MAGMA_BLOCK.get(), 1)
                 .pattern("#")
                 .pattern("X")
@@ -139,7 +148,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', Blocks.MAGMA_BLOCK)
                 .unlockedBy("has_iron_bars", has(Blocks.IRON_BARS))
                 .unlockedBy("has_magma_block", has(Blocks.MAGMA_BLOCK))
-                .save(consumer, modResourceLocation("grate_magma_block"));
+                .save(consumer, modLoc("grate_magma_block"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get(), 1)
                 .pattern("#")
                 .pattern("X")
@@ -147,7 +156,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', ModBlocks.SOUL_MAGMA_BLOCK.get())
                 .unlockedBy("has_iron_bars", has(Blocks.IRON_BARS))
                 .unlockedBy("has_soul_magma_block", has(ModBlocks.SOUL_MAGMA_BLOCK.get()))
-                .save(consumer, modResourceLocation("grate_soul_magma_block"));
+                .save(consumer, modLoc("grate_soul_magma_block"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GRATE_SOUL_SAND.get(), 1)
                 .pattern("#")
                 .pattern("X")
@@ -155,7 +164,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', Blocks.SOUL_SAND)
                 .unlockedBy("has_iron_bars", has(Blocks.IRON_BARS))
                 .unlockedBy("has_soul_sand", has(Blocks.SOUL_SAND))
-                .save(consumer, modResourceLocation("grate_soul_sand"));
+                .save(consumer, modLoc("grate_soul_sand"));
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ModBlocks.HYDRODYNAMIC_RAIL.get(), 12)
                 .pattern("XLX")
                 .pattern("X#X")
@@ -167,12 +176,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_lapis_lazuli", has(Items.LAPIS_LAZULI))
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
                 .unlockedBy("has_prismarine_crystals", has(Items.PRISMARINE_CRYSTALS))
-                .save(consumer, modResourceLocation("hydrodynamic_rail"));
+                .save(consumer, modLoc("hydrodynamic_rail"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.OPAL_BRICK_SLAB.get(), 6)
                 .pattern("###")
                 .define('#', ModBlocks.OPAL_BRICKS.get())
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("opal_brick_slab"));
+                .save(consumer, modLoc("opal_brick_slab"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.OPAL_BRICK_STAIRS.get(), 4)
                 .pattern("#  ")
                 .pattern("## ")
@@ -180,24 +189,24 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModBlocks.OPAL_BRICKS.get())
                 .group("stone_stairs")
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("opal_brick_stairs"));
+                .save(consumer, modLoc("opal_brick_stairs"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.OPAL_BRICK_WALL.get(), 6)
                 .pattern("###")
                 .pattern("###")
                 .define('#', ModBlocks.OPAL_BRICKS.get())
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("opal_brick_wall"));
+                .save(consumer, modLoc("opal_brick_wall"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.OPAL_BRICKS.get(), 4)
                 .pattern("##")
                 .pattern("##")
                 .define('#', ModBlocks.OPAL.get())
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_bricks"));
+                .save(consumer, modLoc("opal_bricks"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.OPAL_COBBLESTONE_SLAB.get(), 6)
                 .pattern("###")
                 .define('#', ModBlocks.OPAL_COBBLESTONE.get())
                 .unlockedBy("has_opal_cobblestone", has(ModBlocks.OPAL_COBBLESTONE.get()))
-                .save(consumer, modResourceLocation("opal_cobblestone_slab"));
+                .save(consumer, modLoc("opal_cobblestone_slab"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.OPAL_COBBLESTONE_STAIRS.get(), 4)
                 .pattern("#  ")
                 .pattern("## ")
@@ -205,13 +214,13 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModBlocks.OPAL_COBBLESTONE.get())
                 .group("stone_stairs")
                 .unlockedBy("has_opal_cobblestone", has(ModBlocks.OPAL_COBBLESTONE.get()))
-                .save(consumer, modResourceLocation("opal_cobblestone_stairs"));
+                .save(consumer, modLoc("opal_cobblestone_stairs"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.OPAL_COBBLESTONE_WALL.get(), 6)
                 .pattern("###")
                 .pattern("###")
                 .define('#', ModBlocks.OPAL_COBBLESTONE.get())
                 .unlockedBy("has_opal_cobblestone", has(ModBlocks.OPAL_COBBLESTONE.get()))
-                .save(consumer, modResourceLocation("opal_cobblestone_wall"));
+                .save(consumer, modLoc("opal_cobblestone_wall"));
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_AXE.get(), 1)
                 .pattern("XX")
                 .pattern("X#")
@@ -220,14 +229,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', ModItems.OPAL_CRYSTAL.get())
                 .group("equipment")
                 .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modResourceLocation("opal_crystal_axe"));
+                .save(consumer, modLoc("opal_crystal_axe"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.OPAL_CRYSTAL_BLOCK.get(), 1)
                 .pattern("###")
                 .pattern("###")
                 .pattern("###")
                 .define('#', ModItems.OPAL_CRYSTAL.get())
                 .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modResourceLocation("opal_crystal_block"));
+                .save(consumer, modLoc("opal_crystal_block"));
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_HOE.get(), 1)
                 .pattern("XX")
                 .pattern(" #")
@@ -236,7 +245,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', ModItems.OPAL_CRYSTAL.get())
                 .group("equipment")
                 .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modResourceLocation("opal_crystal_hoe"));
+                .save(consumer, modLoc("opal_crystal_hoe"));
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_PICKAXE.get(), 1)
                 .pattern("XXX")
                 .pattern(" # ")
@@ -245,7 +254,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', ModItems.OPAL_CRYSTAL.get())
                 .group("equipment")
                 .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modResourceLocation("opal_crystal_pickaxe"));
+                .save(consumer, modLoc("opal_crystal_pickaxe"));
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_SHOVEL.get(), 1)
                 .pattern("X")
                 .pattern("#")
@@ -254,7 +263,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', ModItems.OPAL_CRYSTAL.get())
                 .group("equipment")
                 .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modResourceLocation("opal_crystal_shovel"));
+                .save(consumer, modLoc("opal_crystal_shovel"));
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_SWORD.get(), 1)
                 .pattern("X")
                 .pattern("X")
@@ -263,17 +272,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', ModItems.OPAL_CRYSTAL.get())
                 .group("equipment")
                 .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modResourceLocation("opal_crystal_sword"));
+                .save(consumer, modLoc("opal_crystal_sword"));
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModBlocks.OPAL_PRESSURE_PLATE.get(), 1)
                 .pattern("##")
                 .define('#', ModBlocks.OPAL.get())
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_pressure_plate"));
+                .save(consumer, modLoc("opal_pressure_plate"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.OPAL_SLAB.get(), 6)
                 .pattern("###")
                 .define('#', ModBlocks.OPAL.get())
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_slab"));
+                .save(consumer, modLoc("opal_slab"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.OPAL_STAIRS.get(), 4)
                 .pattern("#  ")
                 .pattern("## ")
@@ -281,14 +290,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModBlocks.OPAL.get())
                 .group("stone_stairs")
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_stairs"));
+                .save(consumer, modLoc("opal_stairs"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), 1)
                 .pattern("###")
                 .pattern("###")
                 .pattern("###")
                 .define('#', ModItems.RAW_OPAL_CRYSTAL.get())
                 .unlockedBy("has_raw_opal_crystal", has(ModItems.RAW_OPAL_CRYSTAL.get()))
-                .save(consumer, modResourceLocation("raw_opal_crystal_block"));
+                .save(consumer, modLoc("raw_opal_crystal_block"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_ANCHOR.get(), 1)
                 .pattern("XLX")
                 .pattern("X#X")
@@ -299,7 +308,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('L', Items.DIAMOND)
                 .unlockedBy("has_ender_chest", has(Blocks.ENDER_CHEST))
                 .unlockedBy("has_soul_obsidian", has(ModBlocks.SOUL_OBSIDIAN.get()))
-                .save(consumer, modResourceLocation("soul_anchor"));
+                .save(consumer, modLoc("soul_anchor"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_FURNACE.get(), 1)
                 .pattern("XBX")
                 .pattern("XFX")
@@ -310,27 +319,27 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('B', Items.BUCKET)
                 .unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE))
                 .unlockedBy("has_soul_magma_block", has(ModBlocks.SOUL_MAGMA_BLOCK.get()))
-                .save(consumer, modResourceLocation("soul_furnace"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SOUL_MAGMA_BLOCK.get(), 8)
-                .pattern("XXX")
-                .pattern("X#X")
-                .pattern("XXX")
-                .define('#', ModItems.SOUL_LAVA_BUCKET.get())
-                .define('X', Blocks.MAGMA_BLOCK)
-                .unlockedBy("has_soul_lava_bucket", has(ModItems.SOUL_LAVA_BUCKET.get()))
-                .unlockedBy("has_magma_block", has(Blocks.MAGMA_BLOCK))
-                .save(consumer, modResourceLocation("soul_magma_block"));
+                .save(consumer, modLoc("soul_furnace"));
+//        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SOUL_MAGMA_BLOCK.get(), 8)
+//                .pattern("XXX")
+//                .pattern("X#X")
+//                .pattern("XXX")
+//                .define('#', ModItems.SOUL_LAVA_BUCKET.get())
+//                .define('X', Blocks.MAGMA_BLOCK)
+//                .unlockedBy("has_soul_lava_bucket", has(ModItems.SOUL_LAVA_BUCKET.get()))
+//                .unlockedBy("has_magma_block", has(Blocks.MAGMA_BLOCK))
+//                .save(consumer, modLoc("soul_magma_block"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SOUL_MAGMA_BRICK_SLAB.get(), 6)
                 .pattern("###")
                 .define('#', ModBlocks.SOUL_MAGMA_BRICKS.get())
                 .unlockedBy("has_soul_magma_bricks", has(ModBlocks.SOUL_MAGMA_BRICKS.get()))
-                .save(consumer, modResourceLocation("soul_magma_brick_slab"));
+                .save(consumer, modLoc("soul_magma_brick_slab"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SOUL_MAGMA_BRICKS.get(), 4)
                 .pattern("##")
                 .pattern("##")
                 .define('#', ModBlocks.SOUL_MAGMA_BLOCK.get())
                 .unlockedBy("has_soul_magma_block", has(ModBlocks.SOUL_MAGMA_BLOCK.get()))
-                .save(consumer, modResourceLocation("soul_magma_bricks"));
+                .save(consumer, modLoc("soul_magma_bricks"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LAVA_GOOGLES.get(), 1)
                 .pattern("sLs")
                 .pattern("#X#")
@@ -339,11 +348,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('s', Items.STRING)
                 .define('L', Items.LEATHER)
                 .unlockedBy("has_amethyst_lens", has(ModItems.AMETHYST_LENS.get()))
-                .save(consumer, modResourceLocation("lava_googles"));
+                .save(consumer, modLoc("lava_googles"));
 
         for (Map.Entry<Block, DyeColor> entry : RecipeUtils.getStainedGlassSet()) {
             LavaGooglesRecipeBuilder.googles(entry.getKey())
-                    .save(consumer, modResourceLocation(entry.getValue().getSerializedName() + "_lava_googles"));
+                    .save(consumer, modLoc(entry.getValue().getSerializedName() + "_lava_googles"));
         }
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, Items.SPECTRAL_ARROW, 4)
@@ -353,7 +362,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('a', Items.ARROW)
                 .define('#', ModItems.BLUE_GLOWSTONE_DUST.get())
                 .unlockedBy("has_blue_glowstone_dust", has(ModItems.BLUE_GLOWSTONE_DUST.get()))
-                .save(consumer, modResourceLocation("spectral_arrows_with_blue_glowstone_dust"));
+                .save(consumer, modLoc("spectral_arrows_with_blue_glowstone_dust"));
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModBlocks.BLUE_REDSTONE_LAMP.get(), 1)
                 .pattern(" # ")
                 .pattern("#g#")
@@ -361,7 +370,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('g', ModBlocks.BLUE_GLOWSTONE.get())
                 .define('#', Items.REDSTONE)
                 .unlockedBy("has_blue_glowstone", has(ModBlocks.BLUE_GLOWSTONE.get()))
-                .save(consumer, modResourceLocation("blue_redstone_lamp"));
+                .save(consumer, modLoc("blue_redstone_lamp"));
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModBlocks.SOUL_JACK_O_LANTERN.get(), 1)
                 .pattern("#")
                 .pattern("I")
@@ -369,7 +378,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', Blocks.CARVED_PUMPKIN)
                 .unlockedBy("has_soul_torch", has(Blocks.SOUL_TORCH))
                 .unlockedBy("has_carved_pumpkin", has(Blocks.CARVED_PUMPKIN))
-                .save(consumer, modResourceLocation("soul_jack_o_lantern"));
+                .save(consumer, modLoc("soul_jack_o_lantern"));
         this.itemPedestalShaped(consumer, "stone_item_pedestal", (ItemPedestalBlock)ModBlocks.STONE_ITEM_PEDESTAL.get(),
                 Blocks.STONE);
         this.itemPedestalShaped(consumer, "stone_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.STONE_BRICK_ITEM_PEDESTAL.get(),
@@ -422,7 +431,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("###")
                 .define('#', ModItems.SMALL_SOUL_FRAGMENT.get())
                 .unlockedBy("has_small_soul_fragment", has(ModItems.SMALL_SOUL_FRAGMENT.get()))
-                .save(consumer, modResourceLocation("small_soul_fragment"));
+                .save(consumer, modLoc("small_soul_fragment"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.INFUSED_SOUL_SAND.get(), 1)
                 .pattern(" # ")
                 .pattern("#s#")
@@ -430,7 +439,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', Blocks.SOUL_SAND)
                 .define('s', ModItems.SOUL_FRAGMENT.get())
                 .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
-                .save(consumer, modResourceLocation("infused_soul_sand"));
+                .save(consumer, modLoc("infused_soul_sand"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
@@ -438,180 +447,180 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(Items.TORCHFLOWER_SEEDS)
                 .requires(Items.GLOW_INK_SAC)
                 .unlockedBy("has_torchflower_seeds", has(Items.TORCHFLOWER_SEEDS))
-                .save(consumer, modResourceLocation("bright_torchflower_seeds"));
+                .save(consumer, modLoc("bright_torchflower_seeds"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, ModBlocks.OPAL_BUTTON.get(), 1)
                 .requires(ModBlocks.OPAL.get())
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_button"));
+                .save(consumer, modLoc("opal_button"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.OPAL_CRYSTAL.get(), 9)
                 .requires(ModBlocks.OPAL_CRYSTAL_BLOCK.get())
                 .unlockedBy("has_opal_crystal_block", has(ModBlocks.OPAL_CRYSTAL_BLOCK.get()))
-                .save(consumer, modResourceLocation("opal_crystal_from_block"));
+                .save(consumer, modLoc("opal_crystal_from_block"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RAW_OPAL_CRYSTAL.get(), 9)
                 .requires(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get())
                 .unlockedBy("has_raw_opal_crystal_block", has(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get()))
-                .save(consumer, modResourceLocation("raw_opal_crystal_from_block"));
+                .save(consumer, modLoc("raw_opal_crystal_from_block"));
     }
 
     private void buildSmeltingRecipes(Consumer<FinishedRecipe> consumer) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.CUT_OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                 ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), 0.1F, 200)
                 .unlockedBy("has_cut_opal_bricks", has(ModBlocks.CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cracked_cut_opal_bricks_from_smelting"));
+                .save(consumer, modLoc("cracked_cut_opal_bricks_from_smelting"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CRACKED_OPAL_BRICKS.get(), 0.1F, 200)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cracked_opal_bricks_from_smelting"));
+                .save(consumer, modLoc("cracked_opal_bricks_from_smelting"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.OPAL_CRYSTAL_ORE.get()), RecipeCategory.MISC,
                         ModItems.OPAL_CRYSTAL.get(), 1.0F, 200)
                 .unlockedBy("has_opal_crystal_ore", has(ModBlocks.OPAL_CRYSTAL_ORE.get()))
-                .save(consumer, modResourceLocation("opal_crystal_from_smelting_opal_crystal_ore"));
+                .save(consumer, modLoc("opal_crystal_from_smelting_opal_crystal_ore"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_OPAL_CRYSTAL.get()), RecipeCategory.MISC,
                         ModItems.OPAL_CRYSTAL.get(), 1.0F, 200)
                 .unlockedBy("has_raw_opal_crystal", has(ModItems.RAW_OPAL_CRYSTAL.get()))
-                .save(consumer, modResourceLocation("opal_crystal_from_smelting_raw_opal_crystal"));
+                .save(consumer, modLoc("opal_crystal_from_smelting_raw_opal_crystal"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.OPAL_COBBLESTONE.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL.get(), 1.0F, 200)
                 .unlockedBy("has_opal_cobblestone", has(ModBlocks.OPAL_COBBLESTONE.get()))
-                .save(consumer, modResourceLocation("opal_from_smelting"));
+                .save(consumer, modLoc("opal_from_smelting"));
     }
 
     private void buildBlastingRecipes(Consumer<FinishedRecipe> consumer) {
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.OPAL_CRYSTAL_ORE.get()), RecipeCategory.MISC,
                         ModItems.OPAL_CRYSTAL.get(), 1.0F, 100)
                 .unlockedBy("has_opal_crystal_ore", has(ModBlocks.OPAL_CRYSTAL_ORE.get()))
-                .save(consumer, modResourceLocation("opal_crystal_from_blasting_opal_crystal_ore"));
+                .save(consumer, modLoc("opal_crystal_from_blasting_opal_crystal_ore"));
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.RAW_OPAL_CRYSTAL.get()), RecipeCategory.MISC,
                         ModItems.OPAL_CRYSTAL.get(), 1.0F, 100)
                 .unlockedBy("has_raw_opal_crystal", has(ModItems.RAW_OPAL_CRYSTAL.get()))
-                .save(consumer, modResourceLocation("opal_crystal_from_blasting_raw_opal_crystal"));
+                .save(consumer, modLoc("opal_crystal_from_blasting_raw_opal_crystal"));
     }
 
     private void buildStonecuttingRecipes(Consumer<FinishedRecipe> consumer) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.CUT_OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                 ModBlocks.CHISELED_OPAL_BRICKS.get(), 1)
                 .unlockedBy("has_cut_opal_bricks", has(ModBlocks.CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("chiseled_opal_bricks_from_cut_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("chiseled_opal_bricks_from_cut_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CHISELED_OPAL_BRICKS.get(), 1)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("chiseled_opal_bricks_from_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("chiseled_opal_bricks_from_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CHISELED_OPAL_BRICKS.get(), 1)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("chiseled_opal_bricks_from_opal_stonecutting"));
+                .save(consumer, modLoc("chiseled_opal_bricks_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.CRACKED_OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), 2)
                 .unlockedBy("has_cracked_opal_bricks", has(ModBlocks.CRACKED_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cracked_cut_opal_brick_slab_from_cracked_cut_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("cracked_cut_opal_brick_slab_from_cracked_cut_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.CRACKED_OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(), 2)
                 .unlockedBy("has_cracked_opal_bricks", has(ModBlocks.CRACKED_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cracked_opal_brick_slab_from_cracked_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("cracked_opal_brick_slab_from_cracked_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.CUT_OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICK_SLAB.get(), 2)
                 .unlockedBy("has_cut_opal_bricks", has(ModBlocks.CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_slab_from_cut_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("cut_opal_brick_slab_from_cut_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICK_SLAB.get(), 2)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_slab_from_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("cut_opal_brick_slab_from_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICK_SLAB.get(), 2)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_slab_from_opal_stonecutting"));
+                .save(consumer, modLoc("cut_opal_brick_slab_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.CUT_OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), 1)
                 .unlockedBy("has_cut_opal_bricks", has(ModBlocks.CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_stairs_from_cut_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("cut_opal_brick_stairs_from_cut_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), 1)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_stairs_from_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("cut_opal_brick_stairs_from_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), 1)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_stairs_from_opal_stonecutting"));
+                .save(consumer, modLoc("cut_opal_brick_stairs_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.CUT_OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICK_WALL.get(), 1)
                 .unlockedBy("has_cut_opal_bricks", has(ModBlocks.CUT_OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_wall_from_cut_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("cut_opal_brick_wall_from_cut_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICK_WALL.get(), 1)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_wall_from_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("cut_opal_brick_wall_from_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICK_WALL.get(), 1)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("cut_opal_brick_wall_from_opal_stonecutting"));
+                .save(consumer, modLoc("cut_opal_brick_wall_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICKS.get(), 1)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("cut_opal_bricks_from_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("cut_opal_bricks_from_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.CUT_OPAL_BRICKS.get(), 1)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("cut_opal_bricks_from_opal_stonecutting"));
+                .save(consumer, modLoc("cut_opal_bricks_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_BRICK_SLAB.get(), 2)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("opal_brick_slab_from_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("opal_brick_slab_from_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_BRICK_SLAB.get(), 2)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_brick_slab_from_opal_stonecutting"));
+                .save(consumer, modLoc("opal_brick_slab_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_BRICK_STAIRS.get(), 1)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("opal_brick_stairs_from_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("opal_brick_stairs_from_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_BRICK_STAIRS.get(), 1)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_brick_stairs_from_opal_stonecutting"));
+                .save(consumer, modLoc("opal_brick_stairs_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_BRICK_WALL.get(), 1)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
-                .save(consumer, modResourceLocation("opal_brick_wall_from_opal_bricks_stonecutting"));
+                .save(consumer, modLoc("opal_brick_wall_from_opal_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_BRICK_WALL.get(), 1)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_brick_wall_from_opal_stonecutting"));
+                .save(consumer, modLoc("opal_brick_wall_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_BRICKS.get(), 1)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_bricks_from_opal_stonecutting"));
+                .save(consumer, modLoc("opal_bricks_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_COBBLESTONE.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_COBBLESTONE_SLAB.get(), 2)
                 .unlockedBy("has_opal_cobblestone", has(ModBlocks.OPAL_COBBLESTONE.get()))
-                .save(consumer, modResourceLocation("opal_cobblestone_slab_from_opal_cobblestone_stonecutting"));
+                .save(consumer, modLoc("opal_cobblestone_slab_from_opal_cobblestone_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_COBBLESTONE.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_COBBLESTONE_STAIRS.get(), 1)
                 .unlockedBy("has_opal_cobblestone", has(ModBlocks.OPAL_COBBLESTONE.get()))
-                .save(consumer, modResourceLocation("opal_cobblestone_stairs_from_opal_cobblestone_stonecutting"));
+                .save(consumer, modLoc("opal_cobblestone_stairs_from_opal_cobblestone_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL_COBBLESTONE.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_COBBLESTONE_WALL.get(), 1)
                 .unlockedBy("has_opal_cobblestone", has(ModBlocks.OPAL_COBBLESTONE.get()))
-                .save(consumer, modResourceLocation("opal_cobblestone_wall_from_opal_cobblestone_stonecutting"));
+                .save(consumer, modLoc("opal_cobblestone_wall_from_opal_cobblestone_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_SLAB.get(), 2)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_slab_from_opal_stonecutting"));
+                .save(consumer, modLoc("opal_slab_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.OPAL.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL_STAIRS.get(), 1)
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
-                .save(consumer, modResourceLocation("opal_stairs_from_opal_stonecutting"));
+                .save(consumer, modLoc("opal_stairs_from_opal_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SOUL_MAGMA_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.SOUL_MAGMA_BRICK_SLAB.get(), 2)
                 .unlockedBy("has_soul_magma_block", has(ModBlocks.SOUL_MAGMA_BLOCK.get()))
-                .save(consumer, modResourceLocation("soul_magma_brick_slab_from_soul_magma_block_stonecutting"));
+                .save(consumer, modLoc("soul_magma_brick_slab_from_soul_magma_block_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SOUL_MAGMA_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.SOUL_MAGMA_BRICK_SLAB.get(), 2)
                 .unlockedBy("has_soul_magma_bricks", has(ModBlocks.SOUL_MAGMA_BRICKS.get()))
-                .save(consumer, modResourceLocation("soul_magma_brick_slab_from_soul_magma_bricks_stonecutting"));
+                .save(consumer, modLoc("soul_magma_brick_slab_from_soul_magma_bricks_stonecutting"));
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SOUL_MAGMA_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.SOUL_MAGMA_BRICKS.get(), 1)
                 .unlockedBy("has_soul_magma_block", has(ModBlocks.SOUL_MAGMA_BLOCK.get()))
-                .save(consumer, modResourceLocation("soul_magma_bricks_from_stone_magma_blocks_stonecutting"));
+                .save(consumer, modLoc("soul_magma_bricks_from_stone_magma_blocks_stonecutting"));
     }
 
     public void itemPedestalShaped(Consumer<FinishedRecipe> consumer, String id, ItemPedestalBlock itemPedestal, Block material) {
@@ -623,10 +632,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('I', Items.ITEM_FRAME)
                 .unlockedBy("has_" + id, has(material))
                 .unlockedBy("has_item_frame", has(Items.ITEM_FRAME))
-                .save(consumer, modResourceLocation(id));
+                .save(consumer, modLoc(id));
     }
 
-    private ResourceLocation modResourceLocation(String id) {
+    private ResourceLocation modLoc(String id) {
         return new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, id);
     }
 

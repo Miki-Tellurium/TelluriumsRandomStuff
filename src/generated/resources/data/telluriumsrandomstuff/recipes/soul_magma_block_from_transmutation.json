@@ -1,0 +1,7 @@
+{
+  "type": "telluriumsrandomstuff:soul_lava_transmutation",
+  "ingredient": {
+    "item": "minecraft:magma_block"
+  },
+  "result": "telluriumsrandomstuff:soul_magma_block"
+}
