@@ -2,10 +2,10 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.ItemPedestalBlock;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.LavaGooglesRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.LavaGooglesRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulSmeltingRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulSmeltingRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
