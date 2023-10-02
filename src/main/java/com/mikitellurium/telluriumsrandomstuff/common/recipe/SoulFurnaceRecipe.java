@@ -31,12 +31,12 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        if(pLevel.isClientSide()) {
+    public boolean matches(SimpleContainer container, Level level) {
+        if(level.isClientSide()) {
             return false;
         }
 
-        return ingredient.test(pContainer.getItem(0));
+        return ingredient.test(container.getItem(0));
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public boolean canCraftInDimensions(int pWidth, int pHeight) {
+    public boolean canCraftInDimensions(int width, int height) {
         return true;
     }
 
