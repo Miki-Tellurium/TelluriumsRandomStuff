@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-23T21:21:21.0344783	Item Models: telluriumsrandomstuff
+// 1.20.1	2023-10-02T20:35:45.4433099	Item Models: telluriumsrandomstuff
 c5a20981980874220ac89870c039b75222466684 assets/telluriumsrandomstuff/models/item/amethyst_lens.json
 23bcbf09981e30a0f6ffb5b06b712b8610ac79d0 assets/telluriumsrandomstuff/models/item/blue_glowstone_dust.json
 8b3404e8be19335b66755638a4e5c05a3359ba49 assets/telluriumsrandomstuff/models/item/bright_torchflower.json
@@ -16,6 +16,7 @@ f925f5812ab18e52f4eb3b200ed524aa961d9821 assets/telluriumsrandomstuff/models/ite
 33bb3a6e66f669baed52870d97cacfaf1d7726e5 assets/telluriumsrandomstuff/models/item/opal_crystal_sword.json
 124cb69e7ba46e32b987411f2051bdfb5cbb1c07 assets/telluriumsrandomstuff/models/item/raw_opal_crystal.json
 d881d8342d25aecfd613b923a7758f7f69efbe74 assets/telluriumsrandomstuff/models/item/small_soul_fragment.json
+6ffb8feb890f2d6c3c3656d6fae07c032eb39ad4 assets/telluriumsrandomstuff/models/item/soul_cluster.json
 fe7248a9b3f180b15e3886621cceeaa38a3758f5 assets/telluriumsrandomstuff/models/item/soul_fragment.json
 404405a2a0f2151133b67ca718c658c93b75edce assets/telluriumsrandomstuff/models/item/soul_lava_bucket.json
 e744ef77d128d44d3d2499abb188ebe17cc0fc3d assets/telluriumsrandomstuff/models/item/soul_torchflower.json

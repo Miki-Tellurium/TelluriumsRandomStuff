@@ -440,6 +440,13 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('s', ModItems.SOUL_FRAGMENT.get())
                 .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
                 .save(consumer, modLoc("infused_soul_sand"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_CLUSTER.get(), 1)
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .define('#', ModItems.SOUL_FRAGMENT.get())
+                .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
+                .save(consumer, modLoc("soul_cluster"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

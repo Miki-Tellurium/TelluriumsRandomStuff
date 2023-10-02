@@ -45,6 +45,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleItem(ModItems.AMETHYST_LENS);
         this.simpleItem(ModItems.SMALL_SOUL_FRAGMENT);
         this.simpleItem(ModItems.SOUL_FRAGMENT);
+        this.simpleItem(ModItems.SOUL_CLUSTER);
     }
 
     private void simpleItem(RegistryObject<Item> item) {
