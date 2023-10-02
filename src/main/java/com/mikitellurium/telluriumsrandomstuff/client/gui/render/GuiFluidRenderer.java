@@ -21,7 +21,7 @@ import net.minecraftforge.fluids.FluidStack;
  *
  * LICENSE : https://github.com/CoFH/CoFHCore#readme
  */
-public class FluidRenderer {
+public class GuiFluidRenderer {
 
     public static void drawBackground(int xPos, int yPos, FluidStack fluidStack, int capacity, int width, int height) {
         int resourceHeight = height - 2;

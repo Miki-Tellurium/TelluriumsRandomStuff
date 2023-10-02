@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulFurnaceMenu;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.FluidRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.render.GuiFluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -85,7 +85,7 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
     }
 
     private void renderSoulLavaStorage(int xPos, int yPos) {
-        FluidRenderer.drawBackground(xPos, yPos, this.menu.getFluidStack(), this.menu.getBlockEntity().getMaxFluidCapacity(),
+        GuiFluidRenderer.drawBackground(xPos, yPos, this.menu.getFluidStack(), this.menu.getBlockEntity().getMaxFluidCapacity(),
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
         RenderSystem.setShaderTexture(0, GUI_TEXTURE);
     }

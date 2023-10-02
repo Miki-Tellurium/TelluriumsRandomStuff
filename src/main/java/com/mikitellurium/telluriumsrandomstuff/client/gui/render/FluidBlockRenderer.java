@@ -20,4 +20,5 @@ public class FluidBlockRenderer implements IIngredientRenderer<FluidStack> {
     public List<Component> getTooltip(FluidStack ingredient, TooltipFlag tooltipFlag) {
         return List.of(ingredient.getDisplayName());
     }
+
 }
