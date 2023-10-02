@@ -2,12 +2,14 @@ package com.mikitellurium.telluriumsrandomstuff.common.content.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.content.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.content.fluid.SoulLavaFluid;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -23,6 +25,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.Optional;
 
 public class SoulLavaCauldronBlock extends AbstractCauldronBlock {
 
@@ -45,23 +49,27 @@ public class SoulLavaCauldronBlock extends AbstractCauldronBlock {
                 !entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE)) {
             if (entity instanceof LivingEntity livingEntity) {
                 SoulLavaFluid.soulLavaHurt(livingEntity);
-            } else if (entity instanceof ItemEntity item && item.getItem().is(Items.CRYING_OBSIDIAN)) {
-                level.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
-                level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(blockState));
-                level.playSound(null, pos, SoundEvents.SOUL_ESCAPE, SoundSource.BLOCKS, 1.0f, 1.2f);
-                this.convertItem(level, item);
-            } else {
-                entity.lavaHurt();
+            } else if (entity instanceof ItemEntity item) {
+                Optional<SoulLavaTransmutationRecipe> recipe = level.getRecipeManager().getRecipeFor(
+                        SoulLavaTransmutationRecipe.Type.INSTANCE, new SimpleContainer(item.getItem()), level);
+                if (recipe.isPresent()) {
+                    level.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
+                    level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(blockState));
+                    level.playSound(null, pos, SoundEvents.SOUL_ESCAPE, SoundSource.BLOCKS, 1.0f, 1.2f);
+                    this.convertItem(level, item, recipe.get().assemble(new SimpleContainer(item.getItem()), level.registryAccess()));
+                } else {
+                    entity.lavaHurt();
+                }
             }
         }
     }
 
-    private void convertItem(Level level, ItemEntity entity) {
-        ItemEntity soulObsidian = new ItemEntity(level, entity.getX(), entity.getY() - 0.4D, entity.getZ(),
-                new ItemStack(ModBlocks.SOUL_OBSIDIAN.get(), entity.getItem().getCount()));
+    private void convertItem(Level level, ItemEntity entity, ItemStack output) {
+        output.setCount(entity.getItem().getCount());
+        ItemEntity result = new ItemEntity(level, entity.getX(), entity.getY() - 0.4D, entity.getZ(), output);
         entity.remove(Entity.RemovalReason.DISCARDED);
-        level.addFreshEntity(soulObsidian);
-        soulObsidian.getDeltaMovement().add(0.0D, 0.02D, 0.0D);
+        level.addFreshEntity(result);
+        result.getDeltaMovement().add(0.0D, 0.02D, 0.0D);
     }
 
     @Override

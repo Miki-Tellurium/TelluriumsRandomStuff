@@ -57,10 +57,6 @@ public class SoulLavaTransmutationRecipe implements Recipe<SimpleContainer> {
         return output;
     }
 
-    public int getRecipeCost() {
-        return recipeCost;
-    }
-
     @Override
     public ResourceLocation getId() {
         return id;
@@ -79,13 +75,13 @@ public class SoulLavaTransmutationRecipe implements Recipe<SimpleContainer> {
     public static class Type implements RecipeType<SoulLavaTransmutationRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "soul_furnace_smelting";
+        public static final String ID = "soul_lava_transmutation";
     }
 
     public static class Serializer implements RecipeSerializer<SoulLavaTransmutationRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_furnace_smelting");
+                new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_lava_transmutation");
 
         @Override
         public SoulLavaTransmutationRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
@@ -102,18 +98,16 @@ public class SoulLavaTransmutationRecipe implements Recipe<SimpleContainer> {
                 ResourceLocation resourcelocation = new ResourceLocation(result);
                 output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
             }
-            int recipeCost = GsonHelper.getAsInt(serializedRecipe, "cost");
 
-            return new SoulLavaTransmutationRecipe(recipeId, output, ingredient, recipeCost);
+            return new SoulLavaTransmutationRecipe(recipeId, output, ingredient);
         }
 
         @Override
         public @Nullable SoulLavaTransmutationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             Ingredient ingredient = Ingredient.fromNetwork(buf);
             ItemStack output = buf.readItem();
-            int recipeCost = buf.readInt();
 
-            return new SoulLavaTransmutationRecipe(id, output, ingredient, recipeCost);
+            return new SoulLavaTransmutationRecipe(id, output, ingredient);
         }
 
         @Override
@@ -122,7 +116,6 @@ public class SoulLavaTransmutationRecipe implements Recipe<SimpleContainer> {
                 ing.toNetwork(buf);
             }
             buf.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buf.writeInt(recipe.getRecipeCost());
         }
     }
 
