@@ -1,5 +1,5 @@
 {
-  "type": "telluriumsrandomstuff:add_soul_jack_o_lantern",
+  "type": "telluriumsrandomstuff:loot_chest_modifier",
   "conditions": [
     {
       "condition": "forge:loot_table_id",

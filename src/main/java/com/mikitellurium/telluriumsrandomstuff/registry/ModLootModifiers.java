@@ -16,10 +16,10 @@ public class ModLootModifiers {
             DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, TelluriumsRandomStuffMod.MOD_ID);
 
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> LOOT_CHEST_MODIFIER =
-            LOOT_MODIFIER_SERIALIZERS.register("add_soul_jack_o_lantern", LootChestModifier.CODEC);
+            LOOT_MODIFIER_SERIALIZERS.register("loot_chest_modifier", LootChestModifier.CODEC);
 
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ENTITY_LOOT_MODIFIER =
-            LOOT_MODIFIER_SERIALIZERS.register("add_small_soul_fragment", EntityLootModifier.CODEC);
+            LOOT_MODIFIER_SERIALIZERS.register("entity_loot_modifier", EntityLootModifier.CODEC);
 
     public static void register(IEventBus eventBus) {
         LOOT_MODIFIER_SERIALIZERS.register(eventBus);

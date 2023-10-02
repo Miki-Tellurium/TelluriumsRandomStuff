@@ -39,7 +39,7 @@ public class EntityLootModifier extends ModLootModifier {
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         LootTable lootTable = context.getLevel().getServer().getLootData().getLootTable(this.getLootTable());
         Entity killerEntity = context.getParamOrNull(LootContextParams.KILLER_ENTITY);
-        LootParams.Builder lootparams$builder = (new LootParams.Builder(context.getLevel()))
+        LootParams.Builder lootparams$builder = new LootParams.Builder(context.getLevel())
                 .withParameter(LootContextParams.THIS_ENTITY, context.getParam(LootContextParams.THIS_ENTITY))
                 .withParameter(LootContextParams.ORIGIN, context.getParam(LootContextParams.ORIGIN))
                 .withParameter(LootContextParams.DAMAGE_SOURCE, context.getParam(LootContextParams.DAMAGE_SOURCE))
