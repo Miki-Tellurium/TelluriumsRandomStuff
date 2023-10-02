@@ -69,6 +69,9 @@ repositories {
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
+    maven {
+        url "https://cursemaven.com"
+    }
 
 }
 
