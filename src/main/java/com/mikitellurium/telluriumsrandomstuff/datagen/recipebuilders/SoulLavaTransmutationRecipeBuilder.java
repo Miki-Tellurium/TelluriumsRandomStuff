@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders;
 import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeSerializers;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -17,30 +18,28 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class SoulSmeltingRecipeBuilder implements RecipeBuilder {
+public class SoulLavaTransmutationRecipeBuilder implements RecipeBuilder {
 
     private final Item result;
     private final Ingredient ingredient;
-    private final int extraCost;
 
-    private SoulSmeltingRecipeBuilder(Ingredient ingredient, ItemLike result, int extraCost) {
+    private SoulLavaTransmutationRecipeBuilder(Ingredient ingredient, ItemLike result) {
         this.result = result.asItem();
         this.ingredient = ingredient;
-        this.extraCost = extraCost;
     }
 
-    public static SoulSmeltingRecipeBuilder addRecipe(Ingredient ingredient, ItemLike result, int extraCost) {
-        return new SoulSmeltingRecipeBuilder(ingredient, result, extraCost);
+    public static SoulLavaTransmutationRecipeBuilder addRecipe(Ingredient ingredient, ItemLike result) {
+        return new SoulLavaTransmutationRecipeBuilder(ingredient, result);
     }
 
     @Override
-    public SoulSmeltingRecipeBuilder unlockedBy(String name, CriterionTriggerInstance criterion) {
+    public SoulLavaTransmutationRecipeBuilder unlockedBy(String name, CriterionTriggerInstance criterion) {
         // No advancement
         return this;
     }
 
     @Override
-    public SoulSmeltingRecipeBuilder group(@Nullable String group) {
+    public SoulLavaTransmutationRecipeBuilder group(@Nullable String group) {
         // No group
         return this;
     }
@@ -52,7 +51,7 @@ public class SoulSmeltingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation resourceLocation) {
-        consumer.accept(new Result(resourceLocation, this.ingredient, this.result, this.extraCost));
+        consumer.accept(new Result(resourceLocation, this.ingredient, this.result));
     }
 
     @Override
@@ -64,19 +63,16 @@ public class SoulSmeltingRecipeBuilder implements RecipeBuilder {
         private final ResourceLocation resourceLocation;
         private final Ingredient ingredient;
         private final Item result;
-        private final int extraCost;
 
-        public Result(ResourceLocation resourceLocation, Ingredient ingredient, Item result, int extraCost){
+        public Result(ResourceLocation resourceLocation, Ingredient ingredient, Item result){
             this.resourceLocation = resourceLocation;
             this.ingredient = ingredient;
             this.result = result;
-            this.extraCost = extraCost;
         }
 
         @Override
         public void serializeRecipeData(JsonObject json) {
             json.add("ingredient", this.ingredient.toJson());
-            json.addProperty("cost", this.extraCost);
             json.addProperty("result", ForgeRegistries.ITEMS.getKey(this.result).toString());
         }
 
@@ -87,7 +83,7 @@ public class SoulSmeltingRecipeBuilder implements RecipeBuilder {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return ModRecipeSerializers.SOUL_FURNACE_SMELTING_SERIALIZER.get();
+            return ModRecipeSerializers.SOUL_LAVA_TRANSMUTATION_SERIALIZER.get();
         }
 
         @Nullable
