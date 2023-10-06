@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.content.loot.EntityLootModifier;
-import com.mikitellurium.telluriumsrandomstuff.common.content.loot.LootChestModifier;
+import com.mikitellurium.telluriumsrandomstuff.common.loot.EntityLootModifier;
+import com.mikitellurium.telluriumsrandomstuff.common.loot.LootChestModifier;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;

@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.capability;
 
-import com.mikitellurium.telluriumsrandomstuff.common.content.block.SoulAnchorBlock;
-import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.SoulAnchorBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.block.SoulAnchorBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulAnchorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

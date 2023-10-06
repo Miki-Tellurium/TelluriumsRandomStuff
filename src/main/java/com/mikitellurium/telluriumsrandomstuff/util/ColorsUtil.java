@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
-import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
+import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

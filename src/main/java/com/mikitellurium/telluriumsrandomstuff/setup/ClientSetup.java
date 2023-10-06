@@ -8,7 +8,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScre
 import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesLayer;
 import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesModel;
 import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesOverlay;
-import com.mikitellurium.telluriumsrandomstuff.common.content.particle.SoulLavaDripParticle;
+import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import net.minecraft.client.Minecraft;

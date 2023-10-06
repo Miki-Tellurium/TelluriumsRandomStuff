@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
-import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.SoulAnchorBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulAnchorBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

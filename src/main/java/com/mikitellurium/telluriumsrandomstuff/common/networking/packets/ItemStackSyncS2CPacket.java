@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.networking.packets;
 
-import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.ItemPedestalBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;

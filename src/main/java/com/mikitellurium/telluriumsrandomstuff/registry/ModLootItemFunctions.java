@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.content.loot.SetRandomGooglesColorFunction;
+import com.mikitellurium.telluriumsrandomstuff.common.loot.SetRandomGooglesColorFunction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.blockentity;
 
-import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.ItemPedestalBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.ForgeHooksClient;
 
 public class ItemPedestalRenderer implements BlockEntityRenderer<ItemPedestalBlockEntity> {
 

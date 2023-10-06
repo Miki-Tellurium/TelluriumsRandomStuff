@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.util.BaseFluidType;
-import com.mikitellurium.telluriumsrandomstuff.common.content.fluid.SoulLavaFluid;
+import com.mikitellurium.telluriumsrandomstuff.common.fluid.SoulLavaFluid;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;

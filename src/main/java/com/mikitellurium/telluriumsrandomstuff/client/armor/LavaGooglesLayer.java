@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.armor;
 
-import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
+import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

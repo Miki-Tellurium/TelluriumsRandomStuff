@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.content.item.LavaGooglesItem;
-import com.mikitellurium.telluriumsrandomstuff.common.content.item.MoltenAmethystItem;
+import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
+import com.mikitellurium.telluriumsrandomstuff.common.item.MoltenAmethystItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;

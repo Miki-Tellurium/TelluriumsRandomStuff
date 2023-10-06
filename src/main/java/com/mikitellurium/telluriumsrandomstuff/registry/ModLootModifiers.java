@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.content.loot.EntityLootModifier;
-import com.mikitellurium.telluriumsrandomstuff.common.content.loot.LootChestModifier;
+import com.mikitellurium.telluriumsrandomstuff.common.loot.EntityLootModifier;
+import com.mikitellurium.telluriumsrandomstuff.common.loot.LootChestModifier;
 import com.mojang.serialization.Codec;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;

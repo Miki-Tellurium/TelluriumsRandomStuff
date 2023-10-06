@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.networking.packets;
 
-import com.mikitellurium.telluriumsrandomstuff.common.content.blockentity.SoulFurnaceBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulFurnaceMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
