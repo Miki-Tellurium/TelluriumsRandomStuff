@@ -2,7 +2,6 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.block.*;
-import com.mikitellurium.telluriumsrandomstuff.common.content.block.*;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
