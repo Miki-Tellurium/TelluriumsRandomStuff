@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulLavaFurnace;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,7 +16,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class SoulFurnaceMenu extends AbstractContainerMenu {
 
-    private final SoulFurnaceBlockEntity blockEntity;
+    private final AbstractSoulLavaFurnace blockEntity;
     private final Level level;
     private final ContainerData data;
     private FluidStack fluidStack;
@@ -28,10 +28,10 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
     public SoulFurnaceMenu(int id, Inventory inventory, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.SOUL_FURNACE_MENU.get(), id);
         checkContainerSize(inventory, 3);
-        blockEntity = (SoulFurnaceBlockEntity)entity;
+        blockEntity = (AbstractSoulLavaFurnace)entity;
         this.level = inventory.player.level();
         this.data = data;
-        this.fluidStack = ((SoulFurnaceBlockEntity) entity).getFluid();
+        this.fluidStack = ((AbstractSoulLavaFurnace) entity).getFluid();
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -136,7 +136,7 @@ public class SoulFurnaceMenu extends AbstractContainerMenu {
         }
     }
 
-    public SoulFurnaceBlockEntity getBlockEntity() {
+    public AbstractSoulLavaFurnace getBlockEntity() {
         return blockEntity;
     }
 

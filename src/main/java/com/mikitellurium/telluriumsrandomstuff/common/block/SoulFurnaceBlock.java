@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulLavaFurnace;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.FluidSyncS2CPacket;
@@ -40,7 +40,7 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
                                  BlockHitResult hitResult) {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof SoulFurnaceBlockEntity && player instanceof ServerPlayer) {
+            if (blockEntity instanceof AbstractSoulLavaFurnace && player instanceof ServerPlayer) {
                 this.openContainer(level, pos, player);
             } else {
                 throw new IllegalStateException("Container provider or player is missing");
@@ -52,8 +52,8 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
 
     @Override
     protected void openContainer(Level level, BlockPos pos, Player player) {
-        NetworkHooks.openScreen((ServerPlayer)player, (SoulFurnaceBlockEntity)level.getBlockEntity(pos), pos);
-        SoulFurnaceBlockEntity blockEntity = (SoulFurnaceBlockEntity) level.getBlockEntity(pos);
+        NetworkHooks.openScreen((ServerPlayer)player, (AbstractSoulLavaFurnace)level.getBlockEntity(pos), pos);
+        AbstractSoulLavaFurnace blockEntity = (AbstractSoulLavaFurnace) level.getBlockEntity(pos);
         // Update the fluid data on the client
         if (blockEntity != null) {
             ModMessages.sendToClients(new FluidSyncS2CPacket(blockEntity.getFluid(), blockEntity.getBlockPos()));
@@ -86,7 +86,7 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return new SoulFurnaceBlockEntity(pos, blockState);
+        return new AbstractSoulLavaFurnace(pos, blockState);
     }
 
     @Nullable
@@ -94,15 +94,15 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
                                                                   BlockEntityType<T> blockEntityType) {
         return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_FURNACE.get(),
-                SoulFurnaceBlockEntity::tick);
+                AbstractSoulLavaFurnace::tick);
     }
 
     @Override
     public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (blockState.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof SoulFurnaceBlockEntity) {
-                ((SoulFurnaceBlockEntity) blockEntity).dropItemsOnBreak();
+            if (blockEntity instanceof AbstractSoulLavaFurnace) {
+                ((AbstractSoulLavaFurnace) blockEntity).dropItemsOnBreak();
             }
         }
         super.onRemove(blockState, level, pos, newState, isMoving);

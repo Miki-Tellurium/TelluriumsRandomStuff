@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulFurnaceBlock;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.SoulLavaInfoCategory;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulFurnaceMenu;
@@ -13,6 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -25,9 +27,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -41,8 +46,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Optional;
 
-public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider {
+public class AbstractSoulLavaFurnace extends AbstractSoulFueledBlockEntity {
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
@@ -61,19 +67,6 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         }
     };
 
-    private final FluidTank fluidTank = new FluidTank(4000) {
-        @Override
-        protected void onContentsChanged() {
-            setChanged();
-            ModMessages.sendToClients(new FluidSyncS2CPacket(this.fluid, getBlockPos()));
-        }
-
-        @Override
-        public boolean isFluidValid(FluidStack fluidStack) {
-            return fluidStack.getFluid().isSame(ModFluids.SOUL_LAVA_SOURCE.get());
-        }
-    };
-
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     // Handle item transportation trough other blocks
     // Credit to Kaupenjoe
@@ -82,7 +75,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
                             (i) -> i == INPUT_SLOT,
                             (i, s) -> true)),
                     Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                            (i) -> i == OUTPUT_SLOT || hasEmptyBucket(i, itemHandler),
+                            (i) -> i == OUTPUT_SLOT || hasEmptyBucket(i),
                             (i, s) -> false)),
                     Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
                             (i) -> i == BUCKET_SLOT,
@@ -98,8 +91,6 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
                             (i, s) -> i == BUCKET_SLOT && itemHandler.isItemValid(BUCKET_SLOT, s)))
             );
 
-    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
-
     private static final int BUCKET_SLOT = 0;
     private static final int INPUT_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
@@ -109,15 +100,16 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     private int maxProgress = 100;
     private int litTime = 0;
     private int maxLitTime = maxProgress * itemSmelted;
-    public RecipeType<? extends AbstractCookingRecipe> recipeType;
+    public RecipeType<?> recipeType;
+    private final RecipeManager.CachedCheck<Container, ? extends Recipe<?>> quickCheck;
     public final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int index) {
             return switch (index) {
-                case 0 -> SoulFurnaceBlockEntity.this.progress;
-                case 1 -> SoulFurnaceBlockEntity.this.maxProgress;
-                case 2 -> SoulFurnaceBlockEntity.this.litTime;
-                case 3 -> SoulFurnaceBlockEntity.this.maxLitTime;
+                case 0 -> AbstractSoulLavaFurnace.this.progress;
+                case 1 -> AbstractSoulLavaFurnace.this.maxProgress;
+                case 2 -> AbstractSoulLavaFurnace.this.litTime;
+                case 3 -> AbstractSoulLavaFurnace.this.maxLitTime;
                 default -> 0;
             };
         }
@@ -125,10 +117,10 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         @Override
         public void set(int index, int value) {
             switch (index) {
-                case 0 -> SoulFurnaceBlockEntity.this.progress = value;
-                case 1 -> SoulFurnaceBlockEntity.this.maxProgress = value;
-                case 2 -> SoulFurnaceBlockEntity.this.litTime = value;
-                case 3 -> SoulFurnaceBlockEntity.this.maxLitTime = value;
+                case 0 -> AbstractSoulLavaFurnace.this.progress = value;
+                case 1 -> AbstractSoulLavaFurnace.this.maxProgress = value;
+                case 2 -> AbstractSoulLavaFurnace.this.litTime = value;
+                case 3 -> AbstractSoulLavaFurnace.this.maxLitTime = value;
             }
         }
 
@@ -138,125 +130,103 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         }
     };
 
-    public SoulFurnaceBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SOUL_FURNACE.get(), pos, state);
-        this.recipeType = RecipeType.SMELTING;
+    @SuppressWarnings("all")
+    public AbstractSoulLavaFurnace(BlockEntityType<? extends AbstractSoulLavaFurnace> entityType, RecipeType<?> recipeType,
+                                   BlockPos pos, BlockState state) {
+        super(entityType, pos, state, 4000);
+        this.recipeType = recipeType;
+        this.quickCheck = RecipeManager.createCheck((RecipeType)recipeType);
     }
 
     private static ItemStack itemCheck = ItemStack.EMPTY;
 
     //private static boolean test = true;
-
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, SoulFurnaceBlockEntity furnace) {
+    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
         if (level.isClientSide) {
             return;
         }
 
         // For some reason half the time the input item is air, accounting for that
-        if (!furnace.itemHandler.getStackInSlot(INPUT_SLOT).is(Items.AIR)) {
+        if (!this.itemHandler.getStackInSlot(INPUT_SLOT).is(Items.AIR)) {
             // Check if the input item is the same as last tick
-            if (furnace.itemHandler.getStackInSlot(INPUT_SLOT).getItem() != itemCheck.getItem()) {
-                furnace.resetProgress();
+            if (this.itemHandler.getStackInSlot(INPUT_SLOT).getItem() != itemCheck.getItem()) {
+                this.resetProgress();
             }
-            itemCheck = furnace.itemHandler.getStackInSlot(INPUT_SLOT);
+            itemCheck = this.itemHandler.getStackInSlot(INPUT_SLOT);
         }
-        // Handle tank refill
-        if (furnace.itemHandler.getStackInSlot(BUCKET_SLOT).is(ModItems.SOUL_LAVA_BUCKET.get()) &&
-                canRefillFluidTank(furnace.fluidTank)) {
-            refillFluidTank(furnace);
-        }
+        this.tankTick(this.itemHandler, BUCKET_SLOT);
+
         // Recipe handling
-        if (hasValidRecipe(level, furnace)) {
+        if (this.hasValidRecipe()) {
             // Lit if furnace is not lit
-            if (!isLit(furnace) && hasEnoughFuel(furnace)) {
-                furnace.fluidTank.drain(litFurnaceCost, IFluidHandler.FluidAction.EXECUTE);
-                furnace.litTime = furnace.maxLitTime;
+            if (!this.isLit() && hasEnoughFuel()) {
+                this.drainTank(litFurnaceCost);
+                this.litTime = this.maxLitTime;
             }
             // If furnace is lit start smelting item
-            if (isLit(furnace)) {
-                furnace.progress++;
+            if (this.isLit()) {
+                this.progress++;
                 // If progress is completed output smelted item
-                if (furnace.progress >= furnace.maxProgress) {
-                    smeltItem(level, furnace);
-                    furnace.resetProgress();
+                if (this.progress >= this.maxProgress) {
+                    this.smeltItem();
+                    this.resetProgress();
                 }
             } else {
-                furnace.resetProgress();
+                this.resetProgress();
             }
 
         } else {
-            furnace.resetProgress();
+            this.resetProgress();
         }
 
-        level.setBlock(blockPos, blockState.setValue(SoulFurnaceBlock.LIT, isLit(furnace)), 2);
-        if (isLit(furnace)) {
-            furnace.litTime--;
+        level.setBlock(blockPos, blockState.setValue(SoulFurnaceBlock.LIT, this.isLit()), 2);
+        if (this.isLit()) {
+            this.litTime--;
         }
         setChanged(level, blockPos, blockState);
     }
 
-    private static boolean hasValidRecipe(Level level, SoulFurnaceBlockEntity furnace) {
-        if (furnace.itemHandler.getStackInSlot(INPUT_SLOT).isEmpty()) return false;
-        if (furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() >=
-                furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
+    private boolean hasValidRecipe() {
+        if (this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() >=
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
 
-        Recipe<?> recipe = getRecipe(level, furnace);
-        if (recipe == null) return false;
-        if (recipe instanceof SoulFurnaceRecipe) {
-            if (((SoulFurnaceRecipe) recipe).getRecipeCost() > furnace.fluidTank.getFluidAmount()) return false;
-        }
-        if (!furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() &&
-                recipe.getResultItem(level.registryAccess()).getItem() !=
-                        furnace.itemHandler.getStackInSlot(OUTPUT_SLOT).getItem()) return false;
-        return true;
+        Optional<?> optionalRecipe = getRecipe();
+        if (optionalRecipe.isEmpty()) return false;
+        Recipe<?> recipe = (Recipe<?>) optionalRecipe.get();
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
+                recipe.getResultItem(level.registryAccess()).getItem() == this.itemHandler.getStackInSlot(OUTPUT_SLOT).getItem();
     }
 
-    private static void smeltItem(Level level, SoulFurnaceBlockEntity furnace) {
-        Recipe<?> recipe = getRecipe(level, furnace);
-        if (recipe != null) {
-            if (recipe instanceof SoulFurnaceRecipe) {
-                int recipeCost = ((SoulFurnaceRecipe) recipe).getRecipeCost();
-                furnace.fluidTank.drain(recipeCost, IFluidHandler.FluidAction.EXECUTE);
-            }
-            Item outputItem = recipe.getResultItem(level.registryAccess()).getItem();
-            furnace.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
-            ItemStack outputStack = furnace.itemHandler.getStackInSlot(OUTPUT_SLOT);
+    @SuppressWarnings("unchecked")
+    private void smeltItem() {
+        Optional<?> optionalRecipe = getRecipe();
+        if (optionalRecipe.isPresent()) {
+            Recipe<SimpleContainer> recipe = (Recipe<SimpleContainer>) optionalRecipe.get();
+            ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
+            this.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
+            ItemStack outputStack = this.itemHandler.getStackInSlot(OUTPUT_SLOT);
             if (outputStack.isEmpty()) {
-                furnace.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(outputItem, 1));
+                this.itemHandler.setStackInSlot(OUTPUT_SLOT, result);
             } else {
-                furnace.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(outputItem, outputStack.getCount() + 1));
+                outputStack.grow(result.getCount());
             }
         }
     }
 
-    private static Recipe<?> getRecipe(Level level, SoulFurnaceBlockEntity furnace) {
-        Recipe<?> soulFurnaceRecipe = level.getRecipeManager().getRecipeFor(SoulFurnaceRecipe.Type.INSTANCE,
-                new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
-        if (soulFurnaceRecipe != null) return soulFurnaceRecipe;
-        return level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,
-                new SimpleContainer(furnace.itemHandler.getStackInSlot(INPUT_SLOT)), level).orElse(null);
+    private Optional<? extends Recipe<?>> getRecipe() {
+        return this.quickCheck.getRecipeFor(this.getInventory(), this.level);
     }
 
     private void resetProgress() {
         this.progress = 0;
     }
 
-    private static boolean hasEnoughFuel(SoulFurnaceBlockEntity furnace) {
-        return furnace.fluidTank.getFluidAmount() >= litFurnaceCost;
+    private boolean hasEnoughFuel() {
+        return this.getFluidTank().getFluidAmount() >= litFurnaceCost;
     }
 
-    private static boolean canRefillFluidTank(FluidTank fluidTank) {
-        return fluidTank.getSpace() >= 1000;
-    }
-
-    private static void refillFluidTank(SoulFurnaceBlockEntity furnace) {
-        furnace.itemHandler.setStackInSlot(BUCKET_SLOT, Items.BUCKET.getDefaultInstance());
-        FluidStack fluidStack = new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 1000);
-        furnace.fluidTank.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
-    }
-
-    private static boolean isLit(SoulFurnaceBlockEntity furnace) {
-        return furnace.litTime > 0;
+    private boolean isLit() {
+        return this.litTime > 0;
     }
 
     private SimpleContainer getInventory() {
@@ -268,39 +238,14 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         return inventory;
     }
 
-    private static boolean hasEmptyBucket(int slot, ItemStackHandler handler) {
-        final int BUCKET_SLOT = 0;
-        return slot == BUCKET_SLOT && handler.getStackInSlot(BUCKET_SLOT).is(Items.BUCKET);
-    }
-
-    public void setFluid(FluidStack fluid) {
-        this.fluidTank.setFluid(fluid);
-    }
-
-    public FluidStack getFluid() {
-        return this.fluidTank.getFluid();
-    }
-
-    public int getMaxFluidCapacity() {
-        return this.fluidTank.getCapacity();
+    private boolean hasEmptyBucket(int slot) {
+        return slot == BUCKET_SLOT && this.itemHandler.getStackInSlot(BUCKET_SLOT).is(Items.BUCKET);
     }
 
     @SuppressWarnings("ConstantConditions")
     public void dropItemsOnBreak() {
         SimpleContainer inventory = getInventory();
         Containers.dropContents(this.level, this.worldPosition, inventory);
-    }
-
-    // Gui stuff
-    @Override
-    public Component getDisplayName() {
-        return Component.translatable("blockentity.telluriumsrandomstuff.soul_furnace");
-    }
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new SoulFurnaceMenu(pContainerId, pPlayerInventory, this, this.containerData);
     }
 
     // Capability stuff
@@ -312,7 +257,7 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
             }
             // Return capability based on side
             if(directionWrappedHandlerMap.containsKey(side)) {
-                Direction localDir = this.getBlockState().getValue(SoulFurnaceBlock.FACING);
+                Direction localDir = this.getBlockState().getValue(AbstractFurnaceBlock.FACING);
 
                 if(side == Direction.UP || side == Direction.DOWN) {
                     return directionWrappedHandlerMap.get(side).cast();
@@ -325,9 +270,6 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
                     case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
                 };
             }
-
-        } else if (cap == ForgeCapabilities.FLUID_HANDLER) {
-            return lazyFluidHandler.cast();
         }
 
         return super.getCapability(cap, side);
@@ -343,14 +285,12 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        lazyFluidHandler = LazyOptional.of(() -> fluidTank);
     }
 
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
-        lazyFluidHandler.invalidate();
     }
 
     @Override
@@ -358,7 +298,6 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         tag.put("inventory", itemHandler.serializeNBT());
         tag.putInt("soul_furnace.progress", this.progress);
         tag.putInt("soul_furnace.litTime", this.litTime);
-        tag = fluidTank.writeToNBT(tag);
         super.saveAdditional(tag);
     }
 
@@ -368,7 +307,6 @@ public class SoulFurnaceBlockEntity extends BlockEntity implements MenuProvider 
         itemHandler.deserializeNBT(tag.getCompound("inventory"));
         this.progress = tag.getInt("soul_furnace.progress");
         this.litTime = tag.getInt("soul_furnace.litTime");
-        this.fluidTank.readFromNBT(tag);
     }
 
 }
