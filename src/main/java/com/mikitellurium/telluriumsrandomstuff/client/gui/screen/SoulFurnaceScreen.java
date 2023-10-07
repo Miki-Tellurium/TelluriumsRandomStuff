@@ -85,7 +85,7 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
     }
 
     private void renderSoulLavaStorage(int xPos, int yPos) {
-        GuiFluidRenderer.drawBackground(xPos, yPos, this.menu.getFluidStack(), this.menu.getBlockEntity().getMaxFluidCapacity(),
+        GuiFluidRenderer.drawBackground(xPos, yPos, this.menu.getFluidStack(), this.menu.getBlockEntity().getFluidTankCapacity(),
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
         RenderSystem.setShaderTexture(0, GUI_TEXTURE);
     }
@@ -105,7 +105,7 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
 
     public List<Component> getTooltips() {
         return List.of(Component.translatable("fluid_type.telluriumsrandomstuff.soul_lava_fluid"),
-                Component.literal( menu.getFluidStack().getAmount() + "/" + menu.getBlockEntity().getMaxFluidCapacity()));
+                Component.literal( menu.getFluidStack().getAmount() + "/" + menu.getBlockEntity().getFluidTankCapacity()));
     }
 
     public Rect2i getSoulLavaStorage() {

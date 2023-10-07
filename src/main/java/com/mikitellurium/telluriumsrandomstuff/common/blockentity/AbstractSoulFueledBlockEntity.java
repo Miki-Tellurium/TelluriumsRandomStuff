@@ -46,7 +46,7 @@ public abstract class AbstractSoulFueledBlockEntity extends BlockEntity {
         this.fluidTank.setCapacity(tankCapacity);
     }
 
-    public void tankTick(ItemStackHandler itemHandler, int bucketSlot) {
+    public void handleTankRefill(ItemStackHandler itemHandler, int bucketSlot) {
         if (itemHandler.getStackInSlot(bucketSlot).is(SOUL_LAVA.getBucket()) &&
                 this.canRefillFluidTank()) {
             this.refillFluidTank(itemHandler, bucketSlot);

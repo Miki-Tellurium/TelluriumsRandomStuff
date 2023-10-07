@@ -13,8 +13,8 @@ public class ModBlockEntities {
     public static  final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, TelluriumsRandomStuffMod.MOD_ID);
 
-    public static final RegistryObject<BlockEntityType<AbstractSoulLavaFurnace>> SOUL_FURNACE = BLOCK_ENTITIES.register(
-            "soul_furnace", () -> BlockEntityType.Builder.of(AbstractSoulLavaFurnace::new,
+    public static final RegistryObject<BlockEntityType<SoulFurnaceBlockEntity>> SOUL_FURNACE = BLOCK_ENTITIES.register(
+            "soul_furnace", () -> BlockEntityType.Builder.of(SoulFurnaceBlockEntity::new,
                     ModBlocks.SOUL_FURNACE.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<SoulAnchorBlockEntity>> SOUL_ANCHOR = BLOCK_ENTITIES.register(
