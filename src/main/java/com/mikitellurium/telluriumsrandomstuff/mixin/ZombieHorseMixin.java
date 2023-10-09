@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.mixin;
+package com.mikitellurium.telluriumsrandomstuff.mixin;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;

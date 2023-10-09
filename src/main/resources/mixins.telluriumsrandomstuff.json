@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.mikitellurium.telluriumsrandomstuff.common.mixin",
+  "package": "com.mikitellurium.telluriumsrandomstuff.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AllayMixin",

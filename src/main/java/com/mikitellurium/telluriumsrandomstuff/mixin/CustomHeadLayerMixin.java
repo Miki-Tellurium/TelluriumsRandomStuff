@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.mixin;
+package com.mikitellurium.telluriumsrandomstuff.mixin;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mojang.blaze3d.vertex.PoseStack;

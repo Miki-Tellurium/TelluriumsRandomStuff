@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.mixin;
+package com.mikitellurium.telluriumsrandomstuff.mixin;
 
 import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;

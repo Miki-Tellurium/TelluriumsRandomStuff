@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.mixin;
+package com.mikitellurium.telluriumsrandomstuff.mixin;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
