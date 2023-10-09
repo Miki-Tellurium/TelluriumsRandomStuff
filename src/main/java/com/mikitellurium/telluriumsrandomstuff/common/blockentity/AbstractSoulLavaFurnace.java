@@ -75,7 +75,6 @@ public abstract class AbstractSoulLavaFurnace extends AbstractSoulFueledBlockEnt
             return;
         }
 
-        LogUtils.consoleLogMessage("progress=" + this.progress);
         this.validateCurrentRecipe();
         this.handleTankRefill();
 
