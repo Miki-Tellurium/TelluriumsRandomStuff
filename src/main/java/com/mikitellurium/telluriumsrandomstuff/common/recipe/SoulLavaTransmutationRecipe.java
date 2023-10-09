@@ -39,7 +39,7 @@ public class SoulLavaTransmutationRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.of(ingredient);
+        return NonNullList.of(Ingredient.EMPTY, ingredient);
     }
 
     @Override
