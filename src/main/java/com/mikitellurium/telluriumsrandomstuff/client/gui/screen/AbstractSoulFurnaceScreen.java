@@ -49,8 +49,6 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         graphics.blit(guiTexture, xPos, yPos, 0, 0, textureWidth, textureHeight);
 
-        renderFire(graphics, xPos, yPos);
-        renderProgressArrow(graphics, xPos, yPos);
         renderSoulLavaStorage(soulLavaStorage.getX(), soulLavaStorage.getY());
         renderGlass(graphics, xPos, yPos);
     }
@@ -68,22 +66,6 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
         int xPos = this.leftPos;
         int yPos = this.topPos + 2;
         renderFluidAreaTooltips(graphics, pMouseX, pMouseY, xPos, yPos);
-    }
-
-    private void renderFire(GuiGraphics graphics, int xPos, int yPos) {
-        if (this.menu.isLit()) {
-            int time = this.menu.getScaledLitTime();
-            graphics.blit(ELEMENT_TEXTURE, xPos + 58, yPos + 62 - time, 176,
-                    12 - time, 14, time + 1);
-        }
-    }
-
-    private void renderProgressArrow(GuiGraphics graphics, int xPos, int yPos) {
-        if (this.menu.isCrafting()) {
-            int progress = this.menu.getScaledProgress();
-            graphics.blit(ELEMENT_TEXTURE, xPos + 79, yPos + 29, 176, 14,
-                    progress + 1, 16);
-        }
     }
 
     private void renderSoulLavaStorage(int xPos, int yPos) {
