@@ -1,8 +1,0 @@
-{
-  "type": "telluriumsrandomstuff:soul_furnace_smelting",
-  "cost": 50,
-  "ingredient": {
-    "item": "minecraft:jack_o_lantern"
-  },
-  "result": "telluriumsrandomstuff:soul_jack_o_lantern"
-}

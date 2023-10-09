@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import net.minecraft.core.NonNullList;
@@ -71,32 +71,23 @@ public class RecipeUtils {
             ModItems.OPAL_CRYSTAL_HOE.get().getDefaultInstance()
             );
 
-    public static List<SoulFurnaceRecipe> getConvertedVanillaRecipes(List<SmeltingRecipe> smeltingRecipes) {
-        List<SoulFurnaceRecipe> soulFurnaceRecipes = NonNullList.create();
+    public static List<SoulFurnaceSmeltingRecipe> getConvertedVanillaRecipes(List<SmeltingRecipe> smeltingRecipes) {
+        List<SoulFurnaceSmeltingRecipe> soulFurnaceRecipes = NonNullList.create();
         for (SmeltingRecipe recipe : smeltingRecipes) {
             soulFurnaceRecipes.add(convert(recipe));
         }
         return soulFurnaceRecipes;
     }
 
-    private static SoulFurnaceRecipe convert(SmeltingRecipe recipe) {
+    private static SoulFurnaceSmeltingRecipe convert(SmeltingRecipe recipe) {
         String itemId = ForgeRegistries.ITEMS.getDelegateOrThrow(recipe.getResultItem(RegistryAccess.EMPTY).getItem())
                 .key().location().getPath();
-        ResourceLocation id = new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_furnace_" + itemId);
+        ResourceLocation id = new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, itemId + "_from_soul_furnace_smelting");
 
         Ingredient ingredient = recipe.getIngredients().get(0);
         ItemStack output = recipe.getResultItem(RegistryAccess.EMPTY);
-        return new SoulFurnaceRecipe(id, output, ingredient, 0);
+        return new SoulFurnaceSmeltingRecipe(id, output, ingredient);
     }
-
-//    private static ItemStack addEnchantment(ItemStack itemStack, Enchantment enchantment, int level) {
-//        if (itemStack.is(Items.ENCHANTED_BOOK)) {
-//            EnchantedBookItem.addEnchantment(itemStack, new EnchantmentInstance(enchantment, level));
-//        } else {
-//            itemStack.enchant(enchantment, level);
-//        }
-//        return itemStack;
-//    }
 
     /*
      *   Anvil recipe helper code taken from JEI Code, credit to mezz and the JEI developers

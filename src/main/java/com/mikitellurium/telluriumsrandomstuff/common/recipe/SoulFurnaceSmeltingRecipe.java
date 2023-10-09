@@ -16,18 +16,16 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
+public class SoulFurnaceSmeltingRecipe implements Recipe<SimpleContainer> {
 
     private final ResourceLocation id;
     private final ItemStack output;
     private final Ingredient ingredient;
-    private final int recipeCost;
 
-    public SoulFurnaceRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient, int recipeCost) {
+    public SoulFurnaceSmeltingRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient) {
         this.id = id;
         this.output = output;
         this.ingredient = ingredient;
-        this.recipeCost = recipeCost;
     }
 
     @Override
@@ -59,10 +57,6 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
         return output;
     }
 
-    public int getRecipeCost() {
-        return recipeCost;
-    }
-
     @Override
     public ResourceLocation getId() {
         return id;
@@ -78,19 +72,19 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<SoulFurnaceRecipe> {
+    public static class Type implements RecipeType<SoulFurnaceSmeltingRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
         public static final String ID = "soul_furnace_smelting";
     }
 
-    public static class Serializer implements RecipeSerializer<SoulFurnaceRecipe> {
+    public static class Serializer implements RecipeSerializer<SoulFurnaceSmeltingRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
                 new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_furnace_smelting");
 
         @Override
-        public SoulFurnaceRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
+        public SoulFurnaceSmeltingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
             JsonObject ingredientJson = GsonHelper.getAsJsonObject(serializedRecipe, "ingredient");
             Ingredient ingredient = Ingredient.of(CraftingHelper.getItemStack(ingredientJson, true, true));
 
@@ -104,27 +98,24 @@ public class SoulFurnaceRecipe implements Recipe<SimpleContainer> {
                 ResourceLocation resourcelocation = new ResourceLocation(result);
                 output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
             }
-            int recipeCost = GsonHelper.getAsInt(serializedRecipe, "cost");
 
-            return new SoulFurnaceRecipe(recipeId, output, ingredient, recipeCost);
+            return new SoulFurnaceSmeltingRecipe(recipeId, output, ingredient);
         }
 
         @Override
-        public @Nullable SoulFurnaceRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public @Nullable SoulFurnaceSmeltingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             Ingredient ingredient = Ingredient.fromNetwork(buf);
             ItemStack output = buf.readItem();
-            int recipeCost = buf.readInt();
 
-            return new SoulFurnaceRecipe(id, output, ingredient, recipeCost);
+            return new SoulFurnaceSmeltingRecipe(id, output, ingredient);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, SoulFurnaceRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, SoulFurnaceSmeltingRecipe recipe) {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
             buf.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buf.writeInt(recipe.getRecipeCost());
         }
     }
 

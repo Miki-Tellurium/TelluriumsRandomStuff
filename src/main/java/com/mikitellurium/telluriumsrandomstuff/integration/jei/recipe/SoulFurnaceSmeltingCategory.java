@@ -4,7 +4,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -32,7 +32,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
-public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceRecipe> {
+public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceSmeltingRecipe> {
 
     public final static ResourceLocation UID =
             new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_furnace_smelting");
@@ -71,17 +71,15 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
     }
 
     @Override
-    public void draw(SoulFurnaceRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        Component translatable = Component.translatable("jei.telluriumsrandomstuff.soul_furnace_recipe_extra_cost")
-                .append(": " + recipe.getRecipeCost());
-        graphics.drawString(this.font, translatable, 25, 2, textColor, false);
+    public void draw(SoulFurnaceSmeltingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics,
+                     double mouseX, double mouseY) {
         animatedFlame.draw(graphics, 37, 43);
         getArrow().draw(graphics, 58, 24);
     }
 
     @Override
-    public RecipeType<SoulFurnaceRecipe> getRecipeType() {
-        return JeiIntegration.SOUL_FURNACE_RECIPE_TYPE;
+    public RecipeType<SoulFurnaceSmeltingRecipe> getRecipeType() {
+        return JeiIntegration.SOUL_FURNACE_SMELTING_RECIPE_TYPE;
     }
 
     @Override
@@ -100,15 +98,15 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceR
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, SoulFurnaceRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, SoulFurnaceSmeltingRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 4, 54).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
         builder.addSlot(RecipeIngredientRole.INPUT, 35, 24).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 24).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
         builder.addSlot(RecipeIngredientRole.CATALYST, 4, 2)
-                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 2500)))
+                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 4000)))
                 .setFluidRenderer(4000, false, 16, 48)
                 .setOverlay(tankGlass, 0, 0);
-        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 50);
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 0);
     }
 
 }

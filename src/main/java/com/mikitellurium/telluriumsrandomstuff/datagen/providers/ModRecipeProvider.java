@@ -28,7 +28,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        buildSoulSmeltingRecipes(consumer);
+        buildSoulInfusingRecipes(consumer);
         buildSoulLavaTransmutationRecipe(consumer);
         buildShapedRecipes(consumer);
         buildShapelessRecipes(consumer);
@@ -37,33 +37,33 @@ public class ModRecipeProvider extends RecipeProvider {
         buildStonecuttingRecipes(consumer);
     }
 
-    private void buildSoulSmeltingRecipes(Consumer<FinishedRecipe> consumer) {
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.GLOWSTONE_DUST), ModItems.BLUE_GLOWSTONE_DUST.get(), 20)
-                .save(consumer, modLoc("blue_glowstone_dust_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.WHEAT), Items.BREAD,10)
-                .save(consumer, modLoc("bread_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.LANTERN), Blocks.SOUL_LANTERN,10)
-                .save(consumer, modLoc("soul_lantern_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.ROTTEN_FLESH), Items.LEATHER,30)
-                .save(consumer, modLoc("leather_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.POISONOUS_POTATO), ModItems.MYSTIC_POTATO.get(), 800)
-                .save(consumer, modLoc("mystic_potato_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.CAMPFIRE), Blocks.SOUL_CAMPFIRE, 250)
-                .save(consumer, modLoc("soul_campfire_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.MAGMA_BLOCK), ModBlocks.SOUL_MAGMA_BLOCK.get(), 100)
-                .save(consumer, modLoc("soul_magma_block_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.CRYING_OBSIDIAN), ModBlocks.SOUL_OBSIDIAN.get(), 500)
-                .save(consumer, modLoc("soul_obsidian_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.TORCH), Blocks.SOUL_TORCH, 5)
-                .save(consumer, modLoc("soul_torch_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get()), ModItems.SOUL_TORCHFLOWER_SEEDS.get(), 20)
-                .save(consumer, modLoc("soul_torchflower_seeds_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.AMETHYST_SHARD), ModItems.MOLTEN_AMETHYST.get(), 80)
-                .save(consumer, modLoc("molten_amethyst_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.SCULK_SHRIEKER), ModBlocks.AWAKENED_SCULK_SHRIEKER.get(), 400)
-                .save(consumer, modLoc("awakened_sculk_shrieker_from_soul_smelting"));
-        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.JACK_O_LANTERN), ModBlocks.SOUL_JACK_O_LANTERN.get(), 50)
-                .save(consumer, modLoc("soul_jack_o_lantern_from_soul_smelting"));
+    private void buildSoulInfusingRecipes(Consumer<FinishedRecipe> consumer) {
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.GLOWSTONE_DUST), ModItems.BLUE_GLOWSTONE_DUST.get(), 20)
+//                .save(consumer, modLoc("blue_glowstone_dust_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.WHEAT), Items.BREAD, 10)
+//                .save(consumer, modLoc("bread_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.LANTERN), Blocks.SOUL_LANTERN,10)
+//                .save(consumer, modLoc("soul_lantern_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.ROTTEN_FLESH), Items.LEATHER,30)
+//                .save(consumer, modLoc("leather_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.POISONOUS_POTATO), ModItems.MYSTIC_POTATO.get(), 800)
+//                .save(consumer, modLoc("mystic_potato_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.CAMPFIRE), Blocks.SOUL_CAMPFIRE, 250)
+//                .save(consumer, modLoc("soul_campfire_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.MAGMA_BLOCK), ModBlocks.SOUL_MAGMA_BLOCK.get(), 100)
+//                .save(consumer, modLoc("soul_magma_block_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.CRYING_OBSIDIAN), ModBlocks.SOUL_OBSIDIAN.get(), 500)
+//                .save(consumer, modLoc("soul_obsidian_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.TORCH), Blocks.SOUL_TORCH, 5)
+//                .save(consumer, modLoc("soul_torch_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get()), ModItems.SOUL_TORCHFLOWER_SEEDS.get(), 20)
+//                .save(consumer, modLoc("soul_torchflower_seeds_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Items.AMETHYST_SHARD), ModItems.MOLTEN_AMETHYST.get(), 80)
+//                .save(consumer, modLoc("molten_amethyst_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.SCULK_SHRIEKER), ModBlocks.AWAKENED_SCULK_SHRIEKER.get(), 400)
+//                .save(consumer, modLoc("awakened_sculk_shrieker_from_soul_smelting"));
+//        SoulSmeltingRecipeBuilder.addRecipe(Ingredient.of(Blocks.JACK_O_LANTERN), ModBlocks.SOUL_JACK_O_LANTERN.get(), 50)
+//                .save(consumer, modLoc("soul_jack_o_lantern_from_soul_smelting"));
     }
 
     private void buildSoulLavaTransmutationRecipe(Consumer<FinishedRecipe> consumer) {

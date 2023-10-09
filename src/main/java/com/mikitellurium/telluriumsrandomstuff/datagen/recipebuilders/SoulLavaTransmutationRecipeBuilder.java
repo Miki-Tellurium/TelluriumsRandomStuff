@@ -2,8 +2,6 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders;
 
 import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeSerializers;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.FinishedRecipe;

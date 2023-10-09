@@ -1,8 +1,0 @@
-{
-  "type": "telluriumsrandomstuff:soul_furnace_smelting",
-  "cost": 20,
-  "ingredient": {
-    "item": "telluriumsrandomstuff:bright_torchflower_seeds"
-  },
-  "result": "telluriumsrandomstuff:soul_torchflower_seeds"
-}

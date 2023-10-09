@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockStateRenderer;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.*;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
@@ -38,8 +38,8 @@ import java.util.*;
 @JeiPlugin
 public class JeiIntegration implements IModPlugin {
 
-    public static RecipeType<SoulFurnaceRecipe> SOUL_FURNACE_RECIPE_TYPE =
-            new RecipeType<>(SoulFurnaceSmeltingCategory.UID, SoulFurnaceRecipe.class);
+    public static RecipeType<SoulFurnaceSmeltingRecipe> SOUL_FURNACE_SMELTING_RECIPE_TYPE =
+            new RecipeType<>(SoulFurnaceSmeltingCategory.UID, SoulFurnaceSmeltingRecipe.class);
     public static final RecipeType<SoulLavaInfoCategory.Recipe> SOUL_LAVA_INFO_TYPE =
             new RecipeType<>(SoulLavaInfoCategory.UID, SoulLavaInfoCategory.Recipe.class);
     public static final RecipeType<AmethystLensInfoCategory.Recipe> AMETHYST_LENS_INFO_TYPE =
@@ -68,33 +68,27 @@ public class JeiIntegration implements IModPlugin {
 
         // Convert vanilla smelting recipes in soul furnace recipes
         List<SmeltingRecipe> vanillaRecipes = recipeManager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
-        List<SoulFurnaceRecipe> convertedRecipes = RecipeUtils.getConvertedVanillaRecipes(vanillaRecipes);
+        List<SoulFurnaceSmeltingRecipe> convertedRecipes = RecipeUtils.getConvertedVanillaRecipes(vanillaRecipes);
+
         // Get soul furnace recipes from json files
-        List<SoulFurnaceRecipe> soulFurnaceRecipes = recipeManager.getAllRecipesFor(SoulFurnaceRecipe.Type.INSTANCE);
+        List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = List.of(new SoulLavaInfoCategory.Recipe());
 
-        List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = new ArrayList<>();
-        soulLavaInfoRecipes.add(new SoulLavaInfoCategory.Recipe());
+        List<AmethystLensInfoCategory.Recipe> amethystLensInfoRecipes = List.of(new AmethystLensInfoCategory.Recipe());
 
-        List<AmethystLensInfoCategory.Recipe> amethystLensInfoRecipes = new ArrayList<>();
-        amethystLensInfoRecipes.add(new AmethystLensInfoCategory.Recipe());
-
-        registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, convertedRecipes);
-        registration.addRecipes(SOUL_FURNACE_RECIPE_TYPE, soulFurnaceRecipes);
-
+        registration.addRecipes(SOUL_FURNACE_SMELTING_RECIPE_TYPE, convertedRecipes);
         registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
         registration.addRecipes(AMETHYST_LENS_INFO_TYPE, amethystLensInfoRecipes);
-
         registration.addRecipes(RecipeTypes.ANVIL, RecipeUtils.getAnvilRecipes(recipeFactory));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), SOUL_FURNACE_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), SOUL_FURNACE_SMELTING_RECIPE_TYPE);
     }
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(SoulFurnaceScreen.class, 77, 28, 28, 21, SOUL_FURNACE_RECIPE_TYPE);
+        registration.addRecipeClickArea(SoulFurnaceScreen.class, 77, 28, 28, 21, SOUL_FURNACE_SMELTING_RECIPE_TYPE);
 
         IIngredientManager ingredientManager = registration.getJeiHelpers().getIngredientManager();
         // Make the soul lava tank clickable

@@ -2,7 +2,6 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders;
 
 import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeSerializers;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -21,16 +20,14 @@ public class SoulSmeltingRecipeBuilder implements RecipeBuilder {
 
     private final Item result;
     private final Ingredient ingredient;
-    private final int extraCost;
 
-    private SoulSmeltingRecipeBuilder(Ingredient ingredient, ItemLike result, int extraCost) {
+    private SoulSmeltingRecipeBuilder(Ingredient ingredient, ItemLike result) {
         this.result = result.asItem();
         this.ingredient = ingredient;
-        this.extraCost = extraCost;
     }
 
-    public static SoulSmeltingRecipeBuilder addRecipe(Ingredient ingredient, ItemLike result, int extraCost) {
-        return new SoulSmeltingRecipeBuilder(ingredient, result, extraCost);
+    public static SoulSmeltingRecipeBuilder addRecipe(Ingredient ingredient, ItemLike result) {
+        return new SoulSmeltingRecipeBuilder(ingredient, result);
     }
 
     @Override
@@ -52,7 +49,7 @@ public class SoulSmeltingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation resourceLocation) {
-        consumer.accept(new Result(resourceLocation, this.ingredient, this.result, this.extraCost));
+        consumer.accept(new Result(resourceLocation, this.ingredient, this.result));
     }
 
     @Override
@@ -64,19 +61,16 @@ public class SoulSmeltingRecipeBuilder implements RecipeBuilder {
         private final ResourceLocation resourceLocation;
         private final Ingredient ingredient;
         private final Item result;
-        private final int extraCost;
 
-        public Result(ResourceLocation resourceLocation, Ingredient ingredient, Item result, int extraCost){
+        public Result(ResourceLocation resourceLocation, Ingredient ingredient, Item result) {
             this.resourceLocation = resourceLocation;
             this.ingredient = ingredient;
             this.result = result;
-            this.extraCost = extraCost;
         }
 
         @Override
         public void serializeRecipeData(JsonObject json) {
             json.add("ingredient", this.ingredient.toJson());
-            json.addProperty("cost", this.extraCost);
             json.addProperty("result", ForgeRegistries.ITEMS.getKey(this.result).toString());
         }
 
