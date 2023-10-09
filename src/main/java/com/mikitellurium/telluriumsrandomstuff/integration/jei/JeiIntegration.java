@@ -1,7 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceRecipe;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.*;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
@@ -14,13 +16,11 @@ import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IClickableIngredient;
 import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.client.Minecraft;
@@ -29,13 +29,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @JeiPlugin
 public class JeiIntegration implements IModPlugin {
@@ -46,6 +44,8 @@ public class JeiIntegration implements IModPlugin {
             new RecipeType<>(SoulLavaInfoCategory.UID, SoulLavaInfoCategory.Recipe.class);
     public static final RecipeType<AmethystLensInfoCategory.Recipe> AMETHYST_LENS_INFO_TYPE =
             new RecipeType<>(AmethystLensInfoCategory.UID, AmethystLensInfoCategory.Recipe.class);
+
+    public static final IIngredientType<Block> BLOCK = () -> Block.class;
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
@@ -108,6 +108,11 @@ public class JeiIntegration implements IModPlugin {
                         Optional.of(new ClickableIngredient<>(soulLava, area)) : Optional.empty();
             }
         });
+    }
+
+    @Override
+    public void registerIngredients(IModIngredientRegistration registration) {
+        registration.register(BLOCK, List.of(), new BlockIngredientHelper(), new BlockStateRenderer());
     }
 
 }

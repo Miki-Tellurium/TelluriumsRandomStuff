@@ -1,6 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockRendering;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -26,6 +28,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
@@ -73,7 +76,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
 
     @Override
     public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        downArrow.draw(graphics, 120, suggestionRenderY + 39);
+        downArrow.draw(graphics, 120, suggestionRenderY + 38);
         drawSplitString(this.font, Component.translatable("jei.telluriumsrandomstuff.soul_lava_crafting"),
                 graphics, 0, 5, 110, 0);
     }
@@ -97,7 +100,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
                 .addFluidStack(recipe.getLava(), 1000)
                 .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 63)
-                .addItemStack(recipe.getCauldron());
+                .addIngredient(JeiIntegration.BLOCK, Blocks.CAULDRON);
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(Items.LAVA_BUCKET));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 1000);

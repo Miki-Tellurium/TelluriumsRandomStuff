@@ -8,8 +8,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -26,16 +28,33 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.RenderTypeHelper;
+import net.minecraftforge.client.model.data.ModelData;
 import org.joml.Quaternionf;
 
-/* CREDIT the Team Applied Energistics for this class.
- * This class is made from copy-pasted code from Applied Energistic 2
- * mod, I just modified some stuff I needed.
- *
- * LICENSE : https://github.com/AppliedEnergistics/Applied-Energistics-2#license
- */
 public final class BlockRendering {
 
+    public static void renderBlock(BlockState blockState, PoseStack poseStack, MultiBufferSource bufferSource, int xPos,
+                                   int yPos, int width, int height) {
+        var blockRenderer = Minecraft.getInstance().getBlockRenderer();
+
+        poseStack.pushPose();
+
+        poseStack.translate(xPos, yPos, 5);
+        poseStack.scale(width, height, 1);
+        poseStack.translate(-0.5f, -0.5f, -0.5f);
+        setupOrtographicProjection(poseStack);
+        blockRenderer.renderSingleBlock(blockState, poseStack, bufferSource, 400, OverlayTexture.NO_OVERLAY,
+                ModelData.EMPTY, RenderType.solid());
+
+        poseStack.popPose();
+    }
+
+    /* CREDIT the Team Applied Energistics for the fluid rendering.
+     * This methods are made from copy-pasted code from Applied Energistic 2
+     * mod, I just modified some stuff I needed.
+     *
+     * LICENSE : https://github.com/AppliedEnergistics/Applied-Energistics-2#license
+     */
     public static void renderFluid(GuiGraphics graphics, Fluid fluid, int x, int y, int width, int height) {
         var fluidState = fluid.defaultFluidState();
 
