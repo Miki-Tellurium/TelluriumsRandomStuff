@@ -13,12 +13,12 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_soul_magma_block": {
+    "has_soul_magma_bricks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "telluriumsrandomstuff:soul_magma_block"
+              "telluriumsrandomstuff:soul_magma_bricks"
             ]
           }
         ]
@@ -35,7 +35,7 @@
   "requirements": [
     [
       "has_blast_furnace",
-      "has_soul_magma_block",
+      "has_soul_magma_bricks",
       "has_the_recipe"
     ]
   ],
