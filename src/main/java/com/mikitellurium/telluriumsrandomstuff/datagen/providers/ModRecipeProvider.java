@@ -314,11 +314,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("XFX")
                 .pattern("###")
                 .define('#', Blocks.OBSIDIAN)
-                .define('X', ModBlocks.SOUL_MAGMA_BLOCK.get())
+                .define('X', ModBlocks.SOUL_MAGMA_BRICKS.get())
                 .define('F', Blocks.BLAST_FURNACE)
                 .define('B', Items.BUCKET)
                 .unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE))
-                .unlockedBy("has_soul_magma_block", has(ModBlocks.SOUL_MAGMA_BLOCK.get()))
+                .unlockedBy("has_soul_magma_bricks", has(ModBlocks.SOUL_MAGMA_BRICKS.get()))
                 .save(consumer, modLoc("soul_furnace"));
 //        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SOUL_MAGMA_BLOCK.get(), 8)
 //                .pattern("XXX")
