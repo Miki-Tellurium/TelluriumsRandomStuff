@@ -114,7 +114,7 @@ public class SoulFurnaceBlockEntity extends AbstractSoulLavaFurnace implements M
         Optional<?> optionalRecipe = getRecipe();
         if (optionalRecipe.isPresent()) {
             Recipe<Container> recipe = (Recipe<Container>) optionalRecipe.get();
-            ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
+            ItemStack result = recipe.getResultItem(level.registryAccess());
             this.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
             ItemStack outputStack = this.itemHandler.getStackInSlot(OUTPUT_SLOT);
             if (outputStack.isEmpty()) {
