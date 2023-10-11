@@ -12,7 +12,7 @@ import net.minecraftforge.items.SlotItemHandler;
 public class SoulInfuserMenu extends AbstractSoulFurnaceMenu {
 
     public SoulInfuserMenu(int id, Inventory inventory, FriendlyByteBuf data) {
-        this(id, inventory, inventory.player.level().getBlockEntity(data.readBlockPos()), new SimpleContainerData(4));
+        this(id, inventory, inventory.player.level().getBlockEntity(data.readBlockPos()), new SimpleContainerData(2));
     }
 
     public SoulInfuserMenu(int id, Inventory inventory, BlockEntity blockEntity, ContainerData data) {

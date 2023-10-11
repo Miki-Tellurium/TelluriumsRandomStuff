@@ -28,7 +28,7 @@ public class SoulInfuserScreen extends AbstractSoulFurnaceScreen<SoulInfuserMenu
     private void renderProgressArrow(GuiGraphics graphics, int xPos, int yPos) {
         if (this.menu.isCrafting()) {
             int progress = this.menu.getScaledProgress(55);
-            graphics.blit(AbstractSoulFurnaceScreen.ELEMENT_TEXTURE, xPos + 79, yPos + 29, 176, 79,
+            graphics.blit(AbstractSoulFurnaceScreen.ELEMENT_TEXTURE, xPos + 54, yPos + 33, 176, 79,
                     progress + 1, 18);
         }
     }
