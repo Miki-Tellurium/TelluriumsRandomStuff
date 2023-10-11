@@ -52,6 +52,7 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.SOUL_MAGMA_BRICKS);
                 event.accept(ModBlocks.SOUL_MAGMA_BRICK_SLAB);
                 event.accept(ModBlocks.SOUL_FURNACE);
+                event.accept(ModBlocks.SOUL_INFUSER);
                 event.accept(ModBlocks.SOUL_OBSIDIAN);
                 event.accept(ModBlocks.SOUL_ANCHOR);
                 event.accept(ModItems.MYSTIC_POTATO);

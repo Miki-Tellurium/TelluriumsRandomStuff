@@ -237,6 +237,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> INFUSED_SOUL_SAND = registerBlockWithItem("infused_soul_sand",
             InfusedSoulSandBlock::new);
 
+    public static final RegistryObject<Block> SOUL_INFUSER = registerBlockWithItem("soul_infuser",
+            SoulInfuserBlock::new);
+
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

@@ -109,6 +109,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("block.telluriumsrandomstuff.opal_brick_item_pedestal", "Opal Brick Item Pedestal");
         add("block.telluriumsrandomstuff.cut_opal_brick_item_pedestal", "Cut Opal Brick Item Pedestal");
         add("block.telluriumsrandomstuff.infused_soul_sand", "Infused Soul Sand");
+        add("block.telluriumsrandomstuff.soul_infuser", "Soul Infuser");
 
         add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning",
                 "Warning!");
@@ -118,6 +119,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("blockentity.telluriumsrandomstuff.soul_furnace", "Soul Furnace");
         add("blockentity.telluriumsrandomstuff.soul_anchor", "Soul Anchor");
         add("blockentity.telluriumsrandomstuff.extractor", "Extractor");
+        add("blockentity.telluriumsrandomstuff.soul_infuser", "Soul Infuser");
 
         add("fluid_type.telluriumsrandomstuff.soul_lava_fluid", "Soul Lava");
 

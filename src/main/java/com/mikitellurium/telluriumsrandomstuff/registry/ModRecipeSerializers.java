@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,10 +16,13 @@ public class ModRecipeSerializers {
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, TelluriumsRandomStuffMod.MOD_ID);
 
     public static final RegistryObject<RecipeSerializer<SoulFurnaceSmeltingRecipe>> SOUL_FURNACE_SMELTING_SERIALIZER =
-            SERIALIZERS.register("soul_furnace_smelting", () -> SoulFurnaceSmeltingRecipe.Serializer.INSTANCE);
+            SERIALIZERS.register(SoulFurnaceSmeltingRecipe.Type.ID, () -> SoulFurnaceSmeltingRecipe.Serializer.INSTANCE);
 
     public static final RegistryObject<RecipeSerializer<SoulLavaTransmutationRecipe>> SOUL_LAVA_TRANSMUTATION_SERIALIZER =
-            SERIALIZERS.register("soul_lava_transmutation", () -> SoulLavaTransmutationRecipe.Serializer.INSTANCE);
+            SERIALIZERS.register(SoulLavaTransmutationRecipe.Type.ID, () -> SoulLavaTransmutationRecipe.Serializer.INSTANCE);
+
+    public static final RegistryObject<RecipeSerializer<SoulInfusionRecipe>> SOUL_INFUSION_SERIALIZER =
+            SERIALIZERS.register(SoulInfusionRecipe.Type.ID, () -> SoulInfusionRecipe.Serializer.INSTANCE);
 
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);

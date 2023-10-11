@@ -46,6 +46,10 @@ public class ModBlockEntities {
                             ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
                     .build(null));
 
+    public static final RegistryObject<BlockEntityType<SoulInfuserBlockEntity>> SOUL_INFUSER = BLOCK_ENTITIES.register(
+            "soul_infuser", () -> BlockEntityType.Builder.of(SoulInfuserBlockEntity::new,
+                    ModBlocks.SOUL_INFUSER.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }
