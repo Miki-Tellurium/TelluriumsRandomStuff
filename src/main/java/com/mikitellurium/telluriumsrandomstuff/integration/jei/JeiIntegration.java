@@ -10,7 +10,7 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
-import com.mikitellurium.telluriumsrandomstuff.util.RecipeUtils;
+import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -62,6 +62,7 @@ public class JeiIntegration implements IModPlugin {
         registration.addRecipeCategories(new SoulFurnaceSmeltingCategory(guiHelper));
         registration.addRecipeCategories(new SoulLavaInfoCategory(guiHelper));
         registration.addRecipeCategories(new AmethystLensInfoCategory(guiHelper));
+        registration.addRecipeCategories(new SoulInfusionCategory(guiHelper));
     }
 
     @Override
@@ -71,7 +72,7 @@ public class JeiIntegration implements IModPlugin {
 
         // Convert vanilla smelting recipes in soul furnace recipes
         List<SmeltingRecipe> vanillaRecipes = recipeManager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
-        List<SoulFurnaceSmeltingRecipe> convertedRecipes = RecipeUtils.getConvertedVanillaRecipes(vanillaRecipes);
+        List<SoulFurnaceSmeltingRecipe> convertedRecipes = RecipeHelper.getConvertedVanillaRecipes(vanillaRecipes);
         List<SoulInfusionRecipe> soulInfusionRecipes = recipeManager.getAllRecipesFor(SoulInfusionRecipe.Type.INSTANCE);
 
         // Get soul furnace recipes from json files
@@ -83,7 +84,7 @@ public class JeiIntegration implements IModPlugin {
         registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
         registration.addRecipes(AMETHYST_LENS_INFO_TYPE, amethystLensInfoRecipes);
         registration.addRecipes(SOUL_INFUSION_RECIPE_TYPE, soulInfusionRecipes);
-        registration.addRecipes(RecipeTypes.ANVIL, RecipeUtils.getAnvilRecipes(recipeFactory));
+        registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(recipeFactory));
     }
 
     @Override
