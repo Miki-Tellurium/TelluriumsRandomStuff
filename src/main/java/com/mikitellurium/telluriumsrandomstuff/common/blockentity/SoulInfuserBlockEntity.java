@@ -31,7 +31,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -107,7 +106,8 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
             return 2;
         }
     };
-    private ItemStack itemCheck = ItemStack.EMPTY;
+    private ItemStack itemCheck1 = ItemStack.EMPTY;
+    private ItemStack itemCheck2 = ItemStack.EMPTY;
 
     @SuppressWarnings("all")
     public SoulInfuserBlockEntity(BlockPos pos, BlockState state) {
@@ -125,12 +125,12 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         this.validateCurrentRecipe();
         int cachedProgress = this.progress;
         // Recipe handling
-        Optional<Recipe<Container>> optionalRecipe = this.getRecipe();
+        Optional<SoulInfusionRecipe> optionalRecipe = (Optional<SoulInfusionRecipe>) this.getRecipe();
         if (optionalRecipe.isPresent() && this.canProcessRecipe(optionalRecipe.get())) {
-            Recipe<?> recipe = optionalRecipe.get();
+            SoulInfusionRecipe recipe = optionalRecipe.get();
             this.progress++;
             if (this.progress >= this.maxProgress) {
-                this.infuseItem((Recipe<SimpleContainer>) recipe);
+                this.infuseItem(recipe);
                 this.resetProgress();
             }
         } else {
@@ -144,27 +144,29 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
 
 
     private void validateCurrentRecipe() {
-        if (this.itemHandler.getStackInSlot(INPUT_SLOT1).getItem() != itemCheck.getItem()) {
+        if (this.itemHandler.getStackInSlot(INPUT_SLOT1).getItem() != itemCheck1.getItem() ||
+                this.itemHandler.getStackInSlot(INPUT_SLOT2).getItem() != itemCheck2.getItem()) {
             this.resetProgress();
         }
-        itemCheck = this.itemHandler.getStackInSlot(INPUT_SLOT1);
+        itemCheck1 = this.itemHandler.getStackInSlot(INPUT_SLOT1);
+        itemCheck2 = this.itemHandler.getStackInSlot(INPUT_SLOT2);
     }
 
-    private boolean canProcessRecipe(Recipe<?> recipe) {
+    private boolean canProcessRecipe(SoulInfusionRecipe recipe) {
         if (this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() >=
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
-        if (!this.hasEnoughFuel(((SoulInfusionRecipe)recipe).getRecipeCost())) return false;
+        if (!this.hasEnoughFuel(recipe.getRecipeCost())) return false;
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
                 recipe.getResultItem(level.registryAccess()).getItem() == this.itemHandler.getStackInSlot(OUTPUT_SLOT).getItem();
     }
 
     @SuppressWarnings("all")
-    private void infuseItem(Recipe<SimpleContainer> recipe) {
+    private void infuseItem(SoulInfusionRecipe recipe) {
         ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
         ItemStack outputStack = this.itemHandler.getStackInSlot(OUTPUT_SLOT);
         this.itemHandler.getStackInSlot(INPUT_SLOT1).shrink(1);
         this.itemHandler.getStackInSlot(INPUT_SLOT2).shrink(1);
-        this.drainTank(((SoulInfusionRecipe) recipe).getRecipeCost());
+        this.drainTank(recipe.getRecipeCost());
         if (outputStack.isEmpty()) {
             this.itemHandler.setStackInSlot(OUTPUT_SLOT, result);
         } else {
@@ -172,7 +174,7 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         }
     }
 
-    private Optional<Recipe<Container>> getRecipe() {
+    private Optional<?> getRecipe() {
         return this.quickCheck().getRecipeFor(new SimpleContainer(
                         this.itemHandler.getStackInSlot(INPUT_SLOT1),
                         this.itemHandler.getStackInSlot(INPUT_SLOT2)), this.level);
@@ -280,7 +282,8 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("inventory"));
         this.progress = tag.getInt("soul_infuser.progress");
-        itemCheck = itemHandler.getStackInSlot(INPUT_SLOT1);
+        itemCheck1 = itemHandler.getStackInSlot(INPUT_SLOT1);
+        itemCheck2 = itemHandler.getStackInSlot(INPUT_SLOT2);
     }
 
 }
