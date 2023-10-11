@@ -142,7 +142,6 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         setChanged(level, blockPos, blockState);
     }
 
-
     private void validateCurrentRecipe() {
         if (this.itemHandler.getStackInSlot(INPUT_SLOT1).getItem() != itemCheck1.getItem() ||
                 this.itemHandler.getStackInSlot(INPUT_SLOT2).getItem() != itemCheck2.getItem()) {
