@@ -95,6 +95,10 @@ public abstract class AbstractSoulFueledBlockEntity extends BlockEntity {
         return super.getCapability(capability, side);
     }
 
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
+    }
+
     @Override
     public void onLoad() {
         super.onLoad();

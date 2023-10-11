@@ -53,13 +53,6 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
     @Override
     protected void openContainer(Level level, BlockPos pos, Player player) {
         NetworkHooks.openScreen((ServerPlayer)player, (SoulFurnaceBlockEntity)level.getBlockEntity(pos), pos);
-        SoulFurnaceBlockEntity blockEntity = (SoulFurnaceBlockEntity) level.getBlockEntity(pos);
-        // Update the fluid data on the client
-        if (blockEntity != null) {
-            ModMessages.sendToClients(new FluidSyncS2CPacket(blockEntity.getFluid(), blockEntity.getBlockPos()));
-        } else {
-            throw new IllegalStateException("Container provider is missing");
-        }
     }
 
     @Override
