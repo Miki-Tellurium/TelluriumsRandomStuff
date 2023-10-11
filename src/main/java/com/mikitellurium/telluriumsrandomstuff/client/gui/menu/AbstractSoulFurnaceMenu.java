@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
 
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulLavaFurnace;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulFueledBlockEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -12,19 +11,19 @@ import net.minecraftforge.fluids.FluidStack;
 
 public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
 
-    private final AbstractSoulLavaFurnace blockEntity;
+    private final AbstractSoulFueledBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
     private FluidStack fluidStack;
 
-    public AbstractSoulFurnaceMenu(int id, MenuType menuType, Inventory inventory, int invSize, BlockEntity entity,
-                                   ContainerData data) {
+    public AbstractSoulFurnaceMenu(int id, MenuType menuType, Inventory inventory, int invSize,
+                                   BlockEntity entity, ContainerData data) {
         super(menuType, id);
         checkContainerSize(inventory, invSize);
-        blockEntity = (AbstractSoulLavaFurnace)entity;
+        blockEntity = (AbstractSoulFueledBlockEntity) entity;
         this.level = inventory.player.level();
         this.data = data;
-        this.fluidStack = ((AbstractSoulLavaFurnace) entity).getFluid();
+        this.fluidStack = blockEntity.getFluid();
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -84,7 +83,7 @@ public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.SOUL_FURNACE.get());
+                pPlayer, blockEntity.getBlockState().getBlock());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
@@ -105,12 +104,11 @@ public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
         return this.getData().get(0) > 0;
     }
 
-    public int getScaledProgress() {
+    public int getScaledProgress(int width) {
         int progress = this.getData().get(0);
         int maxProgress = this.getData().get(1);
-        int progressArrowSize = 24;
 
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+        return maxProgress != 0 && progress != 0 ? progress * width / maxProgress : 0;
     }
 
     public int getScaledLitTime() {
@@ -121,7 +119,7 @@ public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
         return maxlitTime != 0 && litTime != 0 ? litTime * progressFireSize / maxlitTime : 0;
     }
 
-    public AbstractSoulLavaFurnace getBlockEntity() {
+    public AbstractSoulFueledBlockEntity getBlockEntity() {
         return blockEntity;
     }
 

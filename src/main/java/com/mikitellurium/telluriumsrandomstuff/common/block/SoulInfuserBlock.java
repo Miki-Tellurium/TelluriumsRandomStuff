@@ -1,9 +1,10 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.FluidSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -16,7 +17,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,13 +26,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulFurnaceBlock extends AbstractFurnaceBlock {
+public class SoulInfuserBlock extends AbstractFurnaceBlock {
 
-    public SoulFurnaceBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.BLAST_FURNACE)
-                .explosionResistance(1200.0f)
-                .lightLevel(SoulFurnaceBlock::getLightLevel)
-                .emissiveRendering((blockState, blockGetter, blockPos) -> true));
+    public SoulInfuserBlock() {
+        super(BlockBehaviour.Properties.copy(ModBlocks.SOUL_FURNACE.get()));
     }
 
     @Override
@@ -40,7 +37,7 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
                                  BlockHitResult hitResult) {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof SoulFurnaceBlockEntity && player instanceof ServerPlayer) {
+            if (blockEntity instanceof SoulInfuserBlockEntity && player instanceof ServerPlayer) {
                 this.openContainer(level, pos, player);
             } else {
                 throw new IllegalStateException("Container provider or player is missing");
@@ -52,8 +49,8 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
 
     @Override
     protected void openContainer(Level level, BlockPos pos, Player player) {
-        NetworkHooks.openScreen((ServerPlayer)player, (SoulFurnaceBlockEntity)level.getBlockEntity(pos), pos);
-        SoulFurnaceBlockEntity blockEntity = (SoulFurnaceBlockEntity) level.getBlockEntity(pos);
+        NetworkHooks.openScreen((ServerPlayer)player, (SoulInfuserBlockEntity)level.getBlockEntity(pos), pos);
+        SoulInfuserBlockEntity blockEntity = (SoulInfuserBlockEntity) level.getBlockEntity(pos);
         // Update the fluid data on the client
         if (blockEntity != null) {
             ModMessages.sendToClients(new FluidSyncS2CPacket(blockEntity.getFluid(), blockEntity.getBlockPos()));
@@ -86,30 +83,26 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return new SoulFurnaceBlockEntity(pos, blockState);
+        return new SoulInfuserBlockEntity(pos, blockState);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
                                                                   BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_FURNACE.get(),
-                (level1, blockPos, blockState1, soulLavaFurnace) -> soulLavaFurnace.tick(level, blockPos, blockState1));
+        return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_INFUSER.get(),
+                (level1, blockPos, blockState1, soulInfuser) -> soulInfuser.tick(level, blockPos, blockState1));
     }
 
     @Override
     public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (blockState.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof SoulFurnaceBlockEntity) {
-                ((SoulFurnaceBlockEntity) blockEntity).dropItemsOnBreak();
+            if (blockEntity instanceof SoulInfuserBlockEntity) {
+                ((SoulInfuserBlockEntity) blockEntity).dropItemsOnBreak();
             }
         }
         super.onRemove(blockState, level, pos, newState, isMoving);
-    }
-
-    public static int getLightLevel(BlockState state) {
-        return state.getValue(LIT) ? 13 : 2;
     }
 
 }

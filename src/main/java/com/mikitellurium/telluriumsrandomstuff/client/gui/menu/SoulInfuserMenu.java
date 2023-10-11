@@ -9,18 +9,19 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class SoulFurnaceMenu extends AbstractSoulFurnaceMenu {
+public class SoulInfuserMenu extends AbstractSoulFurnaceMenu {
 
-    public SoulFurnaceMenu(int id, Inventory inventory, FriendlyByteBuf data) {
+    public SoulInfuserMenu(int id, Inventory inventory, FriendlyByteBuf data) {
         this(id, inventory, inventory.player.level().getBlockEntity(data.readBlockPos()), new SimpleContainerData(4));
     }
 
-    public SoulFurnaceMenu(int id, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
-        super(id, ModMenuTypes.SOUL_FURNACE_MENU.get(), inventory, 3, blockEntity, data);
+    public SoulInfuserMenu(int id, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
+        super(id, ModMenuTypes.SOUL_INFUSER_MENU.get(), inventory, 4, blockEntity, data);
         this.getBlockEntity().getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((itemHandler) -> {
             this.addSlot(new SlotItemHandler(itemHandler, 0, 8, 62));
-            this.addSlot(new SlotItemHandler(itemHandler, 1, 56, 32));
-            this.addSlot(new SlotItemHandler(itemHandler, 2, 116, 32));
+            this.addSlot(new SlotItemHandler(itemHandler, 1, 47, 18));
+            this.addSlot(new SlotItemHandler(itemHandler, 2, 47, 54));
+            this.addSlot(new SlotItemHandler(itemHandler, 3, 116, 36));
         });
     }
 

@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-27T12:36:21.2269125	Loot Tables
+// 1.20.1	2023-10-10T17:01:20.0272405	Loot Tables
 aad2eb4ccc191064ab597f6b62589bd61a0e8603 data/telluriumsrandomstuff/loot_tables/blocks/awakened_sculk_shrieker.json
 3074b73cb5812b9f1be6fd51ea9f2f3e8502a312 data/telluriumsrandomstuff/loot_tables/blocks/blue_glowstone.json
 02b26b510ddb0499cf51118b2924038b1a7a26f3 data/telluriumsrandomstuff/loot_tables/blocks/blue_redstone_lamp.json
@@ -59,6 +59,7 @@ c458b501afd15ea4269b26384a6c3a32ddcca5da data/telluriumsrandomstuff/loot_tables/
 162f1018c1540959308f42a77f7bbb762f629a66 data/telluriumsrandomstuff/loot_tables/blocks/red_nether_brick_item_pedestal.json
 4016f1c8c63d4b49ca0677ea5bddab80cd475cef data/telluriumsrandomstuff/loot_tables/blocks/soul_anchor.json
 add2e46fbd4cece537ab7e709e625d681d319909 data/telluriumsrandomstuff/loot_tables/blocks/soul_furnace.json
+07d263ae1443a9289212ef7c8e4ecbf64bf92ecd data/telluriumsrandomstuff/loot_tables/blocks/soul_infuser.json
 86325a6c06925c7ebf451ad8919e1c9110ff8eb1 data/telluriumsrandomstuff/loot_tables/blocks/soul_jack_o_lantern.json
 30e7b856409a7e817f1eadb458fcf433716f87f6 data/telluriumsrandomstuff/loot_tables/blocks/soul_lava_block.json
 0bed0331c0957e36b0843f4fcaab63de6462ded7 data/telluriumsrandomstuff/loot_tables/blocks/soul_lava_cauldron.json
