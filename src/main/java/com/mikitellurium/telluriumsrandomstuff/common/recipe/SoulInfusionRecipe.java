@@ -1,9 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,6 +19,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Map;
 
 public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
@@ -93,28 +96,11 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public SoulInfusionRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            if (!serializedRecipe.has("ingredient"))
-                throw new JsonSyntaxException("Missing ingredient, expected to find an object");
-            JsonObject ingredientJson = GsonHelper.getAsJsonObject(serializedRecipe, "ingredient");
-            Map<String, JsonElement> map = ingredientJson.asMap();
-            NonNullList<Ingredient> ingredientsList = NonNullList.create();
-            map.entrySet().forEach((entry) -> {
-                Ingredient ingredient = CraftingHelper.getIngredient(entry.getValue(), false);
-                ingredientsList.add(ingredient);
-            });
+            Ingredient ingredient = Ingredient.of(RecipeHelper.stackFromJson(serializedRecipe, "ingredient"));
+            Ingredient catalystIngredient = Ingredient.of(RecipeHelper.stackFromJson(serializedRecipe, "catalyst"));
+            ItemStack result = RecipeHelper.stackFromJson(serializedRecipe, "result");
 
-            if (!serializedRecipe.has("result")) throw new JsonSyntaxException("Missing result, expected to find a string or object");
-            ItemStack output;
-            if (serializedRecipe.get("result").isJsonObject()) {
-                JsonObject resultJson = GsonHelper.getAsJsonObject(serializedRecipe, "result");
-                output = ShapedRecipe.itemStackFromJson(resultJson);
-            } else {
-                String result = GsonHelper.getAsString(serializedRecipe, "result");
-                ResourceLocation resourcelocation = new ResourceLocation(result);
-                output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
-            }
-
-            return new SoulInfusionRecipe(recipeId, output, ingredientsList);
+            return new SoulInfusionRecipe(recipeId, result, NonNullList.of(Ingredient.EMPTY, ingredient, catalystIngredient));
         }
 
         @Override
