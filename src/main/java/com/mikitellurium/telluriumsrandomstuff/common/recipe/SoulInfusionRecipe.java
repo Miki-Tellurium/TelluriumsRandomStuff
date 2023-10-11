@@ -27,11 +27,13 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> ingredients;
+    private final int recipeCost;
 
-    public SoulInfusionRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> ingredients) {
+    public SoulInfusionRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> ingredients, int recipeCost) {
         this.id = id;
         this.output = output;
         this.ingredients = ingredients;
+        this.recipeCost = recipeCost;
     }
 
     @Override
@@ -51,6 +53,10 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    public int getRecipeCost() {
+        return recipeCost;
     }
 
     @Override
@@ -99,8 +105,10 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
             Ingredient ingredient = Ingredient.of(RecipeHelper.stackFromJson(serializedRecipe, "ingredient"));
             Ingredient catalystIngredient = Ingredient.of(RecipeHelper.stackFromJson(serializedRecipe, "catalyst"));
             ItemStack result = RecipeHelper.stackFromJson(serializedRecipe, "result");
+            int recipeCost = GsonHelper.getAsInt(serializedRecipe, "cost");
 
-            return new SoulInfusionRecipe(recipeId, result, NonNullList.of(Ingredient.EMPTY, ingredient, catalystIngredient));
+            return new SoulInfusionRecipe(recipeId, result,
+                    NonNullList.of(Ingredient.EMPTY, ingredient, catalystIngredient), recipeCost);
         }
 
         @Override
@@ -108,8 +116,9 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
             NonNullList<Ingredient> ingredients = NonNullList.create();
             ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buf));
             ItemStack output = buf.readItem();
+            int recipeCost = buf.readInt();
 
-            return new SoulInfusionRecipe(id, output, ingredients);
+            return new SoulInfusionRecipe(id, output, ingredients, recipeCost);
         }
 
         @Override
@@ -118,6 +127,7 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
                 ingredient.toNetwork(buf);
             }
             buf.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
+            buf.writeInt(recipe.getRecipeCost());
         }
     }
 

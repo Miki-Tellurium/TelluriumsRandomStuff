@@ -115,6 +115,7 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         this.quickCheck = RecipeManager.createCheck((RecipeType) SoulInfusionRecipe.Type.INSTANCE);
     }
 
+    @SuppressWarnings("unchecked")
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
         if (level.isClientSide) {
             return;
@@ -122,14 +123,14 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
 
         this.handleTankRefill(itemHandler, BUCKET_SLOT);
         this.validateCurrentRecipe();
-        int chachedProgress = this.progress;
+        int cachedProgress = this.progress;
         // Recipe handling
         Optional<Recipe<Container>> optionalRecipe = this.getRecipe();
         if (optionalRecipe.isPresent() && this.canProcessRecipe(optionalRecipe.get())) {
-            Recipe<Container> recipe = optionalRecipe.get();
+            Recipe<?> recipe = optionalRecipe.get();
             this.progress++;
             if (this.progress >= this.maxProgress) {
-                this.infuseItem(recipe);
+                this.infuseItem((Recipe<SimpleContainer>) recipe);
                 this.resetProgress();
             }
         } else {
@@ -137,7 +138,7 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         }
 
         level.setBlock(blockPos, blockState.setValue(SoulInfuserBlock.LIT,
-                        chachedProgress >= this.maxProgress - 1 || this.isLit()), 2);
+                        cachedProgress >= this.maxProgress - 1 || this.isLit()), 2);
         setChanged(level, blockPos, blockState);
     }
 
@@ -152,15 +153,18 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
     private boolean canProcessRecipe(Recipe<?> recipe) {
         if (this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() >=
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
+        if (!this.hasEnoughFuel(((SoulInfusionRecipe)recipe).getRecipeCost())) return false;
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
                 recipe.getResultItem(level.registryAccess()).getItem() == this.itemHandler.getStackInSlot(OUTPUT_SLOT).getItem();
     }
 
     @SuppressWarnings("all")
-    void infuseItem(Recipe<Container> recipe) {
+    private void infuseItem(Recipe<SimpleContainer> recipe) {
         ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
         ItemStack outputStack = this.itemHandler.getStackInSlot(OUTPUT_SLOT);
         this.itemHandler.getStackInSlot(INPUT_SLOT1).shrink(1);
+        this.itemHandler.getStackInSlot(INPUT_SLOT2).shrink(1);
+        this.drainTank(((SoulInfusionRecipe) recipe).getRecipeCost());
         if (outputStack.isEmpty()) {
             this.itemHandler.setStackInSlot(OUTPUT_SLOT, result);
         } else {
@@ -168,17 +172,19 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         }
     }
 
-    Optional<Recipe<Container>> getRecipe() {
-        return this.quickCheck().getRecipeFor(new SimpleContainer(this.itemHandler.getStackInSlot(INPUT_SLOT1)), this.level);
+    private Optional<Recipe<Container>> getRecipe() {
+        return this.quickCheck().getRecipeFor(new SimpleContainer(
+                        this.itemHandler.getStackInSlot(INPUT_SLOT1),
+                        this.itemHandler.getStackInSlot(INPUT_SLOT2)), this.level);
     }
 
-    protected void resetProgress() {
+    private void resetProgress() {
         this.progress = 0;
     }
 
-//    protected boolean hasEnoughFuel() {
-//        return this.getFluidTank().getFluidAmount() >= litFurnaceCost;
-//    }
+    private boolean hasEnoughFuel(int recipeCost) {
+        return this.getFluidTank().getFluidAmount() >= recipeCost;
+    }
 
     private boolean isLit() {
         return this.progress > 0;
