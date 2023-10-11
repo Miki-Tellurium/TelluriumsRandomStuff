@@ -1,5 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
@@ -8,9 +10,11 @@ import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -22,7 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public class RecipeUtils {
+public class RecipeHelper {
 
     private static final Map<Block, DyeColor> glassColors = new HashMap<>();
     static {
@@ -87,6 +91,20 @@ public class RecipeUtils {
         Ingredient ingredient = recipe.getIngredients().get(0);
         ItemStack output = recipe.getResultItem(RegistryAccess.EMPTY);
         return new SoulFurnaceSmeltingRecipe(id, output, ingredient);
+    }
+
+    public static ItemStack stackFromJson(JsonObject recipe, String memberName) {
+        if (!recipe.has(memberName)) throw new JsonSyntaxException("Missing " + memberName + ", expected to find a string or object");
+        ItemStack output;
+        if (recipe.get(memberName).isJsonObject()) {
+            JsonObject resultJson = GsonHelper.getAsJsonObject(recipe, memberName);
+            output = ShapedRecipe.itemStackFromJson(resultJson);
+        } else {
+            String result = GsonHelper.getAsString(recipe, memberName);
+            ResourceLocation resourcelocation = new ResourceLocation(result);
+            output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
+        }
+        return output;
     }
 
     /*

@@ -6,8 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.LavaGoogle
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulLavaTransmutationRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulSmeltingRecipeBuilder;
-import com.mikitellurium.telluriumsrandomstuff.util.RecipeUtils;
+import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -350,7 +349,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_amethyst_lens", has(ModItems.AMETHYST_LENS.get()))
                 .save(consumer, modLoc("lava_googles"));
 
-        for (Map.Entry<Block, DyeColor> entry : RecipeUtils.getStainedGlassSet()) {
+        for (Map.Entry<Block, DyeColor> entry : RecipeHelper.getStainedGlassSet()) {
             LavaGooglesRecipeBuilder.googles(entry.getKey())
                     .save(consumer, modLoc(entry.getValue().getSerializedName() + "_lava_googles"));
         }
