@@ -125,8 +125,8 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
             return;
         }
 
-        this.validateCurrentRecipe();
         this.handleTankRefill();
+        this.validateCurrentRecipe();
 
         // Recipe handling
         if (this.hasValidRecipe()) {
@@ -163,13 +163,10 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
     }
 
     void validateCurrentRecipe() {
-        // For some reason half the time the input item is air, accounting for that
-        if (!this.itemHandler.getStackInSlot(INPUT_SLOT).is(Items.AIR)) {
-            if (this.itemHandler.getStackInSlot(INPUT_SLOT).getItem() != itemCheck.getItem()) {
-                this.resetProgress();
-            }
-            itemCheck = this.itemHandler.getStackInSlot(INPUT_SLOT);
+        if (this.itemHandler.getStackInSlot(INPUT_SLOT).getItem() != itemCheck.getItem()) {
+            this.resetProgress();
         }
+        itemCheck = this.itemHandler.getStackInSlot(INPUT_SLOT);
     }
 
     boolean hasValidRecipe() {
@@ -230,10 +227,6 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         }
 
         return inventory;
-    }
-
-    protected ItemStackHandler getItemHandler() {
-        return this.itemHandler;
     }
 
     private boolean hasEmptyBucket(int slot) {
