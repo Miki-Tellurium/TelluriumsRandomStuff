@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
@@ -16,16 +17,18 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulFurnaceSmeltingRecipe implements Recipe<SimpleContainer> {
+import java.util.Map;
+
+public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
 
     private final ResourceLocation id;
     private final ItemStack output;
-    private final Ingredient ingredient;
+    private final NonNullList<Ingredient> ingredients;
 
-    public SoulFurnaceSmeltingRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient) {
+    public SoulInfusionRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> ingredients) {
         this.id = id;
         this.output = output;
-        this.ingredient = ingredient;
+        this.ingredients = ingredients;
     }
 
     @Override
@@ -34,12 +37,17 @@ public class SoulFurnaceSmeltingRecipe implements Recipe<SimpleContainer> {
             return false;
         }
 
-        return ingredient.test(container.getItem(0));
+        for (int i = 0; i < container.getContainerSize(); i++) {
+            if (!ingredients.get(i).test(container.getItem(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.of(Ingredient.EMPTY, ingredient);
+        return ingredients;
     }
 
     @Override
@@ -72,21 +80,28 @@ public class SoulFurnaceSmeltingRecipe implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<SoulFurnaceSmeltingRecipe> {
+    public static class Type implements RecipeType<SoulInfusionRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "soul_furnace_smelting";
+        public static final String ID = "soul_infusion";
     }
 
-    public static class Serializer implements RecipeSerializer<SoulFurnaceSmeltingRecipe> {
+    public static class Serializer implements RecipeSerializer<SoulInfusionRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_furnace_smelting");
+                new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_infusion");
 
         @Override
-        public SoulFurnaceSmeltingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
+        public SoulInfusionRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
+            if (!serializedRecipe.has("ingredient"))
+                throw new JsonSyntaxException("Missing ingredient, expected to find an object");
             JsonObject ingredientJson = GsonHelper.getAsJsonObject(serializedRecipe, "ingredient");
-            Ingredient ingredient = Ingredient.of(CraftingHelper.getItemStack(ingredientJson, true, true));
+            Map<String, JsonElement> map = ingredientJson.asMap();
+            NonNullList<Ingredient> ingredientsList = NonNullList.create();
+            map.entrySet().forEach((entry) -> {
+                Ingredient ingredient = CraftingHelper.getIngredient(entry.getValue(), false);
+                ingredientsList.add(ingredient);
+            });
 
             if (!serializedRecipe.has("result")) throw new JsonSyntaxException("Missing result, expected to find a string or object");
             ItemStack output;
@@ -99,21 +114,22 @@ public class SoulFurnaceSmeltingRecipe implements Recipe<SimpleContainer> {
                 output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
             }
 
-            return new SoulFurnaceSmeltingRecipe(recipeId, output, ingredient);
+            return new SoulInfusionRecipe(recipeId, output, ingredientsList);
         }
 
         @Override
-        public @Nullable SoulFurnaceSmeltingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            Ingredient ingredient = Ingredient.fromNetwork(buf);
+        public @Nullable SoulInfusionRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+            NonNullList<Ingredient> ingredients = NonNullList.create();
+            ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buf));
             ItemStack output = buf.readItem();
 
-            return new SoulFurnaceSmeltingRecipe(id, output, ingredient);
+            return new SoulInfusionRecipe(id, output, ingredients);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, SoulFurnaceSmeltingRecipe recipe) {
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.toNetwork(buf);
+        public void toNetwork(FriendlyByteBuf buf, SoulInfusionRecipe recipe) {
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                ingredient.toNetwork(buf);
             }
             buf.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
         }

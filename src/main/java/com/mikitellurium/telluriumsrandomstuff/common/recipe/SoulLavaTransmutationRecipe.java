@@ -44,7 +44,7 @@ public class SoulLavaTransmutationRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public ItemStack assemble(SimpleContainer container, RegistryAccess registryAccess) {
-        return output;
+        return output.copy();
     }
 
     @Override
