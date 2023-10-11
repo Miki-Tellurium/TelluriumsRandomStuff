@@ -147,11 +147,6 @@ public class ItemPedestalBlockEntity extends BlockEntity {
 
     // NBT stuff
     @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        super.deserializeNBT(nbt);
-    }
-
-    @Override
     public CompoundTag getUpdateTag() {
         return this.saveWithoutMetadata();
     }
