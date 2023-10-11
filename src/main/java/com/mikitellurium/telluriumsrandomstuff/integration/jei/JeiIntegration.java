@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.*;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
@@ -44,6 +45,8 @@ public class JeiIntegration implements IModPlugin {
             new RecipeType<>(SoulLavaInfoCategory.UID, SoulLavaInfoCategory.Recipe.class);
     public static final RecipeType<AmethystLensInfoCategory.Recipe> AMETHYST_LENS_INFO_TYPE =
             new RecipeType<>(AmethystLensInfoCategory.UID, AmethystLensInfoCategory.Recipe.class);
+    public static RecipeType<SoulInfusionRecipe> SOUL_INFUSION_RECIPE_TYPE =
+            new RecipeType<>(SoulInfusionCategory.UID, SoulInfusionRecipe.class);
 
     public static final IIngredientType<Block> BLOCK = () -> Block.class;
 
@@ -69,6 +72,7 @@ public class JeiIntegration implements IModPlugin {
         // Convert vanilla smelting recipes in soul furnace recipes
         List<SmeltingRecipe> vanillaRecipes = recipeManager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
         List<SoulFurnaceSmeltingRecipe> convertedRecipes = RecipeUtils.getConvertedVanillaRecipes(vanillaRecipes);
+        List<SoulInfusionRecipe> soulInfusionRecipes = recipeManager.getAllRecipesFor(SoulInfusionRecipe.Type.INSTANCE);
 
         // Get soul furnace recipes from json files
         List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = List.of(new SoulLavaInfoCategory.Recipe());
@@ -78,6 +82,7 @@ public class JeiIntegration implements IModPlugin {
         registration.addRecipes(SOUL_FURNACE_SMELTING_RECIPE_TYPE, convertedRecipes);
         registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
         registration.addRecipes(AMETHYST_LENS_INFO_TYPE, amethystLensInfoRecipes);
+        registration.addRecipes(SOUL_INFUSION_RECIPE_TYPE, soulInfusionRecipes);
         registration.addRecipes(RecipeTypes.ANVIL, RecipeUtils.getAnvilRecipes(recipeFactory));
     }
 
