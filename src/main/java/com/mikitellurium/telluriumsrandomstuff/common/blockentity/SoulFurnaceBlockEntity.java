@@ -159,18 +159,18 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         setChanged(level, blockPos, blockState);
     }
 
-    void handleTankRefill() {
+    private void handleTankRefill() {
         super.handleTankRefill(itemHandler, BUCKET_SLOT);
     }
 
-    void validateCurrentRecipe() {
+    private void validateCurrentRecipe() {
         if (this.itemHandler.getStackInSlot(INPUT_SLOT).getItem() != itemCheck.getItem()) {
             this.resetProgress();
         }
         itemCheck = this.itemHandler.getStackInSlot(INPUT_SLOT);
     }
 
-    boolean canProcessRecipe(Recipe<?> recipe) {
+    private boolean canProcessRecipe(Recipe<?> recipe) {
         if (this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() >=
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
@@ -178,7 +178,7 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
     }
 
     @SuppressWarnings("all")
-    void smeltItem(Recipe<Container> recipe) {
+    private void smeltItem(Recipe<Container> recipe) {
         ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
         ItemStack outputStack = this.itemHandler.getStackInSlot(OUTPUT_SLOT);
         this.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
@@ -193,12 +193,12 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         return this.quickCheck().getRecipeFor(new SimpleContainer(this.itemHandler.getStackInSlot(INPUT_SLOT)), this.level);
     }
 
-    protected void resetProgress() {
-        this.progress = 0;
+    private boolean hasEmptyBucket(int slot) {
+        return slot == BUCKET_SLOT && this.itemHandler.getStackInSlot(BUCKET_SLOT).is(Items.BUCKET);
     }
 
-    protected boolean hasEnoughFuel() {
-        return this.getFluidTank().getFluidAmount() >= litFurnaceCost;
+    private void resetProgress() {
+        this.progress = 0;
     }
 
     private boolean isLit() {
@@ -207,6 +207,10 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
 
     public ContainerData getContainerData() {
         return this.containerData;
+    }
+
+    private boolean hasEnoughFuel() {
+        return this.getFluidTank().getFluidAmount() >= litFurnaceCost;
     }
 
     public RecipeManager.CachedCheck<Container, Recipe<Container>> quickCheck() {
@@ -220,10 +224,6 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         }
 
         return inventory;
-    }
-
-    private boolean hasEmptyBucket(int slot) {
-        return slot == BUCKET_SLOT && this.itemHandler.getStackInSlot(BUCKET_SLOT).is(Items.BUCKET);
     }
 
     @SuppressWarnings("ConstantConditions")
