@@ -29,7 +29,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -129,7 +128,9 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         this.validateCurrentRecipe();
 
         // Recipe handling
-        if (this.hasValidRecipe()) {
+        Optional<Recipe<Container>> optionalRecipe = this.getRecipe();
+        if (optionalRecipe.isPresent() && this.canProcessRecipe(optionalRecipe.get())) {
+            Recipe<Container> recipe = optionalRecipe.get();
             // Lit if furnace is not lit
             if (!this.isLit() && hasEnoughFuel()) {
                 this.drainTank(litFurnaceCost);
@@ -140,7 +141,7 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
                 this.progress++;
                 // If progress is completed output smelted item
                 if (this.progress >= this.maxProgress) {
-                    this.smeltItem();
+                    this.smeltItem(recipe);
                     this.resetProgress();
                 }
             } else {
@@ -169,30 +170,22 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         itemCheck = this.itemHandler.getStackInSlot(INPUT_SLOT);
     }
 
-    boolean hasValidRecipe() {
+    boolean canProcessRecipe(Recipe<?> recipe) {
         if (this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() >=
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
-
-        Optional<?> optionalRecipe = getRecipe();
-        if (optionalRecipe.isEmpty()) return false;
-        Recipe<?> recipe = (Recipe<?>) optionalRecipe.get();
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
                 recipe.getResultItem(level.registryAccess()).getItem() == this.itemHandler.getStackInSlot(OUTPUT_SLOT).getItem();
     }
 
     @SuppressWarnings("all")
-    void smeltItem() {
-        Optional<?> optionalRecipe = getRecipe();
-        if (optionalRecipe.isPresent()) {
-            Recipe<Container> recipe = (Recipe<Container>) optionalRecipe.get();
-            ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
-            ItemStack outputStack = this.itemHandler.getStackInSlot(OUTPUT_SLOT);
-            this.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
-            if (outputStack.isEmpty()) {
-                this.itemHandler.setStackInSlot(OUTPUT_SLOT, result);
-            } else {
-                outputStack.grow(result.getCount());
-            }
+    void smeltItem(Recipe<Container> recipe) {
+        ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
+        ItemStack outputStack = this.itemHandler.getStackInSlot(OUTPUT_SLOT);
+        this.itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
+        if (outputStack.isEmpty()) {
+            this.itemHandler.setStackInSlot(OUTPUT_SLOT, result);
+        } else {
+            outputStack.grow(result.getCount());
         }
     }
 
