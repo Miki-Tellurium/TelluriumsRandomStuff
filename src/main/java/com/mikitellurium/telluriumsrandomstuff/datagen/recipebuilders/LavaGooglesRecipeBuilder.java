@@ -6,7 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.util.RecipeUtils;
+import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
@@ -103,7 +103,7 @@ public class LavaGooglesRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> recipeConsumer, ResourceLocation resourceLocation) {
-        recipeConsumer.accept(new Result(resourceLocation, RecipeUtils.getGlassColor(this.glassBlock),
+        recipeConsumer.accept(new Result(resourceLocation, RecipeHelper.getGlassColor(this.glassBlock),
                 this.rows, this.key, this.advancement));
     }
 
