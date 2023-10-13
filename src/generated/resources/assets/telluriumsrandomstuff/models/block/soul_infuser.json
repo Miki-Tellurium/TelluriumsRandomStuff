@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "telluriumsrandomstuff:block/soul_infuser_side_off",
+    "front": "telluriumsrandomstuff:block/soul_infuser_front_off",
+    "side": "telluriumsrandomstuff:block/soul_infuser_side_off",
+    "top": "telluriumsrandomstuff:block/soul_infuser_side_off"
+  }
+}
