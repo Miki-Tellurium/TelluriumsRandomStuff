@@ -42,12 +42,23 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
             return false;
         }
 
-        for (int i = 0; i < container.getContainerSize(); i++) {
-            if (!ingredients.get(i).test(container.getItem(i))) {
-                return false;
+        boolean matches = true;
+        for (Ingredient ingredient : ingredients) {
+
+            boolean ingredientIsPresent = false;
+            for (int i = 0; i < container.getContainerSize(); i++) {
+                if (ingredient.test(container.getItem(i))) {
+                    ingredientIsPresent = true; // If the ingredient is present in any slot return true
+                }
             }
+
+            if (!ingredientIsPresent) {
+                matches = false; // If an ingredient is not present return false
+            }
+
         }
-        return true;
+
+        return matches;
     }
 
     @Override
