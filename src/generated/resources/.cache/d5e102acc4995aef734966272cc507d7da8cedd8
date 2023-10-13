@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-27T12:36:21.2289136	Tags for minecraft:block mod id minecraft
+// 1.20.1	2023-10-13T14:43:27.2029625	Tags for minecraft:block mod id minecraft
 acf26b9c767586076a6d49ba14284b11cfd751ee data/minecraft/tags/blocks/buttons.json
 466c180ae08afe001b958042f0d1d411fc400231 data/minecraft/tags/blocks/cauldrons.json
 610d3a4212b8c38ad4f8927640e482faae4fa6f9 data/minecraft/tags/blocks/dripstone_replaceable_blocks.json
@@ -7,7 +7,7 @@ c7008fa9cc0a105a6ff628595dbbc80827c8d6ef data/minecraft/tags/blocks/infiniburn_o
 a86ad5868b9a000f1c226ccebffb92306f648fa3 data/minecraft/tags/blocks/maintains_farmland.json
 46c092dbca8cb904d780e71173858809856bf08a data/minecraft/tags/blocks/mineable/axe.json
 f61509dc1b3444efbebde01a46b4c22aa19ab647 data/minecraft/tags/blocks/mineable/hoe.json
-6819557167dcd4da930ed69a4667282ebb36c12c data/minecraft/tags/blocks/mineable/pickaxe.json
+c37da929d99ba7ab5ce98dd70a494fa34432f935 data/minecraft/tags/blocks/mineable/pickaxe.json
 323a694d7054871c0ade184e6c0f49654cf0e3b9 data/minecraft/tags/blocks/mineable/shovel.json
 8b6682a0f70756a105de0a6d812f1df2b4c141b1 data/minecraft/tags/blocks/needs_diamond_tool.json
 4c47a9d6a659efc3de4b51ae368e4084206bc785 data/minecraft/tags/blocks/needs_iron_tool.json
@@ -15,7 +15,7 @@ f61509dc1b3444efbebde01a46b4c22aa19ab647 data/minecraft/tags/blocks/mineable/hoe
 07186f5a0ee078d6e4e8a38148e656e0777727f9 data/minecraft/tags/blocks/rails.json
 d1404e807d023c2afbe1f6cd3bf965d67a7f16b3 data/minecraft/tags/blocks/slabs.json
 8d9317fef27aecc3f2748bcf5a28d0c034a15c73 data/minecraft/tags/blocks/small_flowers.json
-94e4f49dce20e0f842cca69c44d4a123bf7cc75d data/minecraft/tags/blocks/soul_fire_base_blocks.json
+0ffc2ece457e9128599593aa2e5f17b6fbcba0ad data/minecraft/tags/blocks/soul_fire_base_blocks.json
 ba11119a21a4297453743006b6f27611abf6cd75 data/minecraft/tags/blocks/soul_speed_blocks.json
 abf4ed6949a5e040ceb55db6966861452ca7b0c7 data/minecraft/tags/blocks/stairs.json
 5484cbd6946579161602483900ecf8c956f7496e data/minecraft/tags/blocks/stone_bricks.json

@@ -1,0 +1,61 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brewing_stand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:brewing_stand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_soul_furnace": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "telluriumsrandomstuff:soul_furnace"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_soul_obsidian": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "telluriumsrandomstuff:soul_obsidian"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "telluriumsrandomstuff:soul_infuser"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_brewing_stand",
+      "has_soul_obsidian",
+      "has_soul_furnace",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "telluriumsrandomstuff:soul_infuser"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -83,7 +83,8 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get())
                     .add(ModBlocks.OPAL_ITEM_PEDESTAL.get())
                     .add(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get())
-                    .add(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
+                    .add(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.SOUL_INFUSER.get());
 
             this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                     .add(ModBlocks.GRATE_SOUL_SAND.get())
@@ -146,7 +147,8 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get())
                     .add(ModBlocks.SOUL_FURNACE.get())
                     .add(ModBlocks.SOUL_OBSIDIAN.get())
-                    .add(ModBlocks.INFUSED_SOUL_SAND.get());
+                    .add(ModBlocks.INFUSED_SOUL_SAND.get())
+                    .add(ModBlocks.SOUL_INFUSER.get());
 
             this.tag(BlockTags.SOUL_SPEED_BLOCKS)
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:brewing_stand"
+    },
+    "F": {
+      "item": "telluriumsrandomstuff:soul_furnace"
+    },
+    "X": {
+      "item": "telluriumsrandomstuff:soul_obsidian"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XFX",
+    "X#X"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:soul_infuser"
+  },
+  "show_notification": true
+}
