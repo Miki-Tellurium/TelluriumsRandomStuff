@@ -56,20 +56,22 @@ public class SoulInfuserBlock extends AbstractFurnaceBlock {
     public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource random) {
         if (blockState.getValue(LIT)) {
             double pX = pos.getX() + 0.5D;
-            double pY = pos.getY();
+            double pY = pos.getY() + 0.7D;
             double pZ = pos.getZ() + 0.5D;
             if (random.nextDouble() < 0.1D) {
-                level.playLocalSound(pX, pY, pZ, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                level.playLocalSound(pX, pY, pZ, SoundEvents.LAVA_POP, SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
 
-            Direction direction = blockState.getValue(FACING);
-            Direction.Axis direction$axis = direction.getAxis();
-            double d0 = random.nextDouble() * 0.6D - 0.3D;
-            double d1 = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52D : d0;
-            double d2 = random.nextDouble() * 6.0D / 16.0D;
-            double d3 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d0;
-            level.addParticle(ParticleTypes.SMOKE, pX + d1, pY + d2, pZ + d3, 0.0D, 0.0D, 0.0D);
-            level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pX + d1, pY + d2, pZ + d3, 0.0D, 0.0D, 0.0D);
+            if (random.nextInt(3) == 0) {
+                Direction direction = blockState.getValue(FACING);
+                Direction.Axis direction$axis = direction.getAxis();
+                double d0 = random.nextDouble() * 0.6D - 0.3D;
+                double d1 = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52D : d0;
+                double d2 = random.nextDouble() * 3.0D / 16.0D;
+                double d3 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52D : d0;
+                level.addParticle(ParticleTypes.SMOKE, pX + d1, pY + d2, pZ + d3, 0.0D, -0.04D, 0.0D);
+                level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pX + d1, pY + d2, pZ + d3, 0.0D, -0.04D, 0.0D);
+            }
         }
     }
 
