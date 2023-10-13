@@ -1,7 +1,0 @@
-{
-  "type": "telluriumsrandomstuff:soul_infusion",
-  "ingredient" : "minecraft:diamond",
-  "catalyst": "telluriumsrandomstuff:soul_fragment",
-  "cost": 250,
-  "result": "minecraft:emerald"
-}

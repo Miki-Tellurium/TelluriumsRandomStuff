@@ -1,0 +1,11 @@
+{
+  "type": "telluriumsrandomstuff:soul_infusion",
+  "catalyst": {
+    "item": "telluriumsrandomstuff:soul_cluster"
+  },
+  "cost": 400,
+  "ingredient": {
+    "item": "minecraft:sculk_shrieker"
+  },
+  "result": "telluriumsrandomstuff:awakened_sculk_shrieker"
+}

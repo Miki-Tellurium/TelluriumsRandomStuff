@@ -1,0 +1,11 @@
+{
+  "type": "telluriumsrandomstuff:soul_infusion",
+  "catalyst": {
+    "item": "telluriumsrandomstuff:small_soul_fragment"
+  },
+  "cost": 50,
+  "ingredient": {
+    "item": "minecraft:sand"
+  },
+  "result": "minecraft:soul_sand"
+}

@@ -1,0 +1,11 @@
+{
+  "type": "telluriumsrandomstuff:soul_infusion",
+  "catalyst": {
+    "item": "telluriumsrandomstuff:soul_cluster"
+  },
+  "cost": 800,
+  "ingredient": {
+    "item": "minecraft:poisonous_potato"
+  },
+  "result": "telluriumsrandomstuff:mystic_potato"
+}
