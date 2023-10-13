@@ -15,6 +15,7 @@ public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
     private final Level level;
     private final ContainerData data;
     private FluidStack fluidStack;
+    private int invSize;
 
     public AbstractSoulFurnaceMenu(int id, MenuType menuType, Inventory inventory, int invSize,
                                    BlockEntity entity, ContainerData data) {
@@ -24,6 +25,7 @@ public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
         this.level = inventory.player.level();
         this.data = data;
         this.fluidStack = blockEntity.getFluid();
+        this.invSize = invSize;
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -45,12 +47,10 @@ public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
-    // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
         Slot sourceSlot = slots.get(index);
-        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
+        if (!sourceSlot.hasItem()) return ItemStack.EMPTY;
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
@@ -58,10 +58,10 @@ public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
         if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into the tile inventory
             if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
+                    + this.invSize, false)) {
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }
-        } else if (index < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
+        } else if (index < TE_INVENTORY_FIRST_SLOT_INDEX + this.invSize) {
             // This is a TE slot so merge the stack into the players inventory
             if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
