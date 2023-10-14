@@ -1,13 +1,11 @@
-package com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe;
+package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockRendering;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.FluidBlockRenderer;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidBlockRenderer;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;

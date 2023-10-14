@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe;
+package com.mikitellurium.telluriumsrandomstuff.integration.jei.util;
 
 import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.runtime.IClickableIngredient;
