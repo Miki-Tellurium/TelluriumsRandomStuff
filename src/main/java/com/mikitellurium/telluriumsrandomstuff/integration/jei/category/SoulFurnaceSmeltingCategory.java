@@ -80,7 +80,7 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceS
 
     @Override
     public Component getTitle() {
-        return Component.translatable("block.telluriumsrandomstuff.soul_furnace");
+        return Component.translatable("jei.telluriumsrandomstuff.category.soul_furnace_smelting");
     }
 
     @Override

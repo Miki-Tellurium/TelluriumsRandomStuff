@@ -67,7 +67,7 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
     @Override
     public void draw(SoulInfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics,
                      double mouseX, double mouseY) {
-        Component translatable = Component.translatable("jei.telluriumsrandomstuff.soul_infusion_recipe_extra_cost")
+        Component translatable = Component.translatable("jei.telluriumsrandomstuff.category.soul_infusion_recipe_extra_cost")
                 .append(": " + recipe.getRecipeCost());
         graphics.drawString(font, translatable, 25, 0, 0xFF808080, false);
         getArrow().draw(graphics, 39, 28);
@@ -80,7 +80,7 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
 
     @Override
     public Component getTitle() {
-        return Component.translatable("block.telluriumsrandomstuff.soul_infuser");
+        return Component.translatable("jei.telluriumsrandomstuff.category.soul_infusion");
     }
 
     @Override

@@ -128,8 +128,12 @@ public class ModTranslationProvider extends LanguageProvider {
 
         add("trim_material.telluriumsrandomstuff.opal_crystal", "Opal Crystal Material");
 
-        add("jei.telluriumsrandomstuff.soul_lava_crafting", "Let lava drip through infused soul sand and into an empty cauldron.");
-        add("jei.telluriumsrandomstuff.soul_infusion_recipe_extra_cost", "Cost");
+        add("jei.telluriumsrandomstuff.category.soul_furnace_smelting", "Soul Furnace Smelting");
+        add("jei.telluriumsrandomstuff.category.soul_infusion", "Soul Infusion");
+        add("jei.telluriumsrandomstuff.category.soul_infusion_recipe_extra_cost", "Cost");
+        add("jei.telluriumsrandomstuff.category.soul_lava_crafting", "Soul Lava Crafting");
+        add("jei.telluriumsrandomstuff.category.soul_lava_crafting_description", "Let lava drip through infused soul sand and into an empty cauldron.");
+        add("jei.telluriumsrandomstuff.category.amethyst_lens_crafting", "Amethyst Lens Crafting");
     }
 
 }

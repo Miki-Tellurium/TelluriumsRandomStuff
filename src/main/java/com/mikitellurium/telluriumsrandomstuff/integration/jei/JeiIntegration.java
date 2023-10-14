@@ -1,13 +1,14 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockStateRenderer;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.*;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.category.*;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ClickableIngredient;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
@@ -20,7 +21,6 @@ import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.helpers.IPlatformFluidHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.RecipeType;

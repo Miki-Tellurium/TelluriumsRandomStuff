@@ -59,7 +59,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
 
     @Override
     public Component getTitle() {
-        return Component.literal("Soul Lava Crafting");
+        return Component.translatable("jei.telluriumsrandomstuff.category.soul_lava_crafting");
     }
 
     @Override
@@ -75,7 +75,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     @Override
     public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
         downArrow.draw(graphics, 120, suggestionRenderY + 38);
-        drawSplitString(this.font, Component.translatable("jei.telluriumsrandomstuff.soul_lava_crafting"),
+        drawSplitString(this.font, Component.translatable("jei.telluriumsrandomstuff.category.soul_lava_crafting_description"),
                 graphics, 0, 5, 110, 0);
     }
 

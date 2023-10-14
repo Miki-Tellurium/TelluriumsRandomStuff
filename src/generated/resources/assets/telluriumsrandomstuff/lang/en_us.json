@@ -103,7 +103,11 @@
   "item.telluriumsrandomstuff.soul_lava_bucket": "Soul Lava Bucket",
   "item.telluriumsrandomstuff.soul_torchflower": "Soul Torchflower",
   "item.telluriumsrandomstuff.soul_torchflower_seeds": "Soul Torchflower Seeds",
-  "jei.telluriumsrandomstuff.soul_infusion_recipe_extra_cost": "Cost",
-  "jei.telluriumsrandomstuff.soul_lava_crafting": "Let lava drip through infused soul sand and into an empty cauldron.",
+  "jei.telluriumsrandomstuff.category.amethyst_lens_crafting": "Amethyst Lens Crafting",
+  "jei.telluriumsrandomstuff.category.soul_furnace_smelting": "Soul Furnace Smelting",
+  "jei.telluriumsrandomstuff.category.soul_infusion": "Soul Infusion",
+  "jei.telluriumsrandomstuff.category.soul_infusion_recipe_extra_cost": "Cost",
+  "jei.telluriumsrandomstuff.category.soul_lava_crafting": "Soul Lava Crafting",
+  "jei.telluriumsrandomstuff.category.soul_lava_crafting_description": "Let lava drip through infused soul sand and into an empty cauldron.",
   "trim_material.telluriumsrandomstuff.opal_crystal": "Opal Crystal Material"
 }

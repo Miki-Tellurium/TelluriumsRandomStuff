@@ -29,7 +29,6 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
     public final static ResourceLocation GUI_TEXTURE =
             new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/jei_gui.png");
 
-    private final Font font = Minecraft.getInstance().font;
     private final IDrawable icon;
     private final IDrawable background;
     private final IDrawable downArrow;
@@ -49,7 +48,7 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
 
     @Override
     public Component getTitle() {
-        return Component.literal("Amethyst Lens Crafting");
+        return Component.translatable("jei.telluriumsrandomstuff.category.amethyst_lens_crafting");
     }
 
     @Override
