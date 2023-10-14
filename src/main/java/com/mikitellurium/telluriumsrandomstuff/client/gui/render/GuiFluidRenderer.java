@@ -17,12 +17,6 @@ import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 import org.joml.Matrix4f;
 
-/* CREDIT to KingLemming and the Team CoFH for this class.
- * This class is made from copy-pasted code from the CofhCore
- * mod, I just modified some stuff I needed.
- *
- * LICENSE : https://github.com/CoFH/CoFHCore#readme
- */
 public class GuiFluidRenderer {
 
     public static void drawBackground(GuiGraphics graphics, int xPos, int yPos, FluidStack fluidStack, int capacity, int width, int height) {
