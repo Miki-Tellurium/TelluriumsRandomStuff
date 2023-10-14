@@ -36,8 +36,13 @@ public abstract class AbstractSoulFueledBlockEntity extends BlockEntity {
         public boolean isFluidValid(FluidStack fluidStack) {
             return fluidStack.getFluid().isSame(SOUL_LAVA);
         }
-    };
 
+        @Override
+        public void setFluid(FluidStack stack) {
+            super.setFluid(stack);
+            onContentsChanged();
+        }
+    };
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
 
     public AbstractSoulFueledBlockEntity(BlockEntityType<? extends AbstractSoulFueledBlockEntity> entityType, BlockPos pos,
