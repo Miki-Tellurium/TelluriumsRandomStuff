@@ -2,6 +2,8 @@ package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockStateRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFurnaceScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
@@ -70,14 +72,11 @@ public class JeiIntegration implements IModPlugin {
         RecipeManager recipeManager = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         IVanillaRecipeFactory recipeFactory = registration.getVanillaRecipeFactory();
 
-        // Convert vanilla smelting recipes in soul furnace recipes
         List<SmeltingRecipe> vanillaRecipes = recipeManager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
         List<SoulFurnaceSmeltingRecipe> convertedRecipes = RecipeHelper.getConvertedVanillaRecipes(vanillaRecipes);
         List<SoulInfusionRecipe> soulInfusionRecipes = recipeManager.getAllRecipesFor(SoulInfusionRecipe.Type.INSTANCE);
 
-        // Get soul furnace recipes from json files
         List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = List.of(new SoulLavaInfoCategory.Recipe());
-
         List<AmethystLensInfoCategory.Recipe> amethystLensInfoRecipes = List.of(new AmethystLensInfoCategory.Recipe());
 
         registration.addRecipes(SOUL_FURNACE_SMELTING_RECIPE_TYPE, convertedRecipes);
@@ -90,20 +89,22 @@ public class JeiIntegration implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), SOUL_FURNACE_SMELTING_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_INFUSER.get()), SOUL_INFUSION_RECIPE_TYPE);
     }
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(SoulFurnaceScreen.class, 77, 28, 28, 21, SOUL_FURNACE_SMELTING_RECIPE_TYPE);
+        registration.addRecipeClickArea(SoulInfuserScreen.class, 54, 33, 55, 18, SOUL_INFUSION_RECIPE_TYPE);
 
         IIngredientManager ingredientManager = registration.getJeiHelpers().getIngredientManager();
         // Make the soul lava tank clickable
-        registration.addGuiContainerHandler(SoulFurnaceScreen.class, new IGuiContainerHandler<>() {
+        registration.addGuiContainerHandler(AbstractSoulFurnaceScreen.class, new IGuiContainerHandler<>() {
             @Override
-            public Optional<IClickableIngredient<?>> getClickableIngredientUnderMouse(SoulFurnaceScreen containerScreen, double mouseX, double mouseY) {
+            public Optional<IClickableIngredient<?>> getClickableIngredientUnderMouse(AbstractSoulFurnaceScreen containerScreen, double mouseX, double mouseY) {
                 Rect2i area = containerScreen.getSoulLavaStorage();
-                ITypedIngredient<FluidStack> soulLava =
-                        ingredientManager.createTypedIngredient(ForgeTypes.FLUID_STACK, new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 10)).get();
+                ITypedIngredient<FluidStack> soulLava = ingredientManager.createTypedIngredient(
+                        ForgeTypes.FLUID_STACK, new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 10)).get();
                 return MouseUtils.isAboveArea(mouseX, mouseY, area.getX(), area.getY(), area.getWidth(), area.getHeight()) ?
                         Optional.of(new ClickableIngredient<>(soulLava, area)) : Optional.empty();
             }
