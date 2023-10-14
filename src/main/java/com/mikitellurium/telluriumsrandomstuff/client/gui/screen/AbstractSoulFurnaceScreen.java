@@ -49,7 +49,7 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         graphics.blit(guiTexture, xPos, yPos, 0, 0, textureWidth, textureHeight);
 
-        renderSoulLavaStorage(soulLavaStorage.getX(), soulLavaStorage.getY());
+        renderSoulLavaStorage(graphics, soulLavaStorage.getX(), soulLavaStorage.getY());
         renderGlass(graphics, xPos, yPos);
     }
 
@@ -68,8 +68,8 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
         renderFluidAreaTooltips(graphics, pMouseX, pMouseY, xPos, yPos);
     }
 
-    private void renderSoulLavaStorage(int xPos, int yPos) {
-        GuiFluidRenderer.drawBackground(xPos, yPos, this.menu.getFluidStack(), this.menu.getBlockEntity().getFluidTankCapacity(),
+    private void renderSoulLavaStorage(GuiGraphics graphics, int xPos, int yPos) {
+        GuiFluidRenderer.drawBackground(graphics, xPos, yPos, this.menu.getFluidStack(), this.menu.getBlockEntity().getFluidTankCapacity(),
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
         RenderSystem.setShaderTexture(0, guiTexture);
     }
