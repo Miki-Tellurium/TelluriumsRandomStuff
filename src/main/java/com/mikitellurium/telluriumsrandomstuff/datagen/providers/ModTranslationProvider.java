@@ -35,6 +35,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("item.telluriumsrandomstuff.small_soul_fragment", "Small Soul Fragment");
         add("item.telluriumsrandomstuff.soul_fragment", "Soul Fragment");
         add("item.telluriumsrandomstuff.soul_cluster", "Soul Cluster");
+        add("item.telluriumsrandomstuff.soul_infuser_lit", "Soul Infuser");
 
         add("item.description.telluriumsrandomstuff.mystic_potato", "What will this do?");
 

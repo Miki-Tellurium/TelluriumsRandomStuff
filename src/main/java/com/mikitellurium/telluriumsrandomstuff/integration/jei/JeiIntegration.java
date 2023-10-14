@@ -11,6 +11,7 @@ import com.mikitellurium.telluriumsrandomstuff.integration.jei.recipe.*;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import mezz.jei.api.IModPlugin;
@@ -89,7 +90,8 @@ public class JeiIntegration implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), SOUL_FURNACE_SMELTING_RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_INFUSER.get()), SOUL_INFUSION_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), RecipeTypes.SMELTING);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SOUL_INFUSER_LIT.get()), SOUL_INFUSION_RECIPE_TYPE);
     }
 
     @Override

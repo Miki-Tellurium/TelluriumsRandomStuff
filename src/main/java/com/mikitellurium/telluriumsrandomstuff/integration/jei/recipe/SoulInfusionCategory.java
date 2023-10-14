@@ -50,7 +50,7 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
 
     public SoulInfusionCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(GUI_TEXTURE, 0, 72, 129, 74);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_INFUSER.get()));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.SOUL_INFUSER_LIT.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(56)
                 .build(new CacheLoader<>() {

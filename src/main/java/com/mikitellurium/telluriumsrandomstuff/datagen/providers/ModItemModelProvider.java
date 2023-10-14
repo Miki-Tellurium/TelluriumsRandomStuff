@@ -46,6 +46,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleItem(ModItems.SMALL_SOUL_FRAGMENT);
         this.simpleItem(ModItems.SOUL_FRAGMENT);
         this.simpleItem(ModItems.SOUL_CLUSTER);
+        this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
     }
 
     private void simpleItem(RegistryObject<Item> item) {

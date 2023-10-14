@@ -133,6 +133,9 @@ public class ModItems {
     public static final RegistryObject<Item> SOUL_CLUSTER = ITEMS.register("soul_cluster",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> SOUL_INFUSER_LIT = ITEMS.register("soul_infuser_lit",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
