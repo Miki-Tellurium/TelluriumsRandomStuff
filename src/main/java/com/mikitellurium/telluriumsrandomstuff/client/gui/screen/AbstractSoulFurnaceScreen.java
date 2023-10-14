@@ -5,14 +5,22 @@ import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFurna
 import com.mikitellurium.telluriumsrandomstuff.client.gui.render.GuiFluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,14 +90,32 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
     private void renderFluidAreaTooltips(GuiGraphics graphics, int pMouseX, int pMouseY, int x, int y) {
         if(MouseUtils.isAboveArea(pMouseX, pMouseY, soulLavaStorage.getX(), soulLavaStorage.getY(),
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight())) {
-            graphics.renderTooltip(this.font, this.getTooltips(),
+            graphics.renderTooltip(this.font, this.getFluidTooltips(this.menu.getFluidStack()),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
 
-    public List<Component> getTooltips() {
-        return List.of(Component.translatable("fluid_type.telluriumsrandomstuff.soul_lava_fluid"),
-                Component.literal( menu.getFluidStack().getAmount() + "/" + menu.getBlockEntity().getFluidTankCapacity()));
+    private List<Component> getFluidTooltips(FluidStack ingredient) {
+        List<Component> tooltip = new ArrayList<>();
+        Fluid fluid = ingredient.getFluid();
+
+        Component displayName = ingredient.getDisplayName();
+        tooltip.add(displayName);
+
+        if (this.getMinecraft().options.advancedItemTooltips) {
+            ResourceLocation resourceLocation = ForgeRegistries.FLUIDS.getKey(fluid);
+            if (resourceLocation != null) {
+                MutableComponent advancedId = Component.literal(resourceLocation.toString())
+                        .withStyle(ChatFormatting.DARK_GRAY);
+                tooltip.add(advancedId);
+            }
+        }
+        MutableComponent amount = Component.literal(menu.getFluidStack().getAmount() + "/" +
+                        menu.getBlockEntity().getFluidTankCapacity() + " mB")
+                .withStyle(ChatFormatting.GRAY);
+        tooltip.add(amount);
+
+        return tooltip;
     }
 
     public Rect2i getSoulLavaStorage() {
