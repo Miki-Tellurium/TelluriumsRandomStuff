@@ -4,7 +4,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.render.FluidTankRenderer;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
@@ -15,13 +15,14 @@ import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
-import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.helpers.IPlatformFluidHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -41,29 +42,24 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
             new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/jei_gui.png");
 
     private final Font font = Minecraft.getInstance().font;
-    private final int textColor = 0xFF808080;
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawable tankGlass;
     private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
-    private final int smeltingTime = 100;
-    private final IDrawableStatic staticFlame;
-    private final IDrawableAnimated animatedFlame;
+    private final int smeltingTime = 120;
 
     public SoulInfusionCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(GUI_TEXTURE, 0, 0, 120, 72);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_FURNACE.get()));
+        this.background = guiHelper.createDrawable(GUI_TEXTURE, 0, 72, 129, 74);
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_INFUSER.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
-                .maximumSize(25)
+                .maximumSize(56)
                 .build(new CacheLoader<>() {
                     @Override
                     public IDrawableAnimated load(Integer cookTime) {
-                        return guiHelper.drawableBuilder(GUI_TEXTURE, 176, 14, 24, 17)
+                        return guiHelper.drawableBuilder(GUI_TEXTURE, 176, 79, 55, 18)
                                 .buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
                     }
                 });
-        this.staticFlame = guiHelper.createDrawable(GUI_TEXTURE, 176, 0, 14, 14);
-        this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
         this.tankGlass = guiHelper.createDrawable(GUI_TEXTURE, 176, 31, 16, 48);
     }
 
@@ -74,8 +70,10 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
     @Override
     public void draw(SoulInfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics,
                      double mouseX, double mouseY) {
-        animatedFlame.draw(graphics, 37, 43);
-        getArrow().draw(graphics, 58, 24);
+        Component translatable = Component.translatable("jei.telluriumsrandomstuff.soul_infusion_recipe_extra_cost")
+                .append(": " + recipe.getRecipeCost());
+        graphics.drawString(font, translatable, 25, 0, 0xFF808080, false);
+        getArrow().draw(graphics, 39, 28);
     }
 
     @Override
@@ -100,13 +98,13 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SoulInfusionRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 4, 54).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
-        builder.addSlot(RecipeIngredientRole.INPUT, 30, 20).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 50, 40).addIngredients(recipe.getIngredients().get(1));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 24).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
-        builder.addSlot(RecipeIngredientRole.CATALYST, 4, 2)
-                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 2777)))
-                .setFluidRenderer(4000, false, 16, 48)
+        builder.addSlot(RecipeIngredientRole.INPUT, 4, 55).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
+        builder.addSlot(RecipeIngredientRole.INPUT, 32, 11).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 32, 47).addIngredients(recipe.getIngredients().get(1));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 101, 29).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        builder.addSlot(RecipeIngredientRole.CATALYST, 4, 3)
+                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), recipe.getRecipeCost())))
+                .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidTankRenderer(0, 0, 16 ,48, 4000))
                 .setOverlay(tankGlass, 0, 0);
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 0);
     }

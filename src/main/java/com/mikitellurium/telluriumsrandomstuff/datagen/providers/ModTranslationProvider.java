@@ -128,7 +128,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("trim_material.telluriumsrandomstuff.opal_crystal", "Opal Crystal Material");
 
         add("jei.telluriumsrandomstuff.soul_lava_crafting", "Let lava drip through infused soul sand and into an empty cauldron.");
-        add("jei.telluriumsrandomstuff.soul_furnace_recipe_extra_cost", "Extra cost");
+        add("jei.telluriumsrandomstuff.soul_infusion_recipe_extra_cost", "Cost");
     }
 
 }
