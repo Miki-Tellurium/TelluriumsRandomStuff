@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 
 public class FluidBlockRenderer implements IIngredientRenderer<FluidStack> {
+
     @Override
     public void render(GuiGraphics graphics, FluidStack ingredient) {
         var fluid = ingredient.getFluid();
