@@ -36,6 +36,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +56,7 @@ public class JeiIntegration implements IModPlugin {
     public static RecipeType<SoulLavaTransmutationRecipe> SOUL_LAVA_TRANSMUTATION_RECIPE_TYPE =
             new RecipeType<>(SoulLavaTransmutationCategory.UID, SoulLavaTransmutationRecipe.class);
 
-    public static final IIngredientType<Block> BLOCK = () -> Block.class;
+    public static final IIngredientType<BlockState> BLOCK_STATE = () -> BlockState.class;
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
@@ -123,7 +124,7 @@ public class JeiIntegration implements IModPlugin {
 
     @Override
     public void registerIngredients(IModIngredientRegistration registration) {
-        registration.register(BLOCK, List.of(), new BlockIngredientHelper(), new BlockStateRenderer());
+        registration.register(BLOCK_STATE, List.of(), new BlockIngredientHelper(), new BlockStateRenderer());
     }
 
 }

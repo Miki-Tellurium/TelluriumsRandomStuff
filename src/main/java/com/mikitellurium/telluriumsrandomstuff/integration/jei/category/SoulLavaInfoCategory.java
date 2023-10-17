@@ -98,7 +98,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
                 .addFluidStack(recipe.getLava(), 1000)
                 .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 63)
-                .addIngredient(JeiIntegration.BLOCK, Blocks.CAULDRON);
+                .addIngredient(JeiIntegration.BLOCK_STATE, Blocks.CAULDRON.defaultBlockState());
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(Items.LAVA_BUCKET));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 1000);

@@ -6,39 +6,38 @@ import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockIngredientHelper implements IIngredientHelper<Block> {
+public class BlockIngredientHelper implements IIngredientHelper<BlockState> {
 
     @Override
-    public IIngredientType<Block> getIngredientType() {
-        return JeiIntegration.BLOCK;
+    public IIngredientType<BlockState> getIngredientType() {
+        return JeiIntegration.BLOCK_STATE;
     }
 
     @Override
-    public String getDisplayName(Block ingredient) {
-        return ingredient.getName().getString();
+    public String getDisplayName(BlockState ingredient) {
+        return ingredient.getBlock().getName().getString();
     }
 
     @Override
-    public String getUniqueId(Block ingredient, UidContext context) {
-        return ingredient.getDescriptionId();
+    public String getUniqueId(BlockState ingredient, UidContext context) {
+        return ingredient.getBlock().getDescriptionId();
     }
 
     @Override
-    public ResourceLocation getResourceLocation(Block ingredient) {
-        return new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, ingredient.getDescriptionId());
+    public ResourceLocation getResourceLocation(BlockState ingredient) {
+        return new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, ingredient.getBlock().getDescriptionId());
     }
 
     @Override
-    public Block copyIngredient(Block ingredient) {
-        return new Block(BlockBehaviour.Properties.copy(ingredient));
+    public BlockState copyIngredient(BlockState ingredient) {
+        return ingredient.getBlock().defaultBlockState();
     }
 
     @Override
-    public String getErrorInfo(@Nullable Block ingredient) {
+    public String getErrorInfo(@Nullable BlockState ingredient) {
         if (ingredient == null) {
             return "debug ingredient: null";
         }

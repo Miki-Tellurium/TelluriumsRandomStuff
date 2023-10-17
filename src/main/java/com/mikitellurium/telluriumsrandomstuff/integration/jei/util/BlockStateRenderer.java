@@ -13,16 +13,16 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
-public class BlockStateRenderer implements IIngredientRenderer<Block> {
+public class BlockStateRenderer implements IIngredientRenderer<BlockState> {
 
     @Override
-    public void render(GuiGraphics graphics, Block ingredient) {
-        BlockRendering.renderBlock(graphics, ingredient.defaultBlockState(), 8, 8, 10);
+    public void render(GuiGraphics graphics, BlockState ingredient) {
+        BlockRendering.renderBlock(graphics, ingredient, 8, 8, 10);
     }
 
     @Override
-    public List<Component> getTooltip(Block ingredient, TooltipFlag tooltipFlag) {
-        return List.of(ingredient.getName());
+    public List<Component> getTooltip(BlockState ingredient, TooltipFlag tooltipFlag) {
+        return List.of(ingredient.getBlock().getName());
     }
 
 }
