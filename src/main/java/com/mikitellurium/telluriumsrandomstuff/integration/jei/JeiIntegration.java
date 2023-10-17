@@ -36,6 +36,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
@@ -101,6 +102,7 @@ public class JeiIntegration implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), SOUL_FURNACE_SMELTING_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), RecipeTypes.SMELTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.SOUL_INFUSER_LIT.get()), SOUL_INFUSION_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(Blocks.CAULDRON), SOUL_LAVA_TRANSMUTATION_RECIPE_TYPE);
     }
 
     @Override
