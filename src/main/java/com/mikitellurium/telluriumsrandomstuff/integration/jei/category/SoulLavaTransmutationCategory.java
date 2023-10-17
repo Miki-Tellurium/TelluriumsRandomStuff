@@ -4,6 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -16,6 +17,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 
 public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTransmutationRecipe> {
 
@@ -69,6 +72,8 @@ public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTr
         builder.addSlot(RecipeIngredientRole.CATALYST, 1, 42)
                 .addIngredient(JeiIntegration.BLOCK_STATE, ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 44, 40).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST)
+                .addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.CAULDRON));
     }
 
 }
