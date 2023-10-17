@@ -65,6 +65,7 @@
   "block.telluriumsrandomstuff.soul_furnace": "Soul Furnace",
   "block.telluriumsrandomstuff.soul_infuser": "Soul Infuser",
   "block.telluriumsrandomstuff.soul_jack_o_lantern": "Soul Jack o'Lantern",
+  "block.telluriumsrandomstuff.soul_lava_cauldron": "Soul Lava Cauldron",
   "block.telluriumsrandomstuff.soul_magma_block": "Soul Magma Block",
   "block.telluriumsrandomstuff.soul_magma_brick_item_pedestal": "Soul Magma Brick Item Pedestal",
   "block.telluriumsrandomstuff.soul_magma_brick_slab": "Soul Magma Brick Slab",
@@ -109,5 +110,6 @@
   "jei.telluriumsrandomstuff.category.soul_infusion_recipe_extra_cost": "Cost",
   "jei.telluriumsrandomstuff.category.soul_lava_crafting": "Soul Lava Crafting",
   "jei.telluriumsrandomstuff.category.soul_lava_crafting_description": "Let lava drip through infused soul sand and into an empty cauldron.",
+  "jei.telluriumsrandomstuff.category.soul_lava_transmutation": "Soul Lava Transmutation",
   "trim_material.telluriumsrandomstuff.opal_crystal": "Opal Crystal Material"
 }

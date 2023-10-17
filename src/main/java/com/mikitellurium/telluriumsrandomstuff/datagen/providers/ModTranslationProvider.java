@@ -111,6 +111,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("block.telluriumsrandomstuff.cut_opal_brick_item_pedestal", "Cut Opal Brick Item Pedestal");
         add("block.telluriumsrandomstuff.infused_soul_sand", "Infused Soul Sand");
         add("block.telluriumsrandomstuff.soul_infuser", "Soul Infuser");
+        add("block.telluriumsrandomstuff.soul_lava_cauldron", "Soul Lava Cauldron");
 
         add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning",
                 "Warning!");
@@ -134,6 +135,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("jei.telluriumsrandomstuff.category.soul_lava_crafting", "Soul Lava Crafting");
         add("jei.telluriumsrandomstuff.category.soul_lava_crafting_description", "Let lava drip through infused soul sand and into an empty cauldron.");
         add("jei.telluriumsrandomstuff.category.amethyst_lens_crafting", "Amethyst Lens Crafting");
+        add("jei.telluriumsrandomstuff.category.soul_lava_transmutation", "Soul Lava Transmutation");
     }
 
 }

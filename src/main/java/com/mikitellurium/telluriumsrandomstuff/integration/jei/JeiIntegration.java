@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
@@ -51,6 +52,8 @@ public class JeiIntegration implements IModPlugin {
             new RecipeType<>(AmethystLensInfoCategory.UID, AmethystLensInfoCategory.Recipe.class);
     public static RecipeType<SoulInfusionRecipe> SOUL_INFUSION_RECIPE_TYPE =
             new RecipeType<>(SoulInfusionCategory.UID, SoulInfusionRecipe.class);
+    public static RecipeType<SoulLavaTransmutationRecipe> SOUL_LAVA_TRANSMUTATION_RECIPE_TYPE =
+            new RecipeType<>(SoulLavaTransmutationCategory.UID, SoulLavaTransmutationRecipe.class);
 
     public static final IIngredientType<Block> BLOCK = () -> Block.class;
 
@@ -62,10 +65,13 @@ public class JeiIntegration implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
-        registration.addRecipeCategories(new SoulFurnaceSmeltingCategory(guiHelper));
-        registration.addRecipeCategories(new SoulLavaInfoCategory(guiHelper));
-        registration.addRecipeCategories(new AmethystLensInfoCategory(guiHelper));
-        registration.addRecipeCategories(new SoulInfusionCategory(guiHelper));
+        registration.addRecipeCategories(
+                new SoulFurnaceSmeltingCategory(guiHelper),
+                new SoulLavaInfoCategory(guiHelper),
+                new AmethystLensInfoCategory(guiHelper),
+                new SoulInfusionCategory(guiHelper),
+                new SoulLavaTransmutationCategory(guiHelper)
+        );
     }
 
     @Override
@@ -75,15 +81,17 @@ public class JeiIntegration implements IModPlugin {
 
         List<SmeltingRecipe> vanillaRecipes = recipeManager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
         List<SoulFurnaceSmeltingRecipe> convertedRecipes = RecipeHelper.getConvertedVanillaRecipes(vanillaRecipes);
+        List<SoulLavaTransmutationRecipe> soulLavaTransmutationRecipes = recipeManager.getAllRecipesFor(SoulLavaTransmutationRecipe.Type.INSTANCE);
         List<SoulInfusionRecipe> soulInfusionRecipes = recipeManager.getAllRecipesFor(SoulInfusionRecipe.Type.INSTANCE);
 
         List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = List.of(new SoulLavaInfoCategory.Recipe());
         List<AmethystLensInfoCategory.Recipe> amethystLensInfoRecipes = List.of(new AmethystLensInfoCategory.Recipe());
 
         registration.addRecipes(SOUL_FURNACE_SMELTING_RECIPE_TYPE, convertedRecipes);
+        registration.addRecipes(SOUL_LAVA_TRANSMUTATION_RECIPE_TYPE, soulLavaTransmutationRecipes);
+        registration.addRecipes(SOUL_INFUSION_RECIPE_TYPE, soulInfusionRecipes);
         registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
         registration.addRecipes(AMETHYST_LENS_INFO_TYPE, amethystLensInfoRecipes);
-        registration.addRecipes(SOUL_INFUSION_RECIPE_TYPE, soulInfusionRecipes);
         registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(recipeFactory));
     }
 
