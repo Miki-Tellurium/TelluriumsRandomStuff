@@ -1,17 +1,20 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.render;
 
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.gui.components.ComponentRenderUtils;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.block.ModelBlockRenderer;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -24,27 +27,37 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LevelLightEngine;
+import net.minecraft.world.level.lighting.LightEngine;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.RenderTypeHelper;
 import net.minecraftforge.client.model.data.ModelData;
+import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
 public final class BlockRendering {
 
-    public static void renderBlock(BlockState blockState, PoseStack poseStack, MultiBufferSource bufferSource, int xPos,
-                                   int yPos, int width, int height) {
-        var blockRenderer = Minecraft.getInstance().getBlockRenderer();
+    public static void renderBlock(GuiGraphics graphics, BlockState blockState, float xPos, float yPos, int scale) {
+        BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
+        PoseStack poseStack = graphics.pose();
+        BakedModel model = blockRenderer.getBlockModel(blockState);
+        boolean blockLight = !model.usesBlockLight();
 
         poseStack.pushPose();
 
-        poseStack.translate(xPos, yPos, 5);
-        poseStack.scale(width, height, 1);
+        poseStack.translate(xPos, yPos, 7);
+        poseStack.mulPoseMatrix(new Matrix4f().scaling(1, -1, 1));
+        poseStack.scale(scale, scale, scale);
+        poseStack.mulPose(new Quaternionf().rotationXYZ(30 * ((float)Math.PI / 180), 225 * ((float)Math.PI / 180), 0 * ((float)Math.PI / 180)));
         poseStack.translate(-0.5f, -0.5f, -0.5f);
-        setupOrtographicProjection(poseStack);
-        blockRenderer.renderSingleBlock(blockState, poseStack, bufferSource, 400, OverlayTexture.NO_OVERLAY,
-                ModelData.EMPTY, RenderType.solid());
+
+        if (blockLight) Lighting.setupForFlatItems();
+        blockRenderer.renderSingleBlock(blockState, poseStack, graphics.bufferSource(),
+                LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+
+        graphics.flush();
+        if (blockLight) Lighting.setupFor3DItems();
 
         poseStack.popPose();
     }

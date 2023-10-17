@@ -17,8 +17,7 @@ public class BlockStateRenderer implements IIngredientRenderer<Block> {
 
     @Override
     public void render(GuiGraphics graphics, Block ingredient) {
-        BlockRendering.renderBlock(ingredient.defaultBlockState(), graphics.pose(), graphics.bufferSource(),
-                13, 13, 10, 10);
+        BlockRendering.renderBlock(graphics, ingredient.defaultBlockState(), 8, 8, 10);
     }
 
     @Override
