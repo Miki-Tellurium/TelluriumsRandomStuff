@@ -14,8 +14,7 @@ public class FluidBlockRenderer implements IIngredientRenderer<FluidStack> {
 
     @Override
     public void render(GuiGraphics graphics, FluidStack ingredient) {
-        var fluid = ingredient.getFluid();
-        BlockRendering.renderFluid(graphics, fluid, 3, 1, 10, 11);
+        BlockRendering.renderLiquid(graphics, ingredient);
     }
 
     @Override

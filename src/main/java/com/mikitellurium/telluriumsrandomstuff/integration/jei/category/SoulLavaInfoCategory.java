@@ -27,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
@@ -93,12 +94,12 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 21)
-                .addItemStack(recipe.getInfusedSoulSand());
+                .addIngredient(JeiIntegration.BLOCK_STATE, recipe.getInfusedSoulSand());
         builder.addSlot(RecipeIngredientRole.INPUT, 120, suggestionRenderY + 14)
                 .addFluidStack(recipe.getLava(), 1000)
                 .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 63)
-                .addIngredient(JeiIntegration.BLOCK_STATE, Blocks.CAULDRON.defaultBlockState());
+                .addIngredient(JeiIntegration.BLOCK_STATE, recipe.getCauldron());
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(Items.LAVA_BUCKET));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 1000);
@@ -106,25 +107,19 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
 
     public static class Recipe {
 
-        private final Fluid lava;
-        private final ItemStack soulSand;
-        private final ItemStack cauldron;
-
-        public Recipe() {
-            this.lava = Fluids.LAVA;
-            this.soulSand = ModBlocks.INFUSED_SOUL_SAND.get().asItem().getDefaultInstance();
-            this.cauldron = Items.CAULDRON.getDefaultInstance();
-        }
+        private final Fluid lava = Fluids.LAVA;
+        private final BlockState infusedSoulSand = ModBlocks.INFUSED_SOUL_SAND.get().defaultBlockState();
+        private final BlockState cauldron = Blocks.CAULDRON.defaultBlockState();
 
         public Fluid getLava() {
             return lava;
         }
 
-        public ItemStack getInfusedSoulSand() {
-            return soulSand;
+        public BlockState getInfusedSoulSand() {
+            return infusedSoulSand;
         }
 
-        public ItemStack getCauldron() {
+        public BlockState getCauldron() {
             return cauldron;
         }
 

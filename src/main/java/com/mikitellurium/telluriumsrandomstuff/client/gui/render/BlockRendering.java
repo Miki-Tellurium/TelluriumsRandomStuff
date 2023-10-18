@@ -8,31 +8,24 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.ComponentRenderUtils;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.block.ModelBlockRenderer;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LevelLightEngine;
-import net.minecraft.world.level.lighting.LightEngine;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.client.RenderTypeHelper;
-import net.minecraftforge.client.model.data.ModelData;
+import net.minecraftforge.fluids.FluidStack;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
@@ -62,73 +55,42 @@ public final class BlockRendering {
         poseStack.popPose();
     }
 
-    /* CREDIT the Team Applied Energistics for the fluid rendering.
-     * This methods are made from copy-pasted code from Applied Energistic 2
-     * mod, I just modified some stuff I needed.
-     *
-     * LICENSE : https://github.com/AppliedEnergistics/Applied-Energistics-2#license
-     */
-    public static void renderFluid(GuiGraphics graphics, Fluid fluid, int x, int y, int width, int height) {
-        var fluidState = fluid.defaultFluidState();
+    public static void renderLiquid(GuiGraphics guiGraphics, FluidStack fluidStack) {
+        PoseStack poseStack = guiGraphics.pose();
+        Minecraft minecraft = Minecraft.getInstance();
+        BlockRenderDispatcher blockRenderDispatcher = minecraft.getBlockRenderer();
+        Fluid fluidType = fluidStack.getFluid();
+        FluidState fluidState = fluidType.defaultFluidState();
+        RenderType renderType = ItemBlockRenderTypes.getRenderLayer(fluidState);
 
-        var blockRenderer = Minecraft.getInstance().getBlockRenderer();
+        poseStack.pushPose();
 
-        var renderType = ItemBlockRenderTypes.getRenderLayer(fluidState);
+        poseStack.translate(15.0F, 11.33F, 10.0F);
+        poseStack.scale(-9.9F, -11.0F, -9.9F);
+        poseStack.mulPose(Axis.XP.rotationDegrees(-30.0F));
+        poseStack.mulPose(Axis.YP.rotationDegrees(45.0F));
+        PoseStack worldStack = RenderSystem.getModelViewStack();
 
         renderType.setupRenderState();
-        RenderSystem.disableDepthTest();
 
-        var worldMatStack = RenderSystem.getModelViewStack();
-        worldMatStack.pushPose();
-        worldMatStack.mulPoseMatrix(graphics.pose().last().pose());
-        worldMatStack.translate(x, y, 0);
+        worldStack.pushPose();
+        worldStack.mulPoseMatrix(poseStack.last().pose());
+        RenderSystem.applyModelViewMatrix();
 
-        FogRenderer.setupNoFog();
-
-        // The fluid block will render [-0.5,0.5] since it's intended for world-rendering
-        // we need to scale it to the rectangle's size, and then move it to the center
-        worldMatStack.translate(width / 2.f, height / 2.f, 0);
-        worldMatStack.scale(width, height, 1);
-
-        setupOrtographicProjection(worldMatStack);
-
-        var tesselator = Tesselator.getInstance();
+        Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder builder = tesselator.getBuilder();
         builder.begin(renderType.mode(), renderType.format());
-        blockRenderer.renderLiquid(
-                BlockPos.ZERO,
-                new FakeWorld(fluidState),
-                builder,
-                fluidState.createLegacyBlock(),
+        blockRenderDispatcher.renderLiquid(BlockPos.ZERO, new FakeWorld(fluidState), builder, fluidState.createLegacyBlock(),
                 fluidState);
         if (builder.building()) {
             tesselator.end();
         }
 
-        // Reset the render state and return to the previous modelview matrix
         renderType.clearRenderState();
-        worldMatStack.popPose();
-        RenderSystem.applyModelViewMatrix();
-    }
+        worldStack.popPose();
 
-    private static void setupOrtographicProjection(PoseStack worldMatStack) {
-        // Set up ortographic rendering for the block
-        float angle = 28;
-        float rotation = 45;
 
-        worldMatStack.scale(1, 1, -1);
-        worldMatStack.mulPose(new Quaternionf().rotationY(Mth.DEG_TO_RAD * -180));
-
-        Quaternionf flip = new Quaternionf().rotationZ(Mth.DEG_TO_RAD * 180);
-        flip.mul(new Quaternionf().rotationX(Mth.DEG_TO_RAD * angle));
-
-        Quaternionf rotate = new Quaternionf().rotationY(Mth.DEG_TO_RAD * rotation);
-        worldMatStack.mulPose(flip);
-        worldMatStack.mulPose(rotate);
-
-        // Move into the center of the block for the transforms
-        worldMatStack.translate(-0.5f, -0.5f, -0.5f);
-
+        poseStack.popPose();
         RenderSystem.applyModelViewMatrix();
     }
 
