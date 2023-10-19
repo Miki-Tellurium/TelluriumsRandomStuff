@@ -121,6 +121,8 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
             return;
         }
 
+
+
         this.handleTankRefill(itemHandler, BUCKET_SLOT);
         this.validateCurrentRecipe();
         int cachedProgress = this.progress;
