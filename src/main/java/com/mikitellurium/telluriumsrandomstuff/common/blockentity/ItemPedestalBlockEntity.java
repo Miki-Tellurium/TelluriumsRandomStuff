@@ -68,6 +68,10 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         return itemHandler.getStackInSlot(0).copy();
     }
 
+    public void setItem(ItemStack itemStack) {
+        this.itemHandler.setStackInSlot(0, itemStack);
+    }
+
     public boolean isEmpty() {
         return this.getItem().isEmpty();
     }
@@ -76,7 +80,7 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         if (!stack.isEmpty()) {
             ItemStack newStack = stack.copy();
             newStack.setCount(1);
-            itemHandler.setStackInSlot(0, newStack);
+            this.setItem(newStack);
             if (shouldShrink) {
                 stack.shrink(1);
             }
@@ -96,9 +100,9 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         Containers.dropContents(this.level, this.worldPosition.above(), new SimpleContainer(this.getItem()));
     }
 
-    public void syncItem(ItemStack itemStack) {
-        this.itemHandler.setStackInSlot(0, itemStack);
-    }
+//    public void syncItem(ItemStack itemStack) {
+//        this.itemHandler.setStackInSlot(0, itemStack);
+//    }
 
     public int getRotTick() {
         return rotTick;
@@ -117,7 +121,7 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         ModMessages.sendToClients(new RotOffsetSyncS2CPacket(rotOffset, worldPosition));
     }
 
-    public void syncRotOffset(float f) {
+    public void setRotOffset(float f) {
         this.rotOffset = f;
     }
 
@@ -125,12 +129,12 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         return alwaysDisplayName;
     }
 
-    public void syncAlwaysDisplayName(boolean alwaysDisplayName) {
+    public void setAlwaysDisplayName(boolean alwaysDisplayName) {
         this.alwaysDisplayName = alwaysDisplayName;
     }
 
-    public void setAlwaysDisplayName() {
-        this.alwaysDisplayName = true;
+    public void setAlwaysDisplayNameAndSync() {
+        this.setAlwaysDisplayName(true);
         ModMessages.sendToClients(new DisplayNameSyncS2CPacket(alwaysDisplayName, worldPosition));
         this.setChanged();
     }

@@ -54,7 +54,7 @@ public class ItemPedestalBlock extends BaseEntityBlock {
         if (blockEntity instanceof ItemPedestalBlockEntity itemPedestal) {
             ItemStack itemStack = player.getItemInHand(hand);
             if (itemStack.is(Items.NAME_TAG) && !itemStack.hasCustomHoverName() && !itemPedestal.alwaysDisplayName()) {
-                itemPedestal.setAlwaysDisplayName();
+                itemPedestal.setAlwaysDisplayNameAndSync();
                 if (!player.isCreative()) {
                     itemStack.shrink(1);
                 }

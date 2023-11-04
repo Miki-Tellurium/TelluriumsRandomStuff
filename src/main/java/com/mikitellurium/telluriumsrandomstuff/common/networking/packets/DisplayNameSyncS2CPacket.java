@@ -32,7 +32,7 @@ public class DisplayNameSyncS2CPacket {
             context.enqueueWork(() -> {
                 // Client
                 if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof ItemPedestalBlockEntity itemPedestal) {
-                    itemPedestal.syncAlwaysDisplayName(this.displayName);
+                    itemPedestal.setAlwaysDisplayName(displayName);
                 }
             });
 
