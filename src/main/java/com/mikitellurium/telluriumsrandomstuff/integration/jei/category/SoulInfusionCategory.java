@@ -70,7 +70,7 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
         Component translatable = Component.translatable("jei.telluriumsrandomstuff.category.soul_infusion_recipe_extra_cost")
                 .append(": " + recipe.getRecipeCost());
         graphics.drawString(font, translatable, 25, 0, 0xFF808080, false);
-        getArrow().draw(graphics, 39, 28);
+        getArrow().draw(graphics, 39, 27);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SoulInfusionRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 4, 55).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
-        builder.addSlot(RecipeIngredientRole.INPUT, 32, 11).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 32, 10).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 32, 47).addIngredients(recipe.getIngredients().get(1));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 101, 29).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
         builder.addSlot(RecipeIngredientRole.CATALYST, 4, 3)

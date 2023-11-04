@@ -70,7 +70,7 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceS
     public void draw(SoulFurnaceSmeltingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics,
                      double mouseX, double mouseY) {
         animatedFlame.draw(graphics, 37, 43);
-        getArrow().draw(graphics, 58, 24);
+        getArrow().draw(graphics, 58, 23);
     }
 
     @Override
