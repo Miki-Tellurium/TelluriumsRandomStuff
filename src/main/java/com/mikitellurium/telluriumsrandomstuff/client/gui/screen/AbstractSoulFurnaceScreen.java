@@ -40,25 +40,23 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
     @Override
     protected void init() {
         super.init();
-        int xPos = this.leftPos;
-        int yPos = this.topPos + 2;
-        soulLavaStorage = new Rect2i(xPos + 8, yPos + 8, 16, 48);
+        soulLavaStorage = new Rect2i(leftPos + 8, topPos + 8, 16, 48);
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
+        this.titleLabelY = 4;
         this.inventoryLabelX = 28;
+        this.inventoryLabelY = 70;
     }
 
     @Override
     protected void renderBg(GuiGraphics graphics, float pPartialTick, int pMouseX, int pMouseY) {
-        int xPos = this.leftPos;
-        int yPos = this.topPos + 2;
         int textureWidth = 176;
         int textureHeight = 166;
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        graphics.blit(guiTexture, xPos, yPos, 0, 0, textureWidth, textureHeight);
+        graphics.blit(guiTexture, leftPos, topPos, 0, 0, textureWidth, textureHeight);
 
         renderSoulLavaStorage(graphics, soulLavaStorage.getX(), soulLavaStorage.getY());
-        renderGlass(graphics, xPos, yPos);
+        renderGlass(graphics, leftPos, topPos);
     }
 
     @Override
@@ -71,9 +69,7 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
     @Override
     protected void renderLabels(GuiGraphics graphics, int pMouseX, int pMouseY) {
         super.renderLabels(graphics, pMouseX, pMouseY);
-        int xPos = this.leftPos;
-        int yPos = this.topPos + 2;
-        renderFluidAreaTooltips(graphics, pMouseX, pMouseY, xPos, yPos);
+        renderFluidAreaTooltips(graphics, pMouseX, pMouseY);
     }
 
     private void renderSoulLavaStorage(GuiGraphics graphics, int xPos, int yPos) {
@@ -87,11 +83,11 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
     }
 
-    private void renderFluidAreaTooltips(GuiGraphics graphics, int pMouseX, int pMouseY, int x, int y) {
+    private void renderFluidAreaTooltips(GuiGraphics graphics, int pMouseX, int pMouseY) {
         if(MouseUtils.isAboveArea(pMouseX, pMouseY, soulLavaStorage.getX(), soulLavaStorage.getY(),
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight())) {
             graphics.renderTooltip(this.font, this.getFluidTooltips(this.menu.getFluidStack()),
-                    Optional.empty(), pMouseX - x, pMouseY - y);
+                    Optional.empty(), pMouseX - leftPos, pMouseY - topPos);
         }
     }
 

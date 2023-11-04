@@ -19,16 +19,14 @@ public class SoulInfuserScreen extends AbstractSoulFurnaceScreen<SoulInfuserMenu
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        int xPos = this.leftPos;
-        int yPos = this.topPos + 2;
         super.renderBg(graphics, partialTick, mouseX, mouseY);
-        renderProgressArrow(graphics, xPos, yPos);
+        renderProgressArrow(graphics);
     }
 
-    private void renderProgressArrow(GuiGraphics graphics, int xPos, int yPos) {
+    private void renderProgressArrow(GuiGraphics graphics) {
         if (this.menu.isCrafting()) {
             int progress = this.menu.getScaledProgress(55);
-            graphics.blit(AbstractSoulFurnaceScreen.ELEMENT_TEXTURE, xPos + 54, yPos + 33, 176, 79,
+            graphics.blit(AbstractSoulFurnaceScreen.ELEMENT_TEXTURE, leftPos + 54, topPos + 32, 176, 79,
                     progress + 1, 18);
         }
     }
