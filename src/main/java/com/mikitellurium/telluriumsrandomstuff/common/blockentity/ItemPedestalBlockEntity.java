@@ -54,12 +54,12 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         super(ModBlockEntities.ITEM_PEDESTAL.get(), pos, state);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, ItemPedestalBlockEntity itemPedestal) {
-        if (level.isClientSide && !itemPedestal.isEmpty()) {
-            if (itemPedestal.rotTick < itemPedestal.itemRotationTime) {
-                itemPedestal.rotTick++;
+    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
+        if (level.isClientSide && !this.isEmpty()) {
+            if (this.rotTick < this.itemRotationTime) {
+                this.rotTick++;
             } else {
-                itemPedestal.rotTick = 0;
+                this.rotTick = 0;
             }
         }
     }

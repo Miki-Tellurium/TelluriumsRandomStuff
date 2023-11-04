@@ -79,7 +79,8 @@ public class ItemPedestalBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
                                                                   BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.ITEM_PEDESTAL.get(), ItemPedestalBlockEntity::tick);
+        return createTickerHelper(blockEntityType, ModBlockEntities.ITEM_PEDESTAL.get(),
+                (tickLevel, blockPos, state, itemPedestal) -> itemPedestal.tick(tickLevel, blockPos, state));
     }
 
     @Override
