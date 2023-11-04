@@ -18,10 +18,10 @@ public class SoulInfuserMenu extends AbstractSoulFurnaceMenu {
     public SoulInfuserMenu(int id, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
         super(id, ModMenuTypes.SOUL_INFUSER_MENU.get(), inventory, 4, blockEntity, data);
         this.getBlockEntity().getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((itemHandler) -> {
-            this.addSlot(new SlotItemHandler(itemHandler, 0, 8, 62));
-            this.addSlot(new SlotItemHandler(itemHandler, 1, 47, 18));
-            this.addSlot(new SlotItemHandler(itemHandler, 2, 47, 54));
-            this.addSlot(new SlotItemHandler(itemHandler, 3, 116, 36));
+            this.addSlot(new SlotItemHandler(itemHandler, 0, 8, 60));
+            this.addSlot(new SlotItemHandler(itemHandler, 1, 47, 16));
+            this.addSlot(new SlotItemHandler(itemHandler, 2, 47, 52));
+            this.addSlot(new SlotItemHandler(itemHandler, 3, 116, 34));
         });
     }
 
