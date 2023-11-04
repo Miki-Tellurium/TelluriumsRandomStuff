@@ -86,7 +86,7 @@ public class SoulInfuserBlock extends AbstractFurnaceBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
                                                                   BlockEntityType<T> blockEntityType) {
         return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_INFUSER.get(),
-                (tickLevel, blockPos, blockState1, soulInfuser) -> soulInfuser.tick(tickLevel, blockPos, blockState1));
+                (tickLevel, blockPos, state, soulInfuser) -> soulInfuser.tick(tickLevel, blockPos, state));
     }
 
     @Override
