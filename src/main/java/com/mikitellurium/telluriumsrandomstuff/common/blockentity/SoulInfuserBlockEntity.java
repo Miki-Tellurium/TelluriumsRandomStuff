@@ -52,11 +52,6 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         protected void onContentsChanged(int slot) {
             setChanged();
         }
-
-        @Override
-        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return isInput(slot) || (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
-        }
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();

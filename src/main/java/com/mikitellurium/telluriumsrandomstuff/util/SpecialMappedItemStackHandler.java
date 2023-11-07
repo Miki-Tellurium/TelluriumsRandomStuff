@@ -1,6 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,6 +18,11 @@ public class SpecialMappedItemStackHandler extends ItemStackHandler {
         types.put(bucketSlot, SlotType.BUCKET);
         Arrays.stream(inputSlots).forEach((i) -> types.put(i, SlotType.INPUT));
         Arrays.stream(outputSlots).forEach((i) -> types.put(i, SlotType.OUTPUT));
+    }
+
+    @Override
+    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+        return isInput(slot) || (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
     }
 
     public SlotType getType(int slot) {
