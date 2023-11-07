@@ -1,0 +1,10 @@
+{
+  "type": "telluriumsrandomstuff:entity_loot_modifier",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/wither"
+    }
+  ],
+  "loot_table": "telluriumsrandomstuff:entities/soul_fragments_boss"
+}

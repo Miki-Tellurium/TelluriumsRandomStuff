@@ -1,4 +1,4 @@
-// 1.20.1	2023-10-17T13:11:41.1417001	Block States: telluriumsrandomstuff
+// 1.20.1	2023-11-07T19:03:03.5359402	Block States: telluriumsrandomstuff
 5ddff5ac8fa1b14577950c557e26d1f2b031cbb8 assets/telluriumsrandomstuff/blockstates/awakened_sculk_shrieker.json
 a5967e21ec39c7048311b2e54a73374469fa5232 assets/telluriumsrandomstuff/blockstates/blue_glowstone.json
 0a1975ee90750856ca81290d28a79b3b1e95a6c8 assets/telluriumsrandomstuff/blockstates/blue_redstone_lamp.json
@@ -239,7 +239,6 @@ a13d7126d50fec7870fb29a6b5d93bf975d05dd4 assets/telluriumsrandomstuff/models/ite
 6b712fcd0208266365b700d705a88402c3df6cbf assets/telluriumsrandomstuff/models/item/soul_furnace.json
 0f0be0d1639f8d54d469e948bb560fa2ea54e05b assets/telluriumsrandomstuff/models/item/soul_infuser.json
 3e5f6aff73d437a7d7e0e5f3ba7459997265b6f4 assets/telluriumsrandomstuff/models/item/soul_jack_o_lantern.json
-15bce5a312060648c6eaee4480cc8f2a12bdf44e assets/telluriumsrandomstuff/models/item/soul_lava_cauldron.json
 d330a526aec991f50c01afc89130d0b0f97c4965 assets/telluriumsrandomstuff/models/item/soul_magma_block.json
 4b0371b2fea77f13ae3eb3338aa1a74198cc49df assets/telluriumsrandomstuff/models/item/soul_magma_bricks.json
 60a344be59d2a6f0076e30e6d4e5d0f539ba614f assets/telluriumsrandomstuff/models/item/soul_magma_brick_item_pedestal.json
