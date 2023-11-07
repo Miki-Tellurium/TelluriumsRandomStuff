@@ -4,8 +4,11 @@ import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulInfuserMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulInfuserBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.category.AmethystLensInfoCategory;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.SpecialMappedItemStackHandler;
 import com.mikitellurium.telluriumsrandomstuff.util.WrappedHandler;
 import net.minecraft.core.BlockPos;
@@ -106,8 +109,7 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
             return 2;
         }
     };
-    private ItemStack itemCheck1 = ItemStack.EMPTY;
-    private ItemStack itemCheck2 = ItemStack.EMPTY;
+    private CachedObject<SoulInfusionRecipe> cachedRecipe = CachedObject.empty();
 
     @SuppressWarnings("all")
     public SoulInfuserBlockEntity(BlockPos pos, BlockState state) {
@@ -122,12 +124,12 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         }
 
         this.handleTankRefill(itemHandler, BUCKET_SLOT);
-        this.validateCurrentRecipe();
         int cachedProgress = this.progress;
         // Recipe handling
         Optional<SoulInfusionRecipe> optionalRecipe = (Optional<SoulInfusionRecipe>) this.getRecipe();
         if (optionalRecipe.isPresent() && this.canProcessRecipe(optionalRecipe.get())) {
             SoulInfusionRecipe recipe = optionalRecipe.get();
+            this.validateCurrentRecipe(recipe);
             this.progress++;
             if (this.progress >= this.maxProgress) {
                 this.infuseItem(recipe);
@@ -142,13 +144,11 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         setChanged(level, blockPos, blockState);
     }
 
-    private void validateCurrentRecipe() {
-        if (this.itemHandler.getStackInSlot(INPUT_SLOT1).getItem() != itemCheck1.getItem() ||
-                this.itemHandler.getStackInSlot(INPUT_SLOT2).getItem() != itemCheck2.getItem()) {
+    private void validateCurrentRecipe(SoulInfusionRecipe recipe) {
+        if (!recipe.equals(this.cachedRecipe.get())) {
             this.resetProgress();
         }
-        itemCheck1 = this.itemHandler.getStackInSlot(INPUT_SLOT1);
-        itemCheck2 = this.itemHandler.getStackInSlot(INPUT_SLOT2);
+        this.cachedRecipe = CachedObject.of(recipe);
     }
 
     private boolean canProcessRecipe(SoulInfusionRecipe recipe) {
@@ -257,10 +257,13 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
     }
 
     // NBT
+    @SuppressWarnings("unchecked")
     @Override
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        Optional<SoulInfusionRecipe> optionalRecipe = (Optional<SoulInfusionRecipe>) this.getRecipe();
+        cachedRecipe = optionalRecipe.map(CachedObject::of).orElseGet(CachedObject::empty);
     }
 
     @Override
@@ -281,8 +284,6 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("inventory"));
         this.progress = tag.getInt("soul_infuser.progress");
-        itemCheck1 = itemHandler.getStackInSlot(INPUT_SLOT1);
-        itemCheck2 = itemHandler.getStackInSlot(INPUT_SLOT2);
     }
 
 }
