@@ -39,82 +39,82 @@ public class ModBlocks {
     public static final RegistryObject<Block> SOUL_FURNACE = registerBlockWithItem("soul_furnace", SoulFurnaceBlock::new);
 
     public static final RegistryObject<Block> SOUL_MAGMA_BRICKS = registerBlockWithItem("soul_magma_bricks",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)
                     .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> entityType.is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE))
                     .lightLevel((blockState) -> 2)
                     .emissiveRendering((blockState, blockGetter, blockPos) -> true)));
 
     public static final RegistryObject<Block> SOUL_MAGMA_BRICK_SLAB = registerBlockWithItem("soul_magma_brick_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.SOUL_MAGMA_BRICKS.get())));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.SOUL_MAGMA_BRICKS.get())));
 
     public static final RegistryObject<Block> SOUL_LAVA_CAULDRON = BLOCKS.register("soul_lava_cauldron", SoulLavaCauldronBlock::new);
 
     public static final RegistryObject<Block> OPAL = registerBlockWithItem("opal",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> OPAL_COBBLESTONE = registerBlockWithItem("opal_cobblestone",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
 
     public static final RegistryObject<Block> OPAL_BRICKS = registerBlockWithItem("opal_bricks",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> CUT_OPAL_BRICKS = registerBlockWithItem("cut_opal_bricks",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> CHISELED_OPAL_BRICKS = registerBlockWithItem("chiseled_opal_bricks",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> CRACKED_OPAL_BRICKS = registerBlockWithItem("cracked_opal_bricks",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> CRACKED_CUT_OPAL_BRICKS = registerBlockWithItem("cracked_cut_opal_bricks",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> OPAL_SLAB = registerBlockWithItem("opal_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
     public static final RegistryObject<Block> OPAL_COBBLESTONE_SLAB = registerBlockWithItem("opal_cobblestone_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
     public static final RegistryObject<Block> OPAL_BRICK_SLAB = registerBlockWithItem("opal_brick_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
     public static final RegistryObject<Block> CUT_OPAL_BRICK_SLAB = registerBlockWithItem("cut_opal_brick_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
     public static final RegistryObject<Block> CRACKED_OPAL_BRICK_SLAB = registerBlockWithItem("cracked_opal_brick_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
     public static final RegistryObject<Block> CRACKED_CUT_OPAL_BRICK_SLAB = registerBlockWithItem("cracked_cut_opal_brick_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.OPAL_COBBLESTONE.get())));
 
     public static final RegistryObject<Block> OPAL_STAIRS = registerBlockWithItem("opal_stairs",
-            ()-> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> OPAL_COBBLESTONE_STAIRS = registerBlockWithItem("opal_cobblestone_stairs",
             () -> new StairBlock(Blocks.COBBLESTONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
 
     public static final RegistryObject<Block> OPAL_BRICK_STAIRS = registerBlockWithItem("opal_brick_stairs",
-            ()-> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> CUT_OPAL_BRICK_STAIRS = registerBlockWithItem("cut_opal_brick_stairs",
-            ()-> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> OPAL_COBBLESTONE_WALL = registerBlockWithItem("opal_cobblestone_wall",
-            ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
 
     public static final RegistryObject<Block> OPAL_BRICK_WALL = registerBlockWithItem("opal_brick_wall",
-            ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> CUT_OPAL_BRICK_WALL = registerBlockWithItem("cut_opal_brick_wall",
-            ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> OPAL_PRESSURE_PLATE = registerBlockWithItem("opal_pressure_plate",
-            ()-> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS,
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS,
                     BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE), BlockSetType.STONE));
 
     public static final RegistryObject<Block> OPAL_BUTTON = registerBlockWithItem("opal_button",
-            ()-> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON), BlockSetType.STONE, 20, false));
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON), BlockSetType.STONE, 20, false));
 
     public static final RegistryObject<Block> OPAL_CRYSTAL_ORE = registerBlockWithItem("opal_crystal_ore",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
@@ -154,10 +154,10 @@ public class ModBlocks {
             SoulTorchFlowerCropBlock::new);
 
     public static final RegistryObject<Block> BLUE_GLOWSTONE = registerBlockWithItem("blue_glowstone",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.GLOWSTONE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLOWSTONE)));
 
     public static final RegistryObject<Block> BLUE_REDSTONE_LAMP = registerBlockWithItem("blue_redstone_lamp",
-            ()-> new RedstoneLampBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+            () -> new RedstoneLampBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
 
     public static final RegistryObject<Block> AWAKENED_SCULK_SHRIEKER = registerBlockWithItem("awakened_sculk_shrieker",
             AwakenedSculkShriekerBlock::new);
