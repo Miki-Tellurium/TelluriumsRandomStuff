@@ -126,22 +126,19 @@ public class SoulAnchorBlock extends BaseEntityBlock {
             if (level.getBlockEntity(pos) instanceof SoulAnchorBlockEntity soulAnchorBlockEntity) {
                 if (soulAnchorBlockEntity.getCachedPlayer() != null) {
                     Player savedPlayer = level.getPlayerByUUID(soulAnchorBlockEntity.getCachedPlayer());
-                    // If the owner broke the soul anchor
-                    if (savedPlayer == player) {
+                    if (savedPlayer == player) { // If the owner broke the soul anchor
                         System.out.println("Same player");
                         player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
                             soulAnchor.setChargedAnchor(false);
                             soulAnchor.clearInventory();
                         });
-                        // If a different player broke the soul anchor
-                    } else if (savedPlayer != null) {
+                    } else if (savedPlayer != null) { // If a different player broke the soul anchor
                         System.out.println("Diff player");
                         savedPlayer.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
                             soulAnchor.setChargedAnchor(false);
                             soulAnchor.clearInventory();
                         });
-                        // If the owner is offline save him in world data so he can be removed on next login
-                    } else {
+                    } else { // If the owner is offline save him in world data so he can be removed on next login
                         SoulAnchorLevelData data = SoulAnchorLevelData.get(level);
                         data.addPlayer(soulAnchorBlockEntity.getCachedPlayer());
                         System.out.println("Saved data");

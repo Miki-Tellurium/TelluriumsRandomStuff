@@ -20,10 +20,9 @@ import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 @AutoRegisterCapability
 public class SoulAnchorCapability {
 
-    private final int playerInventorySize = 41;
     private boolean hasChargedAnchor;
     private boolean canRecoverInventory;
-    private SimpleContainer inventory = new SimpleContainer(playerInventorySize) {
+    private SimpleContainer inventory = new SimpleContainer(41) {
         @Override
         public ListTag createTag() {
             ListTag listTag = new ListTag();
@@ -62,8 +61,21 @@ public class SoulAnchorCapability {
         this.hasChargedAnchor = b;
     }
 
+    public boolean canRecoverInventory() {
+        return canRecoverInventory;
+    }
+
+    public void setCanRecoverInventory(boolean b) {
+        this.canRecoverInventory = b;
+    }
+
+    public boolean hasSavedInventory() {
+        return !inventory.isEmpty();
+    }
+
     public void saveInventory(Inventory playerInventory) {
-        for (int i = 0; i < playerInventorySize; i++) {
+        this.clearInventory();
+        for (int i = 0; i < playerInventory.getContainerSize(); i++) {
             ItemStack itemStack = playerInventory.getItem(i);
             inventory.setItem(i, itemStack.copy());
         }
@@ -75,18 +87,7 @@ public class SoulAnchorCapability {
 
     public void putInventoryInAnchor(SoulAnchorBlockEntity soulAnchor) {
         soulAnchor.savePlayerInventory(inventory);
-    }
-
-    public boolean hasSavedInventory() {
-        return !inventory.isEmpty();
-    }
-
-    public boolean canRecoverInventory() {
-        return canRecoverInventory;
-    }
-
-    public void setCanRecoverInventory(boolean b) {
-        this.canRecoverInventory = b;
+        this.clearInventory();
     }
 
     public void charge(Entity entity, Level level, BlockPos pos, BlockState blockState) {
@@ -95,7 +96,7 @@ public class SoulAnchorCapability {
         level.playSound(null, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D,
                 (double)pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS,
                 1.0F, 1.0F);
-        setChargedAnchor(true);
+        this.setChargedAnchor(true);
     }
 
     public void discharge(Entity entity, Level level, BlockPos pos, BlockState blockState) {
@@ -104,7 +105,7 @@ public class SoulAnchorCapability {
         level.playSound(null, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D,
                 (double)pos.getZ() + 0.5D, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS,
                 1.0F, 1.0F);
-        setChargedAnchor(false);
+        this.setChargedAnchor(false);
     }
 
     public void copyFrom(SoulAnchorCapability source) {
@@ -115,14 +116,14 @@ public class SoulAnchorCapability {
 
     public void saveNBTDAta(CompoundTag nbt) {
         nbt.putBoolean("hasChargedAnchor", hasChargedAnchor);
-        nbt.put("inventory", inventory.createTag());
         nbt.putBoolean("canRecoverInventory", canRecoverInventory);
+        nbt.put("inventory", inventory.createTag());
     }
 
     public void loadNBTData(CompoundTag nbt) {
-        hasChargedAnchor = nbt.getBoolean("hasChargedAnchor");
-        inventory.fromTag(nbt.getList("inventory", Tag.TAG_COMPOUND));
-        canRecoverInventory = nbt.getBoolean("canRecoverInventory");
+        this.hasChargedAnchor = nbt.getBoolean("hasChargedAnchor");
+        this.canRecoverInventory = nbt.getBoolean("canRecoverInventory");
+        this.inventory.fromTag(nbt.getList("inventory", Tag.TAG_COMPOUND));
     }
 
 }
