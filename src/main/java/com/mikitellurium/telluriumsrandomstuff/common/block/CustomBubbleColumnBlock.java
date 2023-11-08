@@ -5,7 +5,9 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
@@ -13,6 +15,9 @@ import net.minecraft.world.level.block.BubbleColumnBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class CustomBubbleColumnBlock extends BubbleColumnBlock {
 
@@ -78,4 +83,50 @@ public class CustomBubbleColumnBlock extends BubbleColumnBlock {
 
         return pState;
     }
+
+    private static boolean wasInBubbleColumn;
+    private static boolean firstTick = true;
+
+    @SubscribeEvent
+    public static void onBubbleColumnEnterSoundEvent(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.START || event.player == null) return;
+        if (event.player.level().isClientSide) {
+            // Play a sound when entering bubble columns
+            BlockState blockstate = event.player.level().getBlockStatesIfLoaded(event.player.getBoundingBox().inflate(0.0D, -0.4F, 0.0D)
+                            .deflate(1.0E-6D)).filter((block) -> block.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get()))
+                    .findFirst().orElse(null);
+            if (blockstate != null) {
+                if (!wasInBubbleColumn && !firstTick && blockstate.is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get()) && !event.player.isSpectator()) {
+                    boolean flag = blockstate.getValue(CustomBubbleColumnBlock.DRAG_DOWN);
+                    if (flag) {
+                        event.player.playSound(SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_INSIDE, 1.0F, 1.0F);
+                    } else {
+                        event.player.playSound(SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, 1.0F, 1.0F);
+                    }
+                }
+
+                wasInBubbleColumn = true;
+            } else {
+                wasInBubbleColumn = false;
+            }
+
+            firstTick = false;
+        }
+
+    }
+
+    @SubscribeEvent
+    public static void livingTickEvent(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide) {
+            return;
+        }
+        // Increase entity air supply when inside bubble column
+        BlockPos pos = BlockPos.containing(entity.blockPosition().getX(), (int) entity.getEyeY(), entity.blockPosition().getZ());
+        if (entity.level().getBlockState(pos).is(ModBlocks.CUSTOM_BUBBLE_COLUMN.get())) {
+            entity.setAirSupply(Math.min(entity.getAirSupply() + 5, entity.getMaxAirSupply()));
+        }
+
+    }
+
 }
