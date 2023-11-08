@@ -120,6 +120,7 @@ public class ModTranslationProvider extends LanguageProvider {
 
         add("blockentity.telluriumsrandomstuff.soul_furnace", "Soul Furnace");
         add("blockentity.telluriumsrandomstuff.soul_anchor", "Soul Anchor");
+        add("blockentity.telluriumsrandomstuff.soul_anchor.warning", "You already have a charged soul anchor");
         add("blockentity.telluriumsrandomstuff.extractor", "Extractor");
         add("blockentity.telluriumsrandomstuff.soul_infuser", "Soul Infuser");
 
