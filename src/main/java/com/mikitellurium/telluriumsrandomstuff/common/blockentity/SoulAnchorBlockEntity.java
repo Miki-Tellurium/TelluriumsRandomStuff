@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
-import com.mikitellurium.telluriumsrandomstuff.util.CachedPlayer;
+import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulAnchorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -45,7 +45,7 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private CachedPlayer savedPlayer = new CachedPlayer();
+    private CachedObject<UUID> cachedPlayer = CachedObject.empty();
 
     public SoulAnchorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SOUL_ANCHOR.get(), pos, state);
@@ -77,16 +77,16 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public void setSavedPlayer(UUID player) {
-        savedPlayer.set(player);
+    public void setCachedPlayer(UUID player) {
+        cachedPlayer.set(player);
     }
 
-    public UUID getSavedPlayer() {
-        return savedPlayer.get();
+    public UUID getCachedPlayer() {
+        return cachedPlayer.get();
     }
 
     public void clearSavedPlayer() {
-        savedPlayer.clear();
+        cachedPlayer.clear();
     }
 
     // Gui stuff
@@ -134,8 +134,8 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
-        if (savedPlayer.get() != null) {
-            tag.putUUID("savedPlayer", savedPlayer.get());
+        if (cachedPlayer.isPresent()) {
+            tag.putUUID("savedPlayer", cachedPlayer.get());
         }
         super.saveAdditional(tag);
     }
@@ -144,11 +144,8 @@ public class SoulAnchorBlockEntity extends BlockEntity implements MenuProvider {
     public void load(CompoundTag tag) {
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("inventory"));
-        try {
-            savedPlayer.set(tag.getUUID("savedPlayer"));
-        } catch (NullPointerException e) {
-            // No player was saved
-        }
+        if (tag.hasUUID("savedPlayer"))
+            cachedPlayer = CachedObject.of(tag.getUUID("savedPlayer"));
     }
 
 }
