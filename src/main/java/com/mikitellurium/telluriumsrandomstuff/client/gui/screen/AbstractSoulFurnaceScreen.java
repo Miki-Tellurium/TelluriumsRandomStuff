@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.render.GuiFluidRenderer;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
@@ -86,16 +87,16 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
     private void renderFluidAreaTooltips(GuiGraphics graphics, int pMouseX, int pMouseY) {
         if(MouseUtils.isAboveArea(pMouseX, pMouseY, soulLavaStorage.getX(), soulLavaStorage.getY(),
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight())) {
-            graphics.renderTooltip(this.font, this.getFluidTooltips(this.menu.getFluidStack()),
+            graphics.renderTooltip(this.font, this.getFluidTooltips(),
                     Optional.empty(), pMouseX - leftPos, pMouseY - topPos);
         }
     }
 
-    private List<Component> getFluidTooltips(FluidStack ingredient) {
+    private List<Component> getFluidTooltips() {
         List<Component> tooltip = new ArrayList<>();
-        Fluid fluid = ingredient.getFluid();
+        Fluid fluid = ModFluids.SOUL_LAVA_SOURCE.get();
 
-        Component displayName = ingredient.getDisplayName();
+        Component displayName = Component.translatable("fluid_type.telluriumsrandomstuff.soul_lava_fluid");
         tooltip.add(displayName);
 
         if (this.getMinecraft().options.advancedItemTooltips) {
