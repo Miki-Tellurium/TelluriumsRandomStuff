@@ -80,8 +80,9 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                                     soulAnchor.clearInventory();
                                     soulAnchor.setCanRecoverInventory(false);
                                 }
-                            } else { // todo add translation
-                                player.sendSystemMessage(Component.literal("You already have a charged soul anchor"));
+                            } else {
+                                player.displayClientMessage(Component.translatable(
+                                        "blockentity.telluriumsrandomstuff.soul_anchor.warning"), true);
                             }
                         });
                     }
@@ -159,15 +160,15 @@ public class SoulAnchorBlock extends BaseEntityBlock {
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
-//todo change signal to analog
+
     @Override
-    public boolean isSignalSource(BlockState blockState) {
+    public boolean hasAnalogOutputSignal(BlockState pState) {
         return true;
     }
 
     @Override
-    public int getSignal(BlockState blockState, BlockGetter blockGetter, BlockPos pos, Direction direction) {
-        return blockState.getValue(CHARGED) ? 5 : 0;
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        return blockState.getValue(CHARGED) ? 15 : 0;
     }
 
     @Override
