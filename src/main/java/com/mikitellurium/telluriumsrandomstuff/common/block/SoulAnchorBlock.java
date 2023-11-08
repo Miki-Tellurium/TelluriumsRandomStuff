@@ -75,12 +75,12 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                         player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
                             if (!soulAnchor.hasChargedAnchor()) {
                                 soulAnchor.charge(player, level, pos, blockState);
-                                soulAnchorBlockEntity.setSavedPlayer(player.getUUID());
+                                soulAnchorBlockEntity.setCachedPlayer(player.getUUID());
                                 if (soulAnchor.hasSavedInventory()) {
                                     soulAnchor.clearInventory();
                                     soulAnchor.setCanRecoverInventory(false);
                                 }
-                            } else {
+                            } else { // todo add translation
                                 player.sendSystemMessage(Component.literal("You already have a charged soul anchor"));
                             }
                         });
@@ -93,10 +93,9 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                 if (blockEntity instanceof SoulAnchorBlockEntity soulAnchorBlockEntity && player instanceof ServerPlayer) {
                     player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
                             if (soulAnchor.hasSavedInventory() && soulAnchor.canRecoverInventory() &&
-                            player.getUUID().equals(soulAnchorBlockEntity.getSavedPlayer())) {
+                            player.getUUID().equals(soulAnchorBlockEntity.getCachedPlayer())) {
                                 // Fill the soul anchor with the saved inventory then clear it
                                 soulAnchor.putInventoryInAnchor(soulAnchorBlockEntity);
-                                soulAnchor.clearInventory();
                                 soulAnchor.setCanRecoverInventory(false);
                                 soulAnchor.discharge(player, level, pos, blockState);
                                 soulAnchorBlockEntity.clearSavedPlayer();
@@ -125,8 +124,8 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                                        boolean willHarvest, FluidState fluid) {
         if (blockState.getValue(CHARGED)) {
             if (level.getBlockEntity(pos) instanceof SoulAnchorBlockEntity soulAnchorBlockEntity) {
-                if (soulAnchorBlockEntity.getSavedPlayer() != null) {
-                    Player savedPlayer = level.getPlayerByUUID(soulAnchorBlockEntity.getSavedPlayer());
+                if (soulAnchorBlockEntity.getCachedPlayer() != null) {
+                    Player savedPlayer = level.getPlayerByUUID(soulAnchorBlockEntity.getCachedPlayer());
                     // If the owner broke the soul anchor
                     if (savedPlayer == player) {
                         System.out.println("Same player");
@@ -144,7 +143,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                         // If the owner is offline save him in world data so he can be removed on next login
                     } else {
                         SoulAnchorLevelData data = SoulAnchorLevelData.get(level);
-                        data.addPlayer(soulAnchorBlockEntity.getSavedPlayer());
+                        data.addPlayer(soulAnchorBlockEntity.getCachedPlayer());
                         System.out.println("Saved data");
                     }
                 }
@@ -163,7 +162,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
-
+//todo change signal to analog
     @Override
     public boolean isSignalSource(BlockState blockState) {
         return true;
@@ -191,6 +190,9 @@ public class SoulAnchorBlock extends BaseEntityBlock {
     /* Events */
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
+        if (event.getEntity().level().isClientSide) {
+            return;
+        }
         if (event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
             return;
         }
@@ -218,7 +220,6 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                     event.setCanceled(true);
                 }
             });
-
         }
     }
 
@@ -239,11 +240,9 @@ public class SoulAnchorBlock extends BaseEntityBlock {
         }
         if (event.isWasDeath()) {
             event.getOriginal().reviveCaps();
-            event.getOriginal().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((old) -> {
-                event.getEntity().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((newClone) -> {
-                    newClone.copyFrom(old);
-                });
-            });
+            event.getOriginal().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent(
+                    (old) -> event.getEntity().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent(
+                            (newClone) -> newClone.copyFrom(old)));
             event.getOriginal().invalidateCaps();
         }
 
