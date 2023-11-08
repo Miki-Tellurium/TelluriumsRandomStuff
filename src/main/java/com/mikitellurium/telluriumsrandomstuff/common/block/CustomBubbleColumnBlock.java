@@ -84,6 +84,7 @@ public class CustomBubbleColumnBlock extends BubbleColumnBlock {
         return pState;
     }
 
+    /* Events */
     private static boolean wasInBubbleColumn;
     private static boolean firstTick = true;
 
