@@ -15,7 +15,7 @@ public class ModFluids {
     public static final DeferredRegister<Fluid> FLUIDS =
             DeferredRegister.create(ForgeRegistries.FLUIDS, TelluriumsRandomStuffMod.MOD_ID);
 
-    public static final RegistryObject<FlowingFluid> SOUL_LAVA_SOURCE = FLUIDS.register("soul_lava_fluid",
+    public static final RegistryObject<FlowingFluid> SOUL_LAVA_SOURCE = FLUIDS.register("soul_lava",
             () -> new SoulLavaFluid.Source(ModFluids.SOUL_LAVA_PROPERTIES));
     public static final RegistryObject<FlowingFluid> SOUL_LAVA_FLOWING = FLUIDS.register("soul_lava_flowing",
             () -> new SoulLavaFluid.Flowing(ModFluids.SOUL_LAVA_PROPERTIES));

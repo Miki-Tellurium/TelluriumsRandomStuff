@@ -59,7 +59,7 @@ public class ModFluidTypes {
         }
     };
 
-    public static final RegistryObject<FluidType> SOUL_LAVA_FLUID_TYPE = registerFluidType("soul_lava_fluid", SOUL_LAVA_TYPE);
+    public static final RegistryObject<FluidType> SOUL_LAVA_FLUID_TYPE = registerFluidType("soul_lava", SOUL_LAVA_TYPE);
 
     public static RegistryObject<FluidType> registerFluidType(String name, FluidType fluidType) {
         return FLUID_TYPES.register(name, ()-> fluidType);

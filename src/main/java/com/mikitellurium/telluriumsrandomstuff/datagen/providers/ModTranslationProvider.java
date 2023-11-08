@@ -123,7 +123,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("blockentity.telluriumsrandomstuff.extractor", "Extractor");
         add("blockentity.telluriumsrandomstuff.soul_infuser", "Soul Infuser");
 
-        add("fluid_type.telluriumsrandomstuff.soul_lava_fluid", "Soul Lava");
+        add("fluid_type.telluriumsrandomstuff.soul_lava", "Soul Lava");
 
         add("enchantment.telluriumsrandomstuff.soul_harvesting", "Soul Harvesting");
 

@@ -96,7 +96,7 @@ public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMen
         List<Component> tooltip = new ArrayList<>();
         Fluid fluid = ModFluids.SOUL_LAVA_SOURCE.get();
 
-        Component displayName = Component.translatable("fluid_type.telluriumsrandomstuff.soul_lava_fluid");
+        Component displayName = Component.translatable("fluid_type.telluriumsrandomstuff.soul_lava");
         tooltip.add(displayName);
 
         if (this.getMinecraft().options.advancedItemTooltips) {
