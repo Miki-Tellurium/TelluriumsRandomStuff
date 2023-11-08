@@ -43,8 +43,6 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class GameplayCommonEvents {
 
-    private static final int spawnWithGooglesChance = 256;
-
     // Zombie rider
     @SubscribeEvent
     public static void onZombieSiegeSpawn(VillageSiegeEvent event) {
@@ -69,36 +67,6 @@ public class GameplayCommonEvents {
                 steed.setTamed(true);
                 rider.startRiding(steed);
                 level.addFreshEntityWithPassengers(steed);
-            }
-        }
-    }
-
-    // Lava googles
-    @SubscribeEvent
-    public static void onEntityHurt(LivingHurtEvent event) {
-        if (event.getEntity() instanceof Player player) {
-            ItemStack itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
-            if (itemStack.getItem() instanceof LavaGooglesItem) {
-                LavaGooglesItem.hurtGoogles(itemStack, player, event.getSource(), event.getAmount());
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
-        if (event.getLevel().isClientSide) {
-            return;
-        }
-        RandomSource random = event.getLevel().getRandom();
-        if (random.nextInt(spawnWithGooglesChance) == 0) {
-            Entity entity = event.getEntity();
-            if (entity instanceof Zombie || entity instanceof AbstractSkeleton || entity instanceof AbstractPiglin) {
-                ItemStack googles = new ItemStack(ModItems.LAVA_GOOGLES.get());
-                LavaGooglesItem.setRandomColor(googles, random);
-                if (random.nextFloat() < 0.40f) {
-                    EnchantmentHelper.enchantItem(random, googles, 10 + random.nextInt(20), true);
-                }
-                entity.setItemSlot(EquipmentSlot.HEAD, googles);
             }
         }
     }
