@@ -6,6 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauld
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
+import com.mikitellurium.telluriumsrandomstuff.setup.CommonSetup;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -30,6 +31,7 @@ public class TelluriumsRandomStuffMod {
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
 
+        CommonSetup.registerForgeBusEvents();
         Registries.init(modEventBus);
     }
 
