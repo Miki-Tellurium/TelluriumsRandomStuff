@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class LavaGooglesItem extends Item implements Equipable {
+public class LavaGooglesItem extends Item implements Equipable, Vanishable {
 
     public static final String tag_color = "color";
 
