@@ -17,6 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.item.Item;
@@ -121,20 +122,14 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
             }
     }
 
-    public static void soulLavaHurt(LivingEntity entity) {
-        if (!entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE)) {
-            if (!entity.fireImmune()) {
-
-                if (!entity.level().isRaining()) {
-                    entity.setSecondsOnFire(15);
-                } else {
-                    entity.extinguishFire();
-                }
-
-                if (entity.hurt(entity.damageSources().inFire(), 4.0F)) {
-                    entity.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + entity.getRandom().nextFloat() * 0.4F);
-                }
-
+    public static void hurt(Entity entity) {
+        if (!entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE) || !entity.fireImmune()) {
+            entity.setSecondsOnFire(15);
+            //entity.setSharedFlagOnFire(true);
+            // todo fire extinguished when touching water
+            if (entity.hurt(entity.damageSources().lava(), 4.0F)) {
+                entity.playSound(SoundEvents.GENERIC_BURN, 0.4F,
+                        2.0F + entity.level().getRandom().nextFloat() * 0.4F);
             }
         }
     }
