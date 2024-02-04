@@ -36,6 +36,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("item.telluriumsrandomstuff.soul_fragment", "Soul Fragment");
         add("item.telluriumsrandomstuff.soul_cluster", "Soul Cluster");
         add("item.telluriumsrandomstuff.soul_infuser_lit", "Soul Infuser");
+        add("item.telluriumsrandomstuff.grappling_hook", "Grappling Hook");
 
         add("item.description.telluriumsrandomstuff.mystic_potato", "What will this do?");
 
@@ -125,6 +126,8 @@ public class ModTranslationProvider extends LanguageProvider {
         add("blockentity.telluriumsrandomstuff.soul_infuser", "Soul Infuser");
 
         add("fluid_type.telluriumsrandomstuff.soul_lava", "Soul Lava");
+
+        add("entity.telluriumsrandomstuff.grappling_hook", "Grappling Hook");
 
         add("enchantment.telluriumsrandomstuff.soul_harvesting", "Soul Harvesting");
 

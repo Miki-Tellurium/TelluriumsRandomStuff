@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.MoltenAmethystItem;
 import net.minecraft.ChatFormatting;
@@ -135,6 +136,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> SOUL_INFUSER_LIT = ITEMS.register("soul_infuser_lit",
             () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> GRAPPLING_HOOK = ITEMS.register("grappling_hook", GrapplingHookItem::new);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
