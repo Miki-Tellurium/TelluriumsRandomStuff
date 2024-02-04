@@ -86,7 +86,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         entity.moveRelative(speed, vec3);
         entity.move(MoverType.SELF, entity.getDeltaMovement());
 
-        if (entity.getFluidTypeHeight(ModFluidTypes.SOUL_LAVA_TYPE) <= entity.getFluidJumpThreshold()) {
+        if (entity.getFluidTypeHeight(ModFluidTypes.SOUL_LAVA_FLUID_TYPE.get()) <= entity.getFluidJumpThreshold()) {
             entity.setDeltaMovement(entity.getDeltaMovement().multiply(0.5D, 0.8F, 0.5D));
             Vec3 fluidVec3 = entity.getFluidFallingAdjustedMovement(gravity, flag, entity.getDeltaMovement());
             entity.setDeltaMovement(fluidVec3);

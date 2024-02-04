@@ -95,7 +95,7 @@ public class RenderingEvents {
             Vec3 cameraPos = camera.getPosition().add(vec3);
             BlockPos blockpos = BlockPos.containing(cameraPos);
             FluidState fluidstate = blockGetter.getFluidState(blockpos);
-            if (fluidstate.getFluidType() == ModFluidTypes.SOUL_LAVA_TYPE) {
+            if (fluidstate.getFluidType() == ModFluidTypes.SOUL_LAVA_FLUID_TYPE.get()) {
                 if (cameraPos.y <= (double)(fluidstate.getHeight(blockGetter, blockpos) + (float)blockpos.getY())) {
                     return true;
                 }
