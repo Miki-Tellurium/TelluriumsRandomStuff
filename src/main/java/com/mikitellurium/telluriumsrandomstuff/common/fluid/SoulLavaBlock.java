@@ -34,14 +34,27 @@ public class SoulLavaBlock extends LiquidBlock {
     }
 
     @Override
-    public boolean isPathfindable(BlockState blockState, BlockGetter level, BlockPos pos, PathComputationType pathType) {
+    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
         return false;
     }
 
     @Override
-    public void entityInside(BlockState blockState, Level level, BlockPos pos, Entity entity) {
-            SoulLavaFluid.hurt(entity);
-            super.entityInside(blockState, level, pos, entity);
+    public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
+        if (pEntity instanceof ItemEntity) {
+
+            if (!pEntity.fireImmune()) {
+                pEntity.setRemainingFireTicks(pEntity.getRemainingFireTicks() + 1);
+                if (pEntity.getRemainingFireTicks() == 0) {
+                    pEntity.setSecondsOnFire(8);
+                }
+            }
+
+            pEntity.hurt(pLevel.damageSources().inFire(), 2.0f);
+            if (pEntity.wasOnFire) {
+                pEntity.playSound(SoundEvents.FIRE_EXTINGUISH, 0.5F, 2.6f);
+            }
+            super.entityInside(pState, pLevel, pPos, pEntity);
+        }
     }
 
 }
