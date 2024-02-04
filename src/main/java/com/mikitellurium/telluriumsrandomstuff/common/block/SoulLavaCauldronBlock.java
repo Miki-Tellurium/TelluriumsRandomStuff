@@ -40,12 +40,12 @@ public class SoulLavaCauldronBlock extends AbstractCauldronBlock {
         return true;
     }
 
-    @Override
+    @Override // todo fix lavahurt
     public void entityInside(BlockState blockState, Level level, BlockPos pos, Entity entity) {
         if (this.isEntityInsideContent(blockState, pos, entity) &&
                 !entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE)) {
             if (entity instanceof LivingEntity livingEntity) {
-                SoulLavaFluid.soulLavaHurt(livingEntity);
+                SoulLavaFluid.hurt(livingEntity);
             } else if (entity instanceof ItemEntity item) {
                 Optional<SoulLavaTransmutationRecipe> recipe = level.getRecipeManager().getRecipeFor(
                         SoulLavaTransmutationRecipe.Type.INSTANCE, new SimpleContainer(item.getItem()), level);

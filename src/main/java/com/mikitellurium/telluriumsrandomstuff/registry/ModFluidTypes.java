@@ -54,7 +54,6 @@ public class ModFluidTypes {
 
         @Override
         public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
-            SoulLavaFluid.soulLavaHurt(entity);
             return SoulLavaFluid.applyMovementLogic(entity, movementVector, gravity);
         }
     };
