@@ -1,28 +1,16 @@
 package com.mikitellurium.telluriumsrandomstuff.common.entity;
 
-import com.google.common.collect.Lists;
+import com.mikitellurium.telluriumsrandomstuff.common.networking.GrapplingHookManager;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -31,21 +19,20 @@ import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 
 public class GrapplingHookEntity extends Projectile {
 
     @Nullable
     private BlockState lastState;
-    protected boolean inGround;
+    protected boolean isStuck;
 
     public GrapplingHookEntity(EntityType<? extends Projectile> entityType, Level level) {
         super(entityType, level);
-        this.noCulling = true;
     }
 
     public GrapplingHookEntity(Player player, Level level) {
-        super(ModEntities.GRAPPLING_HOOK.get(), level);
+        this(ModEntities.GRAPPLING_HOOK.get(), level);
+        this.noCulling = true;
         this.setOwner(player);
         this.setPos(player.getX(), player.getEyeY(), player.getZ());
         this.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.0F, 1.0F);
@@ -53,12 +40,10 @@ public class GrapplingHookEntity extends Projectile {
 
     @Override
     protected void defineSynchedData() {
-
     }
 
     @Override
     public void tick() {
-        if (this.tickCount > 250) this.discard();
         super.tick();
         Vec3 vec3 = this.getDeltaMovement();
         if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
@@ -78,7 +63,7 @@ public class GrapplingHookEntity extends Projectile {
 
                 for(AABB aabb : voxelshape.toAabbs()) {
                     if (aabb.move(blockpos).contains(vec31)) {
-                        this.inGround = true;
+                        this.isStuck = true;
                         break;
                     }
                 }
@@ -89,7 +74,7 @@ public class GrapplingHookEntity extends Projectile {
             this.clearFire();
         }
 
-        if (this.inGround) {
+        if (this.isStuck) {
             if (this.lastState != blockstate && this.shouldFall()) {
                 this.startFalling();
             }
@@ -162,6 +147,10 @@ public class GrapplingHookEntity extends Projectile {
         }
     }
 
+    public void retrieve() {
+        this.discard();
+    }
+
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         this.lastState = this.level().getBlockState(pResult.getBlockPos());
@@ -170,7 +159,7 @@ public class GrapplingHookEntity extends Projectile {
         this.setDeltaMovement(vec3);
         Vec3 vec31 = vec3.normalize().scale(0.05F);
         this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
-        this.inGround = true;
+        this.isStuck = true;
     }
 
     @Override
@@ -184,11 +173,11 @@ public class GrapplingHookEntity extends Projectile {
     }
 
     private boolean shouldFall() {
-        return this.inGround && this.level().noCollision((new AABB(this.position(), this.position())).inflate(0.06D));
+        return this.isStuck && this.level().noCollision((new AABB(this.position(), this.position())).inflate(0.06D));
     }
 
     private void startFalling() {
-        this.inGround = false;
+        this.isStuck = false;
         Vec3 vec3 = this.getDeltaMovement();
         this.setDeltaMovement(vec3.multiply(this.random.nextFloat() * 0.2F, this.random.nextFloat() * 0.2F, this.random.nextFloat() * 0.2F));
     }
@@ -199,6 +188,15 @@ public class GrapplingHookEntity extends Projectile {
 
     protected EntityHitResult findHitEntity(Vec3 pStartVec, Vec3 pEndVec) {
         return ProjectileUtil.getEntityHitResult(this.level(), this, pStartVec, pEndVec, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), this::canHitEntity);
+    }
+
+    @Override
+    public void remove(RemovalReason reason) {
+        if (!this.level().isClientSide) {
+            GrapplingHookManager manager = GrapplingHookManager.get(this.level());
+            manager.removeHook(this.getPlayerOwner());
+        }
+        super.remove(reason);
     }
 
     @Override

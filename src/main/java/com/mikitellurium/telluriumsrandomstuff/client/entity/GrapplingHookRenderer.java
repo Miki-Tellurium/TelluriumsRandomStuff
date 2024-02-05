@@ -47,11 +47,6 @@ public class GrapplingHookRenderer extends EntityRenderer<GrapplingHookEntity> {
             vertex(vertexconsumer, matrix4f, matrix3f, packedLight, 0.0F, 1, 0, 0);
             poseStack.popPose();
             int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
-//            ItemStack itemstack = player.getMainHandItem();
-//            if (itemstack.canPerformAction(ToolActions.FISHING_ROD_CAST)) {
-//                i = -i;
-//            }
-
             float f = player.getAttackAnim(partialTicks);
             float f1 = Mth.sin(Mth.sqrt(f) * (float)Math.PI);
             float f2 = Mth.lerp(partialTicks, player.yBodyRotO, player.yBodyRot) * ((float)Math.PI / 180F);
@@ -63,7 +58,7 @@ public class GrapplingHookRenderer extends EntityRenderer<GrapplingHookEntity> {
             double d6;
             float f3;
             if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
-                double d7 = 960.0D / (double)this.entityRenderDispatcher.options.fov().get().intValue();
+                double d7 = 960.0D / (double) this.entityRenderDispatcher.options.fov().get();
                 Vec3 vec3 = this.entityRenderDispatcher.camera.getNearPlane().getPointOnPlane((float)i * 0.525F, -0.1F);
                 vec3 = vec3.scale(d7);
                 vec3 = vec3.yRot(f1 * 0.5F);
@@ -88,8 +83,10 @@ public class GrapplingHookRenderer extends EntityRenderer<GrapplingHookEntity> {
             VertexConsumer vertexconsumer1 = bufferSource.getBuffer(RenderType.lineStrip());
             PoseStack.Pose posestack$pose1 = poseStack.last();
 
-            for(int k = 0; k <= 16; ++k) {
-                stringVertex(f4, f5, f6, vertexconsumer1, posestack$pose1, fraction(k, 16), fraction(k + 1, 16));
+            final int segments = 16;
+            for(int k = 0; k <= segments; ++k) {
+                stringVertex(f4, f5, f6, vertexconsumer1, posestack$pose1,
+                        fraction(k, segments), fraction(k + 1, segments));
             }
 
             poseStack.popPose();
@@ -112,13 +109,13 @@ public class GrapplingHookRenderer extends EntityRenderer<GrapplingHookEntity> {
         float f1 = pY * (segmentStart * segmentStart + segmentStart) * 0.5F + 0.25F;
         float f2 = pZ * segmentStart;
         float f3 = pX * segmentEnd - f;
-        float f4 = pY * (segmentEnd * segmentEnd + segmentEnd) * 0.5F + 0.25F - f1;
+        float f4 = pY * (segmentEnd * segmentEnd + segmentEnd) * 0.5F + 0.0F - f1;
         float f5 = pZ * segmentEnd - f2;
         float f6 = Mth.sqrt(f3 * f3 + f4 * f4 + f5 * f5);
         f3 /= f6;
         f4 /= f6;
         f5 /= f6;
-        vertexConsumer.vertex(pose.pose(), f, f1, f2).color(0, 0, 0, 255).normal(pose.normal(), f3, f4, f5).endVertex();
+        vertexConsumer.vertex(pose.pose(), f, f1, f2).color(25, 25, 25, 255).normal(pose.normal(), f3, f4, f5).endVertex();
     }
 
     @Override
