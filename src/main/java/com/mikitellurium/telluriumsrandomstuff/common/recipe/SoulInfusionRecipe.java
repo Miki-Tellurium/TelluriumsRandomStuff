@@ -124,7 +124,7 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public @Nullable SoulInfusionRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            NonNullList<Ingredient> ingredients = NonNullList.create();
+            NonNullList<Ingredient> ingredients = NonNullList.withSize(2, Ingredient.EMPTY);
             ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buf));
             ItemStack output = buf.readItem();
             int recipeCost = buf.readInt();
