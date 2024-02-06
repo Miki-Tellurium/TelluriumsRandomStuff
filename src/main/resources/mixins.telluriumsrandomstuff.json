@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AllayMixin",
+    "EntityMixin",
     "LivingEntityMixin",
     "PointedDripstoneBlockMixin",
     "SoulSandBlockMixin",
@@ -12,7 +13,8 @@
     "ZombieHorseMixin"
   ],
   "client": [
-    "CustomHeadLayerMixin"
+    "CustomHeadLayerMixin",
+    "ScreenEffectRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
