@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -65,6 +66,17 @@ public class GrapplingHookItem extends Item implements Vanishable {
         if (!level.isClientSide) {
             Player player = event.getEntity();
             GrapplingHookManager.get(player.level()).ifHookPresent(player, GrapplingHookEntity::discard);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLogOut(EntityLeaveLevelEvent event) {
+        Entity entity = event.getEntity();
+        Level level = entity.level();
+        if (!level.isClientSide) {
+            if (entity instanceof Player player) {
+                GrapplingHookManager.get(player.level()).ifHookPresent(player, GrapplingHookEntity::discard);
+            }
         }
     }
 
