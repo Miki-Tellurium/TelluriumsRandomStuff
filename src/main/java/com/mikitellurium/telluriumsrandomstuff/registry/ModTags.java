@@ -17,7 +17,6 @@ public class ModTags {
         public static final TagKey<Block> BUBBLE_COLUMN_GENERATOR = create("bubble_column_generator");
         public static final TagKey<Block> BUBBLE_COLUMN_DRAG_DOWN = create("bubble_column_drag_down");
         public static final TagKey<Block> BUBBLE_COLUMN_LIFT_UP = create("bubble_column_lift_up");
-        //public static final TagKey<Block> SOUL_LAVA_CONVERTER = create("soul_lava_converter");
         public static final TagKey<Block> NEEDS_OPAL_CRYSTAL_TOOL = create("needs_opal_crystal_tools");
 
         public static TagKey<Block> create(String name) {
@@ -40,6 +39,7 @@ public class ModTags {
     public static class EntityTypes {
 
         public static TagKey<EntityType<?>> SOUL_LAVA_IMMUNE = create("soul_lava_immune");
+        public static TagKey<EntityType<?>> SOUL_FRAGMENT_DROP_BOSS = create("soul_fragment_drop_boss");
 
         public static TagKey<EntityType<?>> create(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, name));

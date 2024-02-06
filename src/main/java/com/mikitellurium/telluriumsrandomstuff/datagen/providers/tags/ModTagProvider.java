@@ -111,6 +111,10 @@ public class ModTagProvider {
             this.tag(ModTags.EntityTypes.SOUL_LAVA_IMMUNE)
                     .addTag(EntityTypeTags.SKELETONS)
                     .add(EntityType.SKELETON_HORSE);
+
+            this.tag(ModTags.EntityTypes.SOUL_FRAGMENT_DROP_BOSS)
+                    .addTag(Tags.EntityTypes.BOSSES)
+                    .add(EntityType.ELDER_GUARDIAN);
         }
     }
 
