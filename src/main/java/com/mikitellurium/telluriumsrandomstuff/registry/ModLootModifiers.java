@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.loot.EntityLootModifier;
 import com.mikitellurium.telluriumsrandomstuff.common.loot.LootChestModifier;
 import com.mojang.serialization.Codec;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
@@ -17,9 +16,6 @@ public class ModLootModifiers {
 
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> LOOT_CHEST_MODIFIER =
             LOOT_MODIFIER_SERIALIZERS.register("loot_chest_modifier", LootChestModifier.CODEC);
-
-    public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ENTITY_LOOT_MODIFIER =
-            LOOT_MODIFIER_SERIALIZERS.register("entity_loot_modifier", EntityLootModifier.CODEC);
 
     public static void register(IEventBus eventBus) {
         LOOT_MODIFIER_SERIALIZERS.register(eventBus);

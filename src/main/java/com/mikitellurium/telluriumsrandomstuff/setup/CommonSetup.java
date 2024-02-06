@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.setup;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.block.CustomBubbleColumnBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulAnchorBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,6 +17,7 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(SoulAnchorBlock.class);
         MinecraftForge.EVENT_BUS.register(LavaGooglesItem.class);
         MinecraftForge.EVENT_BUS.register(GrapplingHookItem.class);
+        MinecraftForge.EVENT_BUS.register(LootEvents.class);
     }
 
 }
