@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -92,6 +94,18 @@ public class ItemPedestalBlock extends BaseEntityBlock {
             }
         }
         super.onRemove(blockState, level, pos, newState, isMoving);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState blockState, HitResult target, BlockGetter level, BlockPos pos, Player player) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof ItemPedestalBlockEntity itemPedestal) {
+            if (!itemPedestal.isEmpty()) {
+                return Screen.hasShiftDown() ? blockState.getBlock().asItem().getDefaultInstance() : itemPedestal.getItem().copy();
+            }
+        }
+
+        return blockState.getBlock().asItem().getDefaultInstance();
     }
 
     @Override
