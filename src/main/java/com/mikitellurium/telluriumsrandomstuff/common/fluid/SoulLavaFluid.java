@@ -132,6 +132,13 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         }
     }
 
+    public static boolean isEntityInSoulLava(Entity entity) {
+        BlockState blockstate = entity.level().getBlockStatesIfLoaded(entity.getBoundingBox())
+                .filter((block) -> block.is(ModBlocks.SOUL_LAVA_BLOCK.get()))
+                .findFirst().orElse(null);
+        return blockstate != null;
+    }
+
     @Override
     protected void animateTick(Level pLevel, BlockPos pPos, FluidState pState, RandomSource pRandom) {
         BlockPos blockpos = pPos.above();
