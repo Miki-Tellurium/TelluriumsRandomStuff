@@ -80,7 +80,7 @@ repositories {
 }
 
 mixin {
-    add sourceSets.main, 'mixins.mymod.refmap.json'
+    add sourceSets.main, 'telluriumsrandomstuff.refmap.json'
     config 'mixins.telluriumsrandomstuff.json'
 }
 
