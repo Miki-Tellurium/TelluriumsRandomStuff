@@ -16,9 +16,11 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<GrapplingHookEntity>> GRAPPLING_HOOK = ENTITY_TYPES.register("grappling_hook",
             () -> EntityType.Builder.<GrapplingHookEntity>of(GrapplingHookEntity::new, MobCategory.MISC)
-                    .sized(0.5F, 0.5F)
+                    .noSave()
+                    .noSummon()
+                    .sized(0.25F, 0.25F)
                     .clientTrackingRange(4)
-                    .updateInterval(10)
+                    .updateInterval(5)
                     .build("grappling_hook"));
 
     public static void register(IEventBus eventBus) {
