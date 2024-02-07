@@ -18,7 +18,7 @@ public class ModEntities {
             () -> EntityType.Builder.<GrapplingHookEntity>of(GrapplingHookEntity::new, MobCategory.MISC)
                     .noSave()
                     .noSummon()
-                    .sized(0.25F, 0.25F)
+                    .sized(0.4F, 0.4F)
                     .clientTrackingRange(4)
                     .updateInterval(5)
                     .build("grappling_hook"));
