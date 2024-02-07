@@ -40,13 +40,10 @@ public class SoulLavaCauldronBlock extends AbstractCauldronBlock {
         return true;
     }
 
-    @Override // todo fix lavahurt
+    @Override
     public void entityInside(BlockState blockState, Level level, BlockPos pos, Entity entity) {
-        if (this.isEntityInsideContent(blockState, pos, entity) &&
-                !entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE)) {
-            if (entity instanceof LivingEntity livingEntity) {
-                SoulLavaFluid.hurt(livingEntity);
-            } else if (entity instanceof ItemEntity item) {
+        if (this.isEntityInsideContent(blockState, pos, entity)) {
+            if (entity instanceof ItemEntity item) {
                 Optional<SoulLavaTransmutationRecipe> recipe = level.getRecipeManager().getRecipeFor(
                         SoulLavaTransmutationRecipe.Type.INSTANCE, new SimpleContainer(item.getItem()), level);
                 if (recipe.isPresent()) {
@@ -54,10 +51,10 @@ public class SoulLavaCauldronBlock extends AbstractCauldronBlock {
                     level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(blockState));
                     level.playSound(null, pos, SoundEvents.SOUL_ESCAPE, SoundSource.BLOCKS, 1.0f, 1.2f);
                     this.convertItem(level, item, recipe.get().assemble(new SimpleContainer(item.getItem()), level.registryAccess()));
-                } else {
-                    entity.lavaHurt();
+                    return;
                 }
             }
+            SoulLavaFluid.hurt(entity);
         }
     }
 
@@ -65,8 +62,8 @@ public class SoulLavaCauldronBlock extends AbstractCauldronBlock {
         output.setCount(entity.getItem().getCount());
         ItemEntity result = new ItemEntity(level, entity.getX(), entity.getY() - 0.4D, entity.getZ(), output);
         entity.remove(Entity.RemovalReason.DISCARDED);
-        level.addFreshEntity(result);
         result.getDeltaMovement().add(0.0D, 0.02D, 0.0D);
+        level.addFreshEntity(result);
     }
 
     @Override
@@ -75,8 +72,7 @@ public class SoulLavaCauldronBlock extends AbstractCauldronBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState blockState, HitResult target, BlockGetter level, BlockPos pos,
-                                       Player player) {
+    public ItemStack getCloneItemStack(BlockState blockState, HitResult target, BlockGetter level, BlockPos pos, Player player) {
         return Items.CAULDRON.getDefaultInstance();
     }
 
