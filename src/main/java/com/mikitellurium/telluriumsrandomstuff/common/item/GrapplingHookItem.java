@@ -73,7 +73,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
     public static void onPlayerLogOut(EntityLeaveLevelEvent event) {
         Entity entity = event.getEntity();
         Level level = entity.level();
-        if (!level.isClientSide) {
+        if (!level.isClientSide && !level.getServer().isSingleplayer()) {
             if (entity instanceof Player player) {
                 GrapplingHookManager.get(player.level()).ifHookPresent(player, GrapplingHookEntity::discard);
             }
