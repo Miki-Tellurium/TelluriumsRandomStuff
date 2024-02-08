@@ -13,11 +13,14 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
@@ -187,38 +190,69 @@ public class GrapplingHookEntity extends Projectile {
         }
     }
 
-    public void retrieve() {
-        if (this.isHookedOnEntity()) {
-            this.pullEntity(this.hookedEntity);
+    public void retrieve(boolean isCrouching) {
+        if (!isCrouching) {
+            if (this.isHookedOnEntity()) {
+                this.pullEntity();
+            } else if (this.isStuckInBlock()) {
+                this.launchOwner();
+            } else {
+                this.playSound(this.getPlayerOwner(), SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
+            }
+        } else {
+            this.playSound(this.getPlayerOwner(), SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
         }
         this.discard();
     }
 
-    private void pullEntity(Entity entity) {
+    private void pullEntity() {
+        Entity entity = this.hookedEntity;
         Entity owner = this.getOwner();
         if (owner != null) {
             double vecX = owner.getX() - this.getX();
             double vecY = owner.getY() - this.getY();
             double vecZ = owner.getZ() - this.getZ();
-            Vec3 vec3;
-            if (entity instanceof ItemEntity) {
-                vec3 = new Vec3(vecX * 0.1D, vecY * 0.1D +
-                        Math.sqrt(Math.sqrt(vecX * vecX + vecY * vecY + vecZ * vecZ)) * 0.08D, vecZ * 0.1D);
-            } else {
-                vec3 = new Vec3(vecX, vecY, vecZ).scale(0.18D);
-            }
+            double angle = Math.sqrt(Math.sqrt(vecX * vecX + vecY * vecY + vecZ * vecZ)) * 0.08D;
+            double scale = entity instanceof ItemEntity ? 0.1D : 0.2D;
+            Vec3 vec3 = new Vec3(vecX * scale, vecY * 0.1D + angle, vecZ * scale);
             entity.setDeltaMovement(vec3);
+            this.playSound(owner, SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
         }
     }
 
+    private void launchOwner() {
+        Player player = this.getPlayerOwner();
+        Vec3 playerPos = player.getEyePosition();
+        Vec3 vec3 = this.position().subtract(playerPos);
+        Vec3 normal = vec3.normalize();
+
+        double lenghtMul = Math.sqrt(vec3.length()) * 0.125D;
+        double launchFactor = 6.0D * lenghtMul;
+        double horizontalFactor = launchFactor * 1.2D;
+        double verticalFactor = launchFactor * 0.75D;
+
+        double x = normal.x * horizontalFactor;
+        double y = normal.y * verticalFactor + lenghtMul;
+        double z = normal.z * horizontalFactor;
+        Vec3 newVec = new Vec3(x, y, z);
+        if (player.isUnderWater()) {
+            newVec = newVec.scale(0.6D);
+        }
+        player.setDeltaMovement(player.getDeltaMovement().add(newVec));
+        this.playSound(player, SoundEvents.TRIDENT_RIPTIDE_1, 1.0F, 0.9F / (this.random.nextFloat() * 0.2F + 0.8F), true);
+        player.hasImpulse = true;
+        player.hurtMarked = true;
+    }
+
     @Override
-    protected void onHitBlock(BlockHitResult pResult) {
-        this.lastState = this.level().getBlockState(pResult.getBlockPos());
-        super.onHitBlock(pResult);
-        Vec3 vec3 = pResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());
+    protected void onHitBlock(BlockHitResult result) {
+        this.lastState = this.level().getBlockState(result.getBlockPos());
+        super.onHitBlock(result);
+        Vec3 vec3 = result.getLocation().subtract(this.getX(), this.getY(), this.getZ());
         this.setDeltaMovement(vec3);
         Vec3 vec31 = vec3.normalize().scale(0.05F);
         this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
+        this.playSound(this, SoundEvents.ARROW_HIT, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F), false);
         this.currentState = HookState.STUCK_ON_BLOCK;
     }
 
@@ -286,8 +320,18 @@ public class GrapplingHookEntity extends Projectile {
         super.remove(reason);
     }
 
+    @Override
     protected boolean canHitEntity(Entity entity) {
         return super.canHitEntity(entity) || entity.isAlive() && entity instanceof ItemEntity;
+    }
+
+    protected void playSound(@Nullable Entity source, SoundEvent sound, float volume, float pitch, boolean global) {
+        if (global) {
+            this.level().playSound(null, source, sound, SoundSource.PLAYERS, volume, pitch);
+        } else {
+            this.level().playSound(null, source.getX(), source.getY(), source.getZ(), sound,
+                    SoundSource.PLAYERS, volume, pitch);
+        }
     }
 
     @Override

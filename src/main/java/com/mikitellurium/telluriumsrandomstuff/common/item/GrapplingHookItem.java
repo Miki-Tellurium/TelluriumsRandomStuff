@@ -2,6 +2,9 @@ package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.GrapplingHookManager;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -28,11 +31,12 @@ public class GrapplingHookItem extends Item implements Vanishable {
         if (!level.isClientSide) {
             GrapplingHookManager manager = GrapplingHookManager.get(level);
             if (manager.isHookPresent(player)) {
-                manager.getHook(player).retrieve();
+                manager.getHook(player).retrieve(player.isCrouching());
             } else {
                 GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level);
                 manager.insertHook(player, grapplingHook);
                 level.addFreshEntity(grapplingHook);
+                level.playSound(null, grapplingHook, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
         }
 
@@ -73,7 +77,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
     public static void onPlayerLogOut(EntityLeaveLevelEvent event) {
         Entity entity = event.getEntity();
         Level level = entity.level();
-        if (!level.isClientSide && !level.getServer().isSingleplayer()) {
+        if (!level.isClientSide) {
             if (entity instanceof Player player) {
                 GrapplingHookManager.get(player.level()).ifHookPresent(player, GrapplingHookEntity::discard);
             }
