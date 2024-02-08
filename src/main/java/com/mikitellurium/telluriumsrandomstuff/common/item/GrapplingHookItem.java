@@ -11,7 +11,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Vanishable;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -22,7 +25,8 @@ public class GrapplingHookItem extends Item implements Vanishable {
 
     public GrapplingHookItem() {
         super(new Item.Properties()
-                .stacksTo(1));
+                .stacksTo(1)
+                .defaultDurability(256));
     }
 
     @Override
@@ -31,7 +35,8 @@ public class GrapplingHookItem extends Item implements Vanishable {
         if (!level.isClientSide) {
             GrapplingHookManager manager = GrapplingHookManager.get(level);
             if (manager.isHookPresent(player)) {
-                manager.getHook(player).retrieve(player.isCrouching());
+                int damage = manager.getHook(player).retrieve(player.isCrouching());
+                itemstack.hurtAndBreak(damage, player, (p) -> p.broadcastBreakEvent(hand));
             } else {
                 GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level);
                 manager.insertHook(player, grapplingHook);
@@ -50,6 +55,18 @@ public class GrapplingHookItem extends Item implements Vanishable {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repairStack) {
+        return repairStack.is(Items.IRON_INGOT); // todo change
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment.equals(Enchantments.VANISHING_CURSE) ||
+                enchantment.equals(Enchantments.UNBREAKING) ||
+                enchantment.equals(Enchantments.MENDING);
     }
 
     /* Events */
