@@ -190,12 +190,15 @@ public class GrapplingHookEntity extends Projectile {
         }
     }
 
-    public void retrieve(boolean isCrouching) {
+    public int retrieve(boolean isCrouching) {
+        int damage = 1;
         if (!isCrouching) {
             if (this.isHookedOnEntity()) {
                 this.pullEntity();
+                damage = 2;
             } else if (this.isStuckInBlock()) {
                 this.launchOwner();
+                damage = 2;
             } else {
                 this.playSound(this.getPlayerOwner(), SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
             }
@@ -203,6 +206,7 @@ public class GrapplingHookEntity extends Projectile {
             this.playSound(this.getPlayerOwner(), SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
         }
         this.discard();
+        return damage;
     }
 
     private void pullEntity() {
