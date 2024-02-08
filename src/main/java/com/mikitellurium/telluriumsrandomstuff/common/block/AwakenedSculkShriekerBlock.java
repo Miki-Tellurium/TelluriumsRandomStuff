@@ -98,11 +98,11 @@ public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
     public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter level,
                                 List<Component> components, TooltipFlag flag) {
         Component shift = Component.literal(" <Shift>").withStyle(ChatFormatting.WHITE);
-        Component warning = Component.translatable("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning")
+        Component warning = Component.translatable("block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.warning")
                 .withStyle((style) -> style.withColor(orange)).append(shift);
         components.add(warning);
         if (Screen.hasShiftDown()) {
-            components.add(Component.translatable("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.message")
+            components.add(Component.translatable("block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.message")
                     .withStyle((style) -> style.withColor(Color.ORANGE.getRGB())));
         }
     }

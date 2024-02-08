@@ -38,7 +38,8 @@ public class ModTranslationProvider extends LanguageProvider {
         add("item.telluriumsrandomstuff.soul_infuser_lit", "Soul Infuser");
         add("item.telluriumsrandomstuff.grappling_hook", "Grappling Hook");
 
-        add("item.description.telluriumsrandomstuff.mystic_potato", "What will this do?");
+        add("item.telluriumsrandomstuff.lava_googles.tooltip.color", "Color");
+        add("item.telluriumsrandomstuff.mystic_potato.tooltip", "What will this do?");
 
         add("block.telluriumsrandomstuff.grate_magma_block", "Magma Block with Grate");
         add("block.telluriumsrandomstuff.grate_soul_sand", "Soul Sand with Grate");
@@ -114,10 +115,8 @@ public class ModTranslationProvider extends LanguageProvider {
         add("block.telluriumsrandomstuff.soul_infuser", "Soul Infuser");
         add("block.telluriumsrandomstuff.soul_lava_cauldron", "Soul Lava Cauldron");
 
-        add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.warning",
-                "Warning!");
-        add("block.description.telluriumsrandomstuff.awakened_sculk_shrieker.message",
-                "This can spawn a Warden anywhere. Use with caution.");
+        add("block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.warning", "Warning!");
+        add("block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.message", "This can spawn a Warden anywhere. Use with caution.");
 
         add("blockentity.telluriumsrandomstuff.soul_furnace", "Soul Furnace");
         add("blockentity.telluriumsrandomstuff.soul_anchor", "Soul Anchor");

@@ -76,7 +76,8 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
         if (dyeColor != null) {
             MutableComponent colorString = Component.literal(dyeColor.getName())
                     .withStyle((style -> style.withColor(dyeColor.getTextColor())));
-            components.add(Component.literal("Color: ").append(colorString));
+            components.add(Component.translatable("item.telluriumsrandomstuff.lava_googles.tooltip.color")
+                    .append(": ").append(colorString));
         }
     }
 

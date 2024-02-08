@@ -37,7 +37,7 @@ public class ModItems {
                 @Override
                 public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
                     if (Screen.hasShiftDown()) {
-                        components.add(Component.translatable("item.description.telluriumsrandomstuff.mystic_potato")
+                        components.add(Component.translatable("item.telluriumsrandomstuff.mystic_potato.tooltip")
                                 .withStyle(ChatFormatting.DARK_AQUA));
                     } else {
                         components.add(Component.literal("<Shift>"));
