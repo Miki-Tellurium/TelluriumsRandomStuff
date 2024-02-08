@@ -22,6 +22,10 @@ import org.slf4j.Logger;
 @Mod(TelluriumsRandomStuffMod.MOD_ID)
 public class TelluriumsRandomStuffMod {
 
+    // todo rei and mei compatibility
+    // todo colored soul fragments
+    // todo update changelog
+
     public static final String MOD_ID = "telluriumsrandomstuff";
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -43,6 +47,8 @@ public class TelluriumsRandomStuffMod {
         ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.SOUL_TORCHFLOWER.getId(), ModBlocks.POTTED_SOUL_TORCHFLOWER);
     }
 
+
+    // todo move command registration
     @SubscribeEvent
     public void registerCommands(RegisterCommandsEvent event){
         SoulAnchorCommand.register(event.getDispatcher());

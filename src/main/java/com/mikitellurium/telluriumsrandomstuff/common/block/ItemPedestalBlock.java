@@ -33,7 +33,7 @@ public class ItemPedestalBlock extends BaseEntityBlock {
     public ItemPedestalBlock(Properties properties) {
         super(properties.noOcclusion());
     }
-
+ // todo test pathfinding of mobs
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
         return PEDESTAL_SHAPE;

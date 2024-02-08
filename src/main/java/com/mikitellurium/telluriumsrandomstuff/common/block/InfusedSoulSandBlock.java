@@ -47,7 +47,7 @@ public class InfusedSoulSandBlock extends SoulSandBlock {
     public void tick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
         CustomBubbleColumnBlock.updateColumn(level, pos.above(), blockState);
     }
-
+ // todo move cauldron find methods here
     @Override
     public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
         if (level.getFluidState(pos.above()).is(Fluids.LAVA)) {
