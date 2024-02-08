@@ -56,11 +56,6 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
     }
 
     @Override
-    public int getEnchantmentValue() {
-        return 12;
-    }
-
-    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return enchantment.equals(Enchantments.VANISHING_CURSE) ||
                 enchantment.equals(Enchantments.BINDING_CURSE) ||
