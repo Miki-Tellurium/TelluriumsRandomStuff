@@ -52,11 +52,11 @@ public class GrapplingHookEntity extends Projectile {
         this.noCulling = true;
     }
 
-    public GrapplingHookEntity(Player player, Level level) {
+    public GrapplingHookEntity(Player player, Level level, float launchSpeed) {
         this(ModEntities.GRAPPLING_HOOK.get(), level);
         this.setOwner(player);
         this.setPos(player.getX(), player.getEyeY(), player.getZ());
-        this.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.0F, 1.0F);
+        this.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.0F * launchSpeed, 1.0F);
     }
 
     @Override

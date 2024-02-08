@@ -2,17 +2,16 @@ package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.GrapplingHookManager;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Vanishable;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -38,14 +37,36 @@ public class GrapplingHookItem extends Item implements Vanishable {
                 int damage = manager.getHook(player).retrieve(player.isCrouching());
                 itemstack.hurtAndBreak(damage, player, (p) -> p.broadcastBreakEvent(hand));
             } else {
-                GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level);
-                manager.insertHook(player, grapplingHook);
-                level.addFreshEntity(grapplingHook);
-                level.playSound(null, grapplingHook, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
+                player.startUsingItem(hand);
+                return InteractionResultHolder.consume(itemstack);
             }
         }
 
         return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+    }
+
+    @Override
+    public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int timeCharged) {
+        if (!level.isClientSide && livingEntity instanceof Player player) {
+            int timeUsed = this.getUseDuration(itemStack) - timeCharged;
+            float launchStrength = BowItem.getPowerForTime(timeUsed);
+            if (launchStrength < 0.1D) return;
+            GrapplingHookManager manager = GrapplingHookManager.get(level);
+            GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level, launchStrength);
+            manager.insertHook(player, grapplingHook);
+            level.addFreshEntity(grapplingHook);
+            level.playSound(null, grapplingHook, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
+    }
+
+    @Override
+    public int getUseDuration(ItemStack itemStack) {
+        return 200;
+    }
+
+    @Override
+    public boolean useOnRelease(ItemStack itemStack) {
+        return itemStack.is(this);
     }
 
     @Override
