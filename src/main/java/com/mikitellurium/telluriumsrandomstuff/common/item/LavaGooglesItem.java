@@ -47,7 +47,7 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
         return this.swapWithEquipmentSlot(this, level, player, hand);
     }
 
-    public static void hurtGoogles(ItemStack googles, Player player, DamageSource source, float damage) {
+    public void hurtGoogles(ItemStack googles, Player player, DamageSource source, float damage) {
         if (!source.is(DamageTypeTags.IS_FIRE) && googles.getItem() instanceof LavaGooglesItem) {
             googles.hurtAndBreak((int)damage, player, (player1) -> {
                 player1.broadcastBreakEvent(EquipmentSlot.HEAD);
@@ -106,8 +106,8 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
     public static void onEntityHurt(LivingHurtEvent event) {
         if (event.getEntity() instanceof Player player) {
             ItemStack itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
-            if (itemStack.getItem() instanceof LavaGooglesItem) {
-                LavaGooglesItem.hurtGoogles(itemStack, player, event.getSource(), event.getAmount());
+            if (itemStack.getItem() instanceof LavaGooglesItem googles) {
+                googles.hurtGoogles(itemStack, player, event.getSource(), event.getAmount());
             }
         }
     }
