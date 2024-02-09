@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class SoulAnchorCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
 
-    public static Capability<SoulAnchorCapability> SOUL_ANCHOR_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
+    public static Capability<SoulAnchorCapability> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {});
 
     private SoulAnchorCapability soulAnchorCapability = null;
     private final LazyOptional<SoulAnchorCapability> optional = LazyOptional.of(this::createSoulAnchorCapability);
@@ -28,7 +28,7 @@ public class SoulAnchorCapabilityProvider implements ICapabilityProvider, INBTSe
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == SOUL_ANCHOR_CAPABILITY) {
+        if (cap == INSTANCE) {
             return optional.cast();
         }
 

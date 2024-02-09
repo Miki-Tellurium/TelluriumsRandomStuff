@@ -52,7 +52,7 @@ public class SoulAnchorCommand {
         }
 
         for (ServerPlayer player : players) {
-            player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY)
+            player.getCapability(SoulAnchorCapabilityProvider.INSTANCE)
                     .ifPresent((SoulAnchorCapability::clearInventory));
         }
         source.sendSuccess(() -> Component.literal("Cleared saved inventory for " + players.iterator().next().getScoreboardName()),
@@ -67,7 +67,7 @@ public class SoulAnchorCommand {
         }
 
         for (ServerPlayer player : players) {
-            player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY)
+            player.getCapability(SoulAnchorCapabilityProvider.INSTANCE)
                     .ifPresent((soulAnchorCapability -> soulAnchorCapability.setChargedAnchor(b)));
         }
         source.sendSuccess(() -> Component.literal("Set hasChargedAnchor to " + b + " for " +
@@ -82,7 +82,7 @@ public class SoulAnchorCommand {
         }
 
         for (ServerPlayer player : players) {
-            player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY)
+            player.getCapability(SoulAnchorCapabilityProvider.INSTANCE)
                     .ifPresent((soulAnchorCapability -> soulAnchorCapability.setCanRecoverInventory(b)));
         }
         source.sendSuccess(() -> Component.literal("Set canRecoverInventory to " + b + " for " +

@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class GrapplingHookCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
 
-    public static Capability<GrapplingHookCapability> GRAPPLING_HOOK_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
+    public static Capability<GrapplingHookCapability> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {});
 
     private GrapplingHookCapability grapplingHookCapability = null;
     private final LazyOptional<GrapplingHookCapability> optional = LazyOptional.of(this::createGrapplingHookCapability);
@@ -28,7 +28,7 @@ public class GrapplingHookCapabilityProvider implements ICapabilityProvider, INB
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == GRAPPLING_HOOK_CAPABILITY) {
+        if (cap == INSTANCE) {
             return optional.cast();
         }
 

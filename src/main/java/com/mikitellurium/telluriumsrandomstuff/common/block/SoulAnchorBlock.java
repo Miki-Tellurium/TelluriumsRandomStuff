@@ -5,7 +5,6 @@ import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulAnchorBloc
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorLevelData;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,7 +14,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -72,7 +70,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                 // If the player use a totem of undying on uncharged anchor
                 if (player.getItemInHand(interactionHand).is(Items.TOTEM_OF_UNDYING)) {
                     if (blockEntity instanceof SoulAnchorBlockEntity soulAnchorBlockEntity) {
-                        player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+                        player.getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent((soulAnchor) -> {
                             if (!soulAnchor.hasChargedAnchor()) {
                                 soulAnchor.charge(player, level, pos, blockState);
                                 soulAnchorBlockEntity.setCachedPlayer(player.getUUID());
@@ -92,7 +90,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                 }
             } else {
                 if (blockEntity instanceof SoulAnchorBlockEntity soulAnchorBlockEntity && player instanceof ServerPlayer) {
-                    player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+                    player.getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent((soulAnchor) -> {
                             if (soulAnchor.hasSavedInventory() && soulAnchor.canRecoverInventory() &&
                             player.getUUID().equals(soulAnchorBlockEntity.getCachedPlayer())) {
                                 // Fill the soul anchor with the saved inventory then clear it
@@ -129,13 +127,13 @@ public class SoulAnchorBlock extends BaseEntityBlock {
                     Player savedPlayer = level.getPlayerByUUID(soulAnchorBlockEntity.getCachedPlayer());
                     if (savedPlayer == player) { // If the owner broke the soul anchor
                         System.out.println("Same player");
-                        player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+                        player.getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent((soulAnchor) -> {
                             soulAnchor.setChargedAnchor(false);
                             soulAnchor.clearInventory();
                         });
                     } else if (savedPlayer != null) { // If a different player broke the soul anchor
                         System.out.println("Diff player");
-                        savedPlayer.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+                        savedPlayer.getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent((soulAnchor) -> {
                             soulAnchor.setChargedAnchor(false);
                             soulAnchor.clearInventory();
                         });
@@ -195,7 +193,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
             return;
         }
         if (event.getEntity() instanceof Player player) {
-            player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+            player.getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent((soulAnchor) -> {
                 if (soulAnchor.hasChargedAnchor()) {
                     soulAnchor.saveInventory(player.getInventory());
                     soulAnchor.setCanRecoverInventory(true);
@@ -213,7 +211,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
             return;
         }
         if (event.getEntity() instanceof Player player) {
-            player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+            player.getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent((soulAnchor) -> {
                 if (soulAnchor.hasChargedAnchor()) {
                     event.setCanceled(true);
                 }
@@ -224,8 +222,8 @@ public class SoulAnchorBlock extends BaseEntityBlock {
     @SubscribeEvent
     public static void onAttachPlayerCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
-            if (!player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).isPresent()) {
-                event.addCapability(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "properties"),
+            if (!player.getCapability(SoulAnchorCapabilityProvider.INSTANCE).isPresent()) {
+                event.addCapability(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_anchor"),
                         new SoulAnchorCapabilityProvider());
             }
         }
@@ -238,8 +236,8 @@ public class SoulAnchorBlock extends BaseEntityBlock {
         }
         if (event.isWasDeath()) {
             event.getOriginal().reviveCaps();
-            event.getOriginal().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent(
-                    (old) -> event.getEntity().getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent(
+            event.getOriginal().getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent(
+                    (old) -> event.getEntity().getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent(
                             (newClone) -> newClone.copyFrom(old)));
             event.getOriginal().invalidateCaps();
         }
@@ -257,7 +255,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
 
         if (event.getEntity() instanceof Player player) {
             if (SoulAnchorLevelData.get(event.getLevel()).removePlayer(player)) {
-                player.getCapability(SoulAnchorCapabilityProvider.SOUL_ANCHOR_CAPABILITY).ifPresent((soulAnchor) -> {
+                player.getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent((soulAnchor) -> {
                     soulAnchor.setChargedAnchor(false);
                     soulAnchor.clearInventory();
                 });
