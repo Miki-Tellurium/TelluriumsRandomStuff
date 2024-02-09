@@ -9,6 +9,7 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.Registries;
 import com.mikitellurium.telluriumsrandomstuff.setup.CommonSetup;
 import com.mojang.logging.LogUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
@@ -56,6 +57,10 @@ public class TelluriumsRandomStuffMod {
     public void registerCommands(RegisterCommandsEvent event){
         SoulAnchorCommand.register(event.getDispatcher());
         LavaGooglesCommand.register(event.getDispatcher());
+    }
+
+    public static ResourceLocation modLoc(String id) {
+        return new ResourceLocation(MOD_ID, id);
     }
 
 }
