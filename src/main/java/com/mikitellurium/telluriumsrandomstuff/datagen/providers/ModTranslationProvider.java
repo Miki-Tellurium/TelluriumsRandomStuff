@@ -37,6 +37,7 @@ public class ModTranslationProvider extends LanguageProvider {
         add("item.telluriumsrandomstuff.soul_cluster", "Soul Cluster");
         add("item.telluriumsrandomstuff.soul_infuser_lit", "Soul Infuser");
         add("item.telluriumsrandomstuff.grappling_hook", "Grappling Hook");
+        add("item.telluriumsrandomstuff.soul_infused_iron_ingot", "Soul Infused Iron Ingot");
 
         add("item.telluriumsrandomstuff.lava_googles.tooltip.color", "Color");
         add("item.telluriumsrandomstuff.mystic_potato.tooltip", "What will this do?");

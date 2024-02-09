@@ -132,6 +132,7 @@ public class ModCreativeTab {
                 event.accept(ModItems.SOUL_FRAGMENT);
                 event.accept(ModItems.SOUL_CLUSTER);
                 event.accept(ModBlocks.INFUSED_SOUL_SAND);
+                event.accept(ModItems.SOUL_INFUSED_IRON_INGOT);
                 event.accept(ModItems.GRAPPLING_HOOK);
             }
         }

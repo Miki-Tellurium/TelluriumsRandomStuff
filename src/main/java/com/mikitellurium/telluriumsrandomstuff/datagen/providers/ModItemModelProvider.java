@@ -49,6 +49,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
         this.withExistingParent(ModItems.GRAPPLING_HOOK.getId().getPath(), mcLoc("item/generated"))
                 .texture("layer0", mcLoc("item/fishing_rod"));
+        this.simpleItem(ModItems.SOUL_INFUSED_IRON_INGOT);
     }
 
     private void simpleItem(RegistryObject<Item> item) {

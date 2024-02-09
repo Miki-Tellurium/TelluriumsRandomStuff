@@ -139,6 +139,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> GRAPPLING_HOOK = ITEMS.register("grappling_hook", GrapplingHookItem::new);
 
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_INGOT = ITEMS.register("soul_infused_iron_ingot",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

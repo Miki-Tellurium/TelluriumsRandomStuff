@@ -80,6 +80,9 @@ public class ModRecipeProvider extends RecipeProvider {
         SoulInfusionRecipeBuilder.addRecipe(Ingredient.of(Blocks.SAND), Ingredient.of(ModItems.SMALL_SOUL_FRAGMENT.get()),
                         Blocks.SOUL_SAND, 50)
                 .save(consumer, modLoc("soul_sand_from_soul_infusion"));
+        SoulInfusionRecipeBuilder.addRecipe(Ingredient.of(Items.IRON_INGOT), Ingredient.of(ModItems.SOUL_FRAGMENT.get()),
+                        ModItems.SOUL_INFUSED_IRON_INGOT.get(), 100)
+                .save(consumer, modLoc("soul_infused_iron_ingot_from_soul_infusion"));
     }
 
     private void buildSoulLavaTransmutationRecipe(Consumer<FinishedRecipe> consumer) {
