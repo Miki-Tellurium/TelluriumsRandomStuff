@@ -1,11 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff;
 
-import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
-import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
+import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.registry.Registries;
 import com.mikitellurium.telluriumsrandomstuff.setup.CommonSetup;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.Blocks;
@@ -47,7 +48,6 @@ public class TelluriumsRandomStuffMod {
         ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.BRIGHT_TORCHFLOWER.getId(), ModBlocks.POTTED_BRIGHT_TORCHFLOWER);
         ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.SOUL_TORCHFLOWER.getId(), ModBlocks.POTTED_SOUL_TORCHFLOWER);
     }
-
 
     // todo move command registration
     @SubscribeEvent
