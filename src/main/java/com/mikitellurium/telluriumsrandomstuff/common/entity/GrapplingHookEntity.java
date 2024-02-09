@@ -1,9 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.common.entity;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.GrapplingHookManager;
+import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -13,18 +12,16 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.ClipContext;
@@ -220,6 +217,9 @@ public class GrapplingHookEntity extends Projectile {
             double scale = entity instanceof ItemEntity ? 0.1D : 0.2D;
             Vec3 vec3 = new Vec3(vecX * scale, vecY * 0.1D + angle, vecZ * scale);
             entity.setDeltaMovement(vec3);
+            if (entity instanceof Player) {
+                entity.hurtMarked = true;
+            }
             this.playSound(owner, SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
         }
     }
@@ -263,12 +263,14 @@ public class GrapplingHookEntity extends Projectile {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        Entity entity = result.getEntity();
+        Entity hitEntity = result.getEntity();
         Player player = this.getPlayerOwner();
         if (!this.level().isClientSide) {
-            if (entity.hurt(this.damageSources().playerAttack(player), 0)) {
-                if (entity instanceof EnderMan) return;
-                this.setHookedEntity(entity);
+            if (hitEntity instanceof Player) {
+                this.setHookedEntity(hitEntity);
+            } else if (hitEntity.hurt(this.damageSources().playerAttack(player), 0)) {
+                if (hitEntity instanceof EnderMan) return;
+                this.setHookedEntity(hitEntity);
             }
         }
     }
@@ -318,8 +320,9 @@ public class GrapplingHookEntity extends Projectile {
     @Override
     public void remove(RemovalReason reason) {
         if (!this.level().isClientSide) {
-            GrapplingHookManager manager = GrapplingHookManager.get(this.level());
-            manager.removeHook(this.getPlayerOwner());
+            this.getPlayerOwner().getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
+                hook.ifPresent((ServerLevel)this.level(), (entity) -> hook.remove());
+            });
         }
         super.remove(reason);
     }
