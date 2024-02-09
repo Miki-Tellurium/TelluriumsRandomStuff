@@ -42,11 +42,13 @@ public class TelluriumsRandomStuffMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        ModFluidInteractions.register();
-        ModCauldronInteractions.register();
-        ModDispenserBehaviours.register();
-        ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.BRIGHT_TORCHFLOWER.getId(), ModBlocks.POTTED_BRIGHT_TORCHFLOWER);
-        ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.SOUL_TORCHFLOWER.getId(), ModBlocks.POTTED_SOUL_TORCHFLOWER);
+        event.enqueueWork(() -> {
+            ModFluidInteractions.register();
+            ModCauldronInteractions.register();
+            ModDispenserBehaviours.register();
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BRIGHT_TORCHFLOWER.getId(), ModBlocks.POTTED_BRIGHT_TORCHFLOWER);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.SOUL_TORCHFLOWER.getId(), ModBlocks.POTTED_SOUL_TORCHFLOWER);
+        });
     }
 
     // todo move command registration
