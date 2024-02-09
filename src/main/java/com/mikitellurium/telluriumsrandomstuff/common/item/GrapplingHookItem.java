@@ -34,7 +34,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
         if (!level.isClientSide) {
             GrapplingHookManager manager = GrapplingHookManager.get(level);
             if (manager.isHookPresent(player)) {
-                int damage = manager.getHook(player).retrieve(player.isCrouching());
+                int damage = manager.getHook(player).retrieve(Screen.hasShiftDown());
                 itemstack.hurtAndBreak(damage, player, (p) -> p.broadcastBreakEvent(hand));
             } else {
                 player.startUsingItem(hand);
