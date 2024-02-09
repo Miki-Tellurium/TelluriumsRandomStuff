@@ -22,6 +22,7 @@ import java.util.List;
 
 public class ItemPedestalRenderer implements BlockEntityRenderer<ItemPedestalBlockEntity> {
 
+    private static final int ITEM_NAME_TEXT_MAX_WIDTH = 60;
     private final ItemRenderer itemRenderer;
     private final EntityRenderDispatcher entityRenderer;
     private final Font font;
@@ -76,8 +77,7 @@ public class ItemPedestalRenderer implements BlockEntityRenderer<ItemPedestalBlo
 
     private void renderItemName(PoseStack poseStack, MultiBufferSource bufferSource, Component component,
                                 int textColor, int backGroundColor, int packedLight) {
-        final int maxWidth = 70;
-        List<FormattedCharSequence> charSequenceList = font.split(component, maxWidth);
+        List<FormattedCharSequence> charSequenceList = font.split(component, ITEM_NAME_TEXT_MAX_WIDTH);
 
         int yPos = (-charSequenceList.size() + 1) * 10;
         for (FormattedCharSequence text : charSequenceList) {
