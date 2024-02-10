@@ -22,52 +22,6 @@ import java.util.function.Predicate;
 
 public class LevelUtils {
 
-    private static final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK =
-            Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
-
-    @Nullable
-    public static BlockPos findFillableCauldronBelow(Level pLevel, BlockPos pPos) {
-        Predicate<BlockState> predicate = (blockState) -> blockState.getBlock() instanceof CauldronBlock;
-        BiPredicate<BlockPos, BlockState> bipredicate = (blockPos, blockState) -> canDripThrough(pLevel, blockPos, blockState);
-        return findBlockVertical(pLevel, pPos, Direction.DOWN.getAxisDirection(), bipredicate, predicate, 11).orElse(null);
-    }
-
-    private static boolean canDripThrough(BlockGetter pLevel, BlockPos pPos, BlockState pState) {
-        if (pState.isAir()) {
-            return true;
-        } else if (pState.isSolidRender(pLevel, pPos)) {
-            return false;
-        } else if (!pState.getFluidState().isEmpty()) {
-            return false;
-        } else {
-            VoxelShape voxelshape = pState.getCollisionShape(pLevel, pPos);
-            return !Shapes.joinIsNotEmpty(REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK, voxelshape, BooleanOp.AND);
-        }
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private static Optional<BlockPos> findBlockVertical(LevelAccessor pLevel, BlockPos pPos, Direction.AxisDirection pAxis,
-                                                        BiPredicate<BlockPos, BlockState> pPositionalStatePredicate,
-                                                        Predicate<BlockState> pStatePredicate, int pMaxIterations) {
-        Direction direction = Direction.get(pAxis, Direction.Axis.Y);
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = pPos.mutable();
-
-        for(int i = 1; i < pMaxIterations; ++i) {
-            blockpos$mutableblockpos.move(direction);
-            BlockState blockstate = pLevel.getBlockState(blockpos$mutableblockpos);
-            if (pStatePredicate.test(blockstate)) {
-                return Optional.of(blockpos$mutableblockpos.immutable());
-            }
-
-            if (pLevel.isOutsideBuildHeight(blockpos$mutableblockpos.getY()) ||
-                    !pPositionalStatePredicate.test(blockpos$mutableblockpos, blockstate)) {
-                return Optional.empty();
-            }
-        }
-
-        return Optional.empty();
-    }
-
     public static boolean isInsideWaterCauldron(Level level, Entity entity) {
         BlockPos blockPos = entity.blockPosition();
         return level.getBlockState(blockPos).is(Blocks.WATER_CAULDRON);
