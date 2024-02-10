@@ -47,11 +47,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleItem(ModItems.SOUL_FRAGMENT);
         this.simpleItem(ModItems.SOUL_CLUSTER);
         this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
-        this.withExistingParent(ModItems.GRAPPLING_HOOK.getId().getPath(), modLoc("item/grappling_hook_in_hand"))
+        this.simpleItem(ModItems.GRAPPLING_HOOK.getId().getPath() + "_string");
+        this.withExistingParent(ModItems.GRAPPLING_HOOK.getId().getPath(), modLoc("item/grappling_hook_handheld"))
                 .texture("layer0", modLoc("item/" + ModItems.GRAPPLING_HOOK.getId().getPath()))
                 .override()
                 .predicate(modLoc("thrown"), 1)
-                .model(this.getExistingFile(mcLoc("string")))
+                .model(this.getExistingFile(modLoc("grappling_hook_string")))
                 .end();
         this.simpleItem(ModItems.SOUL_INFUSED_IRON_INGOT);
     }
@@ -59,6 +60,11 @@ public class ModItemModelProvider extends ItemModelProvider {
     private void simpleItem(RegistryObject<Item> item) {
         this.withExistingParent(item.getId().getPath(), mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/" + item.getId().getPath()));
+    }
+
+    private void simpleItem(String name) {
+        this.withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/" + name));
     }
 
     private void handheldItem(RegistryObject<Item> item) {

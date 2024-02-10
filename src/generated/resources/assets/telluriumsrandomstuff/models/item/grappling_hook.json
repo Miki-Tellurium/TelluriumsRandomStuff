@@ -1,8 +1,8 @@
 {
-  "parent": "telluriumsrandomstuff:item/grappling_hook_in_hand",
+  "parent": "telluriumsrandomstuff:item/grappling_hook_handheld",
   "overrides": [
     {
-      "model": "minecraft:item/string",
+      "model": "telluriumsrandomstuff:item/grappling_hook_string",
       "predicate": {
         "telluriumsrandomstuff:thrown": 1.0
       }
