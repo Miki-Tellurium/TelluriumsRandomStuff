@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "telluriumsrandomstuff:item/grappling_hook_in_hand",
   "overrides": [
     {
       "model": "minecraft:item/string",
