@@ -2,24 +2,27 @@ package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapabilityProvider;
-import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -28,6 +31,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class GrapplingHookItem extends Item implements Vanishable {
+
+    private static final String TAG_IS_USING = "grappling_hook.is_using";
 
     public GrapplingHookItem() {
         super(new Item.Properties()
@@ -41,8 +46,8 @@ public class GrapplingHookItem extends Item implements Vanishable {
         AtomicReference<InteractionResultHolder<ItemStack>> result = new AtomicReference<>(InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide()));
         if (!level.isClientSide) {
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
-                if (hook.isPresent((ServerLevel) level)) {
-                    int damage = hook.getHook((ServerLevel) level).retrieve(player.isShiftKeyDown());
+                if (hook.isPresent()) {
+                    int damage = hook.getHook().retrieve(player.isShiftKeyDown());
                     itemstack.hurtAndBreak(damage, player, (p) -> p.broadcastBreakEvent(hand));
                 } else {
                     player.startUsingItem(hand);
@@ -62,11 +67,26 @@ public class GrapplingHookItem extends Item implements Vanishable {
             if (launchStrength < 0.15D) return;
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
                 GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level, launchStrength);
-                hook.setGrappling(grapplingHook);
+                hook.setGrappling(grapplingHook, itemStack);
                 level.addFreshEntity(grapplingHook);
                 level.playSound(null, grapplingHook, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
             });
         }
+    }
+
+    public void setPlayerIsUsing(ItemStack itemStack, boolean isUsing) {
+        if (itemStack.is(this)) {
+            CompoundTag tag = itemStack.getOrCreateTag();
+            tag.putBoolean(TAG_IS_USING, isUsing);
+        }
+    }
+
+    public boolean getPlayerIsUsing(ItemStack itemStack) {
+        if (itemStack.hasTag()) {
+            CompoundTag tag = itemStack.getTag();
+            return tag.contains(TAG_IS_USING) && tag.getBoolean(TAG_IS_USING);
+        }
+        return false;
     }
 
     @Override
@@ -83,7 +103,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
     public boolean onDroppedByPlayer(ItemStack item, Player player) {
         if (!player.level().isClientSide) {
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) ->
-                    hook.ifPresent((ServerLevel)player.level(), GrapplingHookEntity::discard));
+                    hook.ifPresent(GrapplingHookEntity::discard));
         }
 
         return true;
@@ -119,7 +139,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
             Entity entity = event.getEntity();
             if (entity instanceof Player player && !event.isCanceled()) {
                 player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) ->
-                        hook.ifPresent((ServerLevel)player.level(), GrapplingHookEntity::discard));
+                        hook.ifPresent(GrapplingHookEntity::discard));
             }
         }
     }
@@ -130,19 +150,17 @@ public class GrapplingHookItem extends Item implements Vanishable {
         if (!level.isClientSide) {
             Player player = event.getEntity();
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) ->
-                    hook.ifPresent((ServerLevel)player.level(), GrapplingHookEntity::discard));
+                    hook.ifPresent(GrapplingHookEntity::discard));
         }
     }
 
     @SubscribeEvent
-    public static void onPlayerLogOut(EntityLeaveLevelEvent event) {
-        Entity entity = event.getEntity();
-        Level level = entity.level();
+    public static void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        Player player = event.getEntity();
+        Level level = player.level();
         if (!level.isClientSide) {
-            if (entity instanceof Player player) {
-                player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) ->
-                        hook.ifPresent((ServerLevel)player.level(), GrapplingHookEntity::discard));
-            }
+            player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) ->
+                    hook.ifPresent(GrapplingHookEntity::discard));
         }
     }
 

@@ -1,56 +1,54 @@
 package com.mikitellurium.telluriumsrandomstuff.common.capability;
 
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 
-import java.util.UUID;
 import java.util.function.Consumer;
 
 @AutoRegisterCapability
 public class GrapplingHookCapability {
 
-    private UUID hook;
+    private GrapplingHookEntity hook;
+    private ItemStack itemStack;
 
-    public boolean isPresent(ServerLevel level) {
-        return this.getHook(level) != null;
+    public boolean isPresent() {
+        return this.hook != null;
     }
 
-    public void setGrappling(GrapplingHookEntity hook) {
-        this.hook = hook.getUUID();
+    public void setGrappling(GrapplingHookEntity hook, ItemStack itemStack) {
+        this.hook = hook;
+        if (itemStack.is(ModItems.GRAPPLING_HOOK.get())) {
+            this.itemStack = itemStack;
+            ((GrapplingHookItem)itemStack.getItem()).setPlayerIsUsing(itemStack, true);
+        }
     }
 
     public void remove() {
         this.hook = null;
-    }
-
-    public GrapplingHookEntity getHook(ServerLevel level) {
-        Entity entity = level.getEntity(this.hook);
-        return entity instanceof GrapplingHookEntity ? (GrapplingHookEntity)entity : null;
-    }
-
-    public void ifPresent(ServerLevel level, Consumer<GrapplingHookEntity> consumer) {
-        if (this.isPresent(level)) {
-            consumer.accept(this.getHook(level));
+        if (this.itemStack != null) {
+            ((GrapplingHookItem) this.itemStack.getItem()).setPlayerIsUsing(this.itemStack, false);
+            this.itemStack = null;
         }
     }
 
-    public void copyFrom(GrapplingHookCapability source) {
-        this.hook = source.hook;
+    public GrapplingHookEntity getHook() {
+        return this.hook;
+    }
+
+    public void ifPresent(Consumer<GrapplingHookEntity> consumer) {
+        if (this.isPresent()) {
+            consumer.accept(this.hook);
+        }
     }
 
     public void saveNBTDAta(CompoundTag nbt) {
-        if (this.hook != null) {
-            nbt.putUUID("hook", this.hook);
-        }
     }
 
     public void loadNBTData(CompoundTag nbt) {
-        if (nbt.hasUUID("hook")) {
-            this.hook = nbt.getUUID("hook");
-        }
     }
 
 }

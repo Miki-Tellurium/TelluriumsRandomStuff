@@ -321,7 +321,7 @@ public class GrapplingHookEntity extends Projectile {
     public void remove(RemovalReason reason) {
         if (!this.level().isClientSide) {
             this.getPlayerOwner().getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
-                hook.ifPresent((ServerLevel)this.level(), (entity) -> hook.remove());
+                hook.ifPresent((entity) -> hook.remove());
             });
         }
         super.remove(reason);
