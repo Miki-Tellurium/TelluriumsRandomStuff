@@ -52,13 +52,6 @@ public class TelluriumsRandomStuffMod {
         });
     }
 
-    // todo move command registration
-    @SubscribeEvent
-    public void registerCommands(RegisterCommandsEvent event){
-        SoulAnchorCommand.register(event.getDispatcher());
-        LavaGooglesCommand.register(event.getDispatcher());
-    }
-
     public static ResourceLocation modLoc(String id) {
         return new ResourceLocation(MOD_ID, id);
     }
