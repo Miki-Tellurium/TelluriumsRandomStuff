@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "telluriumsrandomstuff:item/grappling_hook_string_handheld",
   "textures": {
     "layer0": "telluriumsrandomstuff:item/grappling_hook_string"
   }
