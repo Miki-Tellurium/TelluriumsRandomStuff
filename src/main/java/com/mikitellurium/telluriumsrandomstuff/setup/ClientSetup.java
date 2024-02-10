@@ -10,6 +10,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesLayer;
 import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesModel;
 import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesOverlay;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
+import com.mikitellurium.telluriumsrandomstuff.common.item.properties.ModItemProperties;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
@@ -36,10 +37,13 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        MenuScreens.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
-        MenuScreens.register(ModMenuTypes.SOUL_ANCHOR_MENU.get(), SoulAnchorScreen::new);
-        MenuScreens.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
-        MenuScreens.register(ModMenuTypes.SOUL_INFUSER_MENU.get(), SoulInfuserScreen::new);
+        event.enqueueWork(() -> {
+            MenuScreens.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
+            MenuScreens.register(ModMenuTypes.SOUL_ANCHOR_MENU.get(), SoulAnchorScreen::new);
+            MenuScreens.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
+            MenuScreens.register(ModMenuTypes.SOUL_INFUSER_MENU.get(), SoulInfuserScreen::new);
+            ModItemProperties.register();
+        });
     }
 
     @SubscribeEvent
