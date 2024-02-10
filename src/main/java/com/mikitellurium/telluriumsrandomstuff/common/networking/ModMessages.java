@@ -1,10 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.networking;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.DisplayNameSyncS2CPacket;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.FluidSyncS2CPacket;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.ItemStackSyncS2CPacket;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.RotOffsetSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.items.ItemStackHandler;
@@ -50,6 +47,11 @@ public class ModMessages {
                 .decoder(DisplayNameSyncS2CPacket::new)
                 .encoder(DisplayNameSyncS2CPacket::toBytes)
                 .consumerMainThread(DisplayNameSyncS2CPacket::handle)
+                .add();
+        net.messageBuilder(GrapplingHookSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(GrapplingHookSyncS2CPacket::new)
+                .encoder(GrapplingHookSyncS2CPacket::toBytes)
+                .consumerMainThread(GrapplingHookSyncS2CPacket::handle)
                 .add();
     }
     

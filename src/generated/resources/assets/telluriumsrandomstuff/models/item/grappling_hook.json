@@ -1,5 +1,13 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "minecraft:item/string",
+      "predicate": {
+        "telluriumsrandomstuff:thrown": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "telluriumsrandomstuff:item/grappling_hook"
   }

@@ -1,10 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.capability;
 
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
-import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 
 import java.util.function.Consumer;
@@ -13,26 +10,28 @@ import java.util.function.Consumer;
 public class GrapplingHookCapability {
 
     private GrapplingHookEntity hook;
-    private ItemStack itemStack;
+    private boolean isUsing;
 
-    public boolean isPresent() {
+    public boolean isUsing() {
+        return isUsing;
+    }
+
+    public void setUsing(boolean b) {
+        this.isUsing = b;
+    }
+
+    public boolean isHookPresent() {
         return this.hook != null;
     }
 
-    public void setGrappling(GrapplingHookEntity hook, ItemStack itemStack) {
+    public void setGrappling(GrapplingHookEntity hook) {
         this.hook = hook;
-        if (itemStack.is(ModItems.GRAPPLING_HOOK.get())) {
-            this.itemStack = itemStack;
-            ((GrapplingHookItem)itemStack.getItem()).setPlayerIsUsing(itemStack, true);
-        }
+        this.setUsing(true);
     }
 
     public void remove() {
         this.hook = null;
-        if (this.itemStack != null) {
-            ((GrapplingHookItem) this.itemStack.getItem()).setPlayerIsUsing(this.itemStack, false);
-            this.itemStack = null;
-        }
+        this.setUsing(false);
     }
 
     public GrapplingHookEntity getHook() {
@@ -40,7 +39,7 @@ public class GrapplingHookCapability {
     }
 
     public void ifPresent(Consumer<GrapplingHookEntity> consumer) {
-        if (this.isPresent()) {
+        if (this.isHookPresent()) {
             consumer.accept(this.hook);
         }
     }
