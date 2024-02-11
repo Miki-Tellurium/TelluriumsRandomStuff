@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.Entity;
 
-public class GrapplingHookModel<T extends Entity> extends Model {
+public class GrapplingHookModel extends Model {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			FastLoc.modLoc("grappling_hook"), "main");
 	private final ModelPart root;
@@ -29,7 +29,7 @@ public class GrapplingHookModel<T extends Entity> extends Model {
 		PartDefinition main = partdefinition.addOrReplaceChild("main", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, -3.0F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
 		.texOffs(0, 10).addBox(0.0F, -5.0F, -4.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
 		.texOffs(4, 10).addBox(0.0F, -8.0F, -4.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 8).addBox(-2.0F, -6.0F, -4.0F, 5.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		.texOffs(0, 8).addBox(-2.0F, -6.0F, -4.0F, 5.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5F, 5.5F, 2.0F));
 
 		PartDefinition up_hook = main.addOrReplaceChild("up_hook", CubeListBuilder.create().texOffs(9, 3).addBox(7.7F, 0.0F, 2.08F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.6981F, -1.5708F));
 		PartDefinition down_hook = main.addOrReplaceChild("down_hook", CubeListBuilder.create().texOffs(9, 3).mirror().addBox(-0.27F, 0.0F, -4.99F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.6981F, -1.5708F));

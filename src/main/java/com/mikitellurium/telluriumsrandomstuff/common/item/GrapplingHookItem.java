@@ -62,7 +62,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
             float launchStrength = BowItem.getPowerForTime(timeUsed);
             if (launchStrength < 0.15D) return;
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
-                GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level, launchStrength);
+                GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level, itemStack, launchStrength);
                 hook.setGrappling(grapplingHook);
                 ModMessages.sendToPlayer(new GrapplingHookSyncS2CPacket(true), (ServerPlayer) player);
                 level.addFreshEntity(grapplingHook);

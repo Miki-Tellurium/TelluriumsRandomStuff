@@ -27,6 +27,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -42,6 +43,8 @@ public class GrapplingHookEntity extends Projectile {
 
     private static final EntityDataAccessor<Integer> DATA_HOOKED_ENTITY =
             SynchedEntityData.defineId(GrapplingHookEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> IS_FOIL =
+            SynchedEntityData.defineId(GrapplingHookEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Nullable
     private BlockState lastState;
@@ -53,16 +56,20 @@ public class GrapplingHookEntity extends Projectile {
         this.noCulling = true;
     }
 
-    public GrapplingHookEntity(Player player, Level level, float launchSpeed) {
+    public GrapplingHookEntity(Player player, Level level, ItemStack itemStack, float launchSpeed) {
         this(ModEntities.GRAPPLING_HOOK.get(), level);
         this.setOwner(player);
+        if (itemStack.is(ModItems.GRAPPLING_HOOK.get()) && itemStack.isEnchanted()) {
+            this.entityData.set(IS_FOIL, true);
+        }
         this.setPos(player.getX(), player.getEyeY(), player.getZ());
-        this.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.0F * launchSpeed, 1.0F);
+        this.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.0F * launchSpeed, 0.0F);
     }
 
     @Override
     protected void defineSynchedData() {
-        this.getEntityData().define(DATA_HOOKED_ENTITY, 0);
+        this.entityData.define(DATA_HOOKED_ENTITY, 0);
+        this.entityData.define(IS_FOIL, false);
     }
 
     public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
@@ -90,15 +97,6 @@ public class GrapplingHookEntity extends Projectile {
                         this.currentState = HookState.FLYING;
                     }
                 }
-            }
-
-            Vec3 movVec = this.getDeltaMovement();
-            if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
-                double d0 = movVec.horizontalDistance();
-                this.setYRot((float) (Mth.atan2(movVec.x, movVec.z) * (double) (180F / (float) Math.PI)));
-                this.setXRot((float) (Mth.atan2(movVec.y, d0) * (double) (180F / (float) Math.PI)));
-                this.yRotO = this.getYRot();
-                this.xRotO = this.getXRot();
             }
 
             BlockPos pos = this.blockPosition();
@@ -132,6 +130,7 @@ public class GrapplingHookEntity extends Projectile {
                     this.startFalling();
                 }
             } else if (this.currentState == HookState.FLYING) {
+                Vec3 movVec = this.getDeltaMovement();
                 Vec3 posVec = this.position();
                 Vec3 vec3 = posVec.add(movVec);
                 HitResult hitResult = this.level().clip(new ClipContext(posVec, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
@@ -168,7 +167,8 @@ public class GrapplingHookEntity extends Projectile {
                 double newZ = this.getZ() + vecZ;
                 double distance = movVec.horizontalDistance();
 
-                this.setXRot((float) (Mth.atan2(vecY, distance) * (double) (180F / (float) Math.PI)));
+                this.setYRot((float)(Mth.atan2(vecX, vecZ) * (double)(180F / (float)Math.PI)));
+                this.setXRot((float)(Mth.atan2(vecY, distance) * (double)(180F / (float)Math.PI)));
                 this.setXRot(lerpRotation(this.xRotO, this.getXRot()));
                 this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
                 float f = 0.99F;
@@ -177,7 +177,6 @@ public class GrapplingHookEntity extends Projectile {
                         this.level().addParticle(ParticleTypes.BUBBLE, newX - vecX * 0.25D, newY - vecY * 0.25D,
                                 newZ - vecZ * 0.25D, vecX, vecY, vecZ);
                     }
-
                     f = this.getWaterInertia();
                 }
 
@@ -336,6 +335,10 @@ public class GrapplingHookEntity extends Projectile {
         return entity instanceof Player player ? player : null;
     }
 
+    public boolean isFoil() {
+        return this.entityData.get(IS_FOIL);
+    }
+
     @Override
     public void remove(RemovalReason reason) {
         if (!this.level().isClientSide) {
@@ -350,7 +353,7 @@ public class GrapplingHookEntity extends Projectile {
 
     @Override
     protected boolean canHitEntity(Entity entity) {
-        return super.canHitEntity(entity) || entity.isAlive() && entity instanceof ItemEntity;
+        return super.canHitEntity(entity) && entity != this.getOwner() || entity.isAlive() && entity instanceof ItemEntity;
     }
 
     protected void playSound(@Nullable Entity source, SoundEvent sound, float volume, float pitch, boolean global) {
