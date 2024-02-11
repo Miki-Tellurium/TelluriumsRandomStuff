@@ -14,7 +14,7 @@ import net.minecraft.world.entity.monster.Drowned;
 
 public class LavaGooglesModel<T extends LivingEntity> extends AgeableListModel<T> {
 
-    public static final ModelLayerLocation LAVA_GOOGLES = new ModelLayerLocation(
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
             new ResourceLocation("minecraft:player"), "lava_googles");
     private final ModelPart googles;
     public float swimAmount;

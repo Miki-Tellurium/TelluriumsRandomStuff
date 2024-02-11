@@ -31,7 +31,7 @@ public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> 
 
     public LavaGooglesLayer(RenderLayerParent<T, M> parent, EntityModelSet modelSet) {
         super(parent);
-        lavaGooglesModel = new LavaGooglesModel<>(modelSet.bakeLayer(LavaGooglesModel.LAVA_GOOGLES));
+        lavaGooglesModel = new LavaGooglesModel<>(modelSet.bakeLayer(LavaGooglesModel.LAYER_LOCATION));
     }
 
     @Override
