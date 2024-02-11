@@ -3,19 +3,14 @@ package com.mikitellurium.telluriumsrandomstuff;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
-import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
-import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.Registries;
 import com.mikitellurium.telluriumsrandomstuff.setup.CommonSetup;
 import com.mojang.logging.LogUtils;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -50,10 +45,6 @@ public class TelluriumsRandomStuffMod {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BRIGHT_TORCHFLOWER.getId(), ModBlocks.POTTED_BRIGHT_TORCHFLOWER);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.SOUL_TORCHFLOWER.getId(), ModBlocks.POTTED_SOUL_TORCHFLOWER);
         });
-    }
-
-    public static ResourceLocation modLoc(String id) {
-        return new ResourceLocation(MOD_ID, id);
     }
 
 }
