@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -47,6 +48,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
                     if (ItemStack.matches(itemstack, hook.getStack())) {
                         int damage = hook.getHook().retrieve(player.isShiftKeyDown());
                         itemstack.hurtAndBreak(damage, player, (p) -> p.broadcastBreakEvent(hand));
+                        player.awardStat(Stats.ITEM_USED.get(this));
                     }
                 } else {
                     player.startUsingItem(hand);
