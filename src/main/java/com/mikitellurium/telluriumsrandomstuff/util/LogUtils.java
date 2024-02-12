@@ -13,4 +13,14 @@ public class LogUtils {
         System.out.println(message);
     }
 
+    public static void debugNonNull(String prefix, Object object) {
+        String s = object == null ? "null" : "NOT null";
+        consoleLogMessage(prefix + ": " + s);
+    }
+
+    public static void debugIsEqual(String prefix, Object firstObj, Object secondObj) {
+        String s = firstObj.equals(secondObj) ? "equal" : "NOT equal";
+        consoleLogMessage(prefix + ": " + s);
+    }
+
 }
