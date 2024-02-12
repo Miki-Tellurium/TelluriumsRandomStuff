@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.GrapplingHookItemExtension;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
@@ -15,18 +16,18 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Vanishable;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 
 public class GrapplingHookItem extends Item implements Vanishable {
 
@@ -75,7 +76,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
 
     @Override
     public int getUseDuration(ItemStack itemStack) {
-        return 200;
+        return 72000;
     }
 
     @Override
@@ -103,6 +104,11 @@ public class GrapplingHookItem extends Item implements Vanishable {
         return enchantment.equals(Enchantments.VANISHING_CURSE) ||
                 enchantment.equals(Enchantments.UNBREAKING) ||
                 enchantment.equals(Enchantments.MENDING);
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new GrapplingHookItemExtension());
     }
 
     /* Events */
