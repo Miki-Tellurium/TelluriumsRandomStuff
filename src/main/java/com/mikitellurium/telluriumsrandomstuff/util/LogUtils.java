@@ -13,7 +13,7 @@ public class LogUtils {
         System.out.println(message);
     }
 
-    public static void debugNonNull(String prefix, Object object) {
+    public static void debugIsNull(String prefix, Object object) {
         String s = object == null ? "null" : "NOT null";
         consoleLogMessage(prefix + ": " + s);
     }
