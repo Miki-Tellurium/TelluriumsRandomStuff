@@ -14,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-    @Shadow public abstract ItemStack eat(Level pLevel, ItemStack pFood);
-
     @ModifyVariable(method = "travel", at = @At("STORE"), ordinal = 0)
     private FluidState getCorrectSoulLavaState(FluidState fluidState) {
         LivingEntity entity = (LivingEntity) (Object) this;
