@@ -1,0 +1,21 @@
+{
+  "base": {
+    "parent": "builtin/entity"
+  },
+  "gui_light": "front",
+  "loader": "forge:separate_transforms",
+  "perspectives": {
+    "ground": {
+      "parent": "telluriumsrandomstuff:item/grappling_hook_string_inventory"
+    },
+    "gui": {
+      "parent": "telluriumsrandomstuff:item/grappling_hook_string_inventory"
+    },
+    "fixed": {
+      "parent": "telluriumsrandomstuff:item/grappling_hook_string_inventory"
+    },
+    "head": {
+      "parent": "telluriumsrandomstuff:item/grappling_hook_string_inventory"
+    }
+  }
+}

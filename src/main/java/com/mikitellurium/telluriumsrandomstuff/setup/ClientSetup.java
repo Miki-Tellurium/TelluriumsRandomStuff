@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.GrapplingHookItemExtension;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.GrapplingHookModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.GrapplingHookRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
@@ -15,16 +16,21 @@ import com.mikitellurium.telluriumsrandomstuff.common.item.properties.ModItemPro
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
@@ -158,12 +164,6 @@ public class ClientSetup {
         });
     }
 
-    @SubscribeEvent
-    public static void registerModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(LavaGooglesModel.LAYER_LOCATION, LavaGooglesModel::createLayerDefinition);
-        event.registerLayerDefinition(GrapplingHookModel.LAYER_LOCATION, GrapplingHookModel::createLayerDefinition);
-    }
-
     private static void addLayerToRenderer(LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer,
                                            EntityType<?> entityType, EntityModelSet modelSet) {
         try {
@@ -175,6 +175,19 @@ public class ClientSetup {
         } catch (Exception e) {
             TelluriumsRandomStuffMod.LOGGER.error("Could not add layer to " + entityType.toShortString());
         }
+    }
+
+    @SubscribeEvent
+    public static void registerModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(LavaGooglesModel.LAYER_LOCATION, LavaGooglesModel::createLayerDefinition);
+        event.registerLayerDefinition(GrapplingHookModel.LAYER_LOCATION, GrapplingHookModel::createLayerDefinition);
+    }
+
+    @SubscribeEvent
+    public static void onResourceListenerReload(RegisterClientReloadListenersEvent event) {
+        GrapplingHookItemExtension.RENDERER = new GrapplingHookItemExtension.Renderer();
+        event.registerReloadListener(GrapplingHookItemExtension.RENDERER);
+        TelluriumsRandomStuffMod.LOGGER.info("Registered CustomItemRenderer instance");
     }
 
 }

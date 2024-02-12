@@ -1,5 +1,5 @@
 {
-  "parent": "telluriumsrandomstuff:item/grappling_hook_string_handheld",
+  "parent": "item/generated",
   "textures": {
     "layer0": "telluriumsrandomstuff:item/grappling_hook_string"
   }
