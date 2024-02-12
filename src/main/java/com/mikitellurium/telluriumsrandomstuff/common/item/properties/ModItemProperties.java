@@ -9,6 +9,7 @@ import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -21,7 +22,8 @@ public class ModItemProperties {
                     AtomicReference<Float> value = new AtomicReference<>(0.0F);
                     if (livingEntity instanceof Player player) {
                         player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) ->{
-                            value.set(hook.isUsing() ? 1.0F : 0.0F);
+                            boolean shouldOverride = hook.isUsing() && ItemStack.matches(hook.getStack(), itemStack);
+                            value.set(shouldOverride ? 1.0F : 0.0F);
                         });
                     }
                     return value.get();

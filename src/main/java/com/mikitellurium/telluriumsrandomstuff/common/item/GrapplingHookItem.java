@@ -43,8 +43,10 @@ public class GrapplingHookItem extends Item implements Vanishable {
         if (!level.isClientSide) {
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
                 if (hook.isHookPresent()) {
-                    int damage = hook.getHook().retrieve(player.isShiftKeyDown());
-                    itemstack.hurtAndBreak(damage, player, (p) -> p.broadcastBreakEvent(hand));
+                    if (ItemStack.matches(itemstack, hook.getStack())) {
+                        int damage = hook.getHook().retrieve(player.isShiftKeyDown());
+                        itemstack.hurtAndBreak(damage, player, (p) -> p.broadcastBreakEvent(hand));
+                    }
                 } else {
                     player.startUsingItem(hand);
                     result.set(InteractionResultHolder.consume(itemstack));
@@ -63,8 +65,8 @@ public class GrapplingHookItem extends Item implements Vanishable {
             if (launchStrength < 0.15D) return;
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
                 GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level, itemStack, launchStrength);
-                hook.setGrappling(grapplingHook);
-                ModMessages.sendToPlayer(new GrapplingHookSyncS2CPacket(true), (ServerPlayer) player);
+                hook.setGrappling(grapplingHook, itemStack);
+                ModMessages.sendToPlayer(new GrapplingHookSyncS2CPacket(true, itemStack), (ServerPlayer) player);
                 level.addFreshEntity(grapplingHook);
                 level.playSound(null, grapplingHook, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
             });

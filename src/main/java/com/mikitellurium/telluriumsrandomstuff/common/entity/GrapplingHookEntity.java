@@ -345,7 +345,7 @@ public class GrapplingHookEntity extends Projectile {
             Player player = this.getPlayerOwner();
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
                 hook.ifPresent((entity) -> hook.remove());
-                ModMessages.sendToPlayer(new GrapplingHookSyncS2CPacket(false), (ServerPlayer) player);
+                ModMessages.sendToPlayer(new GrapplingHookSyncS2CPacket(false, ItemStack.EMPTY), (ServerPlayer) player);
             });
         }
         super.remove(reason);
