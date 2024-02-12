@@ -47,8 +47,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleItem(ModItems.SOUL_FRAGMENT);
         this.simpleItem(ModItems.SOUL_CLUSTER);
         this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
-        this.withExistingParent(ModItems.GRAPPLING_HOOK.getId().getPath() + "_string",
-                modLoc("item/grappling_hook_string_handheld"))
+        this.withExistingParent(ModItems.GRAPPLING_HOOK.getId().getPath() + "_string_inventory", mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/grappling_hook_string"));
         this.withExistingParent(ModItems.GRAPPLING_HOOK.getId().getPath(), modLoc("item/grappling_hook_handheld"))
                 .texture("layer0", modLoc("item/" + ModItems.GRAPPLING_HOOK.getId().getPath()))
