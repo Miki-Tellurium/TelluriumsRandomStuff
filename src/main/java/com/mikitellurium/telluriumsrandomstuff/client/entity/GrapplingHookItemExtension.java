@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.client.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -16,7 +17,12 @@ public class GrapplingHookItemExtension implements IClientItemExtensions {
 
     private final HumanoidModel.ArmPose GRAPPLING_HOOK = HumanoidModel.ArmPose.create("Grappling_hook", false,
             (model, entity, arm) -> {
-
+                ItemStack itemInHand = arm == entity.getMainArm() ? entity.getMainHandItem() : entity.getOffhandItem();
+                if (entity.isUsingItem() && entity.getUseItem() == itemInHand) {
+                    ModelPart modelArm = arm == HumanoidArm.RIGHT ? model.rightArm : model.leftArm;
+                    modelArm.xRot = modelArm.xRot * 0.5F - (float) Math.PI;
+                    modelArm.yRot = 0.0F;
+                }
             });
 
     @Nullable
