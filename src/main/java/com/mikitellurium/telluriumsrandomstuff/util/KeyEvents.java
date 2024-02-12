@@ -11,11 +11,12 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, value = Dist.CLIENT)
 public class KeyEvents {
 
-    private static final float increase = 0.05F;
-    public static float scale = 0.00105F;
+    private static final float increase = 0.01F;
+    private static final float initScale = 1.0F;
     private static final float initX = 0.0F;
     private static final float initY = 0.0F;
     private static final float initZ = 0.0F;
+    public static float scale = 1.0F;
     public static float translateX = 0.0F;
     public static float translateY = 0.0F;
     public static float translateZ = 0.0F;
@@ -34,7 +35,12 @@ public class KeyEvents {
             translateZ += increase;
         } else if (KeyBindings.TRANSLATE_Z_DOWN_KEY.consumeClick()) {
             translateZ -= increase;
+        } else if (KeyBindings.SCALE_UP_KEY.consumeClick()) {
+            scale += 0.01F;
+        } else if (KeyBindings.SCALE_DOWN_KEY.consumeClick()) {
+            scale -= 0.01F;
         } else if (KeyBindings.RESET_KEY.consumeClick()) {
+            scale = initScale;
             translateX = initX;
             translateY = initY;
             translateZ = initZ;
@@ -45,8 +51,8 @@ public class KeyEvents {
     public static class ClientModBusEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
-//            event.register(KeyBindings.SCALE_UP_KEY);
-//            event.register(KeyBindings.SCALE_DOWN_KEY);
+            event.register(KeyBindings.SCALE_UP_KEY);
+            event.register(KeyBindings.SCALE_DOWN_KEY);
             event.register(KeyBindings.TRANSLATE_X_UP_KEY);
             event.register(KeyBindings.TRANSLATE_X_DOWN_KEY);
             event.register(KeyBindings.TRANSLATE_Y_UP_KEY);
@@ -61,7 +67,7 @@ public class KeyEvents {
     public static class GameShutDown {
         @SubscribeEvent
         public static void onGameShutDown(GameShuttingDownEvent event) {
-            //System.out.println("Scale="+cardRenderer.scale);
+            System.out.println("Scale="+scale);
             System.out.println("TranslateX="+translateX);
             System.out.println("TranslateY="+translateY);
             System.out.println("TranslateZ="+translateZ);

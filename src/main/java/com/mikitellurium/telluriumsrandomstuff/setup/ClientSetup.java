@@ -183,11 +183,4 @@ public class ClientSetup {
         event.registerLayerDefinition(GrapplingHookModel.LAYER_LOCATION, GrapplingHookModel::createLayerDefinition);
     }
 
-    @SubscribeEvent
-    public static void onResourceListenerReload(RegisterClientReloadListenersEvent event) {
-        GrapplingHookItemExtension.RENDERER = new GrapplingHookItemExtension.Renderer();
-        event.registerReloadListener(GrapplingHookItemExtension.RENDERER);
-        TelluriumsRandomStuffMod.LOGGER.info("Registered CustomItemRenderer instance");
-    }
-
 }

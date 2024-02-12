@@ -9,8 +9,8 @@ public class KeyBindings {
 
     public static final String KEY_CATEGORY_TUTORIAL = FastLoc.modId();
 
-//    public static final String KEY_SCALE_UP = "Scale up";
-//    public static final String KEY_SCALE_DOWN = "Scale down";
+    public static final String KEY_SCALE_UP = "Scale up";
+    public static final String KEY_SCALE_DOWN = "Scale down";
     public static final String KEY_TRANSLATE_X_UP = "Translate x up";
     public static final String KEY_TRANSLATE_X_DOWN = "Translate x down";
     public static final String KEY_TRANSLATE_Y_UP = "Translate y up";
@@ -20,10 +20,10 @@ public class KeyBindings {
 
     public static final String KEY_RESET = "Reset";
 
-//    public static final KeyMapping SCALE_UP_KEY = new KeyMapping(KEY_SCALE_UP, KeyConflictContext.IN_GAME,
-//            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UP, KEY_CATEGORY_TUTORIAL);
-//    public static final KeyMapping SCALE_DOWN_KEY = new KeyMapping(KEY_SCALE_DOWN, KeyConflictContext.IN_GAME,
-//            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_DOWN, KEY_CATEGORY_TUTORIAL);
+    public static final KeyMapping SCALE_UP_KEY = new KeyMapping(KEY_SCALE_UP, KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UP, KEY_CATEGORY_TUTORIAL);
+    public static final KeyMapping SCALE_DOWN_KEY = new KeyMapping(KEY_SCALE_DOWN, KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_DOWN, KEY_CATEGORY_TUTORIAL);
 
     public static final KeyMapping TRANSLATE_X_UP_KEY = new KeyMapping(KEY_TRANSLATE_X_UP, KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_KP_4, KEY_CATEGORY_TUTORIAL);

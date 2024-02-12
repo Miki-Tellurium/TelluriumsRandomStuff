@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
@@ -57,6 +58,11 @@ public class GrapplingHookItemExtension implements IClientItemExtensions {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+        return GrapplingHookHandRenderer.INSTANCE;
     }
 
 }
