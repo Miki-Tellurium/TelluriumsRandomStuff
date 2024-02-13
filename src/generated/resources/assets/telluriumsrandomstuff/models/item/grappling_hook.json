@@ -2,6 +2,12 @@
   "parent": "telluriumsrandomstuff:item/grappling_hook_handheld",
   "overrides": [
     {
+      "model": "telluriumsrandomstuff:item/grappling_hook_handheld_charging",
+      "predicate": {
+        "telluriumsrandomstuff:charging": 1.0
+      }
+    },
+    {
       "model": "telluriumsrandomstuff:item/grappling_hook_string",
       "predicate": {
         "telluriumsrandomstuff:thrown": 1.0

@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.item.properties;
+package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapability;
@@ -27,6 +27,10 @@ public class ModItemProperties {
                         });
                     }
                     return value.get();
+                });
+        ItemProperties.register(ModItems.GRAPPLING_HOOK.get(), FastLoc.modLoc("charging"),
+                (itemStack, level, livingEntity, seed) -> {
+                    return livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F;
                 });
     }
 

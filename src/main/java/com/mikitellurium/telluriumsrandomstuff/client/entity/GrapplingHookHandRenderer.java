@@ -38,8 +38,10 @@ public class GrapplingHookHandRenderer extends BlockEntityWithoutLevelRenderer {
     @Override
     public void renderByItem(ItemStack itemStack, ItemDisplayContext context, PoseStack poseStack,
                              MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        HumanoidArm arm = context == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND ? HumanoidArm.RIGHT : HumanoidArm.LEFT;
-        this.renderHand(poseStack, bufferSource, minecraft.player, arm, packedLight);
+        if (context == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND || context == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
+            HumanoidArm arm = context == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND ? HumanoidArm.RIGHT : HumanoidArm.LEFT;
+            this.renderHand(poseStack, bufferSource, minecraft.player, arm, packedLight);
+        }
     }
 
     private void renderHand(PoseStack poseStack, MultiBufferSource bufferSource, LocalPlayer player, HumanoidArm arm, int packedLight) {

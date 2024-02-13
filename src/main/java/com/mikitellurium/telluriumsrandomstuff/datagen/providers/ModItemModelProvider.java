@@ -52,6 +52,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.withExistingParent(ModItems.GRAPPLING_HOOK.getId().getPath(), modLoc("item/grappling_hook_handheld"))
                 .texture("layer0", modLoc("item/" + ModItems.GRAPPLING_HOOK.getId().getPath()))
                 .override()
+                .predicate(modLoc("charging"), 1)
+                .model(this.getExistingFile(modLoc("grappling_hook_handheld_charging")))
+                .end()
+                .override()
                 .predicate(modLoc("thrown"), 1)
                 .model(this.getExistingFile(modLoc("grappling_hook_string")))
                 .end();
