@@ -3,8 +3,9 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-public class CachedObject<T> {
+public class CachedObject<T> implements Supplier<T> {
 
     T obj;
 
@@ -20,6 +21,7 @@ public class CachedObject<T> {
         return new CachedObject<>(null);
     }
 
+    @Override
     public T get() {
         return obj;
     }
