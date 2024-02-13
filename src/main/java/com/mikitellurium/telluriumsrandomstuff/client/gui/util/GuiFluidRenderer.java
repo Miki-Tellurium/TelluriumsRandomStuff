@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.gui.render;
+package com.mikitellurium.telluriumsrandomstuff.client.gui.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -43,14 +43,14 @@ public class GuiFluidRenderer {
             for(int j = 0; j < height; j += 16) {
                 int drawWidth = Math.min(width - i, 16);
                 int drawHeight = Math.min(height - j, 16);
-                drawScaledTexturedModalRectFromSprite(graphics, x + i, y + j, icon, drawWidth, drawHeight);
+                drawScaledTextureFromSprite(graphics, x + i, y + j, icon, drawWidth, drawHeight);
             }
         }
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    public static void drawScaledTexturedModalRectFromSprite(GuiGraphics graphics, int x, int y, TextureAtlasSprite icon, int width, int height) {
+    public static void drawScaledTextureFromSprite(GuiGraphics graphics, int x, int y, TextureAtlasSprite icon, int width, int height) {
         if (icon != null) {
             float minU = icon.getU0();
             float maxU = icon.getU1();

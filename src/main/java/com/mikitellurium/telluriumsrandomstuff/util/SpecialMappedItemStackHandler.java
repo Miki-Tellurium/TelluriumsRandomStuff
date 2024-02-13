@@ -12,7 +12,7 @@ import java.util.Map;
 public class SpecialMappedItemStackHandler extends ItemStackHandler {
 
     private final Map<Integer, SlotType> types = new HashMap<>();
-
+    // todo fix this cringe
     public SpecialMappedItemStackHandler(int slots, int bucketSlot, int[] inputSlots, int[] outputSlots) {
         super(slots);
         types.put(bucketSlot, SlotType.BUCKET);

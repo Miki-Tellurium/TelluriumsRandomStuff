@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.jei.util;
 
 import java.util.List;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockRendering;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.util.BlockRendering;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;

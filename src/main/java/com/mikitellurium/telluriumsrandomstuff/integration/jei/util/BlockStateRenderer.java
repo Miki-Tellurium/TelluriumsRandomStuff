@@ -1,15 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.util;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockRendering;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.util.BlockRendering;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 

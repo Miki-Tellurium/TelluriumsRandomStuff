@@ -1,16 +1,13 @@
-package com.mikitellurium.telluriumsrandomstuff.client.entity;
+package com.mikitellurium.telluriumsrandomstuff.client.entity.render;
 
+import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
-import com.mikitellurium.telluriumsrandomstuff.util.KeyBindings;
-import com.mikitellurium.telluriumsrandomstuff.util.KeyEvents;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.TridentModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -23,8 +20,6 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Matrix3f;
-import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
 public class GrapplingHookRenderer extends EntityRenderer<GrapplingHookEntity> {

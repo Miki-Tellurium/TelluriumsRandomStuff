@@ -1,12 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesLayer;
-import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesModel;
-import com.mikitellurium.telluriumsrandomstuff.client.armor.LavaGooglesOverlay;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
+import com.mikitellurium.telluriumsrandomstuff.client.LavaGooglesOverlay;
 import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRenderer;
-import com.mikitellurium.telluriumsrandomstuff.client.entity.GrapplingHookModel;
-import com.mikitellurium.telluriumsrandomstuff.client.entity.GrapplingHookRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulAnchorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;

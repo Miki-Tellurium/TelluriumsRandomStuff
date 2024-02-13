@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.entity;
+package com.mikitellurium.telluriumsrandomstuff.client.item;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mojang.blaze3d.systems.RenderSystem;

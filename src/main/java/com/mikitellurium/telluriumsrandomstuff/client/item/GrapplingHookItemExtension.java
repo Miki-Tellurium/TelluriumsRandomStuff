@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.entity;
+package com.mikitellurium.telluriumsrandomstuff.client.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;

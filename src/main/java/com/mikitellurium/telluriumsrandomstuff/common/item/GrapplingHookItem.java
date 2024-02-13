@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.client.entity.GrapplingHookItemExtension;
+import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookItemExtension;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;

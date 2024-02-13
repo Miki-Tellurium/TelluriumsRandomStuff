@@ -2,12 +2,11 @@ package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFurnaceMenu;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.GuiFluidRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -16,9 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;

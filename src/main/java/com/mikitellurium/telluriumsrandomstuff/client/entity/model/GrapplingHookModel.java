@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.entity;
+package com.mikitellurium.telluriumsrandomstuff.client.entity.model;
 // Made with Blockbench 4.9.3
 
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;

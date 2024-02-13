@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.armor;
+package com.mikitellurium.telluriumsrandomstuff.client.entity.model;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.AgeableListModel;

@@ -36,7 +36,7 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
                 .defaultDurability(64)
                 .fireResistant());
     }
-
+    // todo look at IClientItemExtensions renderHelmetOverlay for overlay
     @Override
     public EquipmentSlot getEquipmentSlot() {
         return EquipmentSlot.HEAD;
