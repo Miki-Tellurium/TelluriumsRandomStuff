@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, value = Dist.CLIENT)
 public class KeyEvents {
 
-    private static final float increase = 0.01F;
+    private static final float increase = 0.1F;
     private static final float initScale = 1.0F;
     private static final float initX = 0.0F;
     private static final float initY = 0.0F;

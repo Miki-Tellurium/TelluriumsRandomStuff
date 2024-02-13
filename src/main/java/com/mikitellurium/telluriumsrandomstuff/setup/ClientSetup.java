@@ -3,7 +3,6 @@ package com.mikitellurium.telluriumsrandomstuff.setup;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
-import com.mikitellurium.telluriumsrandomstuff.client.LavaGooglesOverlay;
 import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
@@ -120,11 +119,6 @@ public class ClientSetup {
         event.registerSpriteSet(ModParticles.SOUL_LAVA_FALL.get(), SoulLavaDripParticle.SoulLavaFallProvider::new);
         event.registerSpriteSet(ModParticles.SOUL_LAVA_HANG.get(), SoulLavaDripParticle.SoulLavaHangProvider::new);
         event.registerSpriteSet(ModParticles.SOUL_LAVA_LAND.get(), SoulLavaDripParticle.SoulLavaLandProvider::new);
-    }
-
-    @SubscribeEvent
-    public static void registerOverlays(RegisterGuiOverlaysEvent event) {
-        event.registerBelowAll(TelluriumsRandomStuffMod.MOD_ID + "_lava_googles_overlay", new LavaGooglesOverlay());
     }
 
     @SubscribeEvent

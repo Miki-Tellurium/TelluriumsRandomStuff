@@ -1,9 +1,14 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
+import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -20,15 +25,19 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class LavaGooglesItem extends Item implements Equipable, Vanishable {
 
+    public static ResourceLocation OVERLAY_TEXTURE =
+            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/misc/lava_googles_overlay.png");
     public static final String tag_color = "color";
 
     public LavaGooglesItem() {
@@ -36,7 +45,7 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
                 .defaultDurability(64)
                 .fireResistant());
     }
-    // todo look at IClientItemExtensions renderHelmetOverlay for overlay
+
     @Override
     public EquipmentSlot getEquipmentSlot() {
         return EquipmentSlot.HEAD;
@@ -93,6 +102,25 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            @Override
+            public void renderHelmetOverlay(ItemStack stack, Player player, int width, int height, float partialTick) {
+                Minecraft minecraft = Minecraft.getInstance();
+                boolean isFirstPerson = minecraft.options.getCameraType().isFirstPerson();
+                if (player.getItemBySlot(EquipmentSlot.HEAD).is(stack.getItem()) && !player.isSpectator() && isFirstPerson) {
+                    GuiGraphics graphics = new GuiGraphics(minecraft, minecraft.renderBuffers().bufferSource());
+                    RenderSystem.enableBlend();
+                    graphics.blit(OVERLAY_TEXTURE, 0, 0, -90, 0.0F, 0.0F,
+                            width, height, width, height);
+                    RenderSystem.disableBlend();
+                    graphics.flush();
+                }
+            }
+        });
     }
 
     /* Events */
