@@ -43,7 +43,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        AtomicReference<InteractionResultHolder<ItemStack>> result = new AtomicReference<>(InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide()));
+        AtomicReference<InteractionResultHolder<ItemStack>> result = new AtomicReference<>(InteractionResultHolder.fail(itemstack));
         if (!level.isClientSide) {
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
                 if (hook.isHookPresent()) {
@@ -51,6 +51,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
                         int damage = hook.getHook().retrieve(player.isShiftKeyDown());
                         itemstack.hurtAndBreak(damage, player, (p) -> p.broadcastBreakEvent(hand));
                         player.awardStat(Stats.ITEM_USED.get(this));
+                        result.set(InteractionResultHolder.success(itemstack));
                     }
                 } else {
                     player.startUsingItem(hand);
