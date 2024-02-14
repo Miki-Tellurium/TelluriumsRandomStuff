@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.config;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulAnchorBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
@@ -20,7 +20,7 @@ public class ModCommonConfig {
     }
 
     private static void registerConfig(ForgeConfigSpec.Builder builder) {
-        builder.comment("Tellurium's Random Stuff Config").push(TelluriumsRandomStuffMod.MOD_ID);
+        builder.comment("Tellurium's Random Stuff Config").push(FastLoc.modId());
 
         ENABLE_MOD_DISPENSER_BEHAVIOR = builder
                 .comment("Enable dispenser interactions with cauldrons.")

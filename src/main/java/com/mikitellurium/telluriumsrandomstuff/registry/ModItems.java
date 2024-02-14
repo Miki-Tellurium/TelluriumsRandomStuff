@@ -1,9 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.MoltenAmethystItem;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -22,7 +22,7 @@ public class ModItems {
 
     private static final int opaliumToolsDurability = 250;
 
-    public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TelluriumsRandomStuffMod.MOD_ID);
+    public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FastLoc.modId());
 
     public static final RegistryObject<Item> SOUL_LAVA_BUCKET = ITEMS.register("soul_lava_bucket",
             () -> new BucketItem(ModFluids.SOUL_LAVA_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)) {

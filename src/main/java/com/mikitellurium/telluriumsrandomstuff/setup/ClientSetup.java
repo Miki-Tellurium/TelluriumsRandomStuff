@@ -1,10 +1,10 @@
 package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
-import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
 import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulAnchorScreen;
@@ -28,7 +28,6 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

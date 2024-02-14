@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.block.*;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModBlockModelProvider extends BlockStateProvider {
 
     public ModBlockModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, TelluriumsRandomStuffMod.MOD_ID, existingFileHelper);
+        super(output, FastLoc.modId(), existingFileHelper);
     }
 
     @Override

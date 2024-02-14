@@ -1,13 +1,13 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class ModTranslationProvider extends LanguageProvider {
 
     public ModTranslationProvider(PackOutput output) {
-        super(output, TelluriumsRandomStuffMod.MOD_ID, "en_us");
+        super(output, FastLoc.modId(), "en_us");
     }
 
     @Override

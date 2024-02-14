@@ -1,10 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -13,14 +10,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.Map;
 
 public class SoulInfusionRecipe implements Recipe<Container> {
 
@@ -108,8 +103,7 @@ public class SoulInfusionRecipe implements Recipe<Container> {
 
     public static class Serializer implements RecipeSerializer<SoulInfusionRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID =
-                new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_infusion");
+        public static final ResourceLocation ID = FastLoc.modLoc("soul_infusion");
 
         @Override
         public SoulInfusionRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {

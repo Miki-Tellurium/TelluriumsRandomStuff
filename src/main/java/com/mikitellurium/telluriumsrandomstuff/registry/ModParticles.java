@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModParticles {
 
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(
-            ForgeRegistries.PARTICLE_TYPES, TelluriumsRandomStuffMod.MOD_ID);
+            ForgeRegistries.PARTICLE_TYPES, FastLoc.modId());
 
     public static final RegistryObject<SimpleParticleType> SOUL_LAVA_FALL =
             PARTICLE_TYPES.register("soul_lava_fall", () -> new SimpleParticleType(true));

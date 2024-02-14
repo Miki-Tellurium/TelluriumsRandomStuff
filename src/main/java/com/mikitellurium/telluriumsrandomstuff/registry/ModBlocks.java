@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.block.*;
 import com.mikitellurium.telluriumsrandomstuff.common.fluid.SoulLavaBlock;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public class ModBlocks {
 
     public static  final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, TelluriumsRandomStuffMod.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.BLOCKS, FastLoc.modId());
 
     public static final RegistryObject<Block> GRATE_SOUL_SAND = registerBlockWithItem("grate_soul_sand", GrateSoulSandBlock::new);
 

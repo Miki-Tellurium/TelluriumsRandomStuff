@@ -1,12 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.block.ItemPedestalBlock;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.LavaGooglesRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulInfusionRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulLavaTransmutationRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
@@ -673,7 +673,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     private ResourceLocation modLoc(String id) {
-        return new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, id);
+        return FastLoc.modLoc(id);
     }
 
 }

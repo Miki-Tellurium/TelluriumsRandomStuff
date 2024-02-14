@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import net.minecraft.sounds.SoundEvents;
-
 import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.common.util.ForgeSoundType;
 

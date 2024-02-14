@@ -2,7 +2,6 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModParticles;
-import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

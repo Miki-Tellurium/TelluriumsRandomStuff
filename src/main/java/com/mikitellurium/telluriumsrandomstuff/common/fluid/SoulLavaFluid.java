@@ -1,12 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.fluid;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModFluidTypes;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModParticles;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
+import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

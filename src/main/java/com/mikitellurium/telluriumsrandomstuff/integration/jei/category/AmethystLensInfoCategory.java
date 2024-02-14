@@ -1,9 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidBlockRenderer;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidBlockRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -14,8 +14,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -24,10 +22,8 @@ import net.minecraft.world.level.material.Fluids;
 
 public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInfoCategory.Recipe> {
 
-    public final static ResourceLocation UID =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "amethyst_lens_info");
-    public final static ResourceLocation GUI_TEXTURE =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/jei_gui.png");
+    public final static ResourceLocation UID = FastLoc.modLoc("amethyst_lens_info");
+    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
 
     private final IDrawable icon;
     private final IDrawable background;

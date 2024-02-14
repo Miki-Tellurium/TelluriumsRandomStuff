@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.ExtractorMenu;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,8 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class ExtractorScreen extends AbstractContainerScreen<ExtractorMenu> {
 
-    public static final ResourceLocation GUI_TEXTURE =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/extractor_gui.png");
+    public static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/extractor_gui.png");
 
     public ExtractorScreen(ExtractorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);

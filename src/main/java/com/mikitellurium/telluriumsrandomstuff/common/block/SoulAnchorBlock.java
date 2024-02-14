@@ -1,12 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulAnchorBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorLevelData;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -223,8 +222,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
     public static void onAttachPlayerCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
             if (!player.getCapability(SoulAnchorCapabilityProvider.INSTANCE).isPresent()) {
-                event.addCapability(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_anchor"),
-                        new SoulAnchorCapabilityProvider());
+                event.addCapability(FastLoc.modLoc("soul_anchor"), new SoulAnchorCapabilityProvider());
             }
         }
     }

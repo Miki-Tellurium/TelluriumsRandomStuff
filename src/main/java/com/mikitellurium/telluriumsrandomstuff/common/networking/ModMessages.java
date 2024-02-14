@@ -1,10 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.common.networking;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.*;
-import net.minecraft.resources.ResourceLocation;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
@@ -20,7 +18,7 @@ public class ModMessages {
 
     public static void register() {
         SimpleChannel net = NetworkRegistry.ChannelBuilder
-                .named(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "messages"))
+                .named(FastLoc.modLoc("messages"))
                 .networkProtocolVersion(() -> "1.0")
                 .clientAcceptedVersions(s -> true)
                 .serverAcceptedVersions(s -> true)

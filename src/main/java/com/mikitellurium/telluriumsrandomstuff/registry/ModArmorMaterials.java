@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.Util;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -72,7 +72,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
     }
 
     public String getName() {
-        return TelluriumsRandomStuffMod.MOD_ID + ":" + this.name;
+        return FastLoc.modId() + ":" + this.name;
     }
 
     public float getToughness() {

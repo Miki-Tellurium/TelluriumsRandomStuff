@@ -1,19 +1,19 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFurnaceScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.category.*;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ClickableIngredient;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import mezz.jei.api.IModPlugin;
@@ -35,13 +35,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @JeiPlugin
 public class JeiIntegration implements IModPlugin {
@@ -61,7 +62,7 @@ public class JeiIntegration implements IModPlugin {
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "jei_plugin");
+        return FastLoc.modLoc("jei_plugin");
     }
 
     @Override

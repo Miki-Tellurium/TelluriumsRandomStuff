@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.common.command;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapability;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -15,7 +15,7 @@ import java.util.Collection;
 public class SoulAnchorCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal(TelluriumsRandomStuffMod.MOD_ID)
+        dispatcher.register(Commands.literal(FastLoc.modId())
                 .requires((commandSourceStack) -> commandSourceStack.hasPermission(3))
                 .then(Commands.literal("soulAnchor")
                         .then(Commands.literal("clearSavedInventory")

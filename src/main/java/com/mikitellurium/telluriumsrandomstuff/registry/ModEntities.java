@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModEntities {
 
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(
-            ForgeRegistries.ENTITY_TYPES, TelluriumsRandomStuffMod.MOD_ID);
+            ForgeRegistries.ENTITY_TYPES, FastLoc.modId());
 
     public static final RegistryObject<EntityType<GrapplingHookEntity>> GRAPPLING_HOOK = ENTITY_TYPES.register("grappling_hook",
             () -> EntityType.Builder.<GrapplingHookEntity>of(GrapplingHookEntity::new, MobCategory.MISC)

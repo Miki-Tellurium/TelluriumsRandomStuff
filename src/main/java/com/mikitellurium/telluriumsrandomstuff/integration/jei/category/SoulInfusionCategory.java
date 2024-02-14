@@ -3,12 +3,12 @@ package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidTankRenderer;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidTankRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -33,10 +33,8 @@ import java.util.List;
 
 public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe> {
 
-    public final static ResourceLocation UID =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_infusion");
-    public final static ResourceLocation GUI_TEXTURE =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/jei_gui.png");
+    public final static ResourceLocation UID = FastLoc.modLoc("soul_infusion");
+    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
 
     private final Font font = Minecraft.getInstance().font;
     private final IDrawable background;

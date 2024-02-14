@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders;
 
 import com.google.gson.JsonObject;
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeSerializers;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -59,7 +59,7 @@ public class SoulInfusionRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> consumer, String id) {
-        this.save(consumer, new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, id));
+        this.save(consumer, FastLoc.modLoc(id));
     }
 
     private static class Result implements FinishedRecipe {

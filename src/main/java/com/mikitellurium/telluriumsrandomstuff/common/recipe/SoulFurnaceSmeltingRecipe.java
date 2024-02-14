@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -80,8 +80,7 @@ public class SoulFurnaceSmeltingRecipe implements Recipe<Container> {
 
     public static class Serializer implements RecipeSerializer<SoulFurnaceSmeltingRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID =
-                new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "soul_furnace_smelting");
+        public static final ResourceLocation ID = FastLoc.modLoc("soul_furnace_smelting");
 
         @Override
         public SoulFurnaceSmeltingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {

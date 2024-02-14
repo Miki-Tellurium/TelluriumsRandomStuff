@@ -10,7 +10,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.entity.Entity;
 
 public class GrapplingHookModel extends Model {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(

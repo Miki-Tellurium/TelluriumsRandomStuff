@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -109,7 +109,7 @@ public class LavaGooglesRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> recipeConsumer, String recipeId) {
-        this.save(recipeConsumer, new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, recipeId));
+        this.save(recipeConsumer, FastLoc.modLoc(recipeId));
     }
 
     protected static class Result implements FinishedRecipe {

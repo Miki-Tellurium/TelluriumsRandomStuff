@@ -1,8 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.FluidSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

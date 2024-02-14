@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.common.command;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.commands.CommandSourceStack;
@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 public class LavaGooglesCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal(TelluriumsRandomStuffMod.MOD_ID)
+        dispatcher.register(Commands.literal(FastLoc.modId())
                 .requires((commandSourceStack) -> commandSourceStack.hasPermission(3))
                 .then(Commands.literal("getLavaGoogles")
                         .executes((context) -> {

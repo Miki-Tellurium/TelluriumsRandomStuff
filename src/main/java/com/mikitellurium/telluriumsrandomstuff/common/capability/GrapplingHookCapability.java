@@ -1,13 +1,10 @@
 package com.mikitellurium.telluriumsrandomstuff.common.capability;
 
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.function.Consumer;
 
 @AutoRegisterCapability

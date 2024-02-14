@@ -1,12 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapability;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapabilityProvider;
-import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.fluid;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.util.BaseFluidType;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -15,10 +15,8 @@ import org.joml.Vector3f;
 
 public class SoulLavaFluidType extends BaseFluidType {
 
-    private static final ResourceLocation SOUL_LAVA_STILL_RL =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "block/soul_lava_still");
-    private static final ResourceLocation SOUL_LAVA_FLOWING_RL =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID,"block/soul_lava_flow");
+    private static final ResourceLocation SOUL_LAVA_STILL_RL = FastLoc.modLoc("block/soul_lava_still");
+    private static final ResourceLocation SOUL_LAVA_FLOWING_RL = FastLoc.modLoc("block/soul_lava_flow");
 
     public SoulLavaFluidType() {
         super(SOUL_LAVA_STILL_RL, SOUL_LAVA_FLOWING_RL, SOUL_LAVA_FLOWING_RL,

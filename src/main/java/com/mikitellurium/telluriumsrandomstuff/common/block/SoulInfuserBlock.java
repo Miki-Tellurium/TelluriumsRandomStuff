@@ -1,8 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.FluidSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import net.minecraft.core.BlockPos;

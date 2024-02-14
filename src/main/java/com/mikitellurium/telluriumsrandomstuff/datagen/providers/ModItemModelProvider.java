@@ -1,15 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.BlockModelProvider;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
@@ -17,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModItemModelProvider extends ItemModelProvider {
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, TelluriumsRandomStuffMod.MOD_ID, existingFileHelper);
+        super(output, FastLoc.modId(), existingFileHelper);
     }
 
     @Override

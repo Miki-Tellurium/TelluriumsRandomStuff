@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.fluid.SoulLavaFluid;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModFluids {
 
     public static final DeferredRegister<Fluid> FLUIDS =
-            DeferredRegister.create(ForgeRegistries.FLUIDS, TelluriumsRandomStuffMod.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.FLUIDS, FastLoc.modId());
 
     public static final RegistryObject<FlowingFluid> SOUL_LAVA_SOURCE = FLUIDS.register("soul_lava",
             () -> new SoulLavaFluid.Source(ModFluids.SOUL_LAVA_PROPERTIES));

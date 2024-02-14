@@ -1,17 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulInfuserMenu;
-import com.mikitellurium.telluriumsrandomstuff.common.block.SoulFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulInfuserBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
-import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,18 +14,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Optional;
 
 public class SoulInfuserBlockEntity extends AbstractSoulSmeltingBlockEntity<SoulInfusionRecipe> implements MenuProvider {

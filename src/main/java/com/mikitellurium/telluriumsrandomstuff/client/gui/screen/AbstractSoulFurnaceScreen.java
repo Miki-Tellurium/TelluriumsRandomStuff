@@ -1,9 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
@@ -24,8 +24,7 @@ import java.util.Optional;
 
 public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMenu> extends AbstractContainerScreen<T> {
 
-    public static final ResourceLocation ELEMENT_TEXTURE =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/jei_gui.png");
+    public static final ResourceLocation ELEMENT_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
     private final ResourceLocation guiTexture;
     private Rect2i soulLavaStorage;
 

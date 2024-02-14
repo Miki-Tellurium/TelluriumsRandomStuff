@@ -1,9 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModRecipeSerializers {
 
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =
-            DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, TelluriumsRandomStuffMod.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, FastLoc.modId());
 
     public static final RegistryObject<RecipeSerializer<SoulFurnaceSmeltingRecipe>> SOUL_FURNACE_SMELTING_SERIALIZER =
             SERIALIZERS.register(SoulFurnaceSmeltingRecipe.Type.ID, () -> SoulFurnaceSmeltingRecipe.Serializer.INSTANCE);

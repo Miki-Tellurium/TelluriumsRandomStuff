@@ -1,10 +1,10 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.ExtractorMenu;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulAnchorMenu;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulInfuserMenu;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModMenuTypes {
 
     public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(ForgeRegistries.MENU_TYPES, TelluriumsRandomStuffMod.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.MENU_TYPES, FastLoc.modId());
 
     public static final RegistryObject<MenuType<SoulFurnaceMenu>> SOUL_FURNACE_MENU =
             registerMenuType(SoulFurnaceMenu::new, "soul_furnace_menu");

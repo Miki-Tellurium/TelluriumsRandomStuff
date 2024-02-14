@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block.interaction;
 
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.dispenserbehavior.DispenseCauldronBehavior;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;

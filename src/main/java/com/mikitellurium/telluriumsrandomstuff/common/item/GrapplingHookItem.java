@@ -1,13 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookItemExtension;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.GrapplingHookSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import net.minecraft.resources.ResourceLocation;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -121,7 +120,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
     public static void onAttachPlayerCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
             if (!player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).isPresent()) {
-                event.addCapability(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "grappling_hook"),
+                event.addCapability(FastLoc.modLoc("grappling_hook"),
                         new GrapplingHookCapabilityProvider());
             }
         }

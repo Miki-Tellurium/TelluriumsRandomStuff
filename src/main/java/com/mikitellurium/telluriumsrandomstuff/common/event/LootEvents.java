@@ -2,13 +2,12 @@ package com.mikitellurium.telluriumsrandomstuff.common.event;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -30,14 +28,10 @@ import java.util.Collection;
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class LootEvents {
 
-    private static final ResourceLocation SMALL_SOUL_FRAGMENT_MONSTERS =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "entities/small_soul_fragment_monsters");
-    private static final ResourceLocation SMALL_SOUL_FRAGMENT_GENERIC =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "entities/small_soul_fragment_generic");
-    private static final ResourceLocation SOUL_FRAGMENT_BOSSES =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "entities/soul_fragments_boss");
-    private static final ResourceLocation SOUL_FRAGMENT_WARDEN =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "entities/soul_fragments_warden");
+    private static final ResourceLocation SMALL_SOUL_FRAGMENT_MONSTERS = FastLoc.modLoc("entities/small_soul_fragment_monsters");
+    private static final ResourceLocation SMALL_SOUL_FRAGMENT_GENERIC = FastLoc.modLoc("entities/small_soul_fragment_generic");
+    private static final ResourceLocation SOUL_FRAGMENT_BOSSES = FastLoc.modLoc("entities/soul_fragments_boss");
+    private static final ResourceLocation SOUL_FRAGMENT_WARDEN = FastLoc.modLoc("entities/soul_fragments_warden");
 
     /* Drop death loot */
     @SubscribeEvent

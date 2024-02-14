@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -36,8 +36,7 @@ import java.util.function.Consumer;
 
 public class LavaGooglesItem extends Item implements Equipable, Vanishable {
 
-    public static ResourceLocation OVERLAY_TEXTURE =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/misc/lava_googles_overlay.png");
+    public static ResourceLocation OVERLAY_TEXTURE = FastLoc.modLoc("textures/misc/lava_googles_overlay.png");
     public static final String tag_color = "color";
 
     public LavaGooglesItem() {

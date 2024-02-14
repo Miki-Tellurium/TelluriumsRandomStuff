@@ -1,9 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -22,10 +22,8 @@ import net.minecraft.world.level.block.Blocks;
 
 public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTransmutationRecipe> {
 
-    public final static ResourceLocation UID =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, SoulLavaTransmutationRecipe.Type.ID);
-    public final static ResourceLocation GUI_TEXTURE =
-            new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, "textures/gui/jei_gui.png");
+    public final static ResourceLocation UID = FastLoc.modLoc(SoulLavaTransmutationRecipe.Type.ID);
+    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
 
     private final IDrawable icon;
     private final IDrawable background;

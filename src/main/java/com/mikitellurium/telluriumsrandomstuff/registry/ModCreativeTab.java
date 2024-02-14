@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
@@ -17,7 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModCreativeTab {
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB,
-            TelluriumsRandomStuffMod.MOD_ID);
+            FastLoc.modId());
 
     public static final RegistryObject<CreativeModeTab> TAB_TELLURIUMSRANDOMSTUFF = CREATIVE_TABS.register(
             "creative_tab", () -> CreativeModeTab.builder()

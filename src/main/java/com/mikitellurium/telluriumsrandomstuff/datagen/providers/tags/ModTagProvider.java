@@ -1,21 +1,16 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers.tags;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -29,7 +24,7 @@ public class ModTagProvider {
 
         public Blocks(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
                       @Nullable ExistingFileHelper existingFileHelper) {
-            super(output, lookupProvider, TelluriumsRandomStuffMod.MOD_ID, existingFileHelper);
+            super(output, lookupProvider, FastLoc.modId(), existingFileHelper);
         }
 
         @Override
@@ -53,7 +48,7 @@ public class ModTagProvider {
 
         public Items(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider,
                      CompletableFuture<TagLookup<Block>> blockLookup, @Nullable ExistingFileHelper existingFileHelper) {
-            super(packOutput, lookupProvider, blockLookup, TelluriumsRandomStuffMod.MOD_ID, existingFileHelper);
+            super(packOutput, lookupProvider, blockLookup, FastLoc.modId(), existingFileHelper);
         }
 
         @Override
@@ -103,7 +98,7 @@ public class ModTagProvider {
 
         public EntityTypes(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider,
                            @Nullable ExistingFileHelper existingFileHelper) {
-            super(packOutput, lookupProvider, TelluriumsRandomStuffMod.MOD_ID, existingFileHelper);
+            super(packOutput, lookupProvider, FastLoc.modId(), existingFileHelper);
         }
 
         @Override

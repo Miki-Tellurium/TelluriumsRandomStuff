@@ -1,8 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -20,7 +19,7 @@ public class ModTags {
         public static final TagKey<Block> NEEDS_OPAL_CRYSTAL_TOOL = create("needs_opal_crystal_tools");
 
         public static TagKey<Block> create(String name) {
-            return BlockTags.create(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, name));
+            return BlockTags.create(FastLoc.modLoc(name));
         }
 
     }
@@ -32,7 +31,7 @@ public class ModTags {
         public static final TagKey<Item> ALLAY_DUPLICATION_ITEMS = create("allay_duplication_items");
 
         public static TagKey<Item> create(String name) {
-            return ItemTags.create(new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, name));
+            return ItemTags.create(FastLoc.modLoc(name));
         }
     }
 
@@ -42,7 +41,7 @@ public class ModTags {
         public static TagKey<EntityType<?>> SOUL_FRAGMENT_DROP_BOSS = create("soul_fragment_drop_boss");
 
         public static TagKey<EntityType<?>> create(String name) {
-            return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, name));
+            return TagKey.create(Registries.ENTITY_TYPE, FastLoc.modLoc(name));
         }
     }
 

@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.helper;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
@@ -28,7 +28,7 @@ public class BlockIngredientHelper implements IIngredientHelper<BlockState> {
 
     @Override
     public ResourceLocation getResourceLocation(BlockState ingredient) {
-        return new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, ingredient.getBlock().getDescriptionId());
+        return FastLoc.modLoc(ingredient.getBlock().getDescriptionId());
     }
 
     @Override

@@ -2,9 +2,8 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import net.minecraft.core.NonNullList;
@@ -86,7 +85,7 @@ public class RecipeHelper {
     private static SoulFurnaceSmeltingRecipe convert(SmeltingRecipe recipe) {
         String itemId = ForgeRegistries.ITEMS.getDelegateOrThrow(recipe.getResultItem(RegistryAccess.EMPTY).getItem())
                 .key().location().getPath();
-        ResourceLocation id = new ResourceLocation(TelluriumsRandomStuffMod.MOD_ID, itemId + "_from_soul_furnace_smelting");
+        ResourceLocation id = FastLoc.modLoc(itemId + "_from_soul_furnace_smelting");
 
         Ingredient ingredient = recipe.getIngredients().get(0);
         ItemStack output = recipe.getResultItem(RegistryAccess.EMPTY);
