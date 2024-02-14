@@ -4,12 +4,9 @@ import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulInfuserMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulInfuserBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.category.AmethystLensInfoCategory;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
-import com.mikitellurium.telluriumsrandomstuff.util.SpecialMappedItemStackHandler;
+import com.mikitellurium.telluriumsrandomstuff.util.MappedItemStackHandler;
 import com.mikitellurium.telluriumsrandomstuff.util.WrappedHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -46,8 +43,9 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
     private static final int INPUT_SLOT1 = 1;
     private static final int INPUT_SLOT2 = 2;
     private static final int OUTPUT_SLOT = 3;
-    private final SpecialMappedItemStackHandler itemHandler =
-            new SpecialMappedItemStackHandler(4, BUCKET_SLOT, new int[] {INPUT_SLOT1, INPUT_SLOT2}, new int[] {OUTPUT_SLOT}) {
+    private final MappedItemStackHandler itemHandler =
+            new MappedItemStackHandler(4, (i) -> i == INPUT_SLOT1 || i == INPUT_SLOT2,
+                    (i) -> i == OUTPUT_SLOT, (i) -> i == BUCKET_SLOT) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -105,7 +103,7 @@ public class SoulInfuserBlockEntity extends AbstractSoulFueledBlockEntity implem
         }
     };
     private CachedObject<SoulInfusionRecipe> cachedRecipe = CachedObject.empty();
-
+    // todo add useless boilerplate abstraction
     @SuppressWarnings("all")
     public SoulInfuserBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SOUL_INFUSER.get(), pos, state, 4000);

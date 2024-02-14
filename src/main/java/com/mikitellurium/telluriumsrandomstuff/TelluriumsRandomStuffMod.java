@@ -26,7 +26,7 @@ public class TelluriumsRandomStuffMod {
     // todo change soul infused soul sand texture
     // todo add strider to soul lava goal
     // todo change all rl with FastLoc
-
+    // todo soul compactor
     public static final String MOD_ID = "telluriumsrandomstuff";
     public static final Logger LOGGER = LogUtils.getLogger();
 

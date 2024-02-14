@@ -3,8 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.util.SpecialMappedItemStackHandler;
+import com.mikitellurium.telluriumsrandomstuff.util.MappedItemStackHandler;
 import com.mikitellurium.telluriumsrandomstuff.util.WrappedHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,8 +39,8 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
     private static final int BUCKET_SLOT = 0;
     private static final int INPUT_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
-    private final SpecialMappedItemStackHandler itemHandler =
-            new SpecialMappedItemStackHandler(3, BUCKET_SLOT, new int[] {INPUT_SLOT}, new int[] {OUTPUT_SLOT}) {
+    private final MappedItemStackHandler itemHandler =
+            new MappedItemStackHandler(3, (i) -> i == INPUT_SLOT, (i) -> i == OUTPUT_SLOT, (i) -> i == BUCKET_SLOT) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -59,7 +58,7 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
                             (i) -> i == OUTPUT_SLOT || hasEmptyBucket(i),
                             (i, s) -> false)),
                     Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                            (i) -> i == BUCKET_SLOT,
+                            (i) ->  i == BUCKET_SLOT,
                             (i, s) -> i == BUCKET_SLOT && itemHandler.isItemValid(BUCKET_SLOT, s))),
                     Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
                             (i) -> i == BUCKET_SLOT,
