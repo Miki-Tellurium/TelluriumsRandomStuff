@@ -11,7 +11,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map;
 
-public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
+public class SoulInfusionRecipe implements Recipe<Container> {
 
     private final ResourceLocation id;
     private final ItemStack output;
@@ -37,7 +37,7 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public boolean matches(SimpleContainer container, Level level) {
+    public boolean matches(Container container, Level level) {
         if(level.isClientSide()) {
             return false;
         }
@@ -71,7 +71,7 @@ public class SoulInfusionRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer container, RegistryAccess registryAccess) {
+    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         return output.copy();
     }
 
