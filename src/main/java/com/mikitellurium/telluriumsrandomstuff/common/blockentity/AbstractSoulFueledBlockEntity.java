@@ -6,7 +6,6 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,13 +16,12 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractSoulFueledBlockEntity extends BlockEntity {
 
-    private final Fluid SOUL_LAVA = ModFluids.SOUL_LAVA_SOURCE.get();
+    private final Fluid soulLava = ModFluids.SOUL_LAVA_SOURCE.get();
 
     private final FluidTank fluidTank = new FluidTank(0) {
         @Override
@@ -34,7 +32,7 @@ public abstract class AbstractSoulFueledBlockEntity extends BlockEntity {
 
         @Override
         public boolean isFluidValid(FluidStack fluidStack) {
-            return fluidStack.getFluid().isSame(SOUL_LAVA);
+            return fluidStack.getFluid().isSame(AbstractSoulFueledBlockEntity.this.soulLava);
         }
     };
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
@@ -45,27 +43,15 @@ public abstract class AbstractSoulFueledBlockEntity extends BlockEntity {
         this.fluidTank.setCapacity(tankCapacity);
     }
 
-    public void handleTankRefill(ItemStackHandler itemHandler, int bucketSlot) {
-        if (itemHandler.getStackInSlot(bucketSlot).is(SOUL_LAVA.getBucket()) &&
-                this.canRefillFluidTank()) {
-            this.refillFluidTank(itemHandler, bucketSlot);
-        }
-    }
-
-    private boolean canRefillFluidTank() {
-        return this.fluidTank.getSpace() >= 1000;
-    }
-
-    private void refillFluidTank(ItemStackHandler itemHandler, int bucketSlot) {
-        itemHandler.setStackInSlot(bucketSlot, Items.BUCKET.getDefaultInstance());
-        this.fillTank(1000);
+    public boolean canRefillFluidTank(int amount) {
+        return this.fluidTank.getSpace() >= amount;
     }
 
     public FluidTank getFluidTank() {
-        return fluidTank;
+        return this.fluidTank;
     }
 
-    public FluidStack getFluid() {
+    public FluidStack getFluidStack() {
         return this.fluidTank.getFluid();
     }
 
@@ -73,16 +59,16 @@ public abstract class AbstractSoulFueledBlockEntity extends BlockEntity {
         return this.fluidTank.getCapacity();
     }
 
-    public void setFluid(FluidStack fluid) {
+    public void setFluidStack(FluidStack fluid) {
         this.fluidTank.setFluid(fluid);
     }
 
     public void fillTank(int amount) {
-        this.fluidTank.fill(new FluidStack(SOUL_LAVA, amount), IFluidHandler.FluidAction.EXECUTE);
+        this.fluidTank.fill(new FluidStack(this.soulLava, amount), IFluidHandler.FluidAction.EXECUTE);
     }
 
     public void drainTank(int amount) {
-        this.fluidTank.drain(new FluidStack(SOUL_LAVA, amount), IFluidHandler.FluidAction.EXECUTE);
+        this.fluidTank.drain(new FluidStack(this.soulLava, amount), IFluidHandler.FluidAction.EXECUTE);
     }
 
     @Override

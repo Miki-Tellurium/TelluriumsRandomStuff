@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
 import com.mikitellurium.telluriumsrandomstuff.util.MappedItemStackHandler;
 import com.mikitellurium.telluriumsrandomstuff.util.WrappedHandler;
@@ -9,6 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -21,6 +23,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -82,11 +85,20 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
         if (level.isClientSide) {
             return;
         }
-        this.handleTankRefill(this.itemHandler, this.bucketSlot);
+        this.handleTankRefill();
         Optional<R> optionalRecipe = this.getRecipe();
         if (optionalRecipe.isPresent() && this.canProcessRecipe(optionalRecipe.get())) {
             R recipe = optionalRecipe.get();
             this.validateCurrentRecipe(recipe);
+        }
+    }
+
+    private void handleTankRefill() {
+        final int amount = 1000;
+        if (this.itemHandler.getStackInSlot(this.bucketSlot).is(ModItems.SOUL_LAVA_BUCKET.get())
+                && this.canRefillFluidTank(amount)) {
+            this.itemHandler.setStackInSlot(bucketSlot, Items.BUCKET.getDefaultInstance());
+            this.fillTank(amount);
         }
     }
 
@@ -111,6 +123,10 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
 
     public RecipeManager.CachedCheck<Container, R> quickCheck() {
         return this.quickCheck;
+    }
+
+    public ItemStackHandler getItemHandler() {
+        return this.itemHandler;
     }
 
     public SimpleContainer getInventory() {
@@ -164,7 +180,6 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
     }
 
     // NBT
-    @SuppressWarnings("unchecked")
     @Override
     public void onLoad() {
         super.onLoad();

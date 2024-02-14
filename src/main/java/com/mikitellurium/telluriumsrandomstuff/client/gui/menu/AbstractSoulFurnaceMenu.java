@@ -24,7 +24,7 @@ public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
         blockEntity = (AbstractSoulFueledBlockEntity) entity;
         this.level = inventory.player.level();
         this.data = data;
-        this.fluidStack = blockEntity.getFluid();
+        this.fluidStack = blockEntity.getFluidStack();
         this.invSize = invSize;
 
         addPlayerInventory(inventory);
