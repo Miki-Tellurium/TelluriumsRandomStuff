@@ -41,8 +41,6 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
     private final RecipeManager.CachedCheck<Container, R> quickCheck;
     private CachedObject<R> cachedRecipe = CachedObject.empty();
 
-    // todo add useless boilerplate abstraction
-
     @SuppressWarnings("all")
     public AbstractSoulSmeltingBlockEntity(BlockEntityType<? extends AbstractSoulSmeltingBlockEntity> type,
                                            BlockPos pos, BlockState state,  int tankCapacity, RecipeType<R> recipeType,

@@ -23,7 +23,6 @@ public class TelluriumsRandomStuffMod {
     // todo colored soul fragments
     // todo update changelog
     // todo opal armor trims
-    // todo change soul infused soul sand texture
     // todo add strider to soul lava goal
     // todo change all rl with FastLoc
     // todo soul compactor
