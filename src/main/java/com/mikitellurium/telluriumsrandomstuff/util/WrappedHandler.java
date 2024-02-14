@@ -14,14 +14,13 @@ import java.util.function.Predicate;
  */
 public class WrappedHandler implements IItemHandlerModifiable {
     private final IItemHandlerModifiable handler;
-    private final Predicate<Integer> extract;
     private final BiPredicate<Integer, ItemStack> insert;
+    private final Predicate<Integer> extract;
 
-    public WrappedHandler(IItemHandlerModifiable handler, Predicate<Integer> extract,
-                          BiPredicate<Integer, ItemStack> insert) {
+    public WrappedHandler(IItemHandlerModifiable handler, BiPredicate<Integer, ItemStack> insert, Predicate<Integer> extract) {
         this.handler = handler;
-        this.extract = extract;
         this.insert = insert;
+        this.extract = extract;
     }
 
     @Override
