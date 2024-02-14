@@ -10,7 +10,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -81,6 +80,12 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
                         itemHandler::isBucket)));
     }
 
+    /**
+     * Called every tick to update the block entity logic
+     * @param level
+     * @param blockPos
+     * @param blockState
+     */
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
         if (level.isClientSide) {
             return;
@@ -90,6 +95,9 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
         if (optionalRecipe.isPresent() && this.canProcessRecipe(optionalRecipe.get())) {
             R recipe = optionalRecipe.get();
             this.validateCurrentRecipe(recipe);
+            this.onProcessRecipe(recipe);
+        } else {
+            this.resetProgress();
         }
     }
 
@@ -109,15 +117,37 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
         this.cachedRecipe = CachedObject.of(recipe);
     }
 
+    /**
+     * Checks if the current recipe can be processed .
+     * @param recipe the recipe to be checked
+     * @return if the recipe can be checked or not
+     */
     protected abstract boolean canProcessRecipe(R recipe);
 
-    protected abstract void processOutput(R recipe);
+    /**
+     * Handle the recipe processing.
+     * @param recipe the recipe that is being processed
+     */
+    protected abstract void onProcessRecipe(R recipe);
 
+    /**
+     * Produce an output when the recipe has finished processing.
+     * @param recipe the recipe that is being processed
+     */
+    protected abstract void produceOutput(R recipe);
+
+    /**
+     * Used to reset the progress when recipe is not
+     * present or can't be processed.
+     */
     protected abstract void resetProgress();
 
+    /**
+     * @return an optional that contains a recipe if one is present or an empty optional if not
+     */
     protected abstract Optional<R> getRecipe();
 
-    private boolean hasEnoughFuel(int recipeCost) {
+    public boolean hasEnoughFuel(int recipeCost) {
         return this.getFluidTank().getFluidAmount() >= recipeCost;
     }
 
@@ -125,7 +155,7 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
         return this.quickCheck;
     }
 
-    public ItemStackHandler getItemHandler() {
+    public MappedItemStackHandler getItemHandler() {
         return this.itemHandler;
     }
 
@@ -142,7 +172,7 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
         return slot == this.bucketSlot && this.itemHandler.getStackInSlot(this.bucketSlot).is(Items.BUCKET);
     }
 
-    private int getBucketSlot() {
+    public int getBucketSlot() {
         return this.bucketSlot;
     }
 
@@ -196,14 +226,14 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
-        tag.put("inventory", itemHandler.serializeNBT());
+        tag.put("soul_smelter.inventory", itemHandler.serializeNBT());
         super.saveAdditional(tag);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        itemHandler.deserializeNBT(tag.getCompound("inventory"));
+        itemHandler.deserializeNBT(tag.getCompound("soul_smelter.inventory"));
     }
 
 }
