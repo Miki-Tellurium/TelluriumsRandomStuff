@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.event;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
+import com.mikitellurium.telluriumsrandomstuff.common.entity.goal.StriderGoToSoulLavaGoal;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -10,11 +11,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.horse.ZombieHorse;
+import net.minecraft.world.entity.monster.Strider;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +22,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.village.VillageSiegeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -103,6 +103,18 @@ public class GameplayCommonEvents {
         }
 
         level.playSound(null, player, soundevent, SoundSource.PLAYERS, 1.0F, 1.0F);
+    }
+
+    /* Strider */
+    @SubscribeEvent
+    public static void addGoalOnEntityJoin(EntityJoinLevelEvent event) {
+        Entity entity = event.getEntity();
+        if (entity.level().isClientSide) {
+            return;
+        }
+        if (entity instanceof Strider strider) {
+            strider.goalSelector.addGoal(4, new StriderGoToSoulLavaGoal(strider, 1.0D));
+        }
     }
 
 }

@@ -9,6 +9,7 @@
     "LivingEntityMixin",
     "PointedDripstoneBlockMixin",
     "SoulSandBlockMixin",
+    "StriderMixin",
     "TridentItemMixin",
     "ZombieHorseMixin"
   ],
