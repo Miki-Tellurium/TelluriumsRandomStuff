@@ -19,7 +19,7 @@ public abstract class ScreenEffectRendererMixin {
     @Shadow
     private static void renderFire(Minecraft pMinecraft, PoseStack pPoseStack) {}
 
-    @Inject(method = "renderScreenEffect", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isOnFire()Z"))
+    @Inject(method = "renderScreenEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isOnFire()Z"))
     private static void renderFireOverlayInSoulLava(Minecraft minecraft, PoseStack poseStack, CallbackInfo ci) {
         if (SoulLavaFluid.isEntityInSoulLava(minecraft.player)) {
             if(!MinecraftForge.EVENT_BUS.post(new RenderBlockScreenEffectEvent(minecraft.player, poseStack, RenderBlockScreenEffectEvent.OverlayType.FIRE, Blocks.FIRE.defaultBlockState(), minecraft.player.blockPosition()))) {
