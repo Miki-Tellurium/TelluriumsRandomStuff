@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.fluid;
 
+import com.mikitellurium.telluriumsrandomstuff.registry.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;

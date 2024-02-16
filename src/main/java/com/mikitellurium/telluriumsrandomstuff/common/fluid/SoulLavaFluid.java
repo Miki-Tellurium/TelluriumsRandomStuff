@@ -14,6 +14,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -62,7 +63,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         return ModFluidTypes.SOUL_LAVA_FLUID_TYPE.get();
     }
 
-    public static boolean applyMovementLogic(LivingEntity entity, Vec3 vec3, double gravity) {
+    public boolean applyMovementLogic(LivingEntity entity, Vec3 vec3, double gravity) {
         boolean flag = entity.getDeltaMovement().y <= 0.0D;
         double dY = entity.getY();
 
@@ -71,11 +72,15 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         if (soulSpeedLevel > 0) {
             speed = speed + (soulSpeedLevel * 0.055f); // Apply soul speed multiplier
             try {
-                Vec3 vec32 = getSoulSpeedVerticalSpeedAdjustedMovement(entity, entity.getDeltaMovement(), soulSpeedLevel);
+                Vec3 vec32 = this.getSoulSpeedVerticalSpeedAdjustedMovement(entity, entity.getDeltaMovement(), soulSpeedLevel);
                 entity.setDeltaMovement(vec32);
             } catch (IllegalAccessException e) {
                 TelluriumsRandomStuffMod.LOGGER.error("Could not apply soul lava movement logic to entity " + entity.getName());
             }
+        }
+
+        if (entity instanceof Mob mob && mob.getNavigation().canFloat()) {
+            entity.jumpInFluid(ModFluidTypes.SOUL_LAVA_FLUID_TYPE.get());
         }
 
         entity.moveRelative(speed, vec3);
@@ -101,7 +106,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         return true;
     }
 
-    private static Vec3 getSoulSpeedVerticalSpeedAdjustedMovement(LivingEntity entity, Vec3 vec3, int soulSpeed) throws IllegalAccessException {
+    private Vec3 getSoulSpeedVerticalSpeedAdjustedMovement(LivingEntity entity, Vec3 vec3, int soulSpeed) throws IllegalAccessException {
             if (!entity.isNoGravity() && !entity.isSprinting()) {
                 double verticalSpeed = vec3.y;
                 if (entity.isCrouching()) {
@@ -110,7 +115,6 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
                     verticalSpeed = 0.06D * soulSpeed;
                 }
 
-                //System.out.println(verticalSpeed);
                 return new Vec3(vec3.x, verticalSpeed, vec3.z);
             } else {
                 return vec3;
