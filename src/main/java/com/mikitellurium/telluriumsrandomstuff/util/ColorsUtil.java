@@ -83,31 +83,4 @@ public class ColorsUtil {
         return FastColor.ABGR32.color(255, r, g, b);
     }
 
-    /*
-    public static int getLegacyRainbowColor(BlockPos pos, float saturation, float brightness) {
-        int waveSize = 75; // How big are the color waves
-
-        Color color = Color.getHSBColor(
-                (((pos.getX() + pos.getZ() + pos.getY() * 1.05f)) / waveSize) % 1.0f,
-                saturation, brightness);
-        return color.getRGB();
-    }*/
-
-    public static class SoulColor {
-        private static final Color soulColor = new Color(37f / 255f, 244f / 255f, 255f / 255f);
-
-        public static float getRed() {
-            return soulColor.getRed() / 255f;
-        }
-
-        public static float getGreen() {
-            return soulColor.getGreen() / 255f;
-        }
-
-        public static float getBlue() {
-            return soulColor.getBlue() / 255f;
-        }
-
-    }
-
 }

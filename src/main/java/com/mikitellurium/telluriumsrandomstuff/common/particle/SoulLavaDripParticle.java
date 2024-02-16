@@ -2,7 +2,6 @@ package com.mikitellurium.telluriumsrandomstuff.common.particle;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModParticles;
-import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.BlockPos;
@@ -15,7 +14,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
+import java.util.function.Function;
+
 public class SoulLavaDripParticle extends TextureSheetParticle {
+
+    private static final Color PARTICLE_COLOR = new Color(37F / 255F, 244F / 255F, 255F / 255F);
+    private static final Function<Integer, Float> RGB = (i -> i / 255F);
 
     private final Fluid type;
     protected boolean isGlowing;
@@ -133,7 +138,10 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
         }
 
         protected void preMoveUpdate() {
-            this.setColor(ColorsUtil.SoulColor.getRed(), ColorsUtil.SoulColor.getGreen(), ColorsUtil.SoulColor.getBlue());
+            this.setColor(
+                    RGB.apply(PARTICLE_COLOR.getRed()),
+                    RGB.apply(PARTICLE_COLOR.getGreen()),
+                    RGB.apply(PARTICLE_COLOR.getBlue()));
             super.preMoveUpdate();
         }
     }
@@ -167,7 +175,10 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
         @Override
         public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
             SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.FallAndLandParticle(pLevel, pX, pY, pZ, ModFluids.SOUL_LAVA_SOURCE.get(), ModParticles.SOUL_LAVA_LAND.get());
-            dripParticle.setColor(ColorsUtil.SoulColor.getRed(), ColorsUtil.SoulColor.getGreen(), ColorsUtil.SoulColor.getBlue());
+            dripParticle.setColor(
+                    RGB.apply(PARTICLE_COLOR.getRed()),
+                    RGB.apply(PARTICLE_COLOR.getGreen()),
+                    RGB.apply(PARTICLE_COLOR.getBlue()));
             dripParticle.pickSprite(this.sprite);
             return dripParticle;
         }
@@ -199,7 +210,10 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
 
         public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
             SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.DripLandParticle(pLevel, pX, pY, pZ, ModFluids.SOUL_LAVA_SOURCE.get());
-            dripParticle.setColor(ColorsUtil.SoulColor.getRed(), ColorsUtil.SoulColor.getGreen(), ColorsUtil.SoulColor.getBlue());
+            dripParticle.setColor(
+                    RGB.apply(PARTICLE_COLOR.getRed()),
+                    RGB.apply(PARTICLE_COLOR.getGreen()),
+                    RGB.apply(PARTICLE_COLOR.getBlue()));
             dripParticle.pickSprite(this.sprite);
             return dripParticle;
         }
