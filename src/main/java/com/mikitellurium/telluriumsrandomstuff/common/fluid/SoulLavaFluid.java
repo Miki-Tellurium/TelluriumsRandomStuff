@@ -118,7 +118,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     public static void hurt(Entity entity) {
-        if (!entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE) || !entity.fireImmune()) {
+        if (!entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE) && !entity.fireImmune()) {
             entity.setSecondsOnFire(15);
             if (entity.hurt(entity.damageSources().lava(), 4.0F)) {
                 entity.playSound(SoundEvents.GENERIC_BURN, 0.4F,
