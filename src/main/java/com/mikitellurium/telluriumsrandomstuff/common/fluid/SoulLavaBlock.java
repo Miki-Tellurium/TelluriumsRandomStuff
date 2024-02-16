@@ -31,11 +31,6 @@ public class SoulLavaBlock extends LiquidBlock {
     }
 
     @Override
-    public @Nullable BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-        return BlockPathTypes.LAVA;
-    }
-
-    @Override
     public void entityInside(BlockState blockState, Level level, BlockPos pos, Entity entity) {
         if (!level.isClientSide) {
             if (entity instanceof Strider strider) { // Float strider

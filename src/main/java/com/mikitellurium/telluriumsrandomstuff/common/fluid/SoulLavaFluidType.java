@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidType;
@@ -23,15 +24,17 @@ public class SoulLavaFluidType extends BaseFluidType {
                 null, 0xFFFFFFFF, 0.05f, 0.8f,
                 new Vector3f(0f / 255f, 210f / 255f, 225f / 255f),
                 FluidType.Properties.create()
-                        .lightLevel(15)
-                        .density(3000)
-                        .viscosity(6000)
-                        .temperature(1300)
                         .canSwim(false)
                         .canDrown(false)
                         .canExtinguish(false)
+                        .pathType(BlockPathTypes.LAVA)
+                        .adjacentPathType(null)
                         .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
-                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA));
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
+                        .density(3000)
+                        .viscosity(6000)
+                        .temperature(1300)
+                        .lightLevel(15));
     }
 
     @Override
@@ -47,7 +50,7 @@ public class SoulLavaFluidType extends BaseFluidType {
 
     @Override
     public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
-        return SoulLavaFluid.applyMovementLogic(entity, movementVector, gravity);
+        return ((SoulLavaFluid)state.getType()).applyMovementLogic(entity, movementVector, gravity);
     }
 
 }
