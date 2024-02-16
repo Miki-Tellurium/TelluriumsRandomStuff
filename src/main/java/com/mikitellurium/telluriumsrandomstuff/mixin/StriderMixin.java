@@ -35,7 +35,7 @@ public class StriderMixin {
     @Inject(method = "getWalkTargetValue", at = @At(value = "HEAD"), cancellable = true)
     private void getSoulLavaTargetValue(BlockPos pos, LevelReader level, CallbackInfoReturnable<Float> cir) {
         if (level.getBlockState(pos).getFluidState().is(ModFluids.SOUL_LAVA_SOURCE.get())) {
-            cir.setReturnValue(12.0F);
+            cir.setReturnValue(10.0F);
         }
     }
 
