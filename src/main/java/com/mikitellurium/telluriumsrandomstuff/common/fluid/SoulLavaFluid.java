@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.fluid;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +17,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.monster.MagmaCube;
+import net.minecraft.world.entity.monster.Strider;
+import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -27,6 +32,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
@@ -67,6 +74,10 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         boolean flag = entity.getDeltaMovement().y <= 0.0D;
         double dY = entity.getY();
 
+        if ((entity instanceof Mob mob && mob.getNavigation().canFloat())) {
+            this.floatMob(entity);
+        }
+
         float speed = 0.02F;
         int soulSpeedLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.SOUL_SPEED, entity);
         if (soulSpeedLevel > 0) {
@@ -77,10 +88,6 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
             } catch (IllegalAccessException e) {
                 TelluriumsRandomStuffMod.LOGGER.error("Could not apply soul lava movement logic to entity " + entity.getName());
             }
-        }
-
-        if (entity instanceof Mob mob && mob.getNavigation().canFloat()) {
-            entity.jumpInFluid(ModFluidTypes.SOUL_LAVA_FLUID_TYPE.get());
         }
 
         entity.moveRelative(speed, vec3);
@@ -121,6 +128,16 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
             }
     }
 
+    private void floatMob(LivingEntity entity) {
+        if (entity instanceof MagmaCube magmaCube) {
+            Vec3 vec3 = magmaCube.getDeltaMovement();
+            magmaCube.setDeltaMovement(vec3.x, 0.22F + (float)magmaCube.getSize() * 0.05F, vec3.z);
+            entity.hasImpulse = true;
+        } else {
+            entity.jumpInFluid(ModFluidTypes.SOUL_LAVA_FLUID_TYPE.get());
+        }
+    }
+
     public static void hurt(Entity entity) {
         if (!entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE) && !entity.fireImmune()) {
             entity.setSecondsOnFire(15);
@@ -132,10 +149,7 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     public static boolean isEntityInSoulLava(Entity entity) {
-        BlockState blockstate = entity.level().getBlockStatesIfLoaded(entity.getBoundingBox())
-                .filter((block) -> block.is(ModBlocks.SOUL_LAVA_BLOCK.get()))
-                .findFirst().orElse(null);
-        return blockstate != null;
+        return entity.isInFluidType((fluid, d) -> fluid == ModFluidTypes.SOUL_LAVA_FLUID_TYPE.get() && d > 0.0D, false);
     }
 
     @Override
