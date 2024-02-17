@@ -32,16 +32,19 @@ public class SoulLavaBlock extends LiquidBlock {
     }
 
     @Override
+    public @Nullable BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
+        return BlockPathTypes.LAVA;
+    }
+
+    @Override
     public void entityInside(BlockState blockState, Level level, BlockPos pos, Entity entity) {
-        if (!level.isClientSide) {
-            if (entity instanceof Strider strider) { // Float strider
-                CollisionContext collisioncontext = CollisionContext.of(strider);
-                if (collisioncontext.isAbove(LiquidBlock.STABLE_SHAPE, strider.blockPosition(), true) &&
-                        !level.getFluidState(strider.blockPosition().above()).is(ModFluids.SOUL_LAVA_SOURCE.get())) {
-                    strider.setOnGround(true);
-                } else {
-                    strider.setDeltaMovement(strider.getDeltaMovement().scale(0.5D).add(0.0D, 0.05D, 0.0D));
-                }
+        if (entity instanceof Strider strider) {
+            CollisionContext collisioncontext = CollisionContext.of(strider);
+            if (collisioncontext.isAbove(LiquidBlock.STABLE_SHAPE, strider.blockPosition(), true) &&
+                    !level.getFluidState(strider.blockPosition().above()).is(ModFluids.SOUL_LAVA_SOURCE.get())) {
+                strider.setOnGround(true);
+            } else {
+                strider.setDeltaMovement(strider.getDeltaMovement().scale(0.5D).add(0.0D, 0.05D, 0.0D));
             }
         }
         SoulLavaFluid.hurt(entity);
