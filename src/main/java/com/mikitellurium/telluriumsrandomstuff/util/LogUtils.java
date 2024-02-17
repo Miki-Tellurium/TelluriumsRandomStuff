@@ -9,18 +9,25 @@ public class LogUtils {
         Minecraft.getInstance().player.sendSystemMessage(Component.literal(message));
     }
 
-    public static void consoleLogMessage(Object message) {
+    public static void consoleLog(Object message) {
         System.out.println(message);
+    }
+
+    public static void consoleLogSequence(Object... objs) {
+        consoleLog("---");
+        for (Object object : objs) {
+            consoleLog(object);
+        }
     }
 
     public static void debugIsNull(String prefix, Object object) {
         String s = object == null ? "null" : "NOT null";
-        consoleLogMessage(prefix + ": " + s);
+        consoleLog(prefix + ": " + s);
     }
 
     public static void debugIsEqual(String prefix, Object firstObj, Object secondObj) {
         String s = firstObj.equals(secondObj) ? "equal" : "NOT equal";
-        consoleLogMessage(prefix + ": " + s);
+        consoleLog(prefix + ": " + s);
     }
 
 }
