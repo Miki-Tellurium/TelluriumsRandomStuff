@@ -1,7 +1,8 @@
 {
-  "parent": "telluriumsrandomstuff:block/cube_all_tinted",
+  "parent": "telluriumsrandomstuff:block/cube_all_layered_tinted",
   "textures": {
-    "all": "telluriumsrandomstuff:block/raw_opal_crystal_block",
-    "particle": "telluriumsrandomstuff:block/raw_opal_crystal_block"
+    "base": "telluriumsrandomstuff:block/raw_opal_crystal_block_layer0",
+    "overlay": "telluriumsrandomstuff:block/raw_opal_crystal_block_layer1",
+    "particle": "telluriumsrandomstuff:block/raw_opal_crystal_block_layer0"
   }
 }

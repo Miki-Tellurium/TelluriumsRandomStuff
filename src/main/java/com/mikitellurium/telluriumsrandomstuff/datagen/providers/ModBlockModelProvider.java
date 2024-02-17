@@ -162,8 +162,16 @@ public class ModBlockModelProvider extends BlockStateProvider {
                 .texture("texture", modLoc("block/opal"));
         this.blockItemModelFromParent(ModBlocks.OPAL_BUTTON, modLoc("block/" + ModBlocks.OPAL_BUTTON.getId().getPath() + "_inventory"));
         this.simpleBlockWithItem(ModBlocks.OPAL_CRYSTAL_ORE.get(), this.models().getExistingFile(modLoc("block/opal_crystal_ore")));
-        this.tintedBlockWithItem(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK);
-        this.tintedBlockWithItem(ModBlocks.OPAL_CRYSTAL_BLOCK);
+        this.simpleBlockWithItem(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), this.models().withExistingParent("block/" + ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.getId().getPath(),
+                        modLoc("block/cube_all_layered_tinted"))
+                .texture("base", modLoc("block/" + "raw_opal_crystal_block_layer0"))
+                .texture("overlay", modLoc("block/" + "raw_opal_crystal_block_layer1"))
+                .texture("particle", modLoc("block/" + "raw_opal_crystal_block_layer0")));
+        this.simpleBlockWithItem(ModBlocks.OPAL_CRYSTAL_BLOCK.get(), this.models().withExistingParent("block/" + ModBlocks.OPAL_CRYSTAL_BLOCK.getId().getPath(),
+                modLoc("block/cube_all_layered_tinted"))
+                .texture("base", modLoc("block/" + "opal_crystal_block_layer0"))
+                .texture("overlay", modLoc("block/" + "opal_crystal_block_layer1"))
+                .texture("particle", modLoc("block/" + "opal_crystal_block_layer0")));
         this.simpleBlockWithItem(ModBlocks.SOUL_OBSIDIAN.get(), this.cubeAll(ModBlocks.SOUL_OBSIDIAN.get()));
         this.getVariantBuilder(ModBlocks.SOUL_ANCHOR.get())
                 .forAllStates((state) -> {

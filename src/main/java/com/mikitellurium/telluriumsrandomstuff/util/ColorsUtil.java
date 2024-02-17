@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.FastColor;
@@ -15,10 +14,10 @@ import java.awt.*;
 
 public class ColorsUtil {
 
-    private static final int opalBaseColor = FastColor.ABGR32.color(255, 160, 210, 210);
-    private static final int opalCrystalBaseColor = FastColor.ABGR32.color(255, 140, 255, 255);
-    private static final int blank = FastColor.ABGR32.color(255, 255, 255, 255);
-    private static final int alpha0 = FastColor.ABGR32.color(0, 255, 255, 255);
+    private static final int opalBaseColor = FastColor.ARGB32.color(255, 160, 220, 220);
+    private static final int opalCrystalBaseColor = FastColor.ARGB32.color(255, 140, 255, 255);
+    private static final int blank = FastColor.ARGB32.color(255, 255, 255, 255);
+    private static final int alpha0 = FastColor.ARGB32.color(0, 255, 255, 255);
 
     public static int getGooglesColor(ItemStack stack, int tintIndex) {
         if (tintIndex == 1) {
@@ -30,17 +29,22 @@ public class ColorsUtil {
     }
 
     public static int getOpalStoneColor(int lightLevel) {
-        return ColorsUtil.getRainbowColor(lightLevel, 0.55f, 0.9f, false);
+        return getRainbowColor(-1, lightLevel, 0.6f, 0.9f, false);
     }
 
     public static int getOpalCrystalColor(int tintIndex, int lightLevel) {
-        return tintIndex == 0 ? ColorsUtil.getRainbowColor(lightLevel, 0.75f, 1.0f, true) : blank;
+        return switch (tintIndex) {
+            case 0 -> getRainbowColor(tintIndex, lightLevel, 0.75f, 1.0f, true);
+            case 1 -> getRainbowColor(tintIndex, lightLevel, 0.4F, 1.0f, true);
+            default -> blank;
+        };
     }
 
-    public static int getRainbowColor(int lightLevel, float saturation, float brightness, boolean isCrystal) {
-        // Return base color if lightLevel is 0
+    public static int getRainbowColor(int tintIndex, int lightLevel, float saturation, float brightness, boolean isCrystal) {
         if (lightLevel == 0) {
-            return isCrystal ? opalCrystalBaseColor : opalBaseColor;
+            saturation = tintIndex == 0 ? saturation * 0.75F : saturation;
+            return isCrystal ?
+                    Color.getHSBColor(extractHue(opalCrystalBaseColor), saturation, brightness).getRGB() : opalBaseColor;
         }
 
         double inverted = 15.5D - lightLevel;
@@ -50,28 +54,9 @@ public class ColorsUtil {
         return color.getRGB();
     }
 
-    public static int getHighestLightLevel(BlockAndTintGetter level, BlockPos pos) {
-        int highestLightLevel = 0;
-
-        for (Direction direction : Direction.values()) {
-            BlockPos sidePos = pos.relative(direction);
-            BlockState adjacentBlock = level.getBlockState(sidePos);
-
-            int lightLevel;
-            if (adjacentBlock.getLightEmission() > 0) {
-                lightLevel = adjacentBlock.getLightEmission();
-            } else if (adjacentBlock.isFaceSturdy(level, pos, direction.getOpposite()) && adjacentBlock.isViewBlocking(level, pos)) {
-                continue; // If this face face is obstructed skip this direction
-            } else {
-                lightLevel = level.getBrightness(LightLayer.BLOCK, sidePos);
-            }
-
-            if (lightLevel > highestLightLevel) {
-                highestLightLevel = lightLevel;
-            }
-        }
-
-        return highestLightLevel;
+    private static float extractHue(int rgb) {
+        float[] hsbValues = Color.RGBtoHSB((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF, null);
+        return hsbValues[0];
     }
 
     public static int getIntDyeColor(DyeColor dyeColor) {

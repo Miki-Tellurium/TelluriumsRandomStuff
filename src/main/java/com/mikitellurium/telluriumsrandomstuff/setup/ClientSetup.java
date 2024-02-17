@@ -13,6 +13,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScre
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
+import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.HumanoidModel;
@@ -58,12 +59,12 @@ public class ClientSetup {
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         // Opal crystals
         event.register((state, level, pos, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex,
-                        ColorsUtil.getHighestLightLevel(level, pos)
+                        LevelUtils.getHighestLightLevel(level, pos)
                 ),
                 ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_CRYSTAL_BLOCK.get());
         // Opal stones
         event.getBlockColors().register((state, level, pos, tintIndex) -> ColorsUtil.getOpalStoneColor(
-                ColorsUtil.getHighestLightLevel(level, pos)
+                        LevelUtils.getHighestLightLevel(level, pos)
                 ),
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),

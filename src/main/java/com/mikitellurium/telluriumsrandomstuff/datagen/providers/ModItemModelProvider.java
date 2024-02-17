@@ -23,13 +23,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleBlockItem(ModBlocks.SOUL_TORCHFLOWER);
         this.simpleItem(ModItems.SOUL_LAVA_BUCKET);
         this.simpleItem(ModItems.MYSTIC_POTATO);
-        this.simpleItem(ModItems.RAW_OPAL_CRYSTAL);
-        this.simpleItem(ModItems.OPAL_CRYSTAL);
-        this.opalTool(ModItems.OPAL_CRYSTAL_SWORD, "opal_crystal_sword_overlay", "opal_crystal_sword_handle");
-        this.opalTool(ModItems.OPAL_CRYSTAL_SHOVEL, "opal_crystal_shovel_overlay", "opal_crystal_shovel_handle");
-        this.opalTool(ModItems.OPAL_CRYSTAL_PICKAXE, "opal_crystal_pickaxe_overlay", "opal_crystal_pickaxe_hoe_handle");
-        this.opalTool(ModItems.OPAL_CRYSTAL_AXE, "opal_crystal_axe_overlay", "opal_crystal_axe_handle");
-        this.opalTool(ModItems.OPAL_CRYSTAL_HOE, "opal_crystal_hoe_overlay", "opal_crystal_pickaxe_hoe_handle");
+        this.withExistingParent(ModItems.RAW_OPAL_CRYSTAL.getId().getPath(), mcLoc("item/handheld"))
+                .texture("layer0", modLoc("item/raw_opal_crystal_layer0"))
+                .texture("layer1", modLoc("item/raw_opal_crystal_layer1"));
+        this.withExistingParent(ModItems.OPAL_CRYSTAL.getId().getPath(), mcLoc("item/handheld"))
+                .texture("layer0", modLoc("item/opal_crystal_layer0"))
+                .texture("layer1", modLoc("item/opal_crystal_layer1"));
+        this.opalTool(ModItems.OPAL_CRYSTAL_SWORD, "opal_crystal_sword_handle", "opal_crystal_sword_overlay");
+        this.opalTool(ModItems.OPAL_CRYSTAL_SHOVEL, "opal_crystal_shovel_handle", "opal_crystal_shovel_overlay");
+        this.opalTool(ModItems.OPAL_CRYSTAL_PICKAXE, "opal_crystal_pickaxe_hoe_handle", "opal_crystal_pickaxe_overlay");
+        this.opalTool(ModItems.OPAL_CRYSTAL_AXE, "opal_crystal_axe_handle", "opal_crystal_axe_overlay");
+        this.opalTool(ModItems.OPAL_CRYSTAL_HOE, "opal_crystal_pickaxe_hoe_handle", "opal_crystal_hoe_overlay");
         this.simpleItem(ModItems.FILTER);
         this.simpleItem(ModItems.BRIGHT_TORCHFLOWER_SEEDS);
         this.simpleItem(ModItems.SOUL_TORCHFLOWER_SEEDS);
@@ -78,10 +82,11 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer0", modLoc("block/" + block.getId().getPath()));
     }
 
-    private void opalTool(RegistryObject<Item> item, String overlay, String handle) {
+    private void opalTool(RegistryObject<Item> item, String handle, String overlay) {
         this.withExistingParent(item.getId().getPath(), mcLoc("item/handheld"))
-                .texture("layer0", modLoc("item/" + overlay))
-                .texture("layer1", modLoc("item/" + handle));
+                .texture("layer0", modLoc("item/" + overlay + "1"))
+                .texture("layer1", modLoc("item/" + overlay + "2"))
+                .texture("layer2", modLoc("item/" + handle));
     }
 
 }

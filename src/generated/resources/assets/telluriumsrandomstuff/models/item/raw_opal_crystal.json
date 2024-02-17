@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "telluriumsrandomstuff:item/raw_opal_crystal"
+    "layer0": "telluriumsrandomstuff:item/raw_opal_crystal_layer0",
+    "layer1": "telluriumsrandomstuff:item/raw_opal_crystal_layer1"
   }
 }
