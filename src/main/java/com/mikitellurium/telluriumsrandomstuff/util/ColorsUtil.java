@@ -17,7 +17,7 @@ public class ColorsUtil {
 
     private static final int opalBaseColor = FastColor.ABGR32.color(255, 160, 210, 210);
     private static final int opalCrystalBaseColor = FastColor.ABGR32.color(255, 140, 255, 255);
-    private static final int blank = 0xFFFFFF;
+    private static final int blank = FastColor.ABGR32.color(255, 255, 255, 255);
     private static final int alpha0 = FastColor.ABGR32.color(0, 255, 255, 255);
 
     public static int getGooglesColor(ItemStack stack, int tintIndex) {
@@ -29,15 +29,14 @@ public class ColorsUtil {
         }
     }
 
-    public static int getMaterialColor(ItemStack stack, int tintIndex, int lightLevel) {
-        if (stack.is(ModTags.Items.OPAL_CRYSTALS)) {
-            return tintIndex == 0 ? ColorsUtil.getRainbowColor(lightLevel, 0.75f, 1.0f, true) : blank;
-        }
-
+    public static int getOpalStoneColor(int lightLevel) {
         return ColorsUtil.getRainbowColor(lightLevel, 0.55f, 0.9f, false);
     }
 
-    // test
+    public static int getOpalCrystalColor(int tintIndex, int lightLevel) {
+        return tintIndex == 0 ? ColorsUtil.getRainbowColor(lightLevel, 0.75f, 1.0f, true) : blank;
+    }
+
     public static int getRainbowColor(int lightLevel, float saturation, float brightness, boolean isCrystal) {
         // Return base color if lightLevel is 0
         if (lightLevel == 0) {

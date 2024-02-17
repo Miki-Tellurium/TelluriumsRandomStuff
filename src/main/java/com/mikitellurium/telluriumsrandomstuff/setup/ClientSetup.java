@@ -24,6 +24,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -55,12 +56,15 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
-        event.getBlockColors().register((state, world, pos, tintIndex) -> {
-                    if (world != null && pos != null) {
-                        return ColorsUtil.getMaterialColor(state.getBlock().asItem().getDefaultInstance(),
-                                tintIndex, ColorsUtil.getHighestLightLevel(world, pos));
-                    }
-                    return 0xFFFFFF;},
+        // Opal crystals
+        event.register((state, level, pos, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex,
+                        ColorsUtil.getHighestLightLevel(level, pos)
+                ),
+                ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_CRYSTAL_BLOCK.get());
+        // Opal stones
+        event.getBlockColors().register((state, level, pos, tintIndex) -> ColorsUtil.getOpalStoneColor(
+                ColorsUtil.getHighestLightLevel(level, pos)
+                ),
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
                 ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
@@ -68,36 +72,24 @@ public class ClientSetup {
                 ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
                 ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
                 ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
-                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_CRYSTAL_ORE.get(), ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(),
-                ModBlocks.OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
-                ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
+                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_CRYSTAL_ORE.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(),
+                ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(), ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
     }
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-        event.getItemColors().register((stack, tintIndex) -> {
-                    // Lava googles
-                    if (stack.is(ModItems.LAVA_GOOGLES.get())) {
-                        return ColorsUtil.getGooglesColor(stack, tintIndex);
-                    }
-
-                    // Opal blocks
-                    BlockPos pos;
-
-                        if (stack.isFramed()) { //Check if the item is in item frame
-                           pos = stack.getFrame().getPos();
-                        } else if (stack.getEntityRepresentation() != null) { // Check if the item is dropped in the world
-                            pos = stack.getEntityRepresentation().getOnPos();
-                        } else {
-                            Player player = Minecraft.getInstance().player;
-                            if (player != null) {
-                                pos = player.getOnPos();
-                            } else {
-                                pos = new BlockPos(0, 0, 0);
-                            }
-                        }
-                    return ColorsUtil.getMaterialColor(stack, tintIndex,
-                            Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, pos.above())); },
+        event.register(ColorsUtil::getGooglesColor, ModItems.LAVA_GOOGLES.get());
+        // Opal crystals
+        event.register((stack, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex,
+                                Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))
+                        ),
+                ModItems.OPAL_CRYSTAL.get(), ModItems.RAW_OPAL_CRYSTAL.get(), ModItems.OPAL_CRYSTAL_AXE.get(),
+                ModItems.OPAL_CRYSTAL_SHOVEL.get(), ModItems.OPAL_CRYSTAL_HOE.get(), ModItems.OPAL_CRYSTAL_PICKAXE.get(),
+                ModItems.OPAL_CRYSTAL_SWORD.get(), ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_CRYSTAL_BLOCK.get());
+        // Opal stones
+        event.register((stack, tintIndex) -> ColorsUtil.getOpalStoneColor(
+                        Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))
+                ),
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
                 ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
@@ -105,12 +97,24 @@ public class ClientSetup {
                 ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
                 ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
                 ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
-                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_CRYSTAL_ORE.get(), ModItems.RAW_OPAL_CRYSTAL.get(),
-                ModItems.OPAL_CRYSTAL.get(), ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_CRYSTAL_BLOCK.get(),
-                ModItems.OPAL_CRYSTAL_SWORD.get(), ModItems.OPAL_CRYSTAL_PICKAXE.get(), ModItems.OPAL_CRYSTAL_SHOVEL.get(),
-                ModItems.OPAL_CRYSTAL_AXE.get(), ModItems.OPAL_CRYSTAL_HOE.get(), ModItems.LAVA_GOOGLES.get(),
-                ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
-                ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
+                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_CRYSTAL_ORE.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(),
+                ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(), ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
+    }
+
+    private static BlockPos getColorPos(ItemStack stack) {
+        BlockPos pos = BlockPos.ZERO;
+
+        if (stack.isFramed()) { // Check if the item is in item frame
+            pos = stack.getFrame().getPos();
+        } else if (stack.getEntityRepresentation() != null) { // Check if the item is dropped in the world
+            pos = stack.getEntityRepresentation().getOnPos();
+        } else {
+            Player player = Minecraft.getInstance().player;
+            if (player != null) {
+                pos = player.getOnPos();
+            }
+        }
+        return pos.above();
     }
 
     @SubscribeEvent
@@ -125,6 +129,13 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.GRAPPLING_HOOK.get(), GrapplingHookRenderer::new);
     }
 
+    @SubscribeEvent
+    public static void registerModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(LavaGooglesModel.LAYER_LOCATION, LavaGooglesModel::createLayerDefinition);
+        event.registerLayerDefinition(GrapplingHookModel.LAYER_LOCATION, GrapplingHookModel::createLayerDefinition);
+    }
+
+    // todo better layer registration
     @SuppressWarnings("unchecked")
     @SubscribeEvent
     public static void addEntityModelLayers(EntityRenderersEvent.AddLayers event) {
@@ -165,12 +176,6 @@ public class ClientSetup {
         } catch (Exception e) {
             TelluriumsRandomStuffMod.LOGGER.error("Could not add layer to " + entityType.toShortString());
         }
-    }
-
-    @SubscribeEvent
-    public static void registerModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(LavaGooglesModel.LAYER_LOCATION, LavaGooglesModel::createLayerDefinition);
-        event.registerLayerDefinition(GrapplingHookModel.LAYER_LOCATION, GrapplingHookModel::createLayerDefinition);
     }
 
 }
