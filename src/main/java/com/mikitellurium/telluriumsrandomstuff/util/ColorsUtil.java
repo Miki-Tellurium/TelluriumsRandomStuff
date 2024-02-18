@@ -1,14 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.awt.*;
 
@@ -43,8 +38,7 @@ public class ColorsUtil {
     public static int getRainbowColor(int tintIndex, int lightLevel, float saturation, float brightness, boolean isCrystal) {
         if (lightLevel == 0) {
             saturation = tintIndex == 0 ? saturation * 0.75F : saturation;
-            return isCrystal ?
-                    Color.getHSBColor(extractHue(opalCrystalBaseColor), saturation, brightness).getRGB() : opalBaseColor;
+            return isCrystal ? RGBtoHSB(opalCrystalBaseColor, saturation, brightness) : opalBaseColor;
         }
 
         double inverted = 15.5D - lightLevel;
@@ -52,6 +46,10 @@ public class ColorsUtil {
 
         Color color = Color.getHSBColor(hue, saturation, brightness);
         return color.getRGB();
+    }
+
+    private static int RGBtoHSB(int rgb, float saturation, float brightness) {
+        return Color.getHSBColor(extractHue(rgb), saturation, brightness).getRGB();
     }
 
     private static float extractHue(int rgb) {
