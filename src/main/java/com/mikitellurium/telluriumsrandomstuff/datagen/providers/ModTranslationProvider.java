@@ -1,5 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
+import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModEnchantments;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -13,133 +17,132 @@ public class ModTranslationProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add("creativemodetab.telluriumsrandomstuff_creative_tab", "Tellurium's Random Stuff");
+        // Items
+        addItem(ModItems.SOUL_LAVA_BUCKET, "Soul Lava Bucket");
+        addItem(ModItems.MYSTIC_POTATO, "Mystic Potato");
+        addItem(ModItems.RAW_OPAL_CRYSTAL, "Raw Opal Crystal");
+        addItem(ModItems.OPAL_CRYSTAL, "Opal Crystal");
+        addItem(ModItems.OPAL_CRYSTAL_SWORD, "Opal Crystal Sword");
+        addItem(ModItems.OPAL_CRYSTAL_SHOVEL, "Opal Crystal Shovel");
+        addItem(ModItems.OPAL_CRYSTAL_PICKAXE, "Opal Crystal Pickaxe");
+        addItem(ModItems.OPAL_CRYSTAL_AXE, "Opal Crystal Axe");
+        addItem(ModItems.OPAL_CRYSTAL_HOE, "Opal Crystal Hoe");
+        addItem(ModItems.FILTER, "Filter");
+        translation("item", "bright_torchflower", "Bright Torchflower");
+        addItem(ModItems.BRIGHT_TORCHFLOWER_SEEDS, "Bright Torchflower Seeds");
+        translation("item", "soul_torchflower", "Soul Torchflower");
+        addItem(ModItems.SOUL_TORCHFLOWER_SEEDS, "Soul Torchflower Seeds");
+        addItem(ModItems.BLUE_GLOWSTONE_DUST, "Blue Glowstone Dust");
+        addItem(ModItems.LAVA_GOOGLES, "Lava Googles");
+        addItem(ModItems.MOLTEN_AMETHYST, "Molten Amethyst");
+        addItem(ModItems.AMETHYST_LENS, "Amethyst Lens");
+        addItem(ModItems.SMALL_SOUL_FRAGMENT, "Small Soul Fragment");
+        addItem(ModItems.SOUL_FRAGMENT, "Soul Fragment");
+        addItem(ModItems.SOUL_CLUSTER, "Soul Cluster");
+        addItem(ModItems.SOUL_INFUSER_LIT, "Soul Infuser");
+        addItem(ModItems.GRAPPLING_HOOK, "Grappling Hook");
+        addItem(ModItems.SOUL_INFUSED_IRON_INGOT, "Soul Infused Iron Ingot");
 
-        add("item.telluriumsrandomstuff.soul_lava_bucket", "Soul Lava Bucket");
-        add("item.telluriumsrandomstuff.mystic_potato", "Mystic Potato");
-        add("item.telluriumsrandomstuff.raw_opal_crystal", "Raw Opal Crystal");
-        add("item.telluriumsrandomstuff.opal_crystal", "Opal Crystal");
-        add("item.telluriumsrandomstuff.opal_crystal_sword", "Opal Crystal Sword");
-        add("item.telluriumsrandomstuff.opal_crystal_shovel", "Opal Crystal Shovel");
-        add("item.telluriumsrandomstuff.opal_crystal_pickaxe", "Opal Crystal Pickaxe");
-        add("item.telluriumsrandomstuff.opal_crystal_axe", "Opal Crystal Axe");
-        add("item.telluriumsrandomstuff.opal_crystal_hoe", "Opal Crystal Hoe");
-        add("item.telluriumsrandomstuff.filter", "Filter");
-        add("item.telluriumsrandomstuff.bright_torchflower", "Bright Torchflower");
-        add("item.telluriumsrandomstuff.bright_torchflower_seeds", "Bright Torchflower Seeds");
-        add("item.telluriumsrandomstuff.soul_torchflower", "Soul Torchflower");
-        add("item.telluriumsrandomstuff.soul_torchflower_seeds", "Soul Torchflower Seeds");
-        add("item.telluriumsrandomstuff.blue_glowstone_dust", "Blue Glowstone Dust");
-        add("item.telluriumsrandomstuff.lava_googles", "Lava Googles");
-        add("item.telluriumsrandomstuff.molten_amethyst", "Molten Amethyst");
-        add("item.telluriumsrandomstuff.amethyst_lens", "Amethyst Lens");
-        add("item.telluriumsrandomstuff.small_soul_fragment", "Small Soul Fragment");
-        add("item.telluriumsrandomstuff.soul_fragment", "Soul Fragment");
-        add("item.telluriumsrandomstuff.soul_cluster", "Soul Cluster");
-        add("item.telluriumsrandomstuff.soul_infuser_lit", "Soul Infuser");
-        add("item.telluriumsrandomstuff.grappling_hook", "Grappling Hook");
-        add("item.telluriumsrandomstuff.soul_infused_iron_ingot", "Soul Infused Iron Ingot");
+        translation("item", "lava_googles.tooltip.color", "Color");
+        translation("item", "mystic_potato.tooltip", "What will this do?");
+        // Blocks
+        addBlock(ModBlocks.GRATE_MAGMA_BLOCK, "Magma Block with Grate");
+        addBlock(ModBlocks.GRATE_SOUL_SAND, "Soul Sand with Grate");
+        addBlock(ModBlocks.HYDRODYNAMIC_RAIL, "Hydrodynamic Rail");
+        addBlock(ModBlocks.SOUL_MAGMA_BLOCK, "Soul Magma Block");
+        addBlock(ModBlocks.GRATE_SOUL_MAGMA_BLOCK, "Soul Magma Block with Grate");
+        addBlock(ModBlocks.SOUL_FURNACE, "Soul Furnace");
+        addBlock(ModBlocks.SOUL_MAGMA_BRICKS, "Soul Magma Bricks");
+        addBlock(ModBlocks.SOUL_MAGMA_BRICK_SLAB, "Soul Magma Brick Slab");
+        addBlock(ModBlocks.OPAL, "Opal");
+        addBlock(ModBlocks.OPAL_COBBLESTONE, "Opal Cobblestone");
+        addBlock(ModBlocks.OPAL_BRICKS, "Opal Bricks");
+        addBlock(ModBlocks.CUT_OPAL_BRICKS, "Cut Opal Bricks");
+        addBlock(ModBlocks.CHISELED_OPAL_BRICKS, "Chiseled Opal Bricks");
+        addBlock(ModBlocks.CRACKED_OPAL_BRICKS, "Cracked Opal Bricks");
+        addBlock(ModBlocks.CRACKED_CUT_OPAL_BRICKS, "Cracked Cut Opal Bricks");
+        addBlock(ModBlocks.OPAL_SLAB, "Opal Slab");
+        addBlock(ModBlocks.OPAL_COBBLESTONE_SLAB, "Opal Cobblestone Slab");
+        addBlock(ModBlocks.OPAL_BRICK_SLAB, "Opal Brick Slab");
+        addBlock(ModBlocks.CUT_OPAL_BRICK_SLAB, "Cut Opal Brick Slab");
+        addBlock(ModBlocks.CRACKED_OPAL_BRICK_SLAB, "Cracked Opal Brick Slab");
+        addBlock(ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB, "Cracked Cut Opal Brick Slab");
+        addBlock(ModBlocks.OPAL_STAIRS, "Opal Stairs");
+        addBlock(ModBlocks.OPAL_COBBLESTONE_STAIRS, "Opal Cobblestone Stairs");
+        addBlock(ModBlocks.OPAL_BRICK_STAIRS, "Opal Brick Stairs");
+        addBlock(ModBlocks.CUT_OPAL_BRICK_STAIRS, "Cut Opal Brick Stairs");
+        addBlock(ModBlocks.OPAL_COBBLESTONE_WALL, "Opal Cobblestone Wall");
+        addBlock(ModBlocks.OPAL_BRICK_WALL, "Opal Brick Wall");
+        addBlock(ModBlocks.CUT_OPAL_BRICK_WALL, "Cut Opal Brick Wall");
+        addBlock(ModBlocks.OPAL_PRESSURE_PLATE, "Opal Pressure Plate");
+        addBlock(ModBlocks.OPAL_BUTTON, "Opal Button");
+        addBlock(ModBlocks.OPAL_CRYSTAL_ORE, "Opal Crystal Ore");
+        addBlock(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK, "Raw Opal Crystal Block");
+        addBlock(ModBlocks.OPAL_CRYSTAL_BLOCK, "Opal Crystal Block");
+        addBlock(ModBlocks.SOUL_OBSIDIAN, "Soul Obsidian");
+        addBlock(ModBlocks.SOUL_ANCHOR, "Soul Anchor");
+        addBlock(ModBlocks.EXTRACTOR, "Extractor");
+        addBlock(ModBlocks.BRIGHT_TORCHFLOWER, "Bright Torchflower");
+        addBlock(ModBlocks.SOUL_TORCHFLOWER, "Soul Torchflower");
+        addBlock(ModBlocks.BLUE_GLOWSTONE, "Blue Glowstone");
+        addBlock(ModBlocks.BLUE_REDSTONE_LAMP, "Blue Redstone Lamp");
+        addBlock(ModBlocks.AWAKENED_SCULK_SHRIEKER, "Awakened Sculk Shrieker");
+        addBlock(ModBlocks.SOUL_JACK_O_LANTERN, "Soul Jack o'Lantern");
+        addBlock(ModBlocks.STONE_ITEM_PEDESTAL, "Stone Item Pedestal");
+        addBlock(ModBlocks.STONE_BRICK_ITEM_PEDESTAL, "Stone Brick Item Pedestal");
+        addBlock(ModBlocks.MOSSY_STONE_BRICK_ITEM_PEDESTAL, "Mossy Stone Brick Item Pedestal");
+        addBlock(ModBlocks.POLISHED_GRANITE_ITEM_PEDESTAL, "Polished Granite Item Pedestal");
+        addBlock(ModBlocks.POLISHED_DIORITE_ITEM_PEDESTAL, "Polished Diorite Item Pedestal");
+        addBlock(ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL, "Polished Andesite Item Pedestal");
+        addBlock(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL, "Polished Deepslate Item Pedestal");
+        addBlock(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL, "Deepslate Brick Item Pedestal");
+        addBlock(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL, "Deepslate Tile Item Pedestal");
+        addBlock(ModBlocks.CUT_SANDSTONE_ITEM_PEDESTAL, "Cut Sandstone Item Pedestal");
+        addBlock(ModBlocks.CUT_RED_SANDSTONE_ITEM_PEDESTAL, "Cut Red Sandstone Item Pedestal");
+        addBlock(ModBlocks.PRISMARINE_BRICK_ITEM_PEDESTAL, "Prismarine Brick Item Pedestal");
+        addBlock(ModBlocks.NETHER_BRICK_ITEM_PEDESTAL, "Nether Brick Item Pedestal");
+        addBlock(ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL, "Red Nether Brick Item Pedestal");
+        addBlock(ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL, "Polished Blackstone Item Pedestal");
+        addBlock(ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL, "Polished Blackstone Brick Item Pedestal");
+        addBlock(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL, "End Stone Brick Item Pedestal");
+        addBlock(ModBlocks.PURPUR_ITEM_PEDESTAL, "Purpur Item Pedestal");
+        addBlock(ModBlocks.QUARTZ_ITEM_PEDESTAL, "Quartz Item Pedestal");
+        addBlock(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL, "Soul Magma Brick Item Pedestal");
+        addBlock(ModBlocks.OPAL_ITEM_PEDESTAL, "Opal Item Pedestal");
+        addBlock(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL, "Opal Brick Item Pedestal");
+        addBlock(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL, "Cut Opal Brick Item Pedestal");
+        addBlock(ModBlocks.INFUSED_SOUL_SAND, "Infused Soul Sand");
+        addBlock(ModBlocks.SOUL_INFUSER, "Soul Infuser");
+        addBlock(ModBlocks.SOUL_LAVA_CAULDRON, "Soul Lava Cauldron");
 
-        add("item.telluriumsrandomstuff.lava_googles.tooltip.color", "Color");
-        add("item.telluriumsrandomstuff.mystic_potato.tooltip", "What will this do?");
+        translation("block", "awakened_sculk_shrieker.tooltip.warning", "Warning!");
+        translation("block", "awakened_sculk_shrieker.tooltip.message", "This can spawn a Warden anywhere. Use with caution.");
+        // Block Entities
+        translation("blockentity", "soul_furnace", "Soul Furnace");
+        translation("blockentity", "soul_anchor", "Soul Anchor");
+        translation("blockentity", "soul_anchor.warning", "You already have a charged soul anchor");
+        translation("blockentity", "extractor", "Extractor");
+        translation("blockentity", "soul_infuser", "Soul Infuser");
+        // Fluids
+        translation("fluid_type", "soul_lava", "Soul Lava");
+        // Entity Types
+        addEntityType(ModEntities.GRAPPLING_HOOK, "Grappling Hook");
+        // Enchantments
+        addEnchantment(ModEnchantments.SOUL_HARVESTING, "Soul Harvesting");
+        // Trims
+        translation("trim_material", "opal_crystal", "Opal Crystal Material");
+        // Jei
+        translation("jei", "category.soul_furnace_smelting", "Soul Furnace Smelting");
+        translation("jei", "category.soul_infusion", "Soul Infusion");
+        translation("jei", "category.soul_infusion_recipe_extra_cost", "Cost");
+        translation("jei", "category.soul_lava_crafting", "Soul Lava Crafting");
+        translation("jei", "category.soul_lava_crafting_description", "Let lava drip through infused soul sand and into an empty cauldron.");
+        translation("jei", "category.amethyst_lens_crafting", "Amethyst Lens Crafting");
+        translation("jei", "category.soul_lava_transmutation", "Soul Lava Transmutation");
+    }
 
-        add("block.telluriumsrandomstuff.grate_magma_block", "Magma Block with Grate");
-        add("block.telluriumsrandomstuff.grate_soul_sand", "Soul Sand with Grate");
-        add("block.telluriumsrandomstuff.hydrodynamic_rail", "Hydrodynamic Rail");
-        add("block.telluriumsrandomstuff.soul_magma_block", "Soul Magma Block");
-        add("block.telluriumsrandomstuff.grate_soul_magma_block", "Soul Magma Block with Grate");
-        add("block.telluriumsrandomstuff.soul_furnace", "Soul Furnace");
-        add("block.telluriumsrandomstuff.soul_magma_bricks", "Soul Magma Bricks");
-        add("block.telluriumsrandomstuff.soul_magma_brick_slab", "Soul Magma Brick Slab");
-        add("block.telluriumsrandomstuff.opal", "Opal");
-        add("block.telluriumsrandomstuff.opal_cobblestone", "Opal Cobblestone");
-        add("block.telluriumsrandomstuff.opal_bricks", "Opal Bricks");
-        add("block.telluriumsrandomstuff.cut_opal_bricks", "Cut Opal Bricks");
-        add("block.telluriumsrandomstuff.chiseled_opal_bricks", "Chiseled Opal Bricks");
-        add("block.telluriumsrandomstuff.cracked_opal_bricks", "Cracked Opal Bricks");
-        add("block.telluriumsrandomstuff.cracked_cut_opal_bricks", "Cracked Cut Opal Bricks");
-        add("block.telluriumsrandomstuff.opal_slab", "Opal Slab");
-        add("block.telluriumsrandomstuff.opal_cobblestone_slab", "Opal Cobblestone Slab");
-        add("block.telluriumsrandomstuff.opal_brick_slab", "Opal Brick Slab");
-        add("block.telluriumsrandomstuff.cut_opal_brick_slab", "Cut Opal Brick Slab");
-        add("block.telluriumsrandomstuff.cracked_opal_brick_slab", "Cracked Opal Brick Slab");
-        add("block.telluriumsrandomstuff.cracked_cut_opal_brick_slab", "Cracked Cut Opal Brick Slab");
-        add("block.telluriumsrandomstuff.opal_stairs", "Opal Stairs");
-        add("block.telluriumsrandomstuff.opal_cobblestone_stairs", "Opal Cobblestone Stairs");
-        add("block.telluriumsrandomstuff.opal_brick_stairs", "Opal Brick Stairs");
-        add("block.telluriumsrandomstuff.cut_opal_brick_stairs", "Cut Opal Brick Stairs");
-        add("block.telluriumsrandomstuff.cracked_opal_brick_stairs", "Cracked Opal Brick Stairs");
-        add("block.telluriumsrandomstuff.cracked_cut_opal_brick_stairs", "Cracked Cut Opal Brick Stairs");
-        add("block.telluriumsrandomstuff.opal_wall", "Opal Wall");
-        add("block.telluriumsrandomstuff.opal_cobblestone_wall", "Opal Cobblestone Wall");
-        add("block.telluriumsrandomstuff.opal_brick_wall", "Opal Brick Wall");
-        add("block.telluriumsrandomstuff.cut_opal_brick_wall", "Cut Opal Brick Wall");
-        add("block.telluriumsrandomstuff.cracked_opal_brick_wall", "Cracked Opal Brick Wall");
-        add("block.telluriumsrandomstuff.cracked_cut_opal_brick_wall", "Cracked Cut Opal Brick Wall");
-        add("block.telluriumsrandomstuff.opal_pressure_plate", "Opal Pressure Plate");
-        add("block.telluriumsrandomstuff.opal_button", "Opal Button");
-        add("block.telluriumsrandomstuff.opal_crystal_ore", "Opal Crystal Ore");
-        add("block.telluriumsrandomstuff.raw_opal_crystal_block", "Raw Opal Crystal Block");
-        add("block.telluriumsrandomstuff.opal_crystal_block", "Opal Crystal Block");
-        add("block.telluriumsrandomstuff.soul_obsidian", "Soul Obsidian");
-        add("block.telluriumsrandomstuff.soul_anchor", "Soul Anchor");
-        add("block.telluriumsrandomstuff.extractor", "Extractor");
-        add("block.telluriumsrandomstuff.bright_torchflower", "Bright Torchflower");
-        add("block.telluriumsrandomstuff.soul_torchflower", "Soul Torchflower");
-        add("block.telluriumsrandomstuff.blue_glowstone", "Blue Glowstone");
-        add("block.telluriumsrandomstuff.blue_redstone_lamp", "Blue Redstone Lamp");
-        add("block.telluriumsrandomstuff.awakened_sculk_shrieker", "Awakened Sculk Shrieker");
-        add("block.telluriumsrandomstuff.soul_jack_o_lantern", "Soul Jack o'Lantern");
-        add("block.telluriumsrandomstuff.stone_item_pedestal", "Stone Item Pedestal");
-        add("block.telluriumsrandomstuff.stone_brick_item_pedestal", "Stone Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.mossy_stone_brick_item_pedestal", "Mossy Stone Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.polished_granite_item_pedestal", "Polished Granite Item Pedestal");
-        add("block.telluriumsrandomstuff.polished_diorite_item_pedestal", "Polished Diorite Item Pedestal");
-        add("block.telluriumsrandomstuff.polished_andesite_item_pedestal", "Polished Andesite Item Pedestal");
-        add("block.telluriumsrandomstuff.polished_deepslate_item_pedestal", "Polished Deepslate Item Pedestal");
-        add("block.telluriumsrandomstuff.deepslate_brick_item_pedestal", "Deepslate Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.deepslate_tile_item_pedestal", "Deepslate Tile Item Pedestal");
-        add("block.telluriumsrandomstuff.cut_sandstone_item_pedestal", "Cut Sandstone Item Pedestal");
-        add("block.telluriumsrandomstuff.cut_red_sandstone_item_pedestal", "Cut Red Sandstone Item Pedestal");
-        add("block.telluriumsrandomstuff.prismarine_brick_item_pedestal", "Prismarine Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.nether_brick_item_pedestal", "Nether Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.red_nether_brick_item_pedestal", "Red Nether Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.polished_blackstone_item_pedestal", "Polished Blackstone Item Pedestal");
-        add("block.telluriumsrandomstuff.polished_blackstone_brick_item_pedestal", "Polished Blackstone Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.end_stone_brick_item_pedestal", "End Stone Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.purpur_item_pedestal", "Purpur Item Pedestal");
-        add("block.telluriumsrandomstuff.quartz_item_pedestal", "Quartz Item Pedestal");
-        add("block.telluriumsrandomstuff.soul_magma_brick_item_pedestal", "Soul Magma Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.opal_item_pedestal", "Opal Item Pedestal");
-        add("block.telluriumsrandomstuff.opal_brick_item_pedestal", "Opal Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.cut_opal_brick_item_pedestal", "Cut Opal Brick Item Pedestal");
-        add("block.telluriumsrandomstuff.infused_soul_sand", "Infused Soul Sand");
-        add("block.telluriumsrandomstuff.soul_infuser", "Soul Infuser");
-        add("block.telluriumsrandomstuff.soul_lava_cauldron", "Soul Lava Cauldron");
-
-        add("block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.warning", "Warning!");
-        add("block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.message", "This can spawn a Warden anywhere. Use with caution.");
-
-        add("blockentity.telluriumsrandomstuff.soul_furnace", "Soul Furnace");
-        add("blockentity.telluriumsrandomstuff.soul_anchor", "Soul Anchor");
-        add("blockentity.telluriumsrandomstuff.soul_anchor.warning", "You already have a charged soul anchor");
-        add("blockentity.telluriumsrandomstuff.extractor", "Extractor");
-        add("blockentity.telluriumsrandomstuff.soul_infuser", "Soul Infuser");
-
-        add("fluid_type.telluriumsrandomstuff.soul_lava", "Soul Lava");
-
-        add("entity.telluriumsrandomstuff.grappling_hook", "Grappling Hook");
-
-        add("enchantment.telluriumsrandomstuff.soul_harvesting", "Soul Harvesting");
-
-        add("trim_material.telluriumsrandomstuff.opal_crystal", "Opal Crystal Material");
-
-        add("jei.telluriumsrandomstuff.category.soul_furnace_smelting", "Soul Furnace Smelting");
-        add("jei.telluriumsrandomstuff.category.soul_infusion", "Soul Infusion");
-        add("jei.telluriumsrandomstuff.category.soul_infusion_recipe_extra_cost", "Cost");
-        add("jei.telluriumsrandomstuff.category.soul_lava_crafting", "Soul Lava Crafting");
-        add("jei.telluriumsrandomstuff.category.soul_lava_crafting_description", "Let lava drip through infused soul sand and into an empty cauldron.");
-        add("jei.telluriumsrandomstuff.category.amethyst_lens_crafting", "Amethyst Lens Crafting");
-        add("jei.telluriumsrandomstuff.category.soul_lava_transmutation", "Soul Lava Transmutation");
+    private void translation(String prefix, String suffix, String translation) {
+        this.add(prefix + "." + FastLoc.modId() + "." + suffix, translation);
     }
 
 }
