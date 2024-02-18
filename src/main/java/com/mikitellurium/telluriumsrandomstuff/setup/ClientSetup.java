@@ -14,16 +14,21 @@ import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParti
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.renderer.entity.ArmorStandRenderer;
+import net.minecraft.client.renderer.entity.GiantMobRenderer;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
@@ -136,10 +141,10 @@ public class ClientSetup {
         event.registerLayerDefinition(GrapplingHookModel.LAYER_LOCATION, GrapplingHookModel::createLayerDefinition);
     }
 
-    // todo better layer registration
     @SuppressWarnings("unchecked")
     @SubscribeEvent
     public static void addEntityModelLayers(EntityRenderersEvent.AddLayers event) {
+        EntityModelSet modelSet = event.getEntityModels();
         for (EntityType<?> entityType : ForgeRegistries.ENTITY_TYPES) {
             try {
                 if (entityType == EntityType.PLAYER) {
@@ -148,7 +153,7 @@ public class ClientSetup {
 
             LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer =
                     event.getRenderer((EntityType<LivingEntity>) entityType);
-                addLayerToRenderer(renderer, entityType, event.getContext().getModelSet());
+                addLayerToRenderer(renderer, entityType, modelSet);
             } catch (ClassCastException e) {
                 // Non living entities can't be casted to LivingEntity,
                 // no need to do anything
@@ -158,7 +163,7 @@ public class ClientSetup {
         event.getSkins().forEach((skin) -> {
             PlayerRenderer playerRenderer = event.getSkin(skin);
             if (playerRenderer != null) {
-                playerRenderer.addLayer(new LavaGooglesLayer<>(playerRenderer, event.getContext().getModelSet()));
+                playerRenderer.addLayer(new LavaGooglesLayer<>(playerRenderer, modelSet));
                 TelluriumsRandomStuffMod.LOGGER.info("Render layer added to player model: " + skin);
             } else {
                 TelluriumsRandomStuffMod.LOGGER.error("Could not apply render layer to player model: " + skin);
