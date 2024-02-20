@@ -1,0 +1,50 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"stand": "telluriumsrandomstuff:block/alchemixer_stand",
+		"base": "telluriumsrandomstuff:block/alchemixer_base",
+		"particle": "telluriumsrandomstuff:block/alchemixer_stand"
+	},
+	"elements": [
+		{
+			"name": "stand",
+			"from": [7, 0, 7],
+			"to": [9, 14, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 14], "texture": "#stand"},
+				"east": {"uv": [2, 0, 4, 14], "texture": "#stand"},
+				"south": {"uv": [4, 0, 6, 14], "texture": "#stand"},
+				"west": {"uv": [6, 0, 8, 14], "texture": "#stand"},
+				"up": {"uv": [10, 2, 8, 0], "texture": "#stand"},
+				"down": {"uv": [10, 2, 8, 4], "texture": "#stand"}
+			}
+		},
+		{
+			"name": "base_1",
+			"from": [5, 0, 1],
+			"to": [11, 2, 7],
+			"faces": {
+				"north": {"uv": [3, 0, 6, 1], "texture": "#base"},
+				"east": {"uv": [3, 1, 6, 2], "texture": "#base"},
+				"south": {"uv": [3, 2, 6, 3], "texture": "#base"},
+				"west": {"uv": [3, 3, 6, 4], "texture": "#base"},
+				"up": {"uv": [3, 3, 0, 0], "texture": "#base"},
+				"down": {"uv": [3, 3, 0, 6], "texture": "#base"}
+			}
+		},
+		{
+			"name": "base_2",
+			"from": [5, 0, 9],
+			"to": [11, 2, 15],
+			"faces": {
+				"north": {"uv": [6, 0, 9, 1], "texture": "#base"},
+				"east": {"uv": [6, 1, 9, 2], "texture": "#base"},
+				"south": {"uv": [6, 2, 9, 3], "texture": "#base"},
+				"west": {"uv": [6, 3, 9, 4], "texture": "#base"},
+				"up": {"uv": [6, 7, 3, 4], "texture": "#base"},
+				"down": {"uv": [3, 6, 0, 9], "texture": "#base"}
+			}
+		}
+	]
+}

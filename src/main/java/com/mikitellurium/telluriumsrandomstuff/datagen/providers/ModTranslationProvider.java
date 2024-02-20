@@ -114,6 +114,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addBlock(ModBlocks.INFUSED_SOUL_SAND, "Infused Soul Sand");
         addBlock(ModBlocks.SOUL_INFUSER, "Soul Infuser");
         addBlock(ModBlocks.SOUL_LAVA_CAULDRON, "Soul Lava Cauldron");
+        addBlock(ModBlocks.ALCHEMIXER, "Alchemixer");
 
         translation("block", "awakened_sculk_shrieker.tooltip.warning", "Warning!");
         translation("block", "awakened_sculk_shrieker.tooltip.message", "This can spawn a Warden anywhere. Use with caution.");

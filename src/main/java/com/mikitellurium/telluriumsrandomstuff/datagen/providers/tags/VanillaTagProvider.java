@@ -84,7 +84,8 @@ public class VanillaTagProvider {
                     .add(ModBlocks.OPAL_ITEM_PEDESTAL.get())
                     .add(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get())
                     .add(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
-                    .add(ModBlocks.SOUL_INFUSER.get());
+                    .add(ModBlocks.SOUL_INFUSER.get())
+                    .add(ModBlocks.ALCHEMIXER.get());
 
             this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                     .add(ModBlocks.GRATE_SOUL_SAND.get())

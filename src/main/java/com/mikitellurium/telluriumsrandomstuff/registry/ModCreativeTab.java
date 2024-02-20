@@ -135,6 +135,7 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.INFUSED_SOUL_SAND);
                 event.accept(ModItems.SOUL_INFUSED_IRON_INGOT);
                 event.accept(ModItems.GRAPPLING_HOOK);
+                event.accept(ModBlocks.ALCHEMIXER);
             }
         }
     }

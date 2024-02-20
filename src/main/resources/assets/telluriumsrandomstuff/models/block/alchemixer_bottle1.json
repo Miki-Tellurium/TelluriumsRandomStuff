@@ -1,0 +1,17 @@
+{
+  "textures": {
+    "particle": "telluriumsrandomstuff:block/alchemixer",
+    "stand": "telluriumsrandomstuff:block/alchemixer_bottle_sides"
+  },
+  "render_type": "cutout",
+  "elements": [
+    {
+      "from": [ 0, 0, 8 ],
+      "to": [ 8, 16, 8 ],
+      "faces": {
+        "north": { "uv": [ 8, 0,  0, 16 ], "texture": "#stand" },
+        "south": { "uv": [ 0, 0, 8, 16 ], "texture": "#stand" }
+      }
+    }
+  ]
+}

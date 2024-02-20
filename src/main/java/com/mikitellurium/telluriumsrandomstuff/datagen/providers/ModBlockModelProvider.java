@@ -3,12 +3,14 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 import com.mikitellurium.telluriumsrandomstuff.common.block.*;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -307,6 +309,22 @@ public class ModBlockModelProvider extends BlockStateProvider {
                             .build();
                 });
         this.blockItemModelFromParent(ModBlocks.SOUL_INFUSER, modLoc("block/soul_infuser"));
+        MultiPartBlockStateBuilder multiPartBuilder = this.getMultipartBuilder(ModBlocks.ALCHEMIXER.get());
+        for (Direction direction : Direction.values()) {
+            if (direction == Direction.UP || direction == Direction.DOWN) {
+                continue;
+            }
+            final int yRot = (int) direction.toYRot() + 180;
+            multiPartBuilder
+                    .part().modelFile(this.models().getExistingFile(modLoc("block/alchemixer"))).rotationY(yRot).addModel().condition(AlchemixerBlock.FACING, direction).end()
+                    .part().modelFile(this.models().getExistingFile(modLoc("block/alchemixer_empty0"))).rotationY(yRot).addModel().condition(AlchemixerBlock.HAS_BOTTLE[0], false).condition(AlchemixerBlock.FACING, direction).end()
+                    .part().modelFile(this.models().getExistingFile(modLoc("block/alchemixer_empty1"))).rotationY(yRot).addModel().condition(AlchemixerBlock.HAS_BOTTLE[1], false).condition(AlchemixerBlock.FACING, direction).end()
+                    .part().modelFile(this.models().getExistingFile(modLoc("block/alchemixer_empty2"))).rotationY(yRot).addModel().condition(AlchemixerBlock.HAS_BOTTLE[2], false).condition(AlchemixerBlock.FACING, direction).end()
+                    .part().modelFile(this.models().getExistingFile(modLoc("block/alchemixer_bottle0"))).rotationY(yRot).addModel().condition(AlchemixerBlock.HAS_BOTTLE[0], true).condition(AlchemixerBlock.FACING, direction).end()
+                    .part().modelFile(this.models().getExistingFile(modLoc("block/alchemixer_bottle1"))).rotationY(yRot).addModel().condition(AlchemixerBlock.HAS_BOTTLE[1], true).condition(AlchemixerBlock.FACING, direction).end()
+                    .part().modelFile(this.models().getExistingFile(modLoc("block/alchemixer_bottle2"))).rotationY(yRot).addModel().condition(AlchemixerBlock.HAS_BOTTLE[2], true).condition(AlchemixerBlock.FACING, direction).end();
+        }
+        this.itemModels().basicItem(ModBlocks.ALCHEMIXER.get().asItem());
     }
 
     private void blockItemModelFromParent(RegistryObject<Block> block, ResourceLocation parent) {

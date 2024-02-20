@@ -7,6 +7,7 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.Registries;
 import com.mikitellurium.telluriumsrandomstuff.setup.CommonSetup;
 import com.mojang.logging.LogUtils;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,7 +21,6 @@ import org.slf4j.Logger;
 public class TelluriumsRandomStuffMod {
 
     // todo rei and mei compatibility
-    // todo colored soul fragments
     // todo update changelog
     // todo opal armor trims
     // todo soul compactor
