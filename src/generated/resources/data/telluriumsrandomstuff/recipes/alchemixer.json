@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "telluriumsrandomstuff:soul_iron_rod"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    " I ",
+    "XXX"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:alchemixer"
+  },
+  "show_notification": true
+}

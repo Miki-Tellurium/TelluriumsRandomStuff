@@ -142,6 +142,9 @@ public class ModItems {
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_INGOT = ITEMS.register("soul_infused_iron_ingot",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> SOUL_IRON_ROD = ITEMS.register("soul_iron_rod",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

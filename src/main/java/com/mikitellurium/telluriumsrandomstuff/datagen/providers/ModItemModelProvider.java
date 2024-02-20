@@ -60,6 +60,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .model(this.getExistingFile(modLoc("grappling_hook_string")))
                 .end();
         this.simpleItem(ModItems.SOUL_INFUSED_IRON_INGOT);
+        this.handheldItem(ModItems.SOUL_IRON_ROD);
     }
 
     private void simpleItem(RegistryObject<Item> item) {
