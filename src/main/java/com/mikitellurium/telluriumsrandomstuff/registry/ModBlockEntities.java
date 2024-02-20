@@ -50,6 +50,10 @@ public class ModBlockEntities {
             "soul_infuser", () -> BlockEntityType.Builder.of(SoulInfuserBlockEntity::new,
                     ModBlocks.SOUL_INFUSER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<AlchemixerBlockEntity>> ALCHEMIXER = BLOCK_ENTITIES.register(
+            "alchemixer", () -> BlockEntityType.Builder.of(AlchemixerBlockEntity::new,
+                    ModBlocks.ALCHEMIXER.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

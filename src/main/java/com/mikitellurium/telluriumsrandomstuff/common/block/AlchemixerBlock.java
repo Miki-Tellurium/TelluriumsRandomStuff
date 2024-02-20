@@ -1,8 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AlchemixerBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -10,9 +14,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -24,9 +32,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class AlchemixerBlock extends Block {
+public class AlchemixerBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty[] HAS_BOTTLE = new BooleanProperty[]{
@@ -50,16 +59,37 @@ public class AlchemixerBlock extends Block {
         );
     }
 
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
+        return new AlchemixerBlockEntity(pos, blockState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
+                                                                  BlockEntityType<T> blockEntityType) {
+        return createTickerHelper(blockEntityType, ModBlockEntities.ALCHEMIXER.get(),
+                (tickLevel, blockPos, state, alchemixer) -> alchemixer.tick(tickLevel, blockPos, state));
+    }
+
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand,
                                  BlockHitResult result) {
+        if (!level.isClientSide) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AlchemixerBlockEntity && player instanceof ServerPlayer) {
+                this.openContainer(level, pos, player);
+            } else {
+                throw new IllegalStateException("Container provider or player is missing");
+            }
+        }
 
-        level.setBlockAndUpdate(pos, blockState
-                .setValue(HAS_BOTTLE[0], !blockState.getValue(HAS_BOTTLE[0]))
-                .setValue(HAS_BOTTLE[1], !blockState.getValue(HAS_BOTTLE[1]))
-                .setValue(HAS_BOTTLE[2], !blockState.getValue(HAS_BOTTLE[2]))
-        );
         return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    protected void openContainer(Level level, BlockPos pos, Player player) {
+        NetworkHooks.openScreen((ServerPlayer)player, (AlchemixerBlockEntity)level.getBlockEntity(pos), pos);
     }
 
     @Override

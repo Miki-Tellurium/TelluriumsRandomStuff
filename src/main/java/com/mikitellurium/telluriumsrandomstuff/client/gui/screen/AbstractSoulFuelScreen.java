@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFurnaceMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFuelMenu;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
@@ -22,14 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractSoulFurnaceScreen<T extends AbstractSoulFurnaceMenu> extends AbstractContainerScreen<T> {
+public abstract class AbstractSoulFuelScreen<T extends AbstractSoulFuelMenu> extends AbstractContainerScreen<T> {
 
     public static final ResourceLocation ELEMENT_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
     private final ResourceLocation guiTexture;
     private Rect2i soulLavaStorage;
 
-    public AbstractSoulFurnaceScreen(T menu, Inventory inventory, ResourceLocation guiTexture,
-                                     Component title) {
+    public AbstractSoulFuelScreen(T menu, Inventory inventory, ResourceLocation guiTexture,
+                                  Component title) {
         super(menu, inventory, title);
         this.guiTexture = guiTexture;
     }

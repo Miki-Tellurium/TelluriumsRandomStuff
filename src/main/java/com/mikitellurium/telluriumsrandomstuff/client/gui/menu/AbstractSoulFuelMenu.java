@@ -9,16 +9,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.fluids.FluidStack;
 
-public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
+public abstract class AbstractSoulFuelMenu extends AbstractContainerMenu {
 
     private final AbstractSoulFueledBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
     private FluidStack fluidStack;
-    private int invSize;
+    private final int invSize;
 
-    public AbstractSoulFurnaceMenu(int id, MenuType menuType, Inventory inventory, int invSize,
-                                   BlockEntity entity, ContainerData data) {
+    public AbstractSoulFuelMenu(int id, MenuType menuType, Inventory inventory, int invSize,
+                                BlockEntity entity, ContainerData data) {
         super(menuType, id);
         checkContainerSize(inventory, invSize);
         blockEntity = (AbstractSoulFueledBlockEntity) entity;
@@ -104,11 +104,11 @@ public abstract class AbstractSoulFurnaceMenu extends AbstractContainerMenu {
         return this.getData().get(0) > 0;
     }
 
-    public int getScaledProgress(int width) {
+    public int getScaledProgress(int scale) {
         int progress = this.getData().get(0);
         int maxProgress = this.getData().get(1);
 
-        return maxProgress != 0 && progress != 0 ? progress * width / maxProgress : 0;
+        return maxProgress != 0 && progress != 0 ? progress * scale / maxProgress : 0;
     }
 
     public int getScaledLitTime() {

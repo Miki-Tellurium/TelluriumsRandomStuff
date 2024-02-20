@@ -6,10 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLa
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.ExtractorScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulAnchorScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
@@ -51,6 +48,7 @@ public class ClientSetup {
             MenuScreens.register(ModMenuTypes.SOUL_ANCHOR_MENU.get(), SoulAnchorScreen::new);
             MenuScreens.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
             MenuScreens.register(ModMenuTypes.SOUL_INFUSER_MENU.get(), SoulInfuserScreen::new);
+            MenuScreens.register(ModMenuTypes.ALCHEMIXER_MENU.get(), AlchemixerScreen::new);
             ModItemProperties.register();
         });
     }

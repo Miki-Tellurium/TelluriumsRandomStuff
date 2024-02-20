@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.networking.packets;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFurnaceMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFuelMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulFueledBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -36,7 +36,7 @@ public class FluidSyncS2CPacket {
                 if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof AbstractSoulFueledBlockEntity blockEntity) {
                     blockEntity.setFluidStack(this.fluidStack);
 
-                    if(Minecraft.getInstance().player.containerMenu instanceof AbstractSoulFurnaceMenu menu &&
+                    if(Minecraft.getInstance().player.containerMenu instanceof AbstractSoulFuelMenu menu &&
                             menu.getBlockEntity().getBlockPos().equals(pos)) {
                         menu.setFluid(this.fluidStack);
                     }

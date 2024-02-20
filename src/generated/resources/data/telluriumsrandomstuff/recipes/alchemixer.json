@@ -7,11 +7,14 @@
     },
     "X": {
       "item": "minecraft:obsidian"
+    },
+    "v": {
+      "item": "minecraft:bucket"
     }
   },
   "pattern": [
     " I ",
-    "XXX"
+    "XvX"
   ],
   "result": {
     "item": "telluriumsrandomstuff:alchemixer"

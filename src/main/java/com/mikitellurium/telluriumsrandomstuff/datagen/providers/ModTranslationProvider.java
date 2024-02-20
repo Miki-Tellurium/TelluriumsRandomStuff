@@ -46,6 +46,7 @@ public class ModTranslationProvider extends LanguageProvider {
 
         translation("item", "lava_googles.tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");
+        translation("item", "mixed_potion.name", "Mixed Potion");
         // Blocks
         addBlock(ModBlocks.GRATE_MAGMA_BLOCK, "Magma Block with Grate");
         addBlock(ModBlocks.GRATE_SOUL_SAND, "Soul Sand with Grate");
@@ -125,6 +126,7 @@ public class ModTranslationProvider extends LanguageProvider {
         translation("blockentity", "soul_anchor.warning", "You already have a charged soul anchor");
         translation("blockentity", "extractor", "Extractor");
         translation("blockentity", "soul_infuser", "Soul Infuser");
+        translation("blockentity", "alchemixer", "Alchemixer");
         // Fluids
         translation("fluid_type", "soul_lava", "Soul Lava");
         // Entity Types

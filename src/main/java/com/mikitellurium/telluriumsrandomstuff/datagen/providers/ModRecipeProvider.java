@@ -36,7 +36,7 @@ public class ModRecipeProvider extends RecipeProvider {
         buildBlastingRecipes(consumer);
         buildStonecuttingRecipes(consumer);
     }
-    // todo add alchemixer recipe
+
     private void buildSoulInfusingRecipes(Consumer<FinishedRecipe> consumer) {
         SoulInfusionRecipeBuilder.addRecipe(Ingredient.of(Items.GLOWSTONE_DUST), Ingredient.of(ModItems.SMALL_SOUL_FRAGMENT.get()),
                         ModItems.BLUE_GLOWSTONE_DUST.get(), 20)
@@ -487,9 +487,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer, modLoc("soul_iron_rod"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ALCHEMIXER.get(), 1)
                 .pattern(" I ")
-                .pattern("XXX")
+                .pattern("XvX")
                 .define('I', ModItems.SOUL_IRON_ROD.get())
                 .define('X', Blocks.OBSIDIAN)
+                .define('v', Items.BUCKET)
                 .unlockedBy("has_soul_rod", has(ModItems.SOUL_IRON_ROD.get()))
                 .unlockedBy("has_brewing_stand", has(Blocks.BREWING_STAND))
                 .save(consumer, modLoc("alchemixer"));

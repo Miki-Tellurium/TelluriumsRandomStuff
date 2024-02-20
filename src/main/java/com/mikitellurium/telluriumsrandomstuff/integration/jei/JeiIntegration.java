@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFurnaceScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFuelScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
@@ -113,9 +113,9 @@ public class JeiIntegration implements IModPlugin {
 
         IIngredientManager ingredientManager = registration.getJeiHelpers().getIngredientManager();
         // Make the soul lava tank clickable
-        registration.addGuiContainerHandler(AbstractSoulFurnaceScreen.class, new IGuiContainerHandler<>() {
+        registration.addGuiContainerHandler(AbstractSoulFuelScreen.class, new IGuiContainerHandler<>() {
             @Override
-            public Optional<IClickableIngredient<?>> getClickableIngredientUnderMouse(AbstractSoulFurnaceScreen containerScreen, double mouseX, double mouseY) {
+            public Optional<IClickableIngredient<?>> getClickableIngredientUnderMouse(AbstractSoulFuelScreen containerScreen, double mouseX, double mouseY) {
                 Rect2i area = containerScreen.getSoulLavaStorage();
                 ITypedIngredient<FluidStack> soulLava = ingredientManager.createTypedIngredient(
                         ForgeTypes.FLUID_STACK, new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 10)).get();

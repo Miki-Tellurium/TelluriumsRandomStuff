@@ -1,9 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.ExtractorMenu;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulAnchorMenu;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulFurnaceMenu;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulInfuserMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.*;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -30,6 +27,9 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<SoulInfuserMenu>> SOUL_INFUSER_MENU =
             registerMenuType(SoulInfuserMenu::new, "soul_infuser_menu");
+
+    public static final RegistryObject<MenuType<AlchemixerMenu>> ALCHEMIXER_MENU =
+            registerMenuType(AlchemixerMenu::new, "alchemixer_menu");
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                   String name) {
