@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class SoulFurnaceMenu extends AbstractSoulFurnaceMenu {
+public class SoulFurnaceMenu extends AbstractSoulFuelMenu {
 
     public SoulFurnaceMenu(int id, Inventory inventory, FriendlyByteBuf data) {
         this(id, inventory, inventory.player.level().getBlockEntity(data.readBlockPos()), new SimpleContainerData(4));

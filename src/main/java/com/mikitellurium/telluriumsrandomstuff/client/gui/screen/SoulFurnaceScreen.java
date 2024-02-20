@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class SoulFurnaceScreen extends AbstractSoulFurnaceScreen<SoulFurnaceMenu> {
+public class SoulFurnaceScreen extends AbstractSoulFuelScreen<SoulFurnaceMenu> {
 
     public static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_furnace_gui.png");
 
@@ -25,7 +25,7 @@ public class SoulFurnaceScreen extends AbstractSoulFurnaceScreen<SoulFurnaceMenu
     private void renderFire(GuiGraphics graphics) {
         if (this.menu.isLit()) {
             int time = this.menu.getScaledLitTime();
-            graphics.blit(AbstractSoulFurnaceScreen.ELEMENT_TEXTURE, leftPos + 57, topPos + 61 - time, 176,
+            graphics.blit(AbstractSoulFuelScreen.ELEMENT_TEXTURE, leftPos + 57, topPos + 61 - time, 176,
                     12 - time, 14, time + 1);
         }
     }
@@ -33,7 +33,7 @@ public class SoulFurnaceScreen extends AbstractSoulFurnaceScreen<SoulFurnaceMenu
     private void renderProgressArrow(GuiGraphics graphics) {
         if (this.menu.isCrafting()) {
             int progress = this.menu.getScaledProgress(24);
-            graphics.blit(AbstractSoulFurnaceScreen.ELEMENT_TEXTURE, leftPos + 79, topPos + 29, 176, 14,
+            graphics.blit(AbstractSoulFuelScreen.ELEMENT_TEXTURE, leftPos + 79, topPos + 29, 176, 14,
                     progress + 1, 16);
         }
     }

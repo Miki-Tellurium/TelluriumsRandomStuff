@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class SoulInfuserScreen extends AbstractSoulFurnaceScreen<SoulInfuserMenu> {
+public class SoulInfuserScreen extends AbstractSoulFuelScreen<SoulInfuserMenu> {
 
     public static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_infuser_gui.png");
 
@@ -24,7 +24,7 @@ public class SoulInfuserScreen extends AbstractSoulFurnaceScreen<SoulInfuserMenu
     private void renderProgressArrow(GuiGraphics graphics) {
         if (this.menu.isCrafting()) {
             int progress = this.menu.getScaledProgress(55);
-            graphics.blit(AbstractSoulFurnaceScreen.ELEMENT_TEXTURE, leftPos + 54, topPos + 32, 176, 79,
+            graphics.blit(AbstractSoulFuelScreen.ELEMENT_TEXTURE, leftPos + 54, topPos + 32, 176, 79,
                     progress + 1, 18);
         }
     }

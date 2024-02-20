@@ -149,7 +149,7 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new SoulFurnaceMenu(id, inventory, this, this.getContainerData());
+        return new SoulFurnaceMenu(id, inventory, this, this.containerData);
     }
 
     @Override

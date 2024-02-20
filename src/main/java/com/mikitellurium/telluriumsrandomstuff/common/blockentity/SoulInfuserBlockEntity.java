@@ -130,7 +130,7 @@ public class SoulInfuserBlockEntity extends AbstractSoulSmeltingBlockEntity<Soul
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new SoulInfuserMenu(id, inventory, this, this.getContainerData());
+        return new SoulInfuserMenu(id, inventory, this, this.containerData);
     }
 
     @Override
