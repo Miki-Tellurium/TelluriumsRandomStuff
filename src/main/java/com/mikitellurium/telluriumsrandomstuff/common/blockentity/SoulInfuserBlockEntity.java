@@ -59,7 +59,6 @@ public class SoulInfuserBlockEntity extends AbstractSoulSmeltingBlockEntity<Soul
                 4, (i) -> i == INPUT_SLOT1 || i == INPUT_SLOT2, (i) -> i == OUTPUT_SLOT, BUCKET_SLOT);
     }
 
-    @SuppressWarnings("unchecked")
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
         if (level.isClientSide) {
             return;
