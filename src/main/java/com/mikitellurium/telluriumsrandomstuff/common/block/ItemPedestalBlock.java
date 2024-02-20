@@ -35,15 +35,18 @@ public class ItemPedestalBlock extends BaseEntityBlock {
         super(properties.noOcclusion());
     }
 
-    @Override
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
-        return PEDESTAL_SHAPE;
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
         return new ItemPedestalBlockEntity(pos, blockState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
+                                                                  BlockEntityType<T> blockEntityType) {
+        return createTickerHelper(blockEntityType, ModBlockEntities.ITEM_PEDESTAL.get(),
+                (tickLevel, blockPos, state, itemPedestal) -> itemPedestal.tick(tickLevel, blockPos, state));
     }
 
     @Override
@@ -83,14 +86,6 @@ public class ItemPedestalBlock extends BaseEntityBlock {
         return Shapes.block();
     }
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
-                                                                  BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.ITEM_PEDESTAL.get(),
-                (tickLevel, blockPos, state, itemPedestal) -> itemPedestal.tick(tickLevel, blockPos, state));
-    }
-
     @Override
     public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (blockState.getBlock() != newState.getBlock()) {
@@ -112,6 +107,11 @@ public class ItemPedestalBlock extends BaseEntityBlock {
         }
 
         return blockState.getBlock().asItem().getDefaultInstance();
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
+        return PEDESTAL_SHAPE;
     }
 
     @Override

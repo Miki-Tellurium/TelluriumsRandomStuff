@@ -47,6 +47,18 @@ public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
         return new AwakenedSculkShriekerBlockEntity(pos, blockState);
     }
 
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
+                                                                  BlockEntityType<T> blockEntityType) {
+        return !level.isClientSide ? BaseEntityBlock.createTickerHelper(blockEntityType,
+                ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get(),
+                (tickLevel, pos, blockState1, shrieker) -> {
+                    VibrationSystem.Ticker.tick(tickLevel, shrieker.getVibrationData(), shrieker.getVibrationUser());
+                    shrieker.getSculkSpreader().updateCursors(tickLevel, pos, tickLevel.random, true);
+                }) : null;
+    }
+
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState blockState, Entity entity) {
         if (level instanceof ServerLevel serverlevel) {
@@ -80,18 +92,6 @@ public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
             level.getBlockEntity(pos, ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get())
                     .ifPresent((shrieker) -> shrieker.tryRespond(level));
         }
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
-                                                                  BlockEntityType<T> blockEntityType) {
-        return !level.isClientSide ? BaseEntityBlock.createTickerHelper(blockEntityType,
-                ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get(),
-                (level1, pos, blockState1, shrieker) -> {
-                        VibrationSystem.Ticker.tick(level1, shrieker.getVibrationData(), shrieker.getVibrationUser());
-                        shrieker.getSculkSpreader().updateCursors(level1, pos, level1.random, true);
-        }) : null;
     }
 
     @Override

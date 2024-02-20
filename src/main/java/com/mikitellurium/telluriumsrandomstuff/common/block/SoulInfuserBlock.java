@@ -30,6 +30,20 @@ public class SoulInfuserBlock extends AbstractFurnaceBlock {
         super(BlockBehaviour.Properties.copy(ModBlocks.SOUL_FURNACE.get()));
     }
 
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
+        return new SoulInfuserBlockEntity(pos, blockState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
+                                                                  BlockEntityType<T> blockEntityType) {
+        return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_INFUSER.get(),
+                (tickLevel, blockPos, state, soulInfuser) -> soulInfuser.tick(tickLevel, blockPos, state));
+    }
+
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand,
                                  BlockHitResult hitResult) {
@@ -71,20 +85,6 @@ public class SoulInfuserBlock extends AbstractFurnaceBlock {
                 level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, pX + d1, pY + d2, pZ + d3, 0.0D, -0.04D, 0.0D);
             }
         }
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return new SoulInfuserBlockEntity(pos, blockState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
-                                                                  BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_INFUSER.get(),
-                (tickLevel, blockPos, state, soulInfuser) -> soulInfuser.tick(tickLevel, blockPos, state));
     }
 
     @Override
