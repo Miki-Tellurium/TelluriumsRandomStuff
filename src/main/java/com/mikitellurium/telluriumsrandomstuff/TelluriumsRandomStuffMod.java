@@ -4,13 +4,21 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauld
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.registry.Registries;
 import com.mikitellurium.telluriumsrandomstuff.setup.CommonSetup;
+import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -44,6 +52,7 @@ public class TelluriumsRandomStuffMod {
             ModDispenserBehaviours.register();
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BRIGHT_TORCHFLOWER.getId(), ModBlocks.POTTED_BRIGHT_TORCHFLOWER);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.SOUL_TORCHFLOWER.getId(), ModBlocks.POTTED_SOUL_TORCHFLOWER);
+            BrewingRecipeRegistry.addRecipe(RecipeHelper.WATER_BOTTLE, Ingredient.of(ModItems.BLUE_GLOWSTONE_DUST.get()), RecipeHelper.THICK_POTION);
         });
     }
 

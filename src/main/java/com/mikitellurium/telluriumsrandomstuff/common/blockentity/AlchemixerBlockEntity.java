@@ -2,9 +2,11 @@ package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AlchemixerMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.MappedItemStackHandler;
 import com.mikitellurium.telluriumsrandomstuff.util.WrappedHandler;
 import net.minecraft.core.BlockPos;
@@ -14,14 +16,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -32,10 +39,8 @@ import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Predicate;
 
 public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity implements MenuProvider {
 
@@ -43,12 +48,18 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
     private static final int INPUT_SLOT1 = 1;
     private static final int INPUT_SLOT2 = 2;
     private static final int OUTPUT_SLOT = 3;
+    private static final Predicate<ItemStack> isValidPotionReceptacle = (itemStack -> {
+        Potion potion = PotionUtils.getPotion(itemStack);
+        return potion == Potions.THICK || potion == Potions.MUNDANE;
+    });
     private final MappedItemStackHandler itemHandler = new MappedItemStackHandler(4,
             (i) -> i == INPUT_SLOT1 || i == INPUT_SLOT2, (i) -> i == OUTPUT_SLOT, (i) -> i == bucketSlot) {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return (isInput(slot) && stack.is(Items.POTION)) || (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
+            return (isInput(slot) && stack.getItem() instanceof PotionItem) ||
+                    (isOutput(slot) && isValidPotionReceptacle.test(stack)) ||
+                    (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
         }
 
         @Override
@@ -57,6 +68,7 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
         }
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    // todo move directionWrappedHandlerMap in a static class
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(
             Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler,
                     (i, s) -> true,
@@ -79,12 +91,14 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
 
     private int progress = 0;
     private int maxProgress = 400;
+    private int recipeCost = 0;
     private final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int index) {
             return switch (index) {
                 case 0 -> AlchemixerBlockEntity.this.progress;
                 case 1 -> AlchemixerBlockEntity.this.maxProgress;
+                case 2 -> AlchemixerBlockEntity.this.recipeCost;
                 default -> 0;
             };
         }
@@ -94,12 +108,13 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
             switch (index) {
                 case 0 -> AlchemixerBlockEntity.this.progress = value;
                 case 1 -> AlchemixerBlockEntity.this.maxProgress = value;
+                case 2 -> AlchemixerBlockEntity.this.recipeCost = value;
             }
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     };
     private CachedObject<PotionMixingRecipe> cachedRecipe = CachedObject.empty();
@@ -121,6 +136,8 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
         } else {
             this.resetProgress();
         }
+        this.recipeCost = optionalRecipe.map(PotionMixingRecipe::getRecipeCost).orElse(0);
+
         level.setBlock(blockPos, blockState
                 .setValue(AlchemixerBlock.HAS_BOTTLE[0], !itemHandler.getStackInSlot(INPUT_SLOT1).isEmpty())
                 .setValue(AlchemixerBlock.HAS_BOTTLE[1], !itemHandler.getStackInSlot(INPUT_SLOT2).isEmpty())
@@ -138,14 +155,15 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
     }
 
     private void validateCurrentRecipe(PotionMixingRecipe recipe) {
-        if (!recipe.equals(this.cachedRecipe.get())) {
+        if (!this.cachedRecipe.isPresent() || !recipe.matches(this.cachedRecipe.get())) {
             this.resetProgress();
         }
         this.cachedRecipe = CachedObject.of(recipe);
     }
 
     protected boolean canProcessRecipe(PotionMixingRecipe recipe) {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() && this.hasEnoughFuel(recipe.getRecipeCost());
+        return isValidPotionReceptacle.test(this.itemHandler.getStackInSlot(OUTPUT_SLOT)) &&
+                this.hasEnoughFuel(recipe.getRecipeCost());
     }
 
     protected void onProcessRecipe(PotionMixingRecipe recipe) {
@@ -157,8 +175,8 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
     }
 
     protected void produceOutput(PotionMixingRecipe recipe) {
-        this.getItemHandler().getStackInSlot(INPUT_SLOT1).shrink(1);
-        this.getItemHandler().getStackInSlot(INPUT_SLOT2).shrink(1);
+        this.getItemHandler().setStackInSlot(INPUT_SLOT1, Items.GLASS_BOTTLE.getDefaultInstance());
+        this.getItemHandler().setStackInSlot(INPUT_SLOT2, Items.GLASS_BOTTLE.getDefaultInstance());
         this.drainTank(recipe.getRecipeCost());
         this.getItemHandler().setStackInSlot(OUTPUT_SLOT, recipe.assemble());
     }
@@ -170,7 +188,8 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
     protected Optional<PotionMixingRecipe> getRecipe() {
         ItemStack firstStack = this.itemHandler.getStackInSlot(INPUT_SLOT1);
         ItemStack secondStack = this.itemHandler.getStackInSlot(INPUT_SLOT2);
-        if (firstStack.isEmpty() || secondStack.isEmpty() || !firstStack.is(Items.POTION) || !secondStack.is(Items.POTION)) {
+        if (firstStack.isEmpty() || secondStack.isEmpty() ||
+                !(firstStack.getItem() instanceof PotionItem) || !(secondStack.getItem() instanceof PotionItem)) {
             return Optional.empty();
         }
         return Optional.of(new PotionMixingRecipe(firstStack, secondStack));
@@ -200,7 +219,7 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
 
         return inventory;
     }
-
+    // todo add onRemove to block
     @SuppressWarnings("ConstantConditions")
     public void dropItemsOnBreak() {
         SimpleContainer inventory = getInventory();
@@ -276,35 +295,6 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("alchemixer.inventory"));
         this.progress = tag.getInt("alchemixer.progress");
-    }
-
-    /* Not a real recipe type */
-    protected record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) {
-
-        // todo fuse same effect like enchantments
-        private List<MobEffectInstance> getEffects() {
-            List<MobEffectInstance> mobEffects = new ArrayList<>();
-            mobEffects.addAll(PotionUtils.getMobEffects(this.firstPotion));
-            mobEffects.addAll(PotionUtils.getMobEffects(this.secondPotion));
-            return mobEffects;
-        }
-
-        private int getRecipeCost() {
-            int cost = 0;
-            for (MobEffectInstance instance : this.getEffects()) {
-                cost += Math.max(instance.getAmplifier(), 1);
-                if (!instance.getEffect().isInstantenous()) {
-                    cost += instance.getDuration() / 1200;
-                }
-            }
-            return cost * 100;
-        }
-
-        private ItemStack assemble() {
-            ItemStack result = PotionUtils.setCustomEffects(new ItemStack(Items.POTION), this.getEffects());
-            return result.setHoverName(Component.translatable("item.telluriumsrandomstuff.mixed_potion.name"));
-        }
-
     }
 
 }

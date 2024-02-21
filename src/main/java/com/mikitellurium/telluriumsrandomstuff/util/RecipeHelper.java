@@ -12,6 +12,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
@@ -47,16 +50,8 @@ public class RecipeHelper {
         glassColors.put(Blocks.YELLOW_STAINED_GLASS, DyeColor.YELLOW);
     }
 
-//    public static final List<ItemStack> soulHarvestingBooks = List.of(
-//            RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 1),
-//            RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
-//            RecipeUtils.addEnchantment(Items.ENCHANTED_BOOK.getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
-//    );
-//    public static final List<ItemStack> soulHarvestingSwords = List.of(
-//            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 1),
-//            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 2),
-//            RecipeUtils.addEnchantment(ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(), ModEnchantments.SOUL_HARVESTING.get(), 3)
-//    );
+    public static final Ingredient WATER_BOTTLE = Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
+    public static final ItemStack THICK_POTION = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.THICK);
 
     public static DyeColor getGlassColor(Block glass) {
         return glassColors.get(glass);
