@@ -1,27 +1,22 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
-import net.minecraft.network.chat.Component;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /* Not a real recipe type */
 public record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) {
 
-    private static final Map<Item, Integer> priorities = Map.of(
-            Items.POTION, 1,
-            Items.SPLASH_POTION, 2,
-            Items.LINGERING_POTION, 3
-    );
-    // todo fix same potion duration and amplifier
+    public static final String TAG_MIXED = FastLoc.modId() + ".mixed";
+
     public PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) {
         this.firstPotion = firstPotion.copy();
         this.secondPotion = secondPotion.copy();
@@ -38,25 +33,15 @@ public record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) 
                 cost += amplifier * 2;
             }
         }
-        cost += this.getRecipeMalus();
         return cost * 100;
     }
 
     public ItemStack assemble() {
-        List<MobEffectInstance> mobEffects = this.getEffects();
-        ItemStack result = PotionUtils.setCustomEffects(new ItemStack(this.getPotionType()), mobEffects);
-        result.getOrCreateTag().putInt("CustomPotionColor", PotionUtils.getColor(mobEffects));
-        return result.setHoverName(Component.translatable("item.telluriumsrandomstuff.mixed_potion.name"));
+        return getMixedPotion(new ItemStack(Items.POTION), this.getEffects());
     }
 
     public boolean matches(PotionMixingRecipe recipe) {
         return ItemStack.matches(this.firstPotion, recipe.firstPotion) && ItemStack.matches(this.secondPotion, recipe.secondPotion);
-    }
-
-    private Item getPotionType() {
-        Item firstType = this.firstPotion.getItem();
-        Item secondType = this.secondPotion.getItem();
-        return priorities.get(firstType) > priorities.get(secondType) ? firstType : secondType;
     }
 
     private List<MobEffectInstance> getRawEffects() {
@@ -79,9 +64,7 @@ public record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) 
 
             if (matchingInstance.isPresent()) {
                 MobEffectInstance instance = matchingInstance.get();
-                mobEffects.add(new MobEffectInstance(effectType,
-                        Math.min(effect.getDuration(), instance.getDuration()),
-                        effect.getAmplifier() + 1));
+                mobEffects.add(MobEffectUpgrade.getCategory(effectType).getMixedInstance(effect, instance));
             } else {
                 mobEffects.add(effect);
             }
@@ -94,8 +77,12 @@ public record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) 
         return mobEffects;
     }
 
-    private int getRecipeMalus() {
-        return Math.abs(priorities.get(this.firstPotion.getItem()) - priorities.get(this.secondPotion.getItem()));
+    public static ItemStack getMixedPotion(ItemStack baseStack, List<MobEffectInstance> mobEffects) {
+        ItemStack result = PotionUtils.setCustomEffects(baseStack, mobEffects);
+        CompoundTag tag = result.getOrCreateTag();
+        tag.putBoolean(TAG_MIXED, true);
+        tag.putInt("CustomPotionColor", PotionUtils.getColor(mobEffects));
+        return result;
     }
 
 }

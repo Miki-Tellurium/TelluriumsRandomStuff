@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.CustomBubbleColumnBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulAnchorBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
@@ -22,6 +23,7 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(LavaGooglesItem.class);
         MinecraftForge.EVENT_BUS.register(GrapplingHookItem.class);
         MinecraftForge.EVENT_BUS.register(LootEvents.class);
+        MinecraftForge.EVENT_BUS.register(AlchemixerBlock.class);
     }
 
     public static void registerCommands(RegisterCommandsEvent event){

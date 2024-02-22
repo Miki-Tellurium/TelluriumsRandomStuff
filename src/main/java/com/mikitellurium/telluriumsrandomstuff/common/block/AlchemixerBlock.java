@@ -2,7 +2,9 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AlchemixerBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -10,7 +12,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,8 +39,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.event.brewing.PotionBrewEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class AlchemixerBlock extends BaseEntityBlock {
 
@@ -129,6 +141,28 @@ public class AlchemixerBlock extends BaseEntityBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, HAS_BOTTLE[0], HAS_BOTTLE[1], HAS_BOTTLE[2]);
+    }
+
+    /* Events */
+    @SubscribeEvent
+    public static void onPotionPreBrew(PotionBrewEvent.Pre event) {
+        for (int i = 0; i < 3; i++) {
+            ItemStack itemStack = event.getItem(i);
+            if (itemStack.hasTag() && itemStack.getTag().contains(PotionMixingRecipe.TAG_MIXED)) {
+                ItemStack output = BrewingRecipeRegistry.getOutput(itemStack, event.getItem(3));
+                ItemStack result = PotionMixingRecipe.getMixedPotion(new ItemStack(output.getItem()), PotionUtils.getCustomEffects(itemStack));
+                event.setItem(i, result);
+                event.setCanceled(true);
+            } else {
+                ItemStack output = BrewingRecipeRegistry.getOutput(itemStack, event.getItem(3));
+                if (!output.isEmpty()) {
+                    event.setItem(i, output);
+                }
+            }
+        }
+        if (event.isCanceled()) {
+            event.getItem(3).shrink(1);
+        }
     }
 
 }

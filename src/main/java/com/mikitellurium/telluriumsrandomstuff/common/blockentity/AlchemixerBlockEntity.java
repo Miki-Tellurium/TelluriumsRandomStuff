@@ -68,6 +68,7 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
         }
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    // todo add brewing sound event
     // todo move directionWrappedHandlerMap in a static class
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(
             Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler,
