@@ -33,6 +33,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.Blocks;
@@ -95,7 +96,18 @@ public class JeiIntegration implements IModPlugin {
         registration.addRecipes(SOUL_INFUSION_RECIPE_TYPE, soulInfusionRecipes);
         registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
         registration.addRecipes(AMETHYST_LENS_INFO_TYPE, amethystLensInfoRecipes);
-        registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(recipeFactory));
+        registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(new RecipeHelper.RepairData(Ingredient.of(ModItems.OPAL_CRYSTAL.get()),
+                ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(),
+                ModItems.OPAL_CRYSTAL_AXE.get().getDefaultInstance(),
+                ModItems.OPAL_CRYSTAL_PICKAXE.get().getDefaultInstance(),
+                ModItems.OPAL_CRYSTAL_SHOVEL.get().getDefaultInstance(),
+                ModItems.OPAL_CRYSTAL_HOE.get().getDefaultInstance()), recipeFactory));
+        registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(new RecipeHelper.RepairData(Ingredient.of(ModItems.SOUL_INFUSED_IRON_INGOT.get()),
+                ModItems.SOUL_INFUSED_IRON_SWORD.get().getDefaultInstance(),
+                ModItems.SOUL_INFUSED_IRON_AXE.get().getDefaultInstance(),
+                ModItems.SOUL_INFUSED_IRON_PICKAXE.get().getDefaultInstance(),
+                ModItems.SOUL_INFUSED_IRON_SHOVEL.get().getDefaultInstance(),
+                ModItems.SOUL_INFUSED_IRON_HOE.get().getDefaultInstance()), recipeFactory));
     }
 
     @Override

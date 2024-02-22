@@ -20,8 +20,6 @@ import java.util.List;
 
 public class ModItems {
 
-    private static final int opaliumToolsDurability = 250;
-
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FastLoc.modId());
 
     public static final RegistryObject<Item> SOUL_LAVA_BUCKET = ITEMS.register("soul_lava_bucket",
@@ -58,7 +56,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> OPAL_CRYSTAL_SWORD = ITEMS.register("opal_crystal_sword",
             () -> new SwordItem(ModToolTiers.OPAL_CRYSTAL, 3, -2.4F, new Item.Properties()
-                    .defaultDurability(opaliumToolsDurability)) {
+                    .defaultDurability(250)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
@@ -67,7 +65,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> OPAL_CRYSTAL_SHOVEL = ITEMS.register("opal_crystal_shovel",
             () -> new ShovelItem(ModToolTiers.OPAL_CRYSTAL, 1.5F, -3.0F, new Item.Properties()
-                    .defaultDurability(opaliumToolsDurability)) {
+                    .defaultDurability(250)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
@@ -76,7 +74,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> OPAL_CRYSTAL_PICKAXE = ITEMS.register("opal_crystal_pickaxe",
             () -> new PickaxeItem(ModToolTiers.OPAL_CRYSTAL, 1, -2.8F, new Item.Properties()
-                    .defaultDurability(opaliumToolsDurability)) {
+                    .defaultDurability(250)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
@@ -85,7 +83,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> OPAL_CRYSTAL_AXE = ITEMS.register("opal_crystal_axe",
             () -> new AxeItem(ModToolTiers.OPAL_CRYSTAL, 5.0F, -3.0F, new Item.Properties()
-                    .defaultDurability(opaliumToolsDurability)) {
+                    .defaultDurability(250)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
@@ -94,7 +92,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> OPAL_CRYSTAL_HOE = ITEMS.register("opal_crystal_hoe",
             () -> new HoeItem(ModToolTiers.OPAL_CRYSTAL, -3, 0.0F, new Item.Properties()
-                    .defaultDurability(opaliumToolsDurability)) {
+                    .defaultDurability(250)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
@@ -141,6 +139,51 @@ public class ModItems {
 
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_INGOT = ITEMS.register("soul_infused_iron_ingot",
             () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_SWORD = ITEMS.register("soul_infused_iron_sword",
+            () -> new SwordItem(ModToolTiers.INFUSED_IRON, 3, -2.4F, new Item.Properties()
+                    .defaultDurability(500)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                }
+            });
+
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_SHOVEL = ITEMS.register("soul_infused_iron_shovel",
+            () -> new ShovelItem(ModToolTiers.INFUSED_IRON, 1.5F, -3.0F, new Item.Properties()
+                    .defaultDurability(500)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                }
+            });
+
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_PICKAXE = ITEMS.register("soul_infused_iron_pickaxe",
+            () -> new PickaxeItem(ModToolTiers.INFUSED_IRON, 1, -2.8F, new Item.Properties()
+                    .defaultDurability(500)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                }
+            });
+
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_AXE = ITEMS.register("soul_infused_iron_axe",
+            () -> new AxeItem(ModToolTiers.INFUSED_IRON, 5.0F, -3.0F, new Item.Properties()
+                    .defaultDurability(500)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                }
+            });
+
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_HOE = ITEMS.register("soul_infused_iron_hoe",
+            () -> new HoeItem(ModToolTiers.INFUSED_IRON, -3, 0.0F, new Item.Properties()
+                    .defaultDurability(500)) {
+                @Override
+                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
+                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                }
+            });
 
     public static final RegistryObject<Item> SOUL_IRON_ROD = ITEMS.register("soul_iron_rod",
             () -> new Item(new Item.Properties()));

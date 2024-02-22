@@ -61,14 +61,6 @@ public class RecipeHelper {
         return glassColors.entrySet();
     }
 
-    private static final RepairData opaliumRepairData = new RepairData(Ingredient.of(ModItems.OPAL_CRYSTAL.get()),
-            ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(),
-            ModItems.OPAL_CRYSTAL_AXE.get().getDefaultInstance(),
-            ModItems.OPAL_CRYSTAL_PICKAXE.get().getDefaultInstance(),
-            ModItems.OPAL_CRYSTAL_SHOVEL.get().getDefaultInstance(),
-            ModItems.OPAL_CRYSTAL_HOE.get().getDefaultInstance()
-            );
-
     public static List<SoulFurnaceSmeltingRecipe> getConvertedVanillaRecipes(List<SmeltingRecipe> smeltingRecipes) {
         List<SoulFurnaceSmeltingRecipe> soulFurnaceRecipes = NonNullList.create();
         for (SmeltingRecipe recipe : smeltingRecipes) {
@@ -104,8 +96,8 @@ public class RecipeHelper {
     /*
      *   Anvil recipe helper code taken from JEI Code, credit to mezz and the JEI developers
      */
-    public static List<IJeiAnvilRecipe> getAnvilRecipes(IVanillaRecipeFactory vanillaRecipeFactory) {
-        return getRepairRecipes(opaliumRepairData, vanillaRecipeFactory).toList();
+    public static List<IJeiAnvilRecipe> getAnvilRecipes(RepairData repairData, IVanillaRecipeFactory vanillaRecipeFactory) {
+        return getRepairRecipes(repairData, vanillaRecipeFactory).toList();
     }
 
     private static Stream<IJeiAnvilRecipe> getRepairRecipes(RepairData repairData, IVanillaRecipeFactory vanillaRecipeFactory) {
@@ -133,7 +125,7 @@ public class RecipeHelper {
                 });
     }
 
-    private static class RepairData {
+    public static class RepairData {
         private final Ingredient repairIngredient;
         private final List<ItemStack> repairables;
 

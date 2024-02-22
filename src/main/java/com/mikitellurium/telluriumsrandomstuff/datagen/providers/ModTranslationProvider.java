@@ -43,6 +43,11 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.GRAPPLING_HOOK, "Grappling Hook");
         addItem(ModItems.SOUL_INFUSED_IRON_INGOT, "Soul Infused Iron Ingot");
         addItem(ModItems.SOUL_IRON_ROD, "Soul Iron Rod");
+        addItem(ModItems.SOUL_INFUSED_IRON_SWORD, "Soul Infused Iron Sword");
+        addItem(ModItems.SOUL_INFUSED_IRON_SHOVEL, "Soul Infused Iron Shovel");
+        addItem(ModItems.SOUL_INFUSED_IRON_PICKAXE, "Soul Infused Iron Pickaxe");
+        addItem(ModItems.SOUL_INFUSED_IRON_AXE, "Soul Infused Iron Axe");
+        addItem(ModItems.SOUL_INFUSED_IRON_HOE, "Soul Infused Iron Hoe");
 
         translation("item", "lava_googles.tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");

@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -15,5 +16,10 @@ public class ModToolTiers {
             new ForgeTier(3, 250, 10.0f, 3.0f, 15,
                     ModTags.Blocks.NEEDS_OPAL_CRYSTAL_TOOL, () -> Ingredient.of(ModItems.OPAL_CRYSTAL.get())),
             FastLoc.modLoc("opal_crystal"), List.of(Tiers.DIAMOND), List.of());
+
+    public static final Tier INFUSED_IRON = TierSortingRegistry.registerTier(
+            new ForgeTier(2, 500, 6.0F, 2.5F, 20,
+                    BlockTags.NEEDS_IRON_TOOL, () -> Ingredient.of(ModItems.OPAL_CRYSTAL.get())),
+            FastLoc.modLoc("infused_iron"), List.of(Tiers.IRON), List.of(Tiers.DIAMOND, OPAL_CRYSTAL));
 
 }

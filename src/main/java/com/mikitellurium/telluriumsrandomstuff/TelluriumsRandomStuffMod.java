@@ -32,6 +32,7 @@ public class TelluriumsRandomStuffMod {
     // todo update changelog
     // todo opal armor trims
     // todo soul compactor
+    // todo add soul infused iron tools and armor
     public static final String MOD_ID = "telluriumsrandomstuff";
     public static final Logger LOGGER = LogUtils.getLogger();
 

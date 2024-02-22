@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "telluriumsrandomstuff:soul_infused_iron_ingot"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "##",
+    "I ",
+    "I "
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:soul_infused_iron_hoe"
+  },
+  "show_notification": true
+}

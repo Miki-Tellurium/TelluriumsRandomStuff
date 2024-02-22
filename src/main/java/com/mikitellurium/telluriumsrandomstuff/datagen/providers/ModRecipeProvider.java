@@ -494,6 +494,46 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_soul_rod", has(ModItems.SOUL_IRON_ROD.get()))
                 .unlockedBy("has_brewing_stand", has(Blocks.BREWING_STAND))
                 .save(consumer, modLoc("alchemixer"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_SWORD.get(), 1)
+                .pattern(" # ")
+                .pattern(" # ")
+                .pattern(" I ")
+                .define('I', Items.STICK)
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_sword"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_SHOVEL.get(), 1)
+                .pattern(" # ")
+                .pattern(" I ")
+                .pattern(" I ")
+                .define('I', Items.STICK)
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_shovel"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_PICKAXE.get(), 1)
+                .pattern("###")
+                .pattern(" I ")
+                .pattern(" I ")
+                .define('I', Items.STICK)
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_pickaxe"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_AXE.get(), 1)
+                .pattern("##")
+                .pattern("I#")
+                .pattern("I ")
+                .define('I', Items.STICK)
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_axe"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_HOE.get(), 1)
+                .pattern("##")
+                .pattern("I ")
+                .pattern("I ")
+                .define('I', Items.STICK)
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_hoe"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
