@@ -88,8 +88,6 @@ public class ModRecipeProvider extends RecipeProvider {
     private void buildSoulLavaTransmutationRecipe(Consumer<FinishedRecipe> consumer) {
         SoulLavaTransmutationRecipeBuilder.addRecipe(Ingredient.of(Blocks.MAGMA_BLOCK), ModBlocks.SOUL_MAGMA_BLOCK.get())
                 .save(consumer, modLoc("soul_magma_block_from_transmutation"));
-        SoulLavaTransmutationRecipeBuilder.addRecipe(Ingredient.of(Blocks.CRYING_OBSIDIAN), ModBlocks.SOUL_OBSIDIAN.get())
-                .save(consumer, modLoc("soul_obsidian_from_transmutation"));
     }
 
     private void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {
@@ -339,15 +337,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE))
                 .unlockedBy("has_soul_magma_bricks", has(ModBlocks.SOUL_MAGMA_BRICKS.get()))
                 .save(consumer, modLoc("soul_furnace"));
-//        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SOUL_MAGMA_BLOCK.get(), 8)
-//                .pattern("XXX")
-//                .pattern("X#X")
-//                .pattern("XXX")
-//                .define('#', ModItems.SOUL_LAVA_BUCKET.get())
-//                .define('X', Blocks.MAGMA_BLOCK)
-//                .unlockedBy("has_soul_lava_bucket", has(ModItems.SOUL_LAVA_BUCKET.get()))
-//                .unlockedBy("has_magma_block", has(Blocks.MAGMA_BLOCK))
-//                .save(consumer, modLoc("soul_magma_block"));
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SOUL_MAGMA_BRICK_SLAB.get(), 6)
                 .pattern("###")
                 .define('#', ModBlocks.SOUL_MAGMA_BRICKS.get())
@@ -444,28 +433,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 ModBlocks.OPAL_BRICKS.get());
         this.itemPedestalShaped(consumer, "cut_opal_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get());
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_FRAGMENT.get(), 1)
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .define('#', ModItems.SMALL_SOUL_FRAGMENT.get())
-                .unlockedBy("has_small_soul_fragment", has(ModItems.SMALL_SOUL_FRAGMENT.get()))
-                .save(consumer, modLoc("small_soul_fragment"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.INFUSED_SOUL_SAND.get(), 1)
-                .pattern(" # ")
-                .pattern("#s#")
-                .pattern(" # ")
-                .define('#', Blocks.SOUL_SAND)
-                .define('s', ModItems.SOUL_FRAGMENT.get())
-                .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
-                .save(consumer, modLoc("infused_soul_sand"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_CLUSTER.get(), 1)
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .define('#', ModItems.SOUL_FRAGMENT.get())
-                .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
-                .save(consumer, modLoc("soul_cluster"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_INFUSER.get(), 1)
                 .pattern("XXX")
                 .pattern("XFX")
@@ -569,6 +536,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('s', Items.STRING)
                 .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
                 .save(consumer, modLoc("grappling_hook"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_OBSIDIAN.get(), 8)
+                .pattern("###")
+                .pattern("#x#")
+                .pattern("###")
+                .define('#', Blocks.CRYING_OBSIDIAN)
+                .define('x', ModItems.SOUL_FRAGMENT.get())
+                .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
+                .unlockedBy("has_crying_obsidian", has(Blocks.CRYING_OBSIDIAN))
+                .save(consumer, modLoc("soul_obsidian"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
@@ -589,6 +565,20 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get())
                 .unlockedBy("has_raw_opal_crystal_block", has(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get()))
                 .save(consumer, modLoc("raw_opal_crystal_from_block"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.INFUSED_SOUL_SAND.get(), 1)
+                .requires(Blocks.SOUL_SAND)
+                .requires(ModItems.SMALL_SOUL_FRAGMENT.get())
+                .unlockedBy("has_soul_sand", has(Blocks.SOUL_SAND))
+                .unlockedBy("has_small_soul_fragment", has(ModItems.SMALL_SOUL_FRAGMENT.get()))
+                .save(consumer, modLoc("infused_soul_sand"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SMALL_SOUL_FRAGMENT.get(), 8)
+                .requires(ModItems.SOUL_FRAGMENT.get())
+                .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
+                .save(consumer, modLoc("small_soul_fragment_from_soul_fragment"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SOUL_FRAGMENT.get(), 8)
+                .requires(ModItems.SOUL_CLUSTER.get())
+                .unlockedBy("has_soul_cluster", has(ModItems.SOUL_CLUSTER.get()))
+                .save(consumer, modLoc("soul_fragment_from_soul_cluster"));
     }
 
     private void buildSmeltingRecipes(Consumer<FinishedRecipe> consumer) {

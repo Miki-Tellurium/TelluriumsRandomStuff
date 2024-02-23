@@ -1,21 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "item": "minecraft:soul_sand"
     },
-    "s": {
-      "item": "telluriumsrandomstuff:soul_fragment"
+    {
+      "item": "telluriumsrandomstuff:small_soul_fragment"
     }
-  },
-  "pattern": [
-    " # ",
-    "#s#",
-    " # "
   ],
   "result": {
     "item": "telluriumsrandomstuff:infused_soul_sand"
-  },
-  "show_notification": true
+  }
 }

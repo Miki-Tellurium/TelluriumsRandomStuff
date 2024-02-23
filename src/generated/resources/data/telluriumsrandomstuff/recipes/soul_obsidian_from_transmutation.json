@@ -1,7 +1,0 @@
-{
-  "type": "telluriumsrandomstuff:soul_lava_transmutation",
-  "ingredient": {
-    "item": "minecraft:crying_obsidian"
-  },
-  "result": "telluriumsrandomstuff:soul_obsidian"
-}

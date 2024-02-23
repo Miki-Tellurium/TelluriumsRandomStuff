@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_small_soul_fragment": {
+    "has_soul_cluster": {
       "conditions": {
         "items": [
           {
             "items": [
-              "telluriumsrandomstuff:small_soul_fragment"
+              "telluriumsrandomstuff:soul_cluster"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "telluriumsrandomstuff:small_soul_fragment"
+        "recipe": "telluriumsrandomstuff:soul_fragment_from_soul_cluster"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_small_soul_fragment",
+      "has_soul_cluster",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "telluriumsrandomstuff:small_soul_fragment"
+      "telluriumsrandomstuff:soul_fragment_from_soul_cluster"
     ]
   },
   "sends_telemetry_event": false
