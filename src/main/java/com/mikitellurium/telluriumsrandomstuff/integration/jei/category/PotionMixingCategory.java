@@ -1,8 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
-import com.google.common.cache.LoadingCache;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.MobEffectUpgrade;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BrewingBubblesTickTimer;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidTankRenderer;
@@ -23,24 +22,14 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
+import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategory.Recipe> {
@@ -90,16 +79,16 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 32, 8)
-                .addIngredient(VanillaTypes.ITEM_STACK, recipe.getFirstInput());
+                .addIngredients(VanillaTypes.ITEM_STACK, recipe.getFirstInputs());
 
         builder.addSlot(RecipeIngredientRole.INPUT, 74, 8)
-                .addIngredient(VanillaTypes.ITEM_STACK, recipe.getSecondInput());
+                .addIngredients(VanillaTypes.ITEM_STACK, recipe.getSecondInputs());
 
         builder.addSlot(RecipeIngredientRole.INPUT, 53, 49)
-                .addIngredient(VanillaTypes.ITEM_STACK, RecipeHelper.THICK_POTION);
+                .addIngredients(VanillaTypes.ITEM_STACK, recipe.getReceptacles());
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 92, 49)
-                .addIngredient(VanillaTypes.ITEM_STACK, recipe.getOutput());
+                .addIngredients(VanillaTypes.ITEM_STACK, recipe.getOutputs());
 
         builder.addSlot(RecipeIngredientRole.INPUT, 4, 54).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
         builder.addSlot(RecipeIngredientRole.CATALYST, 4, 2)
@@ -110,69 +99,83 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
     }
 
     public abstract static class Recipe {
-        abstract ItemStack getFirstInput();
-        abstract ItemStack getSecondInput();
-        abstract ItemStack getOutput();
+        abstract List<ItemStack> getFirstInputs();
+        abstract List<ItemStack> getSecondInputs();
+        abstract List<ItemStack> getOutputs();
+        public List<ItemStack> getReceptacles() {
+            return List.of(RecipeHelper.MUNDANE_POTION, RecipeHelper.THICK_POTION);
+        }
     }
 
     public static class Amplifier extends Recipe {
 
-        private final ItemStack input = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.SWIFTNESS);
+        private final List<ItemStack> inputs = RecipeHelper.getPotionsByUpgradeType(MobEffectUpgrade.AMPLIFIER);
+        private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
+            inputs.forEach((itemStack -> list.add(new PotionMixingRecipe(itemStack, itemStack).assemble())));
+        });
 
         @Override
-        ItemStack getFirstInput() {
-            return input;
+        List<ItemStack> getFirstInputs() {
+            return inputs;
         }
 
         @Override
-        ItemStack getSecondInput() {
-            return input;
+        List<ItemStack> getSecondInputs() {
+            return inputs;
         }
 
         @Override
-        ItemStack getOutput() {
-            return new PotionMixingRecipe(input, input).assemble();
+        List<ItemStack> getOutputs() {
+            return outputs;
         }
     }
 
     public static class Duration extends Recipe {
 
-        private final ItemStack input = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.FIRE_RESISTANCE);
+        private final List<ItemStack> inputs =  RecipeHelper.getPotionsByUpgradeType(MobEffectUpgrade.DURATION);
+        private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
+            inputs.forEach((itemStack -> list.add(new PotionMixingRecipe(itemStack, itemStack).assemble())));
+        });
 
         @Override
-        ItemStack getFirstInput() {
-            return input;
+        List<ItemStack> getFirstInputs() {
+            return inputs;
         }
 
         @Override
-        ItemStack getSecondInput() {
-            return input;
+        List<ItemStack> getSecondInputs() {
+            return inputs;
         }
 
         @Override
-        ItemStack getOutput() {
-            return new PotionMixingRecipe(input, input).assemble();
+        List<ItemStack> getOutputs() {
+            return outputs;
         }
     }
 
     public static class Mixed extends Recipe {
 
-        private final ItemStack input1 = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.INVISIBILITY);
-        private final ItemStack input2 = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.STRENGTH);
+        private final List<ItemStack> inputs1 = RecipeHelper.getRandomPotionList(20);
+        private final List<ItemStack> inputs2 = RecipeHelper.getRandomPotionList(11);
+        private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
+            for (int i = 0; i < inputs1.size(); i++) {
+                list.add(new PotionMixingRecipe(inputs1.get(i), inputs2.get(i)).assemble());
+            }
+        });
 
         @Override
-        ItemStack getFirstInput() {
-            return input1;
+        List<ItemStack> getFirstInputs() {
+            return inputs1;
         }
 
         @Override
-        ItemStack getSecondInput() {
-            return input2;
+        List<ItemStack> getSecondInputs() {
+            return inputs2;
         }
 
         @Override
-        ItemStack getOutput() {
-            return new PotionMixingRecipe(input1, input2).assemble();
+        List<ItemStack> getOutputs() {
+            return outputs;
         }
     }
 }

@@ -1,7 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
+import com.google.common.collect.Collections2;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.MobEffectUpgrade;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
@@ -10,9 +12,11 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -22,10 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class RecipeHelper {
@@ -52,6 +53,7 @@ public class RecipeHelper {
 
     public static final Ingredient WATER_BOTTLE = Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
     public static final ItemStack THICK_POTION = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.THICK);
+    public static final ItemStack MUNDANE_POTION = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.MUNDANE);
 
     public static DyeColor getGlassColor(Block glass) {
         return glassColors.get(glass);
@@ -91,6 +93,24 @@ public class RecipeHelper {
             output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
         }
         return output;
+    }
+
+    public static List<ItemStack> getRandomPotionList(long randomSeed) {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        ForgeRegistries.POTIONS.forEach((potion) -> itemStacks.add(PotionUtils.setPotion(new ItemStack(Items.POTION), potion)));
+        Collections.shuffle(itemStacks, new Random(randomSeed));
+        return itemStacks;
+    }
+
+    public static List<ItemStack> getPotionsByUpgradeType(MobEffectUpgrade mobEffectUpgrade) {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        ForgeRegistries.POTIONS.getValues().stream().filter((potion -> potion.getEffects().size() == 1))
+                .forEach((potion) -> {
+                    if (MobEffectUpgrade.getCategory(potion.getEffects().get(0).getEffect()) == mobEffectUpgrade) {
+                        itemStacks.add(PotionUtils.setPotion(new ItemStack(Items.POTION), potion));
+                    }
+                });
+        return itemStacks;
     }
 
     /*
