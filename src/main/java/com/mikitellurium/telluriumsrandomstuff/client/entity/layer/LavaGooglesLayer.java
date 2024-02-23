@@ -23,11 +23,11 @@ import net.minecraft.world.item.ItemStack;
 public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
  // todo move texture in models folder
     private static final ResourceLocation GOOGLES_FRAME_TEXTURE =
-            new ResourceLocation("telluriumsrandomstuff:textures/armor/lava_googles_frame_model.png");
+            new ResourceLocation("telluriumsrandomstuff:textures/models/armor/lava_googles_frame_model.png");
     private static final ResourceLocation GOOGLES_NO_COLOR_TEXTURE =
-            new ResourceLocation("telluriumsrandomstuff:textures/armor/lava_googles_nocolor_layer_model.png");
+            new ResourceLocation("telluriumsrandomstuff:textures/models/armor/lava_googles_nocolor_layer_model.png");
     private static final ResourceLocation GOOGLES_COLORED_TEXTURE =
-            new ResourceLocation("telluriumsrandomstuff:textures/armor/lava_googles_color_layer_model.png");
+            new ResourceLocation("telluriumsrandomstuff:textures/models/armor/lava_googles_color_layer_model.png");
     private final LavaGooglesModel<T> lavaGooglesModel;
 
     public LavaGooglesLayer(RenderLayerParent<T, M> parent, EntityModelSet modelSet) {
