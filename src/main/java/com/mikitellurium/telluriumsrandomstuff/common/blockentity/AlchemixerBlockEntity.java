@@ -219,7 +219,7 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
 
         return inventory;
     }
-    // todo add onRemove to block
+
     @SuppressWarnings("ConstantConditions")
     public void dropItemsOnBreak() {
         SimpleContainer inventory = getInventory();

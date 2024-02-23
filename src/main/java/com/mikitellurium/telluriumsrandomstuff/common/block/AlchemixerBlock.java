@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AlchemixerBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
@@ -102,6 +103,17 @@ public class AlchemixerBlock extends BaseEntityBlock {
 
     protected void openContainer(Level level, BlockPos pos, Player player) {
         NetworkHooks.openScreen((ServerPlayer)player, (AlchemixerBlockEntity)level.getBlockEntity(pos), pos);
+    }
+
+    @Override
+    public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (blockState.getBlock() != newState.getBlock()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AlchemixerBlockEntity) {
+                ((AlchemixerBlockEntity) blockEntity).dropItemsOnBreak();
+            }
+        }
+        super.onRemove(blockState, level, pos, newState, isMoving);
     }
 
     @Override
