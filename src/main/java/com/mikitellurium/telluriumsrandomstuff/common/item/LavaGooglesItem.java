@@ -37,7 +37,7 @@ import java.util.function.Consumer;
 public class LavaGooglesItem extends Item implements Equipable, Vanishable {
 
     public static ResourceLocation OVERLAY_TEXTURE = FastLoc.modLoc("textures/misc/lava_googles_overlay.png");
-    public static final String tag_color = "color";
+    public static final String TAG_COLOR = "color";
 
     public LavaGooglesItem() {
         super(new Item.Properties()
@@ -85,7 +85,7 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
     }
 
     public static ItemStack setColor(ItemStack itemStack, DyeColor dyeColor) {
-        itemStack.getOrCreateTag().putString(tag_color, dyeColor.getSerializedName());
+        itemStack.getOrCreateTag().putString(TAG_COLOR, dyeColor.getSerializedName());
         return itemStack;
     }
 
@@ -95,9 +95,9 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
 
     public static DyeColor getColor(ItemStack itemStack) {
         CompoundTag tag = itemStack.getTag();
-        if (tag != null && tag.contains(tag_color)) {
-            String colorName = tag.getString(tag_color);
-            return DyeColor.byName(colorName, DyeColor.byId(tag.getInt(tag_color)));
+        if (tag != null && tag.contains(TAG_COLOR)) {
+            String colorName = tag.getString(TAG_COLOR);
+            return DyeColor.byName(colorName, DyeColor.byId(tag.getInt(TAG_COLOR)));
         } else {
             return null;
         }
