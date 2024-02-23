@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
+import net.minecraft.Util;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -24,8 +25,7 @@ public enum MobEffectUpgrade implements IExtensibleEnum {
                 Math.min(firstInstance.getDuration(), secondInstance.getDuration()), amplifier);
     });
 
-    private static final Map<MobEffect, MobEffectUpgrade> MOB_EFFECT_CATEGORIES = new HashMap<>();
-    static {
+    private static final Map<MobEffect, MobEffectUpgrade> MOB_EFFECT_CATEGORIES = Util.make(new HashMap<>(), (map) -> {
         addCategory(MobEffects.MOVEMENT_SPEED, MobEffectUpgrade.AMPLIFIER);
         addCategory(MobEffects.MOVEMENT_SLOWDOWN, MobEffectUpgrade.AMPLIFIER);
         addCategory(MobEffects.DIG_SPEED, MobEffectUpgrade.AMPLIFIER);
@@ -59,7 +59,7 @@ public enum MobEffectUpgrade implements IExtensibleEnum {
         addCategory(MobEffects.BAD_OMEN, MobEffectUpgrade.AMPLIFIER);
         addCategory(MobEffects.HERO_OF_THE_VILLAGE, MobEffectUpgrade.AMPLIFIER);
         addCategory(MobEffects.DARKNESS, MobEffectUpgrade.DURATION);
-    }
+    });
 
     /**
      * Adds a new category for a mob effect.
