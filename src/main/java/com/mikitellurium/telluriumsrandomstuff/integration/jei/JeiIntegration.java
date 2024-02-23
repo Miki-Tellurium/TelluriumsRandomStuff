@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFuelScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AlchemixerScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
@@ -133,12 +134,14 @@ public class JeiIntegration implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), RecipeTypes.SMELTING);
         registration.addRecipeCatalyst(new ItemStack(ModItems.SOUL_INFUSER_LIT.get()), SOUL_INFUSION_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(Blocks.CAULDRON), SOUL_LAVA_TRANSMUTATION_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.ALCHEMIXER.get()), POTION_MIXING_RECIPE_TYPE);
     }
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(SoulFurnaceScreen.class, 77, 28, 28, 21, SOUL_FURNACE_SMELTING_RECIPE_TYPE);
         registration.addRecipeClickArea(SoulInfuserScreen.class, 54, 33, 55, 18, SOUL_INFUSION_RECIPE_TYPE);
+        registration.addRecipeClickArea(AlchemixerScreen.class, 88, 13, 22, 43, POTION_MIXING_RECIPE_TYPE);
 
         IIngredientManager ingredientManager = registration.getJeiHelpers().getIngredientManager();
         // Make the soul lava tank clickable
