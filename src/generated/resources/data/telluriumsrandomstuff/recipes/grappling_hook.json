@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "s": {
+      "item": "minecraft:string"
+    },
+    "x": {
+      "item": "telluriumsrandomstuff:soul_infused_iron_ingot"
+    }
+  },
+  "pattern": [
+    "#x#",
+    " s ",
+    " s "
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:grappling_hook"
+  },
+  "show_notification": true
+}

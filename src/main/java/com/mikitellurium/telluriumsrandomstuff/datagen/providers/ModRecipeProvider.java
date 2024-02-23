@@ -560,6 +560,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
                 .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
                 .save(consumer, modLoc("soul_infused_iron_helmet"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.GRAPPLING_HOOK.get(), 1)
+                .pattern("#x#")
+                .pattern(" s ")
+                .pattern(" s ")
+                .define('#', Items.IRON_PICKAXE)
+                .define('x', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .define('s', Items.STRING)
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("grappling_hook"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
