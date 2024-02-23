@@ -21,7 +21,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 
 public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
- // todo move texture in models folder
+
     private static final ResourceLocation GOOGLES_FRAME_TEXTURE =
             new ResourceLocation("telluriumsrandomstuff:textures/models/armor/lava_googles_frame_model.png");
     private static final ResourceLocation GOOGLES_NO_COLOR_TEXTURE =
