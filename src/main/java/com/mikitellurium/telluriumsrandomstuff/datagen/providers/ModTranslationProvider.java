@@ -154,6 +154,7 @@ public class ModTranslationProvider extends LanguageProvider {
         translation("jei", "category.soul_lava_crafting_description", "Let lava drip through infused soul sand and into an empty cauldron.");
         translation("jei", "category.amethyst_lens_crafting", "Amethyst Lens Crafting");
         translation("jei", "category.soul_lava_transmutation", "Soul Lava Transmutation");
+        translation("jei", "category.potion_mixing", "Potion Mixing");
     }
 
     private void translation(String prefix, String suffix, String translation) {

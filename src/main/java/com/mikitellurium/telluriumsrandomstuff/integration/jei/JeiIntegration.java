@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFuelScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
@@ -58,8 +59,12 @@ public class JeiIntegration implements IModPlugin {
             new RecipeType<>(SoulInfusionCategory.UID, SoulInfusionRecipe.class);
     public static RecipeType<SoulLavaTransmutationRecipe> SOUL_LAVA_TRANSMUTATION_RECIPE_TYPE =
             new RecipeType<>(SoulLavaTransmutationCategory.UID, SoulLavaTransmutationRecipe.class);
+    public static RecipeType<PotionMixingCategory.Recipe> POTION_MIXING_RECIPE_TYPE =
+            new RecipeType<>(PotionMixingCategory.UID, PotionMixingCategory.Recipe.class);
 
     public static final IIngredientType<BlockState> BLOCK_STATE = () -> BlockState.class;
+
+    // todo Add alchemixer recipe
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
@@ -74,7 +79,8 @@ public class JeiIntegration implements IModPlugin {
                 new SoulLavaInfoCategory(guiHelper),
                 new AmethystLensInfoCategory(guiHelper),
                 new SoulInfusionCategory(guiHelper),
-                new SoulLavaTransmutationCategory(guiHelper)
+                new SoulLavaTransmutationCategory(guiHelper),
+                new PotionMixingCategory(guiHelper)
         );
     }
 
@@ -112,6 +118,11 @@ public class JeiIntegration implements IModPlugin {
                 ModItems.SOUL_INFUSED_IRON_LEGGINGS.get().getDefaultInstance(),
                 ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get().getDefaultInstance(),
                 ModItems.SOUL_INFUSED_IRON_HELMET.get().getDefaultInstance()),recipeFactory));
+        registration.addRecipes(POTION_MIXING_RECIPE_TYPE, List.of(
+                new PotionMixingCategory.Amplifier(),
+                new PotionMixingCategory.Duration(),
+                new PotionMixingCategory.Mixed()
+        ));
     }
 
     @Override
