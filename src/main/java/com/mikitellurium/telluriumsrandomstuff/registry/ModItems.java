@@ -140,6 +140,9 @@ public class ModItems {
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_INGOT = ITEMS.register("soul_infused_iron_ingot",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> SOUL_IRON_ROD = ITEMS.register("soul_iron_rod",
+            () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_SWORD = ITEMS.register("soul_infused_iron_sword",
             () -> new SwordItem(ModToolTiers.INFUSED_IRON, 3, -2.4F, new Item.Properties()
                     .defaultDurability(500)) {
@@ -185,8 +188,17 @@ public class ModItems {
                 }
             });
 
-    public static final RegistryObject<Item> SOUL_IRON_ROD = ITEMS.register("soul_iron_rod",
-            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_BOOTS = ITEMS.register("soul_infused_iron_boots",
+            () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_LEGGINGS = ITEMS.register("soul_infused_iron_leggings",
+            () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_CHESTPLATE = ITEMS.register("soul_infused_iron_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_HELMET = ITEMS.register("soul_infused_iron_helmet",
+            () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

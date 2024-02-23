@@ -139,6 +139,10 @@ public class ModCreativeTab {
                 event.accept(ModItems.SOUL_INFUSED_IRON_PICKAXE);
                 event.accept(ModItems.SOUL_INFUSED_IRON_AXE);
                 event.accept(ModItems.SOUL_INFUSED_IRON_HOE);
+                event.accept(ModItems.SOUL_INFUSED_IRON_BOOTS);
+                event.accept(ModItems.SOUL_INFUSED_IRON_LEGGINGS);
+                event.accept(ModItems.SOUL_INFUSED_IRON_CHESTPLATE);
+                event.accept(ModItems.SOUL_INFUSED_IRON_HELMET);
                 event.accept(ModItems.SOUL_IRON_ROD);
                 event.accept(ModBlocks.ALCHEMIXER);
                 event.accept(ModItems.GRAPPLING_HOOK);

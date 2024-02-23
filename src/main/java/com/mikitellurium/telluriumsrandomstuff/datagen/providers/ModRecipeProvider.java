@@ -534,6 +534,32 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
                 .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
                 .save(consumer, modLoc("soul_infused_iron_hoe"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_BOOTS.get(), 1)
+                .pattern("# #")
+                .pattern("# #")
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_boots"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_LEGGINGS.get(), 1)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("# #")
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_leggings"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get(), 1)
+                .pattern("# #")
+                .pattern("###")
+                .pattern("###")
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_chestplate"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_HELMET.get(), 1)
+                .pattern("###")
+                .pattern("# #")
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_helmet"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

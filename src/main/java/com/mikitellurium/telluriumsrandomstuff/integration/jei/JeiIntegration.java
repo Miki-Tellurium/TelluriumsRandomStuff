@@ -107,7 +107,11 @@ public class JeiIntegration implements IModPlugin {
                 ModItems.SOUL_INFUSED_IRON_AXE.get().getDefaultInstance(),
                 ModItems.SOUL_INFUSED_IRON_PICKAXE.get().getDefaultInstance(),
                 ModItems.SOUL_INFUSED_IRON_SHOVEL.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_HOE.get().getDefaultInstance()), recipeFactory));
+                ModItems.SOUL_INFUSED_IRON_HOE.get().getDefaultInstance(),
+                ModItems.SOUL_INFUSED_IRON_BOOTS.get().getDefaultInstance(),
+                ModItems.SOUL_INFUSED_IRON_LEGGINGS.get().getDefaultInstance(),
+                ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get().getDefaultInstance(),
+                ModItems.SOUL_INFUSED_IRON_HELMET.get().getDefaultInstance()),recipeFactory));
     }
 
     @Override

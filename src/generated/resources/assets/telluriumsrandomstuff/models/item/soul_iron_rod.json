@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "telluriumsrandomstuff:item/soul_iron_rod"
+  }
+}

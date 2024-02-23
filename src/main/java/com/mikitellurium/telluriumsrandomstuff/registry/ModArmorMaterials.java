@@ -6,20 +6,19 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.EnumMap;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    LAVA_GOOGLES("lava_googles", 2, Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
-        map.put(ArmorItem.Type.BOOTS, 1);
-        map.put(ArmorItem.Type.LEGGINGS, 1);
-        map.put(ArmorItem.Type.CHESTPLATE, 1);
-        map.put(ArmorItem.Type.HELMET, 1);
-    }), 5, SoundEvents.ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
-            () -> Ingredient.of(Items.AMETHYST_SHARD));
+    SOUL_INFUSED_IRON("soul_infused_iron", 30, Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+        map.put(ArmorItem.Type.BOOTS, 2);
+        map.put(ArmorItem.Type.LEGGINGS, 5);
+        map.put(ArmorItem.Type.CHESTPLATE, 6);
+        map.put(ArmorItem.Type.HELMET, 2);
+    }), 18, SoundEvents.ARMOR_EQUIP_GENERIC, 1.0F, 0.05F,
+            () -> Ingredient.of(ModItems.SOUL_INFUSED_IRON_INGOT.get()));
 
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class),
             (map) -> {
