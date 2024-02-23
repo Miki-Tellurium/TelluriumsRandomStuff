@@ -67,8 +67,6 @@ public class JeiIntegration implements IModPlugin {
 
     public static final IIngredientType<BlockState> BLOCK_STATE = () -> BlockState.class;
 
-    // todo Add alchemixer recipe
-
     @Override
     public @NotNull ResourceLocation getPluginUid() {
         return FastLoc.modLoc("jei_plugin");
