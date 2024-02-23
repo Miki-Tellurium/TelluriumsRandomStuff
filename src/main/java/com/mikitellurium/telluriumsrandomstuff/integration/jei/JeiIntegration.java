@@ -49,6 +49,8 @@ import java.util.Optional;
 @JeiPlugin
 public class JeiIntegration implements IModPlugin {
 
+    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
+
     public static RecipeType<SoulFurnaceSmeltingRecipe> SOUL_FURNACE_SMELTING_RECIPE_TYPE =
             new RecipeType<>(SoulFurnaceSmeltingCategory.UID, SoulFurnaceSmeltingRecipe.class);
     public static final RecipeType<SoulLavaInfoCategory.Recipe> SOUL_LAVA_INFO_TYPE =

@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.Blocks;
 public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTransmutationRecipe> {
 
     public final static ResourceLocation UID = FastLoc.modLoc(SoulLavaTransmutationRecipe.Type.ID);
-    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
 
     private final IDrawable icon;
     private final IDrawable background;
@@ -34,9 +33,9 @@ public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTr
     public SoulLavaTransmutationCategory(IGuiHelper guiHelper) {
         this.icon = guiHelper.createDrawableIngredient(JeiIntegration.BLOCK_STATE, ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState());
         this.background = guiHelper.createBlankDrawable(60, 60);
-        this.downArrow = guiHelper.createDrawable(GUI_TEXTURE, 239, 24, 16, 24);
-        this.rightArrow = guiHelper.createDrawable(GUI_TEXTURE, 176, 14, 24, 16);
-        this.itemSlot = guiHelper.createDrawable(GUI_TEXTURE, 34, 23, 18, 18);
+        this.downArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 239, 24, 16, 24);
+        this.rightArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 14, 24, 16);
+        this.itemSlot = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 34, 23, 18, 18);
     }
 
     @Override

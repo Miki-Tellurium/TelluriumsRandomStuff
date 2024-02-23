@@ -23,7 +23,6 @@ import net.minecraft.world.level.material.Fluids;
 public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInfoCategory.Recipe> {
 
     public final static ResourceLocation UID = FastLoc.modLoc("amethyst_lens_info");
-    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
 
     private final IDrawable icon;
     private final IDrawable background;
@@ -34,9 +33,9 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
     public AmethystLensInfoCategory(IGuiHelper guiHelper) {
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.AMETHYST_LENS.get()));
         this.background = guiHelper.createBlankDrawable(60, 60);
-        this.downArrow = guiHelper.createDrawable(GUI_TEXTURE, 239, 24, 16, 24);
-        this.rightArrow = guiHelper.createDrawable(GUI_TEXTURE, 176, 14, 24, 16);
-        this.itemSlot = guiHelper.createDrawable(GUI_TEXTURE, 34, 23, 18, 18);
+        this.downArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 239, 24, 16, 24);
+        this.rightArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 14, 24, 16);
+        this.itemSlot = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 34, 23, 18, 18);
     }
 
     @Override

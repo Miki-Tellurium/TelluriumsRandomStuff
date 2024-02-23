@@ -33,7 +33,6 @@ import java.util.List;
 public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceSmeltingRecipe> {
 
     public final static ResourceLocation UID = FastLoc.modLoc("soul_furnace_smelting");
-    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
 
     private final IDrawable background;
     private final IDrawable icon;
@@ -44,20 +43,20 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceS
     private final IDrawableAnimated animatedFlame;
 
     public SoulFurnaceSmeltingCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(GUI_TEXTURE, 0, 0, 120, 72);
+        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 0, 120, 72);
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_FURNACE.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(25)
                 .build(new CacheLoader<>() {
                     @Override
                     public IDrawableAnimated load(Integer cookTime) {
-                        return guiHelper.drawableBuilder(GUI_TEXTURE, 176, 14, 24, 17)
+                        return guiHelper.drawableBuilder(JeiIntegration.GUI_TEXTURE, 176, 14, 24, 17)
                                 .buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
                     }
                 });
-        this.staticFlame = guiHelper.createDrawable(GUI_TEXTURE, 176, 0, 14, 14);
+        this.staticFlame = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 0, 14, 14);
         this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
-        this.tankGlass = guiHelper.createDrawable(GUI_TEXTURE, 176, 31, 16, 48);
+        this.tankGlass = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 31, 16, 48);
     }
 
     protected IDrawableAnimated getArrow() {

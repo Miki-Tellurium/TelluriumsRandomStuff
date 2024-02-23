@@ -34,7 +34,6 @@ import java.util.List;
 public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe> {
 
     public final static ResourceLocation UID = FastLoc.modLoc("soul_infusion");
-    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
 
     private final Font font = Minecraft.getInstance().font;
     private final IDrawable background;
@@ -44,18 +43,18 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
     private final int smeltingTime = 120;
 
     public SoulInfusionCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(GUI_TEXTURE, 0, 72, 129, 74);
+        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 72, 129, 74);
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.SOUL_INFUSER_LIT.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(56)
                 .build(new CacheLoader<>() {
                     @Override
                     public IDrawableAnimated load(Integer cookTime) {
-                        return guiHelper.drawableBuilder(GUI_TEXTURE, 176, 79, 55, 18)
+                        return guiHelper.drawableBuilder(JeiIntegration.GUI_TEXTURE, 176, 79, 55, 18)
                                 .buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
                     }
                 });
-        this.tankGlass = guiHelper.createDrawable(GUI_TEXTURE, 176, 31, 16, 48);
+        this.tankGlass = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 31, 16, 48);
     }
 
     protected IDrawableAnimated getArrow() {

@@ -46,7 +46,6 @@ import java.util.List;
 public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategory.Recipe> {
 
     public final static ResourceLocation UID = FastLoc.modLoc("potion_mixing");
-    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
 
     private final IDrawable background;
     private final IDrawable icon;
@@ -55,11 +54,11 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
 
     public PotionMixingCategory(IGuiHelper guiHelper) {
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ModBlocks.ALCHEMIXER.get().asItem().getDefaultInstance());
-        this.background = guiHelper.createDrawable(GUI_TEXTURE, 0, 145, 112, 71);
+        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 145, 112, 71);
         ITickTimer bubblesTickTimer = new BrewingBubblesTickTimer(guiHelper);
-        bubbles = guiHelper.drawableBuilder(GUI_TEXTURE, 192, 31, 11, 29)
+        bubbles = guiHelper.drawableBuilder(JeiIntegration.GUI_TEXTURE, 192, 31, 11, 29)
                 .buildAnimated(bubblesTickTimer, IDrawableAnimated.StartDirection.BOTTOM);
-        this.tankGlass = guiHelper.createDrawable(GUI_TEXTURE, 176, 31, 16, 48);
+        this.tankGlass = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 31, 16, 48);
     }
 
     @Override

@@ -36,7 +36,6 @@ import java.util.List;
 public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategory.Recipe> {
 
     public final static ResourceLocation UID = FastLoc.modLoc("soul_lava_info");
-    public final static ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
 
     private final int suggestionRenderY = -10;
 
@@ -48,7 +47,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     public SoulLavaInfoCategory(IGuiHelper guiHelper) {
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
         this.background = guiHelper.createBlankDrawable(140, 80);
-        this.downArrow = guiHelper.createDrawable(GUI_TEXTURE, 239, 0, 16, 24);
+        this.downArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 239, 0, 16, 24);
     }
 
     @Override
