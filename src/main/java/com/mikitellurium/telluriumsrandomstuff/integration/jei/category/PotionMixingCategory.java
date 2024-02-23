@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
+import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.MobEffectUpgrade;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
@@ -22,7 +23,10 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.common.util.TickTimer;
 import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -36,18 +40,21 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
 
     public final static ResourceLocation UID = FastLoc.modLoc("potion_mixing");
 
+    Font font = Minecraft.getInstance().font;
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableAnimated bubbles;
     private final IDrawable tankGlass;
+    private final TickTimer soulLavaTimer;
 
     public PotionMixingCategory(IGuiHelper guiHelper) {
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ModBlocks.ALCHEMIXER.get().asItem().getDefaultInstance());
-        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 145, 112, 71);
+        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 145, 115, 71);
         ITickTimer bubblesTickTimer = new BrewingBubblesTickTimer(guiHelper);
         bubbles = guiHelper.drawableBuilder(JeiIntegration.GUI_TEXTURE, 192, 31, 11, 29)
                 .buildAnimated(bubblesTickTimer, IDrawableAnimated.StartDirection.BOTTOM);
         this.tankGlass = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 31, 16, 48);
+        this.soulLavaTimer = new TickTimer(400, 1000, true);
     }
 
     @Override
@@ -72,16 +79,19 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
 
     @Override
     public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        bubbles.draw(graphics, 36, 25);
-        bubbles.draw(graphics, 78, 25);
+        graphics.drawString(font, recipe.getLabel(), 24, 0, 0xFF606060, false);
+        bubbles.draw(graphics, 36, 30);
+        bubbles.draw(graphics, 78, 30);
+        GuiFluidRenderer.drawBackground(graphics, 57, 10, new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(),
+                        soulLavaTimer.getValue()), soulLavaTimer.getMaxValue(), 8, 35);
     }
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 32, 8)
+        builder.addSlot(RecipeIngredientRole.INPUT, 32, 13)
                 .addIngredients(VanillaTypes.ITEM_STACK, recipe.getFirstInputs());
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 74, 8)
+        builder.addSlot(RecipeIngredientRole.INPUT, 74, 13)
                 .addIngredients(VanillaTypes.ITEM_STACK, recipe.getSecondInputs());
 
         builder.addSlot(RecipeIngredientRole.INPUT, 53, 49)
@@ -99,6 +109,7 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
     }
 
     public abstract static class Recipe {
+        abstract Component getLabel();
         abstract List<ItemStack> getFirstInputs();
         abstract List<ItemStack> getSecondInputs();
         abstract List<ItemStack> getOutputs();
@@ -113,6 +124,11 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
         private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
             inputs.forEach((itemStack -> list.add(new PotionMixingRecipe(itemStack, itemStack).assemble())));
         });
+
+        @Override
+        Component getLabel() {
+            return Component.translatable("jei.telluriumsrandomstuff.category.potion_mixing.label.amplifier");
+        }
 
         @Override
         List<ItemStack> getFirstInputs() {
@@ -136,6 +152,11 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
         private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
             inputs.forEach((itemStack -> list.add(new PotionMixingRecipe(itemStack, itemStack).assemble())));
         });
+
+        @Override
+        Component getLabel() {
+            return Component.translatable("jei.telluriumsrandomstuff.category.potion_mixing.label.duration");
+        }
 
         @Override
         List<ItemStack> getFirstInputs() {
@@ -164,6 +185,11 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
         });
 
         @Override
+        Component getLabel() {
+            return Component.translatable("jei.telluriumsrandomstuff.category.potion_mixing.label.effect_mix");
+        }
+
+        @Override
         List<ItemStack> getFirstInputs() {
             return inputs1;
         }
@@ -178,4 +204,5 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
             return outputs;
         }
     }
+
 }

@@ -97,7 +97,8 @@ public class RecipeHelper {
 
     public static List<ItemStack> getRandomPotionList(long randomSeed) {
         List<ItemStack> itemStacks = new ArrayList<>();
-        ForgeRegistries.POTIONS.forEach((potion) -> itemStacks.add(PotionUtils.setPotion(new ItemStack(Items.POTION), potion)));
+        ForgeRegistries.POTIONS.getValues().stream().filter((potion -> !potion.getEffects().isEmpty()))
+                .forEach((potion) -> itemStacks.add(PotionUtils.setPotion(new ItemStack(Items.POTION), potion)));
         Collections.shuffle(itemStacks, new Random(randomSeed));
         return itemStacks;
     }
