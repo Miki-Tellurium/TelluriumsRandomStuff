@@ -29,21 +29,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
+import java.util.function.Function;
 
-public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceSmeltingRecipe> {
+public class SoulFurnaceSmeltingCategory extends SoulLavaTankCategory<SoulFurnaceSmeltingRecipe> {
 
     public final static ResourceLocation UID = FastLoc.modLoc("soul_furnace_smelting");
 
     private final IDrawable background;
     private final IDrawable icon;
-    private final IDrawable tankGlass;
     private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
     private final int smeltingTime = 100;
-    private final IDrawableStatic staticFlame;
     private final IDrawableAnimated animatedFlame;
 
     public SoulFurnaceSmeltingCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 0, 120, 72);
+        super(guiHelper, 4000, (recipe) -> 4000);
+        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 0, 120, 71);
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_FURNACE.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(25)
@@ -54,9 +54,8 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceS
                                 .buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
                     }
                 });
-        this.staticFlame = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 0, 14, 14);
+        IDrawableStatic staticFlame = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 0, 14, 14);
         this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
-        this.tankGlass = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 31, 16, 48);
     }
 
     protected IDrawableAnimated getArrow() {
@@ -92,14 +91,9 @@ public class SoulFurnaceSmeltingCategory implements IRecipeCategory<SoulFurnaceS
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SoulFurnaceSmeltingRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 4, 54).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
+        super.setRecipe(builder, recipe, focuses);
         builder.addSlot(RecipeIngredientRole.INPUT, 35, 24).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 24).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
-        builder.addSlot(RecipeIngredientRole.CATALYST, 4, 2)
-                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 4000)))
-                .setFluidRenderer(4000, false, 16, 48)
-                .setOverlay(tankGlass, 0, 0);
-        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 0);
     }
 
 }

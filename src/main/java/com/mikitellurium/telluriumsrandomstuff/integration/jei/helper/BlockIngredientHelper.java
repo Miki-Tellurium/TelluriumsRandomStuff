@@ -7,6 +7,7 @@ import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockIngredientHelper implements IIngredientHelper<BlockState> {
@@ -28,7 +29,7 @@ public class BlockIngredientHelper implements IIngredientHelper<BlockState> {
 
     @Override
     public ResourceLocation getResourceLocation(BlockState ingredient) {
-        return FastLoc.modLoc(ingredient.getBlock().getDescriptionId());
+        return ForgeRegistries.BLOCKS.getKey(ingredient.getBlock());
     }
 
     @Override

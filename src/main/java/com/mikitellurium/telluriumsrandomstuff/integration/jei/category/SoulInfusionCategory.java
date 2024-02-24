@@ -31,19 +31,19 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
-public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe> {
+public class SoulInfusionCategory extends SoulLavaTankCategory<SoulInfusionRecipe> {
 
     public final static ResourceLocation UID = FastLoc.modLoc("soul_infusion");
 
     private final Font font = Minecraft.getInstance().font;
     private final IDrawable background;
     private final IDrawable icon;
-    private final IDrawable tankGlass;
     private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
     private final int smeltingTime = 120;
 
     public SoulInfusionCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 72, 129, 74);
+        super(guiHelper, 4000, SoulInfusionRecipe::getRecipeCost);
+        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 72, 129, 71);
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.SOUL_INFUSER_LIT.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(56)
@@ -54,7 +54,6 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
                                 .buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
                     }
                 });
-        this.tankGlass = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 31, 16, 48);
     }
 
     protected IDrawableAnimated getArrow() {
@@ -92,15 +91,10 @@ public class SoulInfusionCategory implements IRecipeCategory<SoulInfusionRecipe>
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SoulInfusionRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 4, 55).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
+        super.setRecipe(builder, recipe, focuses);
         builder.addSlot(RecipeIngredientRole.INPUT, 32, 10).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 32, 47).addIngredients(recipe.getIngredients().get(1));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 101, 29).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
-        builder.addSlot(RecipeIngredientRole.CATALYST, 4, 3)
-                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), recipe.getRecipeCost())))
-                .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidTankRenderer(0, 0, 16 ,48, 4000))
-                .setOverlay(tankGlass, 0, 0);
-        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 0);
     }
 
 }

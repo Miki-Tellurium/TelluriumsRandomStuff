@@ -36,7 +36,7 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategory.Recipe> {
+public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixingCategory.Recipe> {
 
     public final static ResourceLocation UID = FastLoc.modLoc("potion_mixing");
 
@@ -44,16 +44,15 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableAnimated bubbles;
-    private final IDrawable tankGlass;
     private final TickTimer soulLavaTimer;
 
     public PotionMixingCategory(IGuiHelper guiHelper) {
+        super(guiHelper, 4000, (recipe) -> 4000);
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ModBlocks.ALCHEMIXER.get().asItem().getDefaultInstance());
-        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 145, 115, 71);
+        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 144, 115, 71);
         ITickTimer bubblesTickTimer = new BrewingBubblesTickTimer(guiHelper);
         bubbles = guiHelper.drawableBuilder(JeiIntegration.GUI_TEXTURE, 192, 31, 11, 29)
                 .buildAnimated(bubblesTickTimer, IDrawableAnimated.StartDirection.BOTTOM);
-        this.tankGlass = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 31, 16, 48);
         this.soulLavaTimer = new TickTimer(400, 1000, true);
     }
 
@@ -88,6 +87,7 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
+        super.setRecipe(builder, recipe, focuses);
         builder.addSlot(RecipeIngredientRole.INPUT, 32, 13)
                 .addIngredients(VanillaTypes.ITEM_STACK, recipe.getFirstInputs());
 
@@ -99,13 +99,6 @@ public class PotionMixingCategory implements IRecipeCategory<PotionMixingCategor
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 92, 49)
                 .addIngredients(VanillaTypes.ITEM_STACK, recipe.getOutputs());
-
-        builder.addSlot(RecipeIngredientRole.INPUT, 4, 54).addItemStack(ModItems.SOUL_LAVA_BUCKET.get().getDefaultInstance());
-        builder.addSlot(RecipeIngredientRole.CATALYST, 4, 2)
-                .addIngredients(ForgeTypes.FLUID_STACK, List.of(new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 4000)))
-                .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidTankRenderer(0, 0, 16 ,48, 4000))
-                .setOverlay(tankGlass, 0, 0);
-        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 0);
     }
 
     public abstract static class Recipe {
