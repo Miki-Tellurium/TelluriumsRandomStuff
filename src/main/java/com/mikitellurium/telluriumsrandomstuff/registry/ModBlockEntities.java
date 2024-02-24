@@ -54,6 +54,10 @@ public class ModBlockEntities {
             "alchemixer", () -> BlockEntityType.Builder.of(AlchemixerBlockEntity::new,
                     ModBlocks.ALCHEMIXER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<SoulCompactorBlockEntity>> SOUL_COMPACTOR = BLOCK_ENTITIES.register(
+            "soul_compactor", () -> BlockEntityType.Builder.of(SoulCompactorBlockEntity::new,
+                    ModBlocks.SOUL_COMPACTOR.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

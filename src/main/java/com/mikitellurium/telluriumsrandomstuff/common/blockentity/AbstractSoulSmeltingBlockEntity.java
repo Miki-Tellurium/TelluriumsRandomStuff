@@ -10,6 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -154,6 +155,10 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
 
     public MappedItemStackHandler getItemHandler() {
         return this.itemHandler;
+    }
+    // todo use this on child classes
+    public ItemStack getStackInSlot(int slot) {
+        return this.itemHandler.getStackInSlot(slot);
     }
 
     public SimpleContainer getInventory() {

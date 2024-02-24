@@ -16,8 +16,14 @@ public abstract class AbstractSoulFuelMenu extends AbstractContainerMenu {
     private final ContainerData data;
     private FluidStack fluidStack;
     private final int invSize;
+    private final int invYOffset;
 
     public AbstractSoulFuelMenu(int id, MenuType menuType, Inventory inventory, int invSize,
+                                BlockEntity entity, ContainerData data) {
+        this(id, menuType, inventory, invSize, 0, entity, data);
+    }
+
+    public AbstractSoulFuelMenu(int id, MenuType menuType, Inventory inventory, int invSize, int invYOffset,
                                 BlockEntity entity, ContainerData data) {
         super(menuType, id);
         checkContainerSize(inventory, invSize);
@@ -26,6 +32,7 @@ public abstract class AbstractSoulFuelMenu extends AbstractContainerMenu {
         this.data = data;
         this.fluidStack = blockEntity.getFluidStack();
         this.invSize = invSize;
+        this.invYOffset = invYOffset;
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
@@ -89,14 +96,14 @@ public abstract class AbstractSoulFuelMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18 + invYOffset));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142 + invYOffset));
         }
     }
 

@@ -139,6 +139,7 @@ public class ModTranslationProvider extends LanguageProvider {
         translation("blockentity", "extractor", "Extractor");
         translation("blockentity", "soul_infuser", "Soul Infuser");
         translation("blockentity", "alchemixer", "Alchemixer");
+        translation("blockentity", "soul_compactor", "Soul Compactor");
         // Fluids
         translation("fluid_type", "soul_lava", "Soul Lava");
         // Entity Types

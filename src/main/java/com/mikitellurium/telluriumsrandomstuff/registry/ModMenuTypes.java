@@ -31,6 +31,9 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<AlchemixerMenu>> ALCHEMIXER_MENU =
             registerMenuType(AlchemixerMenu::new, "alchemixer_menu");
 
+    public static final RegistryObject<MenuType<SoulCompactorMenu>> SOUL_COMPACTOR_MENU =
+            registerMenuType(SoulCompactorMenu::new, "soul_compactor_menu");
+
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                   String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

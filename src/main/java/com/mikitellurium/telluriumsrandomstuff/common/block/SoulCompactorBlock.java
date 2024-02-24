@@ -1,5 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulCompactorBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
@@ -32,22 +34,27 @@ public class SoulCompactorBlock extends AbstractFurnaceBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return new SoulInfuserBlockEntity(pos, blockState);
+        return new SoulCompactorBlockEntity(pos, blockState);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
                                                                   BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_INFUSER.get(),
-                (tickLevel, blockPos, state, soulInfuser) -> soulInfuser.tick(tickLevel, blockPos, state));
+        return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_COMPACTOR.get(),
+                (tickLevel, blockPos, state, soulCompactor) -> soulCompactor.tick(tickLevel, blockPos, state));
     }
 
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand,
                                  BlockHitResult hitResult) {
         if (!level.isClientSide) {
-            level.setBlockAndUpdate(pos, blockState.setValue(LIT, !blockState.getValue(LIT)));
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof SoulCompactorBlockEntity && player instanceof ServerPlayer) {
+                this.openContainer(level, pos, player);
+            } else {
+                throw new IllegalStateException("Container provider or player is missing");
+            }
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide);
@@ -55,7 +62,18 @@ public class SoulCompactorBlock extends AbstractFurnaceBlock {
 
     @Override
     protected void openContainer(Level level, BlockPos pos, Player player) {
-        NetworkHooks.openScreen((ServerPlayer)player, (SoulInfuserBlockEntity)level.getBlockEntity(pos), pos);
+        NetworkHooks.openScreen((ServerPlayer)player, (SoulCompactorBlockEntity)level.getBlockEntity(pos), pos);
+    }
+
+    @Override
+    public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (blockState.getBlock() != newState.getBlock()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof SoulCompactorBlockEntity) {
+                ((SoulCompactorBlockEntity) blockEntity).dropItemsOnBreak();
+            }
+        }
+        super.onRemove(blockState, level, pos, newState, isMoving);
     }
 
 //    @Override
@@ -80,16 +98,5 @@ public class SoulCompactorBlock extends AbstractFurnaceBlock {
 //            }
 //        }
 //    }
-
-    @Override
-    public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (blockState.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof SoulInfuserBlockEntity) {
-                ((SoulInfuserBlockEntity) blockEntity).dropItemsOnBreak();
-            }
-        }
-        super.onRemove(blockState, level, pos, newState, isMoving);
-    }
 
 }

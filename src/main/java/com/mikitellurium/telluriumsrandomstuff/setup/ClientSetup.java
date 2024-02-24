@@ -49,6 +49,7 @@ public class ClientSetup {
             MenuScreens.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
             MenuScreens.register(ModMenuTypes.SOUL_INFUSER_MENU.get(), SoulInfuserScreen::new);
             MenuScreens.register(ModMenuTypes.ALCHEMIXER_MENU.get(), AlchemixerScreen::new);
+            MenuScreens.register(ModMenuTypes.SOUL_COMPACTOR_MENU.get(), SoulCompactorScreen::new);
             ModItemProperties.register();
         });
     }
