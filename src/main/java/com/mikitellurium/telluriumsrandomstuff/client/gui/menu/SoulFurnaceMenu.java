@@ -24,4 +24,16 @@ public class SoulFurnaceMenu extends AbstractSoulFuelMenu {
         });
     }
 
+    public boolean isLit() {
+        return this.getData().get(2) > 0;
+    }
+
+    public int getScaledLitTime() {
+        int litTime = this.getData().get(2);
+        int maxlitTime = this.getData().get(3);
+        int progressFireSize = 13;
+
+        return maxlitTime != 0 && litTime != 0 ? litTime * progressFireSize / maxlitTime : 0;
+    }
+
 }

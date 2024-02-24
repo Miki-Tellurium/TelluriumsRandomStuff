@@ -111,24 +111,12 @@ public abstract class AbstractSoulFuelMenu extends AbstractContainerMenu {
         return maxProgress != 0 && progress != 0 ? progress * scale / maxProgress : 0;
     }
 
-    public int getScaledLitTime() {
-        int litTime = this.getData().get(2);
-        int maxlitTime = this.getData().get(3);
-        int progressFireSize = 13;
-
-        return maxlitTime != 0 && litTime != 0 ? litTime * progressFireSize / maxlitTime : 0;
-    }
-
     public AbstractSoulFueledBlockEntity getBlockEntity() {
         return blockEntity;
     }
 
     public ContainerData getData() {
         return this.data;
-    }
-
-    public boolean isLit() {
-        return this.data.get(2) > 0;
     }
 
     public void setFluid(FluidStack fluidStack) {
