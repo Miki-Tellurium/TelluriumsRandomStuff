@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidBlockRenderer;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ModIngredientTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -91,12 +92,12 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 21)
-                .addIngredient(JeiIntegration.BLOCK_STATE, recipe.getInfusedSoulSand());
+                .addIngredient(ModIngredientTypes.BLOCK_STATE, recipe.getInfusedSoulSand());
         builder.addSlot(RecipeIngredientRole.INPUT, 120, suggestionRenderY + 14)
                 .addFluidStack(recipe.getLava(), 1000)
                 .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 63)
-                .addIngredient(JeiIntegration.BLOCK_STATE, recipe.getCauldron());
+                .addIngredient(ModIngredientTypes.BLOCK_STATE, recipe.getCauldron());
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(Items.LAVA_BUCKET));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 1000);

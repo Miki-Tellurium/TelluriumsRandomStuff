@@ -1,11 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.helper;
 
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
-import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ModIngredientTypes;
 import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +14,7 @@ public class BlockIngredientHelper implements IIngredientHelper<BlockState> {
 
     @Override
     public IIngredientType<BlockState> getIngredientType() {
-        return JeiIntegration.BLOCK_STATE;
+        return ModIngredientTypes.BLOCK_STATE;
     }
 
     @Override
@@ -35,6 +35,11 @@ public class BlockIngredientHelper implements IIngredientHelper<BlockState> {
     @Override
     public BlockState copyIngredient(BlockState ingredient) {
         return ingredient.getBlock().defaultBlockState();
+    }
+
+    @Override
+    public ItemStack getCheatItemStack(BlockState ingredient) {
+        return ingredient.getBlock().asItem().getDefaultInstance();
     }
 
     @Override

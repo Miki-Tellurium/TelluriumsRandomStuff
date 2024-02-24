@@ -12,6 +12,7 @@ import com.mikitellurium.telluriumsrandomstuff.integration.jei.category.*;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ClickableIngredient;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ModIngredientTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -25,6 +26,7 @@ import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredientType;
+import mezz.jei.api.ingredients.IIngredientTypeWithSubtypes;
 import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
@@ -38,6 +40,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
@@ -66,8 +69,6 @@ public class JeiIntegration implements IModPlugin {
             new RecipeType<>(SoulLavaTransmutationCategory.UID, SoulLavaTransmutationRecipe.class);
     public static RecipeType<PotionMixingCategory.Recipe> POTION_MIXING_RECIPE_TYPE =
             new RecipeType<>(PotionMixingCategory.UID, PotionMixingCategory.Recipe.class);
-
-    public static final IIngredientType<BlockState> BLOCK_STATE = () -> BlockState.class;
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
@@ -159,7 +160,7 @@ public class JeiIntegration implements IModPlugin {
 
     @Override
     public void registerIngredients(IModIngredientRegistration registration) {
-        registration.register(BLOCK_STATE, List.of(), new BlockIngredientHelper(), new BlockStateRenderer());
+        registration.register(ModIngredientTypes.BLOCK_STATE, List.of(), new BlockIngredientHelper(), new BlockStateRenderer());
     }
 
 }

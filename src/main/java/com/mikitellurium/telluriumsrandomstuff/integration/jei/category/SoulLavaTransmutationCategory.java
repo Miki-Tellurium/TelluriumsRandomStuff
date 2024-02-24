@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ModIngredientTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import mezz.jei.api.constants.VanillaTypes;
@@ -31,7 +32,7 @@ public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTr
     private final IDrawable itemSlot;
 
     public SoulLavaTransmutationCategory(IGuiHelper guiHelper) {
-        this.icon = guiHelper.createDrawableIngredient(JeiIntegration.BLOCK_STATE, ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState());
+        this.icon = guiHelper.createDrawableIngredient(ModIngredientTypes.BLOCK_STATE, ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState());
         this.background = guiHelper.createBlankDrawable(60, 60);
         this.downArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 239, 24, 16, 24);
         this.rightArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 14, 24, 16);
@@ -71,7 +72,7 @@ public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTr
     public void setRecipe(IRecipeLayoutBuilder builder, SoulLavaTransmutationRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 2).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.CATALYST, 1, 42)
-                .addIngredient(JeiIntegration.BLOCK_STATE, ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState());
+                .addIngredient(ModIngredientTypes.BLOCK_STATE, ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 44, 40).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST)
                 .addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.CAULDRON));
