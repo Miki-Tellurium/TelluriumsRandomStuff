@@ -243,6 +243,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> ALCHEMIXER = registerBlockWithItem("alchemixer",
             AlchemixerBlock::new);
 
+    public static final RegistryObject<Block> SOUL_COMPACTOR = registerBlockWithItem("soul_compactor",
+            SoulCompactorBlock::new);
+
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

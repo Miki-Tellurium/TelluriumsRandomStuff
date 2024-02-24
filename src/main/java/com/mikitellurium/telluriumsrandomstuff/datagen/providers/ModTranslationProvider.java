@@ -128,6 +128,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addBlock(ModBlocks.SOUL_INFUSER, "Soul Infuser");
         addBlock(ModBlocks.SOUL_LAVA_CAULDRON, "Soul Lava Cauldron");
         addBlock(ModBlocks.ALCHEMIXER, "Alchemixer");
+        addBlock(ModBlocks.SOUL_COMPACTOR, "Soul Compactor");
 
         translation("block", "awakened_sculk_shrieker.tooltip.warning", "Warning!");
         translation("block", "awakened_sculk_shrieker.tooltip.message", "This can spawn a Warden anywhere. Use with caution.");
@@ -149,9 +150,9 @@ public class ModTranslationProvider extends LanguageProvider {
         // Jei
         translation("jei", "category.soul_furnace_smelting", "Soul Furnace Smelting");
         translation("jei", "category.soul_infusion", "Soul Infusion");
-        translation("jei", "category.soul_infusion_recipe_extra_cost", "Cost");
+        translation("jei", "category.soul_infusion.cost", "Cost");
         translation("jei", "category.soul_lava_crafting", "Soul Lava Crafting");
-        translation("jei", "category.soul_lava_crafting_description", "Let lava drip through infused soul sand and into an empty cauldron.");
+        translation("jei", "category.soul_lava_crafting.description", "Let lava drip through infused soul sand and into an empty cauldron.");
         translation("jei", "category.amethyst_lens_crafting", "Amethyst Lens Crafting");
         translation("jei", "category.soul_lava_transmutation", "Soul Lava Transmutation");
         translation("jei", "category.potion_mixing", "Potion Mixing");

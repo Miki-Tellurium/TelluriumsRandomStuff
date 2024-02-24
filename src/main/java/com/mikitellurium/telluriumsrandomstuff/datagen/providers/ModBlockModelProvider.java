@@ -295,20 +295,20 @@ public class ModBlockModelProvider extends BlockStateProvider {
         this.tintedItemPedestalWithItem(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL, modLoc("block/opal_bricks"));
         this.tintedItemPedestalWithItem(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL, modLoc("block/cut_opal_bricks"));
         this.simpleBlockWithItem(ModBlocks.INFUSED_SOUL_SAND.get(), this.cubeAll(ModBlocks.INFUSED_SOUL_SAND.get()));
-        this.getVariantBuilder(ModBlocks.SOUL_INFUSER.get())
-                .forAllStates((state) -> {
-                    String model = "soul_infuser";
-                    String lit = state.getValue(SoulFurnaceBlock.LIT) ? "on" : "off";
-                    return ConfiguredModel.builder().modelFile(this.models()
-                                    .orientableWithBottom(state.getValue(SoulInfuserBlock.LIT) ? model  + "_on" : model,
-                                            modLoc("block/" + model + "_side_" + lit),
-                                            modLoc("block/" + model + "_front_" + lit),
-                                            modLoc("block/" + model + "_side_" + lit),
-                                            modLoc("block/" + model + "_side_" + lit)))
-                            .rotationY((int) state.getValue(SoulFurnaceBlock.FACING).toYRot() + 180)
-                            .build();
-                });
-        this.blockItemModelFromParent(ModBlocks.SOUL_INFUSER, modLoc("block/soul_infuser"));
+//        this.getVariantBuilder(ModBlocks.SOUL_INFUSER.get())
+//                .forAllStates((state) -> {
+//                    String model = "soul_infuser";
+//                    String lit = state.getValue(SoulFurnaceBlock.LIT) ? "on" : "off";
+//                    return ConfiguredModel.builder().modelFile(this.models()
+//                                    .orientableWithBottom(state.getValue(SoulInfuserBlock.LIT) ? model  + "_on" : model,
+//                                            modLoc("block/" + model + "_side_" + lit),
+//                                            modLoc("block/" + model + "_front_" + lit),
+//                                            modLoc("block/" + model + "_side_" + lit),
+//                                            modLoc("block/" + model + "_side_" + lit)))
+//                            .rotationY((int) state.getValue(SoulFurnaceBlock.FACING).toYRot() + 180)
+//                            .build();
+//                });
+        //this.blockItemModelFromParent(ModBlocks.SOUL_INFUSER, modLoc("block/soul_infuser"));
         MultiPartBlockStateBuilder multiPartBuilder = this.getMultipartBuilder(ModBlocks.ALCHEMIXER.get());
         for (Direction direction : Direction.values()) {
             if (direction == Direction.UP || direction == Direction.DOWN) {
@@ -325,6 +325,20 @@ public class ModBlockModelProvider extends BlockStateProvider {
                     .part().modelFile(this.models().getExistingFile(modLoc("block/alchemixer_bottle2"))).rotationY(yRot).addModel().condition(AlchemixerBlock.HAS_BOTTLE[2], true).condition(AlchemixerBlock.FACING, direction).end();
         }
         this.itemModels().basicItem(ModBlocks.ALCHEMIXER.get().asItem());
+                this.getVariantBuilder(ModBlocks.SOUL_COMPACTOR.get())
+                .forAllStates((state) -> {
+                    String model = "soul_compactor";
+                    String lit = state.getValue(SoulCompactorBlock.LIT) ? "on" : "off";
+                    return ConfiguredModel.builder().modelFile(this.models()
+                                    .orientableWithBottom(state.getValue(SoulCompactorBlock.LIT) ? model  + "_on" : model,
+                                            modLoc("block/" + model + "_side_" + lit),
+                                            modLoc("block/" + model + "_front_" + lit),
+                                            modLoc("block/" + model + "_side_" + lit),
+                                            modLoc("block/" + model + "_side_" + lit)))
+                            .rotationY((int) state.getValue(SoulCompactorBlock.FACING).toYRot() + 180)
+                            .build();
+                });
+        this.blockItemModelFromParent(ModBlocks.SOUL_COMPACTOR, modLoc("block/soul_compactor"));
     }
 
     private void blockItemModelFromParent(RegistryObject<Block> block, ResourceLocation parent) {

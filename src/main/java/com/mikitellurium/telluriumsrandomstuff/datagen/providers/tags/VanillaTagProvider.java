@@ -85,7 +85,8 @@ public class VanillaTagProvider {
                     .add(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get())
                     .add(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
                     .add(ModBlocks.SOUL_INFUSER.get())
-                    .add(ModBlocks.ALCHEMIXER.get());
+                    .add(ModBlocks.ALCHEMIXER.get())
+                    .add(ModBlocks.SOUL_COMPACTOR.get());
 
             this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                     .add(ModBlocks.GRATE_SOUL_SAND.get())
@@ -149,7 +150,8 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_FURNACE.get())
                     .add(ModBlocks.SOUL_OBSIDIAN.get())
                     .add(ModBlocks.INFUSED_SOUL_SAND.get())
-                    .add(ModBlocks.SOUL_INFUSER.get());
+                    .add(ModBlocks.SOUL_INFUSER.get())
+                    .add(ModBlocks.SOUL_COMPACTOR.get());
 
             this.tag(BlockTags.SOUL_SPEED_BLOCKS)
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())
@@ -203,19 +205,24 @@ public class VanillaTagProvider {
         @Override
         protected void addTags(HolderLookup.Provider provider) {
             this.tag(ItemTags.AXES)
-                    .add(ModItems.OPAL_CRYSTAL_AXE.get());
+                    .add(ModItems.OPAL_CRYSTAL_AXE.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_AXE.get());
 
             this.tag(ItemTags.HOES)
-                    .add(ModItems.OPAL_CRYSTAL_HOE.get());
+                    .add(ModItems.OPAL_CRYSTAL_HOE.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_HOE.get());
 
             this.tag(ItemTags.PICKAXES)
-                    .add(ModItems.OPAL_CRYSTAL_PICKAXE.get());
+                    .add(ModItems.OPAL_CRYSTAL_PICKAXE.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_PICKAXE.get());
 
             this.tag(ItemTags.SHOVELS)
-                    .add(ModItems.OPAL_CRYSTAL_SHOVEL.get());
+                    .add(ModItems.OPAL_CRYSTAL_SHOVEL.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_SHOVEL.get());
 
             this.tag(ItemTags.SWORDS)
-                    .add(ModItems.OPAL_CRYSTAL_SWORD.get());
+                    .add(ModItems.OPAL_CRYSTAL_SWORD.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_SWORD.get());
 
             this.tag(ItemTags.STONE_CRAFTING_MATERIALS)
                     .add(ModBlocks.OPAL_COBBLESTONE.get().asItem());

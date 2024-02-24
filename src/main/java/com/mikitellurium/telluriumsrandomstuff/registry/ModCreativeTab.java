@@ -132,6 +132,7 @@ public class ModCreativeTab {
                 event.accept(ModItems.SMALL_SOUL_FRAGMENT);
                 event.accept(ModItems.SOUL_FRAGMENT);
                 event.accept(ModItems.SOUL_CLUSTER);
+                event.accept(ModBlocks.SOUL_COMPACTOR);
                 event.accept(ModBlocks.INFUSED_SOUL_SAND);
                 event.accept(ModItems.SOUL_INFUSED_IRON_INGOT);
                 event.accept(ModItems.SOUL_INFUSED_IRON_SWORD);

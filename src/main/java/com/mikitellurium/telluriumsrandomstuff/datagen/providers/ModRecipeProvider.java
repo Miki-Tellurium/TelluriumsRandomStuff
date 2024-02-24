@@ -545,6 +545,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
                 .unlockedBy("has_crying_obsidian", has(Blocks.CRYING_OBSIDIAN))
                 .save(consumer, modLoc("soul_obsidian"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_COMPACTOR.get(), 1)
+                .pattern("#I#")
+                .pattern("#I#")
+                .pattern("#x#")
+                .define('#', ModBlocks.SOUL_OBSIDIAN.get())
+                .define('x', ModBlocks.SOUL_FURNACE.get())
+                .define('I', Ingredient.of(Blocks.PISTON, Blocks.STICKY_PISTON))
+                .unlockedBy("has_soul_furnace", has(ModBlocks.SOUL_FURNACE.get()))
+                .unlockedBy("has_soul_obsidian", has(ModBlocks.SOUL_OBSIDIAN.get()))
+                .save(consumer, modLoc("soul_compactor"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

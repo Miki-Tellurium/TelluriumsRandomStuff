@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_soul_furnace": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "telluriumsrandomstuff:soul_furnace"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_soul_obsidian": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "telluriumsrandomstuff:soul_obsidian"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "telluriumsrandomstuff:soul_compactor"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_soul_furnace",
+      "has_soul_obsidian",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "telluriumsrandomstuff:soul_compactor"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -58,6 +58,7 @@
   "block.telluriumsrandomstuff.raw_opal_crystal_block": "Raw Opal Crystal Block",
   "block.telluriumsrandomstuff.red_nether_brick_item_pedestal": "Red Nether Brick Item Pedestal",
   "block.telluriumsrandomstuff.soul_anchor": "Soul Anchor",
+  "block.telluriumsrandomstuff.soul_compactor": "Soul Compactor",
   "block.telluriumsrandomstuff.soul_furnace": "Soul Furnace",
   "block.telluriumsrandomstuff.soul_infuser": "Soul Infuser",
   "block.telluriumsrandomstuff.soul_jack_o_lantern": "Soul Jack o'Lantern",
@@ -126,9 +127,9 @@
   "jei.telluriumsrandomstuff.category.potion_mixing.label.effect_mix": "Mix Effects",
   "jei.telluriumsrandomstuff.category.soul_furnace_smelting": "Soul Furnace Smelting",
   "jei.telluriumsrandomstuff.category.soul_infusion": "Soul Infusion",
-  "jei.telluriumsrandomstuff.category.soul_infusion_recipe_extra_cost": "Cost",
+  "jei.telluriumsrandomstuff.category.soul_infusion.cost": "Cost",
   "jei.telluriumsrandomstuff.category.soul_lava_crafting": "Soul Lava Crafting",
-  "jei.telluriumsrandomstuff.category.soul_lava_crafting_description": "Let lava drip through infused soul sand and into an empty cauldron.",
+  "jei.telluriumsrandomstuff.category.soul_lava_crafting.description": "Let lava drip through infused soul sand and into an empty cauldron.",
   "jei.telluriumsrandomstuff.category.soul_lava_transmutation": "Soul Lava Transmutation",
   "trim_material.telluriumsrandomstuff.opal_crystal": "Opal Crystal Material"
 }
