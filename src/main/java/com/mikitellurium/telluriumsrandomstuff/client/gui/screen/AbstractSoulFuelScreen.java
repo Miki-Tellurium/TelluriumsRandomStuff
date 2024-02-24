@@ -26,18 +26,26 @@ public abstract class AbstractSoulFuelScreen<T extends AbstractSoulFuelMenu> ext
 
     public static final ResourceLocation ELEMENT_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
     private final ResourceLocation guiTexture;
+    private final int texWidth;
+    private final int texHeight;
     private Rect2i soulLavaStorage;
+    private final int tankXPos;
+    private final int tankYPos;
 
-    public AbstractSoulFuelScreen(T menu, Inventory inventory, ResourceLocation guiTexture,
-                                  Component title) {
+    public AbstractSoulFuelScreen(T menu, Inventory inventory, ResourceLocation guiTexture, Component title,
+                                  int texWidth, int texHeight, int tankXPos, int tankYPos) {
         super(menu, inventory, title);
         this.guiTexture = guiTexture;
+        this.texWidth = texWidth;
+        this.texHeight = texHeight;
+        this.tankXPos = tankXPos;
+        this.tankYPos = tankYPos;
     }
 
     @Override
     protected void init() {
         super.init();
-        soulLavaStorage = new Rect2i(leftPos + 8, topPos + 8, 16, 48);
+        soulLavaStorage = new Rect2i(leftPos + tankXPos, topPos + tankYPos, 16, 48);
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
         this.titleLabelY = 4;
         this.inventoryLabelX = 28;
@@ -46,14 +54,12 @@ public abstract class AbstractSoulFuelScreen<T extends AbstractSoulFuelMenu> ext
 
     @Override
     protected void renderBg(GuiGraphics graphics, float pPartialTick, int pMouseX, int pMouseY) {
-        int textureWidth = 176;
-        int textureHeight = 166;
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        graphics.blit(guiTexture, leftPos, topPos, 0, 0, textureWidth, textureHeight);
+        graphics.blit(guiTexture, leftPos, topPos, 0, 0, this.texWidth, this.texHeight);
 
         renderSoulLavaStorage(graphics, soulLavaStorage.getX(), soulLavaStorage.getY());
-        renderGlass(graphics, leftPos, topPos);
+        renderGlass(graphics);
     }
 
     @Override
@@ -75,7 +81,7 @@ public abstract class AbstractSoulFuelScreen<T extends AbstractSoulFuelMenu> ext
         RenderSystem.setShaderTexture(0, guiTexture);
     }
 
-    private void renderGlass(GuiGraphics graphics, int xPos, int yPos) {
+    private void renderGlass(GuiGraphics graphics) {
         graphics.blit(ELEMENT_TEXTURE, soulLavaStorage.getX(), soulLavaStorage.getY(), 176, 31,
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
     }

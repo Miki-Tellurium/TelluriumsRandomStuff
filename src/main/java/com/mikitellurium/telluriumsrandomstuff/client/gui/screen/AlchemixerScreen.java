@@ -20,7 +20,7 @@ public class AlchemixerScreen extends AbstractSoulFuelScreen<AlchemixerMenu>{
     private static final int blue = 0xFF00AFC8;
 
     public AlchemixerScreen(AlchemixerMenu menu, Inventory inventory, Component title) {
-        super(menu, inventory, GUI_TEXTURE, title);
+        super(menu, inventory, GUI_TEXTURE, title, 176, 166, 8, 8);
     }
 
     @Override
