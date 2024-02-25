@@ -12,7 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class AlchemixerScreen extends AbstractSoulFuelScreen<AlchemixerMenu>{
 
-    public static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/alchemixer_gui.png");
+    private static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/alchemixer_gui.png");
 
     private static final int[] BUBBLE_LENGTHS = new int[]{0, 6, 11, 16, 20, 24, 29};
     private static final int gray = 0xFF646464;

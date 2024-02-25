@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class SoulInfuserScreen extends AbstractSoulFuelScreen<SoulInfuserMenu> {
 
-    public static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_infuser_gui.png");
+    private static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_infuser_gui.png");
 
     public SoulInfuserScreen(SoulInfuserMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, GUI_TEXTURE, title, 176, 166, 8, 8);

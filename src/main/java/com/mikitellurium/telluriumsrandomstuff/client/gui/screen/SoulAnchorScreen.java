@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class SoulAnchorScreen extends AbstractContainerScreen<SoulAnchorMenu> {
 
-    public static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_anchor_gui.png");
+    private static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_anchor_gui.png");
 
     public SoulAnchorScreen(SoulAnchorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);

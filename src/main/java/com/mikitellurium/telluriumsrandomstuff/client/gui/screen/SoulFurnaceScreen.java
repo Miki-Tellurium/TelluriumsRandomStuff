@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class SoulFurnaceScreen extends AbstractSoulFuelScreen<SoulFurnaceMenu> {
 
-    public static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_furnace_gui.png");
+    private static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_furnace_gui.png");
 
     public SoulFurnaceScreen(SoulFurnaceMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, GUI_TEXTURE, title, 176, 166, 8, 8);
