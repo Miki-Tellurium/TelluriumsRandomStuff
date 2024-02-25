@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
@@ -23,6 +24,9 @@ public class ModRecipeSerializers {
 
     public static final RegistryObject<RecipeSerializer<SoulInfusionRecipe>> SOUL_INFUSION_SERIALIZER =
             SERIALIZERS.register(SoulInfusionRecipe.Type.ID, () -> SoulInfusionRecipe.Serializer.INSTANCE);
+
+    public static final RegistryObject<RecipeSerializer<CompactingRecipe>> COMPACTING_SERIALIZER =
+            SERIALIZERS.register(CompactingRecipe.Type.ID, () -> CompactingRecipe.Serializer.INSTANCE);
 
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);

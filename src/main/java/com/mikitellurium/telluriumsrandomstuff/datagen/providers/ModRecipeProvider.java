@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.common.block.ItemPedestalBlock;
+import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.CompactingRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.LavaGooglesRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulInfusionRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulLavaTransmutationRecipeBuilder;
@@ -29,7 +30,8 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         buildSoulInfusingRecipes(consumer);
-        buildSoulLavaTransmutationRecipe(consumer);
+        buildSoulLavaTransmutationRecipes(consumer);
+        buildCompactingRecipes(consumer);
         buildShapedRecipes(consumer);
         buildShapelessRecipes(consumer);
         buildSmeltingRecipes(consumer);
@@ -85,9 +87,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer, modLoc("soul_infused_iron_ingot_from_soul_infusion"));
     }
 
-    private void buildSoulLavaTransmutationRecipe(Consumer<FinishedRecipe> consumer) {
+    private void buildSoulLavaTransmutationRecipes(Consumer<FinishedRecipe> consumer) {
         SoulLavaTransmutationRecipeBuilder.addRecipe(Ingredient.of(Blocks.MAGMA_BLOCK), ModBlocks.SOUL_MAGMA_BLOCK.get())
                 .save(consumer, modLoc("soul_magma_block_from_transmutation"));
+    }
+
+    private void buildCompactingRecipes(Consumer<FinishedRecipe> consumer) {
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(Blocks.COBBLESTONE), Items.COBBLED_DEEPSLATE, 4, 100)
+                .save(consumer, modLoc("cobbled_deepslate_from_compacting"));
     }
 
     private void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {

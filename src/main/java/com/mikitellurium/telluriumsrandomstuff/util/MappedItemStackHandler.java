@@ -21,11 +21,6 @@ public class MappedItemStackHandler extends ItemStackHandler {
         this.isBucketSlot = isBucketSlot;
     }
 
-    @Override
-    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        return isInput(slot) || (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
-    }
-
     public boolean isBucket(int slot) {
         return this.isBucketSlot.test(slot);
     }

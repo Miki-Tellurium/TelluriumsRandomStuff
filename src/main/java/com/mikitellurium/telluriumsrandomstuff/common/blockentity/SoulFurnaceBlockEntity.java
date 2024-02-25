@@ -62,8 +62,10 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
     };
 
     public SoulFurnaceBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SOUL_FURNACE.get(), pos, state, 4000, RecipeType.SMELTING,
-                3, (i) -> i == INPUT_SLOT, (i) -> i == OUTPUT_SLOT, BUCKET_SLOT);
+        super(ModBlockEntities.SOUL_FURNACE.get(), pos, state, 4000, RecipeType.SMELTING, 3,
+                (i) -> i == INPUT_SLOT,
+                (i) -> i == OUTPUT_SLOT,
+                BUCKET_SLOT);
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
@@ -80,23 +82,21 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
 
     @Override
     protected boolean canProcessRecipe(SmeltingRecipe recipe) {
-        if (this.getItemHandler().getStackInSlot(OUTPUT_SLOT).getCount() >=
-                this.getItemHandler().getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
-        return this.getItemHandler().getStackInSlot(OUTPUT_SLOT).isEmpty() ||
-                recipe.getResultItem(level.registryAccess()).getItem() == this.getItemHandler().getStackInSlot(OUTPUT_SLOT).getItem();
+        ItemStack outputStack = this.getStackInSlot(OUTPUT_SLOT);
+        if (outputStack.getCount() >= outputStack.getMaxStackSize()) return false;
+        ItemStack result = recipe.getResultItem(this.level.registryAccess());
+        if(!outputStack.isEmpty() && result.getItem() != outputStack.getItem()) return false;
+        return outputStack.getCount() + result.getCount() <= outputStack.getMaxStackSize();
     }
 
     @Override
     protected void onProcessRecipe(SmeltingRecipe recipe) {
-        // Lit if furnace is not lit
         if (!this.isLit() && hasEnoughFuel()) {
             this.drainTank(litFurnaceCost);
             this.litTime = this.maxLitTime;
         }
-        // If furnace is lit start smelting item
         if (this.isLit()) {
             this.progress++;
-            // If progress is completed output smelted item
             if (this.progress >= this.maxProgress) {
                 this.produceOutput(recipe);
                 this.resetProgress();

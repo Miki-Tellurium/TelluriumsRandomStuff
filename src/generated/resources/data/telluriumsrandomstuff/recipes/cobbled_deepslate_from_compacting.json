@@ -1,0 +1,9 @@
+{
+  "type": "telluriumsrandomstuff:compacting",
+  "cost": 100,
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:cobblestone"
+  },
+  "result": "minecraft:cobbled_deepslate"
+}

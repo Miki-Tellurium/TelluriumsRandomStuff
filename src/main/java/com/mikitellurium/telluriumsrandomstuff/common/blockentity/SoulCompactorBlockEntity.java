@@ -1,9 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulCompactorMenu;
+import com.mikitellurium.telluriumsrandomstuff.common.block.SoulCompactorBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulInfuserBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -20,13 +22,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<CompactingRecipe> implements MenuProvider {
 
     private static final int BUCKET_SLOT = 0;
-    private static final int[] INPUT_SLOTS = new int[] {1, 2, 3, 4, 5, 6, 7, 8};
-    private static final int OUTPUT_SLOT = 9;
+    private static final int INPUT_SLOT = 1;
+    private static final int OUTPUT_SLOT = 2;
 
     private int progress = 0;
     private int maxProgress = 120;
@@ -55,16 +59,18 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
     };
 
     public SoulCompactorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SOUL_COMPACTOR.get(), pos, state, 4000, CompactingRecipe.Type.INSTANCE, 10,
-                (i) -> i >= INPUT_SLOTS[0] && i <= INPUT_SLOTS[INPUT_SLOTS.length - 1], (i) -> i == OUTPUT_SLOT, BUCKET_SLOT);
+        super(ModBlockEntities.SOUL_COMPACTOR.get(), pos, state, 4000, CompactingRecipe.Type.INSTANCE, 3,
+                (i) -> i >= INPUT_SLOT, (i) -> i == OUTPUT_SLOT, BUCKET_SLOT);
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
         if (level.isClientSide) {
             return;
         }
+        int cachedProgress = this.progress;
         super.tick(level, blockPos, blockState);
-        level.setBlock(blockPos, blockState.setValue(SoulInfuserBlock.LIT, this.isLit()), 2);
+        level.setBlock(blockPos, blockState.setValue(SoulCompactorBlock.LIT,
+                cachedProgress >= this.maxProgress - 1 || this.isLit()), 2);
         setChanged(level, blockPos, blockState);
     }
 
@@ -74,9 +80,8 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
         if (outputStack.getCount() >= outputStack.getMaxStackSize()) return false;
         if (!this.hasEnoughFuel(recipe.getRecipeCost())) return false;
         ItemStack result = recipe.getResultItem(this.level.registryAccess());
-        if(result.getItem() != outputStack.getItem()) return false;
-        int itemSum = outputStack.getCount() + result.getCount();
-        return itemSum <= outputStack.getMaxStackSize();
+        if(!outputStack.isEmpty() && result.getItem() != outputStack.getItem()) return false;
+        return outputStack.getCount() + result.getCount() <= outputStack.getMaxStackSize();
     }
 
     @Override
@@ -91,8 +96,8 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
     @Override
     protected void produceOutput(CompactingRecipe recipe) {
         ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
-        ItemStack outputStack = this.getItemHandler().getStackInSlot(OUTPUT_SLOT);
-        this.forEachInputStack((itemStack -> itemStack.shrink(1)));
+        ItemStack outputStack = this.getStackInSlot(OUTPUT_SLOT);
+        this.getStackInSlot(INPUT_SLOT).shrink(8);
         this.drainTank(recipe.getRecipeCost());
         if (outputStack.isEmpty()) {
             this.getItemHandler().setStackInSlot(OUTPUT_SLOT, result);
@@ -108,17 +113,11 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
 
     @Override
     protected Optional<CompactingRecipe> getRecipe() {
-        SimpleContainer container = new SimpleContainer(8);
-        this.forEachInputStack((container::addItem));
-        return this.quickCheck().getRecipeFor(container, this.level);
+        return this.quickCheck().getRecipeFor(new SimpleContainer(this.getStackInSlot(INPUT_SLOT)), this.level);
     }
 
     private boolean isLit() {
         return this.progress > 0;
-    }
-
-    public void forEachInputStack(Consumer<ItemStack> consumer) {
-        Arrays.stream(INPUT_SLOTS).mapToObj(this::getStackInSlot).forEach(consumer);
     }
 
     public ContainerData getContainerData() {

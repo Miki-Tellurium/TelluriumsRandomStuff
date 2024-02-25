@@ -16,18 +16,11 @@ public class SoulCompactorMenu extends AbstractSoulFuelMenu {
     }
 
     public SoulCompactorMenu(int id, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
-        super(id, ModMenuTypes.SOUL_COMPACTOR_MENU.get(), inventory, 10, 29, blockEntity, data);
+        super(id, ModMenuTypes.SOUL_COMPACTOR_MENU.get(), inventory, 3, blockEntity, data);
         this.getBlockEntity().getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((itemHandler) -> {
-            this.addSlot(new SlotItemHandler(itemHandler, 0, 8, 89));
-            this.addSlot(new SlotItemHandler(itemHandler, 1, 53, 46));
-            this.addSlot(new SlotItemHandler(itemHandler, 2, 59, 14));
-            this.addSlot(new SlotItemHandler(itemHandler, 3, 91, 8));
-            this.addSlot(new SlotItemHandler(itemHandler, 4, 123, 14));
-            this.addSlot(new SlotItemHandler(itemHandler, 5, 129, 46));
-            this.addSlot(new SlotItemHandler(itemHandler, 6, 123, 78));
-            this.addSlot(new SlotItemHandler(itemHandler, 7, 91, 84));
-            this.addSlot(new SlotItemHandler(itemHandler, 8, 59, 78));
-            this.addSlot(new SlotItemHandler(itemHandler, 9, 91, 46));
+            this.addSlot(new SlotItemHandler(itemHandler, 0, 8, 60));
+            this.addSlot(new SlotItemHandler(itemHandler, 1, 56, 30));
+            this.addSlot(new SlotItemHandler(itemHandler, 2, 115, 30));
         });
     }
 

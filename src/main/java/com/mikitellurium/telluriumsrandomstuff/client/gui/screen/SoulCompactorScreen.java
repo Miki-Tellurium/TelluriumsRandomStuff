@@ -13,16 +13,7 @@ public class SoulCompactorScreen extends AbstractSoulFuelScreen<SoulCompactorMen
     public static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_compactor_gui.png");
 
     public SoulCompactorScreen(SoulCompactorMenu menu, Inventory inventory, Component title) {
-        super(menu, inventory, GUI_TEXTURE, title, 176, 195, 8, 22);
-    }
-
-    @Override
-    protected void init() {
-        super.init();
-        this.imageHeight = 195;
-        this.topPos = (this.height - this.imageHeight) / 2;
-        this.titleLabelX = 7;
-        this.inventoryLabelY = 100;
+        super(menu, inventory, GUI_TEXTURE, title, 176, 166, 8, 8);
     }
 
     @Override
@@ -32,9 +23,8 @@ public class SoulCompactorScreen extends AbstractSoulFuelScreen<SoulCompactorMen
     }
 
     private void renderProgressArrow(GuiGraphics graphics) {
-        if (this.menu.isCrafting()) {
-
-        }
+        String text = this.menu.isCrafting() ? "Crafting" : "Not Crafting";
+        graphics.drawString(this.font, text, 80, 20, -1);
     }
 
 }

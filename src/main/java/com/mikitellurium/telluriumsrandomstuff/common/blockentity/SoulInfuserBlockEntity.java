@@ -55,8 +55,10 @@ public class SoulInfuserBlockEntity extends AbstractSoulSmeltingBlockEntity<Soul
 
     @SuppressWarnings("all")
     public SoulInfuserBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SOUL_INFUSER.get(), pos, state, 4000, SoulInfusionRecipe.Type.INSTANCE,
-                4, (i) -> i == INPUT_SLOT1 || i == INPUT_SLOT2, (i) -> i == OUTPUT_SLOT, BUCKET_SLOT);
+        super(ModBlockEntities.SOUL_INFUSER.get(), pos, state, 4000, SoulInfusionRecipe.Type.INSTANCE, 4,
+                (i) -> i == INPUT_SLOT1 || i == INPUT_SLOT2,
+                (i) -> i == OUTPUT_SLOT,
+                BUCKET_SLOT);
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
@@ -72,11 +74,12 @@ public class SoulInfuserBlockEntity extends AbstractSoulSmeltingBlockEntity<Soul
 
     @Override
     protected boolean canProcessRecipe(SoulInfusionRecipe recipe) {
-        if (this.getItemHandler().getStackInSlot(OUTPUT_SLOT).getCount() >=
-                this.getItemHandler().getStackInSlot(OUTPUT_SLOT).getMaxStackSize()) return false;
+        ItemStack outputStack = this.getStackInSlot(OUTPUT_SLOT);
+        if (outputStack.getCount() >= outputStack.getMaxStackSize()) return false;
         if (!this.hasEnoughFuel(recipe.getRecipeCost())) return false;
-        return this.getItemHandler().getStackInSlot(OUTPUT_SLOT).isEmpty() ||
-                recipe.getResultItem(level.registryAccess()).getItem() == this.getItemHandler().getStackInSlot(OUTPUT_SLOT).getItem();
+        ItemStack result = recipe.getResultItem(this.level.registryAccess());
+        if(!outputStack.isEmpty() && result.getItem() != outputStack.getItem()) return false;
+        return outputStack.getCount() + result.getCount() <= outputStack.getMaxStackSize();
     }
 
     @Override

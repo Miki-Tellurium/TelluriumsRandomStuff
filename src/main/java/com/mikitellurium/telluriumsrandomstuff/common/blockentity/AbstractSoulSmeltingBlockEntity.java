@@ -10,6 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
@@ -28,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container>> extends AbstractSoulFueledBlockEntity {
@@ -43,7 +45,7 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
 
     @SuppressWarnings("all")
     public AbstractSoulSmeltingBlockEntity(BlockEntityType<? extends AbstractSoulSmeltingBlockEntity> type,
-                                           BlockPos pos, BlockState state,  int tankCapacity, RecipeType<R> recipeType,
+                                           BlockPos pos, BlockState state, int tankCapacity, RecipeType<R> recipeType,
                                            int itemSlots, Predicate<Integer> isInputSlot, Predicate<Integer> isOutputSlot,
                                            int bucketSlot) {
         super(type, pos, state, tankCapacity);
@@ -53,6 +55,11 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
             @Override
             protected void onContentsChanged(int slot) {
                 setChanged();
+            }
+
+            @Override
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                return isInput(slot) || (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
             }
         };
         // Handle item transportation trough other blocks

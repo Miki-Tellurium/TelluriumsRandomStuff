@@ -38,14 +38,8 @@ public class CompactingRecipe implements Recipe<Container> {
         if(level.isClientSide()) {
             return false;
         }
-        if (container.getContainerSize() < 8) return false;
-        boolean matches = true;
-        for (int i = 0; i < container.getContainerSize(); i++) {
-            if (!this.ingredient.test(container.getItem(i))) {
-                matches = false;
-            }
-        }
-        return matches;
+        ItemStack input = container.getItem(0);
+        return this.ingredient.test(input) && input.getCount() >= 8;
     }
 
     @Override

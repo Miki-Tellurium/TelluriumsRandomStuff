@@ -48,7 +48,7 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
     private static final int INPUT_SLOT1 = 1;
     private static final int INPUT_SLOT2 = 2;
     private static final int OUTPUT_SLOT = 3;
-    private static final Predicate<ItemStack> isValidPotionReceptacle = (itemStack -> {
+    private final Predicate<ItemStack> isValidPotionReceptacle = (itemStack -> {
         Potion potion = PotionUtils.getPotion(itemStack);
         return potion == Potions.THICK || potion == Potions.MUNDANE;
     });
@@ -58,7 +58,7 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return (isInput(slot) && stack.getItem() instanceof PotionItem) ||
-                    (isOutput(slot) && isValidPotionReceptacle.test(stack)) ||
+                    (isOutput(slot) && AlchemixerBlockEntity.this.isValidPotionReceptacle.test(stack)) ||
                     (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
         }
 
@@ -161,7 +161,7 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
     }
 
     protected boolean canProcessRecipe(PotionMixingRecipe recipe) {
-        return isValidPotionReceptacle.test(this.itemHandler.getStackInSlot(OUTPUT_SLOT)) &&
+        return this.isValidPotionReceptacle.test(this.itemHandler.getStackInSlot(OUTPUT_SLOT)) &&
                 this.hasEnoughFuel(recipe.getRecipeCost());
     }
 
