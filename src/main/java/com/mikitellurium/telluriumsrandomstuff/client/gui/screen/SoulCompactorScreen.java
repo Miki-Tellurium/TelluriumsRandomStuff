@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class SoulCompactorScreen extends AbstractSoulFuelScreen<SoulCompactorMenu> {
 
-    public static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_compactor_gui.png");
+    private static final ResourceLocation GUI_TEXTURE = FastLoc.modLoc("textures/gui/soul_compactor_gui.png");
 
     public SoulCompactorScreen(SoulCompactorMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, GUI_TEXTURE, title, 176, 166, 8, 8);
@@ -23,8 +23,11 @@ public class SoulCompactorScreen extends AbstractSoulFuelScreen<SoulCompactorMen
     }
 
     private void renderProgressArrow(GuiGraphics graphics) {
-        String text = this.menu.isCrafting() ? "Crafting" : "Not Crafting";
-        graphics.drawString(this.font, text, 80, 20, -1);
+        if (this.menu.isCrafting()) {
+            int progress = this.menu.getScaledProgress(32);
+            graphics.blit(AbstractSoulFuelScreen.ELEMENT_TEXTURE, leftPos + 76, topPos + 26, 200, 0,
+                    progress + 1, 23);
+        }
     }
 
 }
