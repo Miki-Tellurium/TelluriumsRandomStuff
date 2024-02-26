@@ -38,7 +38,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
                 .stacksTo(1)
                 .defaultDurability(256));
     }
-
+    // todo add quick charge and launch booster enchantment
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);

@@ -34,10 +34,11 @@ public class AlchemixerScreen extends AbstractSoulFuelScreen<AlchemixerMenu>{
     private void renderProgressBubbles(GuiGraphics graphics) {
         if (this.menu.isCrafting()) {
             int bubbleLength = BUBBLE_LENGTHS[this.menu.getData().get(0) / 2 % 7];
-            graphics.blit(AbstractSoulFuelScreen.ELEMENT_TEXTURE, leftPos + 66, topPos + 33 + 29 - bubbleLength,
-                    192, 60 - bubbleLength, 11, bubbleLength);
-            graphics.blit(AbstractSoulFuelScreen.ELEMENT_TEXTURE, leftPos + 124, topPos + 33 + 29 - bubbleLength,
-                    192, 60 - bubbleLength, 11, bubbleLength);
+            int renderHeight = 29 - bubbleLength;
+            graphics.blit(FastLoc.GUI_ELEMENTS_TEXTURE, leftPos + 66, topPos + 33 + renderHeight,
+                    89, renderHeight, 11, bubbleLength);
+            graphics.blit(FastLoc.GUI_ELEMENTS_TEXTURE, leftPos + 124, topPos + 33 + renderHeight,
+                    89, renderHeight, 11, bubbleLength);
         }
     }
 

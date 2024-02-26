@@ -43,14 +43,14 @@ public class SoulInfusionCategory extends SoulLavaTankCategory<SoulInfusionRecip
 
     public SoulInfusionCategory(IGuiHelper guiHelper) {
         super(guiHelper, 4000, SoulInfusionRecipe::getRecipeCost);
-        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 72, 129, 71);
+        this.background = guiHelper.createDrawable(FastLoc.JEI_GUI_TEXTURE, 0, 72, 129, 71);
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.SOUL_INFUSER_LIT.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(56)
                 .build(new CacheLoader<>() {
                     @Override
                     public IDrawableAnimated load(Integer cookTime) {
-                        return guiHelper.drawableBuilder(JeiIntegration.GUI_TEXTURE, 176, 79, 55, 18)
+                        return guiHelper.drawableBuilder(FastLoc.GUI_ELEMENTS_TEXTURE, 0, 17, 55, 18)
                                 .buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
                     }
                 });
@@ -63,7 +63,7 @@ public class SoulInfusionCategory extends SoulLavaTankCategory<SoulInfusionRecip
     @Override
     public void draw(SoulInfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics,
                      double mouseX, double mouseY) {
-        Component translatable = Component.translatable("jei.telluriumsrandomstuff.category.soul_infusion_recipe_extra_cost")
+        Component translatable = Component.translatable("jei.telluriumsrandomstuff.category.soul_infusion.cost")
                 .append(": " + recipe.getRecipeCost());
         graphics.drawString(font, translatable, 25, 0, 0xFF808080, false);
         getArrow().draw(graphics, 39, 27);

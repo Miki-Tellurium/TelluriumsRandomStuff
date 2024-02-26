@@ -24,7 +24,6 @@ import java.util.Optional;
 
 public abstract class AbstractSoulFuelScreen<T extends AbstractSoulFuelMenu> extends AbstractContainerScreen<T> {
 
-    public static final ResourceLocation ELEMENT_TEXTURE = FastLoc.modLoc("textures/gui/jei_gui.png");
     private final ResourceLocation guiTexture;
     private final int texWidth;
     private final int texHeight;
@@ -78,11 +77,11 @@ public abstract class AbstractSoulFuelScreen<T extends AbstractSoulFuelMenu> ext
     private void renderSoulLavaStorage(GuiGraphics graphics, int xPos, int yPos) {
         GuiFluidRenderer.drawBackground(graphics, xPos, yPos, this.menu.getFluidStack(), this.menu.getBlockEntity().getFluidTankCapacity(),
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
-        RenderSystem.setShaderTexture(0, guiTexture);
+//        RenderSystem.setShaderTexture(0, guiTexture);
     }
 
     private void renderGlass(GuiGraphics graphics) {
-        graphics.blit(ELEMENT_TEXTURE, soulLavaStorage.getX(), soulLavaStorage.getY(), 176, 31,
+        graphics.blit(FastLoc.GUI_ELEMENTS_TEXTURE, soulLavaStorage.getX(), soulLavaStorage.getY(), 72, 0,
                 soulLavaStorage.getWidth(), soulLavaStorage.getHeight());
     }
 

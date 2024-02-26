@@ -48,7 +48,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     public SoulLavaInfoCategory(IGuiHelper guiHelper) {
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
         this.background = guiHelper.createBlankDrawable(140, 80);
-        this.downArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 239, 0, 16, 24);
+        this.downArrow = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 55, 0, 16, 24);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
     @Override
     public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
         downArrow.draw(graphics, 120, suggestionRenderY + 38);
-        drawSplitString(this.font, Component.translatable("jei.telluriumsrandomstuff.category.soul_lava_crafting_description"),
+        drawSplitString(this.font, Component.translatable("jei.telluriumsrandomstuff.category.soul_lava_crafting.description"),
                 graphics, 0, 5, 110, 0);
     }
 

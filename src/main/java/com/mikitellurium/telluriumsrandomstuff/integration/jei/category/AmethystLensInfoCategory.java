@@ -33,9 +33,9 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
     public AmethystLensInfoCategory(IGuiHelper guiHelper) {
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.AMETHYST_LENS.get()));
         this.background = guiHelper.createBlankDrawable(60, 60);
-        this.downArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 239, 24, 16, 24);
-        this.rightArrow = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 14, 24, 16);
-        this.itemSlot = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 34, 23, 18, 18);
+        this.downArrow = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 55, 26, 16, 24);
+        this.rightArrow = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 0, 0, 24, 16);
+        this.itemSlot = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 110, 0, 18, 18);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
                      double mouseX, double mouseY) {
         itemSlot.draw(graphics, 0, 1);
         itemSlot.draw(graphics, 43, 39);
-        downArrow.draw(graphics, 1, 18);
+        downArrow.draw(graphics, 1, 20);
         rightArrow.draw(graphics, 19, 41);
     }
 

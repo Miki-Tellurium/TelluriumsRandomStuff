@@ -60,7 +60,7 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
 
     public SoulCompactorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SOUL_COMPACTOR.get(), pos, state, 4000, CompactingRecipe.Type.INSTANCE, 3,
-                (i) -> i >= INPUT_SLOT,
+                (i) -> i == INPUT_SLOT,
                 (i) -> i == OUTPUT_SLOT,
                 BUCKET_SLOT);
     }

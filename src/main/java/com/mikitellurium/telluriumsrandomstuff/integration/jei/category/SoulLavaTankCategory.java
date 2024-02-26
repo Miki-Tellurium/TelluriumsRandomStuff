@@ -1,8 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -14,13 +14,9 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.Container;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public abstract class SoulLavaTankCategory<T> implements IRecipeCategory<T> {
 
@@ -29,7 +25,7 @@ public abstract class SoulLavaTankCategory<T> implements IRecipeCategory<T> {
     private final Function<T, Integer> getFluidAmount;
 
     public SoulLavaTankCategory(IGuiHelper guiHelper, int tankCapacity, Function<T, Integer> getFluidAmount) {
-        this.tankGlass = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 31, 16, 48);
+        this.tankGlass = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 72, 0, 16, 48);
         this.tankCapacity = tankCapacity;
         this.getFluidAmount = getFluidAmount;
     }

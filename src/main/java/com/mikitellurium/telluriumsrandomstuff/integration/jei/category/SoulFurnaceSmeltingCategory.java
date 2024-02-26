@@ -43,18 +43,18 @@ public class SoulFurnaceSmeltingCategory extends SoulLavaTankCategory<SoulFurnac
 
     public SoulFurnaceSmeltingCategory(IGuiHelper guiHelper) {
         super(guiHelper, 4000, (recipe) -> 4000);
-        this.background = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 0, 0, 120, 71);
+        this.background = guiHelper.createDrawable(FastLoc.JEI_GUI_TEXTURE, 0, 0, 120, 71);
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_FURNACE.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(25)
                 .build(new CacheLoader<>() {
                     @Override
                     public IDrawableAnimated load(Integer cookTime) {
-                        return guiHelper.drawableBuilder(JeiIntegration.GUI_TEXTURE, 176, 14, 24, 17)
+                        return guiHelper.drawableBuilder(FastLoc.GUI_ELEMENTS_TEXTURE, 0, 0, 24, 17)
                                 .buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
                     }
                 });
-        IDrawableStatic staticFlame = guiHelper.createDrawable(JeiIntegration.GUI_TEXTURE, 176, 0, 14, 14);
+        IDrawableStatic staticFlame = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 24, 0, 14, 14);
         this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
     }
 
@@ -65,7 +65,7 @@ public class SoulFurnaceSmeltingCategory extends SoulLavaTankCategory<SoulFurnac
     @Override
     public void draw(SoulFurnaceSmeltingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics,
                      double mouseX, double mouseY) {
-        animatedFlame.draw(graphics, 37, 43);
+        animatedFlame.draw(graphics, 36, 43);
         getArrow().draw(graphics, 58, 23);
     }
 

@@ -25,7 +25,7 @@ public class SoulFurnaceScreen extends AbstractSoulFuelScreen<SoulFurnaceMenu> {
     private void renderFire(GuiGraphics graphics) {
         if (this.menu.isLit()) {
             int time = this.menu.getScaledLitTime();
-            graphics.blit(AbstractSoulFuelScreen.ELEMENT_TEXTURE, leftPos + 57, topPos + 61 - time, 176,
+            graphics.blit(FastLoc.GUI_ELEMENTS_TEXTURE, leftPos + 57, topPos + 61 - time, 24,
                     12 - time, 14, time + 1);
         }
     }
@@ -33,7 +33,7 @@ public class SoulFurnaceScreen extends AbstractSoulFuelScreen<SoulFurnaceMenu> {
     private void renderProgressArrow(GuiGraphics graphics) {
         if (this.menu.isCrafting()) {
             int progress = this.menu.getScaledProgress(24);
-            graphics.blit(AbstractSoulFuelScreen.ELEMENT_TEXTURE, leftPos + 79, topPos + 29, 176, 14,
+            graphics.blit(FastLoc.GUI_ELEMENTS_TEXTURE, leftPos + 79, topPos + 29, 0, 0,
                     progress + 1, 16);
         }
     }

@@ -25,7 +25,7 @@ public class SoulCompactorScreen extends AbstractSoulFuelScreen<SoulCompactorMen
     private void renderProgressArrow(GuiGraphics graphics) {
         if (this.menu.isCrafting()) {
             int progress = this.menu.getScaledProgress(32);
-            graphics.blit(AbstractSoulFuelScreen.ELEMENT_TEXTURE, leftPos + 76, topPos + 26, 200, 0,
+            graphics.blit(FastLoc.GUI_ELEMENTS_TEXTURE, leftPos + 76, topPos + 26, 0, 53,
                     progress + 1, 23);
         }
     }
