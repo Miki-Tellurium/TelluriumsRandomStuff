@@ -107,9 +107,9 @@ public class SoulInfusionRecipe implements Recipe<Container> {
 
         @Override
         public SoulInfusionRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            Ingredient ingredient = Ingredient.of(RecipeHelper.stackFromJson(serializedRecipe, "ingredient"));
-            Ingredient catalystIngredient = Ingredient.of(RecipeHelper.stackFromJson(serializedRecipe, "catalyst"));
-            ItemStack result = RecipeHelper.stackFromJson(serializedRecipe, "result");
+            Ingredient ingredient = Ingredient.of(RecipeHelper.itemStackFromJson(serializedRecipe, "ingredient"));
+            Ingredient catalystIngredient = Ingredient.of(RecipeHelper.itemStackFromJson(serializedRecipe, "catalyst"));
+            ItemStack result = RecipeHelper.itemStackFromJson(serializedRecipe, "result");
             int recipeCost = GsonHelper.getAsInt(serializedRecipe, "cost");
 
             return new SoulInfusionRecipe(recipeId, result,

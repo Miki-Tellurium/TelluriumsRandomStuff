@@ -78,6 +78,13 @@ public class RecipeHelper {
         return new SoulFurnaceSmeltingRecipe(id, output, ingredient);
     }
 
+    public static void validateJsonElement(JsonObject obj, String... keys) {
+        Arrays.asList(keys).forEach((s) -> {
+            if (!obj.has(s))
+                throw new JsonSyntaxException("Missing " + s + ", expected to find a string or object");
+        });
+    }
+
     public static Ingredient ingredientFromJson(JsonElement element) {
         Ingredient ingredient;
         if (element.isJsonObject()) {
@@ -94,7 +101,7 @@ public class RecipeHelper {
         return ingredient;
     }
 
-    public static ItemStack stackFromJson(JsonObject object, String memberName) {
+    public static ItemStack itemStackFromJson(JsonObject object, String memberName) {
         if (!object.has(memberName)) throw new JsonSyntaxException("Missing " + memberName + ", expected to find a string or object");
         ItemStack output;
         if (object.get(memberName).isJsonObject()) {

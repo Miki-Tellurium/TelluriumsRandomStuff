@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
+import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -52,22 +53,13 @@ public class SoulLavaTransmutationRecipe extends TelluriumRecipe {
         public static final ResourceLocation ID = FastLoc.modLoc("soul_lava_transmutation");
 
         @Override
-        public SoulLavaTransmutationRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            JsonObject ingredientJson = GsonHelper.getAsJsonObject(serializedRecipe, "ingredient");
-            Ingredient ingredient = Ingredient.of(CraftingHelper.getItemStack(ingredientJson, true, true));
+        public SoulLavaTransmutationRecipe fromJson(ResourceLocation id, JsonObject recipe) {
+            RecipeHelper.validateJsonElement(recipe, "ingredient", "result");
 
-            if (!serializedRecipe.has("result")) throw new JsonSyntaxException("Missing result, expected to find a string or object");
-            ItemStack output;
-            if (serializedRecipe.get("result").isJsonObject()) {
-                JsonObject resultJson = GsonHelper.getAsJsonObject(serializedRecipe, "result");
-                output = ShapedRecipe.itemStackFromJson(resultJson);
-            } else {
-                String result = GsonHelper.getAsString(serializedRecipe, "result");
-                ResourceLocation resourcelocation = new ResourceLocation(result);
-                output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
-            }
+            Ingredient ingredient = RecipeHelper.ingredientFromJson(recipe.get("ingredient"));
+            ItemStack output = RecipeHelper.itemStackFromJson(recipe, "result");
 
-            return new SoulLavaTransmutationRecipe(recipeId, output, ingredient);
+            return new SoulLavaTransmutationRecipe(id, output, ingredient);
         }
 
         @Override
