@@ -16,16 +16,10 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulLavaTransmutationRecipe implements Recipe<Container> {
-
-    private final ResourceLocation id;
-    private final ItemStack output;
-    private final Ingredient ingredient;
+public class SoulLavaTransmutationRecipe extends TelluriumRecipe {
 
     public SoulLavaTransmutationRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient) {
-        this.id = id;
-        this.output = output;
-        this.ingredient = ingredient;
+        super(id, output, ingredient);
     }
 
     @Override
@@ -34,32 +28,7 @@ public class SoulLavaTransmutationRecipe implements Recipe<Container> {
             return false;
         }
 
-        return ingredient.test(container.getItem(0));
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.of(Ingredient.EMPTY, ingredient);
-    }
-
-    @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return output.copy();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
-    }
-
-    @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return output;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
+        return this.getIngredient().test(container.getItem(0));
     }
 
     @Override

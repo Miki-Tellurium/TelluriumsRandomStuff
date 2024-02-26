@@ -23,17 +23,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompactingRecipe implements Recipe<Container> {
+public class CompactingRecipe extends TelluriumRecipe {
 
-    private final ResourceLocation id;
-    private final ItemStack output;
-    private final Ingredient ingredient;
     private final int recipeCost;
 
     public CompactingRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient, int recipeCost) {
-        this.id = id;
-        this.output = output;
-        this.ingredient = ingredient;
+        super(id, output, ingredient);
         this.recipeCost = recipeCost;
     }
 
@@ -43,46 +38,11 @@ public class CompactingRecipe implements Recipe<Container> {
             return false;
         }
         ItemStack input = container.getItem(0);
-        return this.ingredient.test(input) && input.getCount() >= this.getMatchingItemCount(input);
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.of(Ingredient.EMPTY, this.ingredient);
-    }
-
-    public int getMatchingItemCount(ItemStack input) {
-        for (int i = 0; i < this.ingredient.getItems().length; i++) {
-            ItemStack ingredientItem = ingredient.getItems()[i];
-            if (ingredientItem.getItem() == input.getItem()) {
-                return ingredientItem.getCount();
-            }
-        }
-        return 0;
+        return this.getIngredient().test(input) && input.getCount() >= this.getMatchingItemCount(input);
     }
 
     public int getRecipeCost() {
         return recipeCost;
-    }
-
-    @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return output.copy();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
-    }
-
-    @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return output;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
     }
 
     @Override
@@ -127,7 +87,7 @@ public class CompactingRecipe implements Recipe<Container> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, CompactingRecipe recipe) {
-            recipe.ingredient.toNetwork(buf);
+            recipe.getIngredient().toNetwork(buf);
             buf.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
             buf.writeInt(recipe.getRecipeCost());
         }
