@@ -1,13 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFuelScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AlchemixerScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.*;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.*;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.category.*;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BlockStateRenderer;
@@ -67,6 +61,8 @@ public class JeiIntegration implements IModPlugin {
             new RecipeType<>(SoulLavaTransmutationCategory.UID, SoulLavaTransmutationRecipe.class);
     public static RecipeType<PotionMixingCategory.Recipe> POTION_MIXING_RECIPE_TYPE =
             new RecipeType<>(PotionMixingCategory.UID, PotionMixingCategory.Recipe.class);
+    public static RecipeType<CompactingRecipe> COMPACTING_RECIPE_TYPE =
+            new RecipeType<>(CompactingCategory.UID, CompactingRecipe.class);
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
@@ -82,7 +78,8 @@ public class JeiIntegration implements IModPlugin {
                 new AmethystLensInfoCategory(guiHelper),
                 new SoulInfusionCategory(guiHelper),
                 new SoulLavaTransmutationCategory(guiHelper),
-                new PotionMixingCategory(guiHelper)
+                new PotionMixingCategory(guiHelper),
+                new CompactingCategory(guiHelper)
         );
     }
 
@@ -95,6 +92,7 @@ public class JeiIntegration implements IModPlugin {
         List<SoulFurnaceSmeltingRecipe> convertedRecipes = RecipeHelper.getConvertedVanillaRecipes(vanillaRecipes);
         List<SoulLavaTransmutationRecipe> soulLavaTransmutationRecipes = recipeManager.getAllRecipesFor(SoulLavaTransmutationRecipe.Type.INSTANCE);
         List<SoulInfusionRecipe> soulInfusionRecipes = recipeManager.getAllRecipesFor(SoulInfusionRecipe.Type.INSTANCE);
+        List<CompactingRecipe> compactingRecipes = recipeManager.getAllRecipesFor(CompactingRecipe.Type.INSTANCE);
 
         List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = List.of(new SoulLavaInfoCategory.Recipe());
         List<AmethystLensInfoCategory.Recipe> amethystLensInfoRecipes = List.of(new AmethystLensInfoCategory.Recipe());
@@ -104,6 +102,12 @@ public class JeiIntegration implements IModPlugin {
         registration.addRecipes(SOUL_INFUSION_RECIPE_TYPE, soulInfusionRecipes);
         registration.addRecipes(SOUL_LAVA_INFO_TYPE, soulLavaInfoRecipes);
         registration.addRecipes(AMETHYST_LENS_INFO_TYPE, amethystLensInfoRecipes);
+        registration.addRecipes(COMPACTING_RECIPE_TYPE, compactingRecipes);
+        registration.addRecipes(POTION_MIXING_RECIPE_TYPE, List.of(
+                new PotionMixingCategory.Amplifier(),
+                new PotionMixingCategory.Duration(),
+                new PotionMixingCategory.Mixed()
+        ));
         registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(new RecipeHelper.RepairData(Ingredient.of(ModItems.OPAL_CRYSTAL.get()),
                 ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(),
                 ModItems.OPAL_CRYSTAL_AXE.get().getDefaultInstance(),
@@ -120,20 +124,16 @@ public class JeiIntegration implements IModPlugin {
                 ModItems.SOUL_INFUSED_IRON_LEGGINGS.get().getDefaultInstance(),
                 ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get().getDefaultInstance(),
                 ModItems.SOUL_INFUSED_IRON_HELMET.get().getDefaultInstance()),recipeFactory));
-        registration.addRecipes(POTION_MIXING_RECIPE_TYPE, List.of(
-                new PotionMixingCategory.Amplifier(),
-                new PotionMixingCategory.Duration(),
-                new PotionMixingCategory.Mixed()
-        ));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), SOUL_FURNACE_SMELTING_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SOUL_FURNACE.get()), RecipeTypes.SMELTING);
-        registration.addRecipeCatalyst(new ItemStack(ModItems.SOUL_INFUSER_LIT.get()), SOUL_INFUSION_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.OPAL_CRYSTAL.get()), SOUL_INFUSION_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(Blocks.CAULDRON), SOUL_LAVA_TRANSMUTATION_RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.ALCHEMIXER.get()), POTION_MIXING_RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.SOUL_COMPACTOR_LIT.get()), COMPACTING_RECIPE_TYPE);
     }
 
     @Override
@@ -141,6 +141,7 @@ public class JeiIntegration implements IModPlugin {
         registration.addRecipeClickArea(SoulFurnaceScreen.class, 77, 28, 28, 21, SOUL_FURNACE_SMELTING_RECIPE_TYPE);
         registration.addRecipeClickArea(SoulInfuserScreen.class, 54, 33, 55, 18, SOUL_INFUSION_RECIPE_TYPE);
         registration.addRecipeClickArea(AlchemixerScreen.class, 88, 13, 22, 43, POTION_MIXING_RECIPE_TYPE);
+        registration.addRecipeClickArea(SoulCompactorScreen.class, 75, 26, 34, 24, COMPACTING_RECIPE_TYPE);
 
         IIngredientManager ingredientManager = registration.getJeiHelpers().getIngredientManager();
         // Make the soul lava tank clickable
