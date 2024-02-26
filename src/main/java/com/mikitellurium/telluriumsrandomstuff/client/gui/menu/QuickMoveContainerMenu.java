@@ -81,7 +81,7 @@ public abstract class QuickMoveContainerMenu extends AbstractContainerMenu {
                     break;
                 }
 
-                if (i < TE_INVENTORY_FIRST_SLOT_INDEX || this.isItemValid(i, stack)) {
+                if (i < TE_INVENTORY_FIRST_SLOT_INDEX || this.isItemValid(i - VANILLA_SLOT_COUNT, stack)) {
 
                     Slot slot = this.slots.get(i);
                     ItemStack itemstack = slot.getItem();
@@ -127,7 +127,7 @@ public abstract class QuickMoveContainerMenu extends AbstractContainerMenu {
                     break;
                 }
 
-                if (i < TE_INVENTORY_FIRST_SLOT_INDEX || this.isItemValid(i, stack)) {
+                if (i < TE_INVENTORY_FIRST_SLOT_INDEX || this.isItemValid(i - VANILLA_SLOT_COUNT, stack)) {
 
                     Slot slot1 = this.slots.get(i);
                     ItemStack itemstack1 = slot1.getItem();

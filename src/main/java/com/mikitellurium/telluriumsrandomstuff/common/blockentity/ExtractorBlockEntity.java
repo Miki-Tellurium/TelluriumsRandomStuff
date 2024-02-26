@@ -57,6 +57,10 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
         super(ModBlockEntities.EXTRACTOR.get(), pos, state);
     }
 
+    public boolean isItemValid(int slot, ItemStack itemStack) {
+        return this.itemHandler.isItemValid(slot, itemStack);
+    }
+
     private SimpleContainer getInventory() {
         SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {

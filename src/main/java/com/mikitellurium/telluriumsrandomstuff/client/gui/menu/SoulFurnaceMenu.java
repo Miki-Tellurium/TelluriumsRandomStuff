@@ -1,10 +1,13 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
 
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulCompactorBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
@@ -22,6 +25,11 @@ public class SoulFurnaceMenu extends AbstractSoulFuelMenu {
             this.addSlot(new SlotItemHandler(itemHandler, 1, 56, 30));
             this.addSlot(new SlotItemHandler(itemHandler, 2, 116, 30));
         });
+    }
+
+    @Override
+    public boolean isItemValid(int slot, ItemStack itemStack) {
+        return ((SoulFurnaceBlockEntity)this.getBlockEntity()).getItemHandler().isItemValid(slot, itemStack);
     }
 
     public boolean isLit() {

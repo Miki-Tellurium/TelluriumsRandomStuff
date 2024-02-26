@@ -1,10 +1,13 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
 
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulCompactorBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
@@ -23,6 +26,11 @@ public class SoulInfuserMenu extends AbstractSoulFuelMenu {
             this.addSlot(new SlotItemHandler(itemHandler, 2, 47, 52));
             this.addSlot(new SlotItemHandler(itemHandler, 3, 116, 34));
         });
+    }
+
+    @Override
+    public boolean isItemValid(int slot, ItemStack itemStack) {
+        return ((SoulInfuserBlockEntity)this.getBlockEntity()).getItemHandler().isItemValid(slot, itemStack);
     }
 
 }
