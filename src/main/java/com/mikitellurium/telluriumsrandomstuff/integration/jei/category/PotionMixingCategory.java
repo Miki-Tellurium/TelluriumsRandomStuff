@@ -1,18 +1,15 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.MobEffectUpgrade;
+import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgrade;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BrewingBubblesTickTimer;
-import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidTankRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -22,7 +19,6 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.common.util.TickTimer;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;

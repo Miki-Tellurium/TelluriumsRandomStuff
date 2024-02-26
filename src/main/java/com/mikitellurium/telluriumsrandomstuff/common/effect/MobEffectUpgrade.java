@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.recipe;
+package com.mikitellurium.telluriumsrandomstuff.common.effect;
 
 import net.minecraft.Util;
 import net.minecraft.world.effect.MobEffect;
