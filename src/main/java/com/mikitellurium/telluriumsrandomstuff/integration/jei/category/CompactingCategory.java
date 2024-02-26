@@ -89,9 +89,8 @@ public class CompactingCategory extends SoulLavaTankCategory<CompactingRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, CompactingRecipe recipe, IFocusGroup focuses) {
         super.setRecipe(builder, recipe, focuses);
-        Item input = recipe.getIngredients().get(0).getItems()[0].getItem();
-        builder.addSlot(RecipeIngredientRole.INPUT, 35, 24).addItemStack(new ItemStack(input, 8));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 94, 24).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        builder.addSlot(RecipeIngredientRole.INPUT, 35, 24).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 24).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
     }
 
 }

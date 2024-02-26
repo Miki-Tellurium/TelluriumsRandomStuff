@@ -1,0 +1,10 @@
+{
+  "type": "telluriumsrandomstuff:compacting",
+  "cost": 20,
+  "count": 1,
+  "ingredient": {
+    "count": 16,
+    "item": "minecraft:sculk_vein"
+  },
+  "result": "minecraft:sculk"
+}

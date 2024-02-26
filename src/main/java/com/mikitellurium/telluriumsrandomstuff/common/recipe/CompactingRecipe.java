@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
@@ -15,8 +16,11 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompactingRecipe implements Recipe<Container> {
@@ -39,12 +43,22 @@ public class CompactingRecipe implements Recipe<Container> {
             return false;
         }
         ItemStack input = container.getItem(0);
-        return this.ingredient.test(input) && input.getCount() >= 8;
+        return this.ingredient.test(input) && input.getCount() >= this.getMatchingItemCount(input);
     }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return NonNullList.of(Ingredient.EMPTY, this.ingredient);
+    }
+
+    public int getMatchingItemCount(ItemStack input) {
+        for (int i = 0; i < this.ingredient.getItems().length; i++) {
+            ItemStack ingredientItem = ingredient.getItems()[i];
+            if (ingredientItem.getItem() == input.getItem()) {
+                return ingredientItem.getCount();
+            }
+        }
+        return 0;
     }
 
     public int getRecipeCost() {
@@ -92,14 +106,14 @@ public class CompactingRecipe implements Recipe<Container> {
         public static final ResourceLocation ID = FastLoc.modLoc("compacting");
         // todo add exception handling for all recipes
         @Override
-        public CompactingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            Ingredient ingredient = Ingredient.of(RecipeHelper.stackFromJson(serializedRecipe, "ingredient"));
+        public CompactingRecipe fromJson(ResourceLocation id, JsonObject serializedRecipe) {
+            Ingredient ingredient = RecipeHelper.ingredientFromJson(serializedRecipe.get("ingredient"));
             ItemStack result = RecipeHelper.stackFromJson(serializedRecipe, "result");
             int count = GsonHelper.getAsInt(serializedRecipe, "count");
             result.setCount(count);
             int recipeCost = GsonHelper.getAsInt(serializedRecipe, "cost");
 
-            return new CompactingRecipe(recipeId, result, ingredient, recipeCost);
+            return new CompactingRecipe(id, result, ingredient, recipeCost);
         }
 
         @Override

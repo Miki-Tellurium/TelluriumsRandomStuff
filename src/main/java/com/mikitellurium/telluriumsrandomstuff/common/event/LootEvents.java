@@ -27,7 +27,7 @@ import java.util.Collection;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class LootEvents {
-
+    // todo decrease small soul fragment drop rate
     private static final ResourceLocation SMALL_SOUL_FRAGMENT_MONSTERS = FastLoc.modLoc("entities/small_soul_fragment_monsters");
     private static final ResourceLocation SMALL_SOUL_FRAGMENT_GENERIC = FastLoc.modLoc("entities/small_soul_fragment_generic");
     private static final ResourceLocation SOUL_FRAGMENT_BOSSES = FastLoc.modLoc("entities/soul_fragments_boss");

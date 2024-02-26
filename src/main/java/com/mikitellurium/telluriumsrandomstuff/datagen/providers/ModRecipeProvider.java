@@ -13,6 +13,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
@@ -93,8 +94,33 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     private void buildCompactingRecipes(Consumer<FinishedRecipe> consumer) {
-        CompactingRecipeBuilder.addRecipe(Ingredient.of(Blocks.COBBLESTONE), Items.COBBLED_DEEPSLATE, 4, 100)
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(ModItems.SMALL_SOUL_FRAGMENT.get(), 8)),
+                ModItems.SOUL_FRAGMENT.get(), 1, 500)
+                .save(consumer, modLoc("soul_fragment_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(ModItems.SOUL_FRAGMENT.get(), 8)),
+                        ModItems.SOUL_CLUSTER.get(), 1, 1000)
+                .save(consumer, modLoc("soul_cluster_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Blocks.COBBLESTONE, 8)),
+                        Blocks.COBBLED_DEEPSLATE, 4, 10)
                 .save(consumer, modLoc("cobbled_deepslate_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Blocks.SAND, 4)),
+                        Blocks.SANDSTONE, 4, 50)
+                .save(consumer, modLoc("sandstone_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Blocks.RED_SAND, 4)),
+                        Blocks.RED_SANDSTONE, 4, 50)
+                .save(consumer, modLoc("red_sandstone_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Blocks.ICE, 2)),
+                        Blocks.PACKED_ICE, 1, 70)
+                .save(consumer, modLoc("packed_ice_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Blocks.PACKED_ICE, 2)),
+                        Blocks.BLUE_ICE, 1, 70)
+                .save(consumer, modLoc("blue_ice_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Blocks.SCULK_VEIN, 16)),
+                        Blocks.SCULK, 1, 20)
+                .save(consumer, modLoc("sculk_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Items.STRING, 8)),
+                        Items.COBWEB, 1, 100)
+                .save(consumer, modLoc("cobweb_from_compacting"));
     }
 
     private void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {

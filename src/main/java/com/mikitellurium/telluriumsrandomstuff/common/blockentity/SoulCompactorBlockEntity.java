@@ -99,7 +99,7 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
     protected void produceOutput(CompactingRecipe recipe) {
         ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
         ItemStack outputStack = this.getStackInSlot(OUTPUT_SLOT);
-        this.getStackInSlot(INPUT_SLOT).shrink(8);
+        this.getStackInSlot(INPUT_SLOT).shrink(recipe.getMatchingItemCount(this.getStackInSlot(INPUT_SLOT)));
         this.drainTank(recipe.getRecipeCost());
         if (outputStack.isEmpty()) {
             this.getItemHandler().setStackInSlot(OUTPUT_SLOT, result);

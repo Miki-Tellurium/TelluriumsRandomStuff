@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.google.common.collect.Collections2;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.MobEffectUpgrade;
@@ -24,6 +25,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
@@ -81,14 +83,30 @@ public class RecipeHelper {
         return new SoulFurnaceSmeltingRecipe(id, output, ingredient);
     }
 
-    public static ItemStack stackFromJson(JsonObject recipe, String memberName) {
-        if (!recipe.has(memberName)) throw new JsonSyntaxException("Missing " + memberName + ", expected to find a string or object");
-        ItemStack output;
-        if (recipe.get(memberName).isJsonObject()) {
-            JsonObject resultJson = GsonHelper.getAsJsonObject(recipe, memberName);
-            output = ShapedRecipe.itemStackFromJson(resultJson);
+    public static Ingredient ingredientFromJson(JsonElement element) {
+        Ingredient ingredient;
+        if (element.isJsonObject()) {
+            JsonObject obj = element.getAsJsonObject();
+            ingredient = Ingredient.of(CraftingHelper.getItemStack(obj, true));
         } else {
-            String result = GsonHelper.getAsString(recipe, memberName);
+            List<ItemStack> itemStacks = new ArrayList<>();
+            element.getAsJsonArray().forEach((e) -> {
+                JsonObject obj = e.getAsJsonObject();
+                itemStacks.add(CraftingHelper.getItemStack(obj, true));
+            });
+            ingredient = Ingredient.of(itemStacks.toArray(new ItemStack[]{}));
+        }
+        return ingredient;
+    }
+
+    public static ItemStack stackFromJson(JsonObject object, String memberName) {
+        if (!object.has(memberName)) throw new JsonSyntaxException("Missing " + memberName + ", expected to find a string or object");
+        ItemStack output;
+        if (object.get(memberName).isJsonObject()) {
+            JsonObject resultJson = GsonHelper.getAsJsonObject(object, memberName);
+            output = CraftingHelper.getItemStack(resultJson, true);
+        } else {
+            String result = GsonHelper.getAsString(object, memberName);
             ResourceLocation resourcelocation = new ResourceLocation(result);
             output = new ItemStack(ForgeRegistries.ITEMS.getDelegateOrThrow(resourcelocation));
         }

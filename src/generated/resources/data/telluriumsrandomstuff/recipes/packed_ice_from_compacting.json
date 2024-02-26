@@ -1,0 +1,10 @@
+{
+  "type": "telluriumsrandomstuff:compacting",
+  "cost": 70,
+  "count": 1,
+  "ingredient": {
+    "count": 2,
+    "item": "minecraft:ice"
+  },
+  "result": "minecraft:packed_ice"
+}
