@@ -17,17 +17,14 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulInfusionRecipe implements Recipe<Container> {
+public class SoulInfusionRecipe extends TelluriumRecipe {
 
-    private final ResourceLocation id;
-    private final ItemStack output;
-    private final NonNullList<Ingredient> ingredients;
+    private final Ingredient catalyst;
     private final int recipeCost;
 
-    public SoulInfusionRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> ingredients, int recipeCost) {
-        this.id = id;
-        this.output = output;
-        this.ingredients = ingredients;
+    public SoulInfusionRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient, Ingredient catalyst, int recipeCost) {
+        super(id, output, ingredient);
+        this.catalyst = catalyst;
         this.recipeCost = recipeCost;
     }
 
@@ -38,7 +35,7 @@ public class SoulInfusionRecipe implements Recipe<Container> {
         }
 
         boolean matches = true;
-        for (Ingredient ingredient : ingredients) {
+        for (Ingredient ingredient : this.getIngredients()) {
 
             boolean ingredientIsPresent = false;
             for (int i = 0; i < container.getContainerSize(); i++) {
@@ -58,31 +55,15 @@ public class SoulInfusionRecipe implements Recipe<Container> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return ingredients;
+        return NonNullList.of(Ingredient.EMPTY, this.getIngredient(), this.catalyst);
+    }
+
+    public Ingredient getCatalyst() {
+        return catalyst;
     }
 
     public int getRecipeCost() {
         return recipeCost;
-    }
-
-    @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return output.copy();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
-    }
-
-    @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return output;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
     }
 
     @Override
@@ -106,31 +87,30 @@ public class SoulInfusionRecipe implements Recipe<Container> {
         public static final ResourceLocation ID = FastLoc.modLoc("soul_infusion");
 
         @Override
-        public SoulInfusionRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            Ingredient ingredient = Ingredient.of(RecipeHelper.itemStackFromJson(serializedRecipe, "ingredient"));
-            Ingredient catalystIngredient = Ingredient.of(RecipeHelper.itemStackFromJson(serializedRecipe, "catalyst"));
-            ItemStack result = RecipeHelper.itemStackFromJson(serializedRecipe, "result");
-            int recipeCost = GsonHelper.getAsInt(serializedRecipe, "cost");
+        public SoulInfusionRecipe fromJson(ResourceLocation recipeId, JsonObject recipe) {
+            RecipeHelper.validateJsonElement(recipe, "ingredient", "catalyst", "result", "cost");
+            Ingredient ingredient = RecipeHelper.ingredientFromJson(recipe.get("ingredient"));
+            Ingredient catalyst = RecipeHelper.ingredientFromJson(recipe.get("catalyst"));
+            ItemStack result = RecipeHelper.itemStackFromJson(recipe, "result");
+            int recipeCost = GsonHelper.getAsInt(recipe, "cost");
 
-            return new SoulInfusionRecipe(recipeId, result,
-                    NonNullList.of(Ingredient.EMPTY, ingredient, catalystIngredient), recipeCost);
+            return new SoulInfusionRecipe(recipeId, result, ingredient, catalyst, recipeCost);
         }
 
         @Override
         public @Nullable SoulInfusionRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            NonNullList<Ingredient> ingredients = NonNullList.withSize(2, Ingredient.EMPTY);
-            ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buf));
+            Ingredient ingredient = Ingredient.fromNetwork(buf);
+            Ingredient catalyst = Ingredient.fromNetwork(buf);
             ItemStack output = buf.readItem();
             int recipeCost = buf.readInt();
 
-            return new SoulInfusionRecipe(id, output, ingredients, recipeCost);
+            return new SoulInfusionRecipe(id, output, ingredient, catalyst, recipeCost);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, SoulInfusionRecipe recipe) {
-            for (Ingredient ingredient : recipe.getIngredients()) {
-                ingredient.toNetwork(buf);
-            }
+            recipe.getIngredient().toNetwork(buf);
+            recipe.getCatalyst().toNetwork(buf);
             buf.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
             buf.writeInt(recipe.getRecipeCost());
         }
