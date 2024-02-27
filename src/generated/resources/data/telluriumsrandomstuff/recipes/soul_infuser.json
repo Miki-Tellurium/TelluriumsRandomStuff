@@ -8,14 +8,17 @@
     "F": {
       "item": "telluriumsrandomstuff:soul_furnace"
     },
+    "I": {
+      "item": "minecraft:stone"
+    },
     "X": {
-      "item": "telluriumsrandomstuff:soul_obsidian"
+      "item": "telluriumsrandomstuff:soul_infused_iron_ingot"
     }
   },
   "pattern": [
     "XXX",
     "XFX",
-    "X#X"
+    "I#I"
   ],
   "result": {
     "item": "telluriumsrandomstuff:soul_infuser"
