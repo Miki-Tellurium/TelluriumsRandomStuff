@@ -473,7 +473,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', Blocks.BREWING_STAND)
                 .define('X', ModItems.SOUL_INFUSED_IRON_INGOT.get())
                 .define('F', ModBlocks.SOUL_FURNACE.get())
-                .define('I', Blocks.STONE)
+                .define('I', Blocks.SMOOTH_STONE)
                 .unlockedBy("has_brewing_stand", has(Blocks.BREWING_STAND))
                 .unlockedBy("has_soul_obsidian", has(ModBlocks.SOUL_OBSIDIAN.get()))
                 .unlockedBy("has_soul_furnace", has(ModBlocks.SOUL_FURNACE.get()))
