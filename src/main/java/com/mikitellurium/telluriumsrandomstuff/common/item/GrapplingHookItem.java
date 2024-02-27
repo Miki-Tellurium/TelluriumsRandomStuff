@@ -37,7 +37,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
                 .stacksTo(1)
                 .defaultDurability(256));
     }
-    // todo add quick charge and launch booster enchantment
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
@@ -66,7 +66,6 @@ public class GrapplingHookItem extends Item implements Vanishable {
         if (!level.isClientSide && livingEntity instanceof Player player) {
             int timeUsed = this.getUseDuration(itemStack) - timeCharged;
             float launchStrength = this.getPowerForTime(timeUsed, itemStack) + this.getAeroDynamicsBoost(itemStack);
-            LogUtils.chatMessage("Launch: " + launchStrength);
             if (launchStrength < 0.2D) return;
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
                 GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level, itemStack, launchStrength);
