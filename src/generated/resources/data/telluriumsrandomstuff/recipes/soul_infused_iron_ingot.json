@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "x": {
+      "item": "telluriumsrandomstuff:soul_fragment"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#x#",
+    " # "
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:soul_infused_iron_ingot"
+  },
+  "show_notification": true
+}
