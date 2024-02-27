@@ -20,7 +20,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -66,15 +65,16 @@ public class GrapplingHookItem extends Item implements Vanishable {
     public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int timeCharged) {
         if (!level.isClientSide && livingEntity instanceof Player player) {
             int timeUsed = this.getUseDuration(itemStack) - timeCharged;
-            float launchStrength = this.getPowerForTime(timeUsed, itemStack);
+            float launchStrength = this.getPowerForTime(timeUsed, itemStack) + this.getAeroDynamicsBoost(itemStack);
             LogUtils.chatMessage("Launch: " + launchStrength);
             if (launchStrength < 0.2D) return;
             player.getCapability(GrapplingHookCapabilityProvider.INSTANCE).ifPresent((hook) -> {
                 GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level, itemStack, launchStrength);
-                hook.setGrappling(grapplingHook, itemStack);
-                ModMessages.sendToPlayer(new GrapplingHookSyncS2CPacket(true, itemStack), (ServerPlayer) player);
-                level.addFreshEntity(grapplingHook);
-                level.playSound(null, grapplingHook, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
+                if (level.addFreshEntity(grapplingHook)) {
+                    hook.setGrappling(grapplingHook, itemStack);
+                    ModMessages.sendToPlayer(new GrapplingHookSyncS2CPacket(true, itemStack), (ServerPlayer) player);
+                    level.playSound(null, grapplingHook, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
+                }
             });
         }
     }
@@ -84,13 +84,17 @@ public class GrapplingHookItem extends Item implements Vanishable {
         if (f > 1.0F) {
             f = 1.0F;
         }
-
         return f;
     }
 
     private int getChargeDuration(ItemStack itemStack) {
         int i = itemStack.getEnchantmentLevel(Enchantments.QUICK_CHARGE);
         return i == 0 ? 20 : 20 - 4 * i;
+    }
+
+    private float getAeroDynamicsBoost(ItemStack itemStack) {
+        int i = itemStack.getEnchantmentLevel(ModEnchantments.AERODYNAMICS.get());
+        return 0.1F * i;
     }
 
     @Override
