@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.item;
 
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.HumanoidModel;
@@ -11,6 +12,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +45,8 @@ public class GrapplingHookItemExtension implements IClientItemExtensions {
             poseStack.mulPose(Axis.YP.rotationDegrees(side * 35.0F));
             poseStack.mulPose(Axis.ZP.rotationDegrees(side * -6.0F));
             float remainingUseTicks = (float) itemInHand.getUseDuration() - ((float) player.getUseItemRemainingTicks() - partialTick + 1.0F);
-            float progress = Math.min(remainingUseTicks / 16.0F, 1.0F);
+            float progress = Math.min(remainingUseTicks / this.getChargeDuration(itemInHand), 1.0F);
+            LogUtils.consoleLog(progress);
 
             if (progress > 0.1F) {
                 float sin = Mth.sin((remainingUseTicks - 0.1F) * 1.2F);
@@ -58,6 +61,11 @@ public class GrapplingHookItemExtension implements IClientItemExtensions {
             return true;
         }
         return false;
+    }
+
+    private float getChargeDuration(ItemStack itemStack) {
+        int i = itemStack.getEnchantmentLevel(Enchantments.QUICK_CHARGE);
+        return i == 0 ? 16.5F : 16.5F - 3.5F * i;
     }
 
     @Override
