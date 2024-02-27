@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class GrapplingHookItemExtension implements IClientItemExtensions {
 
-    private final HumanoidModel.ArmPose GRAPPLING_HOOK = HumanoidModel.ArmPose.create("Grappling_hook", false,
+    private final HumanoidModel.ArmPose GRAPPLING_HOOK = HumanoidModel.ArmPose.create("GRAPPLING_HOOK", false,
             (model, entity, arm) -> {
                 ItemStack itemInHand = arm == entity.getMainArm() ? entity.getMainHandItem() : entity.getOffhandItem();
                 if (entity.isUsingItem() && entity.getUseItem() == itemInHand) {
