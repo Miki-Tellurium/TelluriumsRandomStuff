@@ -147,6 +147,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addEntityType(ModEntities.GRAPPLING_HOOK, "Grappling Hook");
         // Enchantments
         addEnchantment(ModEnchantments.SOUL_HARVESTING, "Soul Harvesting");
+        addEnchantment(ModEnchantments.AERODYNAMICS, "Aerodynamics");
         // Trims
         translation("trim_material", "opal_crystal", "Opal Crystal Material");
         // Jei

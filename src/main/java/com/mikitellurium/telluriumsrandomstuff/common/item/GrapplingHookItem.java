@@ -5,6 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCa
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.GrapplingHookSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModEnchantments;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
@@ -119,7 +120,8 @@ public class GrapplingHookItem extends Item implements Vanishable {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment.equals(Enchantments.QUICK_CHARGE) ||
+        return enchantment.equals(ModEnchantments.AERODYNAMICS.get()) ||
+                enchantment.equals(Enchantments.QUICK_CHARGE) ||
                 enchantment.equals(Enchantments.VANISHING_CURSE) ||
                 enchantment.equals(Enchantments.UNBREAKING) ||
                 enchantment.equals(Enchantments.MENDING);
