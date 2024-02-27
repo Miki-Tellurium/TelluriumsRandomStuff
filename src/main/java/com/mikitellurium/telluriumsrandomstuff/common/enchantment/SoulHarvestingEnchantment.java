@@ -27,8 +27,8 @@ public class SoulHarvestingEnchantment extends Enchantment {
 
     private final float lootChance = 0.0125f;
 
-    public SoulHarvestingEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {
-        super(rarity, EnchantmentCategory.WEAPON, equipmentSlots);
+    public SoulHarvestingEnchantment(EquipmentSlot... equipmentSlots) {
+        super(Rarity.RARE, EnchantmentCategory.WEAPON, equipmentSlots);
         dropFromLootTable.setAccessible(true);
     }
 

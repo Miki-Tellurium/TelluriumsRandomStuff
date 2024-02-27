@@ -15,7 +15,7 @@ public class ModEnchantments {
             ForgeRegistries.ENCHANTMENTS, FastLoc.modId());
 
     public static RegistryObject<Enchantment> SOUL_HARVESTING = ENCHANTMENTS.register("soul_harvesting",
-            ()-> new SoulHarvestingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND));
+            ()-> new SoulHarvestingEnchantment(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND));
 
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);
