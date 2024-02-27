@@ -30,7 +30,7 @@ public class AlchemixerMenu extends AbstractSoulFuelMenu {
 
     @Override
     public boolean isItemValid(int slot, ItemStack itemStack) {
-        return ((AlchemixerBlockEntity)this.getBlockEntity()).getItemHandler().isItemValid(slot, itemStack);
+        return ((AlchemixerBlockEntity)this.getBlockEntity()).isItemValid(slot, itemStack);
     }
 
     public int getRecipeCost() {

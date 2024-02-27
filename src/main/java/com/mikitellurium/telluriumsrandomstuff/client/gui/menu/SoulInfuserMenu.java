@@ -30,7 +30,7 @@ public class SoulInfuserMenu extends AbstractSoulFuelMenu {
 
     @Override
     public boolean isItemValid(int slot, ItemStack itemStack) {
-        return ((SoulInfuserBlockEntity)this.getBlockEntity()).getItemHandler().isItemValid(slot, itemStack);
+        return ((SoulInfuserBlockEntity)this.getBlockEntity()).isItemValid(slot, itemStack);
     }
 
 }

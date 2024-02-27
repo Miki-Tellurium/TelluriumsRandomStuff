@@ -102,7 +102,7 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
         this.getStackInSlot(INPUT_SLOT).shrink(recipe.getMatchingItemCount(this.getStackInSlot(INPUT_SLOT)));
         this.drainTank(recipe.getRecipeCost());
         if (outputStack.isEmpty()) {
-            this.getItemHandler().setStackInSlot(OUTPUT_SLOT, result);
+            this.setStackInSlot(OUTPUT_SLOT, result);
         } else {
             outputStack.grow(result.getCount());
         }
@@ -120,10 +120,6 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
 
     private boolean isLit() {
         return this.progress > 0;
-    }
-
-    public ContainerData getContainerData() {
-        return this.containerData;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
+import com.google.common.base.Suppliers;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
 import com.mikitellurium.telluriumsrandomstuff.util.MappedItemStackHandler;
@@ -29,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -160,12 +162,24 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
         return this.quickCheck;
     }
 
-    public MappedItemStackHandler getItemHandler() {
-        return this.itemHandler;
+    public boolean isItemValid(int slot, ItemStack itemStack) {
+        return this.itemHandler.isItemValid(slot, itemStack);
     }
-    // todo use this on child classes
+
     public ItemStack getStackInSlot(int slot) {
         return this.itemHandler.getStackInSlot(slot);
+    }
+
+    public void setStackInSlot(int slot, ItemStack itemStack) {
+        this.itemHandler.setStackInSlot(slot, itemStack);
+    }
+
+    public void forEachStack(BiPredicate<Integer, ItemStack> filter, BiConsumer<Integer, ItemStack> consumer) {
+        if (filter == null) {
+            this.itemHandler.forEachStack(consumer);
+        } else {
+            this.itemHandler.forEachStack(filter, consumer);
+        }
     }
 
     public SimpleContainer getInventory() {

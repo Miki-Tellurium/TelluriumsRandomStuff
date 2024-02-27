@@ -28,7 +28,7 @@ public class SoulCompactorMenu extends AbstractSoulFuelMenu {
 
     @Override
     public boolean isItemValid(int slot, ItemStack itemStack) {
-        return ((SoulCompactorBlockEntity)this.getBlockEntity()).getItemHandler().isItemValid(slot, itemStack);
+        return ((SoulCompactorBlockEntity)this.getBlockEntity()).isItemValid(slot, itemStack);
     }
 
 }

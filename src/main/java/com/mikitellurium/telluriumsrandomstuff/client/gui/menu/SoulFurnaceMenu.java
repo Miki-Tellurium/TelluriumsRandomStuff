@@ -29,7 +29,7 @@ public class SoulFurnaceMenu extends AbstractSoulFuelMenu {
 
     @Override
     public boolean isItemValid(int slot, ItemStack itemStack) {
-        return ((SoulFurnaceBlockEntity)this.getBlockEntity()).getItemHandler().isItemValid(slot, itemStack);
+        return ((SoulFurnaceBlockEntity)this.getBlockEntity()).isItemValid(slot, itemStack);
     }
 
     public boolean isLit() {

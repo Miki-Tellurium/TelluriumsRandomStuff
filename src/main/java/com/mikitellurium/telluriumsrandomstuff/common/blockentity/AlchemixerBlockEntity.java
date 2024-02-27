@@ -175,10 +175,10 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
     }
 
     protected void produceOutput(PotionMixingRecipe recipe) {
-        this.getItemHandler().setStackInSlot(INPUT_SLOT1, Items.GLASS_BOTTLE.getDefaultInstance());
-        this.getItemHandler().setStackInSlot(INPUT_SLOT2, Items.GLASS_BOTTLE.getDefaultInstance());
+        this.itemHandler.setStackInSlot(INPUT_SLOT1, Items.GLASS_BOTTLE.getDefaultInstance());
+        this.itemHandler.setStackInSlot(INPUT_SLOT2, Items.GLASS_BOTTLE.getDefaultInstance());
         this.drainTank(recipe.getRecipeCost());
-        this.getItemHandler().setStackInSlot(OUTPUT_SLOT, recipe.assemble());
+        this.itemHandler.setStackInSlot(OUTPUT_SLOT, recipe.assemble());
     }
 
     protected void resetProgress() {
@@ -199,16 +199,24 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
         return this.getFluidTank().getFluidAmount() >= recipeCost;
     }
 
-    public MappedItemStackHandler getItemHandler() {
-        return this.itemHandler;
-    }
-
     private boolean hasEmptyBucket(int slot) {
         return slot == this.bucketSlot && this.itemHandler.getStackInSlot(this.bucketSlot).is(Items.BUCKET);
     }
 
     public int getBucketSlot() {
         return this.bucketSlot;
+    }
+
+    public boolean isItemValid(int slot, ItemStack itemStack) {
+        return this.itemHandler.isItemValid(slot, itemStack);
+    }
+
+    public ItemStack getStackInSlot(int slot) {
+        return this.itemHandler.getStackInSlot(slot);
+    }
+
+    public void setStackInSlot(int slot, ItemStack itemStack) {
+        this.itemHandler.setStackInSlot(slot, itemStack);
     }
 
     public SimpleContainer getInventory() {
@@ -224,10 +232,6 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
     public void dropItemsOnBreak() {
         SimpleContainer inventory = getInventory();
         Containers.dropContents(this.level, this.worldPosition, inventory);
-    }
-
-    public ContainerData getContainerData() {
-        return this.containerData;
     }
 
     @Override

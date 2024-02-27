@@ -5,6 +5,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class MappedItemStackHandler extends ItemStackHandler {
@@ -19,6 +23,15 @@ public class MappedItemStackHandler extends ItemStackHandler {
         this.isInputSlot = isInputSlot;
         this.isOutputSlot = isOutputSlot;
         this.isBucketSlot = isBucketSlot;
+    }
+
+    public void forEachStack(BiConsumer<Integer, ItemStack> consumer) {
+        this.stacks.forEach((itemStack) -> consumer.accept(stacks.indexOf(itemStack), itemStack));
+    }
+
+    public void forEachStack(BiPredicate<Integer, ItemStack> filter, BiConsumer<Integer, ItemStack> consumer) {
+        this.stacks.stream().filter((itemStack) -> filter.test(stacks.indexOf(itemStack), itemStack))
+                .forEach((itemStack) -> consumer.accept(stacks.indexOf(itemStack), itemStack));
     }
 
     public boolean isBucket(int slot) {

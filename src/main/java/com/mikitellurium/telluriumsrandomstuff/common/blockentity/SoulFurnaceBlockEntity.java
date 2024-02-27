@@ -109,10 +109,10 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
     @Override
     protected void produceOutput(SmeltingRecipe recipe) {
         ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
-        ItemStack outputStack = this.getItemHandler().getStackInSlot(OUTPUT_SLOT);
-        this.getItemHandler().getStackInSlot(INPUT_SLOT).shrink(1);
+        ItemStack outputStack = this.getStackInSlot(OUTPUT_SLOT);
+        this.getStackInSlot(INPUT_SLOT).shrink(1);
         if (outputStack.isEmpty()) {
-            this.getItemHandler().setStackInSlot(OUTPUT_SLOT, result);
+            this.setStackInSlot(OUTPUT_SLOT, result);
         } else {
             outputStack.grow(result.getCount());
         }
@@ -126,15 +126,11 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
     @Override
     protected Optional<SmeltingRecipe> getRecipe() {
         return this.quickCheck().getRecipeFor(
-                new SimpleContainer(this.getItemHandler().getStackInSlot(INPUT_SLOT)), this.level);
+                new SimpleContainer(this.getStackInSlot(INPUT_SLOT)), this.level);
     }
 
     private boolean isLit() {
         return this.litTime > 0;
-    }
-
-    public ContainerData getContainerData() {
-        return this.containerData;
     }
 
     private boolean hasEnoughFuel() {

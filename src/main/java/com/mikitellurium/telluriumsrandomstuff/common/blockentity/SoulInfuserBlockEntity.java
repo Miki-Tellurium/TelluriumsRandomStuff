@@ -4,6 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulInfuserMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulInfuserBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -94,12 +95,12 @@ public class SoulInfuserBlockEntity extends AbstractSoulSmeltingBlockEntity<Soul
     @Override
     protected void produceOutput(SoulInfusionRecipe recipe) {
         ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
-        ItemStack outputStack = this.getItemHandler().getStackInSlot(OUTPUT_SLOT);
-        this.getItemHandler().getStackInSlot(INPUT_SLOT1).shrink(1);
-        this.getItemHandler().getStackInSlot(INPUT_SLOT2).shrink(1);
+        ItemStack outputStack = this.getStackInSlot(OUTPUT_SLOT);
+        this.getStackInSlot(INPUT_SLOT1).shrink(1);
+        this.getStackInSlot(INPUT_SLOT2).shrink(1);
         this.drainTank(recipe.getRecipeCost());
         if (outputStack.isEmpty()) {
-            this.getItemHandler().setStackInSlot(OUTPUT_SLOT, result);
+            this.setStackInSlot(OUTPUT_SLOT, result);
         } else {
             outputStack.grow(result.getCount());
         }
@@ -113,16 +114,12 @@ public class SoulInfuserBlockEntity extends AbstractSoulSmeltingBlockEntity<Soul
     @Override
     protected Optional<SoulInfusionRecipe> getRecipe() {
         return this.quickCheck().getRecipeFor(new SimpleContainer(
-                this.getItemHandler().getStackInSlot(INPUT_SLOT1),
-                this.getItemHandler().getStackInSlot(INPUT_SLOT2)), this.level);
+                this.getStackInSlot(INPUT_SLOT1),
+                this.getStackInSlot(INPUT_SLOT2)), this.level);
     }
 
     private boolean isLit() {
         return this.progress > 0;
-    }
-
-    public ContainerData getContainerData() {
-        return this.containerData;
     }
 
     @Override
