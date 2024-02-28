@@ -46,7 +46,6 @@ public class GrapplingHookItemExtension implements IClientItemExtensions {
             poseStack.mulPose(Axis.ZP.rotationDegrees(side * -6.0F));
             float remainingUseTicks = (float) itemInHand.getUseDuration() - ((float) player.getUseItemRemainingTicks() - partialTick + 1.0F);
             float progress = Math.min(remainingUseTicks / this.getChargeDuration(itemInHand), 1.0F);
-            LogUtils.consoleLog(progress);
 
             if (progress > 0.1F) {
                 float sin = Mth.sin((remainingUseTicks - 0.1F) * 1.2F);
