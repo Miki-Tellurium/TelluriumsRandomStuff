@@ -5,8 +5,8 @@ import net.minecraft.network.chat.Component;
 
 public class LogUtils {
 
-    public static void chatMessage(String message) {
-        Minecraft.getInstance().player.sendSystemMessage(Component.literal(message));
+    public static void chatMessage(Object message) {
+        Minecraft.getInstance().player.sendSystemMessage(Component.literal(message.toString()));
     }
 
     public static void consoleLog(Object message) {
