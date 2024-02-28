@@ -15,6 +15,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -27,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 public class SoulInfuserBlock extends AbstractFurnaceBlock {
 
     public SoulInfuserBlock() {
-        super(BlockBehaviour.Properties.copy(ModBlocks.SOUL_FURNACE.get()));
+        super(BlockBehaviour.Properties.copy(Blocks.BLAST_FURNACE));
     }
 
     @Nullable
