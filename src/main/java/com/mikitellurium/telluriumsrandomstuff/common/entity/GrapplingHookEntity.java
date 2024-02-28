@@ -22,6 +22,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
@@ -231,25 +232,24 @@ public class GrapplingHookEntity extends Projectile {
     private void launchOwner() {
         Player player = this.getPlayerOwner();
         Vec3 playerPos = player.getEyePosition();
-        Vec3 vec3 = this.position().subtract(playerPos);
+        Vec3 vec3 = playerPos.vectorTo(this.position());
         Vec3 normal = vec3.normalize();
 
-        double lenghtMul = Math.sqrt(vec3.length()) * 0.125D;
-        double launchFactor = 6.0D * lenghtMul;
+        double lengthMul = Math.sqrt(vec3.length()) * 0.125D;
+        double launchFactor = 6.0D * lengthMul;
         double horizontalFactor = launchFactor * 1.2D;
         double verticalFactor = launchFactor * 0.75D;
 
-        double x = normal.x * horizontalFactor;
-        double y = normal.y * verticalFactor + lenghtMul;
-        double z = normal.z * horizontalFactor;
-        Vec3 newVec = new Vec3(x, y, z);
+        Vec3 newVec = normal.multiply(horizontalFactor, verticalFactor, horizontalFactor).add(0, lengthMul, 0);
         if (player.isUnderWater()) {
             newVec = newVec.scale(0.6D);
         }
-        player.setDeltaMovement(player.getDeltaMovement().add(newVec));
-        this.playSound(player, SoundEvents.TRIDENT_RIPTIDE_1, 1.0F, 0.9F / (this.random.nextFloat() * 0.2F + 0.8F), true);
-        player.hasImpulse = true;
+        player.push(newVec.x, newVec.y, newVec.z);
+        if (player.onGround()) {
+            player.move(MoverType.SELF, new Vec3(0.0D, 1.2F, 0.0D));
+        }
         player.hurtMarked = true;
+        this.playSound(player, SoundEvents.TRIDENT_RIPTIDE_1, 1.0F, 0.9F / (this.random.nextFloat() * 0.2F + 0.8F), true);
     }
 
     @Override
