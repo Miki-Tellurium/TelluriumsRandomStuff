@@ -6,6 +6,7 @@ import com.google.common.cache.LoadingCache;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidTankRenderer;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
@@ -44,7 +45,7 @@ public class SoulInfusionCategory extends SoulLavaTankCategory<SoulInfusionRecip
     public SoulInfusionCategory(IGuiHelper guiHelper) {
         super(guiHelper, 4000, SoulInfusionRecipe::getRecipeCost);
         this.background = guiHelper.createDrawable(FastLoc.JEI_GUI_TEXTURE, 0, 72, 129, 71);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.OPAL_CRYSTAL.get()));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_INFUSER_LIT.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(56)
                 .build(new CacheLoader<>() {

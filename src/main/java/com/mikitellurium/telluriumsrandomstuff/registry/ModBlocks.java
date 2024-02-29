@@ -239,12 +239,16 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SOUL_INFUSER = registerBlockWithItem("soul_infuser",
             SoulInfuserBlock::new);
+    public static final RegistryObject<Item> SOUL_INFUSER_LIT = ModItems.ITEMS.register("soul_infuser_lit",
+            () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Block> ALCHEMIXER = registerBlockWithItem("alchemixer",
             AlchemixerBlock::new);
 
     public static final RegistryObject<Block> SOUL_COMPACTOR = registerBlockWithItem("soul_compactor",
             SoulCompactorBlock::new);
+    public static final RegistryObject<Item> SOUL_COMPACTOR_LIT = ModItems.ITEMS.register("soul_compactor_lit",
+            () -> new Item(new Item.Properties()));
 
     //Method to register blocks
     private static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {

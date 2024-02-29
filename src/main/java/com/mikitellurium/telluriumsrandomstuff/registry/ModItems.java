@@ -132,9 +132,6 @@ public class ModItems {
     public static final RegistryObject<Item> SOUL_CLUSTER = ITEMS.register("soul_cluster",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> SOUL_COMPACTOR_LIT = ITEMS.register("soul_compactor_lit",
-            () -> new Item(new Item.Properties()));
-
     public static final RegistryObject<Item> GRAPPLING_HOOK = ITEMS.register("grappling_hook", GrapplingHookItem::new);
 
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_INGOT = ITEMS.register("soul_infused_iron_ingot",

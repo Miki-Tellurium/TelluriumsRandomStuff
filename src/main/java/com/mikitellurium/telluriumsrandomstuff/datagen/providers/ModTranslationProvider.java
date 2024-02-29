@@ -39,7 +39,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SMALL_SOUL_FRAGMENT, "Small Soul Fragment");
         addItem(ModItems.SOUL_FRAGMENT, "Soul Fragment");
         addItem(ModItems.SOUL_CLUSTER, "Soul Cluster");
-        //addItem(ModItems.SOUL_INFUSER_LIT, "Soul Infuser");
+        addItem(ModBlocks.SOUL_INFUSER_LIT, "Soul Infuser");
         addItem(ModItems.GRAPPLING_HOOK, "Grappling Hook");
         addItem(ModItems.SOUL_INFUSED_IRON_INGOT, "Soul Infused Iron Ingot");
         addItem(ModItems.SOUL_IRON_ROD, "Soul Iron Rod");
@@ -52,7 +52,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SOUL_INFUSED_IRON_LEGGINGS, "Soul Infused Iron Leggings");
         addItem(ModItems.SOUL_INFUSED_IRON_CHESTPLATE, "Soul Infused Iron Chestplate");
         addItem(ModItems.SOUL_INFUSED_IRON_HELMET, "Soul Infused Iron Helmet");
-        addItem(ModItems.SOUL_COMPACTOR_LIT, "Soul Compactor");
+        addItem(ModBlocks.SOUL_COMPACTOR_LIT, "Soul Compactor");
 
         translation("item", "lava_googles.tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");
