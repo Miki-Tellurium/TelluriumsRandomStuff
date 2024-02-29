@@ -5,6 +5,8 @@ import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -13,6 +15,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModCreativeTab {
@@ -36,12 +41,8 @@ public class ModCreativeTab {
     public static class RegisterCreativeTabs {
         @SubscribeEvent
         public static void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
-            ItemStack soulHarvestingI = new ItemStack(Items.ENCHANTED_BOOK);
-            ItemStack soulHarvestingII = soulHarvestingI.copy();
-            ItemStack soulHarvestingIII = soulHarvestingI.copy();
-            EnchantedBookItem.addEnchantment(soulHarvestingI, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 1));
-            EnchantedBookItem.addEnchantment(soulHarvestingII, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 2));
-            EnchantedBookItem.addEnchantment(soulHarvestingIII, new EnchantmentInstance(ModEnchantments.SOUL_HARVESTING.get(), 3));
+            List<ItemStack> soulHarvesting = getEnchantedBooks(ModEnchantments.SOUL_HARVESTING.get());
+            List<ItemStack> aerodynamics = getEnchantedBooks(ModEnchantments.AERODYNAMICS.get());
 
             if (event.getTab() == ModCreativeTab.TAB_TELLURIUMSRANDOMSTUFF.get()) {
                 event.accept(ModBlocks.GRATE_MAGMA_BLOCK);
@@ -57,9 +58,7 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.SOUL_OBSIDIAN);
                 event.accept(ModBlocks.SOUL_ANCHOR);
                 event.accept(ModItems.MYSTIC_POTATO);
-                event.accept(soulHarvestingI);
-                event.accept(soulHarvestingII);
-                event.accept(soulHarvestingIII);
+                event.acceptAll(soulHarvesting);
                 event.accept(ModBlocks.OPAL);
                 event.accept(ModBlocks.OPAL_COBBLESTONE);
                 event.accept(ModBlocks.OPAL_BRICKS);
@@ -147,7 +146,19 @@ public class ModCreativeTab {
                 event.accept(ModItems.SOUL_IRON_ROD);
                 event.accept(ModBlocks.ALCHEMIXER);
                 event.accept(ModItems.GRAPPLING_HOOK);
+                event.acceptAll(aerodynamics);
             }
+        }
+
+        private static List<ItemStack> getEnchantedBooks(Enchantment enchantment) {
+            List<ItemStack> books = new ArrayList<>();
+            ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
+            for (int i = 1; i <= enchantment.getMaxLevel(); i++) {
+                ItemStack instance = book.copy();
+                EnchantedBookItem.addEnchantment(instance, new EnchantmentInstance(enchantment, i));
+                books.add(instance);
+            }
+            return books;
         }
     }
 
