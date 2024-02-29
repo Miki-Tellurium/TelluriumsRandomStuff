@@ -6,6 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.GrapplingHookSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -235,16 +236,16 @@ public class GrapplingHookEntity extends Projectile {
         Vec3 vec3 = playerPos.vectorTo(this.position());
         Vec3 normal = vec3.normalize();
 
-        double lengthMul = Math.sqrt(vec3.length()) * 0.125D;
-        double launchFactor = 6.0D * lengthMul;
-        double horizontalFactor = launchFactor * 1.2D;
-        double verticalFactor = launchFactor * 0.75D;
+        double length = Math.sqrt(vec3.length()) * 0.125D;
+        double strength = 6.0D * length;
+        double horizontal = strength * 1.25D;
+        double vertical = strength * 0.75D;
 
-        Vec3 newVec = normal.multiply(horizontalFactor, verticalFactor, horizontalFactor).add(0, lengthMul, 0);
+        Vec3 vec31 = normal.multiply(horizontal, vertical, horizontal).add(0, length, 0);
         if (player.isUnderWater()) {
-            newVec = newVec.scale(0.6D);
+            vec31 = vec31.scale(0.6D);
         }
-        player.push(newVec.x, newVec.y, newVec.z);
+        player.push(vec31.x, vec31.y, vec31.z);
         if (player.onGround()) {
             player.move(MoverType.SELF, new Vec3(0.0D, 1.2F, 0.0D));
         }
