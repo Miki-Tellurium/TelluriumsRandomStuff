@@ -234,21 +234,26 @@ public class GrapplingHookEntity extends Projectile {
         Player player = this.getPlayerOwner();
         Vec3 playerPos = player.getEyePosition();
         Vec3 vec3 = playerPos.vectorTo(this.position());
-        Vec3 normal = vec3.normalize();
+        Vec3 normalY = vec3.normalize();
+        Vec3 normalXZ = new Vec3(vec3.x, 0, vec3.z).normalize();
 
         double length = Math.sqrt(vec3.length()) * 0.125D;
         double strength = 6.0D * length;
-        double horizontal = strength * 1.25D;
+        double horizontalX = strength * 1.25D;
         double vertical = strength * 0.75D;
+        double horizontalZ = strength * 1.25D;
 
-        Vec3 vec31 = normal.multiply(horizontal, vertical, horizontal).add(0, length, 0);
+        double maxHorizontalLength = Math.max(Math.abs(horizontalX), Math.abs(horizontalZ));
+        double scale = maxHorizontalLength / Math.sqrt(horizontalX * horizontalX + horizontalZ * horizontalZ);
+
+        double adjustedX = horizontalX * scale;
+        double adjustedZ = horizontalZ * scale;
+
+        Vec3 vec31 = new Vec3(normalXZ.x, normalY.y, normalXZ.z).multiply(adjustedX, vertical, adjustedZ).add(0, length, 0);
         if (player.isUnderWater()) {
             vec31 = vec31.scale(0.6D);
         }
         player.push(vec31.x, vec31.y, vec31.z);
-        if (player.onGround()) {
-            player.move(MoverType.SELF, new Vec3(0.0D, 1.2F, 0.0D));
-        }
         player.hurtMarked = true;
         this.playSound(player, SoundEvents.TRIDENT_RIPTIDE_1, 1.0F, 0.9F / (this.random.nextFloat() * 0.2F + 0.8F), true);
     }
