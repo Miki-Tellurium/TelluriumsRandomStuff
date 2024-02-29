@@ -7,6 +7,8 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
+import com.mojang.blaze3d.platform.InputConstants;
+import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -98,7 +100,10 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
                 .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
         builder.addSlot(RecipeIngredientRole.CATALYST, 120, suggestionRenderY + 63)
                 .addIngredient(ModIngredientTypes.BLOCK_STATE, recipe.getCauldron());
+
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(Items.LAVA_BUCKET));
+        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(ModBlocks.INFUSED_SOUL_SAND.get()));
+        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(Blocks.CAULDRON));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 1000);
     }
