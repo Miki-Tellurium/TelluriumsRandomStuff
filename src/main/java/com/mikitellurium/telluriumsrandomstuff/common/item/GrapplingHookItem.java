@@ -35,7 +35,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
     public GrapplingHookItem() {
         super(new Item.Properties()
                 .stacksTo(1)
-                .defaultDurability(256));
+                .defaultDurability(200));
     }
 
     @Override
