@@ -6,7 +6,6 @@ import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.GrapplingHookSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +22,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
@@ -131,42 +129,17 @@ public class GrapplingHookEntity extends Projectile {
                     this.startFalling();
                 }
             } else if (this.currentState == HookState.FLYING) {
-                Vec3 movVec = this.getDeltaMovement();
-                Vec3 posVec = this.position();
-                Vec3 vec3 = posVec.add(movVec);
-                HitResult hitResult = this.level().clip(new ClipContext(posVec, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
-                if (hitResult.getType() != HitResult.Type.MISS) {
-                    vec3 = hitResult.getLocation();
-                }
+                this.checkCollision();
 
-                EntityHitResult entityHitResult = this.findHitEntity(posVec, vec3);
-                if (entityHitResult != null) {
-                    hitResult = entityHitResult;
-                }
-
-                if (hitResult.getType() == HitResult.Type.ENTITY) {
-                    Entity hitEntity = ((EntityHitResult) hitResult).getEntity();
-                    if (hitEntity instanceof Player && !player.canHarmPlayer((Player) hitEntity)) {
-                        hitResult = null;
-                    }
-                }
-
-                if (hitResult != null && hitResult.getType() != HitResult.Type.MISS) {
-                    if (!ForgeEventFactory.onProjectileImpact(this, hitResult)) {
-                        this.onHit(hitResult);
-                        this.hasImpulse = true;
-                    }
-                }
-
-                movVec = this.getDeltaMovement();
-                double vecX = movVec.x;
-                double vecY = movVec.y;
-                double vecZ = movVec.z;
+                Vec3 vec3 = this.getDeltaMovement();
+                double vecX = vec3.x;
+                double vecY = vec3.y;
+                double vecZ = vec3.z;
 
                 double newX = this.getX() + vecX;
                 double newY = this.getY() + vecY;
                 double newZ = this.getZ() + vecZ;
-                double distance = movVec.horizontalDistance();
+                double distance = vec3.horizontalDistance();
 
                 this.setYRot((float)(Mth.atan2(vecX, vecZ) * (double)(180F / (float)Math.PI)));
                 this.setXRot((float)(Mth.atan2(vecY, distance) * (double)(180F / (float)Math.PI)));
@@ -181,7 +154,7 @@ public class GrapplingHookEntity extends Projectile {
                     f = this.getWaterInertia();
                 }
 
-                this.setDeltaMovement(movVec.scale(f));
+                this.setDeltaMovement(vec3.scale(f));
                 if (!this.isNoGravity()) {
                     Vec3 vec31 = this.getDeltaMovement();
                     this.setDeltaMovement(vec31.x, vec31.y - (double) 0.05F, vec31.z);
@@ -320,9 +293,11 @@ public class GrapplingHookEntity extends Projectile {
         return 0.6F;
     }
 
-    protected EntityHitResult findHitEntity(Vec3 start, Vec3 end) {
-        return ProjectileUtil.getEntityHitResult(this.level(), this, start, end,
-                this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), this::canHitEntity);
+    private void checkCollision() {
+        HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+        if (hitresult.getType() == HitResult.Type.MISS || !ForgeEventFactory.onProjectileImpact(this, hitresult)) {
+            this.onHit(hitresult);
+        }
     }
 
     private void setHookedEntity(@Nullable Entity entity) {
