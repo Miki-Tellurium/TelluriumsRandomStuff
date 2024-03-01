@@ -123,7 +123,8 @@ public class JeiIntegration implements IModPlugin {
                 ModItems.SOUL_INFUSED_IRON_BOOTS.get().getDefaultInstance(),
                 ModItems.SOUL_INFUSED_IRON_LEGGINGS.get().getDefaultInstance(),
                 ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_HELMET.get().getDefaultInstance()),recipeFactory));
+                ModItems.SOUL_INFUSED_IRON_HELMET.get().getDefaultInstance(),
+                ModItems.GRAPPLING_HOOK.get().getDefaultInstance()),recipeFactory));
     }
 
     @Override
