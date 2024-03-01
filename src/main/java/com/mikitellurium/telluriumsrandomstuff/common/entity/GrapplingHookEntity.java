@@ -28,7 +28,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,6 +42,8 @@ public class GrapplingHookEntity extends Projectile {
     private static final EntityDataAccessor<Integer> DATA_HOOKED_ENTITY =
             SynchedEntityData.defineId(GrapplingHookEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> IS_FOIL =
+            SynchedEntityData.defineId(GrapplingHookEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_RETRIEVING =
             SynchedEntityData.defineId(GrapplingHookEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Nullable
@@ -69,6 +70,7 @@ public class GrapplingHookEntity extends Projectile {
     protected void defineSynchedData() {
         this.entityData.define(DATA_HOOKED_ENTITY, 0);
         this.entityData.define(IS_FOIL, false);
+        this.entityData.define(IS_RETRIEVING, false);
     }
 
     public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
@@ -127,6 +129,8 @@ public class GrapplingHookEntity extends Projectile {
             if (this.isStuckInBlock()) {
                 if (this.lastState != blockState && this.shouldFall()) {
                     this.startFalling();
+                } else if (this.entityData.get(IS_RETRIEVING)) {
+                    this.launchOwner();
                 }
             } else if (this.currentState == HookState.FLYING) {
                 this.checkCollision();
@@ -169,15 +173,24 @@ public class GrapplingHookEntity extends Projectile {
     public int retrieve(boolean isCrouching) {
         int damage = 1;
         if (!isCrouching) {
+
             if (this.isHookedOnEntity()) {
                 this.pullEntity();
                 damage = 2;
             } else if (this.isStuckInBlock()) {
-                this.launchOwner();
-                damage = 2;
+                if (this.isRetrieving()) {
+                    this.discard();
+                    damage = 0;
+                } else {
+                    this.setRetrieving(true);
+                    damage = 2;
+                    this.playSound(this.getPlayerOwner(), SoundEvents.TRIDENT_RIPTIDE_1, 1.0F, 0.9F / (this.random.nextFloat() * 0.2F + 0.8F), true);
+                }
+                return damage;
             } else {
                 this.playSound(this.getPlayerOwner(), SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
             }
+
         } else {
             this.playSound(this.getPlayerOwner(), SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
         }
@@ -205,30 +218,18 @@ public class GrapplingHookEntity extends Projectile {
 
     private void launchOwner() {
         Player player = this.getPlayerOwner();
-        Vec3 playerPos = player.getEyePosition();
+        Vec3 playerPos = player.getEyePosition().subtract(0 , 0.4D, 0);
         Vec3 vec3 = playerPos.vectorTo(this.position());
-        Vec3 normalY = vec3.normalize();
-        Vec3 normalXZ = new Vec3(vec3.x, 0, vec3.z).normalize();
-
-        double length = Math.sqrt(vec3.length()) * 0.125D;
-        double strength = 6.0D * length;
-        double horizontalX = strength * 1.25D;
-        double vertical = strength * 0.75D;
-        double horizontalZ = strength * 1.25D;
-
-        double maxHorizontalLength = Math.max(Math.abs(horizontalX), Math.abs(horizontalZ));
-        double scale = maxHorizontalLength / Math.sqrt(horizontalX * horizontalX + horizontalZ * horizontalZ);
-
-        double adjustedX = horizontalX * scale;
-        double adjustedZ = horizontalZ * scale;
-
-        Vec3 vec31 = new Vec3(normalXZ.x, normalY.y, normalXZ.z).multiply(adjustedX, vertical, adjustedZ).add(0, length, 0);
+        Vec3 normal = vec3.normalize();
+        double height = Math.abs(1.0D - normal.y) * 0.04D;
+        Vec3 vec31 = normal.scale(0.3D).add(0, height, 0);
         if (player.isUnderWater()) {
-            vec31 = vec31.scale(0.6D);
+            vec31 = vec31.scale(0.4D);
         }
         player.push(vec31.x, vec31.y, vec31.z);
+        player.fallDistance *= 0.92F; // Reduce fall damage
         player.hurtMarked = true;
-        this.playSound(player, SoundEvents.TRIDENT_RIPTIDE_1, 1.0F, 0.9F / (this.random.nextFloat() * 0.2F + 0.8F), true);
+        if (this.position().distanceTo(player.position()) < 2.5D) this.discard();
     }
 
     @Override
@@ -317,6 +318,14 @@ public class GrapplingHookEntity extends Projectile {
 
     public boolean isFoil() {
         return this.entityData.get(IS_FOIL);
+    }
+
+    public void setRetrieving(boolean retrieving) {
+        this.entityData.set(IS_RETRIEVING, retrieving);
+    }
+
+    public boolean isRetrieving() {
+        return this.entityData.get(IS_RETRIEVING);
     }
 
     @Override
