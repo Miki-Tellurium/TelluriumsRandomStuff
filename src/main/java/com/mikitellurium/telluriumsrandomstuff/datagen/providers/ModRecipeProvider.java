@@ -575,7 +575,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("#x#")
                 .pattern("###")
                 .define('#', Blocks.CRYING_OBSIDIAN)
-                .define('x', ModItems.SOUL_FRAGMENT.get())
+                .define('x', ModItems.SOUL_CLUSTER.get())
                 .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
                 .unlockedBy("has_crying_obsidian", has(Blocks.CRYING_OBSIDIAN))
                 .save(consumer, modLoc("soul_obsidian"));

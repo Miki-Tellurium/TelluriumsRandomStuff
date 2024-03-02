@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 @Mod(TelluriumsRandomStuffMod.MOD_ID)
 public class TelluriumsRandomStuffMod {
 
-    // todo rei and mei compatibility
+    // todo rei and emi compatibility
     // todo update changelog
     // todo add armor trims
 
