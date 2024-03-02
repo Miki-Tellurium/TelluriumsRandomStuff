@@ -66,6 +66,11 @@ minecraft {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+mixin {
+    add sourceSets.main, 'telluriumsrandomstuff.refmap.json'
+    config 'mixins.telluriumsrandomstuff.json'
+}
+
 repositories {
 
     maven {
@@ -76,12 +81,18 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
-
-}
-
-mixin {
-    add sourceSets.main, 'telluriumsrandomstuff.refmap.json'
-    config 'mixins.telluriumsrandomstuff.json'
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        forRepositories(fg.repository)
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 dependencies {
