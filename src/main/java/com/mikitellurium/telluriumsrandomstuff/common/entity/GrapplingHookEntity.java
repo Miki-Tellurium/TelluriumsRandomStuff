@@ -198,24 +198,6 @@ public class GrapplingHookEntity extends Projectile {
         return damage;
     }
 
-    private void pullEntity() {
-        Entity entity = this.hookedEntity;
-        Entity owner = this.getOwner();
-        if (owner != null) {
-            double vecX = owner.getX() - this.getX();
-            double vecY = owner.getY() - this.getY();
-            double vecZ = owner.getZ() - this.getZ();
-            double angle = Math.sqrt(Math.sqrt(vecX * vecX + vecY * vecY + vecZ * vecZ)) * 0.08D;
-            double scale = entity instanceof ItemEntity ? 0.1D : 0.2D;
-            Vec3 vec3 = new Vec3(vecX * scale, vecY * 0.1D + angle, vecZ * scale);
-            entity.setDeltaMovement(vec3);
-            if (entity instanceof Player) {
-                entity.hurtMarked = true;
-            }
-            this.playSound(owner, SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
-        }
-    }
-
     private void launchOwner() {
         Player player = this.getPlayerOwner();
         Vec3 playerPos = player.getEyePosition().subtract(0 , 0.4D, 0);
@@ -227,9 +209,30 @@ public class GrapplingHookEntity extends Projectile {
             vec31 = vec31.scale(0.4D);
         }
         player.push(vec31.x, vec31.y, vec31.z);
-        player.fallDistance *= 0.92F; // Reduce fall damage
+        player.fallDistance *= 0.92F;
         player.hurtMarked = true;
         if (this.position().distanceTo(player.position()) < 2.5D) this.discard();
+    }
+
+    private void pullEntity() {
+        Entity entity = this.hookedEntity;
+        Entity owner = this.getOwner();
+        if (owner != null) {
+            double vecX = owner.getX() - this.getX();
+            double vecY = owner.getY() - this.getY();
+            double vecZ = owner.getZ() - this.getZ();
+            double angle = Math.sqrt(Math.sqrt(vecX * vecX + vecY * vecY + vecZ * vecZ)) * 0.08D;
+            double scale = entity instanceof ItemEntity ? 0.1D : 0.2D;
+            Vec3 vec3 = new Vec3(vecX * scale, vecY * 0.1D + angle, vecZ * scale);
+            if (entity.isUnderWater()) {
+                vec3 = vec3.scale(0.6D);
+            }
+            entity.setDeltaMovement(vec3);
+            if (entity instanceof Player) {
+                entity.hurtMarked = true;
+            }
+            this.playSound(owner, SoundEvents.FISHING_BOBBER_RETRIEVE, 2.0F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F), false);
+        }
     }
 
     @Override
