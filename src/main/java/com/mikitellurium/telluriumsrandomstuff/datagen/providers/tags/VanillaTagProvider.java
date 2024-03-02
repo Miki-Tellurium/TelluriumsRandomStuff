@@ -8,6 +8,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -192,6 +193,14 @@ public class VanillaTagProvider {
             this.tag(BlockTags.SMALL_FLOWERS)
                     .add(ModBlocks.BRIGHT_TORCHFLOWER.get())
                     .add(ModBlocks.SOUL_TORCHFLOWER.get());
+
+            this.tag(BlockTags.PIGLIN_REPELLENTS)
+                    .add(ModBlocks.SOUL_JACK_O_LANTERN.get())
+                    .add(ModBlocks.SOUL_TORCHFLOWER.get())
+                    .add(ModBlocks.SOUL_LAVA_BLOCK.get())
+                    .add(ModBlocks.SOUL_MAGMA_BLOCK.get())
+                    .add(ModBlocks.SOUL_MAGMA_BRICKS.get())
+                    .add(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get());
         }
     }
 
@@ -235,6 +244,14 @@ public class VanillaTagProvider {
                     .add(ModItems.SOUL_INFUSED_IRON_LEGGINGS.get())
                     .add(ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get())
                     .add(ModItems.SOUL_INFUSED_IRON_HELMET.get());
+
+            this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
+                    .add(ModItems.OPAL_CRYSTAL.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+
+            this.tag(ItemTags.VILLAGER_PLANTABLE_SEEDS)
+                    .add(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get())
+                    .add(ModItems.SOUL_TORCHFLOWER_SEEDS.get());
 
             this.copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
             this.copy(BlockTags.STONE_BUTTONS, ItemTags.STONE_BUTTONS);
