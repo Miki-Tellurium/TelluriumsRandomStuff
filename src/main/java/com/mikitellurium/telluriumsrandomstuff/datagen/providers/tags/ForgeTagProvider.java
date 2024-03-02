@@ -34,7 +34,7 @@ public class ForgeTagProvider {
                     .add(ModBlocks.OPAL.get());
 
             this.tag(Tags.Blocks.COBBLESTONE)
-                    .add(ModBlocks.OPAL_COBBLESTONE_SLAB.get());
+                    .add(ModBlocks.OPAL_COBBLESTONE.get());
 
             this.tag(Tags.Blocks.COBBLESTONE_NORMAL)
                     .add(ModBlocks.OPAL_COBBLESTONE.get());
@@ -70,7 +70,8 @@ public class ForgeTagProvider {
                     .add(ModItems.SOUL_INFUSED_IRON_PICKAXE.get())
                     .add(ModItems.SOUL_INFUSED_IRON_AXE.get())
                     .add(ModItems.SOUL_INFUSED_IRON_SHOVEL.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_HOE.get());
+                    .add(ModItems.SOUL_INFUSED_IRON_HOE.get())
+                    .add(ModItems.GRAPPLING_HOOK.get());
 
             this.tag(Tags.Items.ARMORS)
                     .add(ModItems.SOUL_INFUSED_IRON_BOOTS.get())
@@ -101,6 +102,12 @@ public class ForgeTagProvider {
 
             this.tag(Tags.Items.INGOTS)
                     .add(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+
+            this.tag(Tags.Items.RODS)
+                    .add(ModItems.SOUL_IRON_ROD.get());
+
+            this.copy(Tags.Blocks.COBBLESTONE, Tags.Items.COBBLESTONE);
+            this.copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
         }
     }
 

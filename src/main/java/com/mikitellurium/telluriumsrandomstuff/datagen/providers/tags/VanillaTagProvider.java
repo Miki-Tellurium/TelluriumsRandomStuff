@@ -144,6 +144,7 @@ public class VanillaTagProvider {
 
             this.tag(BlockTags.SOUL_FIRE_BASE_BLOCKS)
                     .add(ModBlocks.GRATE_SOUL_SAND.get())
+                    .add(ModBlocks.INFUSED_SOUL_SAND.get())
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())
                     .add(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICKS.get())
@@ -190,6 +191,10 @@ public class VanillaTagProvider {
                     .add(ModBlocks.BRIGHT_TORCHFLOWER_CROP.get())
                     .add(ModBlocks.SOUL_TORCHFLOWER_CROP.get());
 
+            this.tag(BlockTags.FLOWERS)
+                    .add(ModBlocks.BRIGHT_TORCHFLOWER.get())
+                    .add(ModBlocks.SOUL_TORCHFLOWER.get());
+
             this.tag(BlockTags.SMALL_FLOWERS)
                     .add(ModBlocks.BRIGHT_TORCHFLOWER.get())
                     .add(ModBlocks.SOUL_TORCHFLOWER.get());
@@ -197,7 +202,7 @@ public class VanillaTagProvider {
             this.tag(BlockTags.PIGLIN_REPELLENTS)
                     .add(ModBlocks.SOUL_JACK_O_LANTERN.get())
                     .add(ModBlocks.SOUL_TORCHFLOWER.get())
-                    .add(ModBlocks.SOUL_LAVA_BLOCK.get())
+                    //.add(ModBlocks.SOUL_LAVA_BLOCK.get())
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICKS.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get());
@@ -213,6 +218,19 @@ public class VanillaTagProvider {
 
         @Override
         protected void addTags(HolderLookup.Provider provider) {
+            this.tag(ItemTags.TOOLS)
+                    .add(ModItems.OPAL_CRYSTAL_SWORD.get())
+                    .add(ModItems.OPAL_CRYSTAL_PICKAXE.get())
+                    .add(ModItems.OPAL_CRYSTAL_AXE.get())
+                    .add(ModItems.OPAL_CRYSTAL_SWORD.get())
+                    .add(ModItems.OPAL_CRYSTAL_HOE.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_SWORD.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_PICKAXE.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_AXE.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_SHOVEL.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_HOE.get())
+                    .add(ModItems.GRAPPLING_HOOK.get());
+
             this.tag(ItemTags.AXES)
                     .add(ModItems.OPAL_CRYSTAL_AXE.get())
                     .add(ModItems.SOUL_INFUSED_IRON_AXE.get());
@@ -260,6 +278,10 @@ public class VanillaTagProvider {
             this.copy(BlockTags.STAIRS, ItemTags.STAIRS);
             this.copy(BlockTags.STONE_BRICKS, ItemTags.STONE_BRICKS);
             this.copy(BlockTags.WALLS, ItemTags.WALLS);
+            this.copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
+            this.copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
+            this.copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS);
+            this.copy(BlockTags.SOUL_FIRE_BASE_BLOCKS, ItemTags.SOUL_FIRE_BASE_BLOCKS);
         }
     }
 
