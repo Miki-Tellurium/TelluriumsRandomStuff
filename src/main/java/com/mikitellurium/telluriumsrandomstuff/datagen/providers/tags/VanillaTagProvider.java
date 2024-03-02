@@ -230,6 +230,12 @@ public class VanillaTagProvider {
             this.tag(ItemTags.STONE_TOOL_MATERIALS)
                     .add(ModBlocks.OPAL_COBBLESTONE.get().asItem());
 
+            this.tag(ItemTags.TRIMMABLE_ARMOR)
+                    .add(ModItems.SOUL_INFUSED_IRON_BOOTS.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_LEGGINGS.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get())
+                    .add(ModItems.SOUL_INFUSED_IRON_HELMET.get());
+
             this.copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
             this.copy(BlockTags.STONE_BUTTONS, ItemTags.STONE_BUTTONS);
             this.copy(BlockTags.RAILS, ItemTags.RAILS);

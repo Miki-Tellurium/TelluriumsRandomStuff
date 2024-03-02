@@ -25,7 +25,7 @@ public class TelluriumsRandomStuffMod {
 
     // todo rei and mei compatibility
     // todo update changelog
-    // todo opal armor trims
+    // todo add armor trims
 
     public static final String MOD_ID = "telluriumsrandomstuff";
     public static final Logger LOGGER = LogUtils.getLogger();

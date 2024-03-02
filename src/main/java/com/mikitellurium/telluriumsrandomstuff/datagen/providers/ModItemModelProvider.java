@@ -3,14 +3,38 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
+import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ModItemModelProvider extends ItemModelProvider {
+
+    private static final Map<String, Float> TRIM_MATERIALS = Util.make(new HashMap<>(), (map) -> {
+                map.put("quartz", 0.1F);
+                map.put("iron", 0.2F);
+                map.put("netherite", 0.3F);
+                map.put("redstone", 0.4F);
+                map.put("copper", 0.5F);
+                map.put("gold", 0.6F );
+                map.put("emerald", 0.7F);
+                map.put("diamond", 0.8F);
+                map.put("lapis", 0.9F );
+                map.put("amethyst", 1.0F);
+    });
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, FastLoc.modId(), existingFileHelper);
@@ -46,7 +70,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleItem(ModItems.SMALL_SOUL_FRAGMENT);
         this.simpleItem(ModItems.SOUL_FRAGMENT);
         this.simpleItem(ModItems.SOUL_CLUSTER);
-        //this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
         this.withExistingParent(ModItems.GRAPPLING_HOOK.getId().getPath() + "_string_inventory", mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/grappling_hook_string"));
         this.withExistingParent(ModItems.GRAPPLING_HOOK.getId().getPath(), modLoc("item/grappling_hook_handheld"))
@@ -100,5 +123,24 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer1", modLoc("item/" + overlay + "2"))
                 .texture("layer2", modLoc("item/" + handle));
     }
+
+//    private void trimmableArmor(RegistryObject<Item> armor) {
+//        String id = armor.getId().getPath();
+//        String type = ((ArmorItem)armor.get()).getType().getName();
+//        ItemModelBuilder builder = this.withExistingParent(id, mcLoc("item/generated"))
+//                .texture("layer0", modLoc("item/" + id));
+//        TRIM_MATERIALS.forEach((key, index) -> {
+//            builder.override()
+//                    .predicate(mcLoc("trim_type"), index)
+//                    .model(this.trimModel(id, type, key))
+//                    .end();
+//        });
+//    }
+//
+//    private ModelFile trimModel(String id, String type, String trimMaterial) {
+//        return this.withExistingParent(id + "_" + trimMaterial + "_trim", mcLoc("item/generated"))
+//                .texture("layer0", modLoc("item/" + id))
+//                .texture("layer1", mcLoc("trims/items/" + type + "_trim"));
+//    }
 
 }
