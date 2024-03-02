@@ -74,9 +74,14 @@ mixin {
 repositories {
 
     maven {
-        // JEI
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
+    }
+    maven {
+        url "https://maven.shedaniel.me/"
+    }
+    maven {
+        url "https://maven.architectury.dev/"
     }
     maven {
         url "https://cursemaven.com"
@@ -101,7 +106,14 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    implementation fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+
+    runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
+    compileOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-api-forge:${rei_version}")
+    compileOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-default-plugin-forge:${rei_version}")
+
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
+    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 
     //implementation fg.deobf("maven.modrinth:trimmed:${trimmed_version}")
 }
