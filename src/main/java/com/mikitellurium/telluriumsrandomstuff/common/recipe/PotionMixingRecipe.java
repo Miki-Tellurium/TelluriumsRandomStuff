@@ -2,7 +2,6 @@ package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
 import com.mikitellurium.telluriumsrandomstuff.api.MobEffectUpgradeManager;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
-import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgradeType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -58,6 +57,7 @@ public record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) 
         List<MobEffectInstance> firstPotionEffects = PotionUtils.getMobEffects(this.firstPotion);
         List<MobEffectInstance> secondPotionEffects = PotionUtils.getMobEffects(this.secondPotion);
 
+        // Check if the two potions have one or more of the same mob effect and if they do upgrade the effect
         for (MobEffectInstance effect : firstPotionEffects) {
             MobEffect effectType = effect.getEffect();
             Optional<MobEffectInstance> matchingInstance = secondPotionEffects.stream()
@@ -66,7 +66,7 @@ public record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) 
 
             if (matchingInstance.isPresent()) {
                 MobEffectInstance instance = matchingInstance.get();
-                mobEffects.add(MobEffectUpgradeManager.getCategory(effectType).getMixedInstance(effect, instance));
+                mobEffects.add(MobEffectUpgradeManager.getCategory(effectType).getUpgradedInstance(effect, instance));
             } else {
                 mobEffects.add(effect);
             }
@@ -75,7 +75,6 @@ public record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) 
         secondPotionEffects.stream()
                 .filter(instance -> firstPotionEffects.stream().noneMatch(e -> e.getEffect() == instance.getEffect()))
                 .forEach(mobEffects::add);
-
         return mobEffects;
     }
 

@@ -28,7 +28,7 @@ public enum MobEffectUpgradeType implements IExtensibleEnum {
         this.getMixedInstance = getMixedInstance;
     }
 
-    public MobEffectInstance getMixedInstance(MobEffectInstance firstInstance, MobEffectInstance secondInstance) {
+    public MobEffectInstance getUpgradedInstance(MobEffectInstance firstInstance, MobEffectInstance secondInstance) {
         return this.getMixedInstance.apply(firstInstance, secondInstance);
     }
 
