@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.fluid;
 
-import com.mikitellurium.telluriumsrandomstuff.util.BaseFluidType;
+import com.mikitellurium.telluriumsrandomstuff.lib.BaseFluidType;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;

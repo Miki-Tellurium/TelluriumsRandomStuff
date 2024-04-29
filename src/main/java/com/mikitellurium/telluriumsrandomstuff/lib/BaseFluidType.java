@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.util;
+package com.mikitellurium.telluriumsrandomstuff.lib;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;

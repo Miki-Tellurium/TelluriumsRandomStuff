@@ -1,12 +1,8 @@
-package com.mikitellurium.telluriumsrandomstuff.util;
+package com.mikitellurium.telluriumsrandomstuff.lib;
 
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;

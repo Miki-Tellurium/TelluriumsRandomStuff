@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.util;
+package com.mikitellurium.telluriumsrandomstuff.lib;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;

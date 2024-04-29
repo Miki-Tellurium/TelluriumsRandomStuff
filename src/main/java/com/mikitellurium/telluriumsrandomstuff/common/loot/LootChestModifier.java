@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.loot;
 
 import com.google.common.base.Suppliers;
+import com.mikitellurium.telluriumsrandomstuff.lib.ModLootModifier;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

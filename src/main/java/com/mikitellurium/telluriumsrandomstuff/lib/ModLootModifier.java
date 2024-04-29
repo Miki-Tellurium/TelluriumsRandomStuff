@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.loot;
+package com.mikitellurium.telluriumsrandomstuff.lib;
 
 import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

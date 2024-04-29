@@ -1,17 +1,15 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
-import com.google.common.base.Suppliers;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
-import com.mikitellurium.telluriumsrandomstuff.util.MappedItemStackHandler;
-import com.mikitellurium.telluriumsrandomstuff.util.WrappedHandler;
+import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;
+import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
