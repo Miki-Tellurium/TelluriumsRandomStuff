@@ -19,7 +19,7 @@ public class ModToolTiers {
 
     public static final Tier INFUSED_IRON = TierSortingRegistry.registerTier(
             new ForgeTier(2, 500, 6.0F, 2.5F, 20,
-                    BlockTags.NEEDS_IRON_TOOL, () -> Ingredient.of(ModItems.OPAL_CRYSTAL.get())),
+                    ModTags.Blocks.NEEDS_SOUL_INFUSED_IRON_TOOL, () -> Ingredient.of(ModItems.SOUL_INFUSED_IRON_INGOT.get())),
             FastLoc.modLoc("infused_iron"), List.of(Tiers.IRON), List.of(Tiers.DIAMOND, OPAL_CRYSTAL));
 
 }
