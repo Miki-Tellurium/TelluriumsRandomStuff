@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
+import com.mikitellurium.telluriumsrandomstuff.api.MobEffectUpgradeManager;
 import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,6 +24,7 @@ public class Registries {
         ModCommonConfig.register();
         ModLootModifiers.register(modEventBus);
         ModLootItemFunctions.register(modEventBus);
+        MobEffectUpgradeManager.init();
     }
 
 }
