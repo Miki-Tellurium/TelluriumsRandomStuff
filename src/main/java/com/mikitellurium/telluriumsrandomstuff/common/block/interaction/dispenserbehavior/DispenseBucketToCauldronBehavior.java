@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block.interaction.dispenserbehavior;
 
-import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispenserBehaviours;
+import com.mikitellurium.telluriumsrandomstuff.api.DispenserCauldronInteractionManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
@@ -12,13 +12,11 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Map;
-
-public class DispenseCauldronBehavior extends DefaultDispenseItemBehavior {
+public class DispenseBucketToCauldronBehavior extends DefaultDispenseItemBehavior {
 
     private final SoundEvent bucketEmptySound;
 
-    public DispenseCauldronBehavior(SoundEvent bucketEmptySound) {
+    public DispenseBucketToCauldronBehavior(SoundEvent bucketEmptySound) {
         this.bucketEmptySound = bucketEmptySound;
     }
 
@@ -53,10 +51,10 @@ public class DispenseCauldronBehavior extends DefaultDispenseItemBehavior {
 
         if (blockState.getBlock() instanceof AbstractCauldronBlock &&
                 (itemStack.getItem() instanceof BucketItem || itemStack.getItem() instanceof SolidBucketItem)) {
-            Block resultCauldron = ModDispenserBehaviours.DISPENSER_CAULDRON_INTERACTIONS.get(itemStack.getItem());
+            Block resultCauldron = DispenserCauldronInteractionManager.getResultingCauldron(itemStack.getItem());
 
             if (resultCauldron instanceof CauldronBlock) {
-                ItemStack resultBucket = getBucket(blockState.getBlock());
+                ItemStack resultBucket = DispenserCauldronInteractionManager.getRemainderBucket(blockState.getBlock());
                 // If the cauldron is already empty do normal dispense
                 if (resultBucket.is(Items.BUCKET)) {
                     return this.vanillaDispenseItemBehavior.dispense(blockSource, itemStack);
@@ -89,17 +87,6 @@ public class DispenseCauldronBehavior extends DefaultDispenseItemBehavior {
     protected void playSound(BlockSource blockSource) {
         blockSource.getLevel().playSound(null, blockSource.getPos(), this.bucketEmptySound,
                 SoundSource.BLOCKS, 1.0f, 1.0f);
-    }
-
-    // Get the correct bucket to return
-    private ItemStack getBucket(Block cauldron) {
-        for (Map.Entry<Item, Block> entry : ModDispenserBehaviours.DISPENSER_CAULDRON_INTERACTIONS.entrySet()) {
-            if (entry.getValue().equals(cauldron)) {
-                return entry.getKey().getDefaultInstance();
-            }
-        }
-
-        return Items.BUCKET.getDefaultInstance();
     }
 
 }
