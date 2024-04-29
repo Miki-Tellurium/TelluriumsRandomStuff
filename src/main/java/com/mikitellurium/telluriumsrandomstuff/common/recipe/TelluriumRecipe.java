@@ -38,7 +38,7 @@ public abstract class TelluriumRecipe implements Recipe<Container> {
     }
 
     @Override
-    public abstract boolean matches(Container pContainer, Level pLevel);
+    public abstract boolean matches(Container container, Level level);
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
@@ -46,17 +46,17 @@ public abstract class TelluriumRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         return this.output.copy();
     }
 
     @Override
-    public boolean canCraftInDimensions(int pWidth, int pHeight) {
+    public boolean canCraftInDimensions(int width, int height) {
         return true;
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return this.output;
     }
 
