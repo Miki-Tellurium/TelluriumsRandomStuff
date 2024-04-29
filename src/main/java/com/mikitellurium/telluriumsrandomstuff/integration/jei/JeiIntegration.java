@@ -1,7 +1,10 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.*;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.*;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.category.*;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngredientHelper;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BlockStateRenderer;
@@ -19,8 +22,6 @@ import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredientType;
-import mezz.jei.api.ingredients.IIngredientTypeWithSubtypes;
 import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
@@ -34,12 +35,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ObjectHolder;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
