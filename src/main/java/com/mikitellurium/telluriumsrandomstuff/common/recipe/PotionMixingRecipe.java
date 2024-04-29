@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
-import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgrade;
+import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgradeType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -65,7 +65,7 @@ public record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) 
 
             if (matchingInstance.isPresent()) {
                 MobEffectInstance instance = matchingInstance.get();
-                mobEffects.add(MobEffectUpgrade.getCategory(effectType).getMixedInstance(effect, instance));
+                mobEffects.add(MobEffectUpgradeType.getCategory(effectType).getMixedInstance(effect, instance));
             } else {
                 mobEffects.add(effect);
             }

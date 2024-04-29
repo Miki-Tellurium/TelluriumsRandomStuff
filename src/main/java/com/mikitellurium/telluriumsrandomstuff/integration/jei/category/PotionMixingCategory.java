@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
-import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgrade;
+import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgradeType;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BrewingBubblesTickTimer;
@@ -109,7 +109,7 @@ public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixingCateg
 
     public static class Amplifier extends Recipe {
 
-        private final List<ItemStack> inputs = RecipeHelper.getPotionsByUpgradeType(MobEffectUpgrade.AMPLIFIER);
+        private final List<ItemStack> inputs = RecipeHelper.getPotionsByUpgradeType(MobEffectUpgradeType.AMPLIFIER);
         private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
             inputs.forEach((itemStack -> list.add(new PotionMixingRecipe(itemStack, itemStack).assemble())));
         });
@@ -137,7 +137,7 @@ public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixingCateg
 
     public static class Duration extends Recipe {
 
-        private final List<ItemStack> inputs =  RecipeHelper.getPotionsByUpgradeType(MobEffectUpgrade.DURATION);
+        private final List<ItemStack> inputs =  RecipeHelper.getPotionsByUpgradeType(MobEffectUpgradeType.DURATION);
         private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
             inputs.forEach((itemStack -> list.add(new PotionMixingRecipe(itemStack, itemStack).assemble())));
         });
