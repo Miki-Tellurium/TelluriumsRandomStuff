@@ -64,12 +64,12 @@ public class RecipeHelper {
     public static List<SoulFurnaceSmeltingRecipe> getConvertedVanillaRecipes(List<SmeltingRecipe> smeltingRecipes) {
         List<SoulFurnaceSmeltingRecipe> soulFurnaceRecipes = NonNullList.create();
         for (SmeltingRecipe recipe : smeltingRecipes) {
-            soulFurnaceRecipes.add(convert(recipe));
+            soulFurnaceRecipes.add(convertSmelting(recipe));
         }
         return soulFurnaceRecipes;
     }
 
-    private static SoulFurnaceSmeltingRecipe convert(SmeltingRecipe recipe) {
+    public static SoulFurnaceSmeltingRecipe convertSmelting(SmeltingRecipe recipe) {
         String itemId = ForgeRegistries.ITEMS.getDelegateOrThrow(recipe.getResultItem(RegistryAccess.EMPTY).getItem())
                 .key().location().getPath();
         ResourceLocation id = FastLoc.modLoc(itemId + "_from_soul_furnace_smelting");
