@@ -130,7 +130,7 @@ public class GrapplingHookEntity extends Projectile {
                 if (this.lastState != blockState && this.shouldFall()) {
                     this.startFalling();
                 } else if (this.entityData.get(IS_RETRIEVING)) {
-                    this.launchOwner();
+                    this.pullOwner();
                 }
             } else if (this.currentState == HookState.FLYING) {
                 this.checkCollision();
@@ -198,20 +198,22 @@ public class GrapplingHookEntity extends Projectile {
         return damage;
     }
 
-    private void launchOwner() {
+    private void pullOwner() {
         Player player = this.getPlayerOwner();
         Vec3 playerPos = player.getEyePosition().subtract(0 , 0.4D, 0);
         Vec3 vec3 = playerPos.vectorTo(this.position());
         Vec3 normal = vec3.normalize();
         double height = Math.abs(1.0D - normal.y) * 0.04D;
         Vec3 vec31 = normal.scale(0.3D).add(0, height, 0);
+        if (this.position().distanceTo(player.position()) < 2.5D) {
+            vec31 = vec31.scale(0.1D);
+        }
         if (player.isUnderWater()) {
             vec31 = vec31.scale(0.4D);
         }
         player.push(vec31.x, vec31.y, vec31.z);
         player.fallDistance *= 0.92F;
         player.hurtMarked = true;
-        if (this.position().distanceTo(player.position()) < 2.5D) this.discard();
     }
 
     private void pullEntity() {
