@@ -1,13 +1,36 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei;
 
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.SoulFurnaceSmeltingCategory;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulFurnaceSmeltingDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateRenderer;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import me.shedaniel.rei.api.client.entry.renderer.EntryRendererRegistry;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
+import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
+import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
+import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
+import me.shedaniel.rei.plugin.common.BuiltinPlugin;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 
 @REIPluginClient
 public class ReiClientIntegration implements REIClientPlugin {
+
+    @Override
+    public void registerCategories(CategoryRegistry registry) {
+        registry.add(new SoulFurnaceSmeltingCategory());
+
+        registry.addWorkstations(SoulFurnaceSmeltingCategory.ID, EntryStacks.of(ModBlocks.SOUL_FURNACE.get()));
+        registry.addWorkstations(BuiltinPlugin.SMELTING, EntryStacks.of(ModBlocks.SOUL_FURNACE.get()));
+    }
+
+    @Override
+    public void registerDisplays(DisplayRegistry registry) {
+        registry.registerFiller(SoulFurnaceSmeltingRecipe.class, SoulFurnaceSmeltingDisplay::new);
+        registry.registerFiller(SmeltingRecipe.class, SoulFurnaceSmeltingDisplay::new);
+    }
 
     @Override
     public void registerEntryRenderers(EntryRendererRegistry registry) {
