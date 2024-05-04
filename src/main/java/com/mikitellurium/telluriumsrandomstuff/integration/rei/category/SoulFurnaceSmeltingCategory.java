@@ -77,6 +77,8 @@ public class SoulFurnaceSmeltingCategory implements DisplayCategory<SoulFurnaceS
         return widgets;
     }
 
+
+
     @Override
     public int getDisplayWidth(SoulFurnaceSmeltingDisplay display) {
         return 120;
