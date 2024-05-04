@@ -50,7 +50,7 @@ public class SoulFurnaceSmeltingCategory implements DisplayCategory<SoulFurnaceS
         widgets.add(Widgets.createRecipeBase(recipeBounds));
 
         widgets.add(Widgets.createTexturedWidget(FastLoc.JEI_GUI_TEXTURE, startPoint.x, startPoint.y + 1,
-                0, 0, 120, 71, 256, 256));
+                0, 0, this.getDisplayWidth(display), this.getDisplayHeight(), 256, 256));
 
         widgets.add(new SoulBurningFireWidget(
                 new Rectangle(new Point(startPoint.x + 37, startPoint.y + 44), new Dimension(14, 14)))

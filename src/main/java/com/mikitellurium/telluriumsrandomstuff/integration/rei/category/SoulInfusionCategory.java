@@ -52,7 +52,7 @@ public class SoulInfusionCategory implements DisplayCategory<SoulInfusionDisplay
         widgets.add(Widgets.createRecipeBase(recipeBounds));
 
         widgets.add(Widgets.createTexturedWidget(FastLoc.JEI_GUI_TEXTURE, startPoint.x, startPoint.y + 1,
-                0, 72, 129, 71, 256, 256));
+                0, 72, this.getDisplayWidth(display), this.getDisplayHeight(), 256, 256));
 
         widgets.add(new CustomArrowWidget(FastLoc.GUI_ELEMENTS_TEXTURE, new Point(startPoint.x + 39, startPoint.y + 28),
                 new Rectangle(0, 17, 55, 18))
