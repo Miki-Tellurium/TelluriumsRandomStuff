@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.rei.display;
 
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.SoulFurnaceSmeltingCategory;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.ModDisplayCategories;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.DisplaySerializer;
@@ -34,7 +35,7 @@ public class SoulFurnaceSmeltingDisplay extends SoulLavaDisplay {
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return SoulFurnaceSmeltingCategory.ID;
+        return ModDisplayCategories.SOUL_FURNACE_SMELTING;
     }
 
     public static DisplaySerializer<SoulFurnaceSmeltingDisplay> serializer() {
