@@ -39,7 +39,6 @@ public class SoulBurningFireWidget extends BurningFire {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        graphics.blit(FastLoc.JEI_GUI_TEXTURE, getX(), getY(), 37, 43, 14, 14);
         if (this.getAnimationDuration() > 0) {
             int height = 14 - Mth.ceil((System.currentTimeMillis() / (animationDuration / 14) % 14D));
             graphics.blit(FastLoc.GUI_ELEMENTS_TEXTURE, getX() - 1, getY() + 14 - height, 24, 14 - height,
