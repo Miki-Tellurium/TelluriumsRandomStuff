@@ -72,7 +72,7 @@ public class SoulFurnaceSmeltingCategory implements DisplayCategory<SoulFurnaceS
                 .entries(List.of(EntryStacks.of(ModItems.SOUL_LAVA_BUCKET.get())))
                 .disableBackground()
                 .markOutput());
-        SoulLavaTankWidget soulLavaTank = new SoulLavaTankWidget(startPoint.x + 4, startPoint.y + 3);
+        SoulLavaTankWidget soulLavaTank = new SoulLavaTankWidget(startPoint.x + 4, startPoint.y + 3, 4000, 4000);
         widgets.add(Widgets.withTooltip(soulLavaTank, soulLavaTank.getFluidTooltips(TooltipContext.ofMouse())));
 
         return widgets;

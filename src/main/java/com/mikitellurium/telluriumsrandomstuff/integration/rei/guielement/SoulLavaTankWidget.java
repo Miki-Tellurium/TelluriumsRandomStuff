@@ -27,9 +27,13 @@ import java.util.List;
 public class SoulLavaTankWidget extends BaseWidget<SoulLavaTankWidget> {
 
     private final Rectangle bounds;
+    private final int capacity;
+    private final int amount;
 
-    public SoulLavaTankWidget(int xPos, int yPos) {
+    public SoulLavaTankWidget(int xPos, int yPos, int capacity, int amount) {
         this.bounds = new Rectangle(new Point(xPos, yPos), new Dimension(16, 48));
+        this.capacity = capacity;
+        this.amount = amount;
     }
 
     @Override
@@ -39,8 +43,8 @@ public class SoulLavaTankWidget extends BaseWidget<SoulLavaTankWidget> {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        GuiFluidRenderer.drawBackground(graphics, bounds.x, bounds.y, new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 4000),
-                4000, bounds.width, bounds.height);
+        GuiFluidRenderer.drawBackground(graphics, bounds.x, bounds.y, new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), amount),
+                capacity, bounds.width, bounds.height);
         graphics.blit(FastLoc.GUI_ELEMENTS_TEXTURE, bounds.x, bounds.y, 72, 0, bounds.width, bounds.height);
     }
 
@@ -64,7 +68,7 @@ public class SoulLavaTankWidget extends BaseWidget<SoulLavaTankWidget> {
                 tooltip.add(advancedId);
             }
         }
-        MutableComponent amount = Component.literal("4000/4000 mB")
+        MutableComponent amount = Component.literal(this.amount + "/" + this.capacity + " mB")
                 .withStyle(ChatFormatting.GRAY);
         tooltip.add(amount);
 
