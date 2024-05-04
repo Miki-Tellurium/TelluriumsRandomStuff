@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei.util;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFuelScreen;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.SoulFurnaceSmeltingCategory;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import me.shedaniel.math.Point;
 import me.shedaniel.rei.api.client.registry.screen.ClickArea;
@@ -10,11 +9,26 @@ import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public class TooltiplessClickArea<T extends AbstractSoulFuelScreen<?>> implements ClickArea<T> {
+public class NoTooltipClickArea<T extends AbstractSoulFuelScreen<?>> implements ClickArea<T> {
+
+    private final List<CategoryIdentifier<?>> categories;
+
+    public NoTooltipClickArea(CategoryIdentifier<?> category) {
+        this(List.of(category));
+    }
+
+    public NoTooltipClickArea(CategoryIdentifier<?>... categories) {
+        this(List.of(categories));
+    }
+
+    public NoTooltipClickArea(List<CategoryIdentifier<?>> categories) {
+        this.categories = categories;
+    }
 
     @Override
     public Result handle(ClickAreaContext<T> context) {
@@ -58,7 +72,7 @@ public class TooltiplessClickArea<T extends AbstractSoulFuelScreen<?>> implement
 
             @Override
             public Stream<CategoryIdentifier<?>> getCategories() {
-                return Stream.of(SoulFurnaceSmeltingCategory.ID);
+                return NoTooltipClickArea.this.categories.stream();
             }
         } : Result.fail();
     }
