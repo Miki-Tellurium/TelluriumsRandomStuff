@@ -71,6 +71,12 @@ public class CompactingCategory implements DisplayCategory<CompactingDisplay> {
         SoulLavaTankWidget soulLavaTank = new SoulLavaTankWidget(startPoint.x + 4, startPoint.y + 3, 4000, display.getRecipeCost());
         widgets.add(Widgets.withTooltip(soulLavaTank, soulLavaTank.getFluidTooltips(TooltipContext.ofMouse())));
 
+        Component label = Component.translatable("jei.telluriumsrandomstuff.category.compacting.cost")
+                .append(": " + display.getRecipeCost());
+        widgets.add(Widgets.createLabel(new Point(startPoint.x + 48, startPoint.y + 5), label)
+                .color(0xFF808080)
+                .noShadow());
+
         return widgets;
     }
 
