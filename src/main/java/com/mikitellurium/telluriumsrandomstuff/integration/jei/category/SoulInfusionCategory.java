@@ -32,7 +32,7 @@ public class SoulInfusionCategory extends SoulLavaTankCategory<SoulInfusionRecip
     private final IDrawable background;
     private final IDrawable icon;
     private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
-    private final int smeltingTime = 120;
+    private final int infusionTime = 120;
 
     public SoulInfusionCategory(IGuiHelper guiHelper) {
         super(guiHelper, 4000, SoulInfusionRecipe::getRecipeCost);
@@ -50,7 +50,7 @@ public class SoulInfusionCategory extends SoulLavaTankCategory<SoulInfusionRecip
     }
 
     protected IDrawableAnimated getArrow() {
-        return this.cachedArrows.getUnchecked(smeltingTime);
+        return this.cachedArrows.getUnchecked(infusionTime);
     }
 
     @Override
