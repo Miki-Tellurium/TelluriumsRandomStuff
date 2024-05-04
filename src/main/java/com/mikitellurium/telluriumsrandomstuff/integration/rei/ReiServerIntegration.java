@@ -1,5 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei;
 
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.SoulFurnaceSmeltingCategory;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulFurnaceSmeltingDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
 import me.shedaniel.rei.api.common.display.DisplaySerializerRegistry;
 import me.shedaniel.rei.api.common.entry.type.EntryTypeRegistry;
@@ -16,7 +18,7 @@ public class ReiServerIntegration implements REIServerPlugin {
 
     @Override
     public void registerDisplaySerializer(DisplaySerializerRegistry registry) {
-
+        registry.register(SoulFurnaceSmeltingCategory.ID, SoulFurnaceSmeltingDisplay.serializer());
     }
 
 }
