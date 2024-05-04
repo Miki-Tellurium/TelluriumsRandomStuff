@@ -15,6 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.ArrayList;
 import java.util.List;
 
+/* This class isn't used anywhere. I don't know why this exists. */
 public class FluidTankRenderer implements IIngredientRenderer<FluidStack> {
 
     private final int xPos;
