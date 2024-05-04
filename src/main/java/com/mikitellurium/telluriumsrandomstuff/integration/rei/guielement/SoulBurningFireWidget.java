@@ -26,8 +26,8 @@ public class SoulBurningFireWidget extends BurningFire {
     }
 
     @Override
-    public void setAnimationDuration(double animationDurationMS) {
-        this.animationDuration = animationDurationMS;
+    public void setAnimationDuration(double milliSeconds) {
+        this.animationDuration = milliSeconds;
         if (this.animationDuration <= 0)
             this.animationDuration = -1;
     }
