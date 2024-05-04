@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.rei.category;
 import com.google.common.collect.Lists;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulFurnaceSmeltingDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.guielement.SoulBurningFireWidget;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.guielement.SoulLavaTankWidget;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
@@ -10,6 +11,7 @@ import me.shedaniel.math.Dimension;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
+import me.shedaniel.rei.api.client.gui.widgets.TooltipContext;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
@@ -17,7 +19,6 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
 
-import java.util.Collections;
 import java.util.List;
 
 public class SoulFurnaceSmeltingCategory implements DisplayCategory<SoulFurnaceSmeltingDisplay> {
@@ -70,10 +71,9 @@ public class SoulFurnaceSmeltingCategory implements DisplayCategory<SoulFurnaceS
                 .entries(List.of(EntryStacks.of(ModItems.SOUL_LAVA_BUCKET.get())))
                 .disableBackground()
                 .markOutput());
-        // todo soul lava tank rendering
-        Widget soulLavaTank = Widgets.createDrawableWidget((graphics, mouseX, mouseY, delta) -> {
+        SoulLavaTankWidget soulLavaTank = new SoulLavaTankWidget(startPoint.x + 4, startPoint.y + 3);
+        widgets.add(Widgets.withTooltip(soulLavaTank, soulLavaTank.getFluidTooltips(TooltipContext.ofMouse())));
 
-        });
         return widgets;
     }
 
