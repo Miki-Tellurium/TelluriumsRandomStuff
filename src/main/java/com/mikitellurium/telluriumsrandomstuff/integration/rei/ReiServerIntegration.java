@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei;
 
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.CompactingDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulFurnaceSmeltingDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulInfusionDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
@@ -16,6 +17,7 @@ public class ReiServerIntegration implements REIServerPlugin, ModDisplayCategori
     public void registerDisplaySerializer(DisplaySerializerRegistry registry) {
         registry.register(SOUL_FURNACE_SMELTING, SoulFurnaceSmeltingDisplay.serializer());
         registry.register(SOUL_INFUSION, SoulInfusionDisplay.serializer());
+        registry.register(COMPACTING, CompactingDisplay.serializer());
     }
 
     @Override
