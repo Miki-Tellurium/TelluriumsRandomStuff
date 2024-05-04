@@ -27,7 +27,7 @@ public class TelluriumsRandomStuffMod {
     // todo update changelog
     // todo add armor trims
 
-    // todo check lava googles loot table
+    // todo check lava googles loot table and drop frequency from treasure chests
     // todo compacting netherite recipe
     // todo spider eye to fermented recipe
 
