@@ -19,6 +19,7 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SoulFurnaceSmeltingCategory implements DisplayCategory<SoulFurnaceSmeltingDisplay> {
@@ -46,7 +47,7 @@ public class SoulFurnaceSmeltingCategory implements DisplayCategory<SoulFurnaceS
     @Override
     public List<Widget> setupDisplay(SoulFurnaceSmeltingDisplay display, Rectangle bounds) {
         Point startPoint = new Point(bounds.x, bounds.y);
-        List<Widget> widgets = Lists.newArrayList();
+        List<Widget> widgets = new ArrayList<>();
         Rectangle recipeBounds = bounds.clone();
         recipeBounds.setSize(bounds.width, bounds.height + 4);
         widgets.add(Widgets.createRecipeBase(recipeBounds));
