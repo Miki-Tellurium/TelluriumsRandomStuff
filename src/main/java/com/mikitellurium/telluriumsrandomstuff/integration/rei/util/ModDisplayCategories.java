@@ -19,7 +19,7 @@ public interface ModDisplayCategories {
     CategoryIdentifier<CompactingDisplay> COMPACTING = CategoryIdentifier.of(FastLoc.modLoc("compacting"));
     CategoryIdentifier<PotionMixingDisplay> POTION_MIXING = CategoryIdentifier.of(FastLoc.modLoc("potion_mixing"));
 
-    static List<CategoryIdentifier<?>> asList() {
+    static List<CategoryIdentifier<?>> entriesAsList() {
         List<CategoryIdentifier<?>> identifiers = new ArrayList<>();
         for (Field field : ModDisplayCategories.class.getDeclaredFields()) {
             try {
@@ -31,6 +31,10 @@ public interface ModDisplayCategories {
             }
         }
         return identifiers;
+    }
+
+    static List<CategoryIdentifier<?>> useSoulLava() {
+        return List.of(SOUL_FURNACE_SMELTING, SOUL_INFUSION, COMPACTING, POTION_MIXING);
     }
 
 }

@@ -57,7 +57,7 @@ public class ClickableSoulLavaTank<T extends AbstractSoulFuelScreen<?>> implemen
 
             @Override
             public Stream<CategoryIdentifier<?>> getCategories() {
-                return ModDisplayCategories.asList().stream();
+                return ModDisplayCategories.useSoulLava().stream();
             }
         } : Result.fail();
     }
