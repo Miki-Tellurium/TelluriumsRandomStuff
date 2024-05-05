@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PotionMixing {
+public abstract class PotionMixingHelper {
 
     public abstract Component getLabel();
     public abstract List<ItemStack> getFirstInputs();
@@ -20,7 +20,7 @@ public abstract class PotionMixing {
         return List.of(RecipeHelper.MUNDANE_POTION, RecipeHelper.THICK_POTION);
     }
 
-    public static class Amplifier extends PotionMixing {
+    public static class Amplifier extends PotionMixingHelper {
 
         private final List<ItemStack> inputs = RecipeHelper.getPotionsByUpgradeType(MobEffectUpgradeType.AMPLIFIER);
         private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
@@ -48,7 +48,7 @@ public abstract class PotionMixing {
         }
     }
 
-    public static class Duration extends PotionMixing {
+    public static class Duration extends PotionMixingHelper {
 
         private final List<ItemStack> inputs =  RecipeHelper.getPotionsByUpgradeType(MobEffectUpgradeType.DURATION);
         private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
@@ -76,7 +76,7 @@ public abstract class PotionMixing {
         }
     }
 
-    public static class Mixed extends PotionMixing {
+    public static class Mixed extends PotionMixingHelper {
 
         private final List<ItemStack> inputs1 = RecipeHelper.getRandomPotionList(20);
         private final List<ItemStack> inputs2 = RecipeHelper.getRandomPotionList(11);

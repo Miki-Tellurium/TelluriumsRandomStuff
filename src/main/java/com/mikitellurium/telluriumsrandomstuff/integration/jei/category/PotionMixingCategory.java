@@ -1,15 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
-import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgradeType;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BrewingBubblesTickTimer;
-import com.mikitellurium.telluriumsrandomstuff.integration.util.PotionMixing;
+import com.mikitellurium.telluriumsrandomstuff.integration.util.PotionMixingHelper;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
-import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -21,19 +18,14 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.common.util.TickTimer;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixing> {
+public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixingHelper> {
 
     public final static ResourceLocation UID = FastLoc.modLoc("potion_mixing");
 
@@ -54,7 +46,7 @@ public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixing> {
     }
 
     @Override
-    public RecipeType<PotionMixing> getRecipeType() {
+    public RecipeType<PotionMixingHelper> getRecipeType() {
         return JeiIntegration.POTION_MIXING_RECIPE_TYPE;
     }
 
@@ -74,7 +66,7 @@ public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixing> {
     }
 
     @Override
-    public void draw(PotionMixing recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+    public void draw(PotionMixingHelper recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
         graphics.drawString(font, recipe.getLabel(), 24, 0, 0xFF606060, false);
         bubbles.draw(graphics, 36, 30);
         bubbles.draw(graphics, 78, 30);
@@ -83,7 +75,7 @@ public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixing> {
     }
     // todo recipe consistency
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, PotionMixing recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, PotionMixingHelper recipe, IFocusGroup focuses) {
         super.setRecipe(builder, recipe, focuses);
         builder.addSlot(RecipeIngredientRole.INPUT, 32, 13)
                 .addIngredients(VanillaTypes.ITEM_STACK, recipe.getFirstInputs());
