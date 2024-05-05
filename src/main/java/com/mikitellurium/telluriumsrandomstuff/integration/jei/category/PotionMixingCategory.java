@@ -67,7 +67,7 @@ public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixingHelpe
 
     @Override
     public void draw(PotionMixingHelper recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        graphics.drawString(font, recipe.getLabel(), 24, 0, 0xFF606060, false);
+        graphics.drawString(font, recipe.getLabel(), 24, 0, 0xFF808080, false);
         bubbles.draw(graphics, 36, 30);
         bubbles.draw(graphics, 78, 30);
         GuiFluidRenderer.drawBackground(graphics, 57, 10, new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(),
