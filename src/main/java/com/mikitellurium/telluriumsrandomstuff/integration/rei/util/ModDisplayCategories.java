@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.rei.util;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.CompactingDisplay;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.PotionMixingDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulFurnaceSmeltingDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulInfusionDisplay;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
@@ -16,6 +17,7 @@ public interface ModDisplayCategories {
     CategoryIdentifier<SoulFurnaceSmeltingDisplay> SOUL_FURNACE_SMELTING = CategoryIdentifier.of(FastLoc.modLoc("soul_furnace_smelting"));
     CategoryIdentifier<SoulInfusionDisplay> SOUL_INFUSION = CategoryIdentifier.of(FastLoc.modLoc("soul_infusion"));
     CategoryIdentifier<CompactingDisplay> COMPACTING = CategoryIdentifier.of(FastLoc.modLoc("compacting"));
+    CategoryIdentifier<PotionMixingDisplay> POTION_MIXING = CategoryIdentifier.of(FastLoc.modLoc("potion_mixing"));
 
     static List<CategoryIdentifier<?>> asList() {
         List<CategoryIdentifier<?>> identifiers = new ArrayList<>();

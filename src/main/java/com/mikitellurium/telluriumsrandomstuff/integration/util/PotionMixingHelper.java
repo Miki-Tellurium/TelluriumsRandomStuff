@@ -4,8 +4,10 @@ import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgradeTyp
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.Util;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,13 @@ public abstract class PotionMixingHelper {
     public abstract List<ItemStack> getFirstInputs();
     public abstract List<ItemStack> getSecondInputs();
     public abstract List<ItemStack> getOutputs();
+    public NonNullList<Ingredient> getIngredients() {
+        return NonNullList.of(Ingredient.EMPTY,
+                Ingredient.of(this.getFirstInputs().toArray(new ItemStack[0])),
+                Ingredient.of(this.getSecondInputs().toArray(new ItemStack[0])),
+                Ingredient.of(this.getReceptacles().toArray(new ItemStack[0]))
+                );
+    }
     public List<ItemStack> getReceptacles() {
         return List.of(RecipeHelper.MUNDANE_POTION, RecipeHelper.THICK_POTION);
     }
