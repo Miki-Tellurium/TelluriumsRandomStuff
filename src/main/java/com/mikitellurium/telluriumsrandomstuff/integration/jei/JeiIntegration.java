@@ -10,6 +10,7 @@ import com.mikitellurium.telluriumsrandomstuff.integration.jei.helper.BlockIngre
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ClickableIngredient;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ModIngredientTypes;
+import com.mikitellurium.telluriumsrandomstuff.integration.util.PotionMixingHelper;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -56,8 +57,8 @@ public class JeiIntegration implements IModPlugin {
             new RecipeType<>(SoulInfusionCategory.UID, SoulInfusionRecipe.class);
     public static RecipeType<SoulLavaTransmutationRecipe> SOUL_LAVA_TRANSMUTATION_RECIPE_TYPE =
             new RecipeType<>(SoulLavaTransmutationCategory.UID, SoulLavaTransmutationRecipe.class);
-    public static RecipeType<PotionMixingCategory.Recipe> POTION_MIXING_RECIPE_TYPE =
-            new RecipeType<>(PotionMixingCategory.UID, PotionMixingCategory.Recipe.class);
+    public static RecipeType<PotionMixingHelper> POTION_MIXING_RECIPE_TYPE =
+            new RecipeType<>(PotionMixingCategory.UID, PotionMixingHelper.class);
     public static RecipeType<CompactingRecipe> COMPACTING_RECIPE_TYPE =
             new RecipeType<>(CompactingCategory.UID, CompactingRecipe.class);
 
@@ -101,9 +102,9 @@ public class JeiIntegration implements IModPlugin {
         registration.addRecipes(AMETHYST_LENS_INFO_TYPE, amethystLensInfoRecipes);
         registration.addRecipes(COMPACTING_RECIPE_TYPE, compactingRecipes);
         registration.addRecipes(POTION_MIXING_RECIPE_TYPE, List.of(
-                new PotionMixingCategory.Amplifier(),
-                new PotionMixingCategory.Duration(),
-                new PotionMixingCategory.Mixed()
+                new PotionMixingHelper.Amplifier(),
+                new PotionMixingHelper.Duration(),
+                new PotionMixingHelper.Mixed()
         ));
         registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(new RecipeHelper.RepairData(Ingredient.of(ModItems.OPAL_CRYSTAL.get()),
                 ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(),
