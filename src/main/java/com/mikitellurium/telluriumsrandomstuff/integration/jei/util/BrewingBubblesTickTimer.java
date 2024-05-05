@@ -1,15 +1,16 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.util;
 
+import com.mikitellurium.telluriumsrandomstuff.integration.util.TickTimer;
+import com.mikitellurium.telluriumsrandomstuff.lib.ITimer;
 import mezz.jei.api.gui.ITickTimer;
-import mezz.jei.api.helpers.IGuiHelper;
 
 public class BrewingBubblesTickTimer implements ITickTimer {
 
     private static final int[] BUBBLE_LENGTHS = new int[]{29, 23, 18, 13, 9, 5, 0};
-    private final ITickTimer internalTimer;
+    private final ITimer internalTimer;
 
-    public BrewingBubblesTickTimer(IGuiHelper guiHelper) {
-        this.internalTimer = guiHelper.createTickTimer(14, BUBBLE_LENGTHS.length - 1, false);
+    public BrewingBubblesTickTimer() {
+        this.internalTimer = new TickTimer(14, BUBBLE_LENGTHS.length - 1, false);
     }
 
     @Override

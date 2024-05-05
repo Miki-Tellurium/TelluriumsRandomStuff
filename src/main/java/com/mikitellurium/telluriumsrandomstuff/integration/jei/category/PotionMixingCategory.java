@@ -39,7 +39,7 @@ public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixingHelpe
         super(guiHelper, 4000, (recipe) -> 4000);
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ModBlocks.ALCHEMIXER.get().asItem().getDefaultInstance());
         this.background = guiHelper.createDrawable(FastLoc.JEI_GUI_TEXTURE, 0, 144, 115, 71);
-        ITickTimer bubblesTickTimer = new BrewingBubblesTickTimer(guiHelper);
+        ITickTimer bubblesTickTimer = new BrewingBubblesTickTimer();
         bubbles = guiHelper.drawableBuilder(FastLoc.GUI_ELEMENTS_TEXTURE, 89, 0, 11, 29)
                 .buildAnimated(bubblesTickTimer, IDrawableAnimated.StartDirection.BOTTOM);
         this.soulLavaTimer = new TickTimer(400, 1000, true);
