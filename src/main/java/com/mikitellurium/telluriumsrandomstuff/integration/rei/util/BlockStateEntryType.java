@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 
 public class BlockStateEntryType implements EntryDefinition<BlockState> {
 
-    public static EntryType<BlockState> BLOCK_STATE = EntryType.deferred(FastLoc.modLoc("block_state"));
+    public static EntryType<BlockState> TYPE = EntryType.deferred(FastLoc.modLoc("block_state"));
 
     private final EntryRenderer<BlockState> renderer;
 
@@ -34,7 +34,7 @@ public class BlockStateEntryType implements EntryDefinition<BlockState> {
 
     @Override
     public EntryType<BlockState> getType() {
-        return BLOCK_STATE;
+        return TYPE;
     }
 
     @Override
