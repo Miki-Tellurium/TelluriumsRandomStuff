@@ -69,10 +69,10 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, AmethystLensInfoCategory.Recipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 1, 2).addItemStack(recipe.getMoltenAmethyst());
+        builder.addSlot(RecipeIngredientRole.INPUT, 1, 2).addItemStack(recipe.getInput());
         builder.addSlot(RecipeIngredientRole.CATALYST, 1, 42).addFluidStack(Fluids.WATER, 1000)
                 .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 44, 40).addItemStack(recipe.getAmethystLens());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 44, 40).addItemStack(recipe.getOutput());
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(ModItems.MOLTEN_AMETHYST.get()));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.AMETHYST_LENS.get()));
     }
@@ -87,11 +87,11 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
             this.amethystLens = new ItemStack(ModItems.AMETHYST_LENS.get());
         }
 
-        public ItemStack getMoltenAmethyst() {
+        public ItemStack getInput() {
             return moltenAmethyst;
         }
 
-        public ItemStack getAmethystLens() {
+        public ItemStack getOutput() {
             return amethystLens;
         }
     }
