@@ -22,7 +22,7 @@ public class PotionMixingDisplay extends SoulLavaDisplay {
     }
 
     public PotionMixingDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, String label) {
-        super(inputs, outputs, Optional.empty());
+        super(inputs, outputs);
         this.label = label;
     }
 

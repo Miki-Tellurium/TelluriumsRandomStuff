@@ -14,6 +14,10 @@ import java.util.Optional;
 
 public abstract class SoulLavaDisplay extends BasicDisplay {
 
+    public SoulLavaDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+        super(inputs, outputs);
+    }
+
     public SoulLavaDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs,
                            Optional<ResourceLocation> location) {
         super(inputs, outputs, location);
