@@ -18,7 +18,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.FluidStack;
 
 public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInfoCategory.Recipe> {
 
@@ -76,6 +79,9 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
         builder.addSlot(RecipeIngredientRole.OUTPUT, 44, 40).addItemStack(recipe.getOutput());
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(ModItems.MOLTEN_AMETHYST.get()));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.AMETHYST_LENS.get()));
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addItemStack(new ItemStack(Blocks.CAULDRON));
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addItemStack(new ItemStack(Items.WATER_BUCKET));
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(Fluids.WATER, 1000);
     }
 
     public static class Recipe {

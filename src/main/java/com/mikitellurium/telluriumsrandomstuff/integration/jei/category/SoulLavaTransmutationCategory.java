@@ -4,6 +4,8 @@ import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutati
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ModIngredientTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -19,7 +21,9 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
 
 public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTransmutationRecipe> {
 
@@ -74,8 +78,9 @@ public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTr
         builder.addSlot(RecipeIngredientRole.CATALYST, 1, 42)
                 .addIngredient(ModIngredientTypes.BLOCK_STATE, ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 44, 40).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
-        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST)
-                .addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.CAULDRON));
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addItemStack(new ItemStack(Blocks.CAULDRON));
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addItemStack(new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()));
+        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addFluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), 1000);
     }
 
 }
