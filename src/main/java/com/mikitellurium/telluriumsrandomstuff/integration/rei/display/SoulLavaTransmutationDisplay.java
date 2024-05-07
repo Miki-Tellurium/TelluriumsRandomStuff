@@ -43,7 +43,8 @@ public class SoulLavaTransmutationDisplay extends BasicDisplay {
         List<EntryIngredient> ingredients = new ArrayList<>(EntryIngredients.ofIngredients(recipe.getIngredients()));
         ingredients.addAll(List.of(
                 EntryIngredients.of(ModFluids.SOUL_LAVA_SOURCE.get()),
-                EntryIngredients.of(ModItems.SOUL_LAVA_BUCKET.get())
+                EntryIngredients.of(ModItems.SOUL_LAVA_BUCKET.get()),
+                EntryIngredients.of(Blocks.CAULDRON)
         ));
         return ingredients;
     }

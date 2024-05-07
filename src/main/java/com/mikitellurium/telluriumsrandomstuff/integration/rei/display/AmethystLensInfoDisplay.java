@@ -24,6 +24,7 @@ public class AmethystLensInfoDisplay extends BasicDisplay {
     public AmethystLensInfoDisplay(Recipe recipe) {
         this(List.of(EntryIngredients.of(recipe.getInput()),
                         EntryIngredient.of(recipe.getTransmutationBlock()),
+                        EntryIngredients.of(Blocks.CAULDRON),
                         EntryIngredients.of(Items.WATER_BUCKET),
                         EntryIngredients.of(Fluids.WATER)),
                 List.of(EntryIngredients.of(recipe.getOutput())));
