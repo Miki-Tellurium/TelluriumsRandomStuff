@@ -13,7 +13,7 @@ public class FluidBlockRenderer implements IIngredientRenderer<FluidStack> {
 
     @Override
     public void render(GuiGraphics graphics, FluidStack ingredient) {
-        BlockRendering.renderLiquid(graphics, ingredient);
+        BlockRendering.renderFluid(graphics, ingredient);
     }
 
     @Override

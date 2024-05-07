@@ -7,14 +7,8 @@ import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScre
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.CompactingCategory;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.PotionMixingCategory;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.SoulFurnaceSmeltingCategory;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.SoulInfusionCategory;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.CompactingDisplay;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.PotionMixingDisplay;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulFurnaceSmeltingDisplay;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulInfusionDisplay;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.*;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.*;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateRenderer;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.ClickableSoulLavaTank;
@@ -41,7 +35,8 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
                 new SoulFurnaceSmeltingCategory(),
                 new SoulInfusionCategory(),
                 new CompactingCategory(),
-                new PotionMixingCategory());
+                new PotionMixingCategory(),
+                new AmethystLensInfoCategory());
 
         registry.addWorkstations(SOUL_FURNACE_SMELTING, EntryStacks.of(ModBlocks.SOUL_FURNACE.get()));
         registry.addWorkstations(BuiltinPlugin.SMELTING, EntryStacks.of(ModBlocks.SOUL_FURNACE.get()));
@@ -60,6 +55,7 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
         registry.add(new PotionMixingDisplay(new PotionMixingHelper.Amplifier()));
         registry.add(new PotionMixingDisplay(new PotionMixingHelper.Duration()));
         registry.add(new PotionMixingDisplay(new PotionMixingHelper.Mixed()));
+        registry.add(new AmethystLensInfoDisplay(new AmethystLensInfoDisplay.Recipe()));
     }
 
     @Override
@@ -76,7 +72,7 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
 
     @Override
     public void registerEntryRenderers(EntryRendererRegistry registry) {
-        registry.register(BlockStateEntryType.BLOCK_STATE, new BlockStateRenderer());
+        registry.register(BlockStateEntryType.TYPE, new BlockStateRenderer());
     }
 
 }

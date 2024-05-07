@@ -37,7 +37,8 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
         this.rightArrow = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 0, 0, 24, 16);
         this.itemSlot = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 110, 0, 18, 18);
     }
-
+    // todo add water as invisible ingredient
+    // todo add water cauldron to recipe
     @Override
     public RecipeType<AmethystLensInfoCategory.Recipe> getRecipeType() {
         return JeiIntegration.AMETHYST_LENS_INFO_TYPE;

@@ -14,7 +14,7 @@ public class BlockStateRenderer implements EntryRenderer<BlockState> {
 
     @Override
     public void render(EntryStack<BlockState> entry, GuiGraphics graphics, Rectangle bounds, int mouseX, int mouseY, float delta) {
-        BlockRendering.renderBlock(graphics, entry.getValue(), 8, 8, 10);
+        BlockRendering.renderBlock(graphics, entry.getValue(), bounds.x + 8, bounds.y + 8, 10);
     }
 
     @Override

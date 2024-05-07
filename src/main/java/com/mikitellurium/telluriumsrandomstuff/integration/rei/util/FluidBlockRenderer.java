@@ -7,7 +7,6 @@ import me.shedaniel.rei.api.client.gui.widgets.Tooltip;
 import me.shedaniel.rei.api.client.gui.widgets.TooltipContext;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +14,7 @@ public class FluidBlockRenderer implements EntryRenderer<FluidStack> {
 
     @Override
     public void render(EntryStack<FluidStack> entry, GuiGraphics graphics, Rectangle bounds, int mouseX, int mouseY, float delta) {
-        BlockRendering.renderLiquid(graphics, entry.getValue());
+        BlockRendering.renderFluid(graphics, entry.getValue(), bounds.x, bounds.y);
     }
 
     @Override

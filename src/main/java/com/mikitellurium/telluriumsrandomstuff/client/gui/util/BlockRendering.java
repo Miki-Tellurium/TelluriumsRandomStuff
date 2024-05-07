@@ -26,6 +26,7 @@ import net.minecraft.world.level.lighting.LevelLightEngine;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.fluids.FluidStack;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
@@ -36,6 +37,7 @@ public final class BlockRendering {
         BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
         PoseStack poseStack = graphics.pose();
         BakedModel model = blockRenderer.getBlockModel(blockState);
+        RenderType renderType = ItemBlockRenderTypes.getRenderType(blockState, false);
         boolean blockLight = !model.usesBlockLight();
 
         poseStack.pushPose();
@@ -48,7 +50,7 @@ public final class BlockRendering {
 
         if (blockLight) Lighting.setupForFlatItems();
         blockRenderer.renderSingleBlock(blockState, poseStack, graphics.bufferSource(),
-                LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+                LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, renderType);
 
         graphics.flush();
         if (blockLight) Lighting.setupFor3DItems();
@@ -56,16 +58,28 @@ public final class BlockRendering {
         poseStack.popPose();
     }
 
-    public static void renderLiquid(GuiGraphics guiGraphics, FluidStack fluidStack) {
+    public static void renderFluid(GuiGraphics guiGraphics, FluidStack fluidStack) {
+        renderFluid(guiGraphics, fluidStack.getFluid());
+    }
+
+    public static void renderFluid(GuiGraphics guiGraphics, Fluid fluid) {
+        renderFluid(guiGraphics, fluid, 0, 0);
+    }
+
+    public static void renderFluid(GuiGraphics guiGraphics, FluidStack fluidStack, float xPos, float yPos) {
+        renderFluid(guiGraphics, fluidStack.getFluid(), xPos, yPos);
+    }
+
+    public static void renderFluid(GuiGraphics guiGraphics, Fluid fluid, float xPos, float yPos) {
         PoseStack poseStack = guiGraphics.pose();
         Minecraft minecraft = Minecraft.getInstance();
         BlockRenderDispatcher blockRenderDispatcher = minecraft.getBlockRenderer();
-        Fluid fluidType = fluidStack.getFluid();
-        FluidState fluidState = fluidType.defaultFluidState();
+        FluidState fluidState = fluid.defaultFluidState();
         RenderType renderType = ItemBlockRenderTypes.getRenderLayer(fluidState);
 
         poseStack.pushPose();
-
+        // todo check if JEI render correctly
+        poseStack.translate(xPos, yPos, 0.0F);
         poseStack.translate(15.0F, 11.33F, 10.0F);
         poseStack.scale(-9.9F, -11.0F, -9.9F);
         poseStack.mulPose(Axis.XP.rotationDegrees(-30.0F));
@@ -127,7 +141,7 @@ public final class BlockRendering {
             var level = Minecraft.getInstance().level;
             if (level != null) {
                 var biome = Minecraft.getInstance().level.getBiome(blockPos);
-                return colorResolver.getColor(biome.value(), 0, 0);
+                return colorResolver.getColor(biome.value(), blockPos.getX(), blockPos.getZ());
             } else {
                 return -1;
             }
