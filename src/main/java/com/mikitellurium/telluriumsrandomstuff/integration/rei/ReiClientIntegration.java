@@ -70,9 +70,4 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
         registry.registerClickArea(AlchemixerScreen.class, new ClickableSoulLavaTank<>());
     }
 
-    @Override
-    public void registerEntryRenderers(EntryRendererRegistry registry) {
-        registry.register(BlockStateEntryType.TYPE, new BlockStateRenderer());
-    }
-
 }
