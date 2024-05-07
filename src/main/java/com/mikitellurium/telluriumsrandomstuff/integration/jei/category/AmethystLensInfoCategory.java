@@ -2,11 +2,13 @@ package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.FluidBlockRenderer;
+import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.ModIngredientTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -20,8 +22,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
 
 public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInfoCategory.Recipe> {
 
@@ -40,8 +42,7 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
         this.rightArrow = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 0, 0, 24, 16);
         this.itemSlot = guiHelper.createDrawable(FastLoc.GUI_ELEMENTS_TEXTURE, 110, 0, 18, 18);
     }
-    // todo add water as invisible ingredient
-    // todo add water cauldron to recipe
+
     @Override
     public RecipeType<AmethystLensInfoCategory.Recipe> getRecipeType() {
         return JeiIntegration.AMETHYST_LENS_INFO_TYPE;
@@ -74,8 +75,13 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, AmethystLensInfoCategory.Recipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 2).addItemStack(recipe.getInput());
-        builder.addSlot(RecipeIngredientRole.CATALYST, 1, 42).addFluidStack(Fluids.WATER, 1000)
-                .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
+        IRecipeSlotBuilder slotBuilder = builder.addSlot(RecipeIngredientRole.CATALYST, 1, 42);
+        if (recipe.useCauldron()) {
+            slotBuilder.addIngredient(ModIngredientTypes.BLOCK_STATE, Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, LayeredCauldronBlock.MAX_FILL_LEVEL));
+        } else {
+            slotBuilder.addFluidStack(Fluids.WATER, 1000)
+                    .setCustomRenderer(ForgeTypes.FLUID_STACK, new FluidBlockRenderer());
+        }
         builder.addSlot(RecipeIngredientRole.OUTPUT, 44, 40).addItemStack(recipe.getOutput());
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(ModItems.MOLTEN_AMETHYST.get()));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(new ItemStack(ModItems.AMETHYST_LENS.get()));
@@ -88,10 +94,13 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
 
         private final ItemStack moltenAmethyst;
         private final ItemStack amethystLens;
+        private final boolean useCauldron;
 
-        public Recipe() {
+        public Recipe(boolean useCauldron) {
             this.moltenAmethyst = new ItemStack(ModItems.MOLTEN_AMETHYST.get());
             this.amethystLens = new ItemStack(ModItems.AMETHYST_LENS.get());
+            this.useCauldron = useCauldron;
+
         }
 
         public ItemStack getInput() {
@@ -100,6 +109,10 @@ public class AmethystLensInfoCategory implements IRecipeCategory<AmethystLensInf
 
         public ItemStack getOutput() {
             return amethystLens;
+        }
+
+        public boolean useCauldron() {
+            return useCauldron;
         }
     }
 

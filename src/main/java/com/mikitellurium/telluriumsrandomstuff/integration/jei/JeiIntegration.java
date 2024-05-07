@@ -93,7 +93,10 @@ public class JeiIntegration implements IModPlugin {
         List<CompactingRecipe> compactingRecipes = recipeManager.getAllRecipesFor(CompactingRecipe.Type.INSTANCE);
 
         List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = List.of(new SoulLavaInfoCategory.Recipe());
-        List<AmethystLensInfoCategory.Recipe> amethystLensInfoRecipes = List.of(new AmethystLensInfoCategory.Recipe());
+        List<AmethystLensInfoCategory.Recipe> amethystLensInfoRecipes = List.of(
+                new AmethystLensInfoCategory.Recipe(true),
+                new AmethystLensInfoCategory.Recipe(false)
+                );
 
         registration.addRecipes(SOUL_FURNACE_SMELTING_RECIPE_TYPE, convertedRecipes);
         registration.addRecipes(SOUL_LAVA_TRANSMUTATION_RECIPE_TYPE, soulLavaTransmutationRecipes);
