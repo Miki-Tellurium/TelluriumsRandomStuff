@@ -1,17 +1,15 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei;
 
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.CompactingDisplay;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.PotionMixingDisplay;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulFurnaceSmeltingDisplay;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulInfusionDisplay;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.*;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.FluidBlockEntryType;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.ModDisplayCategories;
 import me.shedaniel.rei.api.common.display.DisplaySerializerRegistry;
 import me.shedaniel.rei.api.common.entry.type.EntryTypeRegistry;
 import me.shedaniel.rei.api.common.plugins.REIServerPlugin;
-import me.shedaniel.rei.forge.REIPluginDedicatedServer;
+import me.shedaniel.rei.forge.REIPluginCommon;
 
-@REIPluginDedicatedServer
+@REIPluginCommon
 public class ReiServerIntegration implements REIServerPlugin, ModDisplayCategories {
 
     @Override
@@ -20,11 +18,13 @@ public class ReiServerIntegration implements REIServerPlugin, ModDisplayCategori
         registry.register(SOUL_INFUSION, SoulInfusionDisplay.serializer());
         registry.register(COMPACTING, CompactingDisplay.serializer());
         registry.register(POTION_MIXING, PotionMixingDisplay.serializer());
+        registry.register(AMETHYST_LENS_INFO, AmethystLensInfoDisplay.serializer());
     }
 
     @Override
     public void registerEntryTypes(EntryTypeRegistry registry) {
-        registry.register(BlockStateEntryType.BLOCK_STATE, new BlockStateEntryType());
+        registry.register(BlockStateEntryType.TYPE, new BlockStateEntryType());
+        registry.register(FluidBlockEntryType.TYPE, new FluidBlockEntryType());
     }
 
 }
