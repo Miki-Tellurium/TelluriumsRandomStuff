@@ -18,6 +18,7 @@ public class LevelUtils {
 
     public static int getHighestLightLevel(BlockAndTintGetter level, BlockPos pos) {
         int highestLightLevel = 0;
+        if (pos == null) return highestLightLevel;
 
         for (Direction direction : Direction.values()) {
             BlockPos sidePos = pos.relative(direction);
