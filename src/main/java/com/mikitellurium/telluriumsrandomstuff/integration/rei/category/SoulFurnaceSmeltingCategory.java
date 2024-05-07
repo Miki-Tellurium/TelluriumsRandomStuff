@@ -1,8 +1,10 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei.category;
 
+import com.mikitellurium.telluriumsrandomstuff.common.block.SoulFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulFurnaceSmeltingDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.guielement.SoulBurningFireWidget;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.guielement.SoulLavaTankWidget;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.ModDisplayCategories;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -16,6 +18,7 @@ import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
 
@@ -38,7 +41,7 @@ public class SoulFurnaceSmeltingCategory implements DisplayCategory<SoulFurnaceS
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(ModBlocks.SOUL_FURNACE.get());
+        return EntryStack.of(BlockStateEntryType.TYPE, ModBlocks.SOUL_FURNACE.get().defaultBlockState().setValue(SoulFurnaceBlock.LIT, true));
     }
 
     @Override
