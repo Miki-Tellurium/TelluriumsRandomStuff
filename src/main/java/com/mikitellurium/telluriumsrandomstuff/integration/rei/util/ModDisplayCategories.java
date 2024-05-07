@@ -16,6 +16,7 @@ public interface ModDisplayCategories {
     CategoryIdentifier<CompactingDisplay> COMPACTING = CategoryIdentifier.of(FastLoc.modLoc("compacting"));
     CategoryIdentifier<PotionMixingDisplay> POTION_MIXING = CategoryIdentifier.of(FastLoc.modLoc("potion_mixing"));
     CategoryIdentifier<AmethystLensInfoDisplay> AMETHYST_LENS_INFO = CategoryIdentifier.of(FastLoc.modLoc("amethyst_lens_info"));
+    CategoryIdentifier<SoulLavaTransmutationDisplay> SOUL_LAVA_TRANSMUTATION = CategoryIdentifier.of(FastLoc.modLoc("soul_lava_transmutation"));
 
     static List<CategoryIdentifier<?>> entriesAsList() {
         List<CategoryIdentifier<?>> identifiers = new ArrayList<>();
@@ -32,7 +33,7 @@ public interface ModDisplayCategories {
     }
 
     static List<CategoryIdentifier<?>> useSoulLava() {
-        return List.of(SOUL_FURNACE_SMELTING, SOUL_INFUSION, COMPACTING, POTION_MIXING);
+        return List.of(SOUL_FURNACE_SMELTING, SOUL_INFUSION, COMPACTING, POTION_MIXING, SOUL_LAVA_TRANSMUTATION);
     }
 
 }

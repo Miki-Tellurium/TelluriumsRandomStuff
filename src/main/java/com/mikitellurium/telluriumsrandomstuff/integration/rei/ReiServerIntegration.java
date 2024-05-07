@@ -19,6 +19,7 @@ public class ReiServerIntegration implements REIServerPlugin, ModDisplayCategori
         registry.register(COMPACTING, CompactingDisplay.serializer());
         registry.register(POTION_MIXING, PotionMixingDisplay.serializer());
         registry.register(AMETHYST_LENS_INFO, AmethystLensInfoDisplay.serializer());
+        registry.register(SOUL_LAVA_TRANSMUTATION, SoulLavaTransmutationDisplay.serializer());
     }
 
     @Override

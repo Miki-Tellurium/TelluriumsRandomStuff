@@ -7,6 +7,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScre
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.*;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.*;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
@@ -21,6 +22,7 @@ import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
+import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
@@ -36,13 +38,15 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
                 new SoulInfusionCategory(),
                 new CompactingCategory(),
                 new PotionMixingCategory(),
-                new AmethystLensInfoCategory());
+                new AmethystLensInfoCategory(),
+                new SoulLavaTransmutationCategory());
 
         registry.addWorkstations(SOUL_FURNACE_SMELTING, EntryStacks.of(ModBlocks.SOUL_FURNACE.get()));
         registry.addWorkstations(BuiltinPlugin.SMELTING, EntryStacks.of(ModBlocks.SOUL_FURNACE.get()));
         registry.addWorkstations(SOUL_INFUSION, EntryStacks.of(ModBlocks.SOUL_INFUSER.get()));
         registry.addWorkstations(COMPACTING, EntryStacks.of(ModBlocks.SOUL_COMPACTOR.get()));
         registry.addWorkstations(POTION_MIXING, EntryStacks.of(ModBlocks.ALCHEMIXER.get().asItem().getDefaultInstance()));
+        registry.addWorkstations(SOUL_LAVA_TRANSMUTATION, EntryStack.of(BlockStateEntryType.TYPE, ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState()));
     }
 
     @Override
@@ -51,6 +55,7 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
         registry.registerFiller(SmeltingRecipe.class, SoulFurnaceSmeltingDisplay::new);
         registry.registerFiller(SoulInfusionRecipe.class, SoulInfusionDisplay::new);
         registry.registerFiller(CompactingRecipe.class, CompactingDisplay::new);
+        registry.registerFiller(SoulLavaTransmutationRecipe.class, SoulLavaTransmutationDisplay::new);
 
         registry.add(new PotionMixingDisplay(new PotionMixingHelper.Amplifier()));
         registry.add(new PotionMixingDisplay(new PotionMixingHelper.Duration()));
