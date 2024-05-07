@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei.category;
 
+import com.mikitellurium.telluriumsrandomstuff.client.gui.util.BlockRendering;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.AmethystLensInfoDisplay;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.FluidBlockEntryType;
@@ -20,6 +21,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -56,7 +58,7 @@ public class AmethystLensInfoCategory implements DisplayCategory<AmethystLensInf
                 .entries(display.getOutputEntries().get(0))
                 .markOutput());
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 5, startPoint.y + 47))
-                .entry(EntryStack.of(FluidBlockEntryType.TYPE, new FluidStack(Fluids.WATER, 1000)))
+                .entries(display.getInputEntries().get(1))
                 .disableBackground()
                 .markInput());
 

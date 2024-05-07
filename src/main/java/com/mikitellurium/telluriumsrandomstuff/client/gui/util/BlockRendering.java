@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.LightLayer;
@@ -34,6 +35,10 @@ import org.joml.Quaternionf;
 public final class BlockRendering {
 
     public static void renderBlock(GuiGraphics graphics, BlockState blockState, float xPos, float yPos, int scale) {
+        renderBlock(graphics, blockState, xPos, yPos, scale, false);
+    }
+
+    public static void renderBlock(GuiGraphics graphics, BlockState blockState, float xPos, float yPos, int scale, boolean renderBatched) {
         BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
         PoseStack poseStack = graphics.pose();
         BakedModel model = blockRenderer.getBlockModel(blockState);
@@ -49,9 +54,13 @@ public final class BlockRendering {
         poseStack.translate(-0.5f, -0.5f, -0.5f);
 
         if (blockLight) Lighting.setupForFlatItems();
-        blockRenderer.renderSingleBlock(blockState, poseStack, graphics.bufferSource(),
-                LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, renderType);
-
+        if (renderBatched) {
+            blockRenderer.renderBatched(blockState, BlockPos.ZERO, new FakeBlockWorld(blockState), poseStack,
+                    graphics.bufferSource().getBuffer(renderType), true, RandomSource.create(), ModelData.EMPTY, renderType);
+        } else {
+            blockRenderer.renderSingleBlock(blockState, poseStack, graphics.bufferSource(),
+                    LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, renderType);
+        }
         graphics.flush();
         if (blockLight) Lighting.setupFor3DItems();
 
@@ -95,7 +104,7 @@ public final class BlockRendering {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder builder = tesselator.getBuilder();
         builder.begin(renderType.mode(), renderType.format());
-        blockRenderDispatcher.renderLiquid(BlockPos.ZERO, new FakeWorld(fluidState), builder, fluidState.createLegacyBlock(),
+        blockRenderDispatcher.renderLiquid(BlockPos.ZERO, new FakeFluidWorld(fluidState), builder, fluidState.createLegacyBlock(),
                 fluidState);
         if (builder.building()) {
             tesselator.end();
@@ -109,10 +118,10 @@ public final class BlockRendering {
         RenderSystem.applyModelViewMatrix();
     }
 
-    private static class FakeWorld implements BlockAndTintGetter {
+    private static class FakeFluidWorld implements BlockAndTintGetter {
         private final FluidState fluidState;
 
-        public FakeWorld(FluidState fluidState) {
+        public FakeFluidWorld(FluidState fluidState) {
             this.fluidState = fluidState;
         }
 
@@ -168,6 +177,74 @@ public final class BlockRendering {
             } else {
                 return Fluids.EMPTY.defaultFluidState();
             }
+        }
+
+        @Override
+        public int getHeight() {
+            return 0;
+        }
+
+        @Override
+        public int getMinBuildHeight() {
+            return 0;
+        }
+    }
+
+    private static class FakeBlockWorld implements BlockAndTintGetter {
+        private final BlockState blockState;
+
+        public FakeBlockWorld(BlockState blockState) {
+            this.blockState = blockState;
+        }
+
+        @Override
+        public float getShade(Direction direction, boolean bl) {
+            return 1.0f;
+        }
+
+        @Override
+        public LevelLightEngine getLightEngine() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public int getBrightness(LightLayer lightLayer, BlockPos blockPos) {
+            return 15;
+        }
+
+        @Override
+        public int getRawBrightness(BlockPos blockPos, int i) {
+            return 15;
+        }
+
+        @Override
+        public int getBlockTint(BlockPos blockPos, ColorResolver colorResolver) {
+            var level = Minecraft.getInstance().level;
+            if (level != null) {
+                var biome = Minecraft.getInstance().level.getBiome(blockPos);
+                return colorResolver.getColor(biome.value(), blockPos.getX(), blockPos.getZ());
+            } else {
+                return -1;
+            }
+        }
+
+        @Override
+        public BlockEntity getBlockEntity(BlockPos blockPos) {
+            return null;
+        }
+
+        @Override
+        public BlockState getBlockState(BlockPos blockPos) {
+            if (blockPos.equals(BlockPos.ZERO)) {
+                return this.blockState;
+            } else {
+                return Blocks.AIR.defaultBlockState();
+            }
+        }
+
+        @Override
+        public FluidState getFluidState(BlockPos blockPos) {
+            return Fluids.EMPTY.defaultFluidState();
         }
 
         @Override

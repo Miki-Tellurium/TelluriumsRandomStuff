@@ -55,7 +55,8 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
         registry.add(new PotionMixingDisplay(new PotionMixingHelper.Amplifier()));
         registry.add(new PotionMixingDisplay(new PotionMixingHelper.Duration()));
         registry.add(new PotionMixingDisplay(new PotionMixingHelper.Mixed()));
-        registry.add(new AmethystLensInfoDisplay(new AmethystLensInfoDisplay.Recipe()));
+        registry.add(new AmethystLensInfoDisplay(new AmethystLensInfoDisplay.Recipe(true)));
+        registry.add(new AmethystLensInfoDisplay(new AmethystLensInfoDisplay.Recipe(false)));
     }
 
     @Override
