@@ -7,19 +7,20 @@ import me.shedaniel.rei.api.client.gui.widgets.Tooltip;
 import me.shedaniel.rei.api.client.gui.widgets.TooltipContext;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
-public class FluidBlockRenderer implements EntryRenderer<FluidStack> {
+public class FluidBlockRenderer implements EntryRenderer<Fluid> {
 
     @Override
-    public void render(EntryStack<FluidStack> entry, GuiGraphics graphics, Rectangle bounds, int mouseX, int mouseY, float delta) {
+    public void render(EntryStack<Fluid> entry, GuiGraphics graphics, Rectangle bounds, int mouseX, int mouseY, float delta) {
         BlockRendering.renderFluid(graphics, entry.getValue(), bounds.x, bounds.y);
     }
 
     @Override
-    public @Nullable Tooltip getTooltip(EntryStack<FluidStack> entry, TooltipContext context) {
-        return Tooltip.create(entry.getValue().getDisplayName());
+    public @Nullable Tooltip getTooltip(EntryStack<Fluid> entry, TooltipContext context) {
+        return Tooltip.create(entry.getValue().getFluidType().getDescription());
     }
 
 }

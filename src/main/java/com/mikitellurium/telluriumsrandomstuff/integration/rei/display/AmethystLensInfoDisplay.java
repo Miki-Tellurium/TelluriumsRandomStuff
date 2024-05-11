@@ -54,7 +54,7 @@ public class AmethystLensInfoDisplay extends BasicDisplay {
             this.amethystLens = new ItemStack(ModItems.AMETHYST_LENS.get());
             this.transmutationBlock = useCauldron ?
                     EntryStack.of(BlockStateEntryType.TYPE, Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, LayeredCauldronBlock.MAX_FILL_LEVEL)) :
-                    EntryStack.of(FluidBlockEntryType.TYPE, new FluidStack(Fluids.WATER, 1000));
+                    EntryStack.of(FluidBlockEntryType.TYPE, Fluids.WATER);
         }
 
         public ItemStack getInput() {

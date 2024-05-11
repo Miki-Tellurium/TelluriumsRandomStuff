@@ -11,90 +11,92 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public class FluidBlockEntryType implements EntryDefinition<FluidStack> {
+public class FluidBlockEntryType implements EntryDefinition<Fluid> {
 
-    public static EntryType<FluidStack> TYPE = EntryType.deferred(FastLoc.modLoc("fluid_block"));
+    public static EntryType<Fluid> TYPE = EntryType.deferred(FastLoc.modLoc("fluid_block"));
 
-    private final EntryRenderer<FluidStack> renderer;
+    private final EntryRenderer<Fluid> renderer;
 
     public FluidBlockEntryType() {
         this.renderer = new FluidBlockRenderer();
     }
 
     @Override
-    public Class<FluidStack> getValueType() {
-        return FluidStack.class;
+    public Class<Fluid> getValueType() {
+        return Fluid.class;
     }
 
     @Override
-    public EntryType<FluidStack> getType() {
+    public EntryType<Fluid> getType() {
         return TYPE;
     }
 
     @Override
-    public EntryRenderer<FluidStack> getRenderer() {
+    public EntryRenderer<Fluid> getRenderer() {
         return this.renderer;
     }
 
     @Override
-    public @Nullable ResourceLocation getIdentifier(EntryStack<FluidStack> entryStack, FluidStack fluidStack) {
-        return ForgeRegistries.FLUIDS.getKey(fluidStack.getFluid());
+    public @Nullable ResourceLocation getIdentifier(EntryStack<Fluid> entryStack, Fluid fluid) {
+        return ForgeRegistries.FLUIDS.getKey(fluid);
     }
 
     @Override
-    public boolean isEmpty(EntryStack<FluidStack> entryStack, FluidStack fluidStack) {
-        return fluidStack.isEmpty();
+    public boolean isEmpty(EntryStack<Fluid> entryStack, Fluid fluid) {
+        return fluid.getFluidType().isAir();
     }
 
     @Override
-    public FluidStack copy(EntryStack<FluidStack> entryStack, FluidStack fluidStack) {
-        return new FluidStack(fluidStack.getFluid(), fluidStack.getAmount());
+    public Fluid copy(EntryStack<Fluid> entryStack, Fluid fluid) {
+        return new FluidStack(fluid, 0).getFluid();
     }
 
     @Override
-    public FluidStack normalize(EntryStack<FluidStack> entryStack, FluidStack fluidStack) {
-        return this.copy(entryStack, fluidStack);
+    public Fluid normalize(EntryStack<Fluid> entryStack, Fluid fluid) {
+        return this.copy(entryStack, fluid);
     }
 
     @Override
-    public FluidStack wildcard(EntryStack<FluidStack> entryStack, FluidStack fluidStack) {
-        return this.copy(entryStack, fluidStack);
+    public Fluid wildcard(EntryStack<Fluid> entryStack, Fluid fluid) {
+        return this.copy(entryStack, fluid);
     }
 
     @Override
-    public @Nullable ItemStack cheatsAs(EntryStack<FluidStack> entry, FluidStack value) {
-        return value.getFluid().getBucket().getDefaultInstance();
+    public @Nullable ItemStack cheatsAs(EntryStack<Fluid> entry, Fluid value) {
+        return value.getBucket().getDefaultInstance();
     }
 
     @Override
-    public long hash(EntryStack<FluidStack> entryStack, FluidStack fluidStack, ComparisonContext comparisonContext) {
+    public long hash(EntryStack<Fluid> entryStack, Fluid fluidStack, ComparisonContext comparisonContext) {
         return fluidStack.hashCode();
     }
 
     @Override
-    public boolean equals(FluidStack fluidStack, FluidStack fluidStack1, ComparisonContext comparisonContext) {
-        return fluidStack.getFluid() == fluidStack1.getFluid();
+    public boolean equals(Fluid fluid, Fluid fluid1, ComparisonContext comparisonContext) {
+        return fluid == fluid1;
     }
 
     @Override
-    public @Nullable EntrySerializer<FluidStack> getSerializer() {
+    public @Nullable EntrySerializer<Fluid> getSerializer() {
         return null;
     }
 
     @Override
-    public Component asFormattedText(EntryStack<FluidStack> entryStack, FluidStack fluidStack) {
-        return Component.translatable(fluidStack.getFluid().getFluidType().getDescriptionId());
+    public Component asFormattedText(EntryStack<Fluid> entryStack, Fluid fluid) {
+        return Component.translatable(fluid.getFluidType().getDescriptionId());
     }
 
     @Override
-    public Stream<? extends TagKey<?>> getTagsFor(EntryStack<FluidStack> entryStack, FluidStack fluidStack) {
-        return fluidStack.getFluid().defaultFluidState().getTags();
+    public Stream<? extends TagKey<?>> getTagsFor(EntryStack<Fluid> entryStack, Fluid fluid) {
+        return fluid.defaultFluidState().getTags();
     }
 
 }

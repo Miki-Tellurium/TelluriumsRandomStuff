@@ -57,7 +57,7 @@ public class SoulLavaInfoCategory implements DisplayCategory<SoulLavaInfoDisplay
         widgets.add(Widgets.createRecipeBase(bounds));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 95, startPoint.y + 9))
-                .entry(EntryStack.of(FluidBlockEntryType.TYPE, new FluidStack(Fluids.LAVA, 1000)))
+                .entry(EntryStack.of(FluidBlockEntryType.TYPE, Fluids.LAVA))
                 .disableBackground()
                 .markInput());
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 95, startPoint.y + 16))
