@@ -80,15 +80,15 @@ public class SoulLavaInfoCategory implements IRecipeCategory<SoulLavaInfoCategor
                 graphics, 0, 5, 110, 0);
     }
 
-    private List<FormattedText> splitComponent(Font font, FormattedText text, int width) {
-        return font.getSplitter().splitLines(text, width, Style.EMPTY);
-    }
-
     private void drawSplitString(Font font, FormattedText text, GuiGraphics graphics, int x, int y, int width, int colour) {
         for (FormattedText s : splitComponent(font, text, width)) {
             graphics.drawString(this.font, Language.getInstance().getVisualOrder(s), x, y , colour, false);
             y += font.lineHeight;
         }
+    }
+
+    private List<FormattedText> splitComponent(Font font, FormattedText text, int width) {
+        return font.getSplitter().splitLines(text, width, Style.EMPTY);
     }
 
     @Override
