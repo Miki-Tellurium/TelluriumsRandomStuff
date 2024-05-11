@@ -27,8 +27,6 @@ public class TelluriumsRandomStuffMod {
     // todo update changelog
     // todo add armor trims
 
-    // todo check lava googles loot table and drop frequency from treasure chests
-
     public static final String MOD_ID = "telluriumsrandomstuff";
     public static final Logger LOGGER = LogUtils.getLogger();
 
