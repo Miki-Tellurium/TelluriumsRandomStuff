@@ -73,7 +73,7 @@ public class PotionMixingCategory extends SoulLavaTankCategory<PotionMixingHelpe
         GuiFluidRenderer.drawBackground(graphics, 57, 10, new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(),
                         soulLavaTimer.getValue()), soulLavaTimer.getMaxValue(), 8, 35);
     }
-    // todo recipe consistency
+
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, PotionMixingHelper recipe, IFocusGroup focuses) {
         super.setRecipe(builder, recipe, focuses);
