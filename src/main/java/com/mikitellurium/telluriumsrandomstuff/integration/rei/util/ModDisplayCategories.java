@@ -17,6 +17,7 @@ public interface ModDisplayCategories {
     CategoryIdentifier<PotionMixingDisplay> POTION_MIXING = CategoryIdentifier.of(FastLoc.modLoc("potion_mixing"));
     CategoryIdentifier<AmethystLensInfoDisplay> AMETHYST_LENS_INFO = CategoryIdentifier.of(FastLoc.modLoc("amethyst_lens_info"));
     CategoryIdentifier<SoulLavaTransmutationDisplay> SOUL_LAVA_TRANSMUTATION = CategoryIdentifier.of(FastLoc.modLoc("soul_lava_transmutation"));
+    CategoryIdentifier<SoulLavaInfoDisplay> SOUL_LAVA_INFO = CategoryIdentifier.of(FastLoc.modLoc("soul_lava_info"));
 
     static List<CategoryIdentifier<?>> entriesAsList() {
         List<CategoryIdentifier<?>> identifiers = new ArrayList<>();
