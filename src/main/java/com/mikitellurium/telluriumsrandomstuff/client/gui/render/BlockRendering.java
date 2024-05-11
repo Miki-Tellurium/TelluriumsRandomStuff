@@ -87,7 +87,6 @@ public final class BlockRendering {
         RenderType renderType = ItemBlockRenderTypes.getRenderLayer(fluidState);
 
         poseStack.pushPose();
-        // todo check if JEI render correctly
         poseStack.translate(xPos, yPos, 0.0F);
         poseStack.translate(15.0F, 11.33F, 10.0F);
         poseStack.scale(-9.9F, -11.0F, -9.9F);
