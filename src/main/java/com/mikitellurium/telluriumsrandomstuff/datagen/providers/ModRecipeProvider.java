@@ -86,6 +86,9 @@ public class ModRecipeProvider extends RecipeProvider {
         SoulInfusionRecipeBuilder.addRecipe(Ingredient.of(Items.IRON_INGOT), Ingredient.of(ModItems.SOUL_FRAGMENT.get()),
                         ModItems.SOUL_INFUSED_IRON_INGOT.get(), 100)
                 .save(consumer, modLoc("soul_infused_iron_ingot_from_soul_infusion"));
+        SoulInfusionRecipeBuilder.addRecipe(Ingredient.of(Items.SPIDER_EYE), Ingredient.of(ModItems.SOUL_FRAGMENT.get()),
+                        Items.FERMENTED_SPIDER_EYE, 80)
+                .save(consumer, modLoc("fermented_spider_eye_from_soul_infusion"));
     }
 
     private void buildSoulLavaTransmutationRecipes(Consumer<FinishedRecipe> consumer) {
@@ -121,6 +124,9 @@ public class ModRecipeProvider extends RecipeProvider {
         CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Items.STRING, 8)),
                         Items.COBWEB, 1, 100)
                 .save(consumer, modLoc("cobweb_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Items.NETHERITE_SCRAP, 4)),
+                        Items.NETHERITE_INGOT, 1, 400)
+                .save(consumer, modLoc("netherite_ingot_from_compacting"));
     }
 
     private void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {

@@ -1,0 +1,11 @@
+{
+  "type": "telluriumsrandomstuff:soul_infusion",
+  "catalyst": {
+    "item": "telluriumsrandomstuff:soul_fragment"
+  },
+  "cost": 80,
+  "ingredient": {
+    "item": "minecraft:spider_eye"
+  },
+  "result": "minecraft:fermented_spider_eye"
+}

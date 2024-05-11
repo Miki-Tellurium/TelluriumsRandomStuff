@@ -28,8 +28,6 @@ public class TelluriumsRandomStuffMod {
     // todo add armor trims
 
     // todo check lava googles loot table and drop frequency from treasure chests
-    // todo compacting netherite recipe
-    // todo spider eye to fermented recipe
 
     public static final String MOD_ID = "telluriumsrandomstuff";
     public static final Logger LOGGER = LogUtils.getLogger();
