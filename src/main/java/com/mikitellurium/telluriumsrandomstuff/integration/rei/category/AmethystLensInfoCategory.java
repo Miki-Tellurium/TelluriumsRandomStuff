@@ -1,11 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei.category;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.util.BlockRendering;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.AmethystLensInfoDisplay;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
-import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.FluidBlockEntryType;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.ModDisplayCategories;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import me.shedaniel.math.Point;
@@ -15,15 +11,9 @@ import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LayeredCauldronBlock;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;

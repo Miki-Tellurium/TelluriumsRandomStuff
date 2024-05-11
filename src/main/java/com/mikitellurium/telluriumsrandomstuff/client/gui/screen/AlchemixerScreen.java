@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AlchemixerMenu;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.render.GuiFluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.client.gui.GuiGraphics;

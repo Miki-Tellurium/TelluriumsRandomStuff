@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.gui.util;
+package com.mikitellurium.telluriumsrandomstuff.client.gui.render;
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;

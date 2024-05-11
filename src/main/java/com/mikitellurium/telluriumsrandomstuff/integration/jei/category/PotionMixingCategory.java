@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.render.GuiFluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.util.BrewingBubblesTickTimer;
 import com.mikitellurium.telluriumsrandomstuff.integration.util.PotionMixingHelper;

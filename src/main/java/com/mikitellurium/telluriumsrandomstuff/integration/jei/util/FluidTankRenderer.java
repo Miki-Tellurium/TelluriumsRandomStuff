@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.util;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.util.GuiFluidRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.gui.render.GuiFluidRenderer;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
