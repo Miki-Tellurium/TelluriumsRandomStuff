@@ -67,12 +67,12 @@ public class SoulLavaTransmutationCategory implements DisplayCategory<SoulLavaTr
     }
 
     @Override
-    public int getDisplayHeight() {
+    public int getDisplayWidth(SoulLavaTransmutationDisplay display) {
         return 68;
     }
 
     @Override
-    public int getDisplayWidth(SoulLavaTransmutationDisplay display) {
+    public int getDisplayHeight() {
         return 68;
     }
 

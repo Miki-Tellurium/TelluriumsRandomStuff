@@ -73,12 +73,12 @@ public class AmethystLensInfoCategory implements DisplayCategory<AmethystLensInf
     }
 
     @Override
-    public int getDisplayHeight() {
+    public int getDisplayWidth(AmethystLensInfoDisplay display) {
         return 68;
     }
 
     @Override
-    public int getDisplayWidth(AmethystLensInfoDisplay display) {
+    public int getDisplayHeight() {
         return 68;
     }
 
