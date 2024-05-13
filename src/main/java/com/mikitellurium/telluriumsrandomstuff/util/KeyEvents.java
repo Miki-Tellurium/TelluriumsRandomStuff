@@ -9,6 +9,8 @@ import net.minecraftforge.event.GameShuttingDownEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Random;
+
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, value = Dist.CLIENT)
 public class KeyEvents {
 
@@ -75,6 +77,7 @@ public class KeyEvents {
             System.out.println("TranslateX="+translateX);
             System.out.println("TranslateY="+translateY);
             System.out.println("TranslateZ="+translateZ);
+            System.out.println("Random Int:" + new Random().nextInt(Integer.MAX_VALUE));
         }
     }
 
