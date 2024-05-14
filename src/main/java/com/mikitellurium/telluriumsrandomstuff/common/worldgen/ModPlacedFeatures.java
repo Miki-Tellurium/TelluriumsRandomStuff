@@ -29,13 +29,13 @@ public class ModPlacedFeatures {
 
         register(context, OPAL_CLUSTER_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPAL_CLUSTER),
                 OrePlacementUtils.rareOrePlacement(10, HeightRangePlacement.uniform(
-                        VerticalAnchor.absolute(-60), VerticalAnchor.absolute(128))));
+                        VerticalAnchor.absolute(-60), VerticalAnchor.absolute(70))));
         register(context, OPAL_CRYSTAL_ORE_SMALL_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPAL_CRYSTAL_ORE_SMALL),
                 OrePlacementUtils.commonOrePlacement(25, HeightRangePlacement.uniform(
-                        VerticalAnchor.absolute(-60), VerticalAnchor.absolute(128))));
+                        VerticalAnchor.absolute(-60), VerticalAnchor.absolute(70))));
         register(context, OPAL_CRYSTAL_ORE_LARGE_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPAL_CRYSTAL_ORE_LARGE),
                 OrePlacementUtils.commonOrePlacement(20, HeightRangePlacement.uniform(
-                        VerticalAnchor.absolute(-60), VerticalAnchor.absolute(128))));
+                        VerticalAnchor.absolute(-60), VerticalAnchor.absolute(70))));
         register(context, BLUE_GLOWSTONE_PLACED, configuredFeatures.getOrThrow(ModConfiguredFeatures.NETHER_BLUE_GLOWSTONE),
                 CountPlacement.of(BiasedToBottomInt.of(0, 7)), InSquarePlacement.spread(),
                 PlacementUtils.RANGE_4_4, BiomeFilter.biome());
