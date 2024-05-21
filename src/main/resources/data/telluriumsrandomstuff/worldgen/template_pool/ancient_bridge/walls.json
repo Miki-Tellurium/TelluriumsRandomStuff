@@ -1,0 +1,149 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/back_left_corner_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/back_left_corner_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/back_right_corner_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/back_right_corner_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/back_wall_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/back_wall_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/front_left_corner_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/front_left_corner_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/front_right_corner_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/front_right_corner_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/front_wall_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/front_wall_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/left_wall_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/left_wall_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/right_wall_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/walls/right_wall_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

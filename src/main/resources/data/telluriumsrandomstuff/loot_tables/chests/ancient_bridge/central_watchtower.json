@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "telluriumsrandomstuff:grappling_hook"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "telluriumsrandomstuff:chests/ancient_bridge"
+}

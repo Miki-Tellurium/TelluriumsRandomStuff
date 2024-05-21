@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "telluriumsrandomstuff:ancient_bridge",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 185212915,
+    "spacing": 32,
+    "separation": 12
+  }
+}
