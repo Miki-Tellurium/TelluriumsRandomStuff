@@ -1,5 +1,6 @@
 Central Watchtower:
 start pool:telluriumsrandomstuff:ancient_bridge/central_watchtower
+telluriumsrandomstuff:ancient_bridge/central_watchtower/bottom
 minecraft:ancient_bridge_anchor
 telluriumsrandomstuff:ancient_bridge/center/walls
 telluriumsrandomstuff:ancient_bridge/entrance

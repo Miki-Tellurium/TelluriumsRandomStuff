@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "telluriumsrandomstuff:ancient_bridge/center/central_watchtower_1",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/watchtower/central_watchtower_bottom_1",
         "processors": "minecraft:ancient_city_start_degradation",
         "projection": "rigid"
       },
@@ -12,7 +12,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "telluriumsrandomstuff:ancient_bridge/center/central_watchtower_2",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/watchtower/central_watchtower_bottom_2",
         "processors": "minecraft:ancient_city_start_degradation",
         "projection": "rigid"
       },
@@ -21,7 +21,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "telluriumsrandomstuff:ancient_bridge/center/central_watchtower_3",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/watchtower/central_watchtower_bottom_3",
         "processors": "minecraft:ancient_city_start_degradation",
         "projection": "rigid"
       },

@@ -1,0 +1,32 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/watchtower/central_watchtower_top_1",
+        "processors": "minecraft:ancient_city_start_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/watchtower/central_watchtower_top_2",
+        "processors": "minecraft:ancient_city_start_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/center/watchtower/central_watchtower_top_3",
+        "processors": "minecraft:ancient_city_start_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}
