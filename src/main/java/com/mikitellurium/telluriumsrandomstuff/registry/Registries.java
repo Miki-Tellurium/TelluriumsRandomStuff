@@ -24,6 +24,7 @@ public class Registries {
         ModCommonConfig.register();
         ModLootModifiers.register(modEventBus);
         ModLootItemFunctions.register(modEventBus);
+        ModStructures.register(modEventBus);
         MobEffectUpgradeManager.init();
     }
 

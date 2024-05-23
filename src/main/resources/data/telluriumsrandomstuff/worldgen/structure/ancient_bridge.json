@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:jigsaw",
+  "type": "telluriumsrandomstuff:ancient_bridge",
   "start_jigsaw_name": "minecraft:ancient_bridge_anchor",
   "start_pool": "telluriumsrandomstuff:ancient_bridge/central_watchtower/top",
   "size": 7,
