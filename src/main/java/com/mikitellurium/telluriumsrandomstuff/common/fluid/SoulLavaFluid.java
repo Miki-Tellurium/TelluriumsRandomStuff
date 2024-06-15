@@ -2,7 +2,6 @@ package com.mikitellurium.telluriumsrandomstuff.common.fluid;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,10 +16,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.monster.MagmaCube;
-import net.minecraft.world.entity.monster.Strider;
-import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -32,8 +28,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
@@ -153,46 +147,46 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     @Override
-    protected void animateTick(Level pLevel, BlockPos pPos, FluidState pState, RandomSource pRandom) {
-        BlockPos blockpos = pPos.above();
-        if (pLevel.getBlockState(blockpos).isAir() && !pLevel.getBlockState(blockpos).isSolidRender(pLevel, blockpos)) {
-            if (pRandom.nextInt(100) == 0) {
-                double pX = pPos.getX() + pRandom.nextDouble();
-                double pY = pPos.above().getY() + (pRandom.nextDouble() * 0.25d);
-                double pZ = pPos.getZ() + pRandom.nextDouble();
-                pLevel.addParticle(ParticleTypes.SOUL, pX, pY, pZ, 0.0D, 0.0D, 0.0D);
-                SoundEvent sound = pRandom.nextInt(3) == 0 ? SoundEvents.SOUL_ESCAPE : SoundEvents.LAVA_POP;
-                pLevel.playLocalSound(pX, pY, pZ, sound, SoundSource.BLOCKS, 0.2F + pRandom.nextFloat() * 0.2F, 0.9F + pRandom.nextFloat() * 0.15F, false);
+    protected void animateTick(Level level, BlockPos pos, FluidState fluidState, RandomSource random) {
+        BlockPos blockpos = pos.above();
+        if (level.getBlockState(blockpos).isAir() && !level.getBlockState(blockpos).isSolidRender(level, blockpos)) {
+            if (random.nextInt(100) == 0) {
+                double pX = pos.getX() + random.nextDouble();
+                double pY = pos.above().getY() + (random.nextDouble() * 0.25d);
+                double pZ = pos.getZ() + random.nextDouble();
+                level.addParticle(ParticleTypes.SOUL, pX, pY, pZ, 0.0D, 0.0D, 0.0D);
+                SoundEvent sound = random.nextInt(3) == 0 ? SoundEvents.SOUL_ESCAPE : SoundEvents.LAVA_POP;
+                level.playLocalSound(pX, pY, pZ, sound, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
             }
 
-            if (pRandom.nextInt(200) == 0) {
-                pLevel.playLocalSound(pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.LAVA_AMBIENT, SoundSource.BLOCKS, 0.2F + pRandom.nextFloat() * 0.2F, 0.9F + pRandom.nextFloat() * 0.15F, false);
+            if (random.nextInt(200) == 0) {
+                level.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.LAVA_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
             }
         }
 
-        if (pLevel.isRaining()) {
-            ParticleUtils.spawnRainParticles(pLevel, pPos, pState, pRandom);
+        if (level.isRaining()) {
+            ParticleUtils.spawnRainParticles(level, pos, fluidState, random);
         }
 
     }
 
     @Override
-    protected void randomTick(Level pLevel, BlockPos pPos, FluidState pState, RandomSource pRandom) {
-        if (pLevel.getGameRules().getBoolean(GameRules.RULE_DOFIRETICK)) {
-            int i = pRandom.nextInt(3);
+    protected void randomTick(Level level, BlockPos pos, FluidState fluidState, RandomSource random) {
+        if (level.getGameRules().getBoolean(GameRules.RULE_DOFIRETICK)) {
+            int i = random.nextInt(3);
             if (i > 0) {
-                BlockPos blockpos = pPos;
+                BlockPos blockpos = pos;
 
                 for(int j = 0; j < i; ++j) {
-                    blockpos = blockpos.offset(pRandom.nextInt(3) - 1, 1, pRandom.nextInt(3) - 1);
-                    if (!pLevel.isLoaded(blockpos)) {
+                    blockpos = blockpos.offset(random.nextInt(3) - 1, 1, random.nextInt(3) - 1);
+                    if (!level.isLoaded(blockpos)) {
                         return;
                     }
 
-                    BlockState blockstate = pLevel.getBlockState(blockpos);
+                    BlockState blockstate = level.getBlockState(blockpos);
                     if (blockstate.isAir()) {
-                        if (this.hasFlammableNeighbours(pLevel, blockpos)) {
-                            pLevel.setBlockAndUpdate(blockpos, ForgeEventFactory.fireFluidPlaceBlockEvent(pLevel, blockpos, pPos, Blocks.FIRE.defaultBlockState()));
+                        if (this.hasFlammableNeighbours(level, blockpos)) {
+                            level.setBlockAndUpdate(blockpos, ForgeEventFactory.fireFluidPlaceBlockEvent(level, blockpos, pos, Blocks.FIRE.defaultBlockState()));
                             return;
                         }
                     } else if (blockstate.blocksMotion()) {
@@ -201,13 +195,13 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
                 }
             } else {
                 for(int k = 0; k < 3; ++k) {
-                    BlockPos blockpos1 = pPos.offset(pRandom.nextInt(3) - 1, 0, pRandom.nextInt(3) - 1);
-                    if (!pLevel.isLoaded(blockpos1)) {
+                    BlockPos blockpos1 = pos.offset(random.nextInt(3) - 1, 0, random.nextInt(3) - 1);
+                    if (!level.isLoaded(blockpos1)) {
                         return;
                     }
 
-                    if (pLevel.isEmptyBlock(blockpos1.above()) && this.isFlammable(pLevel, blockpos1, Direction.UP)) {
-                        pLevel.setBlockAndUpdate(blockpos1.above(), ForgeEventFactory.fireFluidPlaceBlockEvent(pLevel, blockpos1.above(), pPos, Blocks.FIRE.defaultBlockState()));
+                    if (level.isEmptyBlock(blockpos1.above()) && this.isFlammable(level, blockpos1, Direction.UP)) {
+                        level.setBlockAndUpdate(blockpos1.above(), ForgeEventFactory.fireFluidPlaceBlockEvent(level, blockpos1.above(), pos, Blocks.FIRE.defaultBlockState()));
                     }
                 }
             }
@@ -215,9 +209,9 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         }
     }
 
-    private boolean hasFlammableNeighbours(LevelReader pLevel, BlockPos pPos) {
+    private boolean hasFlammableNeighbours(LevelReader level, BlockPos pos) {
         for(Direction direction : Direction.values()) {
-            if (this.isFlammable(pLevel, pPos.relative(direction), direction.getOpposite())) {
+            if (this.isFlammable(level, pos.relative(direction), direction.getOpposite())) {
                 return true;
             }
         }
@@ -237,12 +231,12 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     @Override
-    protected void beforeDestroyingBlock(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
-        this.fizz(pLevel, pPos);
+    protected void beforeDestroyingBlock(LevelAccessor level, BlockPos pos, BlockState blockState) {
+        this.fizz(level, pos);
     }
 
-    private void fizz(LevelAccessor pLevel, BlockPos pPos) {
-        pLevel.levelEvent(1501, pPos, 0);
+    private void fizz(LevelAccessor level, BlockPos pos) {
+        level.levelEvent(1501, pos, 0);
     }
 
     @Override
@@ -276,8 +270,8 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     @Override
-    public boolean canBeReplacedWith(FluidState pFluidState, BlockGetter pBlockReader, BlockPos pPos, Fluid pFluid, Direction pDirection) {
-        return pFluidState.getHeight(pBlockReader, pPos) >= 0.44444445F && (pFluid.is(FluidTags.WATER));
+    public boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockGetter, BlockPos pos, Fluid fluid, Direction direction) {
+        return fluidState.getHeight(blockGetter, pos) >= 0.44444445F && (fluid.is(FluidTags.WATER));
     }
 
     @Override
@@ -286,12 +280,12 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     @Override
-    public int getAmount(FluidState pState) {
-        return this.isSource(pState) ? 8 : pState.getValue(LEVEL);
+    public int getAmount(FluidState fluidState) {
+        return this.isSource(fluidState) ? 8 : fluidState.getValue(LEVEL);
     }
 
     @Override
-    public boolean isSource(FluidState pState) {
+    public boolean isSource(FluidState fluidState) {
         return this instanceof Source;
     }
 
@@ -307,13 +301,13 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        public boolean isSource(FluidState pState) {
+        public boolean isSource(FluidState fluidState) {
             return false;
         }
 
         @Override
-        public int getAmount(FluidState pState) {
-            return pState.getValue(LEVEL);
+        public int getAmount(FluidState fluidState) {
+            return fluidState.getValue(LEVEL);
         }
 
     }
@@ -324,11 +318,11 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
             super(properties);
         }
 
-        public int getAmount(FluidState pState) {
+        public int getAmount(FluidState fluidState) {
             return 8;
         }
 
-        public boolean isSource(FluidState pState) {
+        public boolean isSource(FluidState fluidState) {
             return true;
         }
 
