@@ -1,6 +1,140 @@
 {
   "elements": [
-    
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/intact_bridge_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/intact_bridge_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/intact_bridge_3",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/intact_bridge_4",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/intact_bridge_stairs",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/ruined_bridge_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/ruined_bridge_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/ruined_bridge_3",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/ruined_bridge_ladder",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/ruined_bridge_stairs",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/intact_cross_bridge",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/intact_intersection_bridge",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/intact_lshape_bridge",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/ruined_cross_bridge_1",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/ruined_cross_bridge_2",
+        "processors": "minecraft:ancient_city_walls_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
   ],
-  "fallback": "minecraft:empty"
+  "fallback": "telluriumsrandomstuff:ancient_bridge/bridges/bridge_ends"
 }

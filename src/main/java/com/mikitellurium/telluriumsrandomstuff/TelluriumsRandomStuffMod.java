@@ -26,6 +26,7 @@ public class TelluriumsRandomStuffMod {
     // todo rei and emi compatibility
     // todo update changelog
     // todo add armor trims
+    // /place jigsaw telluriumsrandomstuff:ancient_bridge/central_watchtower/top ancient_bridge_anchor 7 ~ -35 ~
 
     public static final String MOD_ID = "telluriumsrandomstuff";
     public static final Logger LOGGER = LogUtils.getLogger();
