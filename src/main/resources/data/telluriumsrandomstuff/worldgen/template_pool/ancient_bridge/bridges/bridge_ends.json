@@ -7,7 +7,7 @@
         "processors": "minecraft:ancient_city_walls_degradation",
         "projection": "rigid"
       },
-      "weight": 4
+      "weight": 5
     },
     {
       "element": {
@@ -21,7 +21,16 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "telluriumsrandomstuff:ancient_bridge/bridges/end/bridge_end_ruined_portal",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/end/bridge_end_ruined_portal_1",
+        "processors": "telluriumsrandomstuff:abandoned_nether_portal",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/bridges/end/bridge_end_ruined_portal_2",
         "processors": "telluriumsrandomstuff:abandoned_nether_portal",
         "projection": "rigid"
       },
