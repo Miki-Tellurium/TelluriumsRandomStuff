@@ -26,7 +26,7 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(AlchemixerBlock.class);
     }
 
-    public static void registerCommands(RegisterCommandsEvent event){
+    private static void registerCommands(RegisterCommandsEvent event){
         SoulAnchorCommand.register(event.getDispatcher());
         LavaGooglesCommand.register(event.getDispatcher());
     }
