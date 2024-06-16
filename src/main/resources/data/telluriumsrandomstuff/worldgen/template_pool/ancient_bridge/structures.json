@@ -1,6 +1,38 @@
 {
   "elements": [
-    
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 5
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/notice_board_small",
+        "processors": "telluriumsrandomstuff:notice_board_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/notice_board_medium",
+        "processors": "telluriumsrandomstuff:notice_board_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/notice_board_large",
+        "processors": "telluriumsrandomstuff:notice_board_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
   ],
   "fallback": "minecraft:empty"
 }
