@@ -2,7 +2,7 @@
   "type": "telluriumsrandomstuff:ancient_bridge",
   "start_jigsaw_name": "minecraft:ancient_bridge_anchor",
   "start_pool": "telluriumsrandomstuff:ancient_bridge/central_watchtower/top",
-  "size": 9,
+  "size": 8,
   "max_distance_from_center": 256,
   "biomes": "#telluriumsrandomstuff:has_structure/ancient_bridge",
   "step": "underground_decoration",
