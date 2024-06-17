@@ -10,14 +10,14 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModLootItemFunctions {
 
-    public static DeferredRegister<LootItemFunctionType> LOOT_ITEM_FUNCTION_TYPES =
+    public static DeferredRegister<LootItemFunctionType> LOOT_ITEM_FUNCTIONS =
             DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, FastLoc.modId());
 
-    public static RegistryObject<LootItemFunctionType> SET_RANDOM_GOOGLES_COLOR = LOOT_ITEM_FUNCTION_TYPES.register(
+    public static RegistryObject<LootItemFunctionType> SET_RANDOM_GOOGLES_COLOR = LOOT_ITEM_FUNCTIONS.register(
             "set_random_googles_color", () -> new LootItemFunctionType(new SetRandomGooglesColorFunction.Serializer()));
 
     public static void register(IEventBus eventBus) {
-        LOOT_ITEM_FUNCTION_TYPES.register(eventBus);
+        LOOT_ITEM_FUNCTIONS.register(eventBus);
     }
 
 }
