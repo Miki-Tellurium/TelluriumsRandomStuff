@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.common.structure.AncientBridge;
+import com.mikitellurium.telluriumsrandomstuff.common.worldgen.structure.AncientBridge;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.structure.StructureType;

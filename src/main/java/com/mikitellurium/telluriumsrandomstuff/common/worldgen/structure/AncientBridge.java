@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.structure;
+package com.mikitellurium.telluriumsrandomstuff.common.worldgen.structure;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModStructures;
 import com.mojang.serialization.Codec;

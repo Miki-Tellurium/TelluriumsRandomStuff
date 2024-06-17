@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.common.worldgen.processor.WriteSignProcessor;
+import com.mikitellurium.telluriumsrandomstuff.common.worldgen.structure.processor.WriteSignProcessor;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
@@ -15,7 +15,7 @@ public class ModStructureProcessors {
 
     public static RegistryObject<StructureProcessorType<WriteSignProcessor>> WRITE_SIGN = PROCESSORS.register("write_sign",
             () -> WriteSignProcessor::codec);
-    
+
     public static void register(IEventBus eventBus) {
         PROCESSORS.register(eventBus);
     }
