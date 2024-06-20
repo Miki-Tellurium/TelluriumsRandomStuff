@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import net.minecraft.util.FastColor;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 
@@ -63,6 +64,15 @@ public class ColorsUtil {
         int g = (int) (floats[1] * 255.0f);
         int b = (int) (floats[2] * 255.0f);
         return FastColor.ABGR32.color(255, r, g, b);
+    }
+
+    public static DyeColor getRandomDyeColor() {
+        return getRandomDyeColor(RandomSource.create());
+    }
+
+    public static DyeColor getRandomDyeColor(RandomSource random) {
+        int i = DyeColor.values().length;
+        return DyeColor.byId(random.nextInt(i));
     }
 
 }

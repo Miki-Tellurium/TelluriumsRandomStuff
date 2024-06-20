@@ -46,7 +46,7 @@
           "input_predicate": {
             "block": "minecraft:dark_oak_wall_sign",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.7
+            "probability": 0.6
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -59,18 +59,168 @@
     },
     {
       "processor_type": "telluriumsrandomstuff:write_sign",
+      "probability": 0.6,
+      "glowing_chance": 0.02,
       "values": [
         {
-          "text": "Hello"
+          "text": "of",
+          "color": "random"
         },
         {
-          "text": "Minecraft"
+          "text": "mine",
+          "color": "random"
         },
         {
-          "text": "Creeper"
+          "text": "trade",
+          "color": "random"
         },
         {
-          "text": "Zombie"
+          "text": "exit",
+          "color": "random"
+        },
+        {
+          "text": "Warden",
+          "color": "blue"
+        },
+        {
+          "text": "escape",
+          "color": "random"
+        },
+        {
+          "text": "to",
+          "color": "random"
+        },
+        {
+          "text": "best",
+          "color": "random"
+        },
+        {
+          "text": "market",
+          "color": "random"
+        },
+        {
+          "text": "goods",
+          "color": "random"
+        },
+        {
+          "text": "treasure",
+          "color": "random"
+        },
+        {
+          "text": "route",
+          "color": "random"
+        },
+        {
+          "text": "merchant",
+          "color": "random"
+        },
+        {
+          "text": "journey",
+          "color": "random"
+        },
+        {
+          "text": "map",
+          "color": "random"
+        },
+        {
+          "text": "safe",
+          "color": "random"
+        },
+        {
+          "text": "path",
+          "color": "random"
+        },
+        {
+          "text": "rest",
+          "color": "random"
+        },
+        {
+          "text": "wisdom",
+          "color": "random"
+        },
+        {
+          "text": "home",
+          "color": "random"
+        },
+        {
+          "text": "travel",
+          "color": "random"
+        },
+        {
+          "text": "friend",
+          "color": "random"
+        },
+        {
+          "text": "foe",
+          "color": "random"
+        },
+        {
+          "text": "from",
+          "color": "random"
+        },
+        {
+          "text": "and",
+          "color": "random"
+        },
+        {
+          "text": "with",
+          "color": "random"
+        },
+        {
+          "text": "by",
+          "color": "random"
+        },
+        {
+          "text": "for",
+          "color": "random"
+        },
+        {
+          "text": "through",
+          "color": "random"
+        },
+        {
+          "text": "around",
+          "color": "random"
+        },
+        {
+          "text": "within",
+          "color": "random"
+        },
+        {
+          "text": "under",
+          "color": "black"
+        },
+        {
+          "text": "above",
+          "color": "purple"
+        },
+        {
+          "text": "save",
+          "color": "random"
+        },
+        {
+          "text": "offer",
+          "color": "random"
+        },
+        {
+          "text": "iron",
+          "color": "light_gray"
+        },
+        {
+          "text": "diamond",
+          "color": "cyan"
+        },
+        {
+          "text": "redstone",
+          "color": "red"
+        },
+        {
+          "text": "the",
+          "color": "random"
+        },
+        {
+          "text": "combat",
+          "color": "random"
         }
       ]
     }

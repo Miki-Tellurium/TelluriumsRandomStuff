@@ -43,6 +43,113 @@
           }
         }
       ]
+    },
+    {
+      "processor_type": "telluriumsrandomstuff:write_sign",
+      "probability": 1.0,
+      "glowing_chance": 0.2,
+      "values": [
+        {
+          "text": "of",
+          "color": "random"
+        },
+        {
+          "text": "mine",
+          "color": "random"
+        },
+        {
+          "text": "trade",
+          "color": "random"
+        },
+        {
+          "text": "exit",
+          "color": "random"
+        },
+        {
+          "text": "escape",
+          "color": "random"
+        },
+        {
+          "text": "to",
+          "color": "random"
+        },
+        {
+          "text": "best",
+          "color": "random"
+        },
+        {
+          "text": "market",
+          "color": "random"
+        },
+        {
+          "text": "route",
+          "color": "random"
+        },
+        {
+          "text": "journey",
+          "color": "random"
+        },
+        {
+          "text": "map",
+          "color": "random"
+        },
+        {
+          "text": "safe",
+          "color": "random"
+        },
+        {
+          "text": "path",
+          "color": "random"
+        },
+        {
+          "text": "home",
+          "color": "random"
+        },
+        {
+          "text": "travel",
+          "color": "random"
+        },
+        {
+          "text": "from",
+          "color": "random"
+        },
+        {
+          "text": "for",
+          "color": "random"
+        },
+        {
+          "text": "through",
+          "color": "random"
+        },
+        {
+          "text": "around",
+          "color": "random"
+        },
+        {
+          "text": "under",
+          "color": "black"
+        },
+        {
+          "text": "save",
+          "color": "random"
+        },
+        {
+          "text": "the",
+          "color": "random"
+        },
+        {
+          "text": "Nether",
+          "color": "red"
+        },
+        {
+          "text": "leave",
+          "color": "random"
+        },
+        {
+          "text": "enter",
+          "color": "random"
+        }
+      ]
     }
   ]
 }
