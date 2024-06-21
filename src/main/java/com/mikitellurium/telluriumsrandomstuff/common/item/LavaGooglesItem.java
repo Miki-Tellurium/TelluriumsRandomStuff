@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -90,7 +91,7 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
     }
 
     public static ItemStack setRandomColor(ItemStack itemStack, RandomSource random) {
-        return setColor(itemStack, DyeColor.byId(random.nextInt(16)));
+        return setColor(itemStack, ColorsUtil.getRandomDyeColor(random));
     }
 
     public static DyeColor getColor(ItemStack itemStack) {

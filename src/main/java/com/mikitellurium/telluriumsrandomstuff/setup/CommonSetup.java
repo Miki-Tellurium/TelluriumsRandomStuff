@@ -9,6 +9,11 @@ import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,9 +31,12 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(AlchemixerBlock.class);
     }
 
-    private static void registerCommands(RegisterCommandsEvent event){
-        SoulAnchorCommand.register(event.getDispatcher());
-        LavaGooglesCommand.register(event.getDispatcher());
+    private static void registerCommands(RegisterCommandsEvent event) {
+        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
+        LiteralArgumentBuilder<CommandSourceStack> builder = Commands.literal(FastLoc.modId())
+                        .requires((sourceStack) -> sourceStack.hasPermission(2));
+        dispatcher.register(LavaGooglesCommand.build(builder));
+        dispatcher.register(SoulAnchorCommand.build(builder));
     }
 
 }

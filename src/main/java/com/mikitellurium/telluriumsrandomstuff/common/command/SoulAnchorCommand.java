@@ -2,8 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.command;
 
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapability;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapabilityProvider;
-import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
-import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -14,10 +13,8 @@ import java.util.Collection;
 
 public class SoulAnchorCommand {
 
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal(FastLoc.modId())
-                .requires((commandSourceStack) -> commandSourceStack.hasPermission(3))
-                .then(Commands.literal("soulAnchor")
+    public static LiteralArgumentBuilder<CommandSourceStack> build(LiteralArgumentBuilder<CommandSourceStack> builder) {
+        return builder.then(Commands.literal("soulAnchor")
                         .then(Commands.literal("clearSavedInventory")
                                 .then(Commands.argument("targets", EntityArgument.players())
                                         .executes((context) -> clearSavedInventory(context.getSource(),
@@ -41,8 +38,8 @@ public class SoulAnchorCommand {
                                         .then(Commands.literal("false")
                                                 .executes((context -> hasChargedAnchor(context.getSource(),
                                                         EntityArgument.getOptionalPlayers(context, "targets"),
-                                                        false))))))
-                ));
+                                                        false))
+                                                )))));
     }
 
     private static int clearSavedInventory(CommandSourceStack source, Collection<ServerPlayer> players) {
