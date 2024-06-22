@@ -1,10 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff;
 
+import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.CustomRegistries;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModPotionMixingFunctions;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModRegistries;
 import com.mikitellurium.telluriumsrandomstuff.setup.CommonSetup;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
@@ -38,6 +40,7 @@ public class TelluriumsRandomStuffMod {
         MinecraftForge.EVENT_BUS.register(this);
         CommonSetup.registerForgeBusEvents();
 
+        CustomRegistries.init(modEventBus);
         ModRegistries.init(modEventBus);
     }
 

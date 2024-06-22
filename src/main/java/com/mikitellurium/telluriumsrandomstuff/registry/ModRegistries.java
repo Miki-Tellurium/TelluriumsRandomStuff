@@ -1,6 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.api.MobEffectUpgradeManager;
+import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingFunction;
+import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.CustomRegistries;
 import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
@@ -47,6 +49,7 @@ public class ModRegistries {
     public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, FastLoc.modId());
     public static final DeferredRegister<LootItemFunctionType> LOOT_ITEM_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, FastLoc.modId());
     public static final DeferredRegister<ArgumentTypeInfo<?, ?>> ARGUMENT_TYPES = DeferredRegister.create(ForgeRegistries.COMMAND_ARGUMENT_TYPES, FastLoc.modId());
+    public static final DeferredRegister<PotionMixingFunction> POTION_MIXING_FUNCTIONS = DeferredRegister.create(CustomRegistries.POTION_MIXING_KEY, FastLoc.modId());
 
     public static void init(IEventBus modEventBus) {
         ModItems.register(modEventBus);
@@ -66,6 +69,7 @@ public class ModRegistries {
         ModLootModifiers.register(modEventBus);
         ModLootItemFunctions.register(modEventBus);
         ModArgumentTypes.register(modEventBus);
+        ModPotionMixingFunctions.register(modEventBus);
 
         MobEffectUpgradeManager.init();
 
