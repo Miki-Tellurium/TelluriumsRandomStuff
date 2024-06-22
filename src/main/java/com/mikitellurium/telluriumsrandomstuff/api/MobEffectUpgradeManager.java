@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.api;
 
-import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgradeType;
+import com.mikitellurium.telluriumsrandomstuff.common.potionmixing.MobEffectUpgradeType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 

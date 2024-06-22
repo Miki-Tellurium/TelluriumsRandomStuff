@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.effect;
+package com.mikitellurium.telluriumsrandomstuff.common.potionmixing;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.common.IExtensibleEnum;

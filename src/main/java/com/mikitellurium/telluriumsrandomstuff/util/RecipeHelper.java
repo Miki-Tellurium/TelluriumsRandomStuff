@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mikitellurium.telluriumsrandomstuff.api.MobEffectUpgradeManager;
-import com.mikitellurium.telluriumsrandomstuff.common.effect.MobEffectUpgradeType;
+import com.mikitellurium.telluriumsrandomstuff.common.potionmixing.MobEffectUpgradeType;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
