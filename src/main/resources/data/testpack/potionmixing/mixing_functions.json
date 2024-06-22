@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "mob_effect": "minecraft:speed",
+      "function": "telluriumsrandomstuff:increase_duration"
+    },
+    {
+      "mob_effect": "minecraft:slow_falling",
+      "function": "telluriumsrandomstuff:increase_duration"
+    }
+  ]
+}

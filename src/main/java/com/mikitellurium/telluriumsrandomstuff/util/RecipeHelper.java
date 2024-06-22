@@ -3,9 +3,9 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mikitellurium.telluriumsrandomstuff.api.MobEffectUpgradeManager;
-import com.mikitellurium.telluriumsrandomstuff.common.potionmixing.MobEffectUpgradeType;
+import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingFunction;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import net.minecraft.core.NonNullList;
@@ -124,11 +124,11 @@ public class RecipeHelper {
         return itemStacks;
     }
 
-    public static List<ItemStack> getPotionsByUpgradeType(MobEffectUpgradeType mobEffectUpgrade) {
+    public static List<ItemStack> getPotionsByFunctionType(PotionMixingFunction function) {
         List<ItemStack> itemStacks = new ArrayList<>();
         ForgeRegistries.POTIONS.getValues().stream().filter((potion -> potion.getEffects().size() == 1))
                 .forEach((potion) -> {
-                    if (MobEffectUpgradeManager.getCategory(potion.getEffects().get(0).getEffect()) == mobEffectUpgrade) {
+                    if (PotionMixingManager.getFunction(potion.getEffects().get(0).getEffect()) == function) {
                         itemStacks.add(PotionUtils.setPotion(new ItemStack(Items.POTION), potion));
                     }
                 });

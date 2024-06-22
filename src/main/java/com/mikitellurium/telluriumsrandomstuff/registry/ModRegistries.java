@@ -1,8 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.api.MobEffectUpgradeManager;
-import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingFunction;
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.CustomRegistries;
+import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingFunction;
 import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
@@ -70,8 +69,6 @@ public class ModRegistries {
         ModLootItemFunctions.register(modEventBus);
         ModArgumentTypes.register(modEventBus);
         ModPotionMixingFunctions.register(modEventBus);
-
-        MobEffectUpgradeManager.init();
 
         ModMessages.register();
         ModCommonConfig.register();

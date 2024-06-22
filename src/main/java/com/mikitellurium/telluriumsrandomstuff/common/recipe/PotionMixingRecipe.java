@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
-import com.mikitellurium.telluriumsrandomstuff.api.MobEffectUpgradeManager;
+import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
@@ -53,29 +53,29 @@ public record PotionMixingRecipe(ItemStack firstPotion, ItemStack secondPotion) 
     }
 
     private List<MobEffectInstance> getEffects() {
-        List<MobEffectInstance> mobEffects = new ArrayList<>();
-        List<MobEffectInstance> firstPotionEffects = PotionUtils.getMobEffects(this.firstPotion);
-        List<MobEffectInstance> secondPotionEffects = PotionUtils.getMobEffects(this.secondPotion);
+        List<MobEffectInstance> finalEffects = new ArrayList<>();
+        List<MobEffectInstance> firstEffectsList = PotionUtils.getMobEffects(this.firstPotion);
+        List<MobEffectInstance> secondEffectsList = PotionUtils.getMobEffects(this.secondPotion);
 
         // Check if the two potions have one or more of the same mob effect and if they do upgrade the effect
-        for (MobEffectInstance effect : firstPotionEffects) {
-            MobEffect effectType = effect.getEffect();
-            Optional<MobEffectInstance> matchingInstance = secondPotionEffects.stream()
-                    .filter(instance -> instance.getEffect() == effectType)
+        for (MobEffectInstance instance : firstEffectsList) {
+            MobEffect effect = instance.getEffect();
+            Optional<MobEffectInstance> matchingEffect = secondEffectsList.stream()
+                    .filter((inst) -> inst.getEffect() == effect)
                     .findFirst();
 
-            if (matchingInstance.isPresent()) {
-                MobEffectInstance instance = matchingInstance.get();
-                mobEffects.add(MobEffectUpgradeManager.getCategory(effectType).getUpgradedInstance(effect, instance));
+            if (matchingEffect.isPresent()) {
+                MobEffectInstance instance1 = matchingEffect.get();
+                finalEffects.add(PotionMixingManager.getFunction(effect).getMixedInstance(instance, instance1));
             } else {
-                mobEffects.add(effect);
+                finalEffects.add(instance);
             }
         }
 
-        secondPotionEffects.stream()
-                .filter(instance -> firstPotionEffects.stream().noneMatch(e -> e.getEffect() == instance.getEffect()))
-                .forEach(mobEffects::add);
-        return mobEffects;
+        secondEffectsList.stream()
+                .filter((inst) -> firstEffectsList.stream().noneMatch(e -> e.getEffect() == inst.getEffect()))
+                .forEach(finalEffects::add);
+        return finalEffects;
     }
 
     public static ItemStack getMixedPotion(ItemStack baseStack, List<MobEffectInstance> mobEffects) {

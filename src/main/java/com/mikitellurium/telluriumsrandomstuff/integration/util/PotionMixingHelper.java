@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.util;
 
-import com.mikitellurium.telluriumsrandomstuff.common.potionmixing.MobEffectUpgradeType;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModPotionMixingFunctions;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.Util;
 import net.minecraft.core.NonNullList;
@@ -31,7 +31,7 @@ public abstract class PotionMixingHelper {
 
     public static class Amplifier extends PotionMixingHelper {
 
-        private final List<ItemStack> inputs = RecipeHelper.getPotionsByUpgradeType(MobEffectUpgradeType.AMPLIFIER);
+        private final List<ItemStack> inputs = RecipeHelper.getPotionsByFunctionType(ModPotionMixingFunctions.INCREASE_AMPLIFIER.get());
         private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
             inputs.forEach((itemStack -> list.add(new PotionMixingRecipe(itemStack, itemStack).assemble())));
         });
@@ -59,7 +59,7 @@ public abstract class PotionMixingHelper {
 
     public static class Duration extends PotionMixingHelper {
 
-        private final List<ItemStack> inputs =  RecipeHelper.getPotionsByUpgradeType(MobEffectUpgradeType.DURATION);
+        private final List<ItemStack> inputs =  RecipeHelper.getPotionsByFunctionType(ModPotionMixingFunctions.INCREASE_DURATION.get());
         private final List<ItemStack> outputs = Util.make(new ArrayList<>(), (list) -> {
             inputs.forEach((itemStack -> list.add(new PotionMixingRecipe(itemStack, itemStack).assemble())));
         });

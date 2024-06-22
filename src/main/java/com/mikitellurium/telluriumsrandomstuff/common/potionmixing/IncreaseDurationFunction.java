@@ -7,7 +7,6 @@ import java.util.function.BiFunction;
 
 public class IncreaseDurationFunction implements PotionMixingFunction {
 
-    @Override
     public BiFunction<MobEffectInstance, MobEffectInstance, MobEffectInstance> mixPotion() {
         return (instance, instance1) -> {
             int firstDuration = instance.getDuration();
