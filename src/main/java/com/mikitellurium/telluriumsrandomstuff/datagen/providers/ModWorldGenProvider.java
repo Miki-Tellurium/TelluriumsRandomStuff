@@ -26,4 +26,5 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
     public String getName() {
         return "WorldGen";
     }
+
 }
