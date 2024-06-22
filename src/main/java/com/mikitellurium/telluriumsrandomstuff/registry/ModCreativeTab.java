@@ -18,23 +18,24 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModCreativeTab {
 
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB,
-            FastLoc.modId());
-
-    public static final RegistryObject<CreativeModeTab> TAB_TELLURIUMSRANDOMSTUFF = CREATIVE_TABS.register(
+    public static final RegistryObject<CreativeModeTab> TAB_TELLURIUMSRANDOMSTUFF = registerTab(
             "creative_tab", () -> CreativeModeTab.builder()
                     .title(Component.translatable("creativemodetab.telluriumsrandomstuff_creative_tab"))
                     .icon(() -> new ItemStack(ModBlocks.SOUL_FURNACE.get()))
                     .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
                     .build());
 
+    private static <T extends CreativeModeTab> RegistryObject<T> registerTab(String name, Supplier<T> tab) {
+        return ModRegistries.CREATIVE_TABS.register(name, tab);
+    }
 
-    public static void register(IEventBus eventBus) {
-        CREATIVE_TABS.register(eventBus);
+    protected static void register(IEventBus eventBus) {
+        ModRegistries.CREATIVE_TABS.register(eventBus);
     }
 
     @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

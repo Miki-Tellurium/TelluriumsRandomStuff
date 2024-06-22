@@ -1,46 +1,39 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.*;
-import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.network.IContainerFactory;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModMenuTypes {
 
-    public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(ForgeRegistries.MENU_TYPES, FastLoc.modId());
-
     public static final RegistryObject<MenuType<SoulFurnaceMenu>> SOUL_FURNACE_MENU =
-            registerMenuType(SoulFurnaceMenu::new, "soul_furnace_menu");
+            registerMenuType("soul_furnace_menu", SoulFurnaceMenu::new);
 
     public static final RegistryObject<MenuType<SoulAnchorMenu>> SOUL_ANCHOR_MENU =
-            registerMenuType(SoulAnchorMenu::new, "soul_anchor_menu");
+            registerMenuType("soul_anchor_menu", SoulAnchorMenu::new);
 
     public static final RegistryObject<MenuType<ExtractorMenu>> EXTRACTOR_MENU =
-            registerMenuType(ExtractorMenu::new, "extractor_menu");
+            registerMenuType("extractor_menu", ExtractorMenu::new);
 
     public static final RegistryObject<MenuType<SoulInfuserMenu>> SOUL_INFUSER_MENU =
-            registerMenuType(SoulInfuserMenu::new, "soul_infuser_menu");
+            registerMenuType("soul_infuser_menu", SoulInfuserMenu::new);
 
     public static final RegistryObject<MenuType<AlchemixerMenu>> ALCHEMIXER_MENU =
-            registerMenuType(AlchemixerMenu::new, "alchemixer_menu");
+            registerMenuType("alchemixer_menu", AlchemixerMenu::new);
 
     public static final RegistryObject<MenuType<SoulCompactorMenu>> SOUL_COMPACTOR_MENU =
-            registerMenuType(SoulCompactorMenu::new, "soul_compactor_menu");
+            registerMenuType("soul_compactor_menu", SoulCompactorMenu::new);
 
-    private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
-                                                                                                  String name) {
-        return MENUS.register(name, () -> IForgeMenuType.create(factory));
+    private static <M extends AbstractContainerMenu> RegistryObject<MenuType<M>> registerMenuType(String name, IContainerFactory<M> menu) {
+        return ModRegistries.MENU_TYPES.register(name, () -> IForgeMenuType.create(menu));
     }
 
-    public static void register(IEventBus eventBus) {
-        MENUS.register(eventBus);
+    protected static void register(IEventBus eventBus) {
+        ModRegistries.MENU_TYPES.register(eventBus);
     }
 
 }
