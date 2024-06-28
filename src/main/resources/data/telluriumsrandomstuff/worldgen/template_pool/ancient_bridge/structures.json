@@ -32,6 +32,24 @@
         "projection": "rigid"
       },
       "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposit_small",
+        "processors": "minecraft:ancient_city_generic_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposit_large",
+        "processors": "minecraft:ancient_city_generic_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
     }
   ],
   "fallback": "minecraft:empty"

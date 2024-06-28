@@ -1,0 +1,104 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_iron_small",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_iron_large",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_iron_rare",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_gold_small",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_gold_large",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_gold_rare",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_redstone_small",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_redstone_medium",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_redstone_large",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_diamond_small",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits/ore_deposit_diamond_medium",
+        "processors": "telluriumsrandomstuff:ore_deposit_replace",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "telluriumsrandomstuff:ancient_bridge/structures/ore_deposits"
+}
