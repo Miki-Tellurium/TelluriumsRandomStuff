@@ -1,7 +1,4 @@
 Ancient Bridge:
 
--Soul lava lake
 -Stand (loot chests)
--Scaffold
--Soul lava crafting hint
 -Guardian house
