@@ -50,6 +50,24 @@
         "projection": "rigid"
       },
       "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/redstone_lava_bridge",
+        "processors": "minecraft:ancient_city_generic_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/wool_storage",
+        "processors": "minecraft:ancient_city_generic_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
     }
   ],
   "fallback": "minecraft:empty"
