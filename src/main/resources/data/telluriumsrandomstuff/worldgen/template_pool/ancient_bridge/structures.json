@@ -55,7 +55,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "telluriumsrandomstuff:ancient_bridge/structures/redstone_lava_bridge",
-        "processors": "minecraft:ancient_city_generic_degradation",
+        "processors": "telluriumsrandomstuff:basic_deepslate_degradation",
         "projection": "rigid"
       },
       "weight": 1
