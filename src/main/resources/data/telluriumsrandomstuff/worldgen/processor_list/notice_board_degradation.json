@@ -59,7 +59,7 @@
     },
     {
       "processor_type": "telluriumsrandomstuff:write_sign",
-      "probability": 0.6,
+      "probability": 0.4,
       "glowing_chance": 0.02,
       "values": [
         {
