@@ -18,6 +18,15 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/notice_board_small_ruined",
+        "processors": "telluriumsrandomstuff:notice_board_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
         "location": "telluriumsrandomstuff:ancient_bridge/structures/notice_board_medium",
         "processors": "telluriumsrandomstuff:notice_board_degradation",
         "projection": "rigid"
@@ -127,6 +136,33 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "telluriumsrandomstuff:ancient_bridge/structures/piston_bridge",
+        "processors": "telluriumsrandomstuff:basic_deepslate_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/pillar",
+        "processors": "telluriumsrandomstuff:basic_deepslate_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ruin_1",
+        "processors": "telluriumsrandomstuff:basic_deepslate_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/ruin_2",
         "processors": "telluriumsrandomstuff:basic_deepslate_degradation",
         "projection": "rigid"
       },
