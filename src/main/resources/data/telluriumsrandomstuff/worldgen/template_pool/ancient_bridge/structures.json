@@ -4,7 +4,7 @@
       "element": {
         "element_type": "minecraft:empty_pool_element"
       },
-      "weight": 5
+      "weight": 4
     },
     {
       "element": {
@@ -54,15 +54,6 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "telluriumsrandomstuff:ancient_bridge/structures/redstone_lava_bridge",
-        "processors": "telluriumsrandomstuff:basic_deepslate_degradation",
-        "projection": "rigid"
-      },
-      "weight": 1
-    },
-    {
-      "element": {
-        "element_type": "minecraft:single_pool_element",
         "location": "telluriumsrandomstuff:ancient_bridge/structures/wool_storage",
         "processors": "minecraft:ancient_city_generic_degradation",
         "projection": "rigid"
@@ -92,6 +83,51 @@
         "element_type": "minecraft:single_pool_element",
         "location": "telluriumsrandomstuff:ancient_bridge/structures/soul_lava_farm",
         "processors": "minecraft:ancient_city_generic_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/stand_1",
+        "processors": "minecraft:ancient_city_generic_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/stand_2",
+        "processors": "minecraft:ancient_city_generic_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/house_1",
+        "processors": "minecraft:ancient_city_generic_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/house_2",
+        "processors": "minecraft:ancient_city_generic_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "telluriumsrandomstuff:ancient_bridge/structures/piston_bridge",
+        "processors": "telluriumsrandomstuff:basic_deepslate_degradation",
         "projection": "rigid"
       },
       "weight": 1
