@@ -20,6 +20,8 @@ import java.util.function.Supplier;
 
 public class AncientBridge extends Structure {
 
+    // /place jigsaw telluriumsrandomstuff:ancient_bridge/central_watchtower/top ancient_bridge_anchor 7 ~ -35 ~
+
     private static final Codec<AncientBridge> CODEC = RecordCodecBuilder.<AncientBridge>mapCodec(instance ->
             instance.group(AncientBridge.settingsCodec(instance),
                     StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
