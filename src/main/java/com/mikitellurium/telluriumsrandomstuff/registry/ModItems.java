@@ -25,7 +25,6 @@ public class ModItems {
                     return 20000;
                 }
             });
-
     public static final RegistryObject<Item> MYSTIC_POTATO = registerItem("mystic_potato",
             () -> new Item(new Item.Properties().fireResistant().food(ModFoods.MYSTIC_POTATO)) {
                 @Override
@@ -43,13 +42,8 @@ public class ModItems {
                     return true;
                 }
             });
-
-    public static final RegistryObject<Item> RAW_OPAL_CRYSTAL = registerItem("raw_opal_crystal",
-            () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> OPAL_CRYSTAL = registerItem("opal_crystal",
-            () -> new Item(new Item.Properties()));
-
+    public static final RegistryObject<Item> RAW_OPAL_CRYSTAL = registerItem("raw_opal_crystal", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> OPAL_CRYSTAL = registerItem("opal_crystal", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> OPAL_CRYSTAL_SWORD = registerItem("opal_crystal_sword",
             () -> new SwordItem(ModToolTiers.OPAL_CRYSTAL, 3, -2.4F, new Item.Properties()
                     .defaultDurability(250)) {
@@ -58,7 +52,6 @@ public class ModItems {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
-
     public static final RegistryObject<Item> OPAL_CRYSTAL_SHOVEL = registerItem("opal_crystal_shovel",
             () -> new ShovelItem(ModToolTiers.OPAL_CRYSTAL, 1.5F, -3.0F, new Item.Properties()
                     .defaultDurability(250)) {
@@ -67,7 +60,6 @@ public class ModItems {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
-
     public static final RegistryObject<Item> OPAL_CRYSTAL_PICKAXE = registerItem("opal_crystal_pickaxe",
             () -> new PickaxeItem(ModToolTiers.OPAL_CRYSTAL, 1, -2.8F, new Item.Properties()
                     .defaultDurability(250)) {
@@ -76,7 +68,6 @@ public class ModItems {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
-
     public static final RegistryObject<Item> OPAL_CRYSTAL_AXE = registerItem("opal_crystal_axe",
             () -> new AxeItem(ModToolTiers.OPAL_CRYSTAL, 5.0F, -3.0F, new Item.Properties()
                     .defaultDurability(250)) {
@@ -85,7 +76,6 @@ public class ModItems {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
-
     public static final RegistryObject<Item> OPAL_CRYSTAL_HOE = registerItem("opal_crystal_hoe",
             () -> new HoeItem(ModToolTiers.OPAL_CRYSTAL, -3, 0.0F, new Item.Properties()
                     .defaultDurability(250)) {
@@ -94,7 +84,6 @@ public class ModItems {
                     return repairStack.is(ModItems.OPAL_CRYSTAL.get());
                 }
             });
-
     public static final RegistryObject<Item> FILTER = registerItem("filter",
             () -> new Item(new Item.Properties()) {
                 @Override
@@ -102,40 +91,18 @@ public class ModItems {
                     return 100;
                 }
             });
-
-    public static final RegistryObject<Item> BRIGHT_TORCHFLOWER_SEEDS = registerItem("bright_torchflower_seeds",
-            () -> new ItemNameBlockItem(ModBlocks.BRIGHT_TORCHFLOWER_CROP.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> SOUL_TORCHFLOWER_SEEDS = registerItem("soul_torchflower_seeds",
-            () -> new ItemNameBlockItem(ModBlocks.SOUL_TORCHFLOWER_CROP.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> BLUE_GLOWSTONE_DUST = registerItem("blue_glowstone_dust",
-            () -> new Item(new Item.Properties()));
-
+    public static final RegistryObject<Item> BRIGHT_TORCHFLOWER_SEEDS = registerItem("bright_torchflower_seeds", () -> new ItemNameBlockItem(ModBlocks.BRIGHT_TORCHFLOWER_CROP.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_TORCHFLOWER_SEEDS = registerItem("soul_torchflower_seeds", () -> new ItemNameBlockItem(ModBlocks.SOUL_TORCHFLOWER_CROP.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_GLOWSTONE_DUST = registerItem("blue_glowstone_dust", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LAVA_GOOGLES = registerItem("lava_googles", LavaGooglesItem::new);
-
     public static final RegistryObject<Item> MOLTEN_AMETHYST = registerItem("molten_amethyst", MoltenAmethystItem::new);
-
-    public static final RegistryObject<Item> AMETHYST_LENS = registerItem("amethyst_lens",
-            () -> new Item(new Item.Properties().fireResistant()));
-
-    public static final RegistryObject<Item> SMALL_SOUL_FRAGMENT = registerItem("small_soul_fragment",
-            () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> SOUL_FRAGMENT = registerItem("soul_fragment",
-            () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> SOUL_CLUSTER = registerItem("soul_cluster",
-            () -> new Item(new Item.Properties()));
-
+    public static final RegistryObject<Item> AMETHYST_LENS = registerItem("amethyst_lens", () -> new Item(new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> SMALL_SOUL_FRAGMENT = registerItem("small_soul_fragment", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_FRAGMENT = registerItem("soul_fragment", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_CLUSTER = registerItem("soul_cluster", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GRAPPLING_HOOK = registerItem("grappling_hook", GrapplingHookItem::new);
-
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_INGOT = registerItem("soul_infused_iron_ingot",
-            () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> SOUL_IRON_ROD = registerItem("soul_iron_rod",
-            () -> new Item(new Item.Properties()));
-
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_INGOT = registerItem("soul_infused_iron_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_IRON_ROD = registerItem("soul_iron_rod", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_SWORD = registerItem("soul_infused_iron_sword",
             () -> new SwordItem(ModToolTiers.INFUSED_IRON, 3, -2.4F, new Item.Properties()
                     .defaultDurability(500)) {
@@ -144,7 +111,6 @@ public class ModItems {
                     return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
                 }
             });
-
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_SHOVEL = registerItem("soul_infused_iron_shovel",
             () -> new ShovelItem(ModToolTiers.INFUSED_IRON, 1.5F, -3.0F, new Item.Properties()
                     .defaultDurability(500)) {
@@ -153,7 +119,6 @@ public class ModItems {
                     return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
                 }
             });
-
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_PICKAXE = registerItem("soul_infused_iron_pickaxe",
             () -> new PickaxeItem(ModToolTiers.INFUSED_IRON, 1, -2.8F, new Item.Properties()
                     .defaultDurability(500)) {
@@ -162,7 +127,6 @@ public class ModItems {
                     return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
                 }
             });
-
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_AXE = registerItem("soul_infused_iron_axe",
             () -> new AxeItem(ModToolTiers.INFUSED_IRON, 5.0F, -3.0F, new Item.Properties()
                     .defaultDurability(500)) {
@@ -171,7 +135,6 @@ public class ModItems {
                     return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
                 }
             });
-
     public static final RegistryObject<Item> SOUL_INFUSED_IRON_HOE = registerItem("soul_infused_iron_hoe",
             () -> new HoeItem(ModToolTiers.INFUSED_IRON, -3, 0.0F, new Item.Properties()
                     .defaultDurability(500)) {
@@ -180,18 +143,14 @@ public class ModItems {
                     return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
                 }
             });
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_BOOTS = registerItem("soul_infused_iron_boots", () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_LEGGINGS = registerItem("soul_infused_iron_leggings", () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_CHESTPLATE = registerItem("soul_infused_iron_chestplate", () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_INFUSED_IRON_HELMET = registerItem("soul_infused_iron_helmet", () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.HELMET, new Item.Properties()));
 
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_BOOTS = registerItem("soul_infused_iron_boots",
-            () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.BOOTS, new Item.Properties()));
-
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_LEGGINGS = registerItem("soul_infused_iron_leggings",
-            () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_CHESTPLATE = registerItem("soul_infused_iron_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_HELMET = registerItem("soul_infused_iron_helmet",
-            () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.HELMET, new Item.Properties()));
+    // Items of block states used only for rendering purposes
+    public static final RegistryObject<Item> SOUL_INFUSER_LIT = registerItem("soul_infuser_lit", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_COMPACTOR_LIT = registerItem("soul_compactor_lit", () -> new Item(new Item.Properties()));
 
     private static <I extends Item> RegistryObject<I> registerItem(String name, Supplier<I> item) {
         return ModRegistries.ITEMS.register(name, item);

@@ -88,10 +88,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> CUT_OPAL_BRICK_ITEM_PEDESTAL = registerBlock("cut_opal_brick_item_pedestal", () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(CUT_OPAL_BRICKS.get())));
     public static final RegistryObject<Block> INFUSED_SOUL_SAND = registerBlock("infused_soul_sand", InfusedSoulSandBlock::new);
     public static final RegistryObject<Block> SOUL_INFUSER = registerBlock("soul_infuser", SoulInfuserBlock::new);
-    public static final RegistryObject<Item> SOUL_INFUSER_LIT = ModRegistries.ITEMS.register("soul_infuser_lit", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Block> ALCHEMIXER = registerBlock("alchemixer", AlchemixerBlock::new);
     public static final RegistryObject<Block> SOUL_COMPACTOR = registerBlock("soul_compactor", SoulCompactorBlock::new);
-    public static final RegistryObject<Item> SOUL_COMPACTOR_LIT = ModRegistries.ITEMS.register("soul_compactor_lit", () -> new Item(new Item.Properties()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         return registerBlock(name, block, true);
