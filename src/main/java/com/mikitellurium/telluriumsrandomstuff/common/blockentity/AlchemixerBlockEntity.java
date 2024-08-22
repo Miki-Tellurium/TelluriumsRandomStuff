@@ -210,6 +210,14 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
         return inventory;
     }
 
+    public int getAnalogOutputSignal() {
+        int output = 0;
+        if (!this.getStackInSlot(INPUT_SLOT1).isEmpty()) output += 5;
+        if (!this.getStackInSlot(INPUT_SLOT2).isEmpty()) output += 5;
+        if (!this.getStackInSlot(OUTPUT_SLOT).isEmpty()) output += 5;
+        return output;
+    }
+
     @SuppressWarnings("ConstantConditions")
     public void dropItemsOnBreak() {
         SimpleContainer inventory = getInventory();

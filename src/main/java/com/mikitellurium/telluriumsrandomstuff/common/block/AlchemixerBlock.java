@@ -1,11 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AlchemixerBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
-import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -13,11 +10,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -45,8 +39,6 @@ import net.minecraftforge.event.brewing.PotionBrewEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class AlchemixerBlock extends BaseEntityBlock {
 
@@ -148,6 +140,20 @@ public class AlchemixerBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState blockState) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        BlockEntity blockEntity = level.getExistingBlockEntity(pos);
+        if (blockEntity instanceof AlchemixerBlockEntity alchemixer) {
+            return alchemixer.getAnalogOutputSignal();
+        }
+        return super.getAnalogOutputSignal(blockState, level, pos);
     }
 
     @Override
