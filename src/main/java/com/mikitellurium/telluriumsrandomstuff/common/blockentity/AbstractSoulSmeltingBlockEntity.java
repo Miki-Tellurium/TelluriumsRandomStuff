@@ -1,9 +1,10 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
+import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;
+import com.mikitellurium.telluriumsrandomstuff.lib.SidedCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
-import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;
-import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -26,20 +27,16 @@ import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container>> extends AbstractSoulFueledBlockEntity {
+public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container>> extends AbstractSoulFueledBlockEntity implements SidedCapabilityProvider<WrappedHandler> {
 
     private final int bucketSlot;
     private final MappedItemStackHandler itemHandler;
-
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap;
-
     private final RecipeManager.CachedCheck<Container, R> quickCheck;
     private CachedObject<R> cachedRecipe = CachedObject.empty();
 
@@ -62,27 +59,6 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
                 return isInput(slot) || (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
             }
         };
-        // Handle item transportation trough other blocks
-        // Credit to Kaupenjoe
-        this.directionWrappedHandlerMap = Map.of(
-                Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                        (i, s) -> true,
-                        itemHandler::isInput)),
-                Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                        (i, s) -> false,
-                        (i) -> itemHandler.isOutput(i) || hasEmptyBucket(i))),
-                Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                        (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s),
-                        itemHandler::isBucket)),
-                Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                        (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s),
-                        itemHandler::isBucket)),
-                Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                        (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s),
-                        itemHandler::isBucket)),
-                Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                        (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s),
-                        itemHandler::isBucket)));
     }
 
     /**
@@ -211,23 +187,30 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
                 return lazyItemHandler.cast();
             }
             // Return capability based on side
-            if(directionWrappedHandlerMap.containsKey(side)) {
-                Direction localDir = this.getBlockState().getValue(AbstractFurnaceBlock.FACING);
+            Direction localDir = this.getBlockState().getValue(AbstractFurnaceBlock.FACING);
 
-                if(side == Direction.UP || side == Direction.DOWN) {
-                    return directionWrappedHandlerMap.get(side).cast();
-                }
-                // Get the correct direction based on the furnace FACING property
-                return switch (localDir) {
-                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
-                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
-                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
-                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
-                };
+            if(side == Direction.UP || side == Direction.DOWN) {
+                return this.sidedLazyOptional(side).cast();
             }
+            // Get the correct direction based on the furnace FACING property
+            return switch (localDir) {
+                default -> this.sidedLazyOptional(side.getOpposite()).cast();
+                case EAST -> this.sidedLazyOptional(side.getClockWise()).cast();
+                case SOUTH -> this.sidedLazyOptional(side).cast();
+                case WEST -> this.sidedLazyOptional(side.getCounterClockWise()).cast();
+            };
         }
 
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public WrappedHandler capabilityBySide(Direction side) {
+        return switch (side) {
+            case UP -> new WrappedHandler(itemHandler, (i, s) -> true, itemHandler::isInput);
+            case DOWN -> new WrappedHandler(itemHandler, (i, s) -> false, (i) -> itemHandler.isOutput(i) || hasEmptyBucket(i));
+            case NORTH, SOUTH, EAST, WEST -> new WrappedHandler(itemHandler, (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s), itemHandler::isBucket);
+        };
     }
 
     // NBT

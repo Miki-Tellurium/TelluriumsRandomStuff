@@ -14,13 +14,13 @@ import java.util.function.Predicate;
  */
 public class WrappedHandler implements IItemHandlerModifiable {
     private final IItemHandlerModifiable handler;
-    private final BiPredicate<Integer, ItemStack> insert;
-    private final Predicate<Integer> extract;
+    private final BiPredicate<Integer, ItemStack> canInsert;
+    private final Predicate<Integer> canExtract;
 
-    public WrappedHandler(IItemHandlerModifiable handler, BiPredicate<Integer, ItemStack> insert, Predicate<Integer> extract) {
+    public WrappedHandler(IItemHandlerModifiable handler, BiPredicate<Integer, ItemStack> canInsert, Predicate<Integer> canExtract) {
         this.handler = handler;
-        this.insert = insert;
-        this.extract = extract;
+        this.canInsert = canInsert;
+        this.canExtract = canExtract;
     }
 
     @Override
@@ -42,13 +42,13 @@ public class WrappedHandler implements IItemHandlerModifiable {
     @Nonnull
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-        return this.insert.test(slot, stack) ? this.handler.insertItem(slot, stack, simulate) : stack;
+        return this.canInsert.test(slot, stack) ? this.handler.insertItem(slot, stack, simulate) : stack;
     }
 
     @Nonnull
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return this.extract.test(slot) ? this.handler.extractItem(slot, amount, simulate) : ItemStack.EMPTY;
+        return this.canExtract.test(slot) ? this.handler.extractItem(slot, amount, simulate) : ItemStack.EMPTY;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class WrappedHandler implements IItemHandlerModifiable {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        return this.insert.test(slot, stack) && this.handler.isItemValid(slot, stack);
+        return this.canInsert.test(slot, stack) && this.handler.isItemValid(slot, stack);
     }
 
 }
