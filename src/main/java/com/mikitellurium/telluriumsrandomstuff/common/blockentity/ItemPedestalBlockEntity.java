@@ -31,7 +31,7 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         protected void onContentsChanged(int slot) {
             setChanged();
             if (!level.isClientSide) {
-                ModMessages.sendToClients(new ItemStackSyncS2CPacket(this.getStackInSlot(0), worldPosition));
+                ModMessages.sendToClients(new ItemStackSyncS2CPacket(ItemPedestalBlockEntity.this.getItem(), worldPosition));
             }
         }
 

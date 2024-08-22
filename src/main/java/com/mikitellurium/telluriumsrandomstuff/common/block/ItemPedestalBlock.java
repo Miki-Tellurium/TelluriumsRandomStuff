@@ -1,6 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
+import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.ItemStackSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -84,6 +86,20 @@ public class ItemPedestalBlock extends BaseEntityBlock {
     @Override
     public VoxelShape getCollisionShape(BlockState blockState, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Shapes.block();
+    }
+
+    @Override
+    public void onPlace(BlockState blockState, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof ItemPedestalBlockEntity itemPedestal) {
+            if (!itemPedestal.isEmpty()) {
+                ModMessages.sendToClients(new ItemStackSyncS2CPacket(itemPedestal.getItem(), pos));
+            }
+            if (itemPedestal.alwaysDisplayName()) {
+                itemPedestal.setAlwaysDisplayNameAndSync();
+            }
+        }
+        super.onPlace(blockState, level, pos, oldState, movedByPiston);
     }
 
     @Override
