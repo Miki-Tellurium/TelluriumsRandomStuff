@@ -39,7 +39,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SMALL_SOUL_FRAGMENT, "Small Soul Fragment");
         addItem(ModItems.SOUL_FRAGMENT, "Soul Fragment");
         addItem(ModItems.SOUL_CLUSTER, "Soul Cluster");
-        addItem(ModBlocks.SOUL_INFUSER_LIT, "Soul Infuser");
+        addItem(ModItems.SOUL_INFUSER_LIT, "Soul Infuser");
         addItem(ModItems.GRAPPLING_HOOK, "Grappling Hook");
         addItem(ModItems.SOUL_INFUSED_IRON_INGOT, "Soul Infused Iron Ingot");
         addItem(ModItems.SOUL_IRON_ROD, "Soul Iron Rod");
@@ -52,7 +52,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SOUL_INFUSED_IRON_LEGGINGS, "Soul Infused Iron Leggings");
         addItem(ModItems.SOUL_INFUSED_IRON_CHESTPLATE, "Soul Infused Iron Chestplate");
         addItem(ModItems.SOUL_INFUSED_IRON_HELMET, "Soul Infused Iron Helmet");
-        addItem(ModBlocks.SOUL_COMPACTOR_LIT, "Soul Compactor");
+        addItem(ModItems.SOUL_COMPACTOR_LIT, "Soul Compactor");
 
         translation("item", "lava_googles.tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");
@@ -121,7 +121,6 @@ public class ModTranslationProvider extends LanguageProvider {
         addBlock(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL, "End Stone Brick Item Pedestal");
         addBlock(ModBlocks.PURPUR_ITEM_PEDESTAL, "Purpur Item Pedestal");
         addBlock(ModBlocks.QUARTZ_ITEM_PEDESTAL, "Quartz Item Pedestal");
-        addBlock(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL, "Soul Magma Brick Item Pedestal");
         addBlock(ModBlocks.OPAL_ITEM_PEDESTAL, "Opal Item Pedestal");
         addBlock(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL, "Opal Brick Item Pedestal");
         addBlock(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL, "Cut Opal Brick Item Pedestal");

@@ -41,7 +41,7 @@ public class CompactingCategory extends SoulLavaTankCategory<CompactingRecipe> {
     public CompactingCategory(IGuiHelper guiHelper) {
         super(guiHelper, 4000, CompactingRecipe::getRecipeCost);
         this.background = guiHelper.createDrawable(FastLoc.JEI_GUI_TEXTURE, 128, 0, 120, 71);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.SOUL_COMPACTOR_LIT.get()));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.SOUL_COMPACTOR_LIT.get()));
         this.cachedArrows = CacheBuilder.newBuilder()
                 .maximumSize(34)
                 .build(new CacheLoader<>() {

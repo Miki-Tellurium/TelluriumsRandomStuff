@@ -40,7 +40,7 @@ public class SoulInfusionCategory implements DisplayCategory<SoulInfusionDisplay
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(ModBlocks.SOUL_INFUSER_LIT.get());
+        return EntryStacks.of(ModItems.SOUL_INFUSER_LIT.get());
     }
 
     @Override

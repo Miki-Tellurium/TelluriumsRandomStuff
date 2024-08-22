@@ -464,8 +464,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 Blocks.PURPUR_BLOCK);
         this.itemPedestalShaped(consumer, "quartz_item_pedestal", (ItemPedestalBlock)ModBlocks.QUARTZ_ITEM_PEDESTAL.get(),
                 Blocks.QUARTZ_BLOCK);
-        this.itemPedestalShaped(consumer, "soul_magma_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get(),
-                ModBlocks.SOUL_MAGMA_BRICKS.get());
         this.itemPedestalShaped(consumer, "opal_item_pedestal", (ItemPedestalBlock)ModBlocks.OPAL_ITEM_PEDESTAL.get(),
                 ModBlocks.OPAL.get());
         this.itemPedestalShaped(consumer, "opal_brick_item_pedestal", (ItemPedestalBlock)ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),

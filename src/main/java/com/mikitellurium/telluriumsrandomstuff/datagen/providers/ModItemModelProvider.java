@@ -93,8 +93,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleItem(ModItems.SOUL_INFUSED_IRON_LEGGINGS);
         this.simpleItem(ModItems.SOUL_INFUSED_IRON_CHESTPLATE);
         this.simpleItem(ModItems.SOUL_INFUSED_IRON_HELMET);
-        this.withExistingParent(ModBlocks.SOUL_COMPACTOR_LIT.getId().getPath(), modLoc("block/soul_compactor_on"));
-        this.withExistingParent(ModBlocks.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
+        this.withExistingParent(ModItems.SOUL_COMPACTOR_LIT.getId().getPath(), modLoc("block/soul_compactor_on"));
+        this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
     }
 
     private void simpleItem(RegistryObject<Item> item) {

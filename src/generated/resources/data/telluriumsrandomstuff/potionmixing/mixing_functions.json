@@ -2,8 +2,12 @@
   "replace": false,
   "values": [
     {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:invisibility"
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:hunger"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:wither"
     },
     {
       "function": "telluriumsrandomstuff:increase_amplifier",
@@ -11,31 +15,15 @@
     },
     {
       "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:jump_boost"
+      "mob_effect": "minecraft:saturation"
     },
     {
       "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:speed"
+      "mob_effect": "minecraft:unluck"
     },
     {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:resistance"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:weakness"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:slowness"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:regeneration"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:poison"
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:nausea"
     },
     {
       "function": "telluriumsrandomstuff:increase_duration",
@@ -43,87 +31,11 @@
     },
     {
       "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:strength"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:instant_damage"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:blindness"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:absorption"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:saturation"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:levitation"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:bad_omen"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:darkness"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:wither"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:night_vision"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:nausea"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
       "mob_effect": "minecraft:conduit_power"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:slow_falling"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:dolphins_grace"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:instant_health"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:hero_of_the_village"
     },
     {
       "function": "telluriumsrandomstuff:increase_amplifier",
       "mob_effect": "minecraft:health_boost"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:luck"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:unluck"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:mining_fatigue"
-    },
-    {
-      "function": "telluriumsrandomstuff:increase_duration",
-      "mob_effect": "minecraft:glowing"
     },
     {
       "function": "telluriumsrandomstuff:increase_duration",
@@ -131,7 +43,95 @@
     },
     {
       "function": "telluriumsrandomstuff:increase_amplifier",
-      "mob_effect": "minecraft:hunger"
+      "mob_effect": "minecraft:speed"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:weakness"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:slow_falling"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:instant_health"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:jump_boost"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:blindness"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:glowing"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:slowness"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:instant_damage"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:regeneration"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:resistance"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:dolphins_grace"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:bad_omen"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:luck"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:poison"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:darkness"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:strength"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:invisibility"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:levitation"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:mining_fatigue"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_amplifier",
+      "mob_effect": "minecraft:absorption"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:hero_of_the_village"
+    },
+    {
+      "function": "telluriumsrandomstuff:increase_duration",
+      "mob_effect": "minecraft:night_vision"
     }
   ]
 }

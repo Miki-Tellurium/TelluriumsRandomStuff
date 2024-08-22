@@ -81,7 +81,6 @@ public class VanillaTagProvider {
                     .add(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL.get())
                     .add(ModBlocks.PURPUR_ITEM_PEDESTAL.get())
                     .add(ModBlocks.QUARTZ_ITEM_PEDESTAL.get())
-                    .add(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get())
                     .add(ModBlocks.OPAL_ITEM_PEDESTAL.get())
                     .add(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get())
                     .add(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
@@ -204,8 +203,7 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_TORCHFLOWER.get())
                     //.add(ModBlocks.SOUL_LAVA_BLOCK.get())
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())
-                    .add(ModBlocks.SOUL_MAGMA_BRICKS.get())
-                    .add(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get());
+                    .add(ModBlocks.SOUL_MAGMA_BRICKS.get());
         }
     }
 

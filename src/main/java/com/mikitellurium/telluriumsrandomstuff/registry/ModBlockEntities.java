@@ -41,9 +41,8 @@ public class ModBlockEntities {
                             ModBlocks.NETHER_BRICK_ITEM_PEDESTAL.get(), ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL.get(),
                             ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL.get(), ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL.get(),
                             ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL.get(), ModBlocks.PURPUR_ITEM_PEDESTAL.get(),
-                            ModBlocks.QUARTZ_ITEM_PEDESTAL.get(), ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL.get(),
-                            ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
-                            ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
+                            ModBlocks.QUARTZ_ITEM_PEDESTAL.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(),
+                            ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(), ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
                     .build(null));
 
     public static final RegistryObject<BlockEntityType<SoulInfuserBlockEntity>> SOUL_INFUSER = registerBlockEntity(

@@ -290,7 +290,6 @@ public class ModBlockModelProvider extends BlockStateProvider {
         this.itemPedestalWithItem(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL, mcLoc("block/end_stone_bricks"));
         this.itemPedestalWithItem(ModBlocks.PURPUR_ITEM_PEDESTAL, mcLoc("block/purpur_block"));
         this.itemPedestalWithItem(ModBlocks.QUARTZ_ITEM_PEDESTAL, mcLoc("block/quartz_block_top"));
-        this.itemPedestalWithItem(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL, modLoc("block/soul_magma_bricks"));
         this.tintedItemPedestalWithItem(ModBlocks.OPAL_ITEM_PEDESTAL, modLoc("block/opal"));
         this.tintedItemPedestalWithItem(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL, modLoc("block/opal_bricks"));
         this.tintedItemPedestalWithItem(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL, modLoc("block/cut_opal_bricks"));

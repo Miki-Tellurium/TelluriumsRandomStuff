@@ -37,7 +37,7 @@ public class CompactingCategory implements DisplayCategory<CompactingDisplay> {
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(ModBlocks.SOUL_COMPACTOR_LIT.get());
+        return EntryStacks.of(ModItems.SOUL_COMPACTOR_LIT.get());
     }
 
     @Override

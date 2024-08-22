@@ -125,7 +125,6 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL);
                 event.accept(ModBlocks.PURPUR_ITEM_PEDESTAL);
                 event.accept(ModBlocks.QUARTZ_ITEM_PEDESTAL);
-                event.accept(ModBlocks.SOUL_MAGMA_BRICK_ITEM_PEDESTAL);
                 event.accept(ModBlocks.OPAL_ITEM_PEDESTAL);
                 event.accept(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL);
                 event.accept(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL);
