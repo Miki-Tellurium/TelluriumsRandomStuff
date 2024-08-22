@@ -74,7 +74,7 @@ public class LootEvents {
 
     private static Collection<? extends ItemEntity> asEntities(Collection<ItemStack> loot, Level level, Vec3 vec3) {
         Collection<ItemEntity> entities = new ArrayList<>();
-        loot.forEach((stack -> entities.add(new ItemEntity(level, vec3.x, vec3.y, vec3.z, stack))));
+        loot.forEach((stack) -> entities.add(new ItemEntity(level, vec3.x, vec3.y, vec3.z, stack)));
         return entities;
     }
 
