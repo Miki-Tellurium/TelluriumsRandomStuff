@@ -2,17 +2,17 @@
   "type": "minecraft:chest",
   "pools": [
     {
+      "rolls": 1.0,
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.4
-        }
-      ],
       "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 6
+        },
         {
           "type": "minecraft:item",
           "name": "telluriumsrandomstuff:soul_jack_o_lantern",
+          "weight": 3,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -23,9 +23,21 @@
               }
             }
           ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:book",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly",
+              "enchantments": [
+                "telluriumsrandomstuff:soul_harvesting"
+              ]
+            }
+          ]
         }
-      ],
-      "rolls": 1.0
+      ]
     }
   ]
 }

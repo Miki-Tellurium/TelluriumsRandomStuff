@@ -14,8 +14,8 @@ public class ModLootModifierProvider extends GlobalLootModifierProvider {
 
     @Override
     protected void start() {
-        add("add_soul_jack_o_lantern_to_ancient_city",
-                new LootChestModifier(BuiltInLootTables.ANCIENT_CITY, FastLoc.modLoc("chests/soul_jack_o_lantern")));
+        add("add_loot_to_ancient_city",
+                new LootChestModifier(BuiltInLootTables.ANCIENT_CITY, FastLoc.modLoc("chests/add_to_ancient_city")));
         add("add_lava_googles_to_nether_bridge",
                 new LootChestModifier(BuiltInLootTables.NETHER_BRIDGE, FastLoc.modLoc("chests/lava_googles")));
         add("add_lava_googles_to_bastion_other",

@@ -30,8 +30,8 @@ public class LootChestModifier extends ModLootModifier {
                     ResourceLocation.CODEC.fieldOf("loot_table").forGetter(LootChestModifier::getLootTable)
             ).apply(instance, LootChestModifier::new)));
 
-    public LootChestModifier(ResourceLocation entityLootTable, ResourceLocation lootTable) {
-        this(ModLootModifier.getLootConditions(entityLootTable), lootTable);
+    public LootChestModifier(ResourceLocation chestLootTable, ResourceLocation lootTable) {
+        this(ModLootModifier.getLootConditions(chestLootTable), lootTable);
     }
 
     private LootChestModifier(LootItemCondition[] lootConditions, ResourceLocation lootTable) {
