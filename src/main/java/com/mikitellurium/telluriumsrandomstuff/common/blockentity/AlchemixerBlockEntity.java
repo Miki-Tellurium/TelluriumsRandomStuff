@@ -3,11 +3,12 @@ package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AlchemixerMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;
+import com.mikitellurium.telluriumsrandomstuff.lib.SidedCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
-import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;
-import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -35,26 +36,21 @@ import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.Optional;
 
-public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity implements MenuProvider {
+public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity implements MenuProvider, SidedCapabilityProvider<WrappedHandler> {
 
     private final int bucketSlot = 0;
     private static final int INPUT_SLOT1 = 1;
     private static final int INPUT_SLOT2 = 2;
     private static final int OUTPUT_SLOT = 3;
-    private final Predicate<ItemStack> isValidPotionReceptacle = (itemStack -> {
-        Potion potion = PotionUtils.getPotion(itemStack);
-        return potion == Potions.THICK || potion == Potions.MUNDANE;
-    });
     private final MappedItemStackHandler itemHandler = new MappedItemStackHandler(4,
             (i) -> i == INPUT_SLOT1 || i == INPUT_SLOT2, (i) -> i == OUTPUT_SLOT, (i) -> i == bucketSlot) {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return (isInput(slot) && stack.getItem() instanceof PotionItem) ||
-                    (isOutput(slot) && AlchemixerBlockEntity.this.isValidPotionReceptacle.test(stack)) ||
+                    (isOutput(slot) && AlchemixerBlockEntity.this.isValidPotionReceptacle(stack)) ||
                     (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
         }
 
@@ -64,25 +60,6 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
         }
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(
-            Direction.UP, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                    (i, s) -> true,
-                    itemHandler::isInput)),
-            Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                    (i, s) -> false,
-                    (i) -> itemHandler.isOutput(i) || hasEmptyBucket(i))),
-            Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                    (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s),
-                    itemHandler::isBucket)),
-            Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                    (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s),
-                    itemHandler::isBucket)),
-            Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                    (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s),
-                    itemHandler::isBucket)),
-            Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler,
-                    (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s),
-                    itemHandler::isBucket)));
 
     private int progress = 0;
     private int maxProgress = 400;
@@ -157,8 +134,7 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
     }
 
     protected boolean canProcessRecipe(PotionMixingRecipe recipe) {
-        return this.isValidPotionReceptacle.test(this.itemHandler.getStackInSlot(OUTPUT_SLOT)) &&
-                this.hasEnoughFuel(recipe.getRecipeCost());
+        return this.hasValidPotionReceptacle() && this.hasEnoughFuel(recipe.getRecipeCost());
     }
 
     protected void onProcessRecipe(PotionMixingRecipe recipe) {
@@ -197,6 +173,16 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
 
     private boolean hasEmptyBucket(int slot) {
         return slot == this.bucketSlot && this.itemHandler.getStackInSlot(this.bucketSlot).is(Items.BUCKET);
+    }
+
+    private boolean hasValidPotionReceptacle() {
+        Potion potion = PotionUtils.getPotion(this.getStackInSlot(OUTPUT_SLOT));
+        return potion == Potions.THICK || potion == Potions.MUNDANE;
+    }
+
+    private boolean isValidPotionReceptacle(ItemStack itemStack) {
+        Potion potion = PotionUtils.getPotion(itemStack);
+        return potion == Potions.THICK || potion == Potions.MUNDANE;
     }
 
     public int getBucketSlot() {
@@ -249,23 +235,36 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
                 return lazyItemHandler.cast();
             }
             // Return capability based on side
-            if(directionWrappedHandlerMap.containsKey(side)) {
                 Direction localDir = this.getBlockState().getValue(AbstractFurnaceBlock.FACING);
 
                 if(side == Direction.UP || side == Direction.DOWN) {
-                    return directionWrappedHandlerMap.get(side).cast();
+                    return this.sidedLazyOptional(side).cast();
                 }
-                // Get the correct direction based on the furnace FACING property
                 return switch (localDir) {
-                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
-                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
-                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
-                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                    default -> this.sidedLazyOptional(side.getOpposite()).cast();
+                    case EAST -> this.sidedLazyOptional(side.getClockWise()).cast();
+                    case SOUTH -> this.sidedLazyOptional(side).cast();
+                    case WEST -> this.sidedLazyOptional(side.getCounterClockWise()).cast();
                 };
-            }
         }
 
         return super.getCapability(cap, side);
+    }
+
+    @Override
+    public WrappedHandler capabilityBySide(Direction side) {
+        return switch (side) {
+            case UP -> new WrappedHandler(itemHandler, (i, s) -> true, itemHandler::isInput);
+            case DOWN -> new WrappedHandler(itemHandler, (i, s) -> false,
+                    (i) -> (itemHandler.isOutput(i) && !this.hasValidPotionReceptacle() ||
+                            this.hasEmptyBucket(i) || this.canExtractInput(i)));
+            case NORTH, SOUTH, EAST, WEST -> new WrappedHandler(itemHandler,
+                    (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(this.getBucketSlot(), s), itemHandler::isBucket);
+        };
+    }
+
+    private boolean canExtractInput(int slot) {
+        return this.itemHandler.isInput(slot) && this.getStackInSlot(slot).is(Items.GLASS_BOTTLE);
     }
 
     // NBT
