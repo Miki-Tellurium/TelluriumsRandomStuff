@@ -30,9 +30,4 @@ public class AerodynamicsEnchantment extends Enchantment {
         return itemStack.getItem() instanceof GrapplingHookItem;
     }
 
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack itemStack) {
-        return true;
-    }
-
 }
