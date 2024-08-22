@@ -50,10 +50,6 @@ public class InfusedSoulSandBlock extends SoulSandBlock {
                 level.addParticle(ModParticles.SOUL_LAVA_HANG.get(), d0, d1, d2, 0.0D, 0.0D, 0.0D);
             }
         }
-
-        if (level.isRaining()) {
-            ParticleUtils.spawnRainParticles(level, pos, blockState, random);
-        }
     }
 
     @Override
@@ -65,7 +61,7 @@ public class InfusedSoulSandBlock extends SoulSandBlock {
     public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
         if (level.getFluidState(pos.above()).is(Fluids.LAVA)) {
             if (random.nextFloat() < soulLavaDripChance) {
-                BlockPos maybeCauldronPos = this.findFillableCauldronBelow(level, pos.below());
+                BlockPos maybeCauldronPos = this.findEmptyCauldronBelow(level, pos.below());
                 if (maybeCauldronPos != null) {
                     BlockState soulLavaCauldron = ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState();
                     level.setBlockAndUpdate(pos.above(), Blocks.AIR.defaultBlockState());
@@ -81,7 +77,7 @@ public class InfusedSoulSandBlock extends SoulSandBlock {
         }
     }
 
-    public BlockPos findFillableCauldronBelow(Level pLevel, BlockPos pPos) {
+    public BlockPos findEmptyCauldronBelow(Level pLevel, BlockPos pPos) {
         Predicate<BlockState> predicate = (blockState) -> blockState.getBlock() instanceof CauldronBlock;
         BiPredicate<BlockPos, BlockState> bipredicate = (blockPos, blockState) -> canDripThrough(pLevel, blockPos, blockState);
         return findBlockVertical(pLevel, pPos, Direction.DOWN.getAxisDirection(), bipredicate, predicate, 11).orElse(null);
