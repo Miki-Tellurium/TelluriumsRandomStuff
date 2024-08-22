@@ -6,7 +6,6 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispe
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModPotionMixingFunctions;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModRegistries;
 import com.mikitellurium.telluriumsrandomstuff.setup.CommonSetup;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
@@ -28,7 +27,6 @@ public class TelluriumsRandomStuffMod {
     // todo rei and emi compatibility
     // todo update changelog
     // todo add armor trims
-    // /place jigsaw telluriumsrandomstuff:ancient_bridge/central_watchtower/top ancient_bridge_anchor 7 ~ -35 ~
 
     public static final String MOD_ID = "telluriumsrandomstuff";
     public static final Logger LOGGER = LogUtils.getLogger();
