@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "telluriumsrandomstuff:soul_infused_iron_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "telluriumsrandomstuff:soul_infused_iron_ingot"
+  }
+}

@@ -47,7 +47,8 @@ public class ForgeTagProvider {
 
             this.tag(Tags.Blocks.STORAGE_BLOCKS)
                     .add(ModBlocks.OPAL_CRYSTAL_BLOCK.get())
-                    .add(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get());
+                    .add(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get())
+                    .add(ModBlocks.SOUL_INFUSED_IRON_BLOCK.get());
         }
     }
 

@@ -602,6 +602,13 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
                 .unlockedBy("has_iron", has(Items.IRON_INGOT))
                 .save(consumer, modLoc("soul_infused_iron_ingot"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_INFUSED_IRON_BLOCK.get(), 1)
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .define('#', ModItems.SOUL_INFUSED_IRON_INGOT.get())
+                .unlockedBy("has_soul_infused_iron_ingot", has(ModItems.SOUL_INFUSED_IRON_INGOT.get()))
+                .save(consumer, modLoc("soul_infused_iron_block"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
@@ -636,6 +643,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ModItems.SOUL_CLUSTER.get())
                 .unlockedBy("has_soul_cluster", has(ModItems.SOUL_CLUSTER.get()))
                 .save(consumer, modLoc("soul_fragment_from_soul_cluster"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SOUL_INFUSED_IRON_INGOT.get(), 9)
+                .requires(ModBlocks.SOUL_INFUSED_IRON_BLOCK.get())
+                .unlockedBy("has_soul_infused_iron_block", has(ModBlocks.SOUL_INFUSED_IRON_BLOCK.get()))
+                .save(consumer, modLoc("soul_infused_iron_ingot_from_block"));
     }
 
     private void buildSmeltingRecipes(Consumer<FinishedRecipe> consumer) {
