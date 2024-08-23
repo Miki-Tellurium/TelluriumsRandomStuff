@@ -25,28 +25,28 @@ public class DataGenerators {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        generator.addProvider(true, new ModBlockModelProvider(packOutput, existingFileHelper));
-        generator.addProvider(true, new ModItemModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModBlockModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
-        generator.addProvider(true, new ModRecipeProvider(generator));
-        generator.addProvider(true, ModBlockLootTableProvider.create(packOutput));
-        generator.addProvider(true, new ModTranslationProvider(packOutput));
-        generator.addProvider(true, new ModLootModifierProvider(packOutput));
-        generator.addProvider(true, new ModPotionMixingFunctionProvider(packOutput));
+        generator.addProvider(event.includeServer(), new ModRecipeProvider(generator));
+        generator.addProvider(event.includeServer(), ModBlockLootTableProvider.create(packOutput));
+        generator.addProvider(event.includeServer(), new ModTranslationProvider(packOutput));
+        generator.addProvider(event.includeServer(), new ModLootModifierProvider(packOutput));
+        generator.addProvider(event.includeServer(), new ModPotionMixingFunctionProvider(packOutput));
 
         // Vanilla tags
         VanillaTagProvider.Blocks vanillaBlockTags = new VanillaTagProvider.Blocks(packOutput, lookupProvider, existingFileHelper);
-        generator.addProvider(true, vanillaBlockTags);
-        generator.addProvider(true, new VanillaTagProvider.Items(packOutput, lookupProvider, vanillaBlockTags.contentsGetter(), existingFileHelper));
+        generator.addProvider(event.includeServer(), vanillaBlockTags);
+        generator.addProvider(event.includeServer(), new VanillaTagProvider.Items(packOutput, lookupProvider, vanillaBlockTags.contentsGetter(), existingFileHelper));
         // Mod tags
         ModTagProvider.Blocks modBlockTags = new ModTagProvider.Blocks(packOutput, lookupProvider, existingFileHelper);
-        generator.addProvider(true, modBlockTags);
-        generator.addProvider(true, new ModTagProvider.Items(packOutput, lookupProvider, modBlockTags.contentsGetter(), existingFileHelper));
-        generator.addProvider(true, new ModTagProvider.EntityTypes(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), modBlockTags);
+        generator.addProvider(event.includeServer(), new ModTagProvider.Items(packOutput, lookupProvider, modBlockTags.contentsGetter(), existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModTagProvider.EntityTypes(packOutput, lookupProvider, existingFileHelper));
         // Forge tags
         ForgeTagProvider.Blocks forgeBlockTags = new ForgeTagProvider.Blocks(packOutput, lookupProvider, existingFileHelper);
-        generator.addProvider(true, forgeBlockTags);
-        generator.addProvider(true, new ForgeTagProvider.Items(packOutput, lookupProvider, forgeBlockTags.contentsGetter(), existingFileHelper));
+        generator.addProvider(event.includeServer(), forgeBlockTags);
+        generator.addProvider(event.includeServer(), new ForgeTagProvider.Items(packOutput, lookupProvider, forgeBlockTags.contentsGetter(), existingFileHelper));
     }
 
 }
