@@ -5,6 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
@@ -28,7 +29,9 @@ public class SoulHarvestingEnchantment extends Enchantment {
 
     @Override
     public boolean canEnchant(ItemStack itemStack) {
-        return itemStack.getItem() instanceof SwordItem || super.canEnchant(itemStack);
+        return itemStack.getItem() instanceof SwordItem ||
+                itemStack.getItem() instanceof TridentItem ||
+                super.canEnchant(itemStack);
     }
 
     @Override
