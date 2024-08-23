@@ -5,6 +5,10 @@
     "telluriumsrandomstuff:soul_magma_block",
     "telluriumsrandomstuff:soul_magma_bricks",
     "telluriumsrandomstuff:soul_magma_brick_slab",
-    "telluriumsrandomstuff:spirited_iron_block"
+    "telluriumsrandomstuff:spirited_iron_block",
+    {
+      "id": "telluriumsrandomstuff:soul_lava_block",
+      "required": false
+    }
   ]
 }

@@ -203,11 +203,13 @@ public class VanillaTagProvider {
             this.tag(BlockTags.PIGLIN_REPELLENTS)
                     .add(ModBlocks.SOUL_JACK_O_LANTERN.get())
                     .add(ModBlocks.SOUL_TORCHFLOWER.get())
-                    //.add(ModBlocks.SOUL_LAVA_BLOCK.get())
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICKS.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get())
                     .add(ModBlocks.SPIRITED_IRON_BLOCK.get());
+
+            this.tag(BlockTags.PIGLIN_REPELLENTS)
+                    .addOptional(ModBlocks.SOUL_LAVA_BLOCK.getId());
         }
     }
 
