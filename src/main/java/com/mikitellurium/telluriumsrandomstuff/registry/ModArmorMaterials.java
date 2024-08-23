@@ -12,13 +12,13 @@ import java.util.EnumMap;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    SOUL_INFUSED_IRON("soul_infused_iron", 30, Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+    SPIRITED_IRON("spirited_iron", 30, Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
         map.put(ArmorItem.Type.BOOTS, 2);
         map.put(ArmorItem.Type.LEGGINGS, 5);
         map.put(ArmorItem.Type.CHESTPLATE, 6);
         map.put(ArmorItem.Type.HELMET, 2);
     }), 18, SoundEvents.ARMOR_EQUIP_GENERIC, 1.0F, 0.05F,
-            () -> Ingredient.of(ModItems.SOUL_INFUSED_IRON_INGOT.get()));
+            () -> Ingredient.of(ModItems.SPIRITED_IRON_INGOT.get()));
 
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class),
             (map) -> {

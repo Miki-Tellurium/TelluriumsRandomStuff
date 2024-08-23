@@ -41,17 +41,17 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SOUL_CLUSTER, "Soul Cluster");
         addItem(ModItems.SOUL_INFUSER_LIT, "Soul Infuser");
         addItem(ModItems.GRAPPLING_HOOK, "Grappling Hook");
-        addItem(ModItems.SOUL_INFUSED_IRON_INGOT, "Soul Infused Iron Ingot");
-        addItem(ModItems.SOUL_IRON_ROD, "Soul Iron Rod");
-        addItem(ModItems.SOUL_INFUSED_IRON_SWORD, "Soul Infused Iron Sword");
-        addItem(ModItems.SOUL_INFUSED_IRON_SHOVEL, "Soul Infused Iron Shovel");
-        addItem(ModItems.SOUL_INFUSED_IRON_PICKAXE, "Soul Infused Iron Pickaxe");
-        addItem(ModItems.SOUL_INFUSED_IRON_AXE, "Soul Infused Iron Axe");
-        addItem(ModItems.SOUL_INFUSED_IRON_HOE, "Soul Infused Iron Hoe");
-        addItem(ModItems.SOUL_INFUSED_IRON_BOOTS, "Soul Infused Iron Boots");
-        addItem(ModItems.SOUL_INFUSED_IRON_LEGGINGS, "Soul Infused Iron Leggings");
-        addItem(ModItems.SOUL_INFUSED_IRON_CHESTPLATE, "Soul Infused Iron Chestplate");
-        addItem(ModItems.SOUL_INFUSED_IRON_HELMET, "Soul Infused Iron Helmet");
+        addItem(ModItems.SPIRITED_IRON_INGOT, "Spirited Iron Ingot");
+        addItem(ModItems.SPIRITED_IRON_ROD, "Spirited Iron Rod");
+        addItem(ModItems.SPIRITED_IRON_SWORD, "Spirited Iron Sword");
+        addItem(ModItems.SPIRITED_IRON_SHOVEL, "Spirited Iron Shovel");
+        addItem(ModItems.SPIRITED_IRON_PICKAXE, "Spirited Iron Pickaxe");
+        addItem(ModItems.SPIRITED_IRON_AXE, "Spirited Iron Axe");
+        addItem(ModItems.SPIRITED_IRON_HOE, "Spirited Iron Hoe");
+        addItem(ModItems.SPIRITED_IRON_BOOTS, "Spirited Iron Boots");
+        addItem(ModItems.SPIRITED_IRON_LEGGINGS, "Spirited Iron Leggings");
+        addItem(ModItems.SPIRITED_IRON_CHESTPLATE, "Spirited Iron Chestplate");
+        addItem(ModItems.SPIRITED_IRON_HELMET, "Spirited Iron Helmet");
         addItem(ModItems.SOUL_COMPACTOR_LIT, "Soul Compactor");
 
         translation("item", "lava_googles.tooltip.color", "Color");
@@ -129,7 +129,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addBlock(ModBlocks.SOUL_LAVA_CAULDRON, "Soul Lava Cauldron");
         addBlock(ModBlocks.ALCHEMIXER, "Alchemixer");
         addBlock(ModBlocks.SOUL_COMPACTOR, "Soul Compactor");
-        addBlock(ModBlocks.SOUL_INFUSED_IRON_BLOCK, "Block of Soul Infused Iron");
+        addBlock(ModBlocks.SPIRITED_IRON_BLOCK, "Block of Spirited Iron");
 
         translation("block", "awakened_sculk_shrieker.tooltip.warning", "Warning!");
         translation("block", "awakened_sculk_shrieker.tooltip.message", "This can spawn a Warden anywhere. Use with caution.");

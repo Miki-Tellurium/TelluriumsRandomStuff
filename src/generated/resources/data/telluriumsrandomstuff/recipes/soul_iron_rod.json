@@ -6,7 +6,7 @@
       "item": "minecraft:blaze_rod"
     },
     "X": {
-      "item": "telluriumsrandomstuff:soul_infused_iron_ingot"
+      "item": "telluriumsrandomstuff:spirited_iron_ingot"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     " X "
   ],
   "result": {
-    "item": "telluriumsrandomstuff:soul_iron_rod"
+    "item": "telluriumsrandomstuff:spirited_iron_rod"
   },
   "show_notification": true
 }

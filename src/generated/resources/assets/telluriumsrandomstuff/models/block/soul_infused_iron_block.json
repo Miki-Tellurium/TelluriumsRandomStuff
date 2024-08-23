@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "telluriumsrandomstuff:block/soul_infused_iron_block"
-  }
-}

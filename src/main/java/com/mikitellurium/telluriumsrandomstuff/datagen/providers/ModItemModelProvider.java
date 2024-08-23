@@ -5,20 +5,13 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -82,17 +75,17 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .predicate(modLoc("thrown"), 1)
                 .model(this.getExistingFile(modLoc("grappling_hook_string")))
                 .end();
-        this.simpleItem(ModItems.SOUL_INFUSED_IRON_INGOT);
-        this.handheldItem(ModItems.SOUL_IRON_ROD);
-        this.handheldItem(ModItems.SOUL_INFUSED_IRON_SWORD);
-        this.handheldItem(ModItems.SOUL_INFUSED_IRON_SHOVEL);
-        this.handheldItem(ModItems.SOUL_INFUSED_IRON_PICKAXE);
-        this.handheldItem(ModItems.SOUL_INFUSED_IRON_AXE);
-        this.handheldItem(ModItems.SOUL_INFUSED_IRON_HOE);
-        this.simpleItem(ModItems.SOUL_INFUSED_IRON_BOOTS);
-        this.simpleItem(ModItems.SOUL_INFUSED_IRON_LEGGINGS);
-        this.simpleItem(ModItems.SOUL_INFUSED_IRON_CHESTPLATE);
-        this.simpleItem(ModItems.SOUL_INFUSED_IRON_HELMET);
+        this.simpleItem(ModItems.SPIRITED_IRON_INGOT);
+        this.handheldItem(ModItems.SPIRITED_IRON_ROD);
+        this.handheldItem(ModItems.SPIRITED_IRON_SWORD);
+        this.handheldItem(ModItems.SPIRITED_IRON_SHOVEL);
+        this.handheldItem(ModItems.SPIRITED_IRON_PICKAXE);
+        this.handheldItem(ModItems.SPIRITED_IRON_AXE);
+        this.handheldItem(ModItems.SPIRITED_IRON_HOE);
+        this.simpleItem(ModItems.SPIRITED_IRON_BOOTS);
+        this.simpleItem(ModItems.SPIRITED_IRON_LEGGINGS);
+        this.simpleItem(ModItems.SPIRITED_IRON_CHESTPLATE);
+        this.simpleItem(ModItems.SPIRITED_IRON_HELMET);
         this.withExistingParent(ModItems.SOUL_COMPACTOR_LIT.getId().getPath(), modLoc("block/soul_compactor_on"));
         this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
     }

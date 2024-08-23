@@ -115,16 +115,16 @@ public class JeiIntegration implements IModPlugin {
                 ModItems.OPAL_CRYSTAL_PICKAXE.get().getDefaultInstance(),
                 ModItems.OPAL_CRYSTAL_SHOVEL.get().getDefaultInstance(),
                 ModItems.OPAL_CRYSTAL_HOE.get().getDefaultInstance()), recipeFactory));
-        registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(new RecipeHelper.RepairData(Ingredient.of(ModItems.SOUL_INFUSED_IRON_INGOT.get()),
-                ModItems.SOUL_INFUSED_IRON_SWORD.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_AXE.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_PICKAXE.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_SHOVEL.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_HOE.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_BOOTS.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_LEGGINGS.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get().getDefaultInstance(),
-                ModItems.SOUL_INFUSED_IRON_HELMET.get().getDefaultInstance(),
+        registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(new RecipeHelper.RepairData(Ingredient.of(ModItems.SPIRITED_IRON_INGOT.get()),
+                ModItems.SPIRITED_IRON_SWORD.get().getDefaultInstance(),
+                ModItems.SPIRITED_IRON_AXE.get().getDefaultInstance(),
+                ModItems.SPIRITED_IRON_PICKAXE.get().getDefaultInstance(),
+                ModItems.SPIRITED_IRON_SHOVEL.get().getDefaultInstance(),
+                ModItems.SPIRITED_IRON_HOE.get().getDefaultInstance(),
+                ModItems.SPIRITED_IRON_BOOTS.get().getDefaultInstance(),
+                ModItems.SPIRITED_IRON_LEGGINGS.get().getDefaultInstance(),
+                ModItems.SPIRITED_IRON_CHESTPLATE.get().getDefaultInstance(),
+                ModItems.SPIRITED_IRON_HELMET.get().getDefaultInstance(),
                 ModItems.GRAPPLING_HOOK.get().getDefaultInstance()),recipeFactory));
     }
 

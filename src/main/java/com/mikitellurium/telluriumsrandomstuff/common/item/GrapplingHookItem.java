@@ -118,7 +118,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
 
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repairStack) {
-        return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+        return repairStack.is(ModItems.SPIRITED_IRON_INGOT.get());
     }
 
     @Override

@@ -101,52 +101,52 @@ public class ModItems {
     public static final RegistryObject<Item> SOUL_FRAGMENT = registerItem("soul_fragment", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SOUL_CLUSTER = registerItem("soul_cluster", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GRAPPLING_HOOK = registerItem("grappling_hook", GrapplingHookItem::new);
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_INGOT = registerItem("soul_infused_iron_ingot", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SOUL_IRON_ROD = registerItem("soul_iron_rod", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_SWORD = registerItem("soul_infused_iron_sword",
-            () -> new SwordItem(ModToolTiers.INFUSED_IRON, 3, -2.4F, new Item.Properties()
+    public static final RegistryObject<Item> SPIRITED_IRON_INGOT = registerItem("spirited_iron_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SPIRITED_IRON_ROD = registerItem("spirited_iron_rod", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SPIRITED_IRON_SWORD = registerItem("spirited_iron_sword",
+            () -> new SwordItem(ModToolTiers.SPIRITED_IRON, 3, -2.4F, new Item.Properties()
                     .defaultDurability(500)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                    return repairStack.is(ModItems.SPIRITED_IRON_INGOT.get());
                 }
             });
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_SHOVEL = registerItem("soul_infused_iron_shovel",
-            () -> new ShovelItem(ModToolTiers.INFUSED_IRON, 1.5F, -3.0F, new Item.Properties()
+    public static final RegistryObject<Item> SPIRITED_IRON_SHOVEL = registerItem("spirited_iron_shovel",
+            () -> new ShovelItem(ModToolTiers.SPIRITED_IRON, 1.5F, -3.0F, new Item.Properties()
                     .defaultDurability(500)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                    return repairStack.is(ModItems.SPIRITED_IRON_INGOT.get());
                 }
             });
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_PICKAXE = registerItem("soul_infused_iron_pickaxe",
-            () -> new PickaxeItem(ModToolTiers.INFUSED_IRON, 1, -2.8F, new Item.Properties()
+    public static final RegistryObject<Item> SPIRITED_IRON_PICKAXE = registerItem("spirited_iron_pickaxe",
+            () -> new PickaxeItem(ModToolTiers.SPIRITED_IRON, 1, -2.8F, new Item.Properties()
                     .defaultDurability(500)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                    return repairStack.is(ModItems.SPIRITED_IRON_INGOT.get());
                 }
             });
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_AXE = registerItem("soul_infused_iron_axe",
-            () -> new AxeItem(ModToolTiers.INFUSED_IRON, 5.0F, -3.0F, new Item.Properties()
+    public static final RegistryObject<Item> SPIRITED_IRON_AXE = registerItem("spirited_iron_axe",
+            () -> new AxeItem(ModToolTiers.SPIRITED_IRON, 5.0F, -3.0F, new Item.Properties()
                     .defaultDurability(500)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                    return repairStack.is(ModItems.SPIRITED_IRON_INGOT.get());
                 }
             });
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_HOE = registerItem("soul_infused_iron_hoe",
-            () -> new HoeItem(ModToolTiers.INFUSED_IRON, -3, 0.0F, new Item.Properties()
+    public static final RegistryObject<Item> SPIRITED_IRON_HOE = registerItem("spirited_iron_hoe",
+            () -> new HoeItem(ModToolTiers.SPIRITED_IRON, -3, 0.0F, new Item.Properties()
                     .defaultDurability(500)) {
                 @Override
                 public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                    return repairStack.is(ModItems.SPIRITED_IRON_INGOT.get());
                 }
             });
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_BOOTS = registerItem("soul_infused_iron_boots", () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.BOOTS, new Item.Properties()));
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_LEGGINGS = registerItem("soul_infused_iron_leggings", () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_CHESTPLATE = registerItem("soul_infused_iron_chestplate", () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static final RegistryObject<Item> SOUL_INFUSED_IRON_HELMET = registerItem("soul_infused_iron_helmet", () -> new ArmorItem(ModArmorMaterials.SOUL_INFUSED_IRON, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> SPIRITED_IRON_BOOTS = registerItem("spirited_iron_boots", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<Item> SPIRITED_IRON_LEGGINGS = registerItem("spirited_iron_leggings", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> SPIRITED_IRON_CHESTPLATE = registerItem("spirited_iron_chestplate", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> SPIRITED_IRON_HELMET = registerItem("spirited_iron_helmet", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.HELMET, new Item.Properties()));
 
     // Items of block states used only for rendering purposes
     public static final RegistryObject<Item> SOUL_INFUSER_LIT = registerItem("soul_infuser_lit", () -> new Item(new Item.Properties()));

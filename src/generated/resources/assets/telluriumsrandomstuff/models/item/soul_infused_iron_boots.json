@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "telluriumsrandomstuff:item/soul_infused_iron_boots"
-  }
-}

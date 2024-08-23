@@ -48,7 +48,7 @@ public class ForgeTagProvider {
             this.tag(Tags.Blocks.STORAGE_BLOCKS)
                     .add(ModBlocks.OPAL_CRYSTAL_BLOCK.get())
                     .add(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get())
-                    .add(ModBlocks.SOUL_INFUSED_IRON_BLOCK.get());
+                    .add(ModBlocks.SPIRITED_IRON_BLOCK.get());
         }
     }
 
@@ -67,30 +67,30 @@ public class ForgeTagProvider {
                     .add(ModItems.OPAL_CRYSTAL_AXE.get())
                     .add(ModItems.OPAL_CRYSTAL_SWORD.get())
                     .add(ModItems.OPAL_CRYSTAL_HOE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_SWORD.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_PICKAXE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_AXE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_SHOVEL.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_HOE.get())
+                    .add(ModItems.SPIRITED_IRON_SWORD.get())
+                    .add(ModItems.SPIRITED_IRON_PICKAXE.get())
+                    .add(ModItems.SPIRITED_IRON_AXE.get())
+                    .add(ModItems.SPIRITED_IRON_SHOVEL.get())
+                    .add(ModItems.SPIRITED_IRON_HOE.get())
                     .add(ModItems.GRAPPLING_HOOK.get());
 
             this.tag(Tags.Items.ARMORS)
-                    .add(ModItems.SOUL_INFUSED_IRON_BOOTS.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_LEGGINGS.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_HELMET.get());
+                    .add(ModItems.SPIRITED_IRON_BOOTS.get())
+                    .add(ModItems.SPIRITED_IRON_LEGGINGS.get())
+                    .add(ModItems.SPIRITED_IRON_CHESTPLATE.get())
+                    .add(ModItems.SPIRITED_IRON_HELMET.get());
 
             this.tag(Tags.Items.ARMORS_BOOTS)
-                    .add(ModItems.SOUL_INFUSED_IRON_BOOTS.get());
+                    .add(ModItems.SPIRITED_IRON_BOOTS.get());
 
             this.tag(Tags.Items.ARMORS_LEGGINGS)
-                    .add(ModItems.SOUL_INFUSED_IRON_LEGGINGS.get());
+                    .add(ModItems.SPIRITED_IRON_LEGGINGS.get());
 
             this.tag(Tags.Items.ARMORS_CHESTPLATES)
-                    .add(ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get());
+                    .add(ModItems.SPIRITED_IRON_CHESTPLATE.get());
 
             this.tag(Tags.Items.ARMORS_HELMETS)
-                    .add(ModItems.SOUL_INFUSED_IRON_HELMET.get());
+                    .add(ModItems.SPIRITED_IRON_HELMET.get());
 
             this.tag(Tags.Items.DUSTS)
                     .add(ModItems.BLUE_GLOWSTONE_DUST.get());
@@ -102,10 +102,10 @@ public class ForgeTagProvider {
                     .add(ModItems.OPAL_CRYSTAL.get());
 
             this.tag(Tags.Items.INGOTS)
-                    .add(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                    .add(ModItems.SPIRITED_IRON_INGOT.get());
 
             this.tag(Tags.Items.RODS)
-                    .add(ModItems.SOUL_IRON_ROD.get());
+                    .add(ModItems.SPIRITED_IRON_ROD.get());
 
             this.copy(Tags.Blocks.COBBLESTONE, Tags.Items.COBBLESTONE);
             this.copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);

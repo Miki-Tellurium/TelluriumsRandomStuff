@@ -13,12 +13,12 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_soul_rod": {
+    "has_spirited_iron_rod": {
       "conditions": {
         "items": [
           {
             "items": [
-              "telluriumsrandomstuff:soul_iron_rod"
+              "telluriumsrandomstuff:spirited_iron_rod"
             ]
           }
         ]
@@ -34,7 +34,7 @@
   },
   "requirements": [
     [
-      "has_soul_rod",
+      "has_spirited_iron_rod",
       "has_brewing_stand",
       "has_the_recipe"
     ]

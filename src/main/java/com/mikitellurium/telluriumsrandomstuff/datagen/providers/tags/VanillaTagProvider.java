@@ -87,7 +87,7 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_INFUSER.get())
                     .add(ModBlocks.ALCHEMIXER.get())
                     .add(ModBlocks.SOUL_COMPACTOR.get())
-                    .add(ModBlocks.SOUL_INFUSED_IRON_BLOCK.get());
+                    .add(ModBlocks.SPIRITED_IRON_BLOCK.get());
 
             this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                     .add(ModBlocks.GRATE_SOUL_SAND.get())
@@ -154,7 +154,7 @@ public class VanillaTagProvider {
                     .add(ModBlocks.INFUSED_SOUL_SAND.get())
                     .add(ModBlocks.SOUL_INFUSER.get())
                     .add(ModBlocks.SOUL_COMPACTOR.get())
-                    .add(ModBlocks.SOUL_INFUSED_IRON_BLOCK.get());
+                    .add(ModBlocks.SPIRITED_IRON_BLOCK.get());
 
             this.tag(BlockTags.SOUL_SPEED_BLOCKS)
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())
@@ -207,7 +207,7 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_MAGMA_BLOCK.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICKS.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get())
-                    .add(ModBlocks.SOUL_INFUSED_IRON_BLOCK.get());
+                    .add(ModBlocks.SPIRITED_IRON_BLOCK.get());
         }
     }
 
@@ -226,32 +226,32 @@ public class VanillaTagProvider {
                     .add(ModItems.OPAL_CRYSTAL_AXE.get())
                     .add(ModItems.OPAL_CRYSTAL_SWORD.get())
                     .add(ModItems.OPAL_CRYSTAL_HOE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_SWORD.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_PICKAXE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_AXE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_SHOVEL.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_HOE.get())
+                    .add(ModItems.SPIRITED_IRON_SWORD.get())
+                    .add(ModItems.SPIRITED_IRON_PICKAXE.get())
+                    .add(ModItems.SPIRITED_IRON_AXE.get())
+                    .add(ModItems.SPIRITED_IRON_SHOVEL.get())
+                    .add(ModItems.SPIRITED_IRON_HOE.get())
                     .add(ModItems.GRAPPLING_HOOK.get());
 
             this.tag(ItemTags.AXES)
                     .add(ModItems.OPAL_CRYSTAL_AXE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_AXE.get());
+                    .add(ModItems.SPIRITED_IRON_AXE.get());
 
             this.tag(ItemTags.HOES)
                     .add(ModItems.OPAL_CRYSTAL_HOE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_HOE.get());
+                    .add(ModItems.SPIRITED_IRON_HOE.get());
 
             this.tag(ItemTags.PICKAXES)
                     .add(ModItems.OPAL_CRYSTAL_PICKAXE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_PICKAXE.get());
+                    .add(ModItems.SPIRITED_IRON_PICKAXE.get());
 
             this.tag(ItemTags.SHOVELS)
                     .add(ModItems.OPAL_CRYSTAL_SHOVEL.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_SHOVEL.get());
+                    .add(ModItems.SPIRITED_IRON_SHOVEL.get());
 
             this.tag(ItemTags.SWORDS)
                     .add(ModItems.OPAL_CRYSTAL_SWORD.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_SWORD.get());
+                    .add(ModItems.SPIRITED_IRON_SWORD.get());
 
             this.tag(ItemTags.STONE_CRAFTING_MATERIALS)
                     .add(ModBlocks.OPAL_COBBLESTONE.get().asItem());
@@ -260,14 +260,14 @@ public class VanillaTagProvider {
                     .add(ModBlocks.OPAL_COBBLESTONE.get().asItem());
 
             this.tag(ItemTags.TRIMMABLE_ARMOR)
-                    .add(ModItems.SOUL_INFUSED_IRON_BOOTS.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_LEGGINGS.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_CHESTPLATE.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_HELMET.get());
+                    .add(ModItems.SPIRITED_IRON_BOOTS.get())
+                    .add(ModItems.SPIRITED_IRON_LEGGINGS.get())
+                    .add(ModItems.SPIRITED_IRON_CHESTPLATE.get())
+                    .add(ModItems.SPIRITED_IRON_HELMET.get());
 
             this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
                     .add(ModItems.OPAL_CRYSTAL.get())
-                    .add(ModItems.SOUL_INFUSED_IRON_INGOT.get());
+                    .add(ModItems.SPIRITED_IRON_INGOT.get());
 
             this.tag(ItemTags.VILLAGER_PLANTABLE_SEEDS)
                     .add(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get())
