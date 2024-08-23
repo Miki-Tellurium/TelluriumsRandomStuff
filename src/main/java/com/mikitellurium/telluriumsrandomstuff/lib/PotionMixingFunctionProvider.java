@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.lib;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.CustomRegistries;
@@ -13,7 +14,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -21,7 +21,7 @@ public abstract class PotionMixingFunctionProvider implements DataProvider {
 
     private final PackOutput output;
     private final String modid;
-    private final Map<MobEffect, PotionMixingFunction> toSerialize = new HashMap<>();
+    private final Map<MobEffect, PotionMixingFunction> toSerialize = Maps.newLinkedHashMap();
     private boolean replace = false;
 
     public PotionMixingFunctionProvider(PackOutput output, String modid) {
