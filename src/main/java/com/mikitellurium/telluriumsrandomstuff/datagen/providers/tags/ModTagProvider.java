@@ -10,6 +10,7 @@ import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -90,7 +91,8 @@ public class ModTagProvider {
                     .add(ModBlocks.OPAL_CRYSTAL_ORE.get().asItem());
 
             this.tag(ModTags.Items.ALLAY_DUPLICATION_ITEMS)
-                    .add(net.minecraft.world.item.Items.ECHO_SHARD);
+                    .add(net.minecraft.world.item.Items.ECHO_SHARD)
+                    .add(net.minecraft.world.item.Items.AMETHYST_SHARD);
         }
     }
 
