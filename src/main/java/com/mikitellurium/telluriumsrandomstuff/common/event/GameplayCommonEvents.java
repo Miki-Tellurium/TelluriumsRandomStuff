@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.event;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
+import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.common.entity.goal.StriderGoToSoulLavaGoal;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.core.BlockPos;

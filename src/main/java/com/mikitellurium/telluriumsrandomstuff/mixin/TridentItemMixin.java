@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.mixin;
 
-import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
+import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
