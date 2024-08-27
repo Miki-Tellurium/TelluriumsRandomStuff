@@ -25,8 +25,7 @@ public class ModBlockEntities {
             "extractor", () -> BlockEntityType.Builder.of(ExtractorBlockEntity::new,
                     ModBlocks.EXTRACTOR.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<AwakenedSculkShriekerBlockEntity>> AWAKENED_SCULK_SHRIEKER =
-            registerBlockEntity(
+    public static final RegistryObject<BlockEntityType<AwakenedSculkShriekerBlockEntity>> AWAKENED_SCULK_SHRIEKER = registerBlockEntity(
             "awakened_sculk_shrieker", () -> BlockEntityType.Builder.of(AwakenedSculkShriekerBlockEntity::new,
                     ModBlocks.AWAKENED_SCULK_SHRIEKER.get()).build(null));
 

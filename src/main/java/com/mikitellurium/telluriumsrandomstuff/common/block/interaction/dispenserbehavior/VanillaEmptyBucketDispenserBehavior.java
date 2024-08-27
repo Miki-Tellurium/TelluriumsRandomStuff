@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block.interaction.dispenserbehavior;
 
+import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispenserBehaviours;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
@@ -14,8 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 public class VanillaEmptyBucketDispenserBehavior extends DefaultDispenseItemBehavior {
-
-    private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
     @Override
     public ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
@@ -35,7 +34,7 @@ public class VanillaEmptyBucketDispenserBehavior extends DefaultDispenseItemBeha
                     return new ItemStack(item);
                 } else {
                     if (((DispenserBlockEntity)blockSource.getEntity()).addItem(new ItemStack(item)) < 0) {
-                        this.defaultDispenseItemBehavior.dispense(blockSource, new ItemStack(item));
+                        ModDispenserBehaviours.DEFAULT_DISPENSE.dispense(blockSource, new ItemStack(item));
                     }
 
                     return itemStack;

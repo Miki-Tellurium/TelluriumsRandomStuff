@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block.interaction.dispenserbehavior;
 
 import com.mikitellurium.telluriumsrandomstuff.api.DispenserCauldronInteractionManager;
+import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispenserBehaviours;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
@@ -22,7 +23,6 @@ public class DispenseBucketToCauldronBehavior extends DefaultDispenseItemBehavio
 
     // Anonymous class copied from vanilla code
     private final DefaultDispenseItemBehavior vanillaDispenseItemBehavior = new DefaultDispenseItemBehavior() {
-        private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
         private final VanillaEmptyBucketDispenserBehavior vanillaEmptyBucketDispenserBehavior = new VanillaEmptyBucketDispenserBehavior();
 
         public ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
@@ -37,18 +37,16 @@ public class DispenseBucketToCauldronBehavior extends DefaultDispenseItemBehavio
                 dispensiblecontaineritem.checkExtraContent(null, level, itemStack, blockpos);
                 return new ItemStack(Items.BUCKET);
             } else {
-                return this.defaultDispenseItemBehavior.dispense(blockSource, itemStack);
+                return ModDispenserBehaviours.DEFAULT_DISPENSE.dispense(blockSource, itemStack);
             }
         }
     };
 
     @Override
     protected ItemStack execute(BlockSource blockSource, ItemStack itemStack) {
-
         BlockPos blockpos = blockSource.getPos().relative(blockSource.getBlockState().getValue(DispenserBlock.FACING));
         Level level = blockSource.getLevel();
         BlockState blockState = level.getBlockState(blockpos);
-
         if (blockState.getBlock() instanceof AbstractCauldronBlock &&
                 (itemStack.getItem() instanceof BucketItem || itemStack.getItem() instanceof SolidBucketItem)) {
             Block resultCauldron = DispenserCauldronInteractionManager.getResultingCauldron(itemStack.getItem());

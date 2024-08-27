@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.api;
 
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.dispenserbehavior.DispenseBucketToCauldronBehavior;
-import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
+import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.AbstractCauldronBlock;

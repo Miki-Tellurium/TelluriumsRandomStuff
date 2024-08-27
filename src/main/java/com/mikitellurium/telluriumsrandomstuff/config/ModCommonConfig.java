@@ -1,5 +1,6 @@
-package com.mikitellurium.telluriumsrandomstuff.common.config;
+package com.mikitellurium.telluriumsrandomstuff.config;
 
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AwakenedSculkShriekerBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulAnchorBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -32,7 +33,7 @@ public class ModCommonConfig {
                 .defineInRange("zombieRiderSpawnChance", 25, 0, 100);
 
         SoulAnchorBlockEntity.ITEM_VOID_CHANCE = builder
-                .comment("The chance of a stack getting lost when recovering the inventory with a soul anchor")
+                .comment("The chance of a stack getting lost when recovering the inventory with a soul anchor.")
                 .defineInRange("soulAnchorItemVoidChance", 0, 0, 100);
 
         ENABLE_USING_TRIDENT_IN_WATER_CAULDRON = builder
@@ -42,6 +43,11 @@ public class ModCommonConfig {
         ALLAY_DUPLICATE_WITH_ECHO_SHARD = builder
                 .comment("Allows to duplicate allays using echo shards.")
                 .define("allayDuplicateWithEchoShards", true);
+
+        AwakenedSculkShriekerBlockEntity.SPAWN_DELAY = builder
+                .comment("How much time in ticks the awakened sculk shrieker stay dormant after",
+                        "spawning a warden.")
+                .defineInRange("awakenedSculkShriekerSpawnDelay", 6000, 0, Integer.MAX_VALUE);
 
         builder.pop();
     }

@@ -246,7 +246,7 @@ public class ModBlockModelProvider extends BlockStateProvider {
         this.getVariantBuilder(ModBlocks.AWAKENED_SCULK_SHRIEKER.get())
                 .forAllStatesExcept((state) -> {
                     ResourceLocation innerTopTexture = state.getValue(AwakenedSculkShriekerBlock.CAN_SUMMON) ?
-                            mcLoc("block/sculk_shrieker_can_summon_inner_top") : modLoc("block/awakened_sculk_shrieker_inner_top");
+                            modLoc("block/awakened_sculk_shrieker_can_summon_inner_top") : modLoc("block/awakened_sculk_shrieker_inner_top");
                     String model = ModBlocks.AWAKENED_SCULK_SHRIEKER.getId().getPath();
                     if (state.getValue(AwakenedSculkShriekerBlock.CAN_SUMMON)) {
                         model = model + "_can_summon";

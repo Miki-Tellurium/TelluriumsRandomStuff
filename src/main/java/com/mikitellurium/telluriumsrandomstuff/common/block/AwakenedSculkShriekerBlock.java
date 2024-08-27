@@ -2,40 +2,38 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AwakenedSculkShriekerBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SculkShriekerBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.SculkShriekerBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.vibrations.VibrationSystem;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-
-import java.awt.*;
-import java.util.List;
 
 public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
 
-    private static final int orange = FastColor.ABGR32.color(255, 0xFD7E00);
-
     public AwakenedSculkShriekerBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.SCULK_SHRIEKER));
-        super.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.stateDefinition.any()
                 .setValue(SHRIEKING, false)
                 .setValue(WATERLOGGED, false)
                 .setValue(CAN_SUMMON, true));
@@ -51,30 +49,43 @@ public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
                                                                   BlockEntityType<T> blockEntityType) {
-        return !level.isClientSide ? BaseEntityBlock.createTickerHelper(blockEntityType,
-                ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get(),
-                (tickLevel, pos, blockState1, shrieker) -> {
-                    VibrationSystem.Ticker.tick(tickLevel, shrieker.getVibrationData(), shrieker.getVibrationUser());
-                    shrieker.getSculkSpreader().updateCursors(tickLevel, pos, tickLevel.random, true);
-                }) : null;
+        return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get(),
+                (tickLevel, pos, state, shrieker) -> shrieker.tick(level, pos, state));
+    }
+
+    public void tick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (blockState.getValue(SHRIEKING)) {
+            level.setBlockAndUpdate(pos, blockState.setValue(SHRIEKING, false));
+            level.getBlockEntity(pos, ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get()).ifPresent((shrieker) -> {
+                shrieker.tryRespond(level);
+            });
+        }
+    }
+
+    @Override
+    public InteractionResult use(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
+        if (level instanceof ServerLevel serverLevel) {
+            if (blockState.getValue(CAN_SUMMON) && !blockState.getValue(SHRIEKING)) {
+                ItemStack itemStack = player.getItemInHand(interactionHand);
+                if (itemStack.is(ModItems.SOUL_CLUSTER.get())) {
+                    if (!player.isCreative()) itemStack.shrink(1);
+                    serverLevel.getBlockEntity(pos, ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get()).ifPresent((shrieker) -> {
+                        shrieker.tryShriek(serverLevel, (ServerPlayer) player);
+                    });
+                }
+            }
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState blockState, Entity entity) {
-        if (level instanceof ServerLevel serverlevel) {
-            ServerPlayer serverplayer = AwakenedSculkShriekerBlockEntity.tryGetPlayer(entity);
-            if (serverplayer != null) {
-                serverlevel.getBlockEntity(pos, ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get())
-                        .ifPresent((shrieker) -> shrieker.tryShriek(serverlevel, serverplayer));
-            }
-        }
-
-        super.stepOn(level, pos, blockState, entity);
+        // Disable shrieker stepOn method
     }
 
     @Override
-    public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState newState,
-                         boolean isMoving) {
+    public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (level instanceof ServerLevel serverlevel) {
             if (blockState.getValue(SHRIEKING) && !blockState.is(newState.getBlock())) {
                 serverlevel.getBlockEntity(pos, ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get())
@@ -86,25 +97,13 @@ public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
     }
 
     @Override
-    public void tick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (blockState.getValue(SHRIEKING)) {
-            level.setBlock(pos, blockState.setValue(SHRIEKING, Boolean.valueOf(false)), 3);
-            level.getBlockEntity(pos, ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get())
-                    .ifPresent((shrieker) -> shrieker.tryRespond(level));
-        }
+    public boolean hasAnalogOutputSignal(BlockState blockState) {
+        return true;
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter level,
-                                List<Component> components, TooltipFlag flag) {
-        Component shift = Component.literal(" <Shift>").withStyle(ChatFormatting.WHITE);
-        Component warning = Component.translatable("block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.warning")
-                .withStyle((style) -> style.withColor(orange)).append(shift);
-        components.add(warning);
-        if (Screen.hasShiftDown()) {
-            components.add(Component.translatable("block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.message")
-                    .withStyle((style) -> style.withColor(Color.ORANGE.getRGB())));
-        }
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        return blockState.getValue(CAN_SUMMON) ? 15 : 0;
     }
 
 }

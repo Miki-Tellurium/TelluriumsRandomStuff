@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.CustomRegistries;
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingFunction;
-import com.mikitellurium.telluriumsrandomstuff.common.config.ModCommonConfig;
+import com.mikitellurium.telluriumsrandomstuff.config.ModCommonConfig;
 import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.serialization.Codec;
