@@ -12,7 +12,7 @@ public class ModCommonConfig {
     public static ForgeConfigSpec.BooleanValue ENABLE_MOD_DISPENSER_BEHAVIOR;
     public static ForgeConfigSpec.IntValue ZOMBIE_RIDER_SPAWN_CHANCE;
     public static ForgeConfigSpec.BooleanValue ENABLE_USING_TRIDENT_IN_WATER_CAULDRON;
-    public static ForgeConfigSpec.BooleanValue ALLAY_DUPLICATE_WITH_ECHO_SHARD;
+    public static ForgeConfigSpec.BooleanValue ALLAY_DUPLICATE_WITH_EXTRA_ITEMS;
 
     public static void register() {
         ForgeConfigSpec.Builder CONFIG_BUILDER = new ForgeConfigSpec.Builder();
@@ -40,9 +40,10 @@ public class ModCommonConfig {
                 .comment("Allows for trident to be used when inside a water cauldron.")
                 .define("enableUseTridentInWaterCauldron", true);
 
-        ALLAY_DUPLICATE_WITH_ECHO_SHARD = builder
-                .comment("Allows to duplicate allays using echo shards.")
-                .define("allayDuplicateWithEchoShards", true);
+        ALLAY_DUPLICATE_WITH_EXTRA_ITEMS = builder
+                .comment("Allows to duplicate allays using more items (defined in the",
+                        "\"allay_duplication_items\" item tag).")
+                .define("allayDuplicateWithExtraItems", true);
 
         AwakenedSculkShriekerBlockEntity.SPAWN_DELAY = builder
                 .comment("How much time in ticks the awakened sculk shrieker stay dormant after",

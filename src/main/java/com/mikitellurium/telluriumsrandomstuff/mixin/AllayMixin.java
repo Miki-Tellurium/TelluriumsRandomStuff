@@ -14,7 +14,7 @@ public class AllayMixin {
 
     @Inject(method = "isDuplicationItem", at = @At(value = "HEAD"), cancellable = true)
     private void onCheckDuplicationItem(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
-        if (ModCommonConfig.ALLAY_DUPLICATE_WITH_ECHO_SHARD.get() && itemStack.is(ModTags.Items.ALLAY_DUPLICATION_ITEMS)) {
+        if (ModCommonConfig.ALLAY_DUPLICATE_WITH_EXTRA_ITEMS.get() && itemStack.is(ModTags.Items.ALLAY_DUPLICATION_ITEMS)) {
             cir.setReturnValue(true);
         }
     }
