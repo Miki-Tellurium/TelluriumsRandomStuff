@@ -110,7 +110,6 @@ public class AwakenedSculkShriekerBlockEntity extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         tag.putInt("awakened_shrieker.spawnDelay", this.spawnDelay);
-        LogUtils.consoleLog("Saved spawn delay="+tag.getInt("awakened_shrieker.spawnDelay"));
         super.saveAdditional(tag);
     }
 
@@ -118,7 +117,6 @@ public class AwakenedSculkShriekerBlockEntity extends BlockEntity {
     public void load(CompoundTag tag) {
         super.load(tag);
         this.spawnDelay = Math.min(tag.getInt("awakened_shrieker.spawnDelay"), SPAWN_DELAY.get());
-        LogUtils.consoleLog("Loaded spawn delay="+spawnDelay);
     }
 
 }
