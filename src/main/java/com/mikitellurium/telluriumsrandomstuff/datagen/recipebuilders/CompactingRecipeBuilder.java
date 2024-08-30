@@ -16,7 +16,6 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class CompactingRecipeBuilder implements RecipeBuilder {
@@ -103,7 +102,7 @@ public class CompactingRecipeBuilder implements RecipeBuilder {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return ModRecipeSerializers.COMPACTING_SERIALIZER.get();
+            return ModRecipeSerializers.COMPACTING.get();
         }
 
         @Nullable

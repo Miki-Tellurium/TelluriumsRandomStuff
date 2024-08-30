@@ -81,7 +81,7 @@ public class SoulLavaTransmutationRecipeBuilder implements RecipeBuilder {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return ModRecipeSerializers.SOUL_LAVA_TRANSMUTATION_SERIALIZER.get();
+            return ModRecipeSerializers.SOUL_LAVA_TRANSMUTATION.get();
         }
 
         @Nullable

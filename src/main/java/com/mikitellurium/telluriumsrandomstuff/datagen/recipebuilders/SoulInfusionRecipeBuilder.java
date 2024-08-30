@@ -93,7 +93,7 @@ public class SoulInfusionRecipeBuilder implements RecipeBuilder {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return ModRecipeSerializers.SOUL_INFUSION_SERIALIZER.get();
+            return ModRecipeSerializers.SOUL_INFUSION.get();
         }
 
         @Nullable

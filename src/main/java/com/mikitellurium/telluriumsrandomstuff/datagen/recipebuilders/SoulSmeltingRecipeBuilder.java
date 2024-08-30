@@ -81,7 +81,7 @@ public class SoulSmeltingRecipeBuilder implements RecipeBuilder {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return ModRecipeSerializers.SOUL_FURNACE_SMELTING_SERIALIZER.get();
+            return ModRecipeSerializers.SOUL_FURNACE_SMELTING.get();
         }
 
         @Nullable
