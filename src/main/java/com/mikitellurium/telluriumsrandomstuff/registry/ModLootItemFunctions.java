@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
+import com.mikitellurium.telluriumsrandomstuff.common.loot.AddStoredSoulFunction;
 import com.mikitellurium.telluriumsrandomstuff.common.loot.SetRandomGooglesColorFunction;
 import com.mikitellurium.telluriumsrandomstuff.common.loot.SoulHarvestEnchantFunction;
 import net.minecraft.world.item.Item;
@@ -16,6 +17,9 @@ public class ModLootItemFunctions {
 
     public static RegistryObject<LootItemFunctionType> SOUL_HARVEST_ENCHANT = registerFunction(
             "soul_harvest_enchant", () -> new LootItemFunctionType(new SoulHarvestEnchantFunction.Serializer()));
+
+    public static RegistryObject<LootItemFunctionType> ADD_STORED_SOUL = registerFunction(
+            "add_stored_soul", () -> new LootItemFunctionType(new AddStoredSoulFunction.Serializer()));
 
     private static <T extends LootItemFunctionType> RegistryObject<T> registerFunction(String name, Supplier<T> function) {
         return ModRegistries.LOOT_ITEM_FUNCTIONS.register(name, function);

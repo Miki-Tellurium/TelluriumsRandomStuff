@@ -3,9 +3,12 @@ package com.mikitellurium.telluriumsrandomstuff.registry;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.MoltenAmethystItem;
+import com.mikitellurium.telluriumsrandomstuff.common.item.SoulStorageItem;
+import com.mikitellurium.telluriumsrandomstuff.test.TooltipTest;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -14,6 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ModItems {
@@ -97,9 +101,11 @@ public class ModItems {
     public static final RegistryObject<Item> LAVA_GOOGLES = registerItem("lava_googles", LavaGooglesItem::new);
     public static final RegistryObject<Item> MOLTEN_AMETHYST = registerItem("molten_amethyst", MoltenAmethystItem::new);
     public static final RegistryObject<Item> AMETHYST_LENS = registerItem("amethyst_lens", () -> new Item(new Item.Properties().fireResistant()));
-    public static final RegistryObject<Item> SMALL_SOUL_FRAGMENT = registerItem("small_soul_fragment", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SOUL_FRAGMENT = registerItem("soul_fragment", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SOUL_CLUSTER = registerItem("soul_cluster", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> SMALL_SOUL_FRAGMENT = registerItem("small_soul_fragment", SoulStorageItem::new);
+    public static final RegistryObject<Item> SOUL_FRAGMENT = registerItem("soul_fragment", SoulStorageItem::new);
+    public static final RegistryObject<Item> SOUL_CLUSTER = registerItem("soul_cluster", SoulStorageItem::new);
+
     public static final RegistryObject<Item> GRAPPLING_HOOK = registerItem("grappling_hook", GrapplingHookItem::new);
     public static final RegistryObject<Item> SPIRITED_IRON_INGOT = registerItem("spirited_iron_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_IRON_ROD = registerItem("spirited_iron_rod", () -> new Item(new Item.Properties()));

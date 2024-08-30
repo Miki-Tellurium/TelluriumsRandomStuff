@@ -18,6 +18,10 @@
                 "max": 1.0,
                 "min": 0.0
               }
+            },
+            {
+              "function": "telluriumsrandomstuff:add_stored_soul",
+              "count": 1
             }
           ]
         }

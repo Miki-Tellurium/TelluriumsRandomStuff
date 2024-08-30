@@ -14,7 +14,7 @@ import java.util.Random;
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, value = Dist.CLIENT)
 public class KeyEvents {
 
-    private static final float increase = 0.01F;
+    private static final float increase = 1.0F;
     private static final float initScale = 1.0F;
     private static final float initX = 0.0F;
     private static final float initY = 0.0F;
@@ -48,9 +48,9 @@ public class KeyEvents {
             translateY = initY;
             translateZ = initZ;
         }
-        translateX = Mth.clamp(translateX, 0.0F, 1.0F);
-        translateY = Mth.clamp(translateY, 0.0F, 1.0F);
-        translateZ = Mth.clamp(translateZ, 0.0F, 1.0F);
+//        translateX = Mth.clamp(translateX, 0.0F, 1.0F);
+//        translateY = Mth.clamp(translateY, 0.0F, 1.0F);
+//        translateZ = Mth.clamp(translateZ, 0.0F, 1.0F);
     }
 
     @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)

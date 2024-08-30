@@ -9,6 +9,8 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHoo
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
+import com.mikitellurium.telluriumsrandomstuff.test.ClientTooltipTest;
+import com.mikitellurium.telluriumsrandomstuff.test.TooltipTest;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.client.Minecraft;
@@ -26,6 +28,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -176,6 +179,11 @@ public class ClientSetup {
         } catch (Exception e) {
             TelluriumsRandomStuffMod.LOGGER.error("Could not add layer to " + entityType.toShortString());
         }
+    }
+
+    @SubscribeEvent
+    public static void registerTooltip(RegisterClientTooltipComponentFactoriesEvent event) {
+        event.register(TooltipTest.class, ClientTooltipTest::new);
     }
 
 }

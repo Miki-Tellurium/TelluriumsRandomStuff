@@ -7,7 +7,19 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "telluriumsrandomstuff:soul_cluster"
+          "name": "telluriumsrandomstuff:soul_cluster",
+          "functions": [
+            {
+              "function": "telluriumsrandomstuff:soul_harvest_enchant",
+              "chance": 1.0,
+              "multiplier": 0.0,
+              "looting": 0
+            },
+            {
+              "function": "telluriumsrandomstuff:add_stored_soul",
+              "count": 64
+            }
+          ]
         }
       ]
     },
@@ -32,6 +44,10 @@
                 "max": 0.5,
                 "min": 0.0
               }
+            },
+            {
+              "function": "telluriumsrandomstuff:add_stored_soul",
+              "count": 8
             }
           ]
         }
