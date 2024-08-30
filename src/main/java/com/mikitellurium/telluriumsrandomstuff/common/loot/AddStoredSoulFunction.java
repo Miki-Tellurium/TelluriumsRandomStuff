@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.loot;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulStorage;
+import com.mikitellurium.telluriumsrandomstuff.common.item.SoulStorageItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModLootItemFunctions;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +28,7 @@ public class AddStoredSoulFunction extends LootItemConditionalFunction {
 
     @Override
     protected ItemStack run(ItemStack itemStack, LootContext context) {
-        if (SoulStorage.isSoulStorageItem(itemStack)) {
+        if (SoulStorageItem.isSoulStorageItem(itemStack)) {
             Entity entity = context.getParam(LootContextParams.THIS_ENTITY);
             String entityId = EntityType.getKey(entity.getType()).toString();
             SoulStorage.performAction(itemStack, (storage) -> storage.set(entityId, this.count.getInt(context)));

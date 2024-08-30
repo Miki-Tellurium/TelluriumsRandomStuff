@@ -44,10 +44,6 @@ public class SoulStorage {
         return tag.getCompound("StoredSouls");
     }
 
-    public static boolean isSoulStorageItem(ItemStack itemStack) {
-        return itemStack.getItem() instanceof SoulStorageItem;
-    }
-
     public static void performAction(ItemStack itemStack, Consumer<SoulStorage> consumer) {
         itemStack.getCapability(SoulStorageCapabilityProvider.INSTANCE).ifPresent(consumer::accept);
     }

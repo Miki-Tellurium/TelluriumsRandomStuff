@@ -61,4 +61,8 @@ public class SoulStorageItem extends Item {
         return new SoulStorageCapabilityProvider();
     }
 
+    public static boolean isSoulStorageItem(ItemStack itemStack) {
+        return itemStack.getItem() instanceof SoulStorageItem;
+    }
+
 }
