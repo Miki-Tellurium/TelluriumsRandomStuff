@@ -16,6 +16,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.MagmaCube;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -133,16 +134,20 @@ public class SoulLavaFluid extends ForgeFlowingFluid {
     }
 
     public static void hurt(Entity entity) {
-        if (!entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE) && !entity.fireImmune()) {
-            entity.setSecondsOnFire(15);
-            if (entity.hurt(entity.damageSources().lava(), 4.0F)) {
-                entity.playSound(SoundEvents.GENERIC_BURN, 0.4F,
-                        2.0F + entity.level().getRandom().nextFloat() * 0.4F);
-            }
+        if (isImmuneToSoulLava(entity)) return;
+        if (entity.fireImmune()) return;
+        entity.setSecondsOnFire(15);
+        if (entity.hurt(entity.damageSources().lava(), 4.0F)) {
+            entity.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + entity.level().getRandom().nextFloat() * 0.4F);
         }
     }
 
-    public static boolean isEntityInSoulLava(Entity entity) {
+    public static boolean isImmuneToSoulLava(Entity entity) {
+        return (entity instanceof ItemEntity item && item.getItem().is(ModTags.Items.SOUL_LAVA_IMMUNE)) ||
+                entity.getType().is(ModTags.EntityTypes.SOUL_LAVA_IMMUNE);
+    }
+
+    public static boolean isInSoulLava(Entity entity) {
         return entity.isInFluidType((fluid, d) -> fluid == ModFluidTypes.SOUL_LAVA_FLUID_TYPE.get() && d > 0.0D, false);
     }
 

@@ -101,11 +101,9 @@ public class ModItems {
     public static final RegistryObject<Item> LAVA_GOOGLES = registerItem("lava_googles", LavaGooglesItem::new);
     public static final RegistryObject<Item> MOLTEN_AMETHYST = registerItem("molten_amethyst", MoltenAmethystItem::new);
     public static final RegistryObject<Item> AMETHYST_LENS = registerItem("amethyst_lens", () -> new Item(new Item.Properties().fireResistant()));
-
     public static final RegistryObject<Item> SMALL_SOUL_FRAGMENT = registerItem("small_soul_fragment", SoulStorageItem::new);
     public static final RegistryObject<Item> SOUL_FRAGMENT = registerItem("soul_fragment", SoulStorageItem::new);
     public static final RegistryObject<Item> SOUL_CLUSTER = registerItem("soul_cluster", SoulStorageItem::new);
-
     public static final RegistryObject<Item> GRAPPLING_HOOK = registerItem("grappling_hook", GrapplingHookItem::new);
     public static final RegistryObject<Item> SPIRITED_IRON_INGOT = registerItem("spirited_iron_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_IRON_ROD = registerItem("spirited_iron_rod", () -> new Item(new Item.Properties()));

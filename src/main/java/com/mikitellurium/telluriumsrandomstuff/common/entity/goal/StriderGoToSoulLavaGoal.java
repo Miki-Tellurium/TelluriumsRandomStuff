@@ -22,11 +22,11 @@ public class StriderGoToSoulLavaGoal extends MoveToBlockGoal {
     }
 
     public boolean canContinueToUse() {
-        return !SoulLavaFluid.isEntityInSoulLava(this.strider) && this.isValidTarget(this.strider.level(), this.blockPos);
+        return !SoulLavaFluid.isInSoulLava(this.strider) && this.isValidTarget(this.strider.level(), this.blockPos);
     }
 
     public boolean canUse() {
-        return !SoulLavaFluid.isEntityInSoulLava(this.strider) && super.canUse();
+        return !SoulLavaFluid.isInSoulLava(this.strider) && super.canUse();
     }
 
     public boolean shouldRecalculatePath() {

@@ -93,6 +93,11 @@ public class ModTagProvider {
             this.tag(ModTags.Items.ALLAY_DUPLICATION_ITEMS)
                     .add(net.minecraft.world.item.Items.ECHO_SHARD)
                     .add(net.minecraft.world.item.Items.AMETHYST_SHARD);
+
+            this.tag(ModTags.Items.SOUL_LAVA_IMMUNE)
+                    .add(ModItems.SMALL_SOUL_FRAGMENT.get())
+                    .add(ModItems.SOUL_FRAGMENT.get())
+                    .add(ModItems.SOUL_CLUSTER.get());
         }
     }
 

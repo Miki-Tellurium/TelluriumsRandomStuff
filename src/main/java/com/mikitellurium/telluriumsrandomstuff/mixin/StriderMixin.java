@@ -3,7 +3,6 @@ package com.mikitellurium.telluriumsrandomstuff.mixin;
 import com.mikitellurium.telluriumsrandomstuff.common.fluid.SoulLavaFluid;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.monster.Strider;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,7 +26,7 @@ public class StriderMixin {
     @Inject(method = "checkFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/Strider;isInLava()Z"))
     private void canStandOnSoulLava(double pY, boolean onGround, BlockState blockState, BlockPos pos, CallbackInfo ci) {
         Strider strider = (Strider) (Object) this;
-        if (SoulLavaFluid.isEntityInSoulLava(strider)) {
+        if (SoulLavaFluid.isInSoulLava(strider)) {
             strider.resetFallDistance();
         }
     }

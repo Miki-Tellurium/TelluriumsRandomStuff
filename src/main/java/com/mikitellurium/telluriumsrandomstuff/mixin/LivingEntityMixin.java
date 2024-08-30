@@ -14,7 +14,7 @@ public abstract class LivingEntityMixin {
     @ModifyVariable(method = "travel", at = @At("STORE"), ordinal = 0)
     private FluidState getCorrectSoulLavaState(FluidState fluidState) {
         LivingEntity entity = (LivingEntity) (Object) this;
-        return SoulLavaFluid.isEntityInSoulLava(entity) ? ModFluids.SOUL_LAVA_SOURCE.get().defaultFluidState() : fluidState;
+        return SoulLavaFluid.isInSoulLava(entity) ? ModFluids.SOUL_LAVA_SOURCE.get().defaultFluidState() : fluidState;
     }
 
 }

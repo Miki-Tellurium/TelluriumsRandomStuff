@@ -17,7 +17,7 @@ public class PathNavigationMixin {
 
     @Inject(method = "isInLiquid", at = @At(value = "HEAD"), cancellable = true)
     private void isInSoulLava(CallbackInfoReturnable<Boolean> cir) {
-        if (SoulLavaFluid.isEntityInSoulLava(this.mob)) {
+        if (SoulLavaFluid.isInSoulLava(this.mob)) {
             cir.setReturnValue(true);
         }
     }

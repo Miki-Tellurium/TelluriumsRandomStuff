@@ -30,6 +30,7 @@ public class ModTags {
         public static final TagKey<Item> OPAL_STONES = create("opal_stones");
         public static final TagKey<Item> OPAL_CRYSTALS = create("opal_crystals");
         public static final TagKey<Item> ALLAY_DUPLICATION_ITEMS = create("allay_duplication_items");
+        public static final TagKey<Item> SOUL_LAVA_IMMUNE = create("soul_lava_immune");
 
         public static TagKey<Item> create(String name) {
             return ItemTags.create(FastLoc.modLoc(name));
@@ -38,8 +39,8 @@ public class ModTags {
 
     public static class EntityTypes {
 
-        public static TagKey<EntityType<?>> SOUL_LAVA_IMMUNE = create("soul_lava_immune");
-        public static TagKey<EntityType<?>> SOUL_FRAGMENT_DROP_BOSS = create("soul_fragment_drop_boss");
+        public static final TagKey<EntityType<?>> SOUL_LAVA_IMMUNE = create("soul_lava_immune");
+        public static final TagKey<EntityType<?>> SOUL_FRAGMENT_DROP_BOSS = create("soul_fragment_drop_boss");
 
         public static TagKey<EntityType<?>> create(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, FastLoc.modLoc(name));
