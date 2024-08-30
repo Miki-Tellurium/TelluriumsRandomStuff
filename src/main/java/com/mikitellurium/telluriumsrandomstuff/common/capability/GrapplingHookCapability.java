@@ -56,10 +56,4 @@ public class GrapplingHookCapability {
         }
     }
 
-    public void saveNBTDAta(CompoundTag nbt) {
-    }
-
-    public void loadNBTData(CompoundTag nbt) {
-    }
-
 }

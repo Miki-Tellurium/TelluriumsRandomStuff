@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class GrapplingHookCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
+public class GrapplingHookCapabilityProvider implements ICapabilityProvider {
 
     public static Capability<GrapplingHookCapability> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {});
 
@@ -33,18 +33,6 @@ public class GrapplingHookCapabilityProvider implements ICapabilityProvider, INB
         }
 
         return LazyOptional.empty();
-    }
-
-    @Override
-    public CompoundTag serializeNBT() {
-        CompoundTag nbt = new CompoundTag();
-        createGrapplingHookCapability().saveNBTDAta(nbt);
-        return nbt;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        createGrapplingHookCapability().loadNBTData(nbt);
     }
 
 }
