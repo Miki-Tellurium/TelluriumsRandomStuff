@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.common.networking.packets;
+package com.mikitellurium.telluriumsrandomstuff.networking.packets;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
 import net.minecraft.client.Minecraft;

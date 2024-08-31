@@ -1,9 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
-import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.DisplayNameSyncS2CPacket;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.ItemStackSyncS2CPacket;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.RotOffsetSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.DisplayNameSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.ItemStackSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.RotOffsetSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

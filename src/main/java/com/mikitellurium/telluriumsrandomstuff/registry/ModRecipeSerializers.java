@@ -1,11 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.*;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -24,6 +22,9 @@ public class ModRecipeSerializers {
 
     public static final RegistryObject<RecipeSerializer<CompactingRecipe>> COMPACTING =
             registerSerializer(CompactingRecipe.Type.ID, () -> CompactingRecipe.Serializer.INSTANCE);
+
+    public static final RegistryObject<RecipeSerializer<SoulStorageDisassembleRecipe>> SOUL_STORAGE_DISASSEMBLE =
+            registerSerializer(SoulStorageDisassembleRecipe.ID, SoulStorageDisassembleRecipe.Serializer::new);
 
     private static <R extends Recipe<?>, T extends RecipeSerializer<R>> RegistryObject<T> registerSerializer(String name, Supplier<T> serializer) {
         return ModRegistries.RECIPE_SERIALIZERS.register(name, serializer);

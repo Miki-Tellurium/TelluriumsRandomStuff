@@ -1,30 +1,29 @@
-package com.mikitellurium.telluriumsrandomstuff.common.networking.packets;
+package com.mikitellurium.telluriumsrandomstuff.networking.packets;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class ItemStackSyncS2CPacket {
-        private final ItemStack itemStack;
+public class RotOffsetSyncS2CPacket {
+        private final float f;
         private final BlockPos pos;
 
-        public ItemStackSyncS2CPacket(ItemStack itemHandler, BlockPos pos) {
-            this.itemStack = itemHandler;
+        public RotOffsetSyncS2CPacket(float f, BlockPos pos) {
+            this.f = f;
             this.pos = pos;
         }
 
-        public ItemStackSyncS2CPacket(FriendlyByteBuf buf) {
-            this.itemStack = buf.readItem();
+        public RotOffsetSyncS2CPacket(FriendlyByteBuf buf) {
+            this.f = buf.readFloat();
             this.pos = buf.readBlockPos();
         }
 
         public void toBytes(FriendlyByteBuf buf) {
-            buf.writeItem(itemStack);
+            buf.writeFloat(f);
             buf.writeBlockPos(pos);
         }
 
@@ -33,7 +32,7 @@ public class ItemStackSyncS2CPacket {
             context.enqueueWork(() -> {
                 // Client
                 if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof ItemPedestalBlockEntity itemPedestal) {
-                    itemPedestal.setItem(itemStack);
+                    itemPedestal.setRotOffset(this.f);
                 }
             });
 

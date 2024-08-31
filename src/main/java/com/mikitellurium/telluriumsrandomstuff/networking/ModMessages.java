@@ -1,6 +1,6 @@
-package com.mikitellurium.telluriumsrandomstuff.common.networking;
+package com.mikitellurium.telluriumsrandomstuff.networking;
 
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.*;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.*;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;

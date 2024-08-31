@@ -2,8 +2,8 @@ package com.mikitellurium.telluriumsrandomstuff.common.entity;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapabilityProvider;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.ModMessages;
-import com.mikitellurium.telluriumsrandomstuff.common.networking.packets.GrapplingHookSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.GrapplingHookSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.core.BlockPos;
