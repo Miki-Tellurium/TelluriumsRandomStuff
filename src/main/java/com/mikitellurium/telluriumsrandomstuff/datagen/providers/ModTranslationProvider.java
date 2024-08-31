@@ -150,6 +150,12 @@ public class ModTranslationProvider extends LanguageProvider {
         addEnchantment(ModEnchantments.AERODYNAMICS, "Aerodynamics");
         // Trims
         translation("trim_material", "opal_crystal", "Opal Crystal Material");
+        // Commands
+        translation("command", "item.soulstorage.notfound", "%s is not a soul storage item");
+        translation("command", "item.soulstorage.set", "Soul storage set: %s");
+        translation("command", "item.soulstorage.add", "Soul storage added: %s");
+        translation("command", "item.soulstorage.remove", "Soul storage removed: %s");
+        translation("command", "item.soulstorage.clear", "Soul storage cleared");
         // Jei
         translation("jei", "category.soul_furnace_smelting", "Soul Furnace Smelting");
         translation("jei", "category.soul_infusion", "Soul Infusion");

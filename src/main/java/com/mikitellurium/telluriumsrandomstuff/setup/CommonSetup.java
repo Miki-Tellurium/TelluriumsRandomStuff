@@ -7,6 +7,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.CustomBubbleColumnBl
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulAnchorBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
+import com.mikitellurium.telluriumsrandomstuff.common.command.SoulStorageCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
@@ -39,6 +40,7 @@ public class CommonSetup {
                         .requires((sourceStack) -> sourceStack.hasPermission(2));
         dispatcher.register(LavaGooglesCommand.build(builder));
         dispatcher.register(SoulAnchorCommand.build(builder));
+        dispatcher.register(SoulStorageCommand.build(builder));
     }
 
 }
