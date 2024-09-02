@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
-import com.mikitellurium.telluriumsrandomstuff.networking.packets.ItemStackSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.PedestalItemSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -93,7 +93,7 @@ public class ItemPedestalBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof ItemPedestalBlockEntity itemPedestal) {
             if (!itemPedestal.isEmpty()) {
-                ModMessages.sendToClients(new ItemStackSyncS2CPacket(itemPedestal.getItem(), pos));
+                ModMessages.sendToClients(new PedestalItemSyncS2CPacket(itemPedestal.getItem(), pos));
             }
             if (itemPedestal.alwaysDisplayName()) {
                 itemPedestal.setAlwaysDisplayNameAndSync();

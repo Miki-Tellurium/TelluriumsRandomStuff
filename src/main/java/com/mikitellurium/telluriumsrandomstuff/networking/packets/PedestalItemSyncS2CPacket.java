@@ -9,16 +9,16 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class ItemStackSyncS2CPacket {
+public class PedestalItemSyncS2CPacket {
         private final ItemStack itemStack;
         private final BlockPos pos;
 
-        public ItemStackSyncS2CPacket(ItemStack itemHandler, BlockPos pos) {
+        public PedestalItemSyncS2CPacket(ItemStack itemHandler, BlockPos pos) {
             this.itemStack = itemHandler;
             this.pos = pos;
         }
 
-        public ItemStackSyncS2CPacket(FriendlyByteBuf buf) {
+        public PedestalItemSyncS2CPacket(FriendlyByteBuf buf) {
             this.itemStack = buf.readItem();
             this.pos = buf.readBlockPos();
         }

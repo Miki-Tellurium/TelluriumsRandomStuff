@@ -31,10 +31,10 @@ public class ModMessages {
                 .encoder(FluidSyncS2CPacket::toBytes)
                 .consumerMainThread(FluidSyncS2CPacket::handle)
                 .add();
-        net.messageBuilder(ItemStackSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(ItemStackSyncS2CPacket::new)
-                .encoder(ItemStackSyncS2CPacket::toBytes)
-                .consumerMainThread(ItemStackSyncS2CPacket::handle)
+        net.messageBuilder(PedestalItemSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(PedestalItemSyncS2CPacket::new)
+                .encoder(PedestalItemSyncS2CPacket::toBytes)
+                .consumerMainThread(PedestalItemSyncS2CPacket::handle)
                 .add();
         net.messageBuilder(RotOffsetSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(RotOffsetSyncS2CPacket::new)

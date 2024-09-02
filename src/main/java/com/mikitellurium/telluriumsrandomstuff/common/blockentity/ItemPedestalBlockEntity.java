@@ -2,7 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.DisplayNameSyncS2CPacket;
-import com.mikitellurium.telluriumsrandomstuff.networking.packets.ItemStackSyncS2CPacket;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.PedestalItemSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.RotOffsetSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         protected void onContentsChanged(int slot) {
             setChanged();
             if (!level.isClientSide) {
-                ModMessages.sendToClients(new ItemStackSyncS2CPacket(ItemPedestalBlockEntity.this.getItem(), worldPosition));
+                ModMessages.sendToClients(new PedestalItemSyncS2CPacket(ItemPedestalBlockEntity.this.getItem(), worldPosition));
             }
         }
 
