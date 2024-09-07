@@ -15,21 +15,21 @@ public class SoulAnchorCapabilityProvider implements ICapabilityProvider, INBTSe
 
     public static Capability<SoulAnchorCapability> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {});
 
-    private SoulAnchorCapability soulAnchorCapability = null;
-    private final LazyOptional<SoulAnchorCapability> optional = LazyOptional.of(this::createSoulAnchorCapability);
+    private SoulAnchorCapability cap = null;
+    private final LazyOptional<SoulAnchorCapability> holder = LazyOptional.of(this::create);
 
-    private SoulAnchorCapability createSoulAnchorCapability() {
-        if (soulAnchorCapability == null) {
-            soulAnchorCapability = new SoulAnchorCapability();
+    private SoulAnchorCapability create() {
+        if (cap == null) {
+            cap = new SoulAnchorCapability();
         }
 
-        return soulAnchorCapability;
+        return cap;
     }
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == INSTANCE) {
-            return optional.cast();
+            return holder.cast();
         }
 
         return LazyOptional.empty();
@@ -38,13 +38,13 @@ public class SoulAnchorCapabilityProvider implements ICapabilityProvider, INBTSe
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
-        createSoulAnchorCapability().saveNBTDAta(nbt);
+        create().saveNBTDAta(nbt);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        createSoulAnchorCapability().loadNBTData(nbt);
+        create().loadNBTData(nbt);
     }
 
 }

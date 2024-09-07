@@ -15,21 +15,21 @@ public class SoulStorageCapabilityProvider implements ICapabilityProvider, INBTS
 
     public static Capability<SoulStorage> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {});
 
-    private SoulStorage soulStorageCapability = null;
-    private final LazyOptional<SoulStorage> optional = LazyOptional.of(this::createSoulStorageCapability);
+    private SoulStorage cap = null;
+    private final LazyOptional<SoulStorage> holder = LazyOptional.of(this::create);
 
-    private SoulStorage createSoulStorageCapability() {
-        if (soulStorageCapability == null) {
-            soulStorageCapability = new SoulStorage();
+    private SoulStorage create() {
+        if (cap == null) {
+            cap = new SoulStorage();
         }
 
-        return soulStorageCapability;
+        return cap;
     }
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == INSTANCE) {
-            return optional.cast();
+            return holder.cast();
         }
 
         return LazyOptional.empty();
@@ -38,13 +38,13 @@ public class SoulStorageCapabilityProvider implements ICapabilityProvider, INBTS
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
-        createSoulStorageCapability().storeNbt(nbt);
+        create().storeNbt(nbt);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        createSoulStorageCapability().readNBT(nbt);
+        create().readNBT(nbt);
     }
 
 }
