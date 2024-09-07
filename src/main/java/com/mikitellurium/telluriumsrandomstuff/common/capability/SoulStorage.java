@@ -18,15 +18,7 @@ import java.util.stream.Collectors;
 @AutoRegisterCapability
 public class SoulStorage {
 
-    private final Map<String, Integer> souls;
-
-    public SoulStorage() {
-        this.souls = new HashMap<>();
-    }
-
-    private SoulStorage(Map<String, Integer> souls) {
-        this.souls = souls;
-    }
+    private final Map<String, Integer> souls = new HashMap<>();
 
     public void storeNbt(CompoundTag tag) {
         CompoundTag storedSouls = new CompoundTag();
