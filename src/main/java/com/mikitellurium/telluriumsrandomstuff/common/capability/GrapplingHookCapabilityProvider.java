@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class GrapplingHookCapabilityProvider implements ICapabilityProvider {
-    // todo add abstraction to providers
+
     public static Capability<GrapplingHookCapability> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {});
 
     private GrapplingHookCapability grapplingHookCapability = null;
