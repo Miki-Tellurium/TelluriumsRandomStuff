@@ -23,9 +23,6 @@ public class ModRecipeSerializers {
     public static final RegistryObject<RecipeSerializer<CompactingRecipe>> COMPACTING =
             registerSerializer(CompactingRecipe.Type.ID, () -> CompactingRecipe.Serializer.INSTANCE);
 
-    public static final RegistryObject<RecipeSerializer<SoulStorageDisassembleRecipe>> SOUL_STORAGE_DISASSEMBLE =
-            registerSerializer(SoulStorageDisassembleRecipe.ID, SoulStorageDisassembleRecipe.Serializer::new);
-
     private static <R extends Recipe<?>, T extends RecipeSerializer<R>> RegistryObject<T> registerSerializer(String name, Supplier<T> serializer) {
         return ModRegistries.RECIPE_SERIALIZERS.register(name, serializer);
     }

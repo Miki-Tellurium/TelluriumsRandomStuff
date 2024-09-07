@@ -6,6 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -13,6 +14,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 public class SoulStorageCommand {
@@ -37,50 +41,44 @@ public class SoulStorageCommand {
     }
 
     private static int set(CommandSourceStack source, String entityId, int count) {
-        return execute(source, (soulStorage) -> {
-            soulStorage.set(entityId, count);
-            String s = count + " " + entityId;
-            source.sendSuccess(() -> Component.translatable("command.telluriumsrandomstuff.item.soulstorage.set", s), true);
-        });
+        String s = count + " " + entityId;
+        return execute(source, (soulStorage) -> soulStorage.set(entityId, count),
+                Component.translatable("command.telluriumsrandomstuff.item.soulstorage.set", s));
     }
 
     private static int add(CommandSourceStack source, String entityId, int count) {
-        return execute(source, (soulStorage) -> {
-            soulStorage.grow(entityId, count);
-            String s = count + " " + entityId;
-            source.sendSuccess(() -> Component.translatable("command.telluriumsrandomstuff.item.soulstorage.add", s), true);
-        });
+        String s = count + " " + entityId;
+        return execute(source, (soulStorage) -> soulStorage.grow(entityId, count),
+                Component.translatable("command.telluriumsrandomstuff.item.soulstorage.add", s));
     }
 
     private static int remove(CommandSourceStack source, String entityId, int count) {
-        return execute(source, (soulStorage) -> {
-            soulStorage.shrink(entityId, count);
-            String s = count + " " + entityId;
-            source.sendSuccess(() -> Component.translatable("command.telluriumsrandomstuff.item.soulstorage.remove", s), true);
-        });
+        String s = count + " " + entityId;
+        return execute(source, (soulStorage) -> soulStorage.shrink(entityId, count),
+                Component.translatable("command.telluriumsrandomstuff.item.soulstorage.remove", s));
     }
 
     private static int clear(CommandSourceStack source) {
-        return execute(source, (soulStorage) -> {
-            soulStorage.clear();
-            source.sendSuccess(() -> Component.translatable("command.telluriumsrandomstuff.item.soulstorage.clear"), true);
-        });
+        return execute(source, SoulStorage::clear, Component.translatable("command.telluriumsrandomstuff.item.soulstorage.clear"));
     }
 
-    private static int execute(CommandSourceStack source, Consumer<SoulStorage> consumer) {
+    private static int execute(CommandSourceStack source, Consumer<SoulStorage> consumer, Component successMessage) {
         if (!(source.source instanceof Player)) {
             source.sendFailure(Component.translatable("argument.entity.notfound.player"));
         }
-        Player player = Minecraft.getInstance().player; // Send to client to avoid de-sync issues
-        if (player != null) {
-            ItemStack itemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-            if (SoulStorageItem.isSoulStorageItem(itemStack)) {
-                SoulStorage.performAction(itemStack, consumer);
+        List<Player> players = Arrays.asList(source.getPlayer(), Minecraft.getInstance().player); // Send to client to avoid de-sync issues
+        for (Player player : players) {
+            if (player != null) {
+                ItemStack itemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
+                if (SoulStorageItem.isSoulStorageItem(itemStack)) {
+                    SoulStorage.performAction(itemStack, consumer);
+                    if (player instanceof LocalPlayer) source.sendSuccess(() -> successMessage, true);
+                } else {
+                    source.sendFailure(Component.translatable("command.telluriumsrandomstuff.item.soulstorage.notfound", itemStack.getItem().getName(itemStack)));
+                }
             } else {
-                source.sendFailure(Component.translatable("command.telluriumsrandomstuff.item.soulstorage.notfound", itemStack.getItem().getName(itemStack)));
+                source.sendFailure(Component.translatable("argument.entity.notfound.player"));
             }
-        } else {
-            source.sendFailure(Component.translatable("argument.entity.notfound.player"));
         }
         return 1;
     }

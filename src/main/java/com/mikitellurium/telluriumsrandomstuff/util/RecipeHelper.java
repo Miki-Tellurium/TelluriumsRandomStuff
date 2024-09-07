@@ -8,11 +8,14 @@ import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmelting
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
+import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -100,6 +103,16 @@ public class RecipeHelper {
             ingredient = Ingredient.of(itemStacks.toArray(new ItemStack[]{}));
         }
         return ingredient;
+    }
+
+    public static Item itemFromJson(JsonObject object, String memberName) {
+        String s = GsonHelper.getAsString(object, memberName);
+        Holder<Item> item = ForgeRegistries.ITEMS.getHolder(ResourceLocation.tryParse(s)).orElseThrow(() -> new JsonSyntaxException("Unknown item '" + s + "'"));
+        if (item.get() == Items.AIR) {
+            throw new JsonSyntaxException("Empty ingredient not allowed here");
+        } else {
+            return item.get();
+        }
     }
 
     public static ItemStack itemStackFromJson(JsonObject object, String memberName) {

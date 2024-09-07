@@ -635,14 +635,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_soul_sand", has(Blocks.SOUL_SAND))
                 .unlockedBy("has_small_soul_fragment", has(ModItems.SMALL_SOUL_FRAGMENT.get()))
                 .save(consumer, modLoc("infused_soul_sand"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SMALL_SOUL_FRAGMENT.get(), 8)
-                .requires(ModItems.SOUL_FRAGMENT.get())
-                .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
-                .save(consumer, modLoc("small_soul_fragment_from_soul_fragment"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SOUL_FRAGMENT.get(), 8)
-                .requires(ModItems.SOUL_CLUSTER.get())
-                .unlockedBy("has_soul_cluster", has(ModItems.SOUL_CLUSTER.get()))
-                .save(consumer, modLoc("soul_fragment_from_soul_cluster"));
+//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SMALL_SOUL_FRAGMENT.get(), 8)
+//                .requires(ModItems.SOUL_FRAGMENT.get())
+//                .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
+//                .save(consumer, modLoc("small_soul_fragment_from_soul_fragment"));
+//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SOUL_FRAGMENT.get(), 8)
+//                .requires(ModItems.SOUL_CLUSTER.get())
+//                .unlockedBy("has_soul_cluster", has(ModItems.SOUL_CLUSTER.get()))
+//                .save(consumer, modLoc("soul_fragment_from_soul_cluster"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SPIRITED_IRON_INGOT.get(), 9)
                 .requires(ModBlocks.SPIRITED_IRON_BLOCK.get())
                 .unlockedBy("has_spirited_iron_block", has(ModBlocks.SPIRITED_IRON_BLOCK.get()))

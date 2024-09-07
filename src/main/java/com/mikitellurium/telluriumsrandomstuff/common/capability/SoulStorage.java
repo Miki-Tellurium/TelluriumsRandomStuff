@@ -1,6 +1,5 @@
 package com.mikitellurium.telluriumsrandomstuff.common.capability;
 
-import com.mikitellurium.telluriumsrandomstuff.common.item.SoulStorageItem;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
@@ -8,10 +7,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @AutoRegisterCapability
 public class SoulStorage {
@@ -88,12 +90,12 @@ public class SoulStorage {
         this.souls.remove(key);
     }
 
-    public boolean isEmpty() {
-        return this.souls.isEmpty();
+    public boolean contains(String key) {
+        return this.souls.containsKey(key);
     }
 
-    public Map<String, Integer> getSouls() {
-        return this.souls;
+    public boolean isEmpty() {
+        return this.souls.isEmpty();
     }
 
     public int getCount() {
@@ -112,6 +114,21 @@ public class SoulStorage {
             return Util.getRandom(strings, random);
         }
         return null;
+    }
+
+    public String getRandomKey(RandomSource random, BiPredicate<String, Integer> filter) {
+        if (!this.isEmpty()) {
+            List<String> strings = this.getKeys(filter);
+            return strings.isEmpty() ? null : Util.getRandom(strings, random);
+        }
+        return null;
+    }
+
+    public List<String> getKeys(BiPredicate<String, Integer> filter) {
+        return this.souls.entrySet().stream()
+                .filter((entry) -> filter.test(entry.getKey(), entry.getValue()))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 
     public void grow(String key, int amount) {
@@ -136,6 +153,10 @@ public class SoulStorage {
 
     public void clear() {
         this.souls.clear();
+    }
+
+    public void forEach(BiConsumer<String, Integer> consumer) {
+        this.souls.forEach(consumer);
     }
 
 }

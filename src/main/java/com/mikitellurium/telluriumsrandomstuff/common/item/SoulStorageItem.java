@@ -39,11 +39,11 @@ public class SoulStorageItem extends Item {
         }
         optional.ifPresent((soulStorage) -> {
             if (!soulStorage.isEmpty()) {
-                soulStorage.getSouls().forEach((key, i) -> {
+                soulStorage.forEach((key, i) -> {
                     EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(key));
                     if (entityType != null) {
                         MutableComponent entityName = Component.translatable(entityType.getDescriptionId());
-                        Component label = entityName.append(": " + i).withStyle(TOOLTIP_STYLE);
+                        Component label = entityName.append(" x" + i + ": " + i * itemStack.getCount()).withStyle(TOOLTIP_STYLE);
                         components.add(label);
                     }
                 });
