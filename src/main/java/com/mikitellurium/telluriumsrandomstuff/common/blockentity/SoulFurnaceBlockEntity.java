@@ -2,10 +2,19 @@ package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulFurnaceBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.util.SoulFurnaceItemHandler;
+import com.mikitellurium.telluriumsrandomstuff.lib.SidedCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,23 +22,46 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<SmeltingRecipe> implements MenuProvider {
+@SuppressWarnings("ConstantConditions")
+public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implements MenuProvider, SidedCapabilityProvider<WrappedHandler> {
 
     private static final int BUCKET_SLOT = 0;
-    private static final int INPUT_SLOT = 1;
-    private static final int OUTPUT_SLOT = 2;
+    private static final List<Integer> inputSlots = List.of(1, 2, 3, 4);
+    private static final List<Integer> outputSlots = List.of(5, 6, 7, 8);
 
-    private static final int litFurnaceCost = 50; // How much soul lava is consumed to lit the furnace
-    private static final int itemSmelted = 8; // How many item get smelted with a full "lit"
-    private int progress = 0;
+    private final SoulFurnaceItemHandler itemHandler = new SoulFurnaceItemHandler() {
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+        }
+    };
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private final RecipeManager.CachedCheck<Container, SmeltingRecipe> quickCheck = RecipeManager.createCheck(RecipeType.SMELTING);
+    private final Map<Integer, CachedObject<SmeltingRecipe>> cachedRecipes = Util.make(new HashMap<>(), (map) -> {
+        inputSlots.forEach((slot) -> map.put(slot, CachedObject.empty()));
+    });
+
+    private static final int litFurnaceCost = 125; // How much soul lava is consumed to lit the furnace
+    private static final int itemSmelted = 8; // How many item get smelted each slot with a full "lit"
     private int maxProgress = 100;
     private int litTime = 0;
     private int maxLitTime = maxProgress * itemSmelted;
@@ -37,10 +69,10 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
         @Override
         public int get(int index) {
             return switch (index) {
-                case 0 -> SoulFurnaceBlockEntity.this.progress;
-                case 1 -> SoulFurnaceBlockEntity.this.maxProgress;
-                case 2 -> SoulFurnaceBlockEntity.this.litTime;
-                case 3 -> SoulFurnaceBlockEntity.this.maxLitTime;
+                case 0 -> SoulFurnaceBlockEntity.this.maxProgress;
+                case 1, 2, 3, 4 -> SoulFurnaceBlockEntity.this.itemHandler.getProgress(index);
+                case 5 -> SoulFurnaceBlockEntity.this.litTime;
+                case 6 -> SoulFurnaceBlockEntity.this.maxLitTime;
                 default -> 0;
             };
         }
@@ -48,31 +80,43 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
         @Override
         public void set(int index, int value) {
             switch (index) {
-                case 0 -> SoulFurnaceBlockEntity.this.progress = value;
-                case 1 -> SoulFurnaceBlockEntity.this.maxProgress = value;
-                case 2 -> SoulFurnaceBlockEntity.this.litTime = value;
-                case 3 -> SoulFurnaceBlockEntity.this.maxLitTime = value;
+                case 0 -> SoulFurnaceBlockEntity.this.maxProgress = value;
+                case 1, 2, 3, 4 -> SoulFurnaceBlockEntity.this.itemHandler.setProgress(index, value);
+                case 5 -> SoulFurnaceBlockEntity.this.litTime = value;
+                case 6 -> SoulFurnaceBlockEntity.this.maxLitTime = value;
             }
         }
 
         @Override
         public int getCount() {
-            return 4;
+            return 7;
         }
     };
+    private final Map<Integer, Integer> counters = Util.make(new HashMap<>(), (map) -> {
+        inputSlots.forEach((slot) -> map.put(slot, 0));
+    });
 
     public SoulFurnaceBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SOUL_FURNACE.get(), pos, state, 4000, RecipeType.SMELTING, 3,
-                (i) -> i == INPUT_SLOT,
-                (i) -> i == OUTPUT_SLOT,
-                BUCKET_SLOT);
+        super(ModBlockEntities.SOUL_FURNACE.get(), pos, state, 4000);
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
         if (level.isClientSide) {
             return;
         }
-        super.tick(level, blockPos, blockState);
+
+        this.handleTankRefill();
+        for (int slot : inputSlots) {
+            Optional<SmeltingRecipe> optionalRecipe = this.getRecipe(slot);
+            if (optionalRecipe.isPresent() && this.canProcessRecipe(optionalRecipe.get())) {
+                SmeltingRecipe recipe = optionalRecipe.get();
+                this.validateRecipe(slot, recipe);
+                this.onProcessRecipe(slot, recipe);
+            } else {
+                this.resetProgress(slot);
+            }
+        }
+
         level.setBlock(blockPos, blockState.setValue(SoulFurnaceBlock.LIT, this.isLit()), 2);
         if (this.isLit()) {
             this.litTime--;
@@ -80,53 +124,77 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
         setChanged(level, blockPos, blockState);
     }
 
-    @Override
-    protected boolean canProcessRecipe(SmeltingRecipe recipe) {
-        ItemStack outputStack = this.getStackInSlot(OUTPUT_SLOT);
-        if (outputStack.getCount() >= outputStack.getMaxStackSize()) return false;
-        ItemStack result = recipe.getResultItem(this.level.registryAccess());
-        if(!outputStack.isEmpty() && result.getItem() != outputStack.getItem()) return false;
-        return outputStack.getCount() + result.getCount() <= outputStack.getMaxStackSize();
+    private void handleTankRefill() {
+        final int amount = 1000;
+        ItemStack bucketStack = this.getStackInSlot(BUCKET_SLOT);
+        if (bucketStack.is(ModItems.SOUL_LAVA_BUCKET.get()) && this.canRefillFluidTank(amount)) {
+            this.setStackInSlot(BUCKET_SLOT, bucketStack.getItem().getCraftingRemainingItem(bucketStack));
+            this.fillTank(amount);
+        }
     }
 
-    @Override
-    protected void onProcessRecipe(SmeltingRecipe recipe) {
-        if (!this.isLit() && hasEnoughFuel()) {
+    private void validateRecipe(int slot, SmeltingRecipe recipe) {
+        if (!recipe.equals(this.cachedRecipes.get(slot).get())) {
+            this.resetProgress(slot);
+        }
+        this.cachedRecipes.put(slot, CachedObject.of(recipe));
+    }
+
+    protected boolean canProcessRecipe(SmeltingRecipe recipe) {
+        for (int slot : outputSlots) {
+            ItemStack outputStack = this.getStackInSlot(slot);
+            if (outputStack.getCount() >= outputStack.getMaxStackSize()) continue;
+            ItemStack result = recipe.getResultItem(this.level.registryAccess());
+            if (!outputStack.isEmpty() && !result.is(outputStack.getItem())) continue;
+            if (outputStack.getCount() + result.getCount() <= outputStack.getMaxStackSize()) return true;
+        }
+        return false;
+    }
+
+    protected void onProcessRecipe(int slot, SmeltingRecipe recipe) {
+        if (!this.isLit() && this.hasEnoughFuel()) {
             this.drainTank(litFurnaceCost);
             this.litTime = this.maxLitTime;
         }
         if (this.isLit()) {
-            this.progress++;
-            if (this.progress >= this.maxProgress) {
-                this.produceOutput(recipe);
-                this.resetProgress();
+            this.itemHandler.tickProgress(slot);
+            if (this.itemHandler.getProgress(slot) >= this.maxProgress) {
+                this.produceOutput(slot, recipe);
+                this.resetProgress(slot);
             }
         } else {
-            this.resetProgress();
+            this.resetProgress(slot);
         }
     }
 
-    @Override
-    protected void produceOutput(SmeltingRecipe recipe) {
-        ItemStack result = recipe.assemble(this.getInventory(), level.registryAccess());
-        ItemStack outputStack = this.getStackInSlot(OUTPUT_SLOT);
-        this.getStackInSlot(INPUT_SLOT).shrink(1);
+    protected void produceOutput(int inputSlot, SmeltingRecipe recipe) {
+        ItemStack resultStack = recipe.assemble(this.getInventory(), level.registryAccess());
+        int outputSlot = this.findOutputSlot(resultStack);
+        ItemStack outputStack = this.getStackInSlot(outputSlot);
+        this.getStackInSlot(inputSlot).shrink(1);
         if (outputStack.isEmpty()) {
-            this.setStackInSlot(OUTPUT_SLOT, result);
+            this.setStackInSlot(outputSlot, resultStack);
         } else {
-            outputStack.grow(result.getCount());
+            outputStack.grow(resultStack.getCount());
         }
     }
 
-    @Override
-    protected void resetProgress() {
-        this.progress = 0;
+    private int findOutputSlot(ItemStack resultStack) {
+        for (int slot : outputSlots) {
+            ItemStack outputStack = this.getStackInSlot(slot);
+            if (outputStack.isEmpty()) return slot;
+            if (resultStack.is(outputStack.getItem()) &&
+                    resultStack.getCount() + outputStack.getCount() <= outputStack.getMaxStackSize()) return slot;
+        }
+        throw new RuntimeException("Could not find available slot for output item");
     }
 
-    @Override
-    protected Optional<SmeltingRecipe> getRecipe() {
-        return this.quickCheck().getRecipeFor(
-                new SimpleContainer(this.getStackInSlot(INPUT_SLOT)), this.level);
+    protected void resetProgress(int slot) {
+        this.itemHandler.resetProgress(slot);
+    }
+
+    protected Optional<SmeltingRecipe> getRecipe(int slot) {
+        return this.quickCheck.getRecipeFor(new SimpleContainer(this.getStackInSlot(slot)), this.level);
     }
 
     private boolean isLit() {
@@ -135,6 +203,36 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
 
     private boolean hasEnoughFuel() {
         return this.getFluidTank().getFluidAmount() >= litFurnaceCost;
+    }
+
+    public SimpleContainer getInventory() {
+        SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, this.getStackInSlot(i));
+        }
+
+        return inventory;
+    }
+
+    public boolean isItemValid(int slot, ItemStack itemStack) {
+        return this.itemHandler.isItemValid(slot, itemStack);
+    }
+
+    public ItemStack getStackInSlot(int slot) {
+        return this.itemHandler.getStackInSlot(slot);
+    }
+
+    public void setStackInSlot(int slot, ItemStack itemStack) {
+        this.itemHandler.setStackInSlot(slot, itemStack);
+    }
+
+    private boolean hasEmptyBucket(int slot) {
+        return slot == BUCKET_SLOT && this.getStackInSlot(BUCKET_SLOT).is(Items.BUCKET);
+    }
+
+    public void dropItemsOnBreak() {
+        SimpleContainer inventory = getInventory();
+        Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
     @Override
@@ -148,18 +246,67 @@ public class SoulFurnaceBlockEntity extends AbstractSoulSmeltingBlockEntity<Smel
         return new SoulFurnaceMenu(id, inventory, this, this.containerData);
     }
 
+    // Capabilities
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if(cap == ForgeCapabilities.ITEM_HANDLER) {
+            if(side == null) {
+                return lazyItemHandler.cast();
+            }
+            // Return capability based on side
+            Direction localDir = this.getBlockState().getValue(AbstractFurnaceBlock.FACING);
+
+            if(side == Direction.UP || side == Direction.DOWN) {
+                return this.sidedLazyOptional(side).cast();
+            }
+            // Get the correct direction based on the furnace FACING property
+            return switch (localDir) {
+                default -> this.sidedLazyOptional(side.getOpposite()).cast();
+                case EAST -> this.sidedLazyOptional(side.getClockWise()).cast();
+                case SOUTH -> this.sidedLazyOptional(side).cast();
+                case WEST -> this.sidedLazyOptional(side.getCounterClockWise()).cast();
+            };
+        }
+
+        return super.getCapability(cap, side);
+    }
+
+    @Override
+    public WrappedHandler capabilityBySide(Direction side) {
+        return switch (side) {
+            case UP, EAST, NORTH, SOUTH -> new WrappedHandler(itemHandler, (i, s) -> true, itemHandler::isInput);
+            case DOWN -> new WrappedHandler(itemHandler, (i, s) -> false, (i) -> itemHandler.isOutput(i) || hasEmptyBucket(i));
+            case WEST -> new WrappedHandler(itemHandler, (i, s) -> itemHandler.isBucket(i) && itemHandler.isItemValid(BUCKET_SLOT, s), itemHandler::isBucket);
+        };
+    }
+
+    // NBT
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        for (int slot : inputSlots) {
+            Optional<SmeltingRecipe> optionalRecipe = this.getRecipe(slot);
+            cachedRecipes.put(slot, optionalRecipe.map(CachedObject::of).orElseGet(CachedObject::empty));
+        }
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        lazyItemHandler.invalidate();
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag) {
-        tag.putInt("soul_furnace.progress", this.progress);
-        tag.putInt("soul_furnace.litTime", this.litTime);
+        tag.put("soul_smelter.inventory", itemHandler.serializeNBT());
         super.saveAdditional(tag);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        this.progress = tag.getInt("soul_furnace.progress");
-        this.litTime = tag.getInt("soul_furnace.litTime");
+        itemHandler.deserializeNBT(tag.getCompound("soul_smelter.inventory"));
     }
 
 }
