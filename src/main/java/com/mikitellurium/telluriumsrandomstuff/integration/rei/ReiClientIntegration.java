@@ -68,7 +68,7 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
 
     @Override
     public void registerScreens(ScreenRegistry registry) {
-        registry.registerContainerClickArea(new Rectangle(77, 28, 28, 21), SoulFurnaceScreen.class, SOUL_FURNACE_SMELTING);
+        registry.registerContainerClickArea(new Rectangle(90, 26, 26, 18), SoulFurnaceScreen.class, SOUL_FURNACE_SMELTING);
         registry.registerContainerClickArea(new Rectangle(54, 33, 55, 18), SoulInfuserScreen.class, SOUL_INFUSION);
         registry.registerContainerClickArea(new Rectangle(75, 26, 34, 24), SoulCompactorScreen.class, COMPACTING);
         registry.registerContainerClickArea(new Rectangle(88, 13, 22, 43), AlchemixerScreen.class, POTION_MIXING);

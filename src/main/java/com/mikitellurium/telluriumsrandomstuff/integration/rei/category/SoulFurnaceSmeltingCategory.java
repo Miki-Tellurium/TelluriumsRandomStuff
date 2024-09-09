@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.integration.rei.category;
 
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.display.SoulFurnaceSmeltingDisplay;
+import com.mikitellurium.telluriumsrandomstuff.integration.rei.guielement.ProgressBarWidget;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.guielement.SoulBurningFireWidget;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.guielement.SoulLavaTankWidget;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.BlockStateEntryType;
@@ -56,14 +57,15 @@ public class SoulFurnaceSmeltingCategory implements DisplayCategory<SoulFurnaceS
                 0, 0, this.getDisplayWidth(display), this.getDisplayHeight(), 256, 256));
 
         widgets.add(new SoulBurningFireWidget(
-                new Rectangle(new Point(startPoint.x + 37, startPoint.y + 44), new Dimension(14, 14)))
+                new Rectangle(new Point(startPoint.x + 35, startPoint.y + 44), new Dimension(14, 14)))
                 .animationDurationMS(10000));
-        widgets.add(Widgets.createArrow(new Point(startPoint.x + 58, startPoint.y + 24))
-                .animationDurationTicks(smeltingTime));
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 35, startPoint.y + 25))
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 33, startPoint.y + 25))
                 .entries(display.getInputEntries().get(0))
                 .disableBackground()
                 .markInput());
+        widgets.add(new ProgressBarWidget(
+                new Rectangle(new Point(startPoint.x + 52, startPoint.y + 25), new Dimension(2, 16)))
+                .animationDurationMS(2500));
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 95, startPoint.y + 25))
                 .entries(display.getOutputEntries().get(0))
                 .disableBackground()
