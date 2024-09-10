@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block.interaction.dispenserbehavior;
 
-import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModDispenserBehaviours;
+import com.mikitellurium.telluriumsrandomstuff.api.ModDispenserBehaviours;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
