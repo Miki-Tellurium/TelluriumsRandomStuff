@@ -140,7 +140,7 @@ public class JeiIntegration implements IModPlugin {
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(SoulFurnaceScreen.class, 77, 28, 28, 21, SOUL_FURNACE_SMELTING_RECIPE_TYPE);
+        registration.addRecipeClickArea(SoulFurnaceScreen.class, 90, 26, 26, 18, SOUL_FURNACE_SMELTING_RECIPE_TYPE);
         registration.addRecipeClickArea(SoulInfuserScreen.class, 54, 33, 55, 18, SOUL_INFUSION_RECIPE_TYPE);
         registration.addRecipeClickArea(AlchemixerScreen.class, 88, 13, 22, 43, POTION_MIXING_RECIPE_TYPE);
         registration.addRecipeClickArea(SoulCompactorScreen.class, 75, 26, 34, 24, COMPACTING_RECIPE_TYPE);
