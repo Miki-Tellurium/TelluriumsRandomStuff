@@ -9,7 +9,7 @@ import net.minecraftforge.fluids.FluidInteractionRegistry.InteractionInformation
 public class ModFluidInteractions {
 
     private static final InteractionInformation SOUL_LAVA_WITH_WATER = new InteractionInformation(ForgeMod.WATER_TYPE.get(),
-            fluidState -> fluidState.isSource() ? Blocks.CRYING_OBSIDIAN.defaultBlockState() : Blocks.SOUL_SOIL.defaultBlockState()
+            (fluidState) -> fluidState.isSource() ? Blocks.CRYING_OBSIDIAN.defaultBlockState() : Blocks.SOUL_SOIL.defaultBlockState()
     );
 
     public static void register() {
