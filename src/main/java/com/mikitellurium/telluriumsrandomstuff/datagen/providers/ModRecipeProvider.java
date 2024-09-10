@@ -99,7 +99,7 @@ public class ModRecipeProvider extends RecipeProvider {
     private void buildCompactingRecipes(Consumer<FinishedRecipe> consumer) {
         CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Blocks.STONE, 8)),
                         Blocks.DEEPSLATE, 4, 10)
-                .save(consumer, modLoc("cobbled_deepslate_from_compacting"));
+                .save(consumer, modLoc("deepslate_from_compacting"));
         CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Blocks.COBBLESTONE, 8)),
                         Blocks.COBBLED_DEEPSLATE, 4, 10)
                 .save(consumer, modLoc("cobbled_deepslate_from_compacting"));
