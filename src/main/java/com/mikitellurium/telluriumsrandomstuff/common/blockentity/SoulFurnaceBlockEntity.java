@@ -60,8 +60,8 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         inputSlots.forEach((slot) -> map.put(slot, CachedObject.empty()));
     });
 
-    private static final int litFurnaceCost = 125; // How much soul lava is consumed to lit the furnace
-    private static final int itemSmelted = 8; // How many item get smelted each slot with a full "lit"
+    private static final int litFurnaceCost = 100; // How much soul lava is consumed to lit the furnace
+    private static final int itemSmelted = 4; // How many item get smelted each slot with a full "lit"
     private int maxProgress = 100;
     private int litTime = 0;
     private int maxLitTime = maxProgress * itemSmelted;
