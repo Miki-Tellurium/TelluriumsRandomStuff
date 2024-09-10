@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.CustomRegistries;
+import com.mikitellurium.telluriumsrandomstuff.api.CustomRegistries;
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingFunction;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;

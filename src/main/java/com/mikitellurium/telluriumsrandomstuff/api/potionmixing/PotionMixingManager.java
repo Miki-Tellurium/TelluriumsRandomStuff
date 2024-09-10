@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.api.potionmixing;
 
 import com.google.common.collect.Maps;
 import com.google.gson.*;
+import com.mikitellurium.telluriumsrandomstuff.api.CustomRegistries;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModPotionMixingFunctions;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.resources.ResourceLocation;

@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff;
 
-import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.CustomRegistries;
+import com.mikitellurium.telluriumsrandomstuff.api.CustomRegistries;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.api.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;

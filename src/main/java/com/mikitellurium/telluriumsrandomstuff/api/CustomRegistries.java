@@ -1,5 +1,6 @@
-package com.mikitellurium.telluriumsrandomstuff.api.potionmixing;
+package com.mikitellurium.telluriumsrandomstuff.api;
 
+import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingFunction;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
