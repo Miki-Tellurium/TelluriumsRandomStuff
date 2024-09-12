@@ -17,7 +17,9 @@ public class ModFluids {
             () -> new SoulLavaFluid.Flowing(ModFluids.SOUL_LAVA_PROPERTIES));
 
     public static final ForgeFlowingFluid.Properties SOUL_LAVA_PROPERTIES = new ForgeFlowingFluid.Properties(
-            ModFluidTypes.SOUL_LAVA_FLUID_TYPE, SOUL_LAVA_SOURCE, SOUL_LAVA_FLOWING);
+            ModFluidTypes.SOUL_LAVA_FLUID_TYPE, SOUL_LAVA_SOURCE, SOUL_LAVA_FLOWING)
+            .bucket(ModItems.SOUL_LAVA_BUCKET)
+            .block(ModBlocks.SOUL_LAVA_BLOCK);
 
     public static <F extends Fluid> RegistryObject<F> registerFluid(String name, Supplier<F> fluid) {
         return ModRegistries.FLUIDS.register(name, fluid);
