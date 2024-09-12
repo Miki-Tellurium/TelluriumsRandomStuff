@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;
 import com.mikitellurium.telluriumsrandomstuff.lib.SidedCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
 import net.minecraft.core.BlockPos;
@@ -23,6 +24,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -56,7 +61,7 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
 
             @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                return isInput(slot) || (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
+                return isInput(slot) || (isBucket(slot) && isFluidHandlerValid(stack));
             }
         };
     }
@@ -84,10 +89,17 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
 
     private void handleTankRefill() {
         final int amount = 1000;
-        if (this.itemHandler.getStackInSlot(this.bucketSlot).is(ModItems.SOUL_LAVA_BUCKET.get())
-                && this.canRefillFluidTank(amount)) {
-            this.itemHandler.setStackInSlot(bucketSlot, Items.BUCKET.getDefaultInstance());
-            this.fillTank(amount);
+        if (this.canRefillFluidTank(amount)) {
+            ItemStack itemStack = this.getStackInSlot(this.bucketSlot);
+            LazyOptional<IFluidHandlerItem> optional = FluidUtil.getFluidHandler(itemStack);
+            optional.ifPresent((handler) -> {
+                FluidStack fluidStack = new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), amount);
+                if (handler.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE).getAmount() == amount) {
+                    handler.drain(fluidStack, IFluidHandler.FluidAction.EXECUTE);
+                    this.setStackInSlot(this.bucketSlot, handler.getContainer());
+                    this.fillTank(amount);
+                }
+            });
         }
     }
 

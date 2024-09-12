@@ -1,12 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity.util;
 
 import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,11 +38,6 @@ public class SoulFurnaceItemHandler extends MappedItemStackHandler {
 
     public void resetProgress(int slot) {
         this.counters.put(slot, 0);
-    }
-
-    @Override
-    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        return isInput(slot) || (isBucket(slot) && stack.is(ModItems.SOUL_LAVA_BUCKET.get()));
     }
 
     @Override

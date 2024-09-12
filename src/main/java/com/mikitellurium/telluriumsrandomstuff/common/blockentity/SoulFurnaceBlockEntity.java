@@ -6,8 +6,10 @@ import com.mikitellurium.telluriumsrandomstuff.common.blockentity.util.SoulFurna
 import com.mikitellurium.telluriumsrandomstuff.lib.SidedCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
+import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -29,9 +32,14 @@ import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,6 +60,11 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return isInput(slot) || (isBucket(slot) && isFluidHandlerValid(stack));
         }
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
@@ -92,9 +105,6 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
             return 7;
         }
     };
-    private final Map<Integer, Integer> counters = Util.make(new HashMap<>(), (map) -> {
-        inputSlots.forEach((slot) -> map.put(slot, 0));
-    });
 
     public SoulFurnaceBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SOUL_FURNACE.get(), pos, state, 4000);
@@ -126,10 +136,17 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
 
     private void handleTankRefill() {
         final int amount = 1000;
-        ItemStack bucketStack = this.getStackInSlot(BUCKET_SLOT);
-        if (bucketStack.is(ModItems.SOUL_LAVA_BUCKET.get()) && this.canRefillFluidTank(amount)) {
-            this.setStackInSlot(BUCKET_SLOT, bucketStack.getItem().getCraftingRemainingItem(bucketStack));
-            this.fillTank(amount);
+        if (this.canRefillFluidTank(amount)) {
+            ItemStack itemStack = this.getStackInSlot(BUCKET_SLOT);
+            LazyOptional<IFluidHandlerItem> optional = FluidUtil.getFluidHandler(itemStack);
+            optional.ifPresent((handler) -> {
+                FluidStack fluidStack = new FluidStack(ModFluids.SOUL_LAVA_SOURCE.get(), amount);
+                if (handler.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE).getAmount() == amount) {
+                    handler.drain(fluidStack, IFluidHandler.FluidAction.EXECUTE);
+                    this.setStackInSlot(BUCKET_SLOT, handler.getContainer());
+                    this.fillTank(amount);
+                }
+            });
         }
     }
 
