@@ -4,20 +4,20 @@ import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.MoltenAmethystItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.SoulStorageItem;
-import com.mikitellurium.telluriumsrandomstuff.test.TooltipTest;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ModItems {
@@ -27,6 +27,11 @@ public class ModItems {
                 @Override
                 public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
                     return 20000;
+                }
+
+                @Override
+                public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+                    return new FluidBucketWrapper(stack);
                 }
             });
     public static final RegistryObject<Item> MYSTIC_POTATO = registerItem("mystic_potato",
