@@ -1,9 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.fluid;
 
-import com.mikitellurium.telluriumsrandomstuff.registry.ModFluidTypes;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Strider;
@@ -22,8 +20,8 @@ import java.util.function.Supplier;
 
 public class SoulLavaBlock extends LiquidBlock {
 
-    public SoulLavaBlock(Supplier<? extends FlowingFluid> pFluid) {
-        super(pFluid, Properties.copy(Blocks.LAVA));
+    public SoulLavaBlock(Supplier<? extends FlowingFluid> fluid) {
+        super(fluid, Properties.copy(Blocks.LAVA));
     }
 
     @Override
