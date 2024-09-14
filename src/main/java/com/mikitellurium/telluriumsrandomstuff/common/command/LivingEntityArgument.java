@@ -41,11 +41,11 @@ public class LivingEntityArgument implements ArgumentType<String> {
     @Override
     public String parse(StringReader reader) throws CommandSyntaxException {
         String s = reader.readQuotedString();
-        ResourceLocation resourceLocation = ResourceLocation.tryParse(s);
-        if (!ForgeRegistries.ENTITY_TYPES.containsKey(resourceLocation)) {
-            throw ERROR_INVALID.createWithContext(reader, s);
-        } else {
+        ResourceLocation id = ResourceLocation.tryParse(s);
+        if (ForgeRegistries.ENTITY_TYPES.containsKey(id) && SUGGESTIONS.contains(StringArgumentType.escapeIfRequired(id.toString()))) {
             return s;
+        } else {
+            throw ERROR_INVALID.createWithContext(reader, s);
         }
     }
 
