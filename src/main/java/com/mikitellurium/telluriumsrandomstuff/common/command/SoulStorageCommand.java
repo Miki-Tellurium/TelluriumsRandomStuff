@@ -29,10 +29,12 @@ public class SoulStorageCommand {
                                         .executes((context) -> set(context.getSource(), LivingEntityArgument.getEntityId(context, "entity"), IntegerArgumentType.getInteger(context, "count"))))))
                 .then(Commands.literal("add")
                         .then(Commands.argument("entity", LivingEntityArgument.livingEntity())
+                                .executes((context) -> add(context.getSource(), LivingEntityArgument.getEntityId(context, "entity"), 1))
                                 .then(Commands.argument("count", IntegerArgumentType.integer(1, Short.MAX_VALUE))
                                         .executes((context) -> add(context.getSource(), LivingEntityArgument.getEntityId(context, "entity"), IntegerArgumentType.getInteger(context, "count"))))))
                 .then(Commands.literal("remove")
                         .then(Commands.argument("entity", LivingEntityArgument.livingEntity())
+                                .executes((context) -> remove(context.getSource(), LivingEntityArgument.getEntityId(context, "entity"), -1))
                                 .then(Commands.argument("count", IntegerArgumentType.integer(1, Short.MAX_VALUE))
                                         .executes((context) -> remove(context.getSource(), LivingEntityArgument.getEntityId(context, "entity"), IntegerArgumentType.getInteger(context, "count"))))))
                 .then(Commands.literal("clear")
@@ -53,9 +55,16 @@ public class SoulStorageCommand {
     }
 
     private static int remove(CommandSourceStack source, String entityId, int count) {
-        String s = count + " " + entityId;
-        return execute(source, (soulStorage) -> soulStorage.shrink(entityId, count),
-                Component.translatable("command.telluriumsrandomstuff.item.soulstorage.remove", s));
+        AtomicReference<String> s = new AtomicReference<>();
+        return execute(source, (soulStorage) -> {
+                    if (count < 0) {
+                        soulStorage.remove(entityId);
+                        s.set(entityId);
+                    } else {
+                        soulStorage.shrink(entityId, count);
+                        s.set(count + " " + entityId);
+                    }
+                }, Component.translatable("command.telluriumsrandomstuff.item.soulstorage.remove", s));
     }
 
     private static int clear(CommandSourceStack source) {
