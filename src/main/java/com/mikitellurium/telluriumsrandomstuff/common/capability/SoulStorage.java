@@ -1,15 +1,18 @@
 package com.mikitellurium.telluriumsrandomstuff.common.capability;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.Maps;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
@@ -18,7 +21,7 @@ import java.util.stream.Collectors;
 @AutoRegisterCapability
 public class SoulStorage {
 
-    private final Map<String, Integer> souls = new HashMap<>();
+    private final Map<String, Integer> souls = Maps.newLinkedHashMap();
 
     public void storeNbt(CompoundTag tag) {
         CompoundTag storedSouls = new CompoundTag();
@@ -72,6 +75,14 @@ public class SoulStorage {
         });
     }
 
+    public static SoulStorage copyFrom(ItemStack itemStack) {
+        AtomicReference<SoulStorage> newStorage = new AtomicReference<>();
+        SoulStorage.performAction(itemStack, (soulStorage) -> {
+            newStorage.set(soulStorage.copy());
+        });
+        return newStorage.get();
+    }
+
     public void set(String key, int amount) {
         if (key == null) throw new IllegalArgumentException("Key can't be null");
         if (amount < 1) throw new IllegalArgumentException("Amount must be higher than 0");
@@ -96,16 +107,17 @@ public class SoulStorage {
         return count.get();
     }
 
+    public int getCount(ResourceLocation key) {
+        return this.getCount(key.toString());
+    }
+
     public int getCount(String key) {
-        return this.souls.get(key);
+        Integer count = this.souls.get(key);
+        return count == null ? 0 : count;
     }
 
     public String getRandomKey(RandomSource random) {
-        if (!this.isEmpty()) {
-            String[] strings = this.souls.keySet().toArray(String[]::new);
-            return Util.getRandom(strings, random);
-        }
-        return null;
+        return this.getRandomKey(random, (s, i) -> true);
     }
 
     public String getRandomKey(RandomSource random, BiPredicate<String, Integer> filter) {
@@ -149,6 +161,12 @@ public class SoulStorage {
 
     public void forEach(BiConsumer<String, Integer> consumer) {
         this.souls.forEach(consumer);
+    }
+
+    public SoulStorage copy() {
+        SoulStorage newStorage = new SoulStorage();
+        this.forEach(newStorage::set);
+        return newStorage;
     }
 
 }
