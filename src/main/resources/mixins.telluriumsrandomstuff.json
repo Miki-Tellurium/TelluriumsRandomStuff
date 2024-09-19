@@ -16,6 +16,7 @@
     "ZombieHorseMixin"
   ],
   "client": [
+    "CreativeScreenMixin",
     "CustomHeadLayerMixin",
     "ScreenEffectRendererMixin"
   ],
