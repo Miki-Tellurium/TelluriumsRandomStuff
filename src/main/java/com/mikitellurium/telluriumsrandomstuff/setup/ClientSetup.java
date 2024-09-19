@@ -7,10 +7,10 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHook
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.*;
+import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageClientTooltip;
+import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageTooltip;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
-import com.mikitellurium.telluriumsrandomstuff.test.ClientTooltipTest;
-import com.mikitellurium.telluriumsrandomstuff.test.TooltipTest;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.client.Minecraft;
@@ -183,7 +183,7 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerTooltip(RegisterClientTooltipComponentFactoriesEvent event) {
-        event.register(TooltipTest.class, ClientTooltipTest::new);
+        event.register(SoulStorageTooltip.class, SoulStorageClientTooltip::new);
     }
 
 }
