@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.item;
 
+import com.mikitellurium.telluriumsrandomstuff.client.ClientEntityManager;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulStorage;
 import com.mikitellurium.telluriumsrandomstuff.common.event.RenderingEvents;
 import com.mojang.blaze3d.platform.Lighting;
@@ -28,8 +29,6 @@ import org.joml.Quaternionf;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mikitellurium.telluriumsrandomstuff.test.KeyEvents.*;
-
 public class SoulStorageClientTooltip implements ClientTooltipComponent {
 
     private static final Quaternionf DEFAULT_ROT = new Quaternionf().rotationXYZ(3.05F, 5.4F, 0.2F);
@@ -56,7 +55,7 @@ public class SoulStorageClientTooltip implements ClientTooltipComponent {
 
     @Override
     public int getHeight() {
-        return this.entities.isEmpty() ? 0 : 25 * Mth.ceil((float) this.entities.size() / 8);
+        return this.entities.isEmpty() ? 0 : 25 * Mth.ceil((float) this.entities.size() / 7);
     }
 
     @Override
@@ -109,35 +108,38 @@ public class SoulStorageClientTooltip implements ClientTooltipComponent {
             }
         }
     }
-    // todo mob client manager
+
     @SuppressWarnings("deprecation")
     private void renderEntity(GuiGraphics graphics, EntityType<?> entityType, double x, double y, float scale) {
-        ClientLevel level = Minecraft.getInstance().level;
         Entity entity;
         if (entityType == EntityType.PLAYER) {
             entity = Minecraft.getInstance().player;
         } else {
-            entity = entityType.create(level);
+            Entity e = ClientEntityManager.getEntityForType(entityType);
+            entity = e != null ? e : this.tryCreate(entityType); // Handle possible non living entity
         }
-        PoseStack poseStack = graphics.pose();
-        poseStack.pushPose();
-        poseStack.translate(x, y, 50.0D);
-        poseStack.mulPoseMatrix(new Matrix4f().scaling(scale, scale, -scale));
-        poseStack.mulPose(DEFAULT_ROT);
-        if (entity instanceof EnderDragon) { // Flip ender dragon model
-            poseStack.mulPose(Axis.YP.rotationDegrees(180));
+
+        if (entity != null) {
+            PoseStack poseStack = graphics.pose();
+            poseStack.pushPose();
+            poseStack.translate(x, y, 50.0D);
+            poseStack.mulPoseMatrix(new Matrix4f().scaling(scale, scale, -scale));
+            poseStack.mulPose(DEFAULT_ROT);
+            if (entity instanceof EnderDragon) { // Flip ender dragon model
+                poseStack.mulPose(Axis.YP.rotationDegrees(180));
+            }
+            poseStack.mulPose(Axis.YN.rotation(RenderingEvents.rotation));
+            Lighting.setupForEntityInInventory();
+            EntityRenderDispatcher entityRenderer = Minecraft.getInstance().getEntityRenderDispatcher();
+            entityRenderer.setRenderShadow(false);
+            RenderSystem.runAsFancy(() -> {
+                entityRenderer.render(entity, 0, 0, 0, 0, 0.0F, poseStack, graphics.bufferSource(), 15728880);
+            });
+            graphics.flush();
+            entityRenderer.setRenderShadow(true);
+            poseStack.popPose();
+            Lighting.setupFor3DItems();
         }
-        poseStack.mulPose(Axis.YN.rotation(RenderingEvents.rotation));
-        Lighting.setupForEntityInInventory();
-        EntityRenderDispatcher entityRenderer = Minecraft.getInstance().getEntityRenderDispatcher();
-        entityRenderer.setRenderShadow(false);
-        RenderSystem.runAsFancy(() -> {
-            entityRenderer.render(entity, 0, 0, 0, 0, 0, poseStack, graphics.bufferSource(), 15728880);
-        });
-        graphics.flush();
-        entityRenderer.setRenderShadow(true);
-        poseStack.popPose();
-        Lighting.setupFor3DItems();
     }
 
     private void renderText(Font font, GuiGraphics graphics, Component text, float x, float y) {
@@ -147,6 +149,11 @@ public class SoulStorageClientTooltip implements ClientTooltipComponent {
         graphics.drawString(font, text.getVisualOrderText(), x, y, 0xF3F3F3, true);
         graphics.flush();
         poseStack.popPose();
+    }
+
+    private Entity tryCreate(EntityType<?> entityType) {
+        ClientLevel level = Minecraft.getInstance().level;
+        return level != null ? entityType.create(level) : null;
     }
 
 }
