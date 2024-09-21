@@ -28,6 +28,7 @@ public class LivingEntityArgument implements ArgumentType<String> {
             Component.translatable("argument.entity.options.type.invalid", obj));
     private static final List<String> SUGGESTIONS = ForgeRegistries.ENTITY_TYPES.getValues().stream()
             .filter(DefaultAttributes::hasSupplier)
+            .filter((entityType) -> !(entityType.equals(EntityType.PLAYER) || entityType.equals(EntityType.ARMOR_STAND)))
             .map((entityType) -> EntityType.getKey(entityType).toString())
             .map(StringArgumentType::escapeIfRequired)
             .collect(Collectors.toList());
