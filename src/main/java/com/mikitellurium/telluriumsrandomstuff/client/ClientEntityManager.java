@@ -3,9 +3,12 @@ package com.mikitellurium.telluriumsrandomstuff.client;
 import com.google.common.collect.Maps;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.mixin.MobAccessor;
+import com.mikitellurium.telluriumsrandomstuff.mixin.TropicalFishAccessor;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
+import net.minecraft.Util;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -13,24 +16,31 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.animal.FrogVariant;
+import net.minecraft.world.entity.animal.Pufferfish;
+import net.minecraft.world.entity.animal.TropicalFish;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Guardian;
+import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.monster.piglin.Piglin;
+import net.minecraft.world.entity.npc.VillagerData;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Map;
 import java.util.Optional;
 
-@Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientEntityManager {
 
     private static final Map<EntityType<?>, Entity> ENTITIES = Maps.newHashMap();
@@ -81,6 +91,20 @@ public class ClientEntityManager {
             setupPose(enderDragon, 2);
         } else if (mob instanceof Guardian guardian) {
             setupPose(guardian, 3);
+        } else if (mob instanceof Slime slime) {
+            slime.setSize(5, true);
+        } else if (mob instanceof Pufferfish pufferfish) {
+            pufferfish.setPuffState(1);
+        } else if (mob instanceof TropicalFish tropicalFish) {
+            RandomSource random = RandomSource.create();
+            DyeColor[] colors = DyeColor.values();
+            TropicalFish.Pattern tropicalfish$pattern = Util.getRandom(TropicalFish.Pattern.values(), random);
+            DyeColor dyeColor = Util.getRandom(colors, random);
+            DyeColor dyeColor1 = Util.getRandom(colors, random);
+            TropicalFish.Variant variant = new TropicalFish.Variant(tropicalfish$pattern, dyeColor, dyeColor1);
+            ((TropicalFishAccessor)tropicalFish).invokeSetPackedVariant(variant.getPackedId());
+        } else if (mob instanceof ZombieVillager zombieVillager) {
+            zombieVillager.setVillagerData(new VillagerData(VillagerType.PLAINS, VillagerProfession.NONE, 1));
         }
     }
 
@@ -101,6 +125,13 @@ public class ClientEntityManager {
     private static void clear() {
         ENTITIES.clear();
         TelluriumsRandomStuffMod.LOGGER.info("Cleared client entities.");
+    }
+
+    @SubscribeEvent
+    public static void testTick(TickEvent.LevelTickEvent event) {
+        if (event.level instanceof ClientLevel && event.phase == TickEvent.Phase.START) {
+            //ENTITIES.forEach(((entityType, entity) -> entity.tick()));
+        }
     }
 
     @SubscribeEvent

@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
+import com.mikitellurium.telluriumsrandomstuff.client.ClientEntityManager;
 import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.CustomBubbleColumnBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulAnchorBlock;
@@ -31,6 +32,7 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(LootEvents.class);
         MinecraftForge.EVENT_BUS.register(AlchemixerBlock.class);
         MinecraftForge.EVENT_BUS.addListener(PotionMixingManager::registerListener);
+        MinecraftForge.EVENT_BUS.register(ClientEntityManager.class);
     }
 
     public static void registerModBusEvents(IEventBus eventBus) {
