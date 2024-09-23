@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.client;
 import com.google.common.collect.Maps;
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.mixin.MobAccessor;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -27,6 +28,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientEntityManager {
@@ -34,19 +36,26 @@ public class ClientEntityManager {
     private static final Map<EntityType<?>, Entity> ENTITIES = Maps.newHashMap();
     private static boolean FROZEN = false;
 
-    public static Entity getEntityForType(EntityType<?> entityType) {
-        return ENTITIES.get(entityType);
+    public static Optional<Entity> getEntityForType(EntityType<?> entityType) {
+        return Optional.ofNullable(ENTITIES.get(entityType));
+    }
+
+    public static boolean containsType(EntityType<?> entityType) {
+        return ENTITIES.containsKey(entityType);
     }
 
     private static void populate(Level level) {
         ForgeRegistries.ENTITY_TYPES.getValues().stream()
                 .filter(DefaultAttributes::hasSupplier)
-                .filter((entityType) -> !entityType.equals(EntityType.PLAYER))
                 .forEach((entityType) -> {
+                    if (entityType.equals(EntityType.PLAYER)) {
+                        ENTITIES.put(entityType, ModEntities.DUMMY_PLAYER.get().create(level));
+                        return;
+                    }
                     Entity entity = entityType.create(level);
-                     if (finalize(level, entity)) {
-                         ENTITIES.put(entityType, entity);
-                     }
+                    if (finalize(level, entity)) {
+                        ENTITIES.put(entityType, entity);
+                    }
                 });
         TelluriumsRandomStuffMod.LOGGER.info("Created client entities.");
     }

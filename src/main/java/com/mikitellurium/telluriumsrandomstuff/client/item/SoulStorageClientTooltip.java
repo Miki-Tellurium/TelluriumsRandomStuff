@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.client.item;
 import com.mikitellurium.telluriumsrandomstuff.client.ClientEntityManager;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulStorage;
 import com.mikitellurium.telluriumsrandomstuff.common.event.RenderingEvents;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,6 +18,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
@@ -28,6 +30,7 @@ import org.joml.Quaternionf;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SoulStorageClientTooltip implements ClientTooltipComponent {
 
@@ -111,14 +114,8 @@ public class SoulStorageClientTooltip implements ClientTooltipComponent {
 
     @SuppressWarnings("deprecation")
     private void renderEntity(GuiGraphics graphics, EntityType<?> entityType, double x, double y, float scale) {
-        Entity entity;
-        if (entityType == EntityType.PLAYER) {
-            entity = Minecraft.getInstance().player;
-        } else {
-            Entity e = ClientEntityManager.getEntityForType(entityType);
-            entity = e != null ? e : this.tryCreate(entityType); // Handle possible non living entity
-        }
-
+        Optional<Entity> optional = ClientEntityManager.getEntityForType(entityType);
+        Entity entity = optional.orElseGet(() -> this.tryCreate(entityType));
         if (entity != null) {
             PoseStack poseStack = graphics.pose();
             poseStack.pushPose();
