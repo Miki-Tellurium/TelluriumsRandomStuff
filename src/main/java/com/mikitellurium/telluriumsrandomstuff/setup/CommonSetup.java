@@ -1,6 +1,5 @@
 package com.mikitellurium.telluriumsrandomstuff.setup;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
 import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.CustomBubbleColumnBlock;
@@ -8,6 +7,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.SoulAnchorBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulStorageCommand;
+import com.mikitellurium.telluriumsrandomstuff.common.entity.DummyPlayer;
 import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
@@ -18,9 +18,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.eventbus.api.IEventBus;
 
-@Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CommonSetup {
 
     public static void registerForgeBusEvents() {
@@ -32,6 +31,10 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(LootEvents.class);
         MinecraftForge.EVENT_BUS.register(AlchemixerBlock.class);
         MinecraftForge.EVENT_BUS.addListener(PotionMixingManager::registerListener);
+    }
+
+    public static void registerModBusEvents(IEventBus eventBus) {
+        eventBus.register(ClientSetup.class);
     }
 
     private static void registerCommands(RegisterCommandsEvent event) {

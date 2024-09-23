@@ -37,6 +37,7 @@ public class TelluriumsRandomStuffMod {
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         CommonSetup.registerForgeBusEvents();
+        CommonSetup.registerModBusEvents(modEventBus);
 
         CustomRegistries.init(modEventBus);
         ModRegistries.init(modEventBus);

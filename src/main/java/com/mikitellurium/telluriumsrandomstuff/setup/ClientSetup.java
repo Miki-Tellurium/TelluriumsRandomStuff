@@ -5,6 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRe
 import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.render.DummyPlayerRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageClientTooltip;
@@ -26,17 +27,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
 
     @SubscribeEvent
@@ -130,6 +128,7 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerEntityRenderer(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.GRAPPLING_HOOK.get(), GrapplingHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.DUMMY_PLAYER.get(), DummyPlayerRenderer::new);
     }
 
     @SubscribeEvent
@@ -161,9 +160,9 @@ public class ClientSetup {
             PlayerRenderer playerRenderer = event.getSkin(skin);
             if (playerRenderer != null) {
                 playerRenderer.addLayer(new LavaGooglesLayer<>(playerRenderer, modelSet));
-                TelluriumsRandomStuffMod.LOGGER.info("Render layer added to player model: " + skin);
+                TelluriumsRandomStuffMod.LOGGER.info("Render layer added to player model: {}", skin);
             } else {
-                TelluriumsRandomStuffMod.LOGGER.error("Could not apply render layer to player model: " + skin);
+                TelluriumsRandomStuffMod.LOGGER.error("Could not apply render layer to player model: {}", skin);
             }
         });
     }
@@ -174,10 +173,10 @@ public class ClientSetup {
             if (renderer instanceof HumanoidMobRenderer || entityType == EntityType.ARMOR_STAND ||
                     entityType == EntityType.GIANT) {
                 renderer.addLayer(new LavaGooglesLayer<>(renderer, modelSet));
-                TelluriumsRandomStuffMod.LOGGER.info("Render layer correctly added to " + entityType.toShortString());
+                TelluriumsRandomStuffMod.LOGGER.info("Render layer correctly added to {}", entityType.toShortString());
             }
         } catch (Exception e) {
-            TelluriumsRandomStuffMod.LOGGER.error("Could not add layer to " + entityType.toShortString());
+            TelluriumsRandomStuffMod.LOGGER.error("Could not add layer to {}", entityType.toShortString());
         }
     }
 
