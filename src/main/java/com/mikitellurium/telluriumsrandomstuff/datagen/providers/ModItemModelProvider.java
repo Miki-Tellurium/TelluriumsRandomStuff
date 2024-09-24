@@ -5,8 +5,10 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
@@ -89,7 +91,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.withExistingParent(ModItems.SOUL_COMPACTOR_LIT.getId().getPath(), modLoc("block/soul_compactor_on"));
         this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
         this.simpleItem(ModItems.TOTEM_OF_BINDING);
-        this.simpleItem(ModItems.SPIRIT_BOTTLE);
+        this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath(), modLoc("item/spirit_bottle_empty"))
+                .override()
+                .predicate(modLoc("storage"), 1)
+                .model(this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath() + "_full", modLoc("item/spirit_bottle_full")))
+                .end();
     }
 
     private void simpleItem(RegistryObject<Item> item) {
@@ -97,9 +103,9 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer0", modLoc("item/" + item.getId().getPath()));
     }
 
-    private void simpleItem(String name) {
-        this.withExistingParent(name, mcLoc("item/generated"))
-                .texture("layer0", modLoc("item/" + name));
+    private ItemModelBuilder itemWithProperties(String name, ResourceLocation texture) {
+        return this.withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", texture);
     }
 
     private void handheldItem(RegistryObject<Item> item) {
