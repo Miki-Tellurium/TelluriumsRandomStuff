@@ -157,7 +157,7 @@ public class ModItems {
     public static final RegistryObject<Item> SPIRITED_IRON_CHESTPLATE = registerItem("spirited_iron_chestplate", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_IRON_HELMET = registerItem("spirited_iron_helmet", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> TOTEM_OF_BINDING = registerItem("totem_of_binding", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> SPIRIT_BOTTLE = registerItem("spirit_bottle", () -> new SoulStorageItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> SPIRIT_BOTTLE = registerItem("spirit_bottle", () -> new SoulStorageItem(new Item.Properties().stacksTo(1)));
 
     // Items of block states used only for rendering purposes
     public static final RegistryObject<Item> SOUL_INFUSER_LIT = registerItem("soul_infuser_lit", () -> new Item(new Item.Properties()));
