@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulAnchorBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulAnchorLevelData;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -66,8 +67,7 @@ public class SoulAnchorBlock extends BaseEntityBlock {
             ItemStack itemStack = player.getItemInHand(interactionHand);
 
             if (!blockState.getValue(CHARGED)) {
-                // If the player use a totem of undying on uncharged anchor
-                if (player.getItemInHand(interactionHand).is(Items.TOTEM_OF_UNDYING)) {
+                if (player.getItemInHand(interactionHand).is(ModItems.TOTEM_OF_BINDING.get())) {
                     if (blockEntity instanceof SoulAnchorBlockEntity soulAnchorBlockEntity) {
                         player.getCapability(SoulAnchorCapabilityProvider.INSTANCE).ifPresent((soulAnchor) -> {
                             if (!soulAnchor.hasChargedAnchor()) {

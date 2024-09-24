@@ -88,6 +88,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleItem(ModItems.SPIRITED_IRON_HELMET);
         this.withExistingParent(ModItems.SOUL_COMPACTOR_LIT.getId().getPath(), modLoc("block/soul_compactor_on"));
         this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
+        this.simpleItem(ModItems.TOTEM_OF_BINDING);
     }
 
     private void simpleItem(RegistryObject<Item> item) {

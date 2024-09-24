@@ -89,6 +89,9 @@ public class ModRecipeProvider extends RecipeProvider {
         SoulInfusionRecipeBuilder.addRecipe(Ingredient.of(Items.SPIDER_EYE), Ingredient.of(ModItems.SOUL_FRAGMENT.get()),
                         Items.FERMENTED_SPIDER_EYE, 80)
                 .save(consumer, modLoc("fermented_spider_eye_from_soul_infusion"));
+        SoulInfusionRecipeBuilder.addRecipe(Ingredient.of(Items.TOTEM_OF_UNDYING), Ingredient.of(ModItems.SOUL_CLUSTER.get()),
+                        ModItems.TOTEM_OF_BINDING.get(), 700)
+                .save(consumer, modLoc("totem_of_binding_from_soul_infusion"));
     }
 
     private void buildSoulLavaTransmutationRecipes(Consumer<FinishedRecipe> consumer) {

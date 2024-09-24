@@ -1,0 +1,11 @@
+{
+  "type": "telluriumsrandomstuff:soul_infusion",
+  "catalyst": {
+    "item": "telluriumsrandomstuff:soul_cluster"
+  },
+  "cost": 700,
+  "ingredient": {
+    "item": "minecraft:totem_of_undying"
+  },
+  "result": "telluriumsrandomstuff:totem_of_binding"
+}

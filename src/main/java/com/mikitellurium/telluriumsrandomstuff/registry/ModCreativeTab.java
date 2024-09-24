@@ -1,19 +1,15 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
@@ -58,6 +54,7 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.SOUL_INFUSER);
                 event.accept(ModBlocks.SOUL_OBSIDIAN);
                 event.accept(ModBlocks.SOUL_ANCHOR);
+                event.accept(ModItems.TOTEM_OF_BINDING);
                 event.accept(ModItems.MYSTIC_POTATO);
                 event.acceptAll(soulHarvesting);
                 event.accept(ModBlocks.OPAL);
