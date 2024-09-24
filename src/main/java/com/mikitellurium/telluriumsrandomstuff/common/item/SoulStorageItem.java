@@ -16,8 +16,8 @@ import java.util.Optional;
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SoulStorageItem extends Item {
 
-    public SoulStorageItem() {
-        super(new Item.Properties());
+    public SoulStorageItem(Item.Properties properties) {
+        super(properties);
     }
 
     @Override

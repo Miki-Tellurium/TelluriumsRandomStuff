@@ -106,9 +106,9 @@ public class ModItems {
     public static final RegistryObject<Item> LAVA_GOOGLES = registerItem("lava_googles", LavaGooglesItem::new);
     public static final RegistryObject<Item> MOLTEN_AMETHYST = registerItem("molten_amethyst", MoltenAmethystItem::new);
     public static final RegistryObject<Item> AMETHYST_LENS = registerItem("amethyst_lens", () -> new Item(new Item.Properties().fireResistant()));
-    public static final RegistryObject<Item> SMALL_SOUL_FRAGMENT = registerItem("small_soul_fragment", SoulStorageItem::new);
-    public static final RegistryObject<Item> SOUL_FRAGMENT = registerItem("soul_fragment", SoulStorageItem::new);
-    public static final RegistryObject<Item> SOUL_CLUSTER = registerItem("soul_cluster", SoulStorageItem::new);
+    public static final RegistryObject<Item> SMALL_SOUL_FRAGMENT = registerItem("small_soul_fragment", () -> new SoulStorageItem(new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_FRAGMENT = registerItem("soul_fragment", () -> new SoulStorageItem(new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_CLUSTER = registerItem("soul_cluster", () -> new SoulStorageItem(new Item.Properties()));
     public static final RegistryObject<Item> GRAPPLING_HOOK = registerItem("grappling_hook", GrapplingHookItem::new);
     public static final RegistryObject<Item> SPIRITED_IRON_INGOT = registerItem("spirited_iron_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_IRON_ROD = registerItem("spirited_iron_rod", () -> new Item(new Item.Properties()));
@@ -157,6 +157,7 @@ public class ModItems {
     public static final RegistryObject<Item> SPIRITED_IRON_CHESTPLATE = registerItem("spirited_iron_chestplate", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_IRON_HELMET = registerItem("spirited_iron_helmet", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> TOTEM_OF_BINDING = registerItem("totem_of_binding", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> SPIRIT_BOTTLE = registerItem("spirit_bottle", () -> new SoulStorageItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
 
     // Items of block states used only for rendering purposes
     public static final RegistryObject<Item> SOUL_INFUSER_LIT = registerItem("soul_infuser_lit", () -> new Item(new Item.Properties()));

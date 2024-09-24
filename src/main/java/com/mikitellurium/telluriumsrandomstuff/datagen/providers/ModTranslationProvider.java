@@ -54,6 +54,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SPIRITED_IRON_HELMET, "Spirited Iron Helmet");
         addItem(ModItems.SOUL_COMPACTOR_LIT, "Soul Compactor");
         addItem(ModItems.TOTEM_OF_BINDING, "Totem of Binding");
+        addItem(ModItems.SPIRIT_BOTTLE, "Spirit Bottle");
 
         translation("item", "lava_googles.tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");
