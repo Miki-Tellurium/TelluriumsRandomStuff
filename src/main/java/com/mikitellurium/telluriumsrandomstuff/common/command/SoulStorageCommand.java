@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.command;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulStorage;
 import com.mikitellurium.telluriumsrandomstuff.common.item.SoulStorageItem;
 import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
+import com.mikitellurium.telluriumsrandomstuff.util.RegistryHelper;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.client.Minecraft;
@@ -11,11 +12,14 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
@@ -34,7 +38,7 @@ public class SoulStorageCommand {
                                         .executes((context) -> add(context.getSource(), LivingEntityArgument.getEntityId(context, "entity"), IntegerArgumentType.getInteger(context, "count"))))))
                 .then(Commands.literal("remove")
                         .then(Commands.argument("entity", LivingEntityArgument.livingEntity())
-                                .executes((context) -> remove(context.getSource(), LivingEntityArgument.getEntityId(context, "entity"), -1))
+                                .executes((context) -> remove(context.getSource(), LivingEntityArgument.getEntityId(context, "entity"), 1))
                                 .then(Commands.argument("count", IntegerArgumentType.integer(1, Short.MAX_VALUE))
                                         .executes((context) -> remove(context.getSource(), LivingEntityArgument.getEntityId(context, "entity"), IntegerArgumentType.getInteger(context, "count"))))))
                 .then(Commands.literal("clear")
@@ -43,28 +47,42 @@ public class SoulStorageCommand {
     }
 
     private static int set(CommandSourceStack source, String entityId, int count) {
-        String s = count + " " + entityId;
-        return execute(source, (soulStorage) -> soulStorage.set(entityId, count),
-                Component.translatable("command.telluriumsrandomstuff.item.soulstorage.set", s));
+        AtomicReference<String> s = new AtomicReference<>();
+        return execute(source, (soulStorage) -> {
+            Optional<EntityType<?>> optional = RegistryHelper.getRegistryOptional(ForgeRegistries.ENTITY_TYPES, entityId);
+            if (optional.isPresent()) {
+                soulStorage.set(optional.get(), count);
+                s.set(Math.min(count, soulStorage.getCapacity()) + " " + entityId);
+            } else {
+                source.sendFailure(Component.translatable("argument.entity.notfound.entity"));
+            }
+        }, Component.translatable("command.telluriumsrandomstuff.item.soulstorage.set", s));
     }
 
     private static int add(CommandSourceStack source, String entityId, int count) {
-        String s = count + " " + entityId;
-        return execute(source, (soulStorage) -> soulStorage.grow(entityId, count),
-                Component.translatable("command.telluriumsrandomstuff.item.soulstorage.add", s));
+        AtomicReference<String> s = new AtomicReference<>();
+        return execute(source, (soulStorage) -> {
+            Optional<EntityType<?>> optional = RegistryHelper.getRegistryOptional(ForgeRegistries.ENTITY_TYPES, entityId);
+            if (optional.isPresent()) {
+                int i = soulStorage.grow(optional.get(), count, false);
+                s.set(i + " " + entityId);
+            } else {
+                source.sendFailure(Component.translatable("argument.entity.notfound.entity"));
+            }
+        }, Component.translatable("command.telluriumsrandomstuff.item.soulstorage.add", s));
     }
 
     private static int remove(CommandSourceStack source, String entityId, int count) {
         AtomicReference<String> s = new AtomicReference<>();
         return execute(source, (soulStorage) -> {
-                    if (count < 0) {
-                        soulStorage.remove(entityId);
-                        s.set(entityId);
-                    } else {
-                        soulStorage.shrink(entityId, count);
-                        s.set(count + " " + entityId);
-                    }
-                }, Component.translatable("command.telluriumsrandomstuff.item.soulstorage.remove", s));
+            Optional<EntityType<?>> optional = RegistryHelper.getRegistryOptional(ForgeRegistries.ENTITY_TYPES, entityId);
+            if (optional.isPresent()) {
+                int i = soulStorage.shrink(optional.get(), count, false);
+                s.set(i + " " + entityId);
+            } else {
+                source.sendFailure(Component.translatable("argument.entity.notfound.entity"));
+            }
+        }, Component.translatable("command.telluriumsrandomstuff.item.soulstorage.remove", s));
     }
 
     private static int clear(CommandSourceStack source) {

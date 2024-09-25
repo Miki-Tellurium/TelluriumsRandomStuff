@@ -1,17 +1,17 @@
 package com.mikitellurium.telluriumsrandomstuff.common.capability;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
+import com.mikitellurium.telluriumsrandomstuff.util.RegistryHelper;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
@@ -21,17 +21,35 @@ import java.util.stream.Collectors;
 @AutoRegisterCapability
 public class SoulStorage {
 
-    private final Map<String, Integer> souls = Maps.newLinkedHashMap();
+    private final Map<EntityType<?>, Integer> souls = Maps.newLinkedHashMap();
+    private final int typesCapacity;
+    private final int capacity;
 
+    public SoulStorage() {
+        this(1, 1);
+    }
+
+    public SoulStorage(int typesCapacity, int capacity) {
+        this.typesCapacity = typesCapacity;
+        this.capacity = capacity;
+    }
+
+    @SuppressWarnings("ConstantConditions")
     public void storeNbt(CompoundTag tag) {
         CompoundTag storedSouls = new CompoundTag();
-        this.souls.forEach(storedSouls::putInt);
+        this.souls.forEach((entityType, i) -> {
+            String s = ForgeRegistries.ENTITY_TYPES.getKey(entityType).toString();
+            storedSouls.putInt(s, i);
+        });
         tag.put("StoredSouls", storedSouls);
     }
 
     public void readNBT(CompoundTag tag) {
         CompoundTag storedSouls = this.getStoredSoulsTag(tag);
-        storedSouls.getAllKeys().forEach((key) -> this.souls.put(key, storedSouls.getInt(key)));
+        storedSouls.getAllKeys().forEach((s) -> {
+            RegistryHelper.getRegistryOptional(ForgeRegistries.ENTITY_TYPES, s)
+                    .ifPresent((entityType) -> this.souls.put(entityType, storedSouls.getInt(s)));
+        });
     }
 
     private CompoundTag getStoredSoulsTag(CompoundTag tag) {
@@ -56,9 +74,9 @@ public class SoulStorage {
     public static void moveRandomSoul(ItemStack senderStack, ItemStack receiverStack, RandomSource random) {
         performAction(senderStack, receiverStack, (sender, receiver) -> {
             if (!sender.isEmpty()) {
-                String key = sender.getRandomKey(random);
-                sender.shrink(key, 1);
-                receiver.grow(key, 1);
+                EntityType<?> entity = sender.getRandom(random);
+                sender.shrink(entity, 1, false);
+                receiver.grow(entity, 1, false);
             }
         });
     }
@@ -83,90 +101,123 @@ public class SoulStorage {
         return newStorage.get();
     }
 
-    public void set(String key, int amount) {
-        if (key == null) throw new IllegalArgumentException("Key can't be null");
-        if (amount < 1) throw new IllegalArgumentException("Amount must be higher than 0");
-        this.souls.put(key, amount);
+    public EntityType<?> getRandom(RandomSource random) {
+        return this.getRandom(random, (s, i) -> true);
     }
 
-    public void remove(String key) {
-        this.souls.remove(key);
-    }
-
-    public boolean contains(String key) {
-        return this.souls.containsKey(key);
-    }
-
-    public boolean isEmpty() {
-        return this.souls.isEmpty();
-    }
-
-    public int getCount() {
-        AtomicInteger count = new AtomicInteger();
-        this.souls.forEach((key, i) -> count.addAndGet(i));
-        return count.get();
-    }
-
-    public int getCount(ResourceLocation key) {
-        return this.getCount(key.toString());
-    }
-
-    public int getCount(String key) {
-        Integer count = this.souls.get(key);
-        return count == null ? 0 : count;
-    }
-
-    public String getRandomKey(RandomSource random) {
-        return this.getRandomKey(random, (s, i) -> true);
-    }
-
-    public String getRandomKey(RandomSource random, BiPredicate<String, Integer> filter) {
+    public EntityType<?> getRandom(RandomSource random, BiPredicate<EntityType<?>, Integer> filter) {
         if (!this.isEmpty()) {
-            List<String> strings = this.getKeys(filter);
-            return strings.isEmpty() ? null : Util.getRandom(strings, random);
+            List<EntityType<?>> entities = this.getEntities(filter);
+            return entities.isEmpty() ? null : Util.getRandom(entities, random);
         }
         return null;
     }
 
-    public List<String> getKeys(BiPredicate<String, Integer> filter) {
+    public List<EntityType<?>> getEntities() {
+        return this.getEntities((e, i) -> true);
+    }
+
+    public List<EntityType<?>> getEntities(BiPredicate<EntityType<?>, Integer> filter) {
         return this.souls.entrySet().stream()
                 .filter((entry) -> filter.test(entry.getKey(), entry.getValue()))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
 
-    public void grow(String key, int amount) {
-        if (key == null) throw new IllegalArgumentException("Key can't be null");
-        if (this.souls.containsKey(key)) {
-            this.souls.put(key, this.souls.get(key) + amount);
-        } else {
-            this.souls.put(key, amount);
-        }
-        if (this.souls.get(key) < 1) {
-            this.remove(key);
-        }
+    public void remove(EntityType<?> entity) {
+        this.souls.remove(entity);
     }
 
-    public void shrink(String key, int amount) {
-        this.grow(key, -amount);
+    public boolean contains(EntityType<?> entity) {
+        return this.souls.containsKey(entity);
+    }
+
+    public boolean isEmpty() {
+        return this.souls.isEmpty();
+    }
+
+    public int getTypesCapacity() {
+        return this.typesCapacity;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
+    }
+
+    public int getTypes() {
+        return this.souls.size();
+    }
+
+    public int getAmount(EntityType<?> entity) {
+        Integer count = this.souls.get(entity);
+        return count == null ? 0 : count;
+    }
+
+    public boolean canInsert(EntityType<?> entity) {
+        if (!this.contains(entity) && this.souls.size() >= this.typesCapacity) return false;
+        return this.getAmount(entity) < this.capacity;
+    }
+
+    public void set(EntityType<?> entity, int amount) {
+        this.validate(entity);
+        if (amount <= 0) {
+            this.remove(entity);
+        } else if (amount < this.getAmount(entity)) {
+            this.souls.put(entity, amount);
+        } else if (this.canInsert(entity)) {
+            int i = Math.min(amount, this.capacity);
+            this.souls.put(entity, i);
+        }
+    }
+    
+    // Returns the inserted amount
+    public int grow(EntityType<?> entity, int amount, boolean simulate) {
+        if (amount == 0) return 0;
+        if (!this.canInsert(entity)) return 0;
+        int sum = this.getAmount(entity) + amount;
+        if (sum <= this.capacity) {
+            if(!simulate) this.set(entity, sum);
+        } else {
+            int remainder = sum - this.capacity;
+            amount -= remainder;
+            if(!simulate) this.set(entity, this.getAmount(entity) + amount);
+        }
+        return amount;
+    }
+    
+    // Returns the removed amount
+    public int shrink(EntityType<?> entity, int amount, boolean simulate) {
+        if (amount == 0) return 0;
+        int remainder = this.getAmount(entity) - amount;
+        if (remainder >= 0) {
+            if(!simulate) this.set(entity, remainder);
+        } else {
+            amount = this.getAmount(entity);
+            if(!simulate) this.set(entity, 0);
+        }
+        return amount;
     }
 
     public void addAll(SoulStorage soulStorage) {
-        soulStorage.souls.forEach(this::grow);
+        soulStorage.souls.forEach((entity, amount) -> this.grow(entity, amount, false));
     }
 
     public void clear() {
         this.souls.clear();
     }
 
-    public void forEach(BiConsumer<String, Integer> consumer) {
+    public void forEach(BiConsumer<EntityType<?>, Integer> consumer) {
         this.souls.forEach(consumer);
     }
 
     public SoulStorage copy() {
-        SoulStorage newStorage = new SoulStorage();
+        SoulStorage newStorage = new SoulStorage(this.typesCapacity, this.capacity);
         this.forEach(newStorage::set);
         return newStorage;
     }
 
+    private void validate(EntityType<?> entity) {
+        if (entity == null) throw new IllegalArgumentException("Entity can't be null");
+    }
+    
 }

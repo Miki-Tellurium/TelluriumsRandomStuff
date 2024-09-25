@@ -3,12 +3,10 @@ package com.mikitellurium.telluriumsrandomstuff.client.item;
 import com.mikitellurium.telluriumsrandomstuff.client.ClientEntityManager;
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulStorage;
 import com.mikitellurium.telluriumsrandomstuff.common.event.RenderingEvents;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,19 +15,14 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.monster.Slime;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,19 +35,8 @@ public class SoulStorageClientTooltip implements ClientTooltipComponent {
 
     public SoulStorageClientTooltip(SoulStorageTooltip tooltip) {
         this.soulStorage = SoulStorage.copyFrom(tooltip.itemStack());
-        this.entities = this.getEntities();
+        this.entities = soulStorage.getEntities();
         this.stackCount = tooltip.itemStack().getCount();
-    }
-
-    private List<EntityType<?>> getEntities() {
-        List<EntityType<?>> types = Util.make(new ArrayList<>(), (list) -> this.soulStorage.forEach((key, count) -> {
-            ResourceLocation id = ResourceLocation.tryParse(key);
-            if (ForgeRegistries.ENTITY_TYPES.containsKey(id)) {
-                EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(id);
-                list.add(entityType);
-            }
-        }));
-        return List.copyOf(types);
     }
 
     @Override
@@ -104,7 +86,7 @@ public class SoulStorageClientTooltip implements ClientTooltipComponent {
                 float finalX = xStartPos + h;
                 float finalY = yStartPos + rowY + v;
                 this.renderEntity(graphics, entityType, finalX, finalY, scale);
-                int amount = this.soulStorage.getCount(EntityType.getKey(entityType)) * this.stackCount;
+                int amount = this.soulStorage.getAmount(entityType) * this.stackCount;
                 Component text = Component.literal("x" + amount);
                 float textOffset = (float) font.width(text) / 2;
                 this.renderText(font, graphics, text, finalX - textOffset - 1.0F, finalY - v - 2.0F);

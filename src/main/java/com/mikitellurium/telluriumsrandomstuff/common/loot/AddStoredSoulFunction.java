@@ -30,8 +30,7 @@ public class AddStoredSoulFunction extends LootItemConditionalFunction {
     protected ItemStack run(ItemStack itemStack, LootContext context) {
         if (SoulStorageItem.isSoulStorageItem(itemStack)) {
             Entity entity = context.getParam(LootContextParams.THIS_ENTITY);
-            String entityId = EntityType.getKey(entity.getType()).toString();
-            SoulStorage.performAction(itemStack, (storage) -> storage.set(entityId, this.count.getInt(context)));
+            SoulStorage.performAction(itemStack, (storage) -> storage.set(entity.getType(), this.count.getInt(context)));
         }
         return itemStack;
     }

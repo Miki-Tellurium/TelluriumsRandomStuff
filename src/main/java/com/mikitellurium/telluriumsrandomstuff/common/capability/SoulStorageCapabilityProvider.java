@@ -17,10 +17,17 @@ public class SoulStorageCapabilityProvider implements ICapabilityProvider, INBTS
 
     private SoulStorage cap = null;
     private final LazyOptional<SoulStorage> holder = LazyOptional.of(this::create);
+    private final int typesCapacity;
+    private final int capacity;
+
+    public SoulStorageCapabilityProvider(int typesCapacity, int capacity) {
+        this.typesCapacity = typesCapacity;
+        this.capacity = capacity;
+    }
 
     private SoulStorage create() {
         if (cap == null) {
-            cap = new SoulStorage();
+            cap = new SoulStorage(this.typesCapacity, this.capacity);
         }
 
         return cap;

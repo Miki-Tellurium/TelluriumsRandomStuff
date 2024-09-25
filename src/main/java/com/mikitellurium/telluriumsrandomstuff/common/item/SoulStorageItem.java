@@ -16,8 +16,21 @@ import java.util.Optional;
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SoulStorageItem extends Item {
 
-    public SoulStorageItem(Item.Properties properties) {
+    private final int typesCapacity; // Max amount of entity types that can be stored
+    private final int capacity; // Max amount of souls for a single entity
+
+    public SoulStorageItem(int typesCapacity, int capacity, Item.Properties properties) {
         super(properties);
+        this.typesCapacity = typesCapacity;
+        this.capacity = capacity;
+    }
+
+    public int getTypesCapacity() {
+        return typesCapacity;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 
     @Override
@@ -27,7 +40,7 @@ public class SoulStorageItem extends Item {
 
     @Override
     public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new SoulStorageCapabilityProvider();
+        return new SoulStorageCapabilityProvider(this.typesCapacity, this.capacity);
     }
 
     public static boolean isSoulStorageItem(ItemStack itemStack) {
