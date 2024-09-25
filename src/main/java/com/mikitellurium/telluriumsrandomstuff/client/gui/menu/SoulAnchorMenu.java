@@ -6,7 +6,6 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +24,7 @@ public class SoulAnchorMenu extends QuickMoveContainerMenu {
     }
 
     public SoulAnchorMenu(int id, Inventory inventory, BlockEntity entity) {
-        super(ModMenuTypes.SOUL_ANCHOR_MENU.get(), id, 41);
+        super(ModMenuTypes.SOUL_ANCHOR.get(), id, 41);
         checkContainerSize(inventory, 41);
         blockEntity = (SoulAnchorBlockEntity)entity;
         this.level = inventory.player.level();

@@ -18,7 +18,7 @@ public class SoulCompactorMenu extends AbstractSoulFuelMenu {
     }
 
     public SoulCompactorMenu(int id, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
-        super(id, ModMenuTypes.SOUL_COMPACTOR_MENU.get(), inventory, 3, blockEntity, data);
+        super(id, ModMenuTypes.SOUL_COMPACTOR.get(), inventory, 3, blockEntity, data);
         this.getBlockEntity().getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((itemHandler) -> {
             this.addSlot(new SlotItemHandler(itemHandler, 0, 8, 60));
             this.addSlot(new SlotItemHandler(itemHandler, 1, 56, 30));
