@@ -12,10 +12,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @AutoRegisterCapability
@@ -69,6 +71,12 @@ public class SoulStorage {
                 consumer.accept(firstStorage, secondStorage);
             });
         });
+    }
+
+    public static boolean evaluate(ItemStack itemStack, Predicate<SoulStorage> predicate) {
+        AtomicBoolean b = new AtomicBoolean();
+        performAction(itemStack, (storage) -> b.set(predicate.test(storage)));
+        return b.get();
     }
 
     public static void moveRandomSoul(ItemStack senderStack, ItemStack receiverStack, RandomSource random) {
