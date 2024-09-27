@@ -612,15 +612,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModItems.SPIRITED_IRON_INGOT.get())
                 .unlockedBy("has_spirited_iron_ingot", has(ModItems.SPIRITED_IRON_INGOT.get()))
                 .save(consumer, modLoc("spirited_iron_block"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPIRIT_BOTTLE.get(), 1)
-                .pattern(" # ")
-                .pattern("#x#")
-                .pattern(" # ")
-                .define('#', Items.ECHO_SHARD)
-                .define('x', Items.GLASS_BOTTLE)
-                .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
-                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
-                .save(consumer, modLoc("spirit_bottle"));
+//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPIRIT_BOTTLE.get(), 1)
+//                .pattern(" # ")
+//                .pattern("#x#")
+//                .pattern(" # ")
+//                .define('#', Items.ECHO_SHARD)
+//                .define('x', Items.GLASS_BOTTLE)
+//                .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
+//                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
+//                .save(consumer, modLoc("spirit_bottle"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

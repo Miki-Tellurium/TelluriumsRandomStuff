@@ -54,7 +54,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SPIRITED_IRON_HELMET, "Spirited Iron Helmet");
         addItem(ModItems.SOUL_COMPACTOR_LIT, "Soul Compactor");
         addItem(ModItems.TOTEM_OF_BINDING, "Totem of Binding");
-        addItem(ModItems.SPIRIT_BOTTLE, "Spirit Bottle");
+        addItem(ModItems.SPIRIT_BOTTLE, "Spirit Bottle (WIP)");
 
         translation("item", "lava_googles.tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");
@@ -132,7 +132,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addBlock(ModBlocks.ALCHEMIXER, "Alchemixer");
         addBlock(ModBlocks.SOUL_COMPACTOR, "Soul Compactor");
         addBlock(ModBlocks.SPIRITED_IRON_BLOCK, "Block of Spirited Iron");
-        addBlock(ModBlocks.SOUL_ASSEMBLY_TABLE, "Soul Assembly Table");
+        addBlock(ModBlocks.SOUL_ASSEMBLY_TABLE, "Soul Assembly Table (WIP)");
 
         translation("block", "awakened_sculk_shrieker.tooltip.warning", "Warning!");
         translation("block", "awakened_sculk_shrieker.tooltip.message", "This can spawn a Warden anywhere. Use with caution.");

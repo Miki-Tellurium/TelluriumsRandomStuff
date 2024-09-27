@@ -1,9 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
-import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
-import com.mikitellurium.telluriumsrandomstuff.common.item.MoltenAmethystItem;
-import com.mikitellurium.telluriumsrandomstuff.common.item.SoulStorageItem;
+import com.mikitellurium.telluriumsrandomstuff.common.item.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
@@ -157,7 +154,7 @@ public class ModItems {
     public static final RegistryObject<Item> SPIRITED_IRON_CHESTPLATE = registerItem("spirited_iron_chestplate", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_IRON_HELMET = registerItem("spirited_iron_helmet", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> TOTEM_OF_BINDING = registerItem("totem_of_binding", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> SPIRIT_BOTTLE = registerItem("spirit_bottle", () -> new SoulStorageItem(16, 8192, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> SPIRIT_BOTTLE = registerItem("spirit_bottle", () -> new SpiritBottleItem(16, 8192, new Item.Properties().stacksTo(1)));
 
     // Items of block states used only for rendering purposes
     public static final RegistryObject<Item> SOUL_INFUSER_LIT = registerItem("soul_infuser_lit", () -> new Item(new Item.Properties()));

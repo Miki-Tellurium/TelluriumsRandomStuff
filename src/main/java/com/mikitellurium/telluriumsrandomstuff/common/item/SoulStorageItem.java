@@ -33,6 +33,10 @@ public class SoulStorageItem extends Item {
         return capacity;
     }
 
+    public ItemStack getEmptyRemainder() {
+        return ItemStack.EMPTY;
+    }
+
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
         return Optional.of(new SoulStorageTooltip(itemStack));
