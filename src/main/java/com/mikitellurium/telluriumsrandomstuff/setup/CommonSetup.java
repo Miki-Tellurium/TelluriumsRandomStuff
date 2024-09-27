@@ -12,14 +12,18 @@ import com.mikitellurium.telluriumsrandomstuff.common.entity.DummyPlayer;
 import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingMenu;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class CommonSetup {
 
@@ -33,6 +37,7 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(AlchemixerBlock.class);
         MinecraftForge.EVENT_BUS.addListener(PotionMixingManager::registerListener);
         MinecraftForge.EVENT_BUS.register(ClientEntityManager.class);
+        MinecraftForge.EVENT_BUS.addListener(CommonSetup::tickMenus);
     }
 
     public static void registerModBusEvents(IEventBus eventBus) {
@@ -46,6 +51,12 @@ public class CommonSetup {
         dispatcher.register(LavaGooglesCommand.build(builder));
         dispatcher.register(SoulAnchorCommand.build(builder));
         dispatcher.register(SoulStorageCommand.build(builder));
+    }
+
+    private static void tickMenus(TickEvent.PlayerTickEvent event) {
+        if (event.player instanceof ServerPlayer && event.player.containerMenu instanceof TickingMenu menu && event.phase == TickEvent.Phase.END) {
+            menu.tickMenu((ServerPlayer) event.player);
+        }
     }
 
 }

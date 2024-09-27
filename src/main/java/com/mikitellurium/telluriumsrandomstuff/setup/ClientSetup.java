@@ -40,12 +40,13 @@ public class ClientSetup {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            MenuScreens.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
-            MenuScreens.register(ModMenuTypes.SOUL_ANCHOR_MENU.get(), SoulAnchorScreen::new);
-            MenuScreens.register(ModMenuTypes.EXTRACTOR_MENU.get(), ExtractorScreen::new);
-            MenuScreens.register(ModMenuTypes.SOUL_INFUSER_MENU.get(), SoulInfuserScreen::new);
-            MenuScreens.register(ModMenuTypes.ALCHEMIXER_MENU.get(), AlchemixerScreen::new);
-            MenuScreens.register(ModMenuTypes.SOUL_COMPACTOR_MENU.get(), SoulCompactorScreen::new);
+            MenuScreens.register(ModMenuTypes.SOUL_FURNACE.get(), SoulFurnaceScreen::new);
+            MenuScreens.register(ModMenuTypes.SOUL_ANCHOR.get(), SoulAnchorScreen::new);
+            MenuScreens.register(ModMenuTypes.EXTRACTOR.get(), ExtractorScreen::new);
+            MenuScreens.register(ModMenuTypes.SOUL_INFUSER.get(), SoulInfuserScreen::new);
+            MenuScreens.register(ModMenuTypes.ALCHEMIXER.get(), AlchemixerScreen::new);
+            MenuScreens.register(ModMenuTypes.SOUL_COMPACTOR.get(), SoulCompactorScreen::new);
+            MenuScreens.register(ModMenuTypes.SOUL_ASSEMBLY.get(), SoulAssemblyScreen::new);
             ModItemProperties.register();
         });
     }

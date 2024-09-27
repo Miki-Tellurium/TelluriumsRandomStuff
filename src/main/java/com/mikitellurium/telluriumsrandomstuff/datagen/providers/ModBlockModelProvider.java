@@ -339,6 +339,7 @@ public class ModBlockModelProvider extends BlockStateProvider {
                 });
         this.blockItemModelFromParent(ModBlocks.SOUL_COMPACTOR, modLoc("block/soul_compactor"));
         this.simpleBlockWithItem(ModBlocks.SPIRITED_IRON_BLOCK.get(), this.cubeAll(ModBlocks.SPIRITED_IRON_BLOCK.get()));
+        this.simpleBlockWithItem(ModBlocks.SOUL_ASSEMBLY_TABLE.get(), this.models().withExistingParent("soul_assembly_table", mcLoc("block/crafting_table")));
     }
 
     private void blockItemModelFromParent(RegistryObject<Block> block, ResourceLocation parent) {

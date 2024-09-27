@@ -51,6 +51,11 @@ public class ModMessages {
                 .encoder(GrapplingHookSyncS2CPacket::toBytes)
                 .consumerMainThread(GrapplingHookSyncS2CPacket::handle)
                 .add();
+        net.messageBuilder(SoulAssemblyModeC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(SoulAssemblyModeC2SPacket::new)
+                .encoder(SoulAssemblyModeC2SPacket::toBytes)
+                .consumerMainThread(SoulAssemblyModeC2SPacket::handle)
+                .add();
     }
     
     public static <MSG> void sendToServer(MSG message) {

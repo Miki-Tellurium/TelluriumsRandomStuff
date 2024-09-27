@@ -125,6 +125,7 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.OPAL_ITEM_PEDESTAL);
                 event.accept(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL);
                 event.accept(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL);
+                event.accept(ModBlocks.SOUL_ASSEMBLY_TABLE);
                 event.accept(ModItems.SMALL_SOUL_FRAGMENT);
                 event.accept(ModItems.SOUL_FRAGMENT);
                 event.accept(ModItems.SOUL_CLUSTER);

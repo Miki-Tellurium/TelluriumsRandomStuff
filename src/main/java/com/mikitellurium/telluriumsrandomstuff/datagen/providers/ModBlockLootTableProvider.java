@@ -118,6 +118,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.ALCHEMIXER.get());
         this.dropSelf(ModBlocks.SOUL_COMPACTOR.get());
         this.dropSelf(ModBlocks.SPIRITED_IRON_BLOCK.get());
+        this.dropSelf(ModBlocks.SOUL_ASSEMBLY_TABLE.get());
     }
 
     @Override

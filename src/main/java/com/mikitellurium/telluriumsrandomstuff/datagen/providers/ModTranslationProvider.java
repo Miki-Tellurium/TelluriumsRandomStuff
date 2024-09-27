@@ -132,6 +132,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addBlock(ModBlocks.ALCHEMIXER, "Alchemixer");
         addBlock(ModBlocks.SOUL_COMPACTOR, "Soul Compactor");
         addBlock(ModBlocks.SPIRITED_IRON_BLOCK, "Block of Spirited Iron");
+        addBlock(ModBlocks.SOUL_ASSEMBLY_TABLE, "Soul Assembly Table");
 
         translation("block", "awakened_sculk_shrieker.tooltip.warning", "Warning!");
         translation("block", "awakened_sculk_shrieker.tooltip.message", "This can spawn a Warden anywhere. Use with caution.");

@@ -92,6 +92,9 @@ public class ModRecipeProvider extends RecipeProvider {
         SoulInfusionRecipeBuilder.addRecipe(Ingredient.of(Items.TOTEM_OF_UNDYING), Ingredient.of(ModItems.SOUL_CLUSTER.get()),
                         ModItems.TOTEM_OF_BINDING.get(), 700)
                 .save(consumer, modLoc("totem_of_binding_from_soul_infusion"));
+        SoulInfusionRecipeBuilder.addRecipe(Ingredient.of(Blocks.CRAFTING_TABLE), Ingredient.of(ModItems.SMALL_SOUL_FRAGMENT.get()),
+                        ModBlocks.SOUL_ASSEMBLY_TABLE.get(), 400)
+                .save(consumer, modLoc("soul_assembly_table_from_soul_infusion"));
     }
 
     private void buildSoulLavaTransmutationRecipes(Consumer<FinishedRecipe> consumer) {

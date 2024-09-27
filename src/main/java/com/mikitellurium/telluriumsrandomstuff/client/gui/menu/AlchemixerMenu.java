@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AlchemixerBlockEntity;
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulCompactorBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,7 +18,7 @@ public class AlchemixerMenu extends AbstractSoulFuelMenu {
     }
 
     public AlchemixerMenu(int id, Inventory inventory, BlockEntity entity, ContainerData data) {
-        super(id, ModMenuTypes.ALCHEMIXER_MENU.get(), inventory, 4, entity, data);
+        super(id, ModMenuTypes.ALCHEMIXER.get(), inventory, 4, entity, data);
         this.getBlockEntity().getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((itemHandler) -> {
             this.addSlot(new SlotItemHandler(itemHandler, 0, 8, 60));
             this.addSlot(new SlotItemHandler(itemHandler, 1, 62, 16));
