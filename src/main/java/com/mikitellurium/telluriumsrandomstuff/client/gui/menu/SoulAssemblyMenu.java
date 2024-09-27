@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
 
+import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulStorage;
 import com.mikitellurium.telluriumsrandomstuff.common.item.SoulStorageItem;
 import com.mikitellurium.telluriumsrandomstuff.lib.TickingMenu;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
@@ -8,6 +9,8 @@ import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;
 import com.mikitellurium.telluriumsrandomstuff.util.ContainerUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -18,16 +21,15 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class SoulAssemblyMenu extends QuickMoveContainerMenu implements TickingMenu {
 
+    private static final int[] ASSEMBLE_SLOTS = new int[] {0, 1, 2, 3, 4, 5, 6, 7};
+    private static final int DISASSEMBLE_SLOT = 8;
     private final ContainerLevelAccess access;
     private Mode mode = Mode.ASSEMBLE;
     private final ItemStackHandler itemHandler = new ItemStackHandler(9) {
-        @Override
-        protected void onContentsChanged(int slot) {
-            
-        }
-
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return SoulStorageItem.isSoulStorageItem(stack);
@@ -67,23 +69,48 @@ public class SoulAssemblyMenu extends QuickMoveContainerMenu implements TickingM
         this.mode = mode;
     }
 
+    private static void handleRecipe(ItemStackHandler itemHandler, Mode mode, RandomSource random) {
+        if (mode == Mode.ASSEMBLE) {
+
+        } else {
+            ItemStack itemStack = itemHandler.getStackInSlot(DISASSEMBLE_SLOT);
+            if (!itemStack.isEmpty() && !itemStack.is(ModItems.SMALL_SOUL_FRAGMENT.get())) {
+                SoulStorage.performAction(itemStack, (storage) -> {
+                    if (!storage.isEmpty()) {
+                        EntityType<?> entityType = storage.getRandom(random);
+
+                        
+
+                        if (storage.isEmpty()) {
+                            itemHandler.setStackInSlot(DISASSEMBLE_SLOT, ItemStack.EMPTY);
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    private static int findAvailableSlot(ItemStackHandler itemHandler, EntityType<?> entityType) {
+        for (int i = 0; i < itemHandler.getSlots() - 1; i++) {
+            ItemStack itemStack = itemHandler.getStackInSlot(i);
+            if (itemStack.isEmpty()) {
+                return i;
+            } else if (itemStack.is(ModItems.SMALL_SOUL_FRAGMENT.get()) && itemStack.getCount() < itemStack.getMaxStackSize() &&
+                    SoulStorage.evaluate(itemStack, (storage) -> storage.contains(entityType))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @Override
     public void tickMenu(ServerPlayer player) {
-        this.access.execute(((level, pos) -> {
-            ItemStack itemStack = this.itemHandler.getStackInSlot(0);
-            if (this.getMode() == Mode.DISASSEMBLE) {
-                if (itemStack.isEmpty()) {
-                    this.itemHandler.setStackInSlot(0, new ItemStack(ModItems.SMALL_SOUL_FRAGMENT.get()));
-                } else if (itemStack.getCount() < itemStack.getMaxStackSize()) {
-                    itemStack.grow(1);
-                }
-            }
-        }));
+        this.access.execute((level, pos) -> handleRecipe(this.itemHandler, this.mode, level.random));
     }
 
     @Override
     public void removed(Player player) {
-        this.clearContainer(player, ContainerUtil.fromItemHandler(this.itemHandler));
+        this.access.execute((level, pos) -> this.clearContainer(player, ContainerUtil.fromItemHandler(this.itemHandler)));
     }
 
     @Override
