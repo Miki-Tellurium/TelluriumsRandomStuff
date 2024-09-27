@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.networking.packets;
 
 import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.lib.ModPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class GrapplingHookSyncS2CPacket {
+public class GrapplingHookSyncS2CPacket implements ModPacket {
 
         private final boolean isUsing;
         private final ItemStack itemStack;
@@ -24,11 +25,13 @@ public class GrapplingHookSyncS2CPacket {
             this.itemStack = buf.readItem();
         }
 
-        public void toBytes(FriendlyByteBuf buf) {
+        @Override
+        public void write(FriendlyByteBuf buf) {
             buf.writeBoolean(this.isUsing);
             buf.writeItem(this.itemStack);
         }
 
+        @Override
         public boolean handle(Supplier<NetworkEvent.Context> supplier) {
             NetworkEvent.Context context = supplier.get();
             context.enqueueWork(() -> {

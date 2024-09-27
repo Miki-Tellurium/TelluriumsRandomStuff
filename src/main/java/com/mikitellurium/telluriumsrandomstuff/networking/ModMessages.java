@@ -28,32 +28,32 @@ public class ModMessages {
 
         net.messageBuilder(FluidSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(FluidSyncS2CPacket::new)
-                .encoder(FluidSyncS2CPacket::toBytes)
+                .encoder(FluidSyncS2CPacket::write)
                 .consumerMainThread(FluidSyncS2CPacket::handle)
                 .add();
         net.messageBuilder(PedestalItemSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(PedestalItemSyncS2CPacket::new)
-                .encoder(PedestalItemSyncS2CPacket::toBytes)
+                .encoder(PedestalItemSyncS2CPacket::write)
                 .consumerMainThread(PedestalItemSyncS2CPacket::handle)
                 .add();
         net.messageBuilder(RotOffsetSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(RotOffsetSyncS2CPacket::new)
-                .encoder(RotOffsetSyncS2CPacket::toBytes)
+                .encoder(RotOffsetSyncS2CPacket::write)
                 .consumerMainThread(RotOffsetSyncS2CPacket::handle)
                 .add();
         net.messageBuilder(DisplayNameSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(DisplayNameSyncS2CPacket::new)
-                .encoder(DisplayNameSyncS2CPacket::toBytes)
+                .encoder(DisplayNameSyncS2CPacket::write)
                 .consumerMainThread(DisplayNameSyncS2CPacket::handle)
                 .add();
         net.messageBuilder(GrapplingHookSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(GrapplingHookSyncS2CPacket::new)
-                .encoder(GrapplingHookSyncS2CPacket::toBytes)
+                .encoder(GrapplingHookSyncS2CPacket::write)
                 .consumerMainThread(GrapplingHookSyncS2CPacket::handle)
                 .add();
         net.messageBuilder(SoulAssemblyModeC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(SoulAssemblyModeC2SPacket::new)
-                .encoder(SoulAssemblyModeC2SPacket::toBytes)
+                .encoder(SoulAssemblyModeC2SPacket::write)
                 .consumerMainThread(SoulAssemblyModeC2SPacket::handle)
                 .add();
     }
@@ -62,7 +62,7 @@ public class ModMessages {
         INSTANCE.sendToServer(message);
     }
 
-    public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
+    public static <MSG> void sendToClientPlayer(MSG message, ServerPlayer player) {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 

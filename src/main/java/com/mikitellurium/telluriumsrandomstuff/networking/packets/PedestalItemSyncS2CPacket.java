@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.networking.packets;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.lib.ModPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -9,7 +10,7 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class PedestalItemSyncS2CPacket {
+public class PedestalItemSyncS2CPacket implements ModPacket {
         private final ItemStack itemStack;
         private final BlockPos pos;
 
@@ -23,11 +24,13 @@ public class PedestalItemSyncS2CPacket {
             this.pos = buf.readBlockPos();
         }
 
-        public void toBytes(FriendlyByteBuf buf) {
+        @Override
+        public void write(FriendlyByteBuf buf) {
             buf.writeItem(itemStack);
             buf.writeBlockPos(pos);
         }
 
+        @Override
         public boolean handle(Supplier<NetworkEvent.Context> supplier) {
             NetworkEvent.Context context = supplier.get();
             context.enqueueWork(() -> {

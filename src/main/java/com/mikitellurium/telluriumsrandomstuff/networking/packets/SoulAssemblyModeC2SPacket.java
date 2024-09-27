@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.networking.packets;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulAssemblyMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.lib.ModPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,7 +12,7 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class SoulAssemblyModeC2SPacket {
+public class SoulAssemblyModeC2SPacket implements ModPacket {
 
         private final SoulAssemblyMenu.Mode mode;
 
@@ -23,10 +24,12 @@ public class SoulAssemblyModeC2SPacket {
             this.mode = buf.readEnum(SoulAssemblyMenu.Mode.class);
         }
 
-        public void toBytes(FriendlyByteBuf buf) {
+        @Override
+        public void write(FriendlyByteBuf buf) {
             buf.writeEnum(this.mode);
         }
 
+        @Override
         public boolean handle(Supplier<NetworkEvent.Context> supplier) {
             NetworkEvent.Context context = supplier.get();
             context.enqueueWork(() -> {

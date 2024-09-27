@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.networking.packets;
 
 import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFuelMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulFueledBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.lib.ModPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -10,7 +11,7 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class FluidSyncS2CPacket {
+public class FluidSyncS2CPacket implements ModPacket {
         private final FluidStack fluidStack;
         private final BlockPos pos;
 
@@ -24,11 +25,13 @@ public class FluidSyncS2CPacket {
             this.pos = buf.readBlockPos();
         }
 
-        public void toBytes(FriendlyByteBuf buf) {
+        @Override
+        public void write(FriendlyByteBuf buf) {
             buf.writeFluidStack(fluidStack);
             buf.writeBlockPos(pos);
         }
 
+        @Override
         public boolean handle(Supplier<NetworkEvent.Context> supplier) {
             NetworkEvent.Context context = supplier.get();
             context.enqueueWork(() -> {

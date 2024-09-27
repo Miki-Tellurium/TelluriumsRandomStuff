@@ -70,7 +70,7 @@ public class GrapplingHookItem extends Item implements Vanishable {
                 GrapplingHookEntity grapplingHook = new GrapplingHookEntity(player, level, itemStack, launchStrength);
                 if (level.addFreshEntity(grapplingHook)) {
                     hook.setGrappling(grapplingHook, itemStack);
-                    ModMessages.sendToPlayer(new GrapplingHookSyncS2CPacket(true, itemStack), (ServerPlayer) player);
+                    ModMessages.sendToClientPlayer(new GrapplingHookSyncS2CPacket(true, itemStack), (ServerPlayer) player);
                     level.playSound(null, grapplingHook, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
                 }
             });
