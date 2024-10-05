@@ -5,8 +5,10 @@ import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRe
 import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.model.SpiritedAllayModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.DummyPlayerRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.entity.render.SpiritedAllayRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageClientTooltip;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageTooltip;
@@ -130,12 +132,14 @@ public class ClientSetup {
     public static void registerEntityRenderer(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.GRAPPLING_HOOK.get(), GrapplingHookRenderer::new);
         event.registerEntityRenderer(ModEntities.DUMMY_PLAYER.get(), DummyPlayerRenderer::new);
+        event.registerEntityRenderer(ModEntities.SPIRITED_ALLAY.get(), SpiritedAllayRenderer::new);
     }
 
     @SubscribeEvent
     public static void registerModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(LavaGooglesModel.LAYER_LOCATION, LavaGooglesModel::createLayerDefinition);
         event.registerLayerDefinition(GrapplingHookModel.LAYER_LOCATION, GrapplingHookModel::createLayerDefinition);
+        event.registerLayerDefinition(SpiritedAllayModel.LAYER_LOCATION, SpiritedAllayModel::createLayerDefinition);
     }
 
     @SuppressWarnings("unchecked")

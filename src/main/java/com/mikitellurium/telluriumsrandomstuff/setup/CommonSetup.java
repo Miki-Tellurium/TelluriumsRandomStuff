@@ -13,15 +13,18 @@ import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.lib.TickingMenu;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -42,6 +45,7 @@ public class CommonSetup {
 
     public static void registerModBusEvents(IEventBus eventBus) {
         eventBus.register(ClientSetup.class);
+        eventBus.addListener(CommonSetup::registerMobAttributes);
     }
 
     private static void registerCommands(RegisterCommandsEvent event) {
@@ -51,6 +55,10 @@ public class CommonSetup {
         dispatcher.register(LavaGooglesCommand.build(builder));
         dispatcher.register(SoulAnchorCommand.build(builder));
         dispatcher.register(SoulStorageCommand.build(builder));
+    }
+
+    private static void registerMobAttributes(EntityAttributeCreationEvent event) {
+        event.put(ModEntities.SPIRITED_ALLAY.get(), Allay.createAttributes().build());
     }
 
     private static void tickMenus(TickEvent.PlayerTickEvent event) {

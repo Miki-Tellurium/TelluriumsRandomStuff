@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.common.entity.DummyPlayer;
 import com.mikitellurium.telluriumsrandomstuff.common.entity.GrapplingHookEntity;
+import com.mikitellurium.telluriumsrandomstuff.common.entity.SpiritedAllay;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -28,6 +29,13 @@ public class ModEntities {
                     .sized(0.6F, 1.8F)
                     .clientTrackingRange(Integer.MAX_VALUE)
                     .build("dummy_player"));
+
+    public static final RegistryObject<EntityType<SpiritedAllay>> SPIRITED_ALLAY = registerEntity("spirited_allay",
+            () -> EntityType.Builder.of(SpiritedAllay::new, MobCategory.CREATURE)
+                    .sized(0.35F, 0.6F)
+                    .clientTrackingRange(8)
+                    .updateInterval(2)
+                    .build("spirited_allay"));
 
     private static <E extends Entity, T extends EntityType<E>> RegistryObject<T> registerEntity(String name, Supplier<T> entity) {
         return ModRegistries.ENTITY_TYPES.register(name, entity);
