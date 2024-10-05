@@ -12,8 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 
 public class GrapplingHookModel extends Model {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			FastLoc.modLoc("grappling_hook"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(FastLoc.modLoc("grappling_hook"), "main");
 	private final ModelPart root;
 
 	public GrapplingHookModel(ModelPart root) {
