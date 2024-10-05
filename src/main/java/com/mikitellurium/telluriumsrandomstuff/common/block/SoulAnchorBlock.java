@@ -168,11 +168,6 @@ public class SoulAnchorBlock extends BaseEntityBlock {
         return blockState.getValue(CHARGED) ? 15 : 0;
     }
 
-    @Override
-    public void onNeighborChange(BlockState state, LevelReader level, BlockPos pos, BlockPos neighbor) {
-        super.onNeighborChange(state, level, pos, neighbor);
-    }
-
     public static int getSoulAnchorLightLevel(BlockState blockState) {
         return blockState.getValue(CHARGED) ? 12 : 0;
     }
