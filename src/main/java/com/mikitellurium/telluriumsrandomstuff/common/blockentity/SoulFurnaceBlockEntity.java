@@ -247,6 +247,10 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         return slot == BUCKET_SLOT && this.getStackInSlot(BUCKET_SLOT).is(Items.BUCKET);
     }
 
+    public int getAnalogOutputSignal() {
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(this.getInventory());
+    }
+
     public void dropItemsOnBreak() {
         SimpleContainer inventory = getInventory();
         Containers.dropContents(this.level, this.worldPosition, inventory);

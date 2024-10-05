@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AlchemixerBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.PedestalItemSyncS2CPacket;
@@ -123,6 +124,20 @@ public class ItemPedestalBlock extends BaseEntityBlock {
         }
 
         return blockState.getBlock().asItem().getDefaultInstance();
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState blockState) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        BlockEntity blockEntity = level.getExistingBlockEntity(pos);
+        if (blockEntity instanceof ItemPedestalBlockEntity itemPedestal) {
+            return itemPedestal.isEmpty() ? 0 : 15;
+        }
+        return super.getAnalogOutputSignal(blockState, level, pos);
     }
 
     @Override

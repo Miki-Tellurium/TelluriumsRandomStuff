@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulSmeltingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -97,6 +98,14 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
             }
         }
         super.onRemove(blockState, level, pos, newState, isMoving);
+    }
+
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        BlockEntity blockEntity = level.getExistingBlockEntity(pos);
+        if (blockEntity instanceof SoulFurnaceBlockEntity soulFurnace) {
+            return soulFurnace.getAnalogOutputSignal();
+        }
+        return super.getAnalogOutputSignal(blockState, level, pos);
     }
 
     public static int getLightLevel(BlockState state) {

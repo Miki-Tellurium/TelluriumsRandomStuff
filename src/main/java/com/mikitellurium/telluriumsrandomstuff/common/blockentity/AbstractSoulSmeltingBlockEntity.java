@@ -12,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
@@ -183,6 +184,10 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
 
     public int getBucketSlot() {
         return this.bucketSlot;
+    }
+
+    public int getAnalogOutputSignal() {
+        return AbstractContainerMenu.getRedstoneSignalFromContainer(this.getInventory());
     }
 
     @SuppressWarnings("ConstantConditions")

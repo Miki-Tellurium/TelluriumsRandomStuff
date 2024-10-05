@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
+import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulSmeltingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
@@ -94,6 +95,14 @@ public class SoulInfuserBlock extends AbstractFurnaceBlock {
             }
         }
         super.onRemove(blockState, level, pos, newState, isMoving);
+    }
+
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        BlockEntity blockEntity = level.getExistingBlockEntity(pos);
+        if (blockEntity instanceof AbstractSoulSmeltingBlockEntity<?> smeltingBlockEntity) {
+            return smeltingBlockEntity.getAnalogOutputSignal();
+        }
+        return super.getAnalogOutputSignal(blockState, level, pos);
     }
 
 }
