@@ -41,21 +41,13 @@ public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> 
                        float netHeadYaw, float headPitch) {
         ItemStack itemStack = livingEntity.getItemBySlot(EquipmentSlot.HEAD);
         if (itemStack.is(ModItems.LAVA_GOOGLES.get())) {
-            ResourceLocation glassToRender = GOOGLES_NO_COLOR_TEXTURE;
-            float[] rgb = new float[] {1.0f, 1.0f, 1.0f};
             DyeColor dyeColor = LavaGooglesItem.getColor(itemStack);
-            if (dyeColor != null) {
-                rgb = dyeColor.getTextureDiffuseColors();
-                glassToRender = GOOGLES_COLORED_TEXTURE;
-            }
-
-
+            float[] rgb = dyeColor == null ? new float[] {1.0f, 1.0f, 1.0f} : dyeColor.getTextureDiffuseColors();
+            ResourceLocation glassToRender = dyeColor == null ? GOOGLES_NO_COLOR_TEXTURE : GOOGLES_COLORED_TEXTURE;
             poseStack.pushPose();
-
             if (livingEntity instanceof AbstractPiglin || livingEntity instanceof ZombifiedPiglin) {
                 poseStack.scale(1.1f, 1.0f, 1.05f); // Handle piglin larger head
             }
-
             lavaGooglesModel.prepareMobModel(livingEntity, limbSwing, limbSwingAmount, partialTick);
             this.getParentModel().copyPropertiesTo(this.lavaGooglesModel);
             this.lavaGooglesModel.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
