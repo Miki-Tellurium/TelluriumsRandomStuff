@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.client.entity.model;
 import com.mikitellurium.telluriumsrandomstuff.common.entity.SpiritedAllay;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
@@ -27,6 +28,9 @@ public class SpiritedAllayModel extends HierarchicalModel<SpiritedAllay> impleme
     private static final float FLYING_ANIMATION_X_ROT = ((float)Math.PI / 4F);
     private static final float MAX_HAND_HOLDING_ITEM_X_ROT_RAD = -1.134464F;
     private static final float MIN_HAND_HOLDING_ITEM_X_ROT_RAD = (-(float)Math.PI / 3F);
+    private float red = 1.0F;
+    private float green = 1.0F;
+    private float blue = 1.0F;
 
     public SpiritedAllayModel(ModelPart pRoot) {
         super(RenderType::entityTranslucent);
@@ -55,6 +59,20 @@ public class SpiritedAllayModel extends HierarchicalModel<SpiritedAllay> impleme
         partDefinition2.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(16, 14).addBox(0.0F, 1.0F, 0.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5F, 0.0F, 0.6F));
         partDefinition2.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(16, 14).addBox(0.0F, 1.0F, 0.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 0.0F, 0.6F));
         return LayerDefinition.create(meshDefinition, 32, 32);
+    }
+
+    public void setColor(float[] rgb) {
+        this.setColor(rgb[0], rgb[1], rgb[2]);
+    }
+
+    public void setColor(float pR, float pG, float pB) {
+        this.red = pR;
+        this.green = pG;
+        this.blue = pB;
+    }
+
+    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
+        super.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, this.red * pRed, this.green * pGreen, this.blue * pBlue, pAlpha);
     }
 
     @Override
