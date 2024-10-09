@@ -55,7 +55,7 @@ public class SpiritedAllay extends PathfinderMob {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(COLOR_ID, (byte) DyeColor.WHITE.getId());
+        this.entityData.define(COLOR_ID, (byte) DyeColor.LIGHT_BLUE.getId());
     }
 
     @Override
