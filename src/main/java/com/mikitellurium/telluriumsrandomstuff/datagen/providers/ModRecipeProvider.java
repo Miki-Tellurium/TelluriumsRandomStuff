@@ -621,6 +621,16 @@ public class ModRecipeProvider extends RecipeProvider {
 //                .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
 //                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
 //                .save(consumer, modLoc("spirit_bottle"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPIRITED_ECHO_WAND.get(), 1)
+                .pattern(" # ")
+                .pattern(" x#")
+                .pattern("I  ")
+                .define('#', Items.ECHO_SHARD)
+                .define('x', ModItems.SOUL_CLUSTER.get())
+                .define('I', Items.STICK)
+                .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
+                .unlockedBy("has_soul_cluster", has(ModItems.SOUL_CLUSTER.get()))
+                .save(consumer, modLoc("spirited_echo_wand"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

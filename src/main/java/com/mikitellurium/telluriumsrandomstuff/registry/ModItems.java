@@ -157,6 +157,7 @@ public class ModItems {
     public static final RegistryObject<Item> TOTEM_OF_BINDING = registerItem("totem_of_binding", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> SPIRIT_BOTTLE = registerItem("spirit_bottle", () -> new SpiritBottleItem(16, 8192, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> SPIRITED_ALLAY_SPAWN_EGG = registerItem("spirited_allay_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.SPIRITED_ALLAY, 6486015, 4247807, new Item.Properties()));
+    public static final RegistryObject<Item> SPIRITED_ECHO_WAND = registerItem("spirited_echo_wand", () -> new SpiritedEchoWandItem(new Item.Properties()));
 
     // Items of block states used only for rendering purposes
     public static final RegistryObject<Item> SOUL_INFUSER_LIT = registerItem("soul_infuser_lit", () -> new Item(new Item.Properties()));

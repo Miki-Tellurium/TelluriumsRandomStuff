@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:echo_shard"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    },
+    "x": {
+      "item": "telluriumsrandomstuff:soul_cluster"
+    }
+  },
+  "pattern": [
+    " # ",
+    " x#",
+    "I  "
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:spirited_echo_wand"
+  },
+  "show_notification": true
+}

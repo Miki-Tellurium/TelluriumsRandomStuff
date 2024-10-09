@@ -148,6 +148,7 @@ public class ModCreativeTab {
                 event.accept(ModItems.GRAPPLING_HOOK);
                 event.acceptAll(aerodynamics);
                 event.accept(ModItems.SPIRITED_ALLAY_SPAWN_EGG);
+                event.accept(ModItems.SPIRITED_ECHO_WAND);
             }
         }
 
