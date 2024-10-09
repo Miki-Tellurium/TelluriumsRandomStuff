@@ -96,6 +96,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .predicate(modLoc("storage"), 1)
                 .model(this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath() + "_full", modLoc("item/spirit_bottle_full")))
                 .end();
+        this.withExistingParent(ModItems.SPIRITED_ALLAY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private void simpleItem(RegistryObject<Item> item) {

@@ -55,6 +55,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SOUL_COMPACTOR_LIT, "Soul Compactor");
         addItem(ModItems.TOTEM_OF_BINDING, "Totem of Binding");
         addItem(ModItems.SPIRIT_BOTTLE, "Spirit Bottle (WIP)");
+        addItem(ModItems.SPIRITED_ALLAY_SPAWN_EGG, "Spirit Allay Spawn Egg");
 
         translation("item", "lava_googles.tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");

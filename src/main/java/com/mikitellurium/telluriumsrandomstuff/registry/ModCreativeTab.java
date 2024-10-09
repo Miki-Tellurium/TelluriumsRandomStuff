@@ -147,6 +147,7 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.ALCHEMIXER);
                 event.accept(ModItems.GRAPPLING_HOOK);
                 event.acceptAll(aerodynamics);
+                event.accept(ModItems.SPIRITED_ALLAY_SPAWN_EGG);
             }
         }
 
