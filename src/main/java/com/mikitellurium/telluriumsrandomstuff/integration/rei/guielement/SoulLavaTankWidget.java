@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei.guielement;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.GuiFluidRenderer;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.render.GuiFluidRenderer;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import me.shedaniel.math.Dimension;

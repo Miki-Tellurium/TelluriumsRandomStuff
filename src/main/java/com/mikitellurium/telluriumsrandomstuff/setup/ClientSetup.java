@@ -9,7 +9,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.model.SpiritedAllay
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.DummyPlayerRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.SpiritedAllayRenderer;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.*;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageClientTooltip;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageTooltip;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;

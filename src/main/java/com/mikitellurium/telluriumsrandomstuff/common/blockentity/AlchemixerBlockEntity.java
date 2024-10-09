@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AlchemixerMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.AlchemixerMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;

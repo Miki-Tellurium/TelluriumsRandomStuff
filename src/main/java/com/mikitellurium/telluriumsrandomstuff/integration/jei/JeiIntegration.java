@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.*;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;

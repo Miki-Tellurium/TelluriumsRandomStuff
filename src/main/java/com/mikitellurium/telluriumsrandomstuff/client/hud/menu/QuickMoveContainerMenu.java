@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
+package com.mikitellurium.telluriumsrandomstuff.client.hud.menu;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;

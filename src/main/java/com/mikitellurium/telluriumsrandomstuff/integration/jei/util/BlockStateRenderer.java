@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.util;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockRendering;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.render.BlockRendering;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

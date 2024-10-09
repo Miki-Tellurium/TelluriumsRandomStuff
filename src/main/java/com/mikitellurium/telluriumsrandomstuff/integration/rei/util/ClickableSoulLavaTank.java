@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei.util;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AbstractSoulFuelScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.AbstractSoulFuelScreen;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import me.shedaniel.math.Point;
 import me.shedaniel.rei.api.client.registry.screen.ClickArea;

@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei.util;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.render.BlockRendering;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.render.BlockRendering;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.entry.renderer.EntryRenderer;
 import me.shedaniel.rei.api.client.gui.widgets.Tooltip;

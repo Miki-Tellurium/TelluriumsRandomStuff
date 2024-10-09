@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
+package com.mikitellurium.telluriumsrandomstuff.client.hud.menu;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AlchemixerBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModMenuTypes;

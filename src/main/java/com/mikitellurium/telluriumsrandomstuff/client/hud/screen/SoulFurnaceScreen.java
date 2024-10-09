@@ -1,6 +1,6 @@
-package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
+package com.mikitellurium.telluriumsrandomstuff.client.hud.screen;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulFurnaceMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;

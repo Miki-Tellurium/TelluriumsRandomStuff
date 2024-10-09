@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.ExtractorMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.ExtractorMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.ExtractorBlock;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;

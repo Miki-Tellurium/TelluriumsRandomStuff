@@ -1,11 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulCompactorMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulCompactorMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulCompactorBlock;
-import com.mikitellurium.telluriumsrandomstuff.common.block.SoulInfuserBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -20,11 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<CompactingRecipe> implements MenuProvider {
 

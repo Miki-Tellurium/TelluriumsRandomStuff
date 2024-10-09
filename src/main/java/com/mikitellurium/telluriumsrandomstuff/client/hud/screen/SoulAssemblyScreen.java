@@ -1,6 +1,6 @@
-package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
+package com.mikitellurium.telluriumsrandomstuff.client.hud.screen;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulAssemblyMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulAssemblyMenu;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.SoulAssemblyModeC2SPacket;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;

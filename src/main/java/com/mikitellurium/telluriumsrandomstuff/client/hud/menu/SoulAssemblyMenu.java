@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.client.gui.menu;
+package com.mikitellurium.telluriumsrandomstuff.client.hud.menu;
 
 import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulStorage;
 import com.mikitellurium.telluriumsrandomstuff.common.item.SoulStorageItem;
@@ -20,8 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SoulAssemblyMenu extends QuickMoveContainerMenu implements TickingMenu {
 

@@ -1,8 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulAnchorMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulAnchorMenu;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.networking.packets;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.AbstractSoulFuelMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.AbstractSoulFuelMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulFueledBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.lib.ModPacket;
 import net.minecraft.client.Minecraft;

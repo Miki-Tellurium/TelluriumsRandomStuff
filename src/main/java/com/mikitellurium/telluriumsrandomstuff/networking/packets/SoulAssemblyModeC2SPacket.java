@@ -1,10 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.networking.packets;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulAssemblyMenu;
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulAssemblyMenu;
 import com.mikitellurium.telluriumsrandomstuff.lib.ModPacket;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketListener;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;

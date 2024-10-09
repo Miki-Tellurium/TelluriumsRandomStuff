@@ -1,9 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.rei;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.AlchemixerScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulCompactorScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulFurnaceScreen;
-import com.mikitellurium.telluriumsrandomstuff.client.gui.screen.SoulInfuserScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.AlchemixerScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.SoulCompactorScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.SoulFurnaceScreen;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.SoulInfuserScreen;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;

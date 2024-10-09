@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulAssemblyMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulAssemblyMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

@@ -1,6 +1,6 @@
-package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
+package com.mikitellurium.telluriumsrandomstuff.client.hud.screen;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulAnchorMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulAnchorMenu;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;

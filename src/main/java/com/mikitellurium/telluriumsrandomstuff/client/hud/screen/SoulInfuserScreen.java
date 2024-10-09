@@ -1,6 +1,6 @@
-package com.mikitellurium.telluriumsrandomstuff.client.gui.screen;
+package com.mikitellurium.telluriumsrandomstuff.client.hud.screen;
 
-import com.mikitellurium.telluriumsrandomstuff.client.gui.menu.SoulInfuserMenu;
+import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulInfuserMenu;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
