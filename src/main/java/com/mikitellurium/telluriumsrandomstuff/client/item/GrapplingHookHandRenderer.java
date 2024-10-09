@@ -43,7 +43,7 @@ public class GrapplingHookHandRenderer extends BlockEntityWithoutLevelRenderer {
             this.renderHand(poseStack, bufferSource, minecraft.player, arm, packedLight);
         }
     }
-
+    // todo add push/ pop pose calls
     private void renderHand(PoseStack poseStack, MultiBufferSource bufferSource, LocalPlayer player, HumanoidArm arm, int packedLight) {
         boolean isRightArm = arm == HumanoidArm.RIGHT;
         float f = isRightArm ? 1.0F : -1.0F;
