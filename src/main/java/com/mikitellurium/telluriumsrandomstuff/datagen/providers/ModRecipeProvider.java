@@ -622,7 +622,7 @@ public class ModRecipeProvider extends RecipeProvider {
 //                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
 //                .save(consumer, modLoc("spirit_bottle"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPIRITED_ECHO_WAND.get(), 1)
-                .pattern(" # ")
+                .pattern(" ##")
                 .pattern(" x#")
                 .pattern("I  ")
                 .define('#', Items.ECHO_SHARD)
