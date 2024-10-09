@@ -10,8 +10,10 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.render.DummyPlayerR
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.SpiritedAllayRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
+import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookHandRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageClientTooltip;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageTooltip;
+import com.mikitellurium.telluriumsrandomstuff.client.item.SpiritedAllayItemRenderer;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
@@ -29,10 +31,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -56,6 +55,14 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.ITEM_PEDESTAL.get(), ItemPedestalRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerReloadListeners(RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener(GrapplingHookHandRenderer.INSTANCE);
+        TelluriumsRandomStuffMod.LOGGER.info("Registered GrapplingHookHandRenderer instance");
+        event.registerReloadListener(SpiritedAllayItemRenderer.INSTANCE);
+        TelluriumsRandomStuffMod.LOGGER.info("Registered SpiritedAllayItemRenderer instance");
     }
 
     @SubscribeEvent

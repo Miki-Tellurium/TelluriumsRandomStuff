@@ -1,6 +1,5 @@
 package com.mikitellurium.telluriumsrandomstuff.client.item;
 
-import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -12,23 +11,11 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GrapplingHookHandRenderer extends BlockEntityWithoutLevelRenderer {
 
-    public static GrapplingHookHandRenderer INSTANCE;
+    public static final GrapplingHookHandRenderer INSTANCE = new GrapplingHookHandRenderer(Minecraft.getInstance());
     private Minecraft minecraft;
-
-    @SubscribeEvent
-    public static void onResourceListenerReload(RegisterClientReloadListenersEvent event) {
-        INSTANCE = new GrapplingHookHandRenderer(Minecraft.getInstance());
-        event.registerReloadListener(INSTANCE);
-        TelluriumsRandomStuffMod.LOGGER.info("Loaded GrapplingHookHandRenderer instance");
-    }
 
     public GrapplingHookHandRenderer(Minecraft minecraft) {
         super(minecraft.getBlockEntityRenderDispatcher(), minecraft.getEntityModels());
