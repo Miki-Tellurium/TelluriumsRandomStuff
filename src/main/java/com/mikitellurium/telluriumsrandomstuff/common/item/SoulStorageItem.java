@@ -36,16 +36,16 @@ public class SoulStorageItem extends Item {
     public ItemStack getEmptyRemainder() {
         return ItemStack.EMPTY;
     }
-
-    @Override
-    public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
-        return Optional.of(new SoulStorageTooltip(itemStack));
-    }
-
-    @Override
-    public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new SoulStorageCapabilityProvider(this.typesCapacity, this.capacity);
-    }
+    // todo fix cap on server
+//    @Override
+//    public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
+//        return Optional.of(new SoulStorageTooltip(itemStack));
+//    }
+//
+//    @Override
+//    public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+//        return new SoulStorageCapabilityProvider(this.typesCapacity, this.capacity);
+//    }
 
     public static boolean isSoulStorageItem(ItemStack itemStack) {
         return itemStack.getItem() instanceof SoulStorageItem;
