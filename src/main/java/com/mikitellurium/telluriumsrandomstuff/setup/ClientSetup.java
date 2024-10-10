@@ -1,6 +1,8 @@
 package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
+import com.mikitellurium.telluriumsrandomstuff.client.ClientEntityManager;
 import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
@@ -14,6 +16,12 @@ import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookHandRend
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageClientTooltip;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageTooltip;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SpiritedAllayItemRenderer;
+import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.block.CustomBubbleColumnBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.block.SoulAnchorBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
+import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
+import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
@@ -31,15 +39,24 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
+@Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
 
+    public static void registerForgeBusEvents() {
+        MinecraftForge.EVENT_BUS.register(ClientEntityManager.class);
+    }
+
     @SubscribeEvent
-    public static void onClientSetup(FMLClientSetupEvent event) {
+    public static void setup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MenuScreens.register(ModMenuTypes.SOUL_FURNACE.get(), SoulFurnaceScreen::new);
             MenuScreens.register(ModMenuTypes.SOUL_ANCHOR.get(), SoulAnchorScreen::new);
@@ -55,6 +72,13 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.ITEM_PEDESTAL.get(), ItemPedestalRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.GRAPPLING_HOOK.get(), GrapplingHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.DUMMY_PLAYER.get(), DummyPlayerRenderer::new);
+        event.registerEntityRenderer(ModEntities.SPIRITED_ALLAY.get(), SpiritedAllayRenderer::new);
     }
 
     @SubscribeEvent
@@ -136,14 +160,7 @@ public class ClientSetup {
     }
 
     @SubscribeEvent
-    public static void registerEntityRenderer(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.GRAPPLING_HOOK.get(), GrapplingHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.DUMMY_PLAYER.get(), DummyPlayerRenderer::new);
-        event.registerEntityRenderer(ModEntities.SPIRITED_ALLAY.get(), SpiritedAllayRenderer::new);
-    }
-
-    @SubscribeEvent
-    public static void registerModels(EntityRenderersEvent.RegisterLayerDefinitions event) {
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(LavaGooglesModel.LAYER_LOCATION, LavaGooglesModel::createLayerDefinition);
         event.registerLayerDefinition(GrapplingHookModel.LAYER_LOCATION, GrapplingHookModel::createLayerDefinition);
         event.registerLayerDefinition(SpiritedAllayModel.LAYER_LOCATION, SpiritedAllayModel::createLayerDefinition);
@@ -193,7 +210,7 @@ public class ClientSetup {
     }
 
     @SubscribeEvent
-    public static void registerTooltip(RegisterClientTooltipComponentFactoriesEvent event) {
+    public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(SoulStorageTooltip.class, SoulStorageClientTooltip::new);
     }
 

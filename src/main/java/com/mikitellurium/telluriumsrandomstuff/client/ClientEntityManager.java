@@ -127,12 +127,12 @@ public class ClientEntityManager {
         TelluriumsRandomStuffMod.LOGGER.info("Cleared client entities.");
     }
 
-    @SubscribeEvent
-    public static void testTick(TickEvent.LevelTickEvent event) {
-        if (event.level instanceof ClientLevel && event.phase == TickEvent.Phase.START) {
-            //ENTITIES.forEach(((entityType, entity) -> entity.tick()));
-        }
-    }
+//    @SubscribeEvent
+//    public static void testTick(TickEvent.LevelTickEvent event) {
+//        if (event.level instanceof ClientLevel && event.phase == TickEvent.Phase.START) {
+//            //ENTITIES.forEach(((entityType, entity) -> entity.tick()));
+//        }
+//    }
 
     @SubscribeEvent
     public static void onClientLevelLoad(LevelEvent.Load event) {
