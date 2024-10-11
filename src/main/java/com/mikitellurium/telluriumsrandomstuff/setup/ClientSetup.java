@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
 import com.mikitellurium.telluriumsrandomstuff.client.ClientEntityManager;
 import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
@@ -15,13 +14,6 @@ import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookHandRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageClientTooltip;
 import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageTooltip;
-import com.mikitellurium.telluriumsrandomstuff.client.item.SpiritedAllayItemRenderer;
-import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
-import com.mikitellurium.telluriumsrandomstuff.common.block.CustomBubbleColumnBlock;
-import com.mikitellurium.telluriumsrandomstuff.common.block.SoulAnchorBlock;
-import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
-import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
-import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
@@ -42,7 +34,6 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -85,8 +76,6 @@ public class ClientSetup {
     public static void registerReloadListeners(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener(GrapplingHookHandRenderer.INSTANCE);
         TelluriumsRandomStuffMod.LOGGER.info("Registered GrapplingHookHandRenderer instance");
-        event.registerReloadListener(SpiritedAllayItemRenderer.INSTANCE);
-        TelluriumsRandomStuffMod.LOGGER.info("Registered SpiritedAllayItemRenderer instance");
     }
 
     @SubscribeEvent

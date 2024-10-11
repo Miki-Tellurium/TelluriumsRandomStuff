@@ -98,6 +98,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .end();
         this.withExistingParent(ModItems.SPIRITED_ALLAY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         this.simpleItem(ModItems.SPIRITED_ECHO_WAND);
+        this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath(), modLoc("item/spirited_allay_light_blue_item"));
     }
 
     private void simpleItem(RegistryObject<Item> item) {
