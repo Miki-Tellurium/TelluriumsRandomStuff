@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.setup;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.client.ClientEntityManager;
 import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
@@ -12,8 +11,6 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHoo
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.SpiritedAllayRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookHandRenderer;
-import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageClientTooltip;
-import com.mikitellurium.telluriumsrandomstuff.client.item.SoulStorageTooltip;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
@@ -32,8 +29,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -43,7 +42,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ClientSetup {
 
     public static void registerForgeBusEvents() {
-        MinecraftForge.EVENT_BUS.register(ClientEntityManager.class);
     }
 
     @SubscribeEvent
@@ -196,11 +194,6 @@ public class ClientSetup {
         } catch (Exception e) {
             TelluriumsRandomStuffMod.LOGGER.error("Could not add layer to {}", entityType.toShortString());
         }
-    }
-
-    @SubscribeEvent
-    public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
-        event.register(SoulStorageTooltip.class, SoulStorageClientTooltip::new);
     }
 
 }

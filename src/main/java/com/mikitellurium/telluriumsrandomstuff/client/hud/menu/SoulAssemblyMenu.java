@@ -1,6 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.hud.menu;
 
-import com.mikitellurium.telluriumsrandomstuff.common.capability.SoulStorage;
+import com.mikitellurium.telluriumsrandomstuff.test.bin.SoulStorage;
 import com.mikitellurium.telluriumsrandomstuff.common.item.SoulStorageItem;
 import com.mikitellurium.telluriumsrandomstuff.lib.TickingMenu;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
@@ -20,6 +20,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.OptionalInt;
 
 public class SoulAssemblyMenu extends QuickMoveContainerMenu implements TickingMenu {
 
@@ -71,34 +73,21 @@ public class SoulAssemblyMenu extends QuickMoveContainerMenu implements TickingM
         if (mode == Mode.ASSEMBLE) {
 
         } else {
-            ItemStack itemStack = itemHandler.getStackInSlot(DISASSEMBLE_SLOT);
-            if (!itemStack.isEmpty() && !itemStack.is(ModItems.SMALL_SOUL_FRAGMENT.get())) {
-                SoulStorage.performAction(itemStack, (storage) -> {
-                    if (!storage.isEmpty()) {
-                        EntityType<?> entityType = storage.getRandom(random);
 
-                        
-
-                        if (storage.isEmpty()) {
-                            itemHandler.setStackInSlot(DISASSEMBLE_SLOT, ItemStack.EMPTY);
-                        }
-                    }
-                });
-            }
         }
     }
 
-    private static int findAvailableSlot(ItemStackHandler itemHandler, EntityType<?> entityType) {
+    private static OptionalInt findAvailableSlot(ItemStackHandler itemHandler, EntityType<?> entityType) {
         for (int i = 0; i < itemHandler.getSlots() - 1; i++) {
             ItemStack itemStack = itemHandler.getStackInSlot(i);
             if (itemStack.isEmpty()) {
-                return i;
+                return OptionalInt.of(i);
             } else if (itemStack.is(ModItems.SMALL_SOUL_FRAGMENT.get()) && itemStack.getCount() < itemStack.getMaxStackSize() &&
                     SoulStorage.evaluate(itemStack, (storage) -> storage.contains(entityType))) {
-                return i;
+                return OptionalInt.of(i);
             }
         }
-        return -1;
+        return OptionalInt.empty();
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauld
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
-import com.mikitellurium.telluriumsrandomstuff.common.command.SoulStorageCommand;
+import com.mikitellurium.telluriumsrandomstuff.test.bin.SoulStorageCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
