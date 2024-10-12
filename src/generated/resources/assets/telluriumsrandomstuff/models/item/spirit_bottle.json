@@ -2,7 +2,61 @@
   "parent": "minecraft:item/generated",
   "overrides": [
     {
-      "model": "telluriumsrandomstuff:item/spirit_bottle_full",
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_1",
+      "predicate": {
+        "telluriumsrandomstuff:storage": 0.1
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_2",
+      "predicate": {
+        "telluriumsrandomstuff:storage": 0.2
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_3",
+      "predicate": {
+        "telluriumsrandomstuff:storage": 0.3
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_4",
+      "predicate": {
+        "telluriumsrandomstuff:storage": 0.4
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_5",
+      "predicate": {
+        "telluriumsrandomstuff:storage": 0.5
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_6",
+      "predicate": {
+        "telluriumsrandomstuff:storage": 0.6
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_7",
+      "predicate": {
+        "telluriumsrandomstuff:storage": 0.7
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_8",
+      "predicate": {
+        "telluriumsrandomstuff:storage": 0.8
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_9",
+      "predicate": {
+        "telluriumsrandomstuff:storage": 0.9
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirit_bottle_full_10",
       "predicate": {
         "telluriumsrandomstuff:storage": 1.0
       }

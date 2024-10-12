@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.common.capability.GrapplingHookCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.common.item.SpiritBottleItem;
 import com.mikitellurium.telluriumsrandomstuff.test.bin.SoulStorage;
 import com.mikitellurium.telluriumsrandomstuff.test.bin.SoulStorageCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
@@ -33,7 +34,13 @@ public class ModItemProperties {
                     return livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F;
                 });
         ItemProperties.register(ModItems.SPIRIT_BOTTLE.get(), FastLoc.modLoc("storage"),
-                (itemStack, level, livingEntity, seed) -> itemStack.getCount() > 0 ? 1 : 0);
+                (itemStack, level, livingEntity, seed) -> {
+                    SpiritBottleItem item = (SpiritBottleItem) itemStack.getItem();
+                    CompoundTag tag = itemStack.getOrCreateTag();
+                    float amount = tag.contains("StoredSouls", Tag.TAG_INT) ? tag.getInt("StoredSouls") : 0;
+                    if (amount <= 0) return 0;
+                    return amount / item.getCapacity();
+                });
         ItemProperties.register(ModItems.SPIRITED_ALLAY_ITEM.get(), FastLoc.modLoc("color"),
                 (itemStack, level, livingEntity, seed) -> {
                     CompoundTag tag = itemStack.getOrCreateTag();

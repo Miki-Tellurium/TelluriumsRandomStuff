@@ -67,23 +67,6 @@ public class SpiritBottleItem extends Item {
     }
 
     @Override
-    public boolean isBarVisible(ItemStack itemStack) {
-        return true;
-    }
-
-    @Override
-    public int getBarWidth(ItemStack itemStack) {
-        int amount = getStoredSouls(itemStack);
-        if (amount <= 0) return 0;
-        return Math.min((int) (13.0F * amount / this.capacity) + 1, 13);
-    }
-
-    @Override
-    public int getBarColor(ItemStack itemStack) {
-        return 25855;
-    }
-
-    @Override
     public void verifyTagAfterLoad(CompoundTag tag) {
         super.verifyTagAfterLoad(tag);
         if (tag.contains(STORED_TAG)) {

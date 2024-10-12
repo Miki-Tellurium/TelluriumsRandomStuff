@@ -92,21 +92,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.withExistingParent(ModItems.SOUL_COMPACTOR_LIT.getId().getPath(), modLoc("block/soul_compactor_on"));
         this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
         this.simpleItem(ModItems.TOTEM_OF_BINDING);
-        this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath(), modLoc("item/spirit_bottle"))
-                .override()
-                .predicate(modLoc("storage"), 1)
-                .model(this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath() + "_full", modLoc("item/spirit_bottle_full")))
-                .end();
         this.withExistingParent(ModItems.SPIRITED_ALLAY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         this.simpleItem(ModItems.SPIRITED_ECHO_WAND);
         ItemModelBuilder builder = this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath(), modLoc("item/spirited_allay_item_light_blue"));
         for (DyeColor dyeColor : DyeColor.values()) {
             this.spiritedAllayColor(builder, dyeColor);
         }
+        ItemModelBuilder builder1 = this.simpleItem(ModItems.SPIRIT_BOTTLE);
+        for (int i = 1; i < 11; i++) {
+            builder1.override()
+                    .predicate(modLoc("storage"), (float) i / 10)
+                    .model(this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath() + "_full_" + i, modLoc("item/spirit_bottle_full_" + i)))
+                    .end();
+        }
     }
 
-    private void simpleItem(RegistryObject<Item> item) {
-        this.withExistingParent(item.getId().getPath(), mcLoc("item/generated"))
+    private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
+        return this.withExistingParent(item.getId().getPath(), mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/" + item.getId().getPath()));
     }
 
