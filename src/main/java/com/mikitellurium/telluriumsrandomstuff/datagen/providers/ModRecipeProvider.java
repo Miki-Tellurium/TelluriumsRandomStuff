@@ -103,6 +103,12 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     private void buildCompactingRecipes(Consumer<FinishedRecipe> consumer) {
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(ModItems.SMALL_SOUL_FRAGMENT.get(), 8)),
+                        ModItems.SOUL_FRAGMENT.get(), 1, 500)
+                .save(consumer, modLoc("soul_fragment_from_compacting"));
+        CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(ModItems.SOUL_FRAGMENT.get(), 8)),
+                        ModItems.SOUL_CLUSTER.get(), 1, 1000)
+                .save(consumer, modLoc("soul_cluster_from_compacting"));
         CompactingRecipeBuilder.addRecipe(Ingredient.of(new ItemStack(Blocks.STONE, 8)),
                         Blocks.DEEPSLATE, 4, 10)
                 .save(consumer, modLoc("deepslate_from_compacting"));
@@ -612,15 +618,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModItems.SPIRITED_IRON_INGOT.get())
                 .unlockedBy("has_spirited_iron_ingot", has(ModItems.SPIRITED_IRON_INGOT.get()))
                 .save(consumer, modLoc("spirited_iron_block"));
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPIRIT_BOTTLE.get(), 1)
-//                .pattern(" # ")
-//                .pattern("#x#")
-//                .pattern(" # ")
-//                .define('#', Items.ECHO_SHARD)
-//                .define('x', Items.GLASS_BOTTLE)
-//                .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
-//                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
-//                .save(consumer, modLoc("spirit_bottle"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPIRIT_BOTTLE.get(), 1)
+                .pattern(" # ")
+                .pattern("#x#")
+                .pattern(" # ")
+                .define('#', Items.ECHO_SHARD)
+                .define('x', Items.GLASS_BOTTLE)
+                .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
+                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
+                .save(consumer, modLoc("spirit_bottle"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPIRITED_ECHO_WAND.get(), 1)
                 .pattern(" ##")
                 .pattern(" x#")
@@ -657,14 +663,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_soul_sand", has(Blocks.SOUL_SAND))
                 .unlockedBy("has_small_soul_fragment", has(ModItems.SMALL_SOUL_FRAGMENT.get()))
                 .save(consumer, modLoc("infused_soul_sand"));
-//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SMALL_SOUL_FRAGMENT.get(), 8)
-//                .requires(ModItems.SOUL_FRAGMENT.get())
-//                .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
-//                .save(consumer, modLoc("small_soul_fragment_from_soul_fragment"));
-//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SOUL_FRAGMENT.get(), 8)
-//                .requires(ModItems.SOUL_CLUSTER.get())
-//                .unlockedBy("has_soul_cluster", has(ModItems.SOUL_CLUSTER.get()))
-//                .save(consumer, modLoc("soul_fragment_from_soul_cluster"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SMALL_SOUL_FRAGMENT.get(), 8)
+                .requires(ModItems.SOUL_FRAGMENT.get())
+                .unlockedBy("has_soul_fragment", has(ModItems.SOUL_FRAGMENT.get()))
+                .save(consumer, modLoc("small_soul_fragment_from_soul_fragment"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SOUL_FRAGMENT.get(), 8)
+                .requires(ModItems.SOUL_CLUSTER.get())
+                .unlockedBy("has_soul_cluster", has(ModItems.SOUL_CLUSTER.get()))
+                .save(consumer, modLoc("soul_fragment_from_soul_cluster"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SPIRITED_IRON_INGOT.get(), 9)
                 .requires(ModBlocks.SPIRITED_IRON_BLOCK.get())
                 .unlockedBy("has_spirited_iron_block", has(ModBlocks.SPIRITED_IRON_BLOCK.get()))
