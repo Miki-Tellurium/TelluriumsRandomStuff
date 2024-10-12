@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "telluriumsrandomstuff:item/spirited_allay_item_brown"
+  }
+}

@@ -5,7 +5,10 @@ import com.mikitellurium.telluriumsrandomstuff.test.bin.SoulStorage;
 import com.mikitellurium.telluriumsrandomstuff.test.bin.SoulStorageCapabilityProvider;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.concurrent.atomic.AtomicReference;
@@ -31,6 +34,17 @@ public class ModItemProperties {
                 });
         ItemProperties.register(ModItems.SPIRIT_BOTTLE.get(), FastLoc.modLoc("storage"),
                 (itemStack, level, livingEntity, seed) -> itemStack.getCount() > 0 ? 1 : 0);
+        ItemProperties.register(ModItems.SPIRITED_ALLAY_ITEM.get(), FastLoc.modLoc("color"),
+                (itemStack, level, livingEntity, seed) -> {
+                    CompoundTag tag = itemStack.getOrCreateTag();
+                    if (tag.contains("SavedEntity", Tag.TAG_COMPOUND)) {
+                        CompoundTag entityTag = tag.getCompound("SavedEntity");
+                        if (entityTag.contains("Color", Tag.TAG_BYTE)) {
+                            return entityTag.getByte("Color");
+                        }
+                    }
+                    return DyeColor.LIGHT_BLUE.getId();
+                });
     }
 
 }

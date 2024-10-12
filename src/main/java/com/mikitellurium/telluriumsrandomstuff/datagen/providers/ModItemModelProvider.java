@@ -6,6 +6,7 @@ import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -98,7 +99,10 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .end();
         this.withExistingParent(ModItems.SPIRITED_ALLAY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         this.simpleItem(ModItems.SPIRITED_ECHO_WAND);
-        this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath(), modLoc("item/spirited_allay_light_blue_item"));
+        ItemModelBuilder builder = this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath(), modLoc("item/spirited_allay_item_light_blue"));
+        for (DyeColor dyeColor : DyeColor.values()) {
+            this.spiritedAllayColor(builder, dyeColor);
+        }
     }
 
     private void simpleItem(RegistryObject<Item> item) {
@@ -126,6 +130,14 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer0", modLoc("item/" + overlay + "1"))
                 .texture("layer1", modLoc("item/" + overlay + "2"))
                 .texture("layer2", modLoc("item/" + handle));
+    }
+
+    private void spiritedAllayColor(ItemModelBuilder builder, DyeColor color) {
+        String name = color.getName();
+        builder.override()
+                .predicate(modLoc("color"), color.getId())
+                .model(this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath() + "_" + name, modLoc("item/spirited_allay_item_" + name)))
+                .end();
     }
 
 //    private void trimmableArmor(RegistryObject<Item> armor) {

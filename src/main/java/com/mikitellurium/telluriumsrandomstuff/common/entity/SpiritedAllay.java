@@ -6,21 +6,38 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.Nullable;
 
 public class SpiritedAllay extends PathfinderMob {
 
     private static final EntityDataAccessor<Byte> COLOR_ID = SynchedEntityData.defineId(SpiritedAllay.class, EntityDataSerializers.BYTE);
+    private static final String COLOR_TAG = "Color";
 
     public SpiritedAllay(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
+    }
+
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType,
+                                        @Nullable SpawnGroupData spawnData, @Nullable CompoundTag tag) {
+        if (tag != null && tag.contains(COLOR_TAG)) {
+            DyeColor color = DyeColor.byId(tag.getByte(COLOR_TAG));
+            this.setColor(color);
+        }
+        return super.finalizeSpawn(level, difficulty, spawnType, spawnData, tag);
     }
 
     @Override
@@ -61,13 +78,13 @@ public class SpiritedAllay extends PathfinderMob {
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        tag.putByte("Color", (byte)this.getColor().getId());
+        tag.putByte(COLOR_TAG, (byte)this.getColor().getId());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        this.setColor(DyeColor.byId(tag.getByte("Color")));
+        this.setColor(DyeColor.byId(tag.getByte(COLOR_TAG)));
     }
 
 }

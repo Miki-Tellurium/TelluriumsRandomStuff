@@ -1,6 +1,104 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_white",
+      "predicate": {
+        "telluriumsrandomstuff:color": 0.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_orange",
+      "predicate": {
+        "telluriumsrandomstuff:color": 1.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_magenta",
+      "predicate": {
+        "telluriumsrandomstuff:color": 2.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_light_blue",
+      "predicate": {
+        "telluriumsrandomstuff:color": 3.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_yellow",
+      "predicate": {
+        "telluriumsrandomstuff:color": 4.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_lime",
+      "predicate": {
+        "telluriumsrandomstuff:color": 5.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_pink",
+      "predicate": {
+        "telluriumsrandomstuff:color": 6.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_gray",
+      "predicate": {
+        "telluriumsrandomstuff:color": 7.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_light_gray",
+      "predicate": {
+        "telluriumsrandomstuff:color": 8.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_cyan",
+      "predicate": {
+        "telluriumsrandomstuff:color": 9.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_purple",
+      "predicate": {
+        "telluriumsrandomstuff:color": 10.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_blue",
+      "predicate": {
+        "telluriumsrandomstuff:color": 11.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_brown",
+      "predicate": {
+        "telluriumsrandomstuff:color": 12.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_green",
+      "predicate": {
+        "telluriumsrandomstuff:color": 13.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_red",
+      "predicate": {
+        "telluriumsrandomstuff:color": 14.0
+      }
+    },
+    {
+      "model": "telluriumsrandomstuff:item/spirited_allay_item_black",
+      "predicate": {
+        "telluriumsrandomstuff:color": 15.0
+      }
+    }
+  ],
   "textures": {
-    "layer0": "telluriumsrandomstuff:item/spirited_allay_light_blue_item"
+    "layer0": "telluriumsrandomstuff:item/spirited_allay_item_light_blue"
   }
 }
