@@ -1,12 +1,14 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.test.KeyEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
@@ -38,8 +40,7 @@ public class SpiritBottleItem extends Item {
     public boolean overrideStackedOnOther(ItemStack bottleStack, Slot slot, ClickAction action, Player player) {
         if (bottleStack.getCount() != 1) return false;
         ItemStack itemStack = slot.getItem();
-        if (!SoulStorageItem.isSoulStorageItem(slot.getItem())) return false;
-        if (action != ClickAction.PRIMARY) {
+        if (action == ClickAction.PRIMARY && SoulStorageItem.isSoulStorageItem(slot.getItem())) {
             SoulStorageItem soulStorage = (SoulStorageItem) itemStack.getItem();
             int count = itemStack.getCount();
             for (int i = 0; i < itemStack.getCount(); i++) {
@@ -54,16 +55,29 @@ public class SpiritBottleItem extends Item {
             }
             itemStack.setCount(count);
             return true;
-        } else {
-
+        } else if (action == ClickAction.SECONDARY && itemStack.is(ModItems.SMALL_SOUL_FRAGMENT.get())) {
+            if (itemStack.getCount() < itemStack.getMaxStackSize()) {
+            int toRemove = itemStack.getMaxStackSize() - itemStack.getCount();
+            int amount = removeSouls(bottleStack, toRemove, false);
+            itemStack.setCount(itemStack.getCount() + amount);
+            return true;
+            }
+        } else if (action == ClickAction.SECONDARY && itemStack.isEmpty()) {
+            int amount = removeSouls(bottleStack, 64, false);
+            slot.set(new ItemStack(ModItems.SMALL_SOUL_FRAGMENT.get(), amount));
+            return true;
         }
         return false;
     }
 
     @Override
+    public boolean overrideOtherStackedOnMe(ItemStack bottleStack, ItemStack itemStack, Slot slot, ClickAction clickAction, Player player, SlotAccess slotAccess) {
+        return super.overrideOtherStackedOnMe(bottleStack, itemStack, slot, clickAction, player, slotAccess);
+    }
+
+    @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag isAdvanced) {
-        Component component = Component.literal(getStoredSouls(itemStack) + "/" + this.capacity).withStyle(ChatFormatting.GRAY);
-        components.add(component);
+        components.add(Component.literal(getStoredSouls(itemStack) + "/" + this.capacity).withStyle(ChatFormatting.GRAY));
     }
 
     @Override
