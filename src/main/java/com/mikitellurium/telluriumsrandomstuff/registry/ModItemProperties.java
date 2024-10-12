@@ -39,7 +39,7 @@ public class ModItemProperties {
                     CompoundTag tag = itemStack.getOrCreateTag();
                     float amount = tag.contains("StoredSouls", Tag.TAG_INT) ? tag.getInt("StoredSouls") : 0;
                     if (amount <= 0) return 0;
-                    return amount / item.getCapacity();
+                    return (amount / item.getCapacity()) + 0.1F;
                 });
         ItemProperties.register(ModItems.SPIRITED_ALLAY_ITEM.get(), FastLoc.modLoc("color"),
                 (itemStack, level, livingEntity, seed) -> {
