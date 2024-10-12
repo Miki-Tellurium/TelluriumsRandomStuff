@@ -59,7 +59,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SPIRITED_ECHO_WAND, "Spirited Echo Wand");
         addItem(ModItems.SPIRITED_ALLAY_ITEM, "Spirited Allay");
 
-        translation("item", "lava_googles.tooltip.color", "Color");
+        translation("item", "tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");
         translation("item", "mixed_potion.name", "Mixed Potion");
         translation("item", "mixed_splash_potion.name", "Mixed Splash Potion");

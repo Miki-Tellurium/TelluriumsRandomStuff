@@ -68,7 +68,7 @@ public class SpiritedAllayItem extends Item {
         }
         DyeColor dyeColor = getColor(itemStack);
         MutableComponent colorString = Component.literal(dyeColor.getName()).withStyle((style) -> style.withColor(dyeColor.getTextColor()));
-        components.add(Component.translatable("item.telluriumsrandomstuff.lava_googles.tooltip.color").append(": ").append(colorString));
+        components.add(Component.translatable("item.telluriumsrandomstuff.tooltip.color").append(": ").append(colorString));
     }
 
     public static DyeColor getColor(ItemStack itemStack) {

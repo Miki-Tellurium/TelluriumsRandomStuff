@@ -38,7 +38,7 @@ import java.util.function.Consumer;
 public class LavaGooglesItem extends Item implements Equipable, Vanishable {
 
     public static ResourceLocation OVERLAY_TEXTURE = FastLoc.modLoc("textures/misc/lava_googles_overlay.png");
-    public static final String TAG_COLOR = "color";
+    private static final String COLOR_TAG = "color";
 
     public LavaGooglesItem() {
         super(new Item.Properties()
@@ -78,15 +78,13 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
                                 TooltipFlag isAdvanced) {
         DyeColor dyeColor = getColor(itemStack);
         if (dyeColor != null) {
-            MutableComponent colorString = Component.literal(dyeColor.getName())
-                    .withStyle((style -> style.withColor(dyeColor.getTextColor())));
-            components.add(Component.translatable("item.telluriumsrandomstuff.lava_googles.tooltip.color")
-                    .append(": ").append(colorString));
+            MutableComponent colorString = Component.literal(dyeColor.getName()).withStyle((style) -> style.withColor(dyeColor.getTextColor()));
+            components.add(Component.translatable("item.telluriumsrandomstuff.tooltip.color").append(": ").append(colorString));
         }
     }
 
     public static ItemStack setColor(ItemStack itemStack, DyeColor dyeColor) {
-        itemStack.getOrCreateTag().putString(TAG_COLOR, dyeColor.getSerializedName());
+        itemStack.getOrCreateTag().putString(COLOR_TAG, dyeColor.getSerializedName());
         return itemStack;
     }
 
@@ -96,9 +94,9 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
 
     public static DyeColor getColor(ItemStack itemStack) {
         CompoundTag tag = itemStack.getTag();
-        if (tag != null && tag.contains(TAG_COLOR)) {
-            String colorName = tag.getString(TAG_COLOR);
-            return DyeColor.byName(colorName, DyeColor.byId(tag.getInt(TAG_COLOR)));
+        if (tag != null && tag.contains(COLOR_TAG)) {
+            String colorName = tag.getString(COLOR_TAG);
+            return DyeColor.byName(colorName, DyeColor.byId(tag.getInt(COLOR_TAG)));
         } else {
             return null;
         }
@@ -114,8 +112,7 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
                 if (player.getItemBySlot(EquipmentSlot.HEAD).is(stack.getItem()) && !player.isSpectator() && isFirstPerson) {
                     GuiGraphics graphics = new GuiGraphics(minecraft, minecraft.renderBuffers().bufferSource());
                     RenderSystem.enableBlend();
-                    graphics.blit(OVERLAY_TEXTURE, 0, 0, -90, 0.0F, 0.0F,
-                            width, height, width, height);
+                    graphics.blit(OVERLAY_TEXTURE, 0, 0, -90, 0.0F, 0.0F, width, height, width, height);
                     RenderSystem.disableBlend();
                     graphics.flush();
                 }
