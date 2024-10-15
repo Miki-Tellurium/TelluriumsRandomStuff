@@ -7,13 +7,20 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.common.Mod;
@@ -41,28 +48,42 @@ public class SpiritBottleItem extends Item {
         if (bottleStack.getCount() != 1) return false;
         ItemStack itemStack = slot.getItem();
         if (action == ClickAction.PRIMARY && SoulStorageItem.isSoulStorageItem(slot.getItem())) {
-            ItemStack returnStack = fillBottle(bottleStack, itemStack);
-            slot.set(returnStack);
+            ItemStack remainderStack = fillBottle(bottleStack, itemStack);
+            if (!ItemStack.matches(itemStack, remainderStack)) {
+                slot.set(remainderStack);
+                this.playFillSound(player);
+            }
             return true;
         } else if (action == ClickAction.SECONDARY && itemStack.is(ModItems.SMALL_SOUL_FRAGMENT.get())) {
             if (itemStack.getCount() < itemStack.getMaxStackSize()) {
-            int toRemove = itemStack.getMaxStackSize() - itemStack.getCount();
-            int amount = removeSouls(bottleStack, toRemove, false);
-            itemStack.setCount(itemStack.getCount() + amount);
-            return true;
+                int toRemove = itemStack.getMaxStackSize() - itemStack.getCount();
+                int amount = removeSouls(bottleStack, toRemove, false);
+                if (amount > 0) {
+                    itemStack.setCount(itemStack.getCount() + amount);
+                    this.playEmptySound(player);
+                }
+                return true;
             }
         } else if (action == ClickAction.SECONDARY && itemStack.isEmpty()) {
             int amount = removeSouls(bottleStack, 64, false);
-            slot.set(new ItemStack(ModItems.SMALL_SOUL_FRAGMENT.get(), amount));
-            return true;
+            if (amount > 0) {
+                slot.set(new ItemStack(ModItems.SMALL_SOUL_FRAGMENT.get(), amount));
+                this.playEmptySound(player);
+                return true;
+            }
+            return false;
         }
         return false;
     }
 
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack bottleStack, ItemStack itemStack, Slot slot, ClickAction action, Player player, SlotAccess slotAccess) {
-        if (SoulStorageItem.isSoulStorageItem(itemStack) && action == ClickAction.PRIMARY) {
-            fillBottle(bottleStack, itemStack);
+        if (action == ClickAction.PRIMARY && SoulStorageItem.isSoulStorageItem(itemStack)) {
+            ItemStack remainderStack = fillBottle(bottleStack, itemStack);
+            if (!ItemStack.matches(itemStack, remainderStack)) {
+                slotAccess.set(remainderStack);
+                this.playFillSound(player);
+            }
             return true;
         }
         return false;
@@ -86,6 +107,15 @@ public class SpiritBottleItem extends Item {
         }
     }
 
+    private void playFillSound(Entity entity) {
+        entity.playSound(SoundEvents.BOTTLE_FILL, 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
+    }
+
+    private void playEmptySound(Entity entity) {
+        entity.playSound(SoundEvents.BOTTLE_EMPTY, 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
+    }
+
+    /* Return the remainder stack */
     private static ItemStack fillBottle(ItemStack bottleStack, ItemStack soulStack) {
         SoulStorageItem soulStorage = (SoulStorageItem) soulStack.getItem();
         int count = soulStack.getCount();
@@ -99,8 +129,7 @@ public class SpiritBottleItem extends Item {
                 break;
             }
         }
-        soulStack.setCount(count);
-        return soulStack;
+        return soulStack.copyWithCount(count);
     }
 
     /* Return the amount added */
