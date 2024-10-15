@@ -155,7 +155,7 @@ public class ModItems {
     public static final RegistryObject<Item> SPIRITED_IRON_CHESTPLATE = registerItem("spirited_iron_chestplate", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_IRON_HELMET = registerItem("spirited_iron_helmet", () -> new ArmorItem(ModArmorMaterials.SPIRITED_IRON, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> TOTEM_OF_BINDING = registerItem("totem_of_binding", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> SPIRIT_BOTTLE = registerItem("spirit_bottle", () -> new SpiritBottleItem(16384, new Item.Properties()));
+    public static final RegistryObject<Item> SPIRIT_BOTTLE = registerItem("spirit_bottle", () -> new SpiritBottleItem(20000, new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_ALLAY_SPAWN_EGG = registerItem("spirited_allay_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.SPIRITED_ALLAY, 6486015, 4247807, new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_ECHO_WAND = registerItem("spirited_echo_wand", () -> new SpiritedEchoWandItem(new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_ALLAY_ITEM = registerItem("spirited_allay_item", () -> new SpiritedAllayItem(new Item.Properties()));
