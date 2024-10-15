@@ -41,19 +41,8 @@ public class SpiritBottleItem extends Item {
         if (bottleStack.getCount() != 1) return false;
         ItemStack itemStack = slot.getItem();
         if (action == ClickAction.PRIMARY && SoulStorageItem.isSoulStorageItem(slot.getItem())) {
-            SoulStorageItem soulStorage = (SoulStorageItem) itemStack.getItem();
-            int count = itemStack.getCount();
-            for (int i = 0; i < itemStack.getCount(); i++) {
-                int soulsForUnit = soulStorage.getSoulsForUnit();
-                int stored = addSouls(bottleStack, soulStorage.getSoulsForUnit(), true);
-                if (stored == soulsForUnit) {
-                    addSouls(bottleStack, soulStorage.getSoulsForUnit(), false);
-                    count--;
-                } else {
-                    break;
-                }
-            }
-            itemStack.setCount(count);
+            ItemStack returnStack = fillBottle(bottleStack, itemStack);
+            slot.set(returnStack);
             return true;
         } else if (action == ClickAction.SECONDARY && itemStack.is(ModItems.SMALL_SOUL_FRAGMENT.get())) {
             if (itemStack.getCount() < itemStack.getMaxStackSize()) {
@@ -71,8 +60,12 @@ public class SpiritBottleItem extends Item {
     }
 
     @Override
-    public boolean overrideOtherStackedOnMe(ItemStack bottleStack, ItemStack itemStack, Slot slot, ClickAction clickAction, Player player, SlotAccess slotAccess) {
-        return super.overrideOtherStackedOnMe(bottleStack, itemStack, slot, clickAction, player, slotAccess);
+    public boolean overrideOtherStackedOnMe(ItemStack bottleStack, ItemStack itemStack, Slot slot, ClickAction action, Player player, SlotAccess slotAccess) {
+        if (SoulStorageItem.isSoulStorageItem(itemStack) && action == ClickAction.PRIMARY) {
+            fillBottle(bottleStack, itemStack);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -91,6 +84,23 @@ public class SpiritBottleItem extends Item {
                 tag.putInt(STORED_TAG, Math.min(stored, this.capacity));
             }
         }
+    }
+
+    private static ItemStack fillBottle(ItemStack bottleStack, ItemStack soulStack) {
+        SoulStorageItem soulStorage = (SoulStorageItem) soulStack.getItem();
+        int count = soulStack.getCount();
+        for (int i = 0; i < soulStack.getCount(); i++) {
+            int soulsForUnit = soulStorage.getSoulsForUnit();
+            int stored = addSouls(bottleStack, soulStorage.getSoulsForUnit(), true);
+            if (stored == soulsForUnit) {
+                addSouls(bottleStack, soulStorage.getSoulsForUnit(), false);
+                count--;
+            } else {
+                break;
+            }
+        }
+        soulStack.setCount(count);
+        return soulStack;
     }
 
     /* Return the amount added */
