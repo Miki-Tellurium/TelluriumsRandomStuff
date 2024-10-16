@@ -65,6 +65,7 @@ public class ModTranslationProvider extends LanguageProvider {
         translation("item", "mixed_potion.name", "Mixed Potion");
         translation("item", "mixed_splash_potion.name", "Mixed Splash Potion");
         translation("item", "mixed_lingering_potion.name", "Mixed Lingering Potion");
+        translation("item", "soul_storage.souls", "Souls");
         // Blocks
         addBlock(ModBlocks.GRATE_MAGMA_BLOCK, "Magma Block with Grate");
         addBlock(ModBlocks.GRATE_SOUL_SAND, "Soul Sand with Grate");

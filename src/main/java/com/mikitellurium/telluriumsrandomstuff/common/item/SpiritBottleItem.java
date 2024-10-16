@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
@@ -91,7 +92,9 @@ public class SpiritBottleItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag isAdvanced) {
-        components.add(Component.literal(getStoredSouls(itemStack) + "/" + this.capacity).withStyle(ChatFormatting.GRAY));
+        MutableComponent content = Component.literal(getStoredSouls(itemStack) + "/" + this.capacity);
+        Component text = Component.translatable("item.telluriumsrandomstuff.soul_storage.souls");
+        components.add(content.append(" ").append(text).withStyle(ChatFormatting.GRAY));
     }
 
     @Override
