@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:echo_shard"
+    },
+    "I": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "x": {
+      "item": "telluriumsrandomstuff:soul_cluster"
+    }
+  },
+  "pattern": [
+    "I#I",
+    "#x#",
+    "I#I"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:resonance_crystal_light_blue"
+  },
+  "show_notification": true
+}

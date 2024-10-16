@@ -16,6 +16,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class ModItemModelProvider extends ItemModelProvider {
 
@@ -95,9 +97,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.withExistingParent(ModItems.SPIRITED_ALLAY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         this.simpleItem(ModItems.SPIRITED_ECHO_WAND);
         ItemModelBuilder builder = this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath(), modLoc("item/spirited_allay_item_light_blue"));
-        for (DyeColor dyeColor : DyeColor.values()) {
-            this.spiritedAllayColor(builder, dyeColor);
-        }
+        this.coloredItems(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath(), (name, color) -> {
+            String colorName = color.getName();
+            builder.override()
+                    .predicate(modLoc("color"), color.getId())
+                    .model(this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath() + "_" + colorName, modLoc("item/spirited_allay_item_" + colorName)))
+                    .end();
+        });
         ItemModelBuilder builder1 = this.simpleItem(ModItems.SPIRIT_BOTTLE);
         for (int i = 1; i < 11; i++) {
             builder1.override()
@@ -105,7 +111,10 @@ public class ModItemModelProvider extends ItemModelProvider {
                     .model(this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath() + "_full_" + i, modLoc("item/spirit_bottle_full_" + i)))
                     .end();
         }
-        this.itemWithProperties(ModItems.RESONANCE_CRYSTAL_WHITE.getId().getPath(), mcLoc("item/emerald"));
+        this.coloredItems("resonance_crystal", (name, color) -> {
+            String colorName = color.getName();
+            this.itemWithProperties(name + "_" + colorName, modLoc("item/" + name + "_" + colorName));
+        });
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
@@ -135,12 +144,23 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer2", modLoc("item/" + handle));
     }
 
+    private void coloredItems(String baseName, BiConsumer<String, DyeColor> consumer) {
+        for (DyeColor color : DyeColor.values()) {
+            consumer.accept(baseName, color);
+        }
+    }
+
     private void spiritedAllayColor(ItemModelBuilder builder, DyeColor color) {
         String name = color.getName();
         builder.override()
                 .predicate(modLoc("color"), color.getId())
                 .model(this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath() + "_" + name, modLoc("item/spirited_allay_item_" + name)))
                 .end();
+    }
+
+    private void coloredItem(String name, DyeColor color) {
+        String colorName = color.getName();
+        this.itemWithProperties(name + "_" + colorName, modLoc("item/" + name + "_" + colorName));
     }
 
 //    private void trimmableArmor(RegistryObject<Item> armor) {

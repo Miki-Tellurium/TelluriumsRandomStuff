@@ -160,6 +160,21 @@ public class ModItems {
     public static final RegistryObject<Item> SPIRITED_ECHO_WAND = registerItem("spirited_echo_wand", () -> new SpiritedEchoWandItem(new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_ALLAY_ITEM = registerItem("spirited_allay_item", () -> new SpiritedAllayItem(new Item.Properties()));
     public static final RegistryObject<Item> RESONANCE_CRYSTAL_WHITE = registerItem("resonance_crystal_white", () -> new ResonanceCrystalItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_ORANGE = registerItem("resonance_crystal_orange", () -> new ResonanceCrystalItem(DyeColor.ORANGE, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_MAGENTA = registerItem("resonance_crystal_magenta", () -> new ResonanceCrystalItem(DyeColor.MAGENTA, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_LIGHT_BLUE = registerItem("resonance_crystal_light_blue", () -> new ResonanceCrystalItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_YELLOW = registerItem("resonance_crystal_yellow", () -> new ResonanceCrystalItem(DyeColor.YELLOW, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_LIME = registerItem("resonance_crystal_lime", () -> new ResonanceCrystalItem(DyeColor.LIME, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_PINK = registerItem("resonance_crystal_pink", () -> new ResonanceCrystalItem(DyeColor.PINK, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_GRAY = registerItem("resonance_crystal_gray", () -> new ResonanceCrystalItem(DyeColor.GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_LIGHT_GRAY = registerItem("resonance_crystal_light_gray", () -> new ResonanceCrystalItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_CYAN = registerItem("resonance_crystal_cyan", () -> new ResonanceCrystalItem(DyeColor.CYAN, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_PURPLE = registerItem("resonance_crystal_purple", () -> new ResonanceCrystalItem(DyeColor.PURPLE, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_BLUE = registerItem("resonance_crystal_blue", () -> new ResonanceCrystalItem(DyeColor.BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_BROWN = registerItem("resonance_crystal_brown", () -> new ResonanceCrystalItem(DyeColor.BROWN, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_GREEN = registerItem("resonance_crystal_green", () -> new ResonanceCrystalItem(DyeColor.GREEN, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_RED = registerItem("resonance_crystal_red", () -> new ResonanceCrystalItem(DyeColor.RED, new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_BLACK = registerItem("resonance_crystal_black", () -> new ResonanceCrystalItem(DyeColor.BLACK, new Item.Properties()));
 
     // Items of block states used only for rendering purposes
     public static final RegistryObject<Item> SOUL_INFUSER_LIT = registerItem("soul_infuser_lit", () -> new Item(new Item.Properties()));

@@ -59,6 +59,21 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SPIRITED_ECHO_WAND, "Spirited Echo Wand");
         addItem(ModItems.SPIRITED_ALLAY_ITEM, "Spirited Allay");
         addItem(ModItems.RESONANCE_CRYSTAL_WHITE, "White Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_ORANGE, "Orange Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_MAGENTA, "Magenta Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_LIGHT_BLUE, "Light Blue Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_YELLOW, "Yellow Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_LIME, "Lime Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_PINK, "Pink Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_GRAY, "Gray Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_LIGHT_GRAY, "Light Gray Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_CYAN, "Cyan Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_PURPLE, "Purple Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_BLUE, "Blue Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_BROWN, "Brown Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_GREEN, "Green Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_RED, "Red Resonance Crystal");
+        addItem(ModItems.RESONANCE_CRYSTAL_BLACK, "Black Resonance Crystal");
 
         translation("item", "tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");
