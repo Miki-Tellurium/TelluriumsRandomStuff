@@ -31,7 +31,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class RecipeHelper {
-
+    // todo use stained glass dyecolor field
     private static final Map<Block, DyeColor> glassColors = new HashMap<>();
     static {
         glassColors.put(Blocks.BLACK_STAINED_GLASS, DyeColor.BLACK);
