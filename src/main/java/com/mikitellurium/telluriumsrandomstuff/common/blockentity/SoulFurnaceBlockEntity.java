@@ -4,6 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulFurnaceMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.util.SoulFurnaceItemHandler;
 import com.mikitellurium.telluriumsrandomstuff.lib.SidedCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
@@ -13,6 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -46,7 +48,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @SuppressWarnings("ConstantConditions")
-public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implements MenuProvider, SidedCapabilityProvider<WrappedHandler> {
+public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implements TickingBlockEntity, MenuProvider, SidedCapabilityProvider<WrappedHandler> {
 
     private static final int BUCKET_SLOT = 0;
     private static final List<Integer> inputSlots = List.of(1, 2, 3, 4);
@@ -106,11 +108,8 @@ public class SoulFurnaceBlockEntity extends AbstractSoulFueledBlockEntity implem
         super(ModBlockEntities.SOUL_FURNACE.get(), pos, state, 4000);
     }
 
-    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
-        if (level.isClientSide) {
-            return;
-        }
-
+    @Override
+    public void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState) {
         this.handleTankRefill();
         for (int slot : inputSlots) {
             Optional<SmeltingRecipe> optionalRecipe = this.getRecipe(slot);

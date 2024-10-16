@@ -1,11 +1,13 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulSmeltingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -42,10 +44,9 @@ public class SoulFurnaceBlock extends AbstractFurnaceBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
-                                                                  BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_FURNACE.get(),
-                (tickLevel, blockPos, state, soulLavaFurnace) -> soulLavaFurnace.tick(tickLevel, blockPos, state));
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
+        return createTickerHelper(type, ModBlockEntities.SOUL_FURNACE.get(),
+                (tickLevel, pos, state, blockEntity) -> blockEntity.tick(tickLevel, pos, state));
     }
 
     @Override
