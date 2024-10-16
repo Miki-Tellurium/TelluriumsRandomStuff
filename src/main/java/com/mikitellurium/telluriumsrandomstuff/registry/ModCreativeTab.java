@@ -150,6 +150,22 @@ public class ModCreativeTab {
                 event.accept(ModItems.SPIRITED_ALLAY_SPAWN_EGG);
                 event.accept(ModItems.SPIRITED_ALLAY_ITEM);
                 event.accept(ModItems.SPIRITED_ECHO_WAND);
+                event.accept(ModItems.RESONANCE_CRYSTAL_WHITE);
+                event.accept(ModItems.RESONANCE_CRYSTAL_LIGHT_GRAY);
+                event.accept(ModItems.RESONANCE_CRYSTAL_GRAY);
+                event.accept(ModItems.RESONANCE_CRYSTAL_BLACK);
+                event.accept(ModItems.RESONANCE_CRYSTAL_BROWN);
+                event.accept(ModItems.RESONANCE_CRYSTAL_RED);
+                event.accept(ModItems.RESONANCE_CRYSTAL_ORANGE);
+                event.accept(ModItems.RESONANCE_CRYSTAL_YELLOW);
+                event.accept(ModItems.RESONANCE_CRYSTAL_LIME);
+                event.accept(ModItems.RESONANCE_CRYSTAL_GREEN);
+                event.accept(ModItems.RESONANCE_CRYSTAL_CYAN);
+                event.accept(ModItems.RESONANCE_CRYSTAL_LIGHT_BLUE);
+                event.accept(ModItems.RESONANCE_CRYSTAL_BLUE);
+                event.accept(ModItems.RESONANCE_CRYSTAL_PURPLE);
+                event.accept(ModItems.RESONANCE_CRYSTAL_MAGENTA);
+                event.accept(ModItems.RESONANCE_CRYSTAL_PINK);
             }
         }
 
