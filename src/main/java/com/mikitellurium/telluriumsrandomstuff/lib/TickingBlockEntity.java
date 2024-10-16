@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 public interface TickingBlockEntity {
-
+    // todo implement in every block entity
     default void tick(Level level, BlockPos blockPos, BlockState blockState) {
         if (level.isClientSide) {
             this.clientTick((ClientLevel) level, blockPos, blockState);
