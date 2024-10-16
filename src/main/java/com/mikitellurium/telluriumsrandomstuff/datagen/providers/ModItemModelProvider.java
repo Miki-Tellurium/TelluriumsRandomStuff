@@ -105,6 +105,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                     .model(this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath() + "_full_" + i, modLoc("item/spirit_bottle_full_" + i)))
                     .end();
         }
+        this.itemWithProperties(ModItems.RESONANCE_CRYSTAL_WHITE.getId().getPath(), mcLoc("item/emerald"));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

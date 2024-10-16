@@ -31,7 +31,7 @@ public class ModEntities {
                     .build("dummy_player"));
 
     public static final RegistryObject<EntityType<SpiritedAllay>> SPIRITED_ALLAY = registerEntity("spirited_allay",
-            () -> EntityType.Builder.of(SpiritedAllay::new, MobCategory.CREATURE)
+            () -> EntityType.Builder.<SpiritedAllay>of(SpiritedAllay::new, MobCategory.CREATURE)
                     .sized(0.35F, 0.6F)
                     .clientTrackingRange(8)
                     .updateInterval(2)

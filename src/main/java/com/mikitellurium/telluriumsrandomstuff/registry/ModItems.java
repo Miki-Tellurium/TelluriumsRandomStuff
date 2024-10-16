@@ -159,6 +159,7 @@ public class ModItems {
     public static final RegistryObject<Item> SPIRITED_ALLAY_SPAWN_EGG = registerItem("spirited_allay_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.SPIRITED_ALLAY, 6486015, 4247807, new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_ECHO_WAND = registerItem("spirited_echo_wand", () -> new SpiritedEchoWandItem(new Item.Properties()));
     public static final RegistryObject<Item> SPIRITED_ALLAY_ITEM = registerItem("spirited_allay_item", () -> new SpiritedAllayItem(new Item.Properties()));
+    public static final RegistryObject<Item> RESONANCE_CRYSTAL_WHITE = registerItem("resonance_crystal_white", () -> new ResonanceCrystalItem(DyeColor.WHITE, new Item.Properties()));
 
     // Items of block states used only for rendering purposes
     public static final RegistryObject<Item> SOUL_INFUSER_LIT = registerItem("soul_infuser_lit", () -> new Item(new Item.Properties()));

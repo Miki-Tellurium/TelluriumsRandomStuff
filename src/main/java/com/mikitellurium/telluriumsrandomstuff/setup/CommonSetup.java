@@ -9,6 +9,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauld
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
+import com.mikitellurium.telluriumsrandomstuff.common.item.ResonanceCrystalItem;
 import com.mikitellurium.telluriumsrandomstuff.test.bin.SoulStorageCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
@@ -49,6 +50,7 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(AlchemixerBlock.class);
         MinecraftForge.EVENT_BUS.addListener(PotionMixingManager::registerListener);
         MinecraftForge.EVENT_BUS.addListener(CommonSetup::tickMenus);
+        MinecraftForge.EVENT_BUS.register(ResonanceCrystalItem.class);
     }
 
     public static void registerModBusEvents(IEventBus eventBus) {

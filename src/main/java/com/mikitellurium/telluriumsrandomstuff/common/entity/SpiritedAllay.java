@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.entity;
 
+import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -27,6 +28,11 @@ public class SpiritedAllay extends PathfinderMob {
 
     public SpiritedAllay(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
+    }
+
+    public SpiritedAllay(Level level, DyeColor color) {
+        this(ModEntities.SPIRITED_ALLAY.get(), level);
+        this.setColor(color);
     }
 
     @Nullable

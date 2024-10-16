@@ -58,6 +58,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SPIRITED_ALLAY_SPAWN_EGG, "Spirit Allay Spawn Egg");
         addItem(ModItems.SPIRITED_ECHO_WAND, "Spirited Echo Wand");
         addItem(ModItems.SPIRITED_ALLAY_ITEM, "Spirited Allay");
+        addItem(ModItems.RESONANCE_CRYSTAL_WHITE, "White Resonance Crystal");
 
         translation("item", "tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");
