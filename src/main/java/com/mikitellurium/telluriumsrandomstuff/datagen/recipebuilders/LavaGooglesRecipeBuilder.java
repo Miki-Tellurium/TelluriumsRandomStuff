@@ -33,7 +33,7 @@ import java.util.function.Consumer;
 
 public class LavaGooglesRecipeBuilder implements RecipeBuilder {
 
-    private final Block glassBlock;
+    private final StainedGlassBlock glassBlock;
     private final List<String> rows = Lists.newArrayList();
     private final Map<Character, Ingredient> key = Maps.newLinkedHashMap();
     private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
@@ -42,7 +42,7 @@ public class LavaGooglesRecipeBuilder implements RecipeBuilder {
                     MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
                     new ItemPredicate[] {(ItemPredicate.Builder.item().of(ModItems.LAVA_GOOGLES.get()).build())});
 
-    public LavaGooglesRecipeBuilder(Block glassBlock) {
+    private LavaGooglesRecipeBuilder(StainedGlassBlock glassBlock) {
         if (!(glassBlock instanceof StainedGlassBlock)) {
             throw new IllegalArgumentException("Block has to be a stained glass block");
         }
@@ -56,7 +56,7 @@ public class LavaGooglesRecipeBuilder implements RecipeBuilder {
                 .define('L', Items.LEATHER);
     }
 
-    public static LavaGooglesRecipeBuilder googles(Block glassBlock) {
+    public static LavaGooglesRecipeBuilder googles(StainedGlassBlock glassBlock) {
         return new LavaGooglesRecipeBuilder(glassBlock);
 
     }
@@ -103,8 +103,7 @@ public class LavaGooglesRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> recipeConsumer, ResourceLocation resourceLocation) {
-        recipeConsumer.accept(new Result(resourceLocation, RecipeHelper.getGlassColor(this.glassBlock),
-                this.rows, this.key, this.advancement));
+        recipeConsumer.accept(new Result(resourceLocation, this.glassBlock.getColor(), this.rows, this.key, this.advancement));
     }
 
     @Override

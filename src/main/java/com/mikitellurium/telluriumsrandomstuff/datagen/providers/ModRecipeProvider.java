@@ -406,10 +406,9 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_amethyst_lens", has(ModItems.AMETHYST_LENS.get()))
                 .save(consumer, modLoc("lava_googles"));
 
-        for (Map.Entry<Block, DyeColor> entry : RecipeHelper.getStainedGlassSet()) {
-            LavaGooglesRecipeBuilder.googles(entry.getKey())
-                    .save(consumer, modLoc(entry.getValue().getSerializedName() + "_lava_googles"));
-        }
+        RecipeHelper.getStainedGlassSet().forEach((glass) -> {
+            LavaGooglesRecipeBuilder.googles(glass).save(consumer, modLoc("lava_googles_" + glass.getColor().getName()));
+        });
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, Items.SPECTRAL_ARROW, 4)
                 .pattern(" # ")
