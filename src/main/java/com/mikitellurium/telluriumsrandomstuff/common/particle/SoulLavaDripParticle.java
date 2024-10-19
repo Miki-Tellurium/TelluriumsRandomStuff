@@ -14,30 +14,23 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
-import java.util.function.Function;
-
 public class SoulLavaDripParticle extends TextureSheetParticle {
 
-    private static final Color PARTICLE_COLOR = new Color(37F / 255F, 244F / 255F, 255F / 255F);
-    private static final Function<Integer, Float> RGB = (i -> i / 255F);
+    private static final float[] PARTICLE_COLOR = new float[]{0.145F, 0.957F, 1.0F};
 
-    private final Fluid type;
+    private final Fluid fluid;
     protected boolean isGlowing;
 
-    protected SoulLavaDripParticle(ClientLevel pLevel, double pX, double pY, double pZ, Fluid type) {
-        super(pLevel, pX, pY, pZ);
+    protected SoulLavaDripParticle(ClientLevel level, double x, double y, double z, Fluid type) {
+        super(level, x, y, z);
+        this.setColor(PARTICLE_COLOR[0], PARTICLE_COLOR[1], PARTICLE_COLOR[2]);
         this.setSize(0.01F, 0.01F);
         this.gravity = 0.06F;
-        this.type = type;
+        this.fluid = type;
     }
 
-    protected Fluid getType() {
-        return this.type;
-    }
-
-    public int getLightColor(float pPartialTick) {
-        return this.isGlowing ? 240 : super.getLightColor(pPartialTick);
+    public int getLightColor(float partialTick) {
+        return this.isGlowing ? 240 : super.getLightColor(partialTick);
     }
 
     @Override
@@ -58,9 +51,9 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
                 this.xd *= 0.98F;
                 this.yd *= 0.98F;
                 this.zd *= 0.98F;
-                BlockPos blockpos = new BlockPos((int)this.x, (int)this.y, (int)this.z);
-                FluidState fluidstate = this.level.getFluidState(blockpos);
-                if (fluidstate.getType() == this.type && this.y < (double)((float)blockpos.getY() + fluidstate.getHeight(this.level, blockpos))) {
+                BlockPos blockPos = new BlockPos((int)this.x, (int)this.y, (int)this.z);
+                FluidState fluidState = this.level.getFluidState(blockPos);
+                if (fluidState.getType() == this.fluid && this.y < (double)((float)blockPos.getY() + fluidState.getHeight(this.level, blockPos))) {
                     this.remove();
                 }
 
@@ -80,12 +73,12 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
 
     @OnlyIn(Dist.CLIENT)
     static class FallingParticle extends SoulLavaDripParticle {
-        FallingParticle(ClientLevel pLevel, double pX, double pY, double pZ, Fluid pType) {
-            this(pLevel, pX, pY, pZ, pType, (int)(64.0D / (Math.random() * 0.8D + 0.2D)));
+        FallingParticle(ClientLevel level, double x, double y, double z, Fluid fluid) {
+            this(level, x, y, z, fluid, (int)(64.0D / (Math.random() * 0.8D + 0.2D)));
         }
 
-        FallingParticle(ClientLevel pLevel, double pX, double pY, double pZ, Fluid pType, int pLifetime) {
-            super(pLevel, pX, pY, pZ, pType);
+        FallingParticle(ClientLevel level, double x, double y, double z, Fluid fluid, int pLifetime) {
+            super(level, x, y, z, fluid);
             this.lifetime = pLifetime;
         }
 
@@ -101,8 +94,8 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
     static class DripHangParticle extends SoulLavaDripParticle {
         private final ParticleOptions fallingParticle;
 
-        DripHangParticle(ClientLevel pLevel, double pX, double pY, double pZ, Fluid pType, ParticleOptions pFallingParticle) {
-            super(pLevel, pX, pY, pZ, pType);
+        DripHangParticle(ClientLevel level, double x, double y, double z, Fluid fluid, ParticleOptions pFallingParticle) {
+            super(level, x, y, z, fluid);
             this.fallingParticle = pFallingParticle;
             this.gravity *= 0.02F;
             this.lifetime = 40;
@@ -125,34 +118,27 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
 
     @OnlyIn(Dist.CLIENT)
     static class DripLandParticle extends SoulLavaDripParticle {
-        DripLandParticle(ClientLevel clientLevel, double pX, double pY, double pZ, Fluid fluid) {
-            super(clientLevel, pX, pY, pZ, fluid);
+        DripLandParticle(ClientLevel clientLevel, double x, double y, double z, Fluid fluid) {
+            super(clientLevel, x, y, z, fluid);
             this.lifetime = (int)(16.0D / (Math.random() * 0.8D + 0.2D));
         }
     }
 
     @OnlyIn(Dist.CLIENT)
     static class CoolingDripHangParticle extends SoulLavaDripParticle.DripHangParticle {
-        CoolingDripHangParticle(ClientLevel clientLevel, double pX, double pY, double pZ, Fluid fluid, ParticleOptions particleOptions) {
-            super(clientLevel, pX, pY, pZ, fluid, particleOptions);
+        CoolingDripHangParticle(ClientLevel clientLevel, double x, double y, double z, Fluid fluid, ParticleOptions particleOptions) {
+            super(clientLevel, x, y, z, fluid, particleOptions);
         }
-
-        protected void preMoveUpdate() {
-            this.setColor(
-                    RGB.apply(PARTICLE_COLOR.getRed()),
-                    RGB.apply(PARTICLE_COLOR.getGreen()),
-                    RGB.apply(PARTICLE_COLOR.getBlue()));
-            super.preMoveUpdate();
-        }
+        
     }
 
     @OnlyIn(Dist.CLIENT)
     static class FallAndLandParticle extends SoulLavaDripParticle.FallingParticle {
         protected final ParticleOptions landParticle;
 
-        FallAndLandParticle(ClientLevel pLevel, double pX, double pY, double pZ, Fluid pType, ParticleOptions pLandParticle) {
-            super(pLevel, pX, pY, pZ, pType);
-            this.landParticle = pLandParticle;
+        FallAndLandParticle(ClientLevel level, double x, double y, double z, Fluid fluid, ParticleOptions landParticle) {
+            super(level, x, y, z, fluid);
+            this.landParticle = landParticle;
         }
 
         protected void postMoveUpdate() {
@@ -167,18 +153,14 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
     public static class SoulLavaFallProvider implements ParticleProvider<SimpleParticleType> {
         protected final SpriteSet sprite;
 
-        public SoulLavaFallProvider(SpriteSet pSprites) {
-            this.sprite = pSprites;
+        public SoulLavaFallProvider(SpriteSet sprite) {
+            this.sprite = sprite;
         }
 
         @Nullable
         @Override
-        public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-            SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.FallAndLandParticle(pLevel, pX, pY, pZ, ModFluids.SOUL_LAVA_SOURCE.get(), ModParticles.SOUL_LAVA_LAND.get());
-            dripParticle.setColor(
-                    RGB.apply(PARTICLE_COLOR.getRed()),
-                    RGB.apply(PARTICLE_COLOR.getGreen()),
-                    RGB.apply(PARTICLE_COLOR.getBlue()));
+        public Particle createParticle(SimpleParticleType fluid, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.FallAndLandParticle(level, x, y, z, ModFluids.SOUL_LAVA_SOURCE.get(), ModParticles.SOUL_LAVA_LAND.get());
             dripParticle.pickSprite(this.sprite);
             return dripParticle;
         }
@@ -193,8 +175,8 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
             this.sprite = pSprites;
         }
 
-        public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-            SoulLavaDripParticle.CoolingDripHangParticle dripparticle$coolingdriphangparticle = new SoulLavaDripParticle.CoolingDripHangParticle(pLevel, pX, pY, pZ, ModFluids.SOUL_LAVA_SOURCE.get(), ModParticles.SOUL_LAVA_FALL.get());
+        public Particle createParticle(SimpleParticleType fluid, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            SoulLavaDripParticle.CoolingDripHangParticle dripparticle$coolingdriphangparticle = new SoulLavaDripParticle.CoolingDripHangParticle(level, x, y, z, ModFluids.SOUL_LAVA_SOURCE.get(), ModParticles.SOUL_LAVA_FALL.get());
             dripparticle$coolingdriphangparticle.pickSprite(this.sprite);
             return dripparticle$coolingdriphangparticle;
         }
@@ -204,16 +186,12 @@ public class SoulLavaDripParticle extends TextureSheetParticle {
     public static class SoulLavaLandProvider implements ParticleProvider<SimpleParticleType> {
         protected final SpriteSet sprite;
 
-        public SoulLavaLandProvider(SpriteSet pSprites) {
-            this.sprite = pSprites;
+        public SoulLavaLandProvider(SpriteSet sprite) {
+            this.sprite = sprite;
         }
 
-        public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-            SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.DripLandParticle(pLevel, pX, pY, pZ, ModFluids.SOUL_LAVA_SOURCE.get());
-            dripParticle.setColor(
-                    RGB.apply(PARTICLE_COLOR.getRed()),
-                    RGB.apply(PARTICLE_COLOR.getGreen()),
-                    RGB.apply(PARTICLE_COLOR.getBlue()));
+        public Particle createParticle(SimpleParticleType fluid, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            SoulLavaDripParticle dripParticle = new SoulLavaDripParticle.DripLandParticle(level, x, y, z, ModFluids.SOUL_LAVA_SOURCE.get());
             dripParticle.pickSprite(this.sprite);
             return dripParticle;
         }
