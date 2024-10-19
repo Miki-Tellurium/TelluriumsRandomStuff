@@ -23,6 +23,9 @@ public class ModRecipeSerializers {
     public static final RegistryObject<RecipeSerializer<CompactingRecipe>> COMPACTING =
             registerSerializer(CompactingRecipe.Type.ID, () -> CompactingRecipe.Serializer.INSTANCE);
 
+    public static final RegistryObject<RecipeSerializer<ResonanceCrystalColoring>> RESONANCE_CRYSTAL_COLORING =
+            registerSerializer(ResonanceCrystalColoring.ID, () -> new SimpleCraftingRecipeSerializer<>((id, category) -> new ResonanceCrystalColoring(id)));
+
     private static <R extends Recipe<?>, T extends RecipeSerializer<R>> RegistryObject<T> registerSerializer(String name, Supplier<T> serializer) {
         return ModRegistries.RECIPE_SERIALIZERS.register(name, serializer);
     }
