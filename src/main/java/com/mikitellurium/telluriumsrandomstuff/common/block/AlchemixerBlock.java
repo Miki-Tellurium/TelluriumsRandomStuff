@@ -58,9 +58,9 @@ public class AlchemixerBlock extends BaseEntityBlock {
         super(BlockBehaviour.Properties.copy(Blocks.BREWING_STAND));
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(HAS_BOTTLE[0], Boolean.valueOf(false))
-                .setValue(HAS_BOTTLE[1], Boolean.valueOf(false))
-                .setValue(HAS_BOTTLE[2], Boolean.valueOf(false))
+                .setValue(HAS_BOTTLE[0], false)
+                .setValue(HAS_BOTTLE[1], false)
+                .setValue(HAS_BOTTLE[2], false)
         );
     }
 
