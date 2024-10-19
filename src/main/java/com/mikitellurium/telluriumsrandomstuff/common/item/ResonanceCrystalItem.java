@@ -4,7 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.entity.SpiritedAllay;
 import com.mikitellurium.telluriumsrandomstuff.mixin.AllayAccessor;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,9 +14,10 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.Random;
 
 public class ResonanceCrystalItem extends Item {
 
@@ -66,12 +67,13 @@ public class ResonanceCrystalItem extends Item {
         return InteractionResult.PASS;
     }
 
-    private static boolean spawnSpiritedAllay(Entity entity, DyeColor color) {
+    private static boolean spawnSpiritedAllay(LivingEntity entity, DyeColor color) {
         Level level = entity.level();
         SpiritedAllay spiritedAllay = new SpiritedAllay(level, color);
         spiritedAllay.moveTo(entity.position());
         spiritedAllay.setPersistenceRequired();
         ((AllayAccessor)entity).invokeResetDuplicationCooldown();
+        spiritedAllay.push(entity.getRandom().triangle(0.0D, 0.2D), 0.0D, entity.getRandom().triangle(0.0D, 0.2D));
         return level.addFreshEntity(spiritedAllay);
     }
 
