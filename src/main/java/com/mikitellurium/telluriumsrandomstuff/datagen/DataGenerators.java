@@ -33,6 +33,7 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModTranslationProvider(packOutput));
         generator.addProvider(event.includeServer(), new ModLootModifierProvider(packOutput));
         generator.addProvider(event.includeServer(), new ModPotionMixingFunctionProvider(packOutput));
+        generator.addProvider(event.includeServer(), new ModParticleProvider(packOutput, existingFileHelper));
 
         // Vanilla tags
         VanillaTagProvider.Blocks vanillaBlockTags = new VanillaTagProvider.Blocks(packOutput, lookupProvider, existingFileHelper);
