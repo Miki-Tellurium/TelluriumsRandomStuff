@@ -18,6 +18,9 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> SOUL_LAVA_LAND =
             registerParticle("soul_lava_land", () -> new SimpleParticleType(true));
 
+    public static final RegistryObject<SimpleParticleType> SPIRITED_ALLAY_SPAWN =
+            registerParticle("spirited_allay_spawn", () -> new SimpleParticleType(true));
+
     private static <T extends ParticleType<?>> RegistryObject<T> registerParticle(String name, Supplier<T> particle) {
         return ModRegistries.PARTICLE_TYPES.register(name, particle);
     }

@@ -17,6 +17,7 @@ public class ModParticleProvider extends ParticleDescriptionProvider {
         this.sprite(ModParticles.SOUL_LAVA_FALL.get(), FastLoc.mcLoc("drip_fall"));
         this.sprite(ModParticles.SOUL_LAVA_HANG.get(), FastLoc.mcLoc("drip_hang"));
         this.sprite(ModParticles.SOUL_LAVA_LAND.get(), FastLoc.mcLoc("drip_land"));
+        this.sprite(ModParticles.SPIRITED_ALLAY_SPAWN.get(), FastLoc.mcLoc("glow"));
     }
 
 }

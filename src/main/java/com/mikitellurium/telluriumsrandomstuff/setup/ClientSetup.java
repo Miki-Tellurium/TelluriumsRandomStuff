@@ -12,6 +12,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.render.SpiritedAlla
 import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookHandRenderer;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
+import com.mikitellurium.telluriumsrandomstuff.common.particle.SpiritedAllaySpawnParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
@@ -144,6 +145,7 @@ public class ClientSetup {
         event.registerSpriteSet(ModParticles.SOUL_LAVA_FALL.get(), SoulLavaDripParticle.SoulLavaFallProvider::new);
         event.registerSpriteSet(ModParticles.SOUL_LAVA_HANG.get(), SoulLavaDripParticle.SoulLavaHangProvider::new);
         event.registerSpriteSet(ModParticles.SOUL_LAVA_LAND.get(), SoulLavaDripParticle.SoulLavaLandProvider::new);
+        event.registerSpriteSet(ModParticles.SPIRITED_ALLAY_SPAWN.get(), SpiritedAllaySpawnParticle.Provider::new);
     }
 
     @SubscribeEvent
