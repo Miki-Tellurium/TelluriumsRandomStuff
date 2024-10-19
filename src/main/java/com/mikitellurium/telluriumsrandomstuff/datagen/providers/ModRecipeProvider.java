@@ -1,12 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.common.block.ItemPedestalBlock;
-import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.CompactingRecipeBuilder;
-import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.LavaGooglesRecipeBuilder;
-import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulInfusionRecipeBuilder;
-import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulLavaTransmutationRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.common.recipe.ResonanceCrystalColoring;
+import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.*;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeSerializers;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.data.DataGenerator;
@@ -36,6 +35,8 @@ public class ModRecipeProvider extends RecipeProvider {
         buildSmeltingRecipes(consumer);
         buildBlastingRecipes(consumer);
         buildStonecuttingRecipes(consumer);
+        ModdedSpecialRecipeBuilder.special(FastLoc.modId(), ModRecipeSerializers.RESONANCE_CRYSTAL_COLORING.get())
+                .save(consumer, ResonanceCrystalColoring.ID);
     }
 
     private void buildSoulInfusingRecipes(Consumer<FinishedRecipe> consumer) {
