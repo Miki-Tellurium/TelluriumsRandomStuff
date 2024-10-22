@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CreativeScreenMixin {
 
     @Inject(method = "keyPressed", at = @At(value = "HEAD"))
-    private void keyEvent(int pKeyCode, int pScanCode, int pModifiers, CallbackInfoReturnable<Boolean> cir) {
-        KeyEvents.handleKey(pKeyCode, pScanCode);
+    private void keyEvent(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
+        KeyEvents.handleKey((key) -> key.matches(keyCode, scanCode));
     }
 
 }
