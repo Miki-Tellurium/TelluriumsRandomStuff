@@ -30,9 +30,9 @@ public class LavaGooglesModel<T extends LivingEntity> extends AgeableListModel<T
     }
 
     @Override
-    public void prepareMobModel(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick) {
-        this.swimAmount = pEntity.getSwimAmount(pPartialTick);
-        super.prepareMobModel(pEntity, pLimbSwing, pLimbSwingAmount, pPartialTick);
+    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTick) {
+        this.swimAmount = entity.getSwimAmount(partialTick);
+        super.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTick);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.client.entity.layer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -22,17 +23,14 @@ import net.minecraft.world.item.ItemStack;
 
 public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
 
-    private static final ResourceLocation GOOGLES_FRAME_TEXTURE =
-            new ResourceLocation("telluriumsrandomstuff:textures/models/armor/lava_googles_frame_model.png");
-    private static final ResourceLocation GOOGLES_NO_COLOR_TEXTURE =
-            new ResourceLocation("telluriumsrandomstuff:textures/models/armor/lava_googles_nocolor_layer_model.png");
-    private static final ResourceLocation GOOGLES_COLORED_TEXTURE =
-            new ResourceLocation("telluriumsrandomstuff:textures/models/armor/lava_googles_color_layer_model.png");
-    private final LavaGooglesModel<T> lavaGooglesModel;
+    private static final ResourceLocation GOOGLES_FRAME_TEXTURE = FastLoc.modLoc("textures/models/armor/lava_googles_frame_model.png");
+    private static final ResourceLocation GOOGLES_NO_COLOR_TEXTURE = FastLoc.modLoc("textures/models/armor/lava_googles_nocolor_layer_model.png");
+    private static final ResourceLocation GOOGLES_COLORED_TEXTURE = FastLoc.modLoc("textures/models/armor/lava_googles_color_layer_model.png");
+    private final LavaGooglesModel<T> model;
 
     public LavaGooglesLayer(RenderLayerParent<T, M> parent, EntityModelSet modelSet) {
         super(parent);
-        lavaGooglesModel = new LavaGooglesModel<>(modelSet.bakeLayer(LavaGooglesModel.LAYER_LOCATION));
+        this.model = new LavaGooglesModel<>(modelSet.bakeLayer(LavaGooglesModel.LAYER_LOCATION));
     }
 
     @Override
@@ -41,33 +39,43 @@ public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> 
                        float netHeadYaw, float headPitch) {
         ItemStack itemStack = livingEntity.getItemBySlot(EquipmentSlot.HEAD);
         if (itemStack.is(ModItems.LAVA_GOOGLES.get())) {
+            float[] rgb = new float[] {1.0f, 1.0f, 1.0f};
+            ResourceLocation glassTexture = GOOGLES_NO_COLOR_TEXTURE;
             DyeColor dyeColor = LavaGooglesItem.getColor(itemStack);
-            float[] rgb = dyeColor == null ? new float[] {1.0f, 1.0f, 1.0f} : dyeColor.getTextureDiffuseColors();
-            ResourceLocation glassToRender = dyeColor == null ? GOOGLES_NO_COLOR_TEXTURE : GOOGLES_COLORED_TEXTURE;
+            if (dyeColor != null) {
+                rgb = dyeColor.getTextureDiffuseColors();
+                glassTexture = GOOGLES_COLORED_TEXTURE;
+            }
+
             poseStack.pushPose();
             if (livingEntity instanceof AbstractPiglin || livingEntity instanceof ZombifiedPiglin) {
                 poseStack.scale(1.1f, 1.0f, 1.05f); // Handle piglin larger head
             }
-            lavaGooglesModel.prepareMobModel(livingEntity, limbSwing, limbSwingAmount, partialTick);
-            this.getParentModel().copyPropertiesTo(this.lavaGooglesModel);
-            this.lavaGooglesModel.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-            boolean isFoil = itemStack.hasFoil();
-            // Render frame
-            VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityTranslucent(GOOGLES_FRAME_TEXTURE));
-            this.lavaGooglesModel.renderToBuffer(poseStack, vertexConsumer, packedLight,
-                    OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-            // Render colored glass
-            vertexConsumer = bufferSource.getBuffer(RenderType.entityTranslucent(glassToRender));
-            this.lavaGooglesModel.renderToBuffer(poseStack, vertexConsumer, packedLight,
-                    OverlayTexture.NO_OVERLAY, rgb[0], rgb[1], rgb[2], 1.0F);
-            // Render enchantment glint
-            if (isFoil) {
-                vertexConsumer = bufferSource.getBuffer(RenderType.entityGlintDirect());
-                this.lavaGooglesModel.renderToBuffer(poseStack, vertexConsumer, packedLight,
-                        OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            this.model.prepareMobModel(livingEntity, limbSwing, limbSwingAmount, partialTick);
+            this.getParentModel().copyPropertiesTo(this.model);
+            this.model.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            this.renderFrame(poseStack, bufferSource, packedLight);
+            this.renderGlass(poseStack, glassTexture, rgb, bufferSource, packedLight);
+            if (itemStack.hasFoil()) {
+                this.renderGlint(poseStack, bufferSource, packedLight);
             }
             poseStack.popPose();
         }
+    }
+
+    private void renderFrame(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityTranslucent(GOOGLES_FRAME_TEXTURE));
+        this.model.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+    private void renderGlass(PoseStack poseStack, ResourceLocation texture, float[] rgb, MultiBufferSource bufferSource, int packedLight) {
+        VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityTranslucent(texture));
+        this.model.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY, rgb[0], rgb[1], rgb[2], 1.0F);
+    }
+
+    private void renderGlint(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityGlintDirect());
+        this.model.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 
 }
