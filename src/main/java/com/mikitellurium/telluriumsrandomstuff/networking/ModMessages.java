@@ -56,6 +56,11 @@ public class ModMessages {
                 .encoder(SoulAssemblyModeC2SPacket::write)
                 .consumerMainThread(SoulAssemblyModeC2SPacket::handle)
                 .add();
+        net.messageBuilder(SpiritedAllaySpawnParticlePacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(SpiritedAllaySpawnParticlePacket::new)
+                .encoder(SpiritedAllaySpawnParticlePacket::write)
+                .consumerMainThread(SpiritedAllaySpawnParticlePacket::handle)
+                .add();
     }
     
     public static <MSG> void sendToServer(MSG message) {

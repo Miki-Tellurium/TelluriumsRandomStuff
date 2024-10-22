@@ -1,7 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.common.entity.SpiritedAllay;
+import com.mikitellurium.telluriumsrandomstuff.common.particle.ColoredParticleOption;
 import com.mikitellurium.telluriumsrandomstuff.mixin.AllayAccessor;
+import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
+import com.mikitellurium.telluriumsrandomstuff.networking.packets.SpiritedAllaySpawnParticlePacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -14,10 +18,9 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import java.util.Random;
 
 public class ResonanceCrystalItem extends Item {
 
@@ -73,8 +76,11 @@ public class ResonanceCrystalItem extends Item {
         spiritedAllay.moveTo(entity.position());
         spiritedAllay.setPersistenceRequired();
         ((AllayAccessor)entity).invokeResetDuplicationCooldown();
+        ModMessages.sendToClients(new SpiritedAllaySpawnParticlePacket(spiritedAllay.getEyePosition(), color));
         spiritedAllay.push(entity.getRandom().triangle(0.0D, 0.2D), 0.0D, entity.getRandom().triangle(0.0D, 0.2D));
         return level.addFreshEntity(spiritedAllay);
     }
+
+
 
 }
