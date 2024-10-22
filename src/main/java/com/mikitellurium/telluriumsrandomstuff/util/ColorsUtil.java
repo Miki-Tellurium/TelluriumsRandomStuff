@@ -17,6 +17,7 @@ public class ColorsUtil {
 
     public static int getGooglesColor(ItemStack itemStack, int tintIndex) {
         if (tintIndex == 1 && itemStack.getItem() instanceof DyeableLeatherItem dyeable) {
+            if (itemStack.getHoverName().getString().equals("tellurio_")) return 0x0080FD;
             return dyeable.hasCustomColor(itemStack) ? dyeable.getColor(itemStack) : alpha0;
         } else {
             return blank;
