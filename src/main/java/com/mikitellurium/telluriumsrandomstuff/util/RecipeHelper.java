@@ -33,20 +33,10 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class RecipeHelper {
-    // todo use stained glass dyecolor field
-    private static final Set<StainedGlassBlock> glassColors = Util.make(new HashSet<>(), (set) -> {
-        ForgeRegistries.BLOCKS.getValues().stream()
-                .filter((block) -> block instanceof StainedGlassBlock)
-                .forEach((block) -> set.add((StainedGlassBlock) block));
-    });
 
     public static final Ingredient WATER_BOTTLE = Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
     public static final ItemStack THICK_POTION = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.THICK);
     public static final ItemStack MUNDANE_POTION = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.MUNDANE);
-
-    public static Set<StainedGlassBlock> getStainedGlassSet() {
-        return glassColors;
-    }
 
     public static List<SoulFurnaceSmeltingRecipe> getConvertedVanillaRecipes(List<SmeltingRecipe> smeltingRecipes) {
         List<SoulFurnaceSmeltingRecipe> soulFurnaceRecipes = NonNullList.create();

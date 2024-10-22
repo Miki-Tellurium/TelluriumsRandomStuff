@@ -17,7 +17,6 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class ModItemModelProvider extends ItemModelProvider {
 
@@ -60,9 +59,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleItem(ModItems.BRIGHT_TORCHFLOWER_SEEDS);
         this.simpleItem(ModItems.SOUL_TORCHFLOWER_SEEDS);
         this.simpleItem(ModItems.BLUE_GLOWSTONE_DUST);
-        this.withExistingParent(ModItems.LAVA_GOOGLES.getId().getPath(), mcLoc("item/handheld"))
-                .texture("layer0", modLoc("item/lava_googles_frame"))
-                .texture("layer1", modLoc("item/lava_googles_color_layer"));
+        this.itemWithProperties(ModItems.LAVA_GOOGLES.getId().getPath(), modLoc("item/lava_googles_no_color"))
+                .override()
+                .predicate(modLoc("colored"), 1)
+                .model(this.withExistingParent(ModItems.LAVA_GOOGLES.getId().getPath() + "_colored", mcLoc("item/generated"))
+                        .texture("layer0", modLoc("item/lava_googles_frame"))
+                        .texture("layer1", modLoc("item/lava_googles_color_layer")))
+                .end();
         this.simpleItem(ModItems.MOLTEN_AMETHYST);
         this.simpleItem(ModItems.AMETHYST_LENS);
         this.simpleItem(ModItems.SMALL_SOUL_FRAGMENT);

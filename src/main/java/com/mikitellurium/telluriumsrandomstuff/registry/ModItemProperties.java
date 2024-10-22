@@ -10,6 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.concurrent.atomic.AtomicReference;
@@ -33,6 +34,8 @@ public class ModItemProperties {
                 (itemStack, level, livingEntity, seed) -> {
                     return livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F;
                 });
+        ItemProperties.register(ModItems.LAVA_GOOGLES.get(), FastLoc.modLoc("colored"),
+                (itemStack, level, livingEntity, seed) -> ((DyeableLeatherItem)itemStack.getItem()).hasCustomColor(itemStack) ? 1.0F : 0);
         ItemProperties.register(ModItems.SPIRIT_BOTTLE.get(), FastLoc.modLoc("storage"),
                 (itemStack, level, livingEntity, seed) -> {
                     SpiritBottleItem item = (SpiritBottleItem) itemStack.getItem();

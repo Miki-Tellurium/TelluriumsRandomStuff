@@ -1,9 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
-import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
@@ -15,10 +15,9 @@ public class ColorsUtil {
     private static final int blank = FastColor.ARGB32.color(255, 255, 255, 255);
     private static final int alpha0 = FastColor.ARGB32.color(0, 255, 255, 255);
 
-    public static int getGooglesColor(ItemStack stack, int tintIndex) {
-        if (tintIndex == 1) {
-            DyeColor color = LavaGooglesItem.getColor(stack);
-            return color == null ? alpha0 : getDyeColorAsInt(color);
+    public static int getGooglesColor(ItemStack itemStack, int tintIndex) {
+        if (tintIndex == 1 && itemStack.getItem() instanceof DyeableLeatherItem dyeable) {
+            return dyeable.hasCustomColor(itemStack) ? dyeable.getColor(itemStack) : alpha0;
         } else {
             return blank;
         }

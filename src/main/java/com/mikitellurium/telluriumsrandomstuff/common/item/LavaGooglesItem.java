@@ -1,14 +1,15 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.RandomSource;
@@ -29,16 +30,17 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 
-public class LavaGooglesItem extends Item implements Equipable, Vanishable {
+public class LavaGooglesItem extends Item implements Equipable, DyeableLeatherItem, Vanishable {
 
     public static ResourceLocation OVERLAY_TEXTURE = FastLoc.modLoc("textures/misc/lava_googles_overlay.png");
-    private static final String COLOR_TAG = "color";
 
     public LavaGooglesItem() {
         super(new Item.Properties()
@@ -56,16 +58,16 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
         return this.swapWithEquipmentSlot(this, level, player, hand);
     }
 
-    public void hurtGoogles(ItemStack googles, Player player, DamageSource source, float damage) {
-        if (!source.is(DamageTypeTags.IS_FIRE) && googles.getItem() instanceof LavaGooglesItem) {
-            googles.hurtAndBreak((int)damage, player, (player1) -> {
+    public void hurtGoogles(ItemStack itemStack, Player player, DamageSource source, float damage) {
+        if (!source.is(DamageTypeTags.IS_FIRE) && itemStack.getItem() instanceof LavaGooglesItem) {
+            itemStack.hurtAndBreak((int)damage, player, (player1) -> {
                 player1.broadcastBreakEvent(EquipmentSlot.HEAD);
             });
         }
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+    public boolean canApplyAtEnchantingTable(ItemStack itemStack, Enchantment enchantment) {
         return enchantment.equals(Enchantments.VANISHING_CURSE) ||
                 enchantment.equals(Enchantments.BINDING_CURSE) ||
                 enchantment.equals(Enchantments.FIRE_PROTECTION) ||
@@ -74,32 +76,19 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components,
-                                TooltipFlag isAdvanced) {
-        DyeColor dyeColor = getColor(itemStack);
-        if (dyeColor != null) {
-            MutableComponent colorString = Component.literal(dyeColor.getName()).withStyle((style) -> style.withColor(dyeColor.getTextColor()));
-            components.add(Component.translatable("item.telluriumsrandomstuff.tooltip.color").append(": ").append(colorString));
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag isAdvanced) {
+        if (this.hasCustomColor(itemStack)) {
+            int color = getColor(itemStack);
+            MutableComponent colorString = Component.literal(String.format(Locale.ROOT, "#%06X", color)).withStyle((style) -> style.withColor(color));
+            MutableComponent textString = Component.translatable("item.telluriumsrandomstuff.tooltip.color").withStyle(ChatFormatting.GRAY);
+            components.add(textString.append(": ").append(colorString));
         }
     }
 
-    public static ItemStack setColor(ItemStack itemStack, DyeColor dyeColor) {
-        itemStack.getOrCreateTag().putString(COLOR_TAG, dyeColor.getSerializedName());
-        return itemStack;
-    }
-
-    public static ItemStack setRandomColor(ItemStack itemStack, RandomSource random) {
-        return setColor(itemStack, ColorsUtil.getRandomDyeColor(random));
-    }
-
-    public static DyeColor getColor(ItemStack itemStack) {
-        CompoundTag tag = itemStack.getTag();
-        if (tag != null && tag.contains(COLOR_TAG)) {
-            String colorName = tag.getString(COLOR_TAG);
-            return DyeColor.byName(colorName, DyeColor.byId(tag.getInt(COLOR_TAG)));
-        } else {
-            return null;
-        }
+    @Override
+    public int getColor(ItemStack itemStack) {
+        CompoundTag tag = itemStack.getTagElement("display");
+        return tag != null && tag.contains("color", 99) ? tag.getInt("color") : 16777215;
     }
 
     @Override
@@ -121,6 +110,19 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
     }
 
     /* Events */
+    @SubscribeEvent
+    public static void modifyTooltip(ItemTooltipEvent event) {
+        ItemStack itemStack = event.getItemStack();
+        if (itemStack.is(ModItems.LAVA_GOOGLES.get())) {
+            List<Component> list = event.getToolTip();
+            list.stream()
+                    .filter((c) -> c.getContents() instanceof TranslatableContents contents && contents.getKey().equals("item.color"))
+                    .findAny()
+                    .ifPresent(list::remove);
+        }
+    }
+
+
     private static final int spawnWithGooglesChance = 256;
 
     @SubscribeEvent
@@ -143,7 +145,7 @@ public class LavaGooglesItem extends Item implements Equipable, Vanishable {
             Entity entity = event.getEntity();
             if (entity instanceof Zombie || entity instanceof AbstractSkeleton || entity instanceof AbstractPiglin) {
                 ItemStack googles = new ItemStack(ModItems.LAVA_GOOGLES.get());
-                LavaGooglesItem.setRandomColor(googles, random);
+                //LavaGooglesItem.setRandomColor(googles, random);
                 if (random.nextFloat() < 0.40f) {
                     EnchantmentHelper.enchantItem(random, googles, 10 + random.nextInt(20), true);
                 }

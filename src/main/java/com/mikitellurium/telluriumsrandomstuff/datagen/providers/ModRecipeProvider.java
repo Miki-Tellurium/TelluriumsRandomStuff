@@ -2,12 +2,14 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.common.block.ItemPedestalBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.ResonanceCrystalColoring;
-import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.*;
+import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.CompactingRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.ModdedSpecialRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulInfusionRecipeBuilder;
+import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulLavaTransmutationRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeSerializers;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
-import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -404,11 +406,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('L', Items.LEATHER)
                 .unlockedBy("has_amethyst_lens", has(ModItems.AMETHYST_LENS.get()))
                 .save(consumer, modLoc("lava_googles"));
-
-        RecipeHelper.getStainedGlassSet().forEach((glass) -> {
-            LavaGooglesRecipeBuilder.googles(glass).save(consumer, modLoc("lava_googles_" + glass.getColor().getName()));
-        });
-
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, Items.SPECTRAL_ARROW, 4)
                 .pattern(" # ")
                 .pattern("#a#")

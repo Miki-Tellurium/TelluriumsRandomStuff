@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.client.entity.layer;
 
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
-import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
@@ -18,10 +17,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 
 public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
@@ -44,12 +43,13 @@ public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> 
         if (itemStack.is(ModItems.LAVA_GOOGLES.get())) {
             float[] rgb = new float[] {1.0f, 1.0f, 1.0f};
             ResourceLocation glassTexture = GOOGLES_NO_COLOR_TEXTURE;
-            DyeColor dyeColor = LavaGooglesItem.getColor(itemStack);
-            if (dyeColor != null) {
-                rgb = dyeColor.getTextureDiffuseColors();
+            DyeableLeatherItem dyeableGoogles = (DyeableLeatherItem) itemStack.getItem();
+            if (dyeableGoogles.hasCustomColor(itemStack)) {
+                rgb = ColorsUtil.getRgbComponents(dyeableGoogles.getColor(itemStack));
                 glassTexture = GOOGLES_COLORED_TEXTURE;
             }
             if (itemStack.getHoverName().getString().equals("tellurio_")) {
+                glassTexture = GOOGLES_COLORED_TEXTURE;
                 int i = livingEntity.tickCount / 25 + livingEntity.getId();
                 int colors = DyeColor.values().length;
                 int j = i % colors;
