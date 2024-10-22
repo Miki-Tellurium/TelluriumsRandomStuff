@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.client.entity.layer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -14,8 +15,10 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.item.DyeColor;
@@ -45,6 +48,17 @@ public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> 
             if (dyeColor != null) {
                 rgb = dyeColor.getTextureDiffuseColors();
                 glassTexture = GOOGLES_COLORED_TEXTURE;
+            }
+            if (itemStack.getHoverName().getString().equals("tellurio_")) {
+                int i = livingEntity.tickCount / 25 + livingEntity.getId();
+                int colors = DyeColor.values().length;
+                int j = i % colors;
+                int k = (i + 1) % colors;
+                float f3 = ((float) (livingEntity.tickCount % 25) + partialTick) / 25.0F;
+                int color1 = ColorsUtil.getDyeColorAsInt(DyeColor.byId(j));
+                int color2 = ColorsUtil.getDyeColorAsInt(DyeColor.byId(k));
+                int finalColor = FastColor.ARGB32.lerp(f3, color1, color2);
+                rgb = ColorsUtil.getRgbComponents(finalColor);
             }
 
             poseStack.pushPose();
