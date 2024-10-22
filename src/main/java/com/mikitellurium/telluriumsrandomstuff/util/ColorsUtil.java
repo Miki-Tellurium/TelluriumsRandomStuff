@@ -18,7 +18,7 @@ public class ColorsUtil {
     public static int getGooglesColor(ItemStack stack, int tintIndex) {
         if (tintIndex == 1) {
             DyeColor color = LavaGooglesItem.getColor(stack);
-            return color == null ? alpha0 : getIntDyeColor(color);
+            return color == null ? alpha0 : getDyeColorAsInt(color);
         } else {
             return blank;
         }
@@ -49,20 +49,28 @@ public class ColorsUtil {
         return color.getRGB();
     }
 
-    private static int RGBtoHSB(int rgb, float saturation, float brightness) {
+    /* Return incorrect color if rgb is white/gray/black */
+    public static int RGBtoHSB(int rgb, float saturation, float brightness) {
         return Color.getHSBColor(extractHue(rgb), saturation, brightness).getRGB();
     }
 
-    private static float extractHue(int rgb) {
-        float[] hsbValues = Color.RGBtoHSB((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF, null);
-        return hsbValues[0];
+    public static float[] getRgbComponents(int rgb) {
+        float red = (rgb >> 16) & 0xFF;
+        float green = (rgb >> 8) & 0xFF;
+        float blue = rgb & 0xFF;
+        return new float[] {red / 255.0F, green / 255.0F, blue / 255.0F};
     }
 
-    public static int getIntDyeColor(DyeColor dyeColor) {
+    private static float extractHue(int rgb) {
+        float[] hsb = Color.RGBtoHSB((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF, null);
+        return hsb[0];
+    }
+
+    public static int getDyeColorAsInt(DyeColor dyeColor) {
         float[] floats = dyeColor.getTextureDiffuseColors();
-        int r = (int) (floats[0] * 255.0f);
-        int g = (int) (floats[1] * 255.0f);
-        int b = (int) (floats[2] * 255.0f);
+        int r = (int) (floats[0] * 255.0F);
+        int g = (int) (floats[1] * 255.0F);
+        int b = (int) (floats[2] * 255.0F);
         return FastColor.ABGR32.color(255, r, g, b);
     }
 
