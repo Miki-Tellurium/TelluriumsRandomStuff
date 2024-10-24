@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModLootItemFunctions;
+import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
@@ -20,7 +21,8 @@ public class SetRandomGooglesColorFunction extends LootItemConditionalFunction {
     @Override
     protected ItemStack run(ItemStack itemStack, LootContext context) {
         if (itemStack.is(ModItems.LAVA_GOOGLES.get())) {
-            return LavaGooglesItem.setRandomColor(itemStack, context.getRandom());
+            int color = ColorsUtil.getRandomRgb(context.getRandom());
+            ((LavaGooglesItem)itemStack.getItem()).setColor(itemStack, color);
         }
         return itemStack;
     }
