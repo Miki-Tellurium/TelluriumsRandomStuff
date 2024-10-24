@@ -11,6 +11,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHoo
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.SpiritedAllayRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookHandRenderer;
+import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SpiritedAllaySpawnParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
@@ -101,7 +102,7 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-        event.register(ColorsUtil::getLavaGooglesColor, ModItems.LAVA_GOOGLES.get());
+        event.register(LavaGooglesItem::getItemTintColor, ModItems.LAVA_GOOGLES.get());
         // Opal crystals
         event.register((stack, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex,
                                 Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))

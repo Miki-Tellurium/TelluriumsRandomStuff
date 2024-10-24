@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
@@ -89,6 +90,15 @@ public class LavaGooglesItem extends Item implements Equipable, DyeableLeatherIt
     public int getColor(ItemStack itemStack) {
         CompoundTag tag = itemStack.getTagElement("display");
         return tag != null && tag.contains("color", 99) ? tag.getInt("color") : 16777215;
+    }
+
+    public static int getItemTintColor(ItemStack itemStack, int tintIndex) {
+        if (tintIndex == 1 && itemStack.getItem() instanceof DyeableLeatherItem dyeable) {
+            if (itemStack.getHoverName().getString().equals("tellurio_")) return 0x0080FD;
+            return dyeable.hasCustomColor(itemStack) ? dyeable.getColor(itemStack) : ColorsUtil.ALPHA_0;
+        } else {
+            return ColorsUtil.BLANK;
+        }
     }
 
     @Override

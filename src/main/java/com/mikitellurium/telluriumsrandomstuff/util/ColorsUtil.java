@@ -3,27 +3,15 @@ package com.mikitellurium.telluriumsrandomstuff.util;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.DyeableLeatherItem;
-import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
-import java.util.Random;
 
 public class ColorsUtil {
 
-    private static final int opalBaseColor = FastColor.ARGB32.color(255, 160, 220, 220);
-    private static final int opalCrystalBaseColor = FastColor.ARGB32.color(255, 140, 255, 255);
-    private static final int blank = FastColor.ARGB32.color(255, 255, 255, 255);
-    private static final int alpha0 = FastColor.ARGB32.color(0, 255, 255, 255);
-
-    public static int getLavaGooglesColor(ItemStack itemStack, int tintIndex) {
-        if (tintIndex == 1 && itemStack.getItem() instanceof DyeableLeatherItem dyeable) {
-            if (itemStack.getHoverName().getString().equals("tellurio_")) return 0x0080FD;
-            return dyeable.hasCustomColor(itemStack) ? dyeable.getColor(itemStack) : alpha0;
-        } else {
-            return blank;
-        }
-    }
+    private static final int OPAL_BASE_COLOR = FastColor.ARGB32.color(255, 160, 220, 220);
+    private static final int OPAL_CRYSTAL_BASE_COLOR = FastColor.ARGB32.color(255, 140, 255, 255);
+    public static final int BLANK = FastColor.ARGB32.color(255, 255, 255, 255);
+    public static final int ALPHA_0 = FastColor.ARGB32.color(0, 255, 255, 255);
 
     public static int getOpalStoneColor(int lightLevel) {
         return getOpalRainbowColor(-1, lightLevel, 0.6f, 0.9f, false);
@@ -33,14 +21,14 @@ public class ColorsUtil {
         return switch (tintIndex) {
             case 0 -> getOpalRainbowColor(tintIndex, lightLevel, 0.75f, 1.0f, true);
             case 1 -> getOpalRainbowColor(tintIndex, lightLevel, 0.4F, 1.0f, true);
-            default -> blank;
+            default -> BLANK;
         };
     }
 
     public static int getOpalRainbowColor(int tintIndex, int lightLevel, float saturation, float brightness, boolean isCrystal) {
         if (lightLevel == 0) {
             saturation = tintIndex == 0 ? saturation * 0.75F : saturation;
-            return isCrystal ? RGBtoHSB(opalCrystalBaseColor, saturation, brightness) : opalBaseColor;
+            return isCrystal ? RGBtoHSB(OPAL_CRYSTAL_BASE_COLOR, saturation, brightness) : OPAL_BASE_COLOR;
         }
 
         double inverted = 15.5D - lightLevel;
