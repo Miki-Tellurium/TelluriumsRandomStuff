@@ -101,7 +101,7 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-        event.register(ColorsUtil::getGooglesColor, ModItems.LAVA_GOOGLES.get());
+        event.register(ColorsUtil::getLavaGooglesColor, ModItems.LAVA_GOOGLES.get());
         // Opal crystals
         event.register((stack, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex,
                                 Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))
