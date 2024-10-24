@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.common.command.DyeColorArgument;
+import com.mikitellurium.telluriumsrandomstuff.common.command.HexColorArgument;
 import com.mikitellurium.telluriumsrandomstuff.common.command.LivingEntityArgument;
 import com.mojang.brigadier.arguments.ArgumentType;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
@@ -18,6 +19,9 @@ public class ModArgumentTypes {
 
     public static final RegistryObject<ArgumentTypeInfo<LivingEntityArgument, SingletonArgumentInfo<LivingEntityArgument>.Template>> LIVING_ENTITY = register("living_entity",
             () -> ArgumentTypeInfos.registerByClass(LivingEntityArgument.class, SingletonArgumentInfo.contextFree(LivingEntityArgument::livingEntity)));
+
+    public static final RegistryObject<ArgumentTypeInfo<HexColorArgument, SingletonArgumentInfo<HexColorArgument>.Template>> HEX_COLOR = register("hex_color",
+            () -> ArgumentTypeInfos.registerByClass(HexColorArgument.class, SingletonArgumentInfo.contextFree(HexColorArgument::hexColor)));
 
     public static <A extends ArgumentType<?>, T extends ArgumentTypeInfo.Template<A>> RegistryObject<ArgumentTypeInfo<A, T>> register(
             String name, Supplier<ArgumentTypeInfo<A, T>> argumentType) {

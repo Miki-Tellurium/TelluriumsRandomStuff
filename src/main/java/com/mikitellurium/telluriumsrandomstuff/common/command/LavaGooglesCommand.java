@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.command;
 
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -24,11 +25,11 @@ public class LavaGooglesCommand {
                         .executes((context) ->
                                 giveGoogles(context.getSource(),
                                         EntityArgument.getPlayers(context, "targets")))
-                        .then(Commands.argument("color", DyeColorArgument.dyeColor())
+                        .then(Commands.argument("color", HexColorArgument.hexColor())
                         .executes((context) ->
                                 giveGoogles(context.getSource(),
                                         EntityArgument.getPlayers(context, "targets"),
-                                        DyeColorArgument.getDyeColor(context, "color"))
+                                        HexColorArgument.getParsedColor(context, "color"))
                         ))));
     }
 
@@ -36,15 +37,15 @@ public class LavaGooglesCommand {
         return giveGoogles(source, targets, null);
     }
 
-    private static int giveGoogles(CommandSourceStack source, Collection<ServerPlayer> targets, DyeColor dyeColor) {
+    private static int giveGoogles(CommandSourceStack source, Collection<ServerPlayer> targets, Integer color) {
         for (ServerPlayer player : targets) {
-            ItemStack googles = new ItemStack(ModItems.LAVA_GOOGLES.get());
-            if (dyeColor != null) {
-                LavaGooglesItem.setColor(googles, dyeColor);
+            ItemStack itemStack = new ItemStack(ModItems.LAVA_GOOGLES.get());
+            if (color != null) {
+                ((LavaGooglesItem)itemStack.getItem()).setColor(itemStack, color);
             }
-            addStackToPlayerInventory(player, googles);
+            addStackToPlayerInventory(player, itemStack);
             source.sendSuccess(() -> Component.translatable("commands.give.success.single", 1,
-                    googles.getDisplayName(), player.getDisplayName()), true);
+                    itemStack.getDisplayName(), player.getDisplayName()), true);
         }
         return 1;
     }

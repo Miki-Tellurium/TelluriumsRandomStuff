@@ -179,6 +179,7 @@ public class ModTranslationProvider extends LanguageProvider {
         translation("command", "item.soulstorage.add", "Soul storage added: %s");
         translation("command", "item.soulstorage.remove", "Soul storage removed: %s");
         translation("command", "item.soulstorage.clear", "Soul storage cleared");
+        translation("command", "item.lava_googles.invalid_color", "Invalid color. Hex string required (ex. #FF00FF)");
         // Jei
         translation("jei", "category.soul_furnace_smelting", "Soul Furnace Smelting");
         translation("jei", "category.soul_infusion", "Soul Infusion");

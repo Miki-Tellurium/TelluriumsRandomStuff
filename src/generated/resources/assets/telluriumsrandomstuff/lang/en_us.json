@@ -79,6 +79,7 @@
   "blockentity.telluriumsrandomstuff.soul_compactor": "Soul Compactor",
   "blockentity.telluriumsrandomstuff.soul_furnace": "Soul Furnace",
   "blockentity.telluriumsrandomstuff.soul_infuser": "Soul Infuser",
+  "command.telluriumsrandomstuff.item.lava_googles.invalid_color": "Invalid color. Hex string required (ex. #FF00FF)",
   "command.telluriumsrandomstuff.item.soulstorage.add": "Soul storage added: %s",
   "command.telluriumsrandomstuff.item.soulstorage.clear": "Soul storage cleared",
   "command.telluriumsrandomstuff.item.soulstorage.notfound": "%s is not a soul storage item",
