@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.command;
 
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
@@ -21,20 +22,22 @@ public class LavaGooglesCommand {
 
     public static LiteralArgumentBuilder<CommandSourceStack> build(LiteralArgumentBuilder<CommandSourceStack> builder) {
         return builder.then(Commands.literal("giveLavaGoogles")
-                        .then(Commands.argument("targets", EntityArgument.players())
-                        .executes((context) ->
-                                giveGoogles(context.getSource(),
-                                        EntityArgument.getPlayers(context, "targets")))
+                .then(Commands.argument("targets", EntityArgument.players())
+                        .executes((context) -> giveGoogles(context.getSource(), EntityArgument.getPlayers(context, "targets")))
                         .then(Commands.argument("color", HexColorArgument.hexColor())
-                        .executes((context) ->
-                                giveGoogles(context.getSource(),
-                                        EntityArgument.getPlayers(context, "targets"),
-                                        HexColorArgument.getParsedColor(context, "color"))
-                        ))));
+                                .executes((context) -> giveGoogles(context.getSource(), EntityArgument.getPlayers(context, "targets"), HexColorArgument.getParsedColor(context, "color"))))
+                        .then(Commands.literal("random")
+                                .executes((context) -> giveGooglesRandomColor(context.getSource(), EntityArgument.getPlayers(context, "targets")))))
+        );
     }
 
     private static int giveGoogles(CommandSourceStack source, Collection<ServerPlayer> targets) {
         return giveGoogles(source, targets, null);
+    }
+
+    private static int giveGooglesRandomColor(CommandSourceStack source, Collection<ServerPlayer> targets) {
+        int color = ColorsUtil.getRandomRgb(source.getLevel().random);
+        return giveGoogles(source, targets, color);
     }
 
     private static int giveGoogles(CommandSourceStack source, Collection<ServerPlayer> targets, Integer color) {

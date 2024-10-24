@@ -80,7 +80,7 @@ public class LavaGooglesItem extends Item implements Equipable, DyeableLeatherIt
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag isAdvanced) {
         if (this.hasCustomColor(itemStack)) {
             int color = getColor(itemStack);
-            MutableComponent colorString = Component.literal(String.format(Locale.ROOT, "#%06X", color)).withStyle((style) -> style.withColor(color));
+            MutableComponent colorString = Component.literal(String.format(Locale.ROOT, "#%06X", 0xFFFFFF & color)).withStyle((style) -> style.withColor(color));
             MutableComponent textString = Component.translatable("item.telluriumsrandomstuff.tooltip.color").withStyle(ChatFormatting.GRAY);
             components.add(textString.append(": ").append(colorString));
         }
