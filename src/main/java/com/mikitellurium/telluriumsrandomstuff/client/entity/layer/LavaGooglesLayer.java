@@ -28,6 +28,7 @@ public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> 
     private static final ResourceLocation GOOGLES_FRAME_TEXTURE = FastLoc.modLoc("textures/models/armor/lava_googles_frame_model.png");
     private static final ResourceLocation GOOGLES_NO_COLOR_TEXTURE = FastLoc.modLoc("textures/models/armor/lava_googles_nocolor_layer_model.png");
     private static final ResourceLocation GOOGLES_COLORED_TEXTURE = FastLoc.modLoc("textures/models/armor/lava_googles_color_layer_model.png");
+    private static final int[] RAINBOW = new int[] {0xFF0000, 0xFD7E00, 0xFFF119, 0x26F100, 0x00FFFF, 0x0007DA, 0x6600CC};
     private final LavaGooglesModel<T> model;
 
     public LavaGooglesLayer(RenderLayerParent<T, M> parent, EntityModelSet modelSet) {
@@ -44,21 +45,18 @@ public class LavaGooglesLayer<T extends LivingEntity, M extends EntityModel<T>> 
             float[] rgb = new float[] {1.0f, 1.0f, 1.0f};
             ResourceLocation glassTexture = GOOGLES_NO_COLOR_TEXTURE;
             DyeableLeatherItem dyeableGoogles = (DyeableLeatherItem) itemStack.getItem();
-            if (dyeableGoogles.hasCustomColor(itemStack)) {
-                rgb = ColorsUtil.getRgbComponents(dyeableGoogles.getColor(itemStack));
-                glassTexture = GOOGLES_COLORED_TEXTURE;
-            }
             if (itemStack.getHoverName().getString().equals("tellurio_")) {
                 glassTexture = GOOGLES_COLORED_TEXTURE;
-                int i = livingEntity.tickCount / 25 + livingEntity.getId();
-                int colors = DyeColor.values().length;
-                int j = i % colors;
-                int k = (i + 1) % colors;
-                float f3 = ((float) (livingEntity.tickCount % 25) + partialTick) / 25.0F;
-                int color1 = ColorsUtil.getDyeColorAsInt(DyeColor.byId(j));
-                int color2 = ColorsUtil.getDyeColorAsInt(DyeColor.byId(k));
-                int finalColor = FastColor.ARGB32.lerp(f3, color1, color2);
+                int speed = 75;
+                int index = livingEntity.tickCount / speed + livingEntity.getId();
+                int color1 = index % RAINBOW.length;
+                int color2 = (index + 1) % RAINBOW.length;
+                float delta = ((float) (livingEntity.tickCount % speed) + partialTick) / (float) speed;
+                int finalColor = FastColor.ARGB32.lerp(delta, RAINBOW[color1], RAINBOW[color2]);
                 rgb = ColorsUtil.getRgbComponents(finalColor);
+            } else if (dyeableGoogles.hasCustomColor(itemStack)) {
+                glassTexture = GOOGLES_COLORED_TEXTURE;
+                rgb = ColorsUtil.getRgbComponents(dyeableGoogles.getColor(itemStack));
             }
 
             poseStack.pushPose();
