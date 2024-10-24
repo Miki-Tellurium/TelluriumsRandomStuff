@@ -7,6 +7,7 @@ import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
+import java.util.Random;
 
 public class ColorsUtil {
 
@@ -15,7 +16,7 @@ public class ColorsUtil {
     private static final int blank = FastColor.ARGB32.color(255, 255, 255, 255);
     private static final int alpha0 = FastColor.ARGB32.color(0, 255, 255, 255);
 
-    public static int getGooglesColor(ItemStack itemStack, int tintIndex) {
+    public static int getLavaGooglesColor(ItemStack itemStack, int tintIndex) {
         if (tintIndex == 1 && itemStack.getItem() instanceof DyeableLeatherItem dyeable) {
             if (itemStack.getHoverName().getString().equals("tellurio_")) return 0x0080FD;
             return dyeable.hasCustomColor(itemStack) ? dyeable.getColor(itemStack) : alpha0;
@@ -25,18 +26,18 @@ public class ColorsUtil {
     }
 
     public static int getOpalStoneColor(int lightLevel) {
-        return getRainbowColor(-1, lightLevel, 0.6f, 0.9f, false);
+        return getOpalRainbowColor(-1, lightLevel, 0.6f, 0.9f, false);
     }
 
     public static int getOpalCrystalColor(int tintIndex, int lightLevel) {
         return switch (tintIndex) {
-            case 0 -> getRainbowColor(tintIndex, lightLevel, 0.75f, 1.0f, true);
-            case 1 -> getRainbowColor(tintIndex, lightLevel, 0.4F, 1.0f, true);
+            case 0 -> getOpalRainbowColor(tintIndex, lightLevel, 0.75f, 1.0f, true);
+            case 1 -> getOpalRainbowColor(tintIndex, lightLevel, 0.4F, 1.0f, true);
             default -> blank;
         };
     }
 
-    public static int getRainbowColor(int tintIndex, int lightLevel, float saturation, float brightness, boolean isCrystal) {
+    public static int getOpalRainbowColor(int tintIndex, int lightLevel, float saturation, float brightness, boolean isCrystal) {
         if (lightLevel == 0) {
             saturation = tintIndex == 0 ? saturation * 0.75F : saturation;
             return isCrystal ? RGBtoHSB(opalCrystalBaseColor, saturation, brightness) : opalBaseColor;
@@ -59,6 +60,17 @@ public class ColorsUtil {
         float green = (rgb >> 8) & 0xFF;
         float blue = rgb & 0xFF;
         return new float[] {red / 255.0F, green / 255.0F, blue / 255.0F};
+    }
+
+    public static int getRandomRgb(RandomSource random) {
+        return getRandomRgb(random, 255);
+    }
+
+    public static int getRandomRgb(RandomSource random, int alpha) {
+        int red = (int) (random.nextFloat() * 255.0F);
+        int green = (int) (random.nextFloat() * 255.0F);
+        int blue = (int) (random.nextFloat() * 255.0F);
+        return FastColor.ARGB32.color(alpha, red, green, blue);
     }
 
     private static float extractHue(int rgb) {
