@@ -74,7 +74,6 @@ public class CommonSetup {
                         .requires((sourceStack) -> sourceStack.hasPermission(2));
         dispatcher.register(LavaGooglesCommand.build(builder));
         dispatcher.register(SoulAnchorCommand.build(builder));
-        dispatcher.register(SoulStorageCommand.build(builder));
     }
 
     private static void tickMenus(TickEvent.PlayerTickEvent event) {
