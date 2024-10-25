@@ -21,17 +21,16 @@ public class ModCauldronInteractions {
             SoundEvents.BUCKET_EMPTY_LAVA);
 
     public static void register() {
-        // Add the soul lava interaction to the vanilla cauldrons
         CauldronInteraction.EMPTY.put(ModItems.SOUL_LAVA_BUCKET.get(), FILL_SOUL_LAVA);
         CauldronInteraction.WATER.put(ModItems.SOUL_LAVA_BUCKET.get(), FILL_SOUL_LAVA);
         CauldronInteraction.LAVA.put(ModItems.SOUL_LAVA_BUCKET.get(), FILL_SOUL_LAVA);
         CauldronInteraction.POWDER_SNOW.put(ModItems.SOUL_LAVA_BUCKET.get(), FILL_SOUL_LAVA);
-        // Add soul lava cauldron interactions
         SOUL_LAVA.put(Items.BUCKET, (blockState, level, blockPos, player, interactionHand, itemStack) ->
                 fillBucket(blockState, level, blockPos, player, interactionHand, itemStack, new ItemStack(ModItems.SOUL_LAVA_BUCKET.get()),
                 (state) -> true, SoundEvents.BUCKET_FILL_LAVA));
         SOUL_LAVA.put(ModItems.SOUL_LAVA_BUCKET.get(), FILL_SOUL_LAVA);
         CauldronInteraction.addDefaultInteractions(SOUL_LAVA);
+        CauldronInteraction.WATER.put(ModItems.LAVA_GOOGLES.get(), CauldronInteraction.DYED_ITEM);
     }
 
 }
