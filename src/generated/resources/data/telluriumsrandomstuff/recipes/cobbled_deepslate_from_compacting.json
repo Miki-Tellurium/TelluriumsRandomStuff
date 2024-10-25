@@ -4,7 +4,7 @@
   "count": 4,
   "ingredient": {
     "count": 8,
-    "item": "minecraft:stone"
+    "item": "minecraft:cobblestone"
   },
-  "result": "minecraft:deepslate"
+  "result": "minecraft:cobbled_deepslate"
 }
