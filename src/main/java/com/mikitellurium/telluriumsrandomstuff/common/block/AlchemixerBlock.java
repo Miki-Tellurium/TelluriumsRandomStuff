@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AlchemixerBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingEntityBlock;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,14 +41,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class AlchemixerBlock extends BaseEntityBlock {
+public class AlchemixerBlock extends TickingEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty[] HAS_BOTTLE = new BooleanProperty[]{
-            BlockStateProperties.HAS_BOTTLE_0,
-            BlockStateProperties.HAS_BOTTLE_1,
-            BlockStateProperties.HAS_BOTTLE_2
-    };
+    public static final BooleanProperty[] HAS_BOTTLE = new BooleanProperty[] {BlockStateProperties.HAS_BOTTLE_0, BlockStateProperties.HAS_BOTTLE_1, BlockStateProperties.HAS_BOTTLE_2};
     protected static final VoxelShape STAND = Block.box(7.0D, 0.0D, 7.0D, 9.0D, 14.0D, 9.0D);
     protected static final VoxelShape BASE_X = Block.box(5.0D, 0.0D, 1.0D, 11.0D, 2.0D, 15.0D);
     protected static final VoxelShape BASE_Z = Block.box(1.0D, 0.0D, 5.0D, 15.0D, 2.0D, 11.0D);
@@ -55,7 +52,7 @@ public class AlchemixerBlock extends BaseEntityBlock {
     protected static final VoxelShape SHAPE_Z_AXIS = Shapes.or(STAND, BASE_Z);
 
     public AlchemixerBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.BREWING_STAND));
+        super(AlchemixerBlockEntity::new, BlockBehaviour.Properties.copy(Blocks.BREWING_STAND));
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(HAS_BOTTLE[0], false)
@@ -64,18 +61,9 @@ public class AlchemixerBlock extends BaseEntityBlock {
         );
     }
 
-    @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return new AlchemixerBlockEntity(pos, blockState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
-                                                                  BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.ALCHEMIXER.get(),
-                (tickLevel, blockPos, state, alchemixer) -> alchemixer.tick(tickLevel, blockPos, state));
+    public BlockEntityType<?> getBlockEntityType() {
+        return ModBlockEntities.ALCHEMIXER.get();
     }
 
     @Override

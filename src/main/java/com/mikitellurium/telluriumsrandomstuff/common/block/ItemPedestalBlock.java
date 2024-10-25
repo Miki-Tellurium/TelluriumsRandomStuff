@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
-import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AlchemixerBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.ItemPedestalBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingEntityBlock;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.PedestalItemSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
@@ -14,11 +14,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -27,29 +25,19 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
-public class ItemPedestalBlock extends BaseEntityBlock {
+public class ItemPedestalBlock extends TickingEntityBlock {
 
     private final VoxelShape PEDESTAL_SHAPE = Block.box(1.0D, 0.0D, 1.0D,
             15.0D, 15.0D, 15.0D);
 
     public ItemPedestalBlock(Properties properties) {
-        super(properties.noOcclusion());
+        super(ItemPedestalBlockEntity::new, properties.noOcclusion());
     }
 
-    @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return new ItemPedestalBlockEntity(pos, blockState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
-                                                                  BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.ITEM_PEDESTAL.get(),
-                (tickLevel, blockPos, state, itemPedestal) -> itemPedestal.tick(tickLevel, blockPos, state));
+    public BlockEntityType<?> getBlockEntityType() {
+        return ModBlockEntities.ITEM_PEDESTAL.get();
     }
 
     @Override

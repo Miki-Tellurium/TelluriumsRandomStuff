@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulFurnaceBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.lib.TickingBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -27,26 +28,18 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulFurnaceBlock extends AbstractFurnaceBlock {
+public class SoulFurnaceBlock extends TickingFurnaceBlock {
 
     public SoulFurnaceBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.BLAST_FURNACE)
+        super(SoulFurnaceBlockEntity::new, BlockBehaviour.Properties.copy(Blocks.BLAST_FURNACE)
                 .explosionResistance(1200.0f)
                 .lightLevel(SoulFurnaceBlock::getLightLevel)
                 .emissiveRendering((blockState, blockGetter, blockPos) -> true));
     }
 
-    @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return new SoulFurnaceBlockEntity(pos, blockState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntities.SOUL_FURNACE.get(),
-                (tickLevel, pos, state, blockEntity) -> blockEntity.tick(tickLevel, pos, state));
+    public BlockEntityType<?> getBlockEntityType() {
+        return ModBlockEntities.SOUL_FURNACE.get();
     }
 
     @Override

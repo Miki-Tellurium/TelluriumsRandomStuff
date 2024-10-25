@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AbstractSoulSmeltingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.SoulInfuserBlockEntity;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingFurnaceBlock;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -26,24 +27,15 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulInfuserBlock extends AbstractFurnaceBlock {
+public class SoulInfuserBlock extends TickingFurnaceBlock {
 
     public SoulInfuserBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.BLAST_FURNACE));
+        super(SoulInfuserBlockEntity::new, BlockBehaviour.Properties.copy(Blocks.BLAST_FURNACE));
     }
 
-    @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return new SoulInfuserBlockEntity(pos, blockState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
-                                                                  BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.SOUL_INFUSER.get(),
-                (tickLevel, blockPos, state, soulInfuser) -> soulInfuser.tick(tickLevel, blockPos, state));
+    public BlockEntityType<?> getBlockEntityType() {
+        return ModBlockEntities.SOUL_INFUSER.get();
     }
 
     @Override
