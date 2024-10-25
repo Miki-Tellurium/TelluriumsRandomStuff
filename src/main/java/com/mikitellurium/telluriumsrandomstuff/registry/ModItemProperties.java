@@ -35,7 +35,12 @@ public class ModItemProperties {
                     return livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F;
                 });
         ItemProperties.register(ModItems.LAVA_GOOGLES.get(), FastLoc.modLoc("colored"),
-                (itemStack, level, livingEntity, seed) -> ((DyeableLeatherItem)itemStack.getItem()).hasCustomColor(itemStack) ? 1.0F : 0);
+                (itemStack, level, livingEntity, seed) -> {
+                    if (itemStack.getHoverName().getString().equals("tellurio_")) {
+                        return 1.0F;
+                    }
+                    return  ((DyeableLeatherItem)itemStack.getItem()).hasCustomColor(itemStack) ? 1.0F : 0;
+                });
         ItemProperties.register(ModItems.SPIRIT_BOTTLE.get(), FastLoc.modLoc("storage"),
                 (itemStack, level, livingEntity, seed) -> {
                     SpiritBottleItem item = (SpiritBottleItem) itemStack.getItem();

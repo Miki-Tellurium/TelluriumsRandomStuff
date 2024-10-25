@@ -94,7 +94,9 @@ public class LavaGooglesItem extends Item implements Equipable, DyeableLeatherIt
 
     public static int getItemTintColor(ItemStack itemStack, int tintIndex) {
         if (tintIndex == 1 && itemStack.getItem() instanceof DyeableLeatherItem dyeable) {
-            if (itemStack.getHoverName().getString().equals("tellurio_")) return 0x0080FD;
+            if (itemStack.getHoverName().getString().equals("tellurio_")) {
+                return 0x0080FD;
+            }
             return dyeable.hasCustomColor(itemStack) ? dyeable.getColor(itemStack) : ColorsUtil.ALPHA_0;
         } else {
             return ColorsUtil.BLANK;
