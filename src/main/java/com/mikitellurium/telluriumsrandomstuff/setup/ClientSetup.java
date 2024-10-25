@@ -43,9 +43,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
 
-    public static void registerForgeBusEvents() {
-    }
-
     @SubscribeEvent
     public static void setup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
