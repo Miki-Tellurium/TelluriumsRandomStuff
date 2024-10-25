@@ -3,10 +3,12 @@ package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulCompactorMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulCompactorBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -59,14 +61,11 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
                 BUCKET_SLOT);
     }
 
-    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
-        if (level.isClientSide) {
-            return;
-        }
+    @Override
+    public void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState) {
         int cachedProgress = this.progress;
-        super.tick(level, blockPos, blockState);
-        level.setBlock(blockPos, blockState.setValue(SoulCompactorBlock.LIT,
-                cachedProgress >= this.maxProgress - 1 || this.isLit()), 2);
+        super.serverTick(level, blockPos, blockState);
+        level.setBlock(blockPos, blockState.setValue(SoulCompactorBlock.LIT, cachedProgress >= this.maxProgress - 1 || this.isLit()), 2);
         setChanged(level, blockPos, blockState);
     }
 

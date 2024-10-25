@@ -1,10 +1,12 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.networking.ModMessages;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.DisplayNameSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.PedestalItemSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.networking.packets.RotOffsetSyncS2CPacket;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("ConstantConditions")
-public class ItemPedestalBlockEntity extends BlockEntity {
+public class ItemPedestalBlockEntity extends BlockEntity implements TickingBlockEntity {
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -54,8 +56,9 @@ public class ItemPedestalBlockEntity extends BlockEntity {
         super(ModBlockEntities.ITEM_PEDESTAL.get(), pos, state);
     }
 
-    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
-        if (level.isClientSide && !this.isEmpty()) {
+    @Override
+    public void clientTick(ClientLevel level, BlockPos blockPos, BlockState blockState) {
+        if (!this.isEmpty()) {
             if (this.rotTick < this.itemRotationTime) {
                 this.rotTick++;
             } else {
@@ -99,10 +102,6 @@ public class ItemPedestalBlockEntity extends BlockEntity {
     public void dropItem() {
         Containers.dropContents(this.level, this.worldPosition.above(), new SimpleContainer(this.getItem()));
     }
-
-//    public void syncItem(ItemStack itemStack) {
-//        this.itemHandler.setStackInSlot(0, itemStack);
-//    }
 
     public int getRotTick() {
         return rotTick;

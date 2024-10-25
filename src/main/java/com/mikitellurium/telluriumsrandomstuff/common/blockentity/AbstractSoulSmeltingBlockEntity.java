@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
 import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;
 import com.mikitellurium.telluriumsrandomstuff.lib.SidedCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -9,6 +10,7 @@ import com.mikitellurium.telluriumsrandomstuff.util.CachedObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
@@ -38,7 +40,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container>> extends AbstractSoulFueledBlockEntity implements SidedCapabilityProvider<WrappedHandler> {
+public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container>> extends AbstractSoulFueledBlockEntity implements TickingBlockEntity, SidedCapabilityProvider<WrappedHandler> {
 
     private final int bucketSlot;
     private final MappedItemStackHandler itemHandler;
@@ -67,16 +69,8 @@ public abstract class AbstractSoulSmeltingBlockEntity<R extends Recipe<Container
         };
     }
 
-    /**
-     * Called every tick to update the block entity logic
-     * @param level
-     * @param blockPos
-     * @param blockState
-     */
-    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
-        if (level.isClientSide) {
-            return;
-        }
+    @Override
+    public void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState) {
         this.handleTankRefill();
         Optional<R> optionalRecipe = this.getRecipe();
         if (optionalRecipe.isPresent() && this.canProcessRecipe(optionalRecipe.get())) {

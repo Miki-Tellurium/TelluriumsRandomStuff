@@ -5,6 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.PotionMixingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.lib.MappedItemStackHandler;
 import com.mikitellurium.telluriumsrandomstuff.lib.SidedCapabilityProvider;
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.lib.WrappedHandler;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
@@ -13,6 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -38,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity implements MenuProvider, SidedCapabilityProvider<WrappedHandler> {
+public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity implements TickingBlockEntity, MenuProvider, SidedCapabilityProvider<WrappedHandler> {
 
     private final int bucketSlot = 0;
     private static final int INPUT_SLOT1 = 1;
@@ -95,10 +97,8 @@ public class AlchemixerBlockEntity extends AbstractSoulFueledBlockEntity impleme
         super(ModBlockEntities.ALCHEMIXER.get(), pos, blockState, 4000);
     }
 
-    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
-        if (level.isClientSide) {
-            return;
-        }
+    @Override
+    public void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState) {
         this.handleTankRefill();
         Optional<PotionMixingRecipe> optionalRecipe = this.getRecipe();
         if (optionalRecipe.isPresent() && this.canProcessRecipe(optionalRecipe.get())) {

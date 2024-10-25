@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.blockentity;
 
+import com.mikitellurium.telluriumsrandomstuff.lib.TickingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.util.LogUtils;
 import net.minecraft.core.BlockPos;
@@ -28,7 +29,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class AwakenedSculkShriekerBlockEntity extends BlockEntity {
+public class AwakenedSculkShriekerBlockEntity extends BlockEntity implements TickingBlockEntity {
 
     private final SculkSpreader sculkSpreader = SculkSpreader.createLevelSpreader();
     public static ForgeConfigSpec.IntValue SPAWN_DELAY;
@@ -38,8 +39,8 @@ public class AwakenedSculkShriekerBlockEntity extends BlockEntity {
         super(ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get(), pos, blockState);
     }
 
-    public void tick(Level level, BlockPos pos, BlockState blockState) {
-        if (level.isClientSide) return;
+    @Override
+    public void serverTick(ServerLevel level, BlockPos pos, BlockState blockState) {
         this.sculkSpreader.updateCursors(level, pos, level.random, true);
         if (!blockState.getValue(SculkShriekerBlock.CAN_SUMMON)) {
             if (--spawnDelay <= 0) {
