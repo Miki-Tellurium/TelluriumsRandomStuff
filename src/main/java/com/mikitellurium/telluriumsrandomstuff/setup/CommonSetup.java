@@ -9,11 +9,10 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauld
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
-import com.mikitellurium.telluriumsrandomstuff.common.item.ResonanceCrystalItem;
-import com.mikitellurium.telluriumsrandomstuff.test.bin.SoulStorageCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
+import com.mikitellurium.telluriumsrandomstuff.common.item.ResonanceCrystalItem;
 import com.mikitellurium.telluriumsrandomstuff.lib.TickingMenu;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
@@ -76,14 +75,14 @@ public class CommonSetup {
         dispatcher.register(SoulAnchorCommand.build(builder));
     }
 
+    private static void registerMobAttributes(EntityAttributeCreationEvent event) {
+        event.put(ModEntities.SPIRITED_ALLAY.get(), Allay.createAttributes().build());
+    }
+
     private static void tickMenus(TickEvent.PlayerTickEvent event) {
         if (event.player instanceof ServerPlayer && event.player.containerMenu instanceof TickingMenu menu && event.phase == TickEvent.Phase.END) {
             menu.tickMenu((ServerPlayer) event.player);
         }
-    }
-
-    private static void registerMobAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.SPIRITED_ALLAY.get(), Allay.createAttributes().build());
     }
 
 }
