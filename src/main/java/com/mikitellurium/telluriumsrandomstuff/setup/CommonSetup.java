@@ -40,7 +40,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 public class CommonSetup {
 
     public static void registerForgeBusEvents() {
-        MinecraftForge.EVENT_BUS.addListener(CommonSetup::setup);
         MinecraftForge.EVENT_BUS.addListener(CommonSetup::registerCommands);
         MinecraftForge.EVENT_BUS.register(CustomBubbleColumnBlock.class);
         MinecraftForge.EVENT_BUS.register(SoulAnchorBlock.class);
@@ -53,8 +52,9 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(ResonanceCrystalItem.class);
     }
 
-    public static void registerModBusEvents(IEventBus eventBus) {
-        eventBus.addListener(CommonSetup::registerMobAttributes);
+    public static void registerModBusEvents(IEventBus modEventBus) {
+        modEventBus.addListener(CommonSetup::setup);
+        modEventBus.addListener(CommonSetup::registerMobAttributes);
     }
 
     private static void setup(final FMLCommonSetupEvent event) {
