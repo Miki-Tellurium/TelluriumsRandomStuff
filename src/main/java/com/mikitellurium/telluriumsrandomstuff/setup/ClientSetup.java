@@ -78,14 +78,10 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         // Opal crystals
-        event.register((state, level, pos, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex,
-                        LevelUtils.getHighestLightLevel(level, pos)
-                ),
+        event.register((state, level, pos, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex, LevelUtils.getHighestLightLevel(level, pos)),
                 ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_CRYSTAL_BLOCK.get());
         // Opal stones
-        event.getBlockColors().register((state, level, pos, tintIndex) -> ColorsUtil.getOpalStoneColor(
-                        LevelUtils.getHighestLightLevel(level, pos)
-                ),
+        event.getBlockColors().register((state, level, pos, tintIndex) -> ColorsUtil.getOpalStoneColor(LevelUtils.getHighestLightLevel(level, pos)),
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
                 ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
@@ -101,16 +97,12 @@ public class ClientSetup {
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.register(LavaGooglesItem::getItemTintColor, ModItems.LAVA_GOOGLES.get());
         // Opal crystals
-        event.register((stack, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex,
-                                Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))
-                        ),
+        event.register((stack, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex, Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))),
                 ModItems.OPAL_CRYSTAL.get(), ModItems.RAW_OPAL_CRYSTAL.get(), ModItems.OPAL_CRYSTAL_AXE.get(),
                 ModItems.OPAL_CRYSTAL_SHOVEL.get(), ModItems.OPAL_CRYSTAL_HOE.get(), ModItems.OPAL_CRYSTAL_PICKAXE.get(),
                 ModItems.OPAL_CRYSTAL_SWORD.get(), ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_CRYSTAL_BLOCK.get());
         // Opal stones
-        event.register((stack, tintIndex) -> ColorsUtil.getOpalStoneColor(
-                        Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))
-                ),
+        event.register((stack, tintIndex) -> ColorsUtil.getOpalStoneColor(Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))),
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
                 ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
@@ -163,8 +155,7 @@ public class ClientSetup {
                     continue; // Exclude player, we add them later
                 }
 
-            LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer =
-                    event.getRenderer((EntityType<LivingEntity>) entityType);
+            LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer = event.getRenderer((EntityType<LivingEntity>) entityType);
                 addLayerToRenderer(renderer, entityType, modelSet);
             } catch (ClassCastException e) {
                 // Non living entities can't be casted to LivingEntity,
@@ -186,8 +177,7 @@ public class ClientSetup {
     private static void addLayerToRenderer(LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer,
                                            EntityType<?> entityType, EntityModelSet modelSet) {
         try {
-            if (renderer instanceof HumanoidMobRenderer || entityType == EntityType.ARMOR_STAND ||
-                    entityType == EntityType.GIANT) {
+            if (renderer instanceof HumanoidMobRenderer || entityType == EntityType.ARMOR_STAND || entityType == EntityType.GIANT) {
                 renderer.addLayer(new LavaGooglesLayer<>(renderer, modelSet));
                 TelluriumsRandomStuffMod.LOGGER.info("Render layer correctly added to {}", entityType.toShortString());
             }
