@@ -1,4 +1,4 @@
-package com.mikitellurium.telluriumsrandomstuff.setup;
+package com.mikitellurium.telluriumsrandomstuff;
 
 import com.mikitellurium.telluriumsrandomstuff.api.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
@@ -25,7 +25,6 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;

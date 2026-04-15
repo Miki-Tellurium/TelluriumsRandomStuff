@@ -2,7 +2,6 @@ package com.mikitellurium.telluriumsrandomstuff;
 
 import com.mikitellurium.telluriumsrandomstuff.api.CustomRegistries;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModRegistries;
-import com.mikitellurium.telluriumsrandomstuff.setup.CommonSetup;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
