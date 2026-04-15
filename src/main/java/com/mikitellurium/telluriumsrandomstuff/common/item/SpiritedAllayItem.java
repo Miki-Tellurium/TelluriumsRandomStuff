@@ -31,23 +31,23 @@ public class SpiritedAllayItem extends Item {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        Level level = context.getLevel();
-        if (!level.isClientSide) {
-            ItemStack itemStack = context.getItemInHand();
-            BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
-            CompoundTag tag = getEntityTag(itemStack);
-            if (tag != null) {
-                if (this.spawnFromTag(tag, (ServerLevel) level, pos)) {
-                    itemStack.shrink(1);
-                    return InteractionResult.SUCCESS;
-                }
-            } else {
-                if (this.spawnWithoutTag((ServerLevel) level, context.getItemInHand(), context.getPlayer(), pos)) {
-                    itemStack.shrink(1);
-                    return InteractionResult.SUCCESS;
-                }
-            }
-        }
+//        Level level = context.getLevel();
+//        if (!level.isClientSide) {
+//            ItemStack itemStack = context.getItemInHand();
+//            BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
+//            CompoundTag tag = getEntityTag(itemStack);
+//            if (tag != null) {
+//                if (this.spawnFromTag(tag, (ServerLevel) level, pos)) {
+//                    itemStack.shrink(1);
+//                    return InteractionResult.SUCCESS;
+//                }
+//            } else {
+//                if (this.spawnWithoutTag((ServerLevel) level, context.getItemInHand(), context.getPlayer(), pos)) {
+//                    itemStack.shrink(1);
+//                    return InteractionResult.SUCCESS;
+//                }
+//            }
+//        }
         return super.useOn(context);
     }
 

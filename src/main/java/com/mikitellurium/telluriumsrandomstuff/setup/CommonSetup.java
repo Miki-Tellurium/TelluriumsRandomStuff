@@ -9,6 +9,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauld
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
+import com.mikitellurium.telluriumsrandomstuff.common.entity.SpiritedAllay;
 import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
@@ -76,7 +77,7 @@ public class CommonSetup {
     }
 
     private static void registerMobAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.SPIRITED_ALLAY.get(), Allay.createAttributes().build());
+        event.put(ModEntities.SPIRITED_ALLAY.get(), SpiritedAllay.createAttributes().build());
     }
 
     private static void tickMenus(TickEvent.PlayerTickEvent event) {
