@@ -20,6 +20,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.player.Player;
@@ -31,6 +32,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +42,6 @@ import java.util.Locale;
 import java.util.function.Consumer;
 
 public class LavaGooglesItem extends Item implements Equipable, DyeableLeatherItem, Vanishable {
-
     public static ResourceLocation OVERLAY_TEXTURE = FastLoc.modLoc("textures/misc/lava_googles_overlay.png");
 
     public LavaGooglesItem() {
@@ -148,8 +149,8 @@ public class LavaGooglesItem extends Item implements Equipable, DyeableLeatherIt
     }
 
     @SubscribeEvent
-    public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
-        if (event.getLevel().isClientSide) {
+    public static void onMobSpawn(MobSpawnEvent.FinalizeSpawn event) {
+        if (event.getLevel().isClientSide()) {
             return;
         }
         RandomSource random = event.getLevel().getRandom();
@@ -157,7 +158,8 @@ public class LavaGooglesItem extends Item implements Equipable, DyeableLeatherIt
             Entity entity = event.getEntity();
             if (entity instanceof Zombie || entity instanceof AbstractSkeleton || entity instanceof AbstractPiglin) {
                 ItemStack googles = new ItemStack(ModItems.LAVA_GOOGLES.get());
-                //LavaGooglesItem.setRandomColor(googles, random);
+                int color = ColorsUtil.getRandomRgb(random);
+                ((LavaGooglesItem)googles.getItem()).setColor(googles, color);
                 if (random.nextFloat() < 0.40f) {
                     EnchantmentHelper.enchantItem(random, googles, 10 + random.nextInt(20), true);
                 }
@@ -165,5 +167,4 @@ public class LavaGooglesItem extends Item implements Equipable, DyeableLeatherIt
             }
         }
     }
-
 }
