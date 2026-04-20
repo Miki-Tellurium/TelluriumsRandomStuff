@@ -17,9 +17,9 @@ public class LevelUtils {
     }
 
     public static int getHighestLightLevel(BlockAndTintGetter level, BlockPos pos) {
-        int highestLightLevel = 0;
-        if (level == null || pos == null) return highestLightLevel;
+        if (level == null || pos == null) return 0;
 
+        int highestLightLevel = 0;
         for (Direction direction : Direction.values()) {
             BlockPos sidePos = pos.relative(direction);
             BlockState adjacentBlock = level.getBlockState(sidePos);
@@ -28,7 +28,7 @@ public class LevelUtils {
             if (adjacentBlock.getLightEmission() > 0) {
                 lightLevel = adjacentBlock.getLightEmission();
             } else if (adjacentBlock.isFaceSturdy(level, pos, direction.getOpposite()) && adjacentBlock.isViewBlocking(level, pos)) {
-                continue; // If this face face is obstructed skip this direction
+                continue; // If this face is obstructed skip this direction
             } else {
                 lightLevel = level.getBrightness(LightLayer.BLOCK, sidePos);
             }

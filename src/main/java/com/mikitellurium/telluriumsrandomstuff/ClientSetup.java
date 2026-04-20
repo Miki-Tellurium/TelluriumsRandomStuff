@@ -15,11 +15,11 @@ import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParti
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SpiritedAllaySpawnParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
-import com.mikitellurium.telluriumsrandomstuff.util.LevelUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -28,7 +28,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
@@ -77,10 +76,10 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         // Opal crystals
-        event.register((state, level, pos, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex, LevelUtils.getHighestLightLevel(level, pos)),
+        event.register(ColorsUtil.getOpalBlockColor(true),
                 ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_CRYSTAL_BLOCK.get());
         // Opal stones
-        event.getBlockColors().register((state, level, pos, tintIndex) -> ColorsUtil.getOpalStoneColor(LevelUtils.getHighestLightLevel(level, pos)),
+        event.register(ColorsUtil.getOpalBlockColor(false),
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
                 ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
@@ -96,12 +95,12 @@ public class ClientSetup {
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.register(LavaGooglesItem::getItemTintColor, ModItems.LAVA_GOOGLES.get());
         // Opal crystals
-        event.register((stack, tintIndex) -> ColorsUtil.getOpalCrystalColor(tintIndex, Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))),
+        event.register(ColorsUtil.getOpalItemColor(true),
                 ModItems.OPAL_CRYSTAL.get(), ModItems.RAW_OPAL_CRYSTAL.get(), ModItems.OPAL_CRYSTAL_AXE.get(),
                 ModItems.OPAL_CRYSTAL_SHOVEL.get(), ModItems.OPAL_CRYSTAL_HOE.get(), ModItems.OPAL_CRYSTAL_PICKAXE.get(),
                 ModItems.OPAL_CRYSTAL_SWORD.get(), ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), ModBlocks.OPAL_CRYSTAL_BLOCK.get());
         // Opal stones
-        event.register((stack, tintIndex) -> ColorsUtil.getOpalStoneColor(Minecraft.getInstance().level.getBrightness(LightLayer.BLOCK, getColorPos(stack))),
+        event.register(ColorsUtil.getOpalItemColor(false),
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
                 ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
                 ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
@@ -111,22 +110,6 @@ public class ClientSetup {
                 ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
                 ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_CRYSTAL_ORE.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(),
                 ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(), ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
-    }
-
-    private static BlockPos getColorPos(ItemStack stack) {
-        BlockPos pos = BlockPos.ZERO;
-
-        if (stack.isFramed()) { // Check if the item is in item frame
-            pos = stack.getFrame().getPos();
-        } else if (stack.getEntityRepresentation() != null) { // Check if the item is dropped in the world
-            pos = stack.getEntityRepresentation().getOnPos();
-        } else {
-            Player player = Minecraft.getInstance().player;
-            if (player != null) {
-                pos = player.getOnPos();
-            }
-        }
-        return pos.above();
     }
 
     @SubscribeEvent
@@ -157,7 +140,7 @@ public class ClientSetup {
             LivingEntityRenderer<LivingEntity, HumanoidModel<LivingEntity>> renderer = event.getRenderer((EntityType<LivingEntity>) entityType);
                 addLayerToRenderer(renderer, entityType, modelSet);
             } catch (ClassCastException e) {
-                // Non living entities can't be casted to LivingEntity,
+                // Non-living entities can't be cast to LivingEntity,
                 // no need to do anything
             }
         }
