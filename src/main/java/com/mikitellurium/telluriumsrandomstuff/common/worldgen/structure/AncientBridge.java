@@ -23,7 +23,7 @@ public class AncientBridge extends Structure {
     // /place jigsaw telluriumsrandomstuff:ancient_bridge/central_watchtower/top ancient_bridge_anchor 7 ~ -35 ~
 
     private static final Codec<AncientBridge> CODEC = RecordCodecBuilder.<AncientBridge>mapCodec(instance ->
-            instance.group(AncientBridge.settingsCodec(instance),
+            instance.group(Structure.settingsCodec(instance),
                     StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
                     ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
                     Codec.intRange(0, 8).fieldOf("size").forGetter(structure -> structure.size),
@@ -65,20 +65,12 @@ public class AncientBridge extends Structure {
         int startY = this.startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
         Supplier<Integer> randomOffset = () -> Mth.randomBetweenInclusive(context.random(), -8, 8);
         BlockPos pos = context.chunkPos().getMiddleBlockPosition(startY).offset(randomOffset.get(), 0, randomOffset.get());
-        return JigsawPlacement.addPieces(
-                context,
-                this.startPool,
-                this.startJigsawName,
-                this.size,
-                pos,
-                false,
-                this.projectStartToHeightmap,
-                this.maxDistanceFromCenter);
+        return JigsawPlacement.addPieces(context, this.startPool, this.startJigsawName, this.size,
+                pos, false, this.projectStartToHeightmap, this.maxDistanceFromCenter);
     }
 
     @Override
     public StructureType<?> type() {
         return ModStructures.ANCIENT_BRIDGE.get();
     }
-
 }
