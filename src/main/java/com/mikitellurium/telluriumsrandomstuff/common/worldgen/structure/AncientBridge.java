@@ -19,17 +19,14 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public class AncientBridge extends Structure {
-
-    // /place jigsaw telluriumsrandomstuff:ancient_bridge/central_watchtower/top ancient_bridge_anchor 7 ~ -35 ~
-
     private static final Codec<AncientBridge> CODEC = RecordCodecBuilder.<AncientBridge>mapCodec(instance ->
             instance.group(Structure.settingsCodec(instance),
                     StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
                     ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
-                    Codec.intRange(0, 8).fieldOf("size").forGetter(structure -> structure.size),
+                    Codec.intRange(0, 7).fieldOf("size").forGetter(structure -> structure.size),
                     HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                     Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
-                    Codec.intRange(1, 256).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter)
+                    Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter)
             ).apply(instance, AncientBridge::new)).codec();
 
     public static Codec<AncientBridge> codec() {
@@ -43,14 +40,8 @@ public class AncientBridge extends Structure {
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
 
-    public AncientBridge(Structure.StructureSettings config,
-                         Holder<StructureTemplatePool> startPool,
-                         Optional<ResourceLocation> startJigsawName,
-                         int size,
-                         HeightProvider startHeight,
-                         Optional<Heightmap.Types> projectStartToHeightmap,
-                         int maxDistanceFromCenter)
-    {
+    public AncientBridge(Structure.StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName,
+                         int size, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter) {
         super(config);
         this.startPool = startPool;
         this.startJigsawName = startJigsawName;
