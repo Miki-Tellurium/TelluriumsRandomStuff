@@ -10,11 +10,6 @@ import org.slf4j.Logger;
 
 @Mod(TelluriumsRandomStuffMod.MOD_ID)
 public class TelluriumsRandomStuffMod {
-
-    // todo rei and emi compatibility
-    // todo update changelog
-    // todo add armor trims
-
     public static final String MOD_ID = "telluriumsrandomstuff";
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -26,6 +21,5 @@ public class TelluriumsRandomStuffMod {
         CommonSetup.registerForgeBusEvents();
         CommonSetup.registerModBusEvents(modEventBus);
     }
-
 }
 
