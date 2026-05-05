@@ -38,7 +38,6 @@ public class ModRegistries {
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, FastLoc.modId());
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, FastLoc.modId());
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, FastLoc.modId());
-    public static final DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(Registries.STRUCTURE_TYPE, FastLoc.modId());
 
     public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSORS = DeferredRegister.create(Registries.STRUCTURE_PROCESSOR, FastLoc.modId());
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, FastLoc.modId());
@@ -59,7 +58,6 @@ public class ModRegistries {
         ModFluids.register(modEventBus);
         ModEnchantments.register(modEventBus);
         ModFeatures.register(modEventBus);
-        ModStructures.register(modEventBus);
         ModStructureProcessors.register(modEventBus);
         ModCreativeTab.register(modEventBus);
         ModParticles.register(modEventBus);

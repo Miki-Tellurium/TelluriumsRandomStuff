@@ -1,15 +1,16 @@
 {
-  "type": "telluriumsrandomstuff:ancient_bridge",
+  "type": "minecraft:jigsaw",
   "start_jigsaw_name": "minecraft:ancient_bridge_anchor",
   "start_pool": "telluriumsrandomstuff:ancient_bridge/central_watchtower/bottom",
   "size": 7,
-  "max_distance_from_center": 128,
+  "max_distance_from_center": 116,
   "biomes": "#telluriumsrandomstuff:has_structure/ancient_bridge",
   "step": "underground_decoration",
   "terrain_adaptation": "beard_box",
   "start_height": {
     "absolute": -53
   },
+  "use_expansion_hack": false,
   "spawn_overrides": {
     "ambient": {
       "bounding_box": "full",
