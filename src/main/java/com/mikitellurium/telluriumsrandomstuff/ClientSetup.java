@@ -4,30 +4,22 @@ import com.mikitellurium.telluriumsrandomstuff.client.blockentity.ItemPedestalRe
 import com.mikitellurium.telluriumsrandomstuff.client.entity.layer.LavaGooglesLayer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.GrapplingHookModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.model.LavaGooglesModel;
-import com.mikitellurium.telluriumsrandomstuff.client.entity.model.SpiritedAllayModel;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.DummyPlayerRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
-import com.mikitellurium.telluriumsrandomstuff.client.entity.render.SpiritedAllayRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookHandRenderer;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
-import com.mikitellurium.telluriumsrandomstuff.common.particle.SpiritedAllaySpawnParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
 import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
@@ -40,7 +32,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = TelluriumsRandomStuffMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
-
     @SubscribeEvent
     public static void setup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
@@ -64,7 +55,6 @@ public class ClientSetup {
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.GRAPPLING_HOOK.get(), GrapplingHookRenderer::new);
         event.registerEntityRenderer(ModEntities.DUMMY_PLAYER.get(), DummyPlayerRenderer::new);
-        event.registerEntityRenderer(ModEntities.SPIRITED_ALLAY.get(), SpiritedAllayRenderer::new);
     }
 
     @SubscribeEvent
@@ -117,14 +107,12 @@ public class ClientSetup {
         event.registerSpriteSet(ModParticles.SOUL_LAVA_FALL.get(), SoulLavaDripParticle.SoulLavaFallProvider::new);
         event.registerSpriteSet(ModParticles.SOUL_LAVA_HANG.get(), SoulLavaDripParticle.SoulLavaHangProvider::new);
         event.registerSpriteSet(ModParticles.SOUL_LAVA_LAND.get(), SoulLavaDripParticle.SoulLavaLandProvider::new);
-        event.registerSpriteSet(ModParticles.SPIRITED_ALLAY_SPAWN.get(), SpiritedAllaySpawnParticle.Provider::new);
     }
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(LavaGooglesModel.LAYER_LOCATION, LavaGooglesModel::createLayerDefinition);
         event.registerLayerDefinition(GrapplingHookModel.LAYER_LOCATION, GrapplingHookModel::createLayerDefinition);
-        event.registerLayerDefinition(SpiritedAllayModel.LAYER_LOCATION, SpiritedAllayModel::createLayerDefinition);
     }
 
     @SuppressWarnings("unchecked")
@@ -167,5 +155,4 @@ public class ClientSetup {
             TelluriumsRandomStuffMod.LOGGER.error("Could not add layer to {}", entityType.toShortString());
         }
     }
-
 }

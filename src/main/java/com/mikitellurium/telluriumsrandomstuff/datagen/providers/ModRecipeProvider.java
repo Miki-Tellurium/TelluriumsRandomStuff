@@ -1,14 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
 import com.mikitellurium.telluriumsrandomstuff.common.block.ItemPedestalBlock;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.ResonanceCrystalColoring;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.CompactingRecipeBuilder;
-import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.ModdedSpecialRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulInfusionRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.datagen.recipebuilders.SoulLavaTransmutationRecipeBuilder;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeSerializers;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
@@ -37,8 +34,6 @@ public class ModRecipeProvider extends RecipeProvider {
         buildSmeltingRecipes(consumer);
         buildBlastingRecipes(consumer);
         buildStonecuttingRecipes(consumer);
-        ModdedSpecialRecipeBuilder.special(FastLoc.modId(), ModRecipeSerializers.RESONANCE_CRYSTAL_COLORING.get())
-                .save(consumer, ResonanceCrystalColoring.ID);
     }
 
     private void buildSoulInfusingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -622,27 +617,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
                 .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
                 .save(consumer, modLoc("spirit_bottle"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPIRITED_ECHO_WAND.get(), 1)
-                .pattern(" ##")
-                .pattern(" x#")
-                .pattern("I  ")
-                .define('#', Items.ECHO_SHARD)
-                .define('x', ModItems.SOUL_CLUSTER.get())
-                .define('I', Items.STICK)
-                .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
-                .unlockedBy("has_soul_cluster", has(ModItems.SOUL_CLUSTER.get()))
-                .save(consumer, modLoc("spirited_echo_wand"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RESONANCE_CRYSTAL_LIGHT_BLUE.get(), 1)
-                .pattern("I#I")
-                .pattern("#x#")
-                .pattern("I#I")
-                .define('#', Items.ECHO_SHARD)
-                .define('x', ModItems.SOUL_CLUSTER.get())
-                .define('I', Items.AMETHYST_SHARD)
-                .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
-                .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD))
-                .unlockedBy("has_soul_cluster", has(ModItems.SOUL_CLUSTER.get()))
-                .save(consumer, modLoc("resonance_crystal"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

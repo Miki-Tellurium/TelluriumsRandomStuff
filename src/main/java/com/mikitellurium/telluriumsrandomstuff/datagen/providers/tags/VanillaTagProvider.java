@@ -108,9 +108,6 @@ public class VanillaTagProvider {
             this.tag(BlockTags.CAULDRONS)
                     .add(ModBlocks.SOUL_LAVA_CAULDRON.get());
 
-            this.tag(BlockTags.DRIPSTONE_REPLACEABLE)
-                    .add(ModBlocks.OPAL.get());
-
             this.tag(BlockTags.FLOWER_POTS)
                     .add(ModBlocks.POTTED_BRIGHT_TORCHFLOWER.get())
                     .add(ModBlocks.POTTED_SOUL_TORCHFLOWER.get());

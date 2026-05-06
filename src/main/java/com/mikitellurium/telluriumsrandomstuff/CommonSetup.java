@@ -9,14 +9,11 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauld
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.command.LavaGooglesCommand;
 import com.mikitellurium.telluriumsrandomstuff.common.command.SoulAnchorCommand;
-import com.mikitellurium.telluriumsrandomstuff.common.entity.SpiritedAllay;
 import com.mikitellurium.telluriumsrandomstuff.common.event.LootEvents;
 import com.mikitellurium.telluriumsrandomstuff.common.item.GrapplingHookItem;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
-import com.mikitellurium.telluriumsrandomstuff.common.item.ResonanceCrystalItem;
 import com.mikitellurium.telluriumsrandomstuff.lib.TickingMenu;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
@@ -24,24 +21,18 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class CommonSetup {
-
     public static void registerForgeBusEvents() {
         MinecraftForge.EVENT_BUS.addListener(CommonSetup::registerCommands);
         MinecraftForge.EVENT_BUS.register(CustomBubbleColumnBlock.class);
@@ -52,12 +43,10 @@ public class CommonSetup {
         MinecraftForge.EVENT_BUS.register(AlchemixerBlock.class);
         MinecraftForge.EVENT_BUS.addListener(PotionMixingManager::registerListener);
         MinecraftForge.EVENT_BUS.addListener(CommonSetup::tickMenus);
-        MinecraftForge.EVENT_BUS.register(ResonanceCrystalItem.class);
     }
 
     public static void registerModBusEvents(IEventBus modEventBus) {
         modEventBus.addListener(CommonSetup::setup);
-        modEventBus.addListener(CommonSetup::registerMobAttributes);
     }
 
     private static void setup(final FMLCommonSetupEvent event) {
@@ -79,14 +68,9 @@ public class CommonSetup {
         dispatcher.register(SoulAnchorCommand.build(builder));
     }
 
-    private static void registerMobAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.SPIRITED_ALLAY.get(), SpiritedAllay.createAttributes().build());
-    }
-
     private static void tickMenus(TickEvent.PlayerTickEvent event) {
         if (event.player instanceof ServerPlayer && event.player.containerMenu instanceof TickingMenu menu && event.phase == TickEvent.Phase.END) {
             menu.tickMenu((ServerPlayer) event.player);
         }
     }
-
 }

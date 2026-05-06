@@ -19,20 +19,6 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class ModItemModelProvider extends ItemModelProvider {
-
-    private static final Map<String, Float> TRIM_MATERIALS = Util.make(new HashMap<>(), (map) -> {
-                map.put("quartz", 0.1F);
-                map.put("iron", 0.2F);
-                map.put("netherite", 0.3F);
-                map.put("redstone", 0.4F);
-                map.put("copper", 0.5F);
-                map.put("gold", 0.6F );
-                map.put("emerald", 0.7F);
-                map.put("diamond", 0.8F);
-                map.put("lapis", 0.9F );
-                map.put("amethyst", 1.0F);
-    });
-
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, FastLoc.modId(), existingFileHelper);
     }
@@ -97,16 +83,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.withExistingParent(ModItems.SOUL_COMPACTOR_LIT.getId().getPath(), modLoc("block/soul_compactor_on"));
         this.withExistingParent(ModItems.SOUL_INFUSER_LIT.getId().getPath(), modLoc("block/soul_infuser_on"));
         this.simpleItem(ModItems.TOTEM_OF_BINDING);
-        this.withExistingParent(ModItems.SPIRITED_ALLAY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        this.simpleItem(ModItems.SPIRITED_ECHO_WAND);
-        ItemModelBuilder builder = this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath(), modLoc("item/spirited_allay_item_light_blue"));
-        this.coloredItems(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath(), (name, color) -> {
-            String colorName = color.getName();
-            builder.override()
-                    .predicate(modLoc("color"), color.getId())
-                    .model(this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath() + "_" + colorName, modLoc("item/spirited_allay_item_" + colorName)))
-                    .end();
-        });
         ItemModelBuilder builder1 = this.simpleItem(ModItems.SPIRIT_BOTTLE);
         for (int i = 1; i < 11; i++) {
             builder1.override()
@@ -114,10 +90,6 @@ public class ModItemModelProvider extends ItemModelProvider {
                     .model(this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath() + "_full_" + i, modLoc("item/spirit_bottle_full_" + i)))
                     .end();
         }
-        this.coloredItems("resonance_crystal", (name, color) -> {
-            String colorName = color.getName();
-            this.itemWithProperties(name + "_" + colorName, modLoc("item/" + name + "_" + colorName));
-        });
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
@@ -153,36 +125,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private void spiritedAllayColor(ItemModelBuilder builder, DyeColor color) {
-        String name = color.getName();
-        builder.override()
-                .predicate(modLoc("color"), color.getId())
-                .model(this.itemWithProperties(ModItems.SPIRITED_ALLAY_ITEM.getId().getPath() + "_" + name, modLoc("item/spirited_allay_item_" + name)))
-                .end();
-    }
-
     private void coloredItem(String name, DyeColor color) {
         String colorName = color.getName();
         this.itemWithProperties(name + "_" + colorName, modLoc("item/" + name + "_" + colorName));
     }
-
-//    private void trimmableArmor(RegistryObject<Item> armor) {
-//        String id = armor.getId().getPath();
-//        String type = ((ArmorItem)armor.get()).getType().getName();
-//        ItemModelBuilder builder = this.withExistingParent(id, mcLoc("item/generated"))
-//                .texture("layer0", modLoc("item/" + id));
-//        TRIM_MATERIALS.forEach((key, index) -> {
-//            builder.override()
-//                    .predicate(mcLoc("trim_type"), index)
-//                    .model(this.trimModel(id, type, key))
-//                    .end();
-//        });
-//    }
-//
-//    private ModelFile trimModel(String id, String type, String trimMaterial) {
-//        return this.withExistingParent(id + "_" + trimMaterial + "_trim", mcLoc("item/generated"))
-//                .texture("layer0", modLoc("item/" + id))
-//                .texture("layer1", mcLoc("trims/items/" + type + "_trim"));
-//    }
-
 }

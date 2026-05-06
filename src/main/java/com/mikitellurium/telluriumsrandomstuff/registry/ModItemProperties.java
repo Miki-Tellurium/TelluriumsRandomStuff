@@ -49,17 +49,6 @@ public class ModItemProperties {
                     if (amount <= 0) return 0;
                     return (amount / item.getCapacity()) + 0.1F;
                 });
-        ItemProperties.register(ModItems.SPIRITED_ALLAY_ITEM.get(), FastLoc.modLoc("color"),
-                (itemStack, level, livingEntity, seed) -> {
-                    CompoundTag tag = itemStack.getOrCreateTag();
-                    if (tag.contains("SavedEntity", Tag.TAG_COMPOUND)) {
-                        CompoundTag entityTag = tag.getCompound("SavedEntity");
-                        if (entityTag.contains("Color", Tag.TAG_BYTE)) {
-                            return entityTag.getByte("Color");
-                        }
-                    }
-                    return DyeColor.LIGHT_BLUE.getId();
-                });
     }
 
 }

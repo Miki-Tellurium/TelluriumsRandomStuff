@@ -1,6 +1,5 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
-import com.mikitellurium.telluriumsrandomstuff.common.particle.ColoredParticleOption;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -12,7 +11,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ModParticles {
-
     public static final RegistryObject<SimpleParticleType> SOUL_LAVA_FALL =
             registerParticle("soul_lava_fall", () -> new SimpleParticleType(true));
 
@@ -21,9 +19,6 @@ public class ModParticles {
 
     public static final RegistryObject<SimpleParticleType> SOUL_LAVA_LAND =
             registerParticle("soul_lava_land", () -> new SimpleParticleType(true));
-
-    public static final RegistryObject<ParticleType<ColoredParticleOption>> SPIRITED_ALLAY_SPAWN =
-            registerParticle("spirited_allay_spawn", true, ColoredParticleOption.DESERIALIZER, (type) -> ColoredParticleOption.CODEC);
 
     private static <T extends ParticleType<?>> RegistryObject<T> registerParticle(String name, Supplier<T> particle) {
         return ModRegistries.PARTICLE_TYPES.register(name, particle);
@@ -40,5 +35,4 @@ public class ModParticles {
     protected static void register(IEventBus eventBus) {
         ModRegistries.PARTICLE_TYPES.register(eventBus);
     }
-
 }
