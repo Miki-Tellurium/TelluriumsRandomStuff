@@ -66,6 +66,7 @@ public class ModCreativeTab {
                 event.accept(ModItems.TOTEM_OF_BINDING);
                 event.accept(ModItems.MYSTIC_POTATO);
                 event.acceptAll(soulHarvesting);
+                event.accept(ModItems.OPAL_COLOR_SHIFTER);
                 event.acceptAll(opals);
                 event.accept(withDefaultHue(ModBlocks.OPAL_COBBLESTONE));
                 event.accept(withDefaultHue(ModBlocks.OPAL_BRICKS));

@@ -47,6 +47,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addItem(ModItems.SOUL_COMPACTOR_LIT, "Soul Compactor");
         addItem(ModItems.TOTEM_OF_BINDING, "Totem of Binding");
         addItem(ModItems.SPIRIT_BOTTLE, "Spirit Bottle");
+        addItem(ModItems.OPAL_COLOR_SHIFTER, "Opal Color Shifter");
 
         translation("item", "tooltip.color", "Color");
         translation("item", "mystic_potato.tooltip", "What will this do?");
@@ -54,6 +55,7 @@ public class ModTranslationProvider extends LanguageProvider {
         translation("item", "mixed_splash_potion.name", "Mixed Splash Potion");
         translation("item", "mixed_lingering_potion.name", "Mixed Lingering Potion");
         translation("item", "soul_storage.souls", "Souls");
+        translation("item", "opal_color_shifter.tooltip", "Use on opal blocks to cycle through the colors");
         // Blocks
         addBlock(ModBlocks.GRATE_MAGMA_BLOCK, "Magma Block with Grate");
         addBlock(ModBlocks.GRATE_SOUL_SAND, "Soul Sand with Grate");

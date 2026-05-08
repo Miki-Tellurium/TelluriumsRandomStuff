@@ -3,7 +3,6 @@ package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
-import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
@@ -14,8 +13,6 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -34,7 +31,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.simpleItem(ModItems.BRIGHT_TORCHFLOWER_SEEDS);
         this.simpleItem(ModItems.SOUL_TORCHFLOWER_SEEDS);
         this.simpleItem(ModItems.BLUE_GLOWSTONE_DUST);
-        this.itemWithProperties(ModItems.LAVA_GOOGLES.getId().getPath(), modLoc("item/lava_googles_no_color"))
+        this.itemWithLocation(ModItems.LAVA_GOOGLES, modLoc("item/lava_googles_no_color"))
                 .override()
                 .predicate(modLoc("colored"), 1)
                 .model(this.withExistingParent(ModItems.LAVA_GOOGLES.getId().getPath() + "_colored", mcLoc("item/generated"))
@@ -76,9 +73,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         for (int i = 1; i < 11; i++) {
             builder1.override()
                     .predicate(modLoc("storage"), (float) i / 10)
-                    .model(this.itemWithProperties(ModItems.SPIRIT_BOTTLE.getId().getPath() + "_full_" + i, modLoc("item/spirit_bottle_full_" + i)))
+                    .model(this.itemWithLocation(ModItems.SPIRIT_BOTTLE.getId().getPath() + "_full_" + i, modLoc("item/spirit_bottle_full_" + i)))
                     .end();
         }
+        this.simpleItem(ModItems.OPAL_COLOR_SHIFTER);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
@@ -86,7 +84,11 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer0", modLoc("item/" + item.getId().getPath()));
     }
 
-    private ItemModelBuilder itemWithProperties(String name, ResourceLocation texture) {
+    private ItemModelBuilder itemWithLocation(RegistryObject<Item> item, ResourceLocation texture) {
+        return itemWithLocation(item.getId().getPath(), texture);
+    }
+
+    private ItemModelBuilder itemWithLocation(String name, ResourceLocation texture) {
         return this.withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", texture);
     }
@@ -116,6 +118,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private void coloredItem(String name, DyeColor color) {
         String colorName = color.getName();
-        this.itemWithProperties(name + "_" + colorName, modLoc("item/" + name + "_" + colorName));
+        this.itemWithLocation(name + "_" + colorName, modLoc("item/" + name + "_" + colorName));
     }
 }
