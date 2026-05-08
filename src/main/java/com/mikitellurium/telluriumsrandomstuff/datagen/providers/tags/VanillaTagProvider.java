@@ -36,10 +36,10 @@ public class VanillaTagProvider {
                     .add(ModBlocks.OPAL.get())
                     .add(ModBlocks.OPAL_COBBLESTONE.get())
                     .add(ModBlocks.OPAL_BRICKS.get())
-                    .add(ModBlocks.CUT_OPAL_BRICKS.get())
+                    .add(ModBlocks.OPAL_TILES.get())
                     .add(ModBlocks.CRACKED_OPAL_BRICKS.get())
                     .add(ModBlocks.CHISELED_OPAL_BRICKS.get())
-                    .add(ModBlocks.CRACKED_CUT_OPAL_BRICKS.get())
+                    .add(ModBlocks.CRACKED_OPAL_TILES.get())
                     .add(ModBlocks.OPAL_SLAB.get())
                     .add(ModBlocks.OPAL_STAIRS.get())
                     .add(ModBlocks.OPAL_COBBLESTONE_SLAB.get())
@@ -48,11 +48,11 @@ public class VanillaTagProvider {
                     .add(ModBlocks.OPAL_BRICK_SLAB.get())
                     .add(ModBlocks.OPAL_BRICK_STAIRS.get())
                     .add(ModBlocks.OPAL_BRICK_WALL.get())
-                    .add(ModBlocks.CUT_OPAL_BRICK_SLAB.get())
-                    .add(ModBlocks.CUT_OPAL_BRICK_STAIRS.get())
-                    .add(ModBlocks.CUT_OPAL_BRICK_WALL.get())
+                    .add(ModBlocks.OPAL_TILES_SLAB.get())
+                    .add(ModBlocks.OPAL_TILES_STAIRS.get())
+                    .add(ModBlocks.OPAL_TILES_WALL.get())
                     .add(ModBlocks.CRACKED_OPAL_BRICK_SLAB.get())
-                    .add(ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get())
+                    .add(ModBlocks.CRACKED_OPAL_TILES_SLAB.get())
                     .add(ModBlocks.OPAL_PRESSURE_PLATE.get())
                     .add(ModBlocks.OPAL_BUTTON.get())
                     .add(ModBlocks.SOUL_OBSIDIAN.get())
@@ -79,7 +79,7 @@ public class VanillaTagProvider {
                     .add(ModBlocks.QUARTZ_ITEM_PEDESTAL.get())
                     .add(ModBlocks.OPAL_ITEM_PEDESTAL.get())
                     .add(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get())
-                    .add(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
+                    .add(ModBlocks.OPAL_TILES_ITEM_PEDESTAL.get())
                     .add(ModBlocks.SOUL_INFUSER.get())
                     .add(ModBlocks.ALCHEMIXER.get())
                     .add(ModBlocks.SOUL_COMPACTOR.get())
@@ -125,9 +125,9 @@ public class VanillaTagProvider {
                     .add(ModBlocks.OPAL_SLAB.get())
                     .add(ModBlocks.OPAL_COBBLESTONE_SLAB.get())
                     .add(ModBlocks.OPAL_BRICK_SLAB.get())
-                    .add(ModBlocks.CUT_OPAL_BRICK_SLAB.get())
+                    .add(ModBlocks.OPAL_TILES_SLAB.get())
                     .add(ModBlocks.CRACKED_OPAL_BRICK_SLAB.get())
-                    .add(ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get())
+                    .add(ModBlocks.CRACKED_OPAL_TILES_SLAB.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get());
 
             this.tag(BlockTags.SOUL_FIRE_BASE_BLOCKS)
@@ -154,14 +154,14 @@ public class VanillaTagProvider {
                     .add(ModBlocks.OPAL_STAIRS.get())
                     .add(ModBlocks.OPAL_COBBLESTONE_STAIRS.get())
                     .add(ModBlocks.OPAL_BRICK_STAIRS.get())
-                    .add(ModBlocks.CUT_OPAL_BRICK_STAIRS.get());
+                    .add(ModBlocks.OPAL_TILES_STAIRS.get());
 
             this.tag(BlockTags.STONE_BRICKS)
                     .add(ModBlocks.OPAL_BRICKS.get())
-                    .add(ModBlocks.CUT_OPAL_BRICKS.get())
+                    .add(ModBlocks.OPAL_TILES.get())
                     .add(ModBlocks.CHISELED_OPAL_BRICKS.get())
                     .add(ModBlocks.CRACKED_OPAL_BRICKS.get())
-                    .add(ModBlocks.CRACKED_CUT_OPAL_BRICKS.get());
+                    .add(ModBlocks.CRACKED_OPAL_TILES.get());
 
             this.tag(BlockTags.STRIDER_WARM_BLOCKS)
                     .add(ModBlocks.SOUL_LAVA_BLOCK.get());
@@ -169,7 +169,7 @@ public class VanillaTagProvider {
             this.tag(BlockTags.WALLS)
                     .add(ModBlocks.OPAL_COBBLESTONE_WALL.get())
                     .add(ModBlocks.OPAL_BRICK_WALL.get())
-                    .add(ModBlocks.CUT_OPAL_BRICK_WALL.get());
+                    .add(ModBlocks.OPAL_TILES_WALL.get());
 
             this.tag(BlockTags.INFINIBURN_OVERWORLD)
                     .add(ModBlocks.GRATE_MAGMA_BLOCK.get())

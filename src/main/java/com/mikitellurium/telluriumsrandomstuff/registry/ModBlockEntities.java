@@ -1,12 +1,9 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.common.blockentity.*;
-import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
@@ -41,7 +38,7 @@ public class ModBlockEntities {
                             ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL.get(), ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL.get(),
                             ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL.get(), ModBlocks.PURPUR_ITEM_PEDESTAL.get(),
                             ModBlocks.QUARTZ_ITEM_PEDESTAL.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(),
-                            ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(), ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get())
+                            ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(), ModBlocks.OPAL_TILES_ITEM_PEDESTAL.get())
                     .build(null));
 
     public static final RegistryObject<BlockEntityType<SoulInfuserBlockEntity>> SOUL_INFUSER = registerBlockEntity(

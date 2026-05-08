@@ -8,7 +8,6 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.render.DummyPlayerR
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookHandRenderer;
-import com.mikitellurium.telluriumsrandomstuff.common.block.RGBTintedBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
@@ -68,14 +67,14 @@ public class ClientSetup {
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(ColorsUtil.getOpalBlockColor(),
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
-                ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
-                ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
-                ModBlocks.OPAL_BRICK_SLAB.get(), ModBlocks.CUT_OPAL_BRICK_SLAB.get(), ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(),
-                ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
-                ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
-                ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
+                ModBlocks.OPAL_TILES.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
+                ModBlocks.CRACKED_OPAL_TILES.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
+                ModBlocks.OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_TILES_SLAB.get(), ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(),
+                ModBlocks.CRACKED_OPAL_TILES_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
+                ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_TILES_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
+                ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.OPAL_TILES_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
                 ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
-                ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
+                ModBlocks.OPAL_TILES_ITEM_PEDESTAL.get());
     }
 
     @SubscribeEvent
@@ -83,14 +82,14 @@ public class ClientSetup {
         event.register(LavaGooglesItem::getItemTintColor, ModItems.LAVA_GOOGLES.get());
         event.register(ColorsUtil.getOpalItemColor(),
                 ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
-                ModBlocks.CUT_OPAL_BRICKS.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
-                ModBlocks.CRACKED_CUT_OPAL_BRICKS.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
-                ModBlocks.OPAL_BRICK_SLAB.get(), ModBlocks.CUT_OPAL_BRICK_SLAB.get(), ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(),
-                ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
-                ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.CUT_OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
-                ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.CUT_OPAL_BRICK_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
+                ModBlocks.OPAL_TILES.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
+                ModBlocks.CRACKED_OPAL_TILES.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
+                ModBlocks.OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_TILES_SLAB.get(), ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(),
+                ModBlocks.CRACKED_OPAL_TILES_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
+                ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_TILES_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
+                ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.OPAL_TILES_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
                 ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
-                ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
+                ModBlocks.OPAL_TILES_ITEM_PEDESTAL.get());
     }
 
     @SubscribeEvent

@@ -1,9 +1,9 @@
 {
   "values": [
     "telluriumsrandomstuff:opal_bricks",
-    "telluriumsrandomstuff:cut_opal_bricks",
+    "telluriumsrandomstuff:opal_tiles",
     "telluriumsrandomstuff:chiseled_opal_bricks",
     "telluriumsrandomstuff:cracked_opal_bricks",
-    "telluriumsrandomstuff:cracked_cut_opal_bricks"
+    "telluriumsrandomstuff:cracked_opal_tiles"
   ]
 }

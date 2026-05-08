@@ -4,7 +4,7 @@
   "group": "stone_stairs",
   "key": {
     "#": {
-      "item": "telluriumsrandomstuff:cut_opal_bricks"
+      "item": "telluriumsrandomstuff:opal_tiles"
     }
   },
   "pattern": [
@@ -14,7 +14,7 @@
   ],
   "result": {
     "count": 4,
-    "item": "telluriumsrandomstuff:cut_opal_brick_stairs"
+    "item": "telluriumsrandomstuff:opal_tiles_stairs"
   },
   "show_notification": true
 }

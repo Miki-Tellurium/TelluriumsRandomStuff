@@ -4,7 +4,7 @@
   "cookingtime": 200,
   "experience": 0.1,
   "ingredient": {
-    "item": "telluriumsrandomstuff:cut_opal_bricks"
+    "item": "telluriumsrandomstuff:opal_tiles"
   },
-  "result": "telluriumsrandomstuff:cracked_cut_opal_bricks"
+  "result": "telluriumsrandomstuff:cracked_opal_tiles"
 }

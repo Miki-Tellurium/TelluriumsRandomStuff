@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "telluriumsrandomstuff:cracked_cut_opal_bricks"
+      "item": "telluriumsrandomstuff:cracked_opal_tiles"
     }
   },
   "pattern": [
@@ -11,7 +11,7 @@
   ],
   "result": {
     "count": 6,
-    "item": "telluriumsrandomstuff:cracked_cut_opal_brick_slab"
+    "item": "telluriumsrandomstuff:cracked_opal_tiles_slab"
   },
   "show_notification": true
 }

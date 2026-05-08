@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "telluriumsrandomstuff:block/opal_tiles_slab"
+    },
+    "type=double": {
+      "model": "telluriumsrandomstuff:block/opal_tiles"
+    },
+    "type=top": {
+      "model": "telluriumsrandomstuff:block/opal_tiles_slab_top"
+    }
+  }
+}

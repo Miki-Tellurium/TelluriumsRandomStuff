@@ -47,14 +47,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.add(ModBlocks.BRIGHT_TORCHFLOWER_CROP.get(), this.applyExplosionDecay(ModBlocks.BRIGHT_TORCHFLOWER_CROP.get(),
                 LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get())))));
         this.dropSelf(ModBlocks.CHISELED_OPAL_BRICKS.get());
-        this.add(ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get(), this::createSlabItemTable);
-        this.dropSelf(ModBlocks.CRACKED_CUT_OPAL_BRICKS.get());
+        this.add(ModBlocks.CRACKED_OPAL_TILES_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(ModBlocks.CRACKED_OPAL_TILES.get());
         this.add(ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(ModBlocks.CRACKED_OPAL_BRICKS.get());
-        this.add(ModBlocks.CUT_OPAL_BRICK_SLAB.get(), this::createSlabItemTable);
-        this.dropSelf(ModBlocks.CUT_OPAL_BRICK_STAIRS.get());
-        this.dropSelf(ModBlocks.CUT_OPAL_BRICK_WALL.get());
-        this.dropSelf(ModBlocks.CUT_OPAL_BRICKS.get());
+        this.add(ModBlocks.OPAL_TILES_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(ModBlocks.OPAL_TILES_STAIRS.get());
+        this.dropSelf(ModBlocks.OPAL_TILES_WALL.get());
+        this.dropSelf(ModBlocks.OPAL_TILES.get());
         this.dropSelf(ModBlocks.EXTRACTOR.get());
         this.dropSelf(ModBlocks.GRATE_MAGMA_BLOCK.get());
         this.dropSelf(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get());
@@ -109,7 +109,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.QUARTZ_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.OPAL_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get());
-        this.dropSelf(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL.get());
+        this.dropSelf(ModBlocks.OPAL_TILES_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.INFUSED_SOUL_SAND.get());
         this.dropSelf(ModBlocks.SOUL_INFUSER.get());
         this.dropSelf(ModBlocks.ALCHEMIXER.get());

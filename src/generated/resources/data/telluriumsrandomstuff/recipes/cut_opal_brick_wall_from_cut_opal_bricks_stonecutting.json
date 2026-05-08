@@ -2,7 +2,7 @@
   "type": "minecraft:stonecutting",
   "count": 1,
   "ingredient": {
-    "item": "telluriumsrandomstuff:cut_opal_bricks"
+    "item": "telluriumsrandomstuff:opal_tiles"
   },
-  "result": "telluriumsrandomstuff:cut_opal_brick_wall"
+  "result": "telluriumsrandomstuff:opal_tiles_wall"
 }

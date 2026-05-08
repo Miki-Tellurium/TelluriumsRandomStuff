@@ -133,22 +133,22 @@ public class ModBlockModelProvider extends BlockStateProvider {
         this.tintedBlockWithItem(ModBlocks.OPAL_COBBLESTONE);
         this.tintedBlockWithItem(ModBlocks.OPAL_BRICKS);
         this.tintedBlockWithItem(ModBlocks.CHISELED_OPAL_BRICKS);
-        this.tintedBlockWithItem(ModBlocks.CUT_OPAL_BRICKS);
+        this.tintedBlockWithItem(ModBlocks.OPAL_TILES);
         this.tintedBlockWithItem(ModBlocks.CRACKED_OPAL_BRICKS);
-        this.tintedBlockWithItem(ModBlocks.CRACKED_CUT_OPAL_BRICKS);
+        this.tintedBlockWithItem(ModBlocks.CRACKED_OPAL_TILES);
         this.tintedSlabWithItem(ModBlocks.OPAL_SLAB, modLoc("block/opal"));
         this.tintedSlabWithItem(ModBlocks.OPAL_COBBLESTONE_SLAB, modLoc("block/opal_cobblestone"));
         this.tintedSlabWithItem(ModBlocks.OPAL_BRICK_SLAB, modLoc("block/opal_bricks"));
-        this.tintedSlabWithItem(ModBlocks.CUT_OPAL_BRICK_SLAB, modLoc("block/cut_opal_bricks"));
+        this.tintedSlabWithItem(ModBlocks.OPAL_TILES_SLAB, modLoc("block/opal_tiles"));
         this.tintedSlabWithItem(ModBlocks.CRACKED_OPAL_BRICK_SLAB, modLoc("block/cracked_opal_bricks"));
-        this.tintedSlabWithItem(ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB, modLoc("block/cracked_cut_opal_bricks"));
+        this.tintedSlabWithItem(ModBlocks.CRACKED_OPAL_TILES_SLAB, modLoc("block/cracked_opal_tiles"));
         this.tintedStairsWithItem(ModBlocks.OPAL_STAIRS, modLoc("block/opal"));
         this.tintedStairsWithItem(ModBlocks.OPAL_COBBLESTONE_STAIRS, modLoc("block/opal_cobblestone"));
         this.tintedStairsWithItem(ModBlocks.OPAL_BRICK_STAIRS, modLoc("block/opal_bricks"));
-        this.tintedStairsWithItem(ModBlocks.CUT_OPAL_BRICK_STAIRS, modLoc("block/cut_opal_bricks"));
+        this.tintedStairsWithItem(ModBlocks.OPAL_TILES_STAIRS, modLoc("block/opal_tiles"));
         this.tintedWallWithItem(ModBlocks.OPAL_COBBLESTONE_WALL, modLoc("block/opal_cobblestone"));
         this.tintedWallWithItem(ModBlocks.OPAL_BRICK_WALL, modLoc("block/opal_bricks"));
-        this.tintedWallWithItem(ModBlocks.CUT_OPAL_BRICK_WALL, modLoc("block/cut_opal_bricks"));
+        this.tintedWallWithItem(ModBlocks.OPAL_TILES_WALL, modLoc("block/opal_tiles"));
         this.pressurePlateBlock((PressurePlateBlock) ModBlocks.OPAL_PRESSURE_PLATE.get(),
                 this.models().withExistingParent(ModBlocks.OPAL_PRESSURE_PLATE.getId().getPath(), modLoc("block/pressure_plate_up_tinted"))
                         .texture("texture", modLoc("block/opal")),
@@ -281,7 +281,7 @@ public class ModBlockModelProvider extends BlockStateProvider {
         this.itemPedestalWithItem(ModBlocks.QUARTZ_ITEM_PEDESTAL, mcLoc("block/quartz_block_top"));
         this.tintedItemPedestalWithItem(ModBlocks.OPAL_ITEM_PEDESTAL, modLoc("block/opal"));
         this.tintedItemPedestalWithItem(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL, modLoc("block/opal_bricks"));
-        this.tintedItemPedestalWithItem(ModBlocks.CUT_OPAL_BRICK_ITEM_PEDESTAL, modLoc("block/cut_opal_bricks"));
+        this.tintedItemPedestalWithItem(ModBlocks.OPAL_TILES_ITEM_PEDESTAL, modLoc("block/opal_tiles"));
         this.simpleBlockWithItem(ModBlocks.INFUSED_SOUL_SAND.get(), this.cubeAll(ModBlocks.INFUSED_SOUL_SAND.get()));
         this.getVariantBuilder(ModBlocks.SOUL_INFUSER.get())
                 .forAllStates((state) -> {

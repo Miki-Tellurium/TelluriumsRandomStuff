@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "telluriumsrandomstuff:cut_opal_bricks"
+      "item": "telluriumsrandomstuff:opal_tiles"
     },
     "I": {
       "item": "minecraft:item_frame"
@@ -16,7 +16,7 @@
   ],
   "result": {
     "count": 2,
-    "item": "telluriumsrandomstuff:cut_opal_brick_item_pedestal"
+    "item": "telluriumsrandomstuff:opal_tiles_item_pedestal"
   },
   "show_notification": true
 }
