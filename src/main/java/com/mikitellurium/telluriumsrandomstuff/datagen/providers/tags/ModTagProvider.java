@@ -10,7 +10,6 @@ import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -54,17 +53,6 @@ public class ModTagProvider {
 
         @Override
         protected void addTags(HolderLookup.Provider provider) {
-            this.tag(ModTags.Items.OPAL_CRYSTALS)
-                    .add(ModBlocks.OPAL_CRYSTAL_BLOCK.get().asItem())
-                    .add(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get().asItem())
-                    .add(ModItems.RAW_OPAL_CRYSTAL.get())
-                    .add(ModItems.OPAL_CRYSTAL.get())
-                    .add(ModItems.OPAL_CRYSTAL_AXE.get())
-                    .add(ModItems.OPAL_CRYSTAL_PICKAXE.get())
-                    .add(ModItems.OPAL_CRYSTAL_SHOVEL.get())
-                    .add(ModItems.OPAL_CRYSTAL_SWORD.get())
-                    .add(ModItems.OPAL_CRYSTAL_HOE.get());
-
             this.tag(ModTags.Items.OPAL_STONES)
                     .add(ModBlocks.OPAL.get().asItem())
                     .add(ModBlocks.OPAL_COBBLESTONE.get().asItem())
@@ -87,8 +75,7 @@ public class ModTagProvider {
                     .add(ModBlocks.OPAL_BRICK_WALL.get().asItem())
                     .add(ModBlocks.CUT_OPAL_BRICK_WALL.get().asItem())
                     .add(ModBlocks.OPAL_PRESSURE_PLATE.get().asItem())
-                    .add(ModBlocks.OPAL_BUTTON.get().asItem())
-                    .add(ModBlocks.OPAL_CRYSTAL_ORE.get().asItem());
+                    .add(ModBlocks.OPAL_BUTTON.get().asItem());
 
             this.tag(ModTags.Items.ALLAY_DUPLICATION_ITEMS)
                     .add(net.minecraft.world.item.Items.ECHO_SHARD)

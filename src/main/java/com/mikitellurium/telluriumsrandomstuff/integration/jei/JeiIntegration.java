@@ -109,12 +109,6 @@ public class JeiIntegration implements IModPlugin {
                 new PotionMixingHelper.Duration(),
                 new PotionMixingHelper.Mixed()
         ));
-        registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(new RecipeHelper.RepairData(Ingredient.of(ModItems.OPAL_CRYSTAL.get()),
-                ModItems.OPAL_CRYSTAL_SWORD.get().getDefaultInstance(),
-                ModItems.OPAL_CRYSTAL_AXE.get().getDefaultInstance(),
-                ModItems.OPAL_CRYSTAL_PICKAXE.get().getDefaultInstance(),
-                ModItems.OPAL_CRYSTAL_SHOVEL.get().getDefaultInstance(),
-                ModItems.OPAL_CRYSTAL_HOE.get().getDefaultInstance()), recipeFactory));
         registration.addRecipes(RecipeTypes.ANVIL, RecipeHelper.getAnvilRecipes(new RecipeHelper.RepairData(Ingredient.of(ModItems.SPIRITED_IRON_INGOT.get()),
                 ModItems.SPIRITED_IRON_SWORD.get().getDefaultInstance(),
                 ModItems.SPIRITED_IRON_AXE.get().getDefaultInstance(),

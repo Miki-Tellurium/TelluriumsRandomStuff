@@ -70,14 +70,11 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.add(ModBlocks.OPAL_COBBLESTONE_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(ModBlocks.OPAL_COBBLESTONE_STAIRS.get());
         this.dropSelf(ModBlocks.OPAL_COBBLESTONE_WALL.get());
-        this.dropSelf(ModBlocks.OPAL_CRYSTAL_BLOCK.get());
-        this.add(ModBlocks.OPAL_CRYSTAL_ORE.get(), (block) -> this.createOreDrop(block, ModItems.RAW_OPAL_CRYSTAL.get()));
         this.dropSelf(ModBlocks.OPAL_PRESSURE_PLATE.get());
         this.add(ModBlocks.OPAL_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(ModBlocks.OPAL_STAIRS.get());
         this.dropPottedContents(ModBlocks.POTTED_BRIGHT_TORCHFLOWER.get());
         this.dropPottedContents(ModBlocks.POTTED_SOUL_TORCHFLOWER.get());
-        this.dropSelf(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get());
         this.dropSelf(ModBlocks.SOUL_ANCHOR.get());
         this.dropSelf(ModBlocks.SOUL_FURNACE.get());
         this.dropOther(ModBlocks.SOUL_LAVA_CAULDRON.get(), Blocks.CAULDRON);

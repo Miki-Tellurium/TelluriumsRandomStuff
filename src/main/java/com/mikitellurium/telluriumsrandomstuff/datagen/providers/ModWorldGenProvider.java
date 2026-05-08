@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.datagen.providers;
 
-import com.mikitellurium.telluriumsrandomstuff.common.worldgen.ModConfiguredFeatures;
-import com.mikitellurium.telluriumsrandomstuff.common.worldgen.ModPlacedFeatures;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModConfiguredFeatures;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModPlacedFeatures;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
 public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
-
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
@@ -26,5 +25,4 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
     public String getName() {
         return "WorldGen";
     }
-
 }

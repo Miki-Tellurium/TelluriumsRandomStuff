@@ -282,58 +282,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModBlocks.OPAL_COBBLESTONE.get())
                 .unlockedBy("has_opal_cobblestone", has(ModBlocks.OPAL_COBBLESTONE.get()))
                 .save(consumer, modLoc("opal_cobblestone_wall"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_AXE.get(), 1)
-                .pattern("XX")
-                .pattern("X#")
-                .pattern(" #")
-                .define('#', Items.STICK)
-                .define('X', ModItems.OPAL_CRYSTAL.get())
-                .group("equipment")
-                .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modLoc("opal_crystal_axe"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.OPAL_CRYSTAL_BLOCK.get(), 1)
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .define('#', ModItems.OPAL_CRYSTAL.get())
-                .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modLoc("opal_crystal_block"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_HOE.get(), 1)
-                .pattern("XX")
-                .pattern(" #")
-                .pattern(" #")
-                .define('#', Items.STICK)
-                .define('X', ModItems.OPAL_CRYSTAL.get())
-                .group("equipment")
-                .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modLoc("opal_crystal_hoe"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_PICKAXE.get(), 1)
-                .pattern("XXX")
-                .pattern(" # ")
-                .pattern(" # ")
-                .define('#', Items.STICK)
-                .define('X', ModItems.OPAL_CRYSTAL.get())
-                .group("equipment")
-                .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modLoc("opal_crystal_pickaxe"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_SHOVEL.get(), 1)
-                .pattern("X")
-                .pattern("#")
-                .pattern("#")
-                .define('#', Items.STICK)
-                .define('X', ModItems.OPAL_CRYSTAL.get())
-                .group("equipment")
-                .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modLoc("opal_crystal_shovel"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OPAL_CRYSTAL_SWORD.get(), 1)
-                .pattern("X")
-                .pattern("X")
-                .pattern("#")
-                .define('#', Items.STICK)
-                .define('X', ModItems.OPAL_CRYSTAL.get())
-                .group("equipment")
-                .unlockedBy("has_opal_crystal", has(ModItems.OPAL_CRYSTAL.get()))
-                .save(consumer, modLoc("opal_crystal_sword"));
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModBlocks.OPAL_PRESSURE_PLATE.get(), 1)
                 .pattern("##")
                 .define('#', ModBlocks.OPAL.get())
@@ -352,13 +300,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("stone_stairs")
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
                 .save(consumer, modLoc("opal_stairs"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get(), 1)
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .define('#', ModItems.RAW_OPAL_CRYSTAL.get())
-                .unlockedBy("has_raw_opal_crystal", has(ModItems.RAW_OPAL_CRYSTAL.get()))
-                .save(consumer, modLoc("raw_opal_crystal_block"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_ANCHOR.get(), 1)
                 .pattern("XLX")
                 .pattern("X#X")
@@ -629,14 +570,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ModBlocks.OPAL.get())
                 .unlockedBy("has_opal", has(ModBlocks.OPAL.get()))
                 .save(consumer, modLoc("opal_button"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.OPAL_CRYSTAL.get(), 9)
-                .requires(ModBlocks.OPAL_CRYSTAL_BLOCK.get())
-                .unlockedBy("has_opal_crystal_block", has(ModBlocks.OPAL_CRYSTAL_BLOCK.get()))
-                .save(consumer, modLoc("opal_crystal_from_block"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RAW_OPAL_CRYSTAL.get(), 9)
-                .requires(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get())
-                .unlockedBy("has_raw_opal_crystal_block", has(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get()))
-                .save(consumer, modLoc("raw_opal_crystal_from_block"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.INFUSED_SOUL_SAND.get(), 1)
                 .requires(Blocks.SOUL_SAND)
                 .requires(ModItems.SMALL_SOUL_FRAGMENT.get())
@@ -666,30 +599,13 @@ public class ModRecipeProvider extends RecipeProvider {
                         ModBlocks.CRACKED_OPAL_BRICKS.get(), 0.1F, 200)
                 .unlockedBy("has_opal_bricks", has(ModBlocks.OPAL_BRICKS.get()))
                 .save(consumer, modLoc("cracked_opal_bricks_from_smelting"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.OPAL_CRYSTAL_ORE.get()), RecipeCategory.MISC,
-                        ModItems.OPAL_CRYSTAL.get(), 1.0F, 200)
-                .unlockedBy("has_opal_crystal_ore", has(ModBlocks.OPAL_CRYSTAL_ORE.get()))
-                .save(consumer, modLoc("opal_crystal_from_smelting_opal_crystal_ore"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_OPAL_CRYSTAL.get()), RecipeCategory.MISC,
-                        ModItems.OPAL_CRYSTAL.get(), 1.0F, 200)
-                .unlockedBy("has_raw_opal_crystal", has(ModItems.RAW_OPAL_CRYSTAL.get()))
-                .save(consumer, modLoc("opal_crystal_from_smelting_raw_opal_crystal"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.OPAL_COBBLESTONE.get()), RecipeCategory.BUILDING_BLOCKS,
                         ModBlocks.OPAL.get(), 1.0F, 200)
                 .unlockedBy("has_opal_cobblestone", has(ModBlocks.OPAL_COBBLESTONE.get()))
                 .save(consumer, modLoc("opal_from_smelting"));
     }
 
-    private void buildBlastingRecipes(Consumer<FinishedRecipe> consumer) {
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.OPAL_CRYSTAL_ORE.get()), RecipeCategory.MISC,
-                        ModItems.OPAL_CRYSTAL.get(), 1.0F, 100)
-                .unlockedBy("has_opal_crystal_ore", has(ModBlocks.OPAL_CRYSTAL_ORE.get()))
-                .save(consumer, modLoc("opal_crystal_from_blasting_opal_crystal_ore"));
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.RAW_OPAL_CRYSTAL.get()), RecipeCategory.MISC,
-                        ModItems.OPAL_CRYSTAL.get(), 1.0F, 100)
-                .unlockedBy("has_raw_opal_crystal", has(ModItems.RAW_OPAL_CRYSTAL.get()))
-                .save(consumer, modLoc("opal_crystal_from_blasting_raw_opal_crystal"));
-    }
+    private void buildBlastingRecipes(Consumer<FinishedRecipe> consumer) {}
 
     private void buildStonecuttingRecipes(Consumer<FinishedRecipe> consumer) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.CUT_OPAL_BRICKS.get()), RecipeCategory.BUILDING_BLOCKS,

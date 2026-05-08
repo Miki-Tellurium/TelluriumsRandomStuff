@@ -16,28 +16,28 @@ public class SoulAnchorCommand {
     public static LiteralArgumentBuilder<CommandSourceStack> build(LiteralArgumentBuilder<CommandSourceStack> builder) {
         return builder.then(Commands.literal("soulAnchor")
                         .then(Commands.literal("clearSavedInventory")
-                                .then(Commands.argument("targets", EntityArgument.players())
+                                .then(Commands.argument("target", EntityArgument.players())
                                         .executes((context) -> clearSavedInventory(context.getSource(),
-                                                EntityArgument.getOptionalPlayers(context, "targets"))))
+                                                EntityArgument.getOptionalPlayers(context, "target"))))
                         ).then(Commands.literal("canRecoverInventory")
-                                .then(Commands.argument("targets", EntityArgument.players())
+                                .then(Commands.argument("target", EntityArgument.players())
                                         .then(Commands.literal("true")
                                                 .executes((context -> canRecoverInventory(context.getSource(),
-                                                        EntityArgument.getOptionalPlayers(context, "targets"),
+                                                        EntityArgument.getOptionalPlayers(context, "target"),
                                                         true))))
                                         .then(Commands.literal("false")
                                                 .executes((context -> canRecoverInventory(context.getSource(),
-                                                        EntityArgument.getOptionalPlayers(context, "targets"),
+                                                        EntityArgument.getOptionalPlayers(context, "target"),
                                                         false)))))
                         ).then(Commands.literal("hasChargedAnchor")
-                                .then(Commands.argument("targets", EntityArgument.players())
+                                .then(Commands.argument("target", EntityArgument.players())
                                         .then(Commands.literal("true")
                                                 .executes((context -> hasChargedAnchor(context.getSource(),
-                                                        EntityArgument.getOptionalPlayers(context, "targets"),
+                                                        EntityArgument.getOptionalPlayers(context, "target"),
                                                         true))))
                                         .then(Commands.literal("false")
                                                 .executes((context -> hasChargedAnchor(context.getSource(),
-                                                        EntityArgument.getOptionalPlayers(context, "targets"),
+                                                        EntityArgument.getOptionalPlayers(context, "target"),
                                                         false))
                                                 )))));
     }

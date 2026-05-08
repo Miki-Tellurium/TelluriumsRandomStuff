@@ -32,7 +32,7 @@ public class ItemPedestalBlock extends TickingEntityBlock {
             15.0D, 15.0D, 15.0D);
 
     public ItemPedestalBlock(Properties properties) {
-        super(ItemPedestalBlockEntity::new, properties.noOcclusion());
+        super(ItemPedestalBlockEntity::new, properties);
     }
 
     @Override

@@ -19,13 +19,6 @@ public class ModTranslationProvider extends LanguageProvider {
         // Items
         addItem(ModItems.SOUL_LAVA_BUCKET, "Soul Lava Bucket");
         addItem(ModItems.MYSTIC_POTATO, "Mystic Potato");
-        addItem(ModItems.RAW_OPAL_CRYSTAL, "Raw Opal Crystal");
-        addItem(ModItems.OPAL_CRYSTAL, "Opal Crystal");
-        addItem(ModItems.OPAL_CRYSTAL_SWORD, "Opal Crystal Sword");
-        addItem(ModItems.OPAL_CRYSTAL_SHOVEL, "Opal Crystal Shovel");
-        addItem(ModItems.OPAL_CRYSTAL_PICKAXE, "Opal Crystal Pickaxe");
-        addItem(ModItems.OPAL_CRYSTAL_AXE, "Opal Crystal Axe");
-        addItem(ModItems.OPAL_CRYSTAL_HOE, "Opal Crystal Hoe");
         addItem(ModItems.FILTER, "Filter");
         translation("item", "bright_torchflower", "Bright Torchflower");
         addItem(ModItems.BRIGHT_TORCHFLOWER_SEEDS, "Bright Torchflower Seeds");
@@ -92,9 +85,6 @@ public class ModTranslationProvider extends LanguageProvider {
         addBlock(ModBlocks.CUT_OPAL_BRICK_WALL, "Cut Opal Brick Wall");
         addBlock(ModBlocks.OPAL_PRESSURE_PLATE, "Opal Pressure Plate");
         addBlock(ModBlocks.OPAL_BUTTON, "Opal Button");
-        addBlock(ModBlocks.OPAL_CRYSTAL_ORE, "Opal Crystal Ore");
-        addBlock(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK, "Raw Opal Crystal Block");
-        addBlock(ModBlocks.OPAL_CRYSTAL_BLOCK, "Opal Crystal Block");
         addBlock(ModBlocks.SOUL_OBSIDIAN, "Soul Obsidian");
         addBlock(ModBlocks.SOUL_ANCHOR, "Soul Anchor");
         addBlock(ModBlocks.EXTRACTOR, "Extractor");

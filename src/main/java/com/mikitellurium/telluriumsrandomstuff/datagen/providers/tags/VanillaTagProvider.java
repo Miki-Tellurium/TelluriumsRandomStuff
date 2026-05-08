@@ -8,7 +8,6 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -56,9 +55,6 @@ public class VanillaTagProvider {
                     .add(ModBlocks.CRACKED_CUT_OPAL_BRICK_SLAB.get())
                     .add(ModBlocks.OPAL_PRESSURE_PLATE.get())
                     .add(ModBlocks.OPAL_BUTTON.get())
-                    .add(ModBlocks.OPAL_CRYSTAL_ORE.get())
-                    .add(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get())
-                    .add(ModBlocks.OPAL_CRYSTAL_BLOCK.get())
                     .add(ModBlocks.SOUL_OBSIDIAN.get())
                     .add(ModBlocks.SOUL_ANCHOR.get())
                     .add(ModBlocks.EXTRACTOR.get())
@@ -115,11 +111,6 @@ public class VanillaTagProvider {
             this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                     .add(ModBlocks.SOUL_OBSIDIAN.get())
                     .add(ModBlocks.SOUL_ANCHOR.get());
-
-            this.tag(BlockTags.NEEDS_IRON_TOOL)
-                    .add(ModBlocks.OPAL_CRYSTAL_ORE.get())
-                    .add(ModBlocks.OPAL_CRYSTAL_BLOCK.get())
-                    .add(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get());
 
             this.tag(BlockTags.PRESSURE_PLATES)
                     .add(ModBlocks.OPAL_PRESSURE_PLATE.get());
@@ -220,11 +211,6 @@ public class VanillaTagProvider {
         @Override
         protected void addTags(HolderLookup.Provider provider) {
             this.tag(ItemTags.TOOLS)
-                    .add(ModItems.OPAL_CRYSTAL_SWORD.get())
-                    .add(ModItems.OPAL_CRYSTAL_PICKAXE.get())
-                    .add(ModItems.OPAL_CRYSTAL_AXE.get())
-                    .add(ModItems.OPAL_CRYSTAL_SWORD.get())
-                    .add(ModItems.OPAL_CRYSTAL_HOE.get())
                     .add(ModItems.SPIRITED_IRON_SWORD.get())
                     .add(ModItems.SPIRITED_IRON_PICKAXE.get())
                     .add(ModItems.SPIRITED_IRON_AXE.get())
@@ -233,23 +219,18 @@ public class VanillaTagProvider {
                     .add(ModItems.GRAPPLING_HOOK.get());
 
             this.tag(ItemTags.AXES)
-                    .add(ModItems.OPAL_CRYSTAL_AXE.get())
                     .add(ModItems.SPIRITED_IRON_AXE.get());
 
             this.tag(ItemTags.HOES)
-                    .add(ModItems.OPAL_CRYSTAL_HOE.get())
                     .add(ModItems.SPIRITED_IRON_HOE.get());
 
             this.tag(ItemTags.PICKAXES)
-                    .add(ModItems.OPAL_CRYSTAL_PICKAXE.get())
                     .add(ModItems.SPIRITED_IRON_PICKAXE.get());
 
             this.tag(ItemTags.SHOVELS)
-                    .add(ModItems.OPAL_CRYSTAL_SHOVEL.get())
                     .add(ModItems.SPIRITED_IRON_SHOVEL.get());
 
             this.tag(ItemTags.SWORDS)
-                    .add(ModItems.OPAL_CRYSTAL_SWORD.get())
                     .add(ModItems.SPIRITED_IRON_SWORD.get());
 
             this.tag(ItemTags.STONE_CRAFTING_MATERIALS)
@@ -265,7 +246,6 @@ public class VanillaTagProvider {
                     .add(ModItems.SPIRITED_IRON_HELMET.get());
 
             this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
-                    .add(ModItems.OPAL_CRYSTAL.get())
                     .add(ModItems.SPIRITED_IRON_INGOT.get());
 
             this.tag(ItemTags.VILLAGER_PLANTABLE_SEEDS)

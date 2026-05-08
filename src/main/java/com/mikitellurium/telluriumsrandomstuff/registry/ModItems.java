@@ -49,48 +49,6 @@ public class ModItems {
                     return true;
                 }
             });
-    public static final RegistryObject<Item> RAW_OPAL_CRYSTAL = registerItem("raw_opal_crystal", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> OPAL_CRYSTAL = registerItem("opal_crystal", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> OPAL_CRYSTAL_SWORD = registerItem("opal_crystal_sword",
-            () -> new SwordItem(ModToolTiers.OPAL_CRYSTAL, 3, -2.4F, new Item.Properties()
-                    .defaultDurability(250)) {
-                @Override
-                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
-                }
-            });
-    public static final RegistryObject<Item> OPAL_CRYSTAL_SHOVEL = registerItem("opal_crystal_shovel",
-            () -> new ShovelItem(ModToolTiers.OPAL_CRYSTAL, 1.5F, -3.0F, new Item.Properties()
-                    .defaultDurability(250)) {
-                @Override
-                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
-                }
-            });
-    public static final RegistryObject<Item> OPAL_CRYSTAL_PICKAXE = registerItem("opal_crystal_pickaxe",
-            () -> new PickaxeItem(ModToolTiers.OPAL_CRYSTAL, 1, -2.8F, new Item.Properties()
-                    .defaultDurability(250)) {
-                @Override
-                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
-                }
-            });
-    public static final RegistryObject<Item> OPAL_CRYSTAL_AXE = registerItem("opal_crystal_axe",
-            () -> new AxeItem(ModToolTiers.OPAL_CRYSTAL, 5.0F, -3.0F, new Item.Properties()
-                    .defaultDurability(250)) {
-                @Override
-                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
-                }
-            });
-    public static final RegistryObject<Item> OPAL_CRYSTAL_HOE = registerItem("opal_crystal_hoe",
-            () -> new HoeItem(ModToolTiers.OPAL_CRYSTAL, -3, 0.0F, new Item.Properties()
-                    .defaultDurability(250)) {
-                @Override
-                public boolean isValidRepairItem(ItemStack itemStack, ItemStack repairStack) {
-                    return repairStack.is(ModItems.OPAL_CRYSTAL.get());
-                }
-            });
     public static final RegistryObject<Item> FILTER = registerItem("filter",
             () -> new Item(new Item.Properties()) {
                 @Override

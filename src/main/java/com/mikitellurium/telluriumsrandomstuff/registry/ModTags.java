@@ -16,7 +16,6 @@ public class ModTags {
         public static final TagKey<Block> BUBBLE_COLUMN_GENERATOR = create("bubble_column_generator");
         public static final TagKey<Block> BUBBLE_COLUMN_DRAG_DOWN = create("bubble_column_drag_down");
         public static final TagKey<Block> BUBBLE_COLUMN_LIFT_UP = create("bubble_column_lift_up");
-        public static final TagKey<Block> NEEDS_OPAL_CRYSTAL_TOOL = create("needs_opal_crystal_tools");
         public static final TagKey<Block> NEEDS_SPIRITED_IRON_TOOL = create("needs_spirited_iron_tools");
 
         public static TagKey<Block> create(String name) {
@@ -28,7 +27,6 @@ public class ModTags {
     public static class Items {
 
         public static final TagKey<Item> OPAL_STONES = create("opal_stones");
-        public static final TagKey<Item> OPAL_CRYSTALS = create("opal_crystals");
         public static final TagKey<Item> ALLAY_DUPLICATION_ITEMS = create("allay_duplication_items");
         public static final TagKey<Item> SOUL_LAVA_IMMUNE = create("soul_lava_immune");
 

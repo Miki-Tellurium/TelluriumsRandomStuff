@@ -22,12 +22,12 @@ public class LavaGooglesCommand {
 
     public static LiteralArgumentBuilder<CommandSourceStack> build(LiteralArgumentBuilder<CommandSourceStack> builder) {
         return builder.then(Commands.literal("giveLavaGoogles")
-                .then(Commands.argument("targets", EntityArgument.players())
-                        .executes((context) -> giveGoogles(context.getSource(), EntityArgument.getPlayers(context, "targets")))
+                .then(Commands.argument("target", EntityArgument.players())
+                        .executes((context) -> giveGoogles(context.getSource(), EntityArgument.getPlayers(context, "target")))
                         .then(Commands.argument("color", HexColorArgument.hexColor())
-                                .executes((context) -> giveGoogles(context.getSource(), EntityArgument.getPlayers(context, "targets"), HexColorArgument.getParsedColor(context, "color"))))
+                                .executes((context) -> giveGoogles(context.getSource(), EntityArgument.getPlayers(context, "target"), HexColorArgument.getParsedColor(context, "color"))))
                         .then(Commands.literal("random")
-                                .executes((context) -> giveGooglesRandomColor(context.getSource(), EntityArgument.getPlayers(context, "targets")))))
+                                .executes((context) -> giveGooglesRandomColor(context.getSource(), EntityArgument.getPlayers(context, "target")))))
         );
     }
 

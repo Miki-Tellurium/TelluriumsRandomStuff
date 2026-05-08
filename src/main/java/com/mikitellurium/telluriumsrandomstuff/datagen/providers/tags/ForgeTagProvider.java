@@ -42,12 +42,7 @@ public class ForgeTagProvider {
             this.tag(Tags.Blocks.OBSIDIAN)
                     .add(ModBlocks.SOUL_OBSIDIAN.get());
 
-            this.tag(Tags.Blocks.ORES)
-                    .add(ModBlocks.OPAL_CRYSTAL_ORE.get());
-
             this.tag(Tags.Blocks.STORAGE_BLOCKS)
-                    .add(ModBlocks.OPAL_CRYSTAL_BLOCK.get())
-                    .add(ModBlocks.RAW_OPAL_CRYSTAL_BLOCK.get())
                     .add(ModBlocks.SPIRITED_IRON_BLOCK.get());
         }
     }
@@ -62,11 +57,6 @@ public class ForgeTagProvider {
         @Override
         protected void addTags(HolderLookup.Provider provider) {
             this.tag(Tags.Items.TOOLS)
-                    .add(ModItems.OPAL_CRYSTAL_SWORD.get())
-                    .add(ModItems.OPAL_CRYSTAL_PICKAXE.get())
-                    .add(ModItems.OPAL_CRYSTAL_AXE.get())
-                    .add(ModItems.OPAL_CRYSTAL_SWORD.get())
-                    .add(ModItems.OPAL_CRYSTAL_HOE.get())
                     .add(ModItems.SPIRITED_IRON_SWORD.get())
                     .add(ModItems.SPIRITED_IRON_PICKAXE.get())
                     .add(ModItems.SPIRITED_IRON_AXE.get())
@@ -94,12 +84,6 @@ public class ForgeTagProvider {
 
             this.tag(Tags.Items.DUSTS)
                     .add(ModItems.BLUE_GLOWSTONE_DUST.get());
-
-            this.tag(Tags.Items.RAW_MATERIALS)
-                    .add(ModItems.RAW_OPAL_CRYSTAL.get());
-
-            this.tag(Tags.Items.GEMS)
-                    .add(ModItems.OPAL_CRYSTAL.get());
 
             this.tag(Tags.Items.INGOTS)
                     .add(ModItems.SPIRITED_IRON_INGOT.get());
