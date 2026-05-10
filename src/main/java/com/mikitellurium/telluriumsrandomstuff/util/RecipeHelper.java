@@ -4,28 +4,18 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingFunction;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
 import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
-import net.minecraft.Util;
 import net.minecraft.core.Holder;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.StainedGlassBlock;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -33,28 +23,9 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class RecipeHelper {
-
     public static final Ingredient WATER_BOTTLE = Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
     public static final ItemStack THICK_POTION = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.THICK);
     public static final ItemStack MUNDANE_POTION = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.MUNDANE);
-
-    public static List<SoulFurnaceSmeltingRecipe> getConvertedVanillaRecipes(List<SmeltingRecipe> smeltingRecipes) {
-        List<SoulFurnaceSmeltingRecipe> soulFurnaceRecipes = NonNullList.create();
-        for (SmeltingRecipe recipe : smeltingRecipes) {
-            soulFurnaceRecipes.add(convertSmelting(recipe));
-        }
-        return soulFurnaceRecipes;
-    }
-
-    public static SoulFurnaceSmeltingRecipe convertSmelting(SmeltingRecipe recipe) {
-        String itemId = ForgeRegistries.ITEMS.getDelegateOrThrow(recipe.getResultItem(RegistryAccess.EMPTY).getItem())
-                .key().location().getPath();
-        ResourceLocation id = FastLoc.modLoc(itemId + "_from_soul_furnace_smelting");
-
-        Ingredient ingredient = recipe.getIngredients().get(0);
-        ItemStack output = recipe.getResultItem(RegistryAccess.EMPTY);
-        return new SoulFurnaceSmeltingRecipe(id, output, ingredient);
-    }
 
     public static void validateJsonElement(JsonObject obj, String... keys) {
         Arrays.asList(keys).forEach((s) -> {
@@ -171,5 +142,4 @@ public class RecipeHelper {
             return repairables;
         }
     }
-
 }

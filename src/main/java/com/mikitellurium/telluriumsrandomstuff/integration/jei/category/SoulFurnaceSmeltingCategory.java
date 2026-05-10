@@ -1,9 +1,5 @@
 package com.mikitellurium.telluriumsrandomstuff.integration.jei.category;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.jei.JeiIntegration;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
@@ -22,9 +18,9 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 
-public class SoulFurnaceSmeltingCategory extends SoulLavaTankCategory<SoulFurnaceSmeltingRecipe> {
-
+public class SoulFurnaceSmeltingCategory extends SoulLavaTankCategory<SmeltingRecipe> {
     public final static ResourceLocation UID = FastLoc.modLoc("soul_furnace_smelting");
 
     private final IDrawable background;
@@ -43,14 +39,13 @@ public class SoulFurnaceSmeltingCategory extends SoulLavaTankCategory<SoulFurnac
     }
 
     @Override
-    public void draw(SoulFurnaceSmeltingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics,
-                     double mouseX, double mouseY) {
+    public void draw(SmeltingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
         animatedFlame.draw(graphics, 34, 43);
         progressBar.draw(graphics, 51, 24);
     }
 
     @Override
-    public RecipeType<SoulFurnaceSmeltingRecipe> getRecipeType() {
+    public RecipeType<SmeltingRecipe> getRecipeType() {
         return JeiIntegration.SOUL_FURNACE_SMELTING_RECIPE_TYPE;
     }
 
@@ -70,10 +65,9 @@ public class SoulFurnaceSmeltingCategory extends SoulLavaTankCategory<SoulFurnac
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, SoulFurnaceSmeltingRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, SmeltingRecipe recipe, IFocusGroup focuses) {
         super.setRecipe(builder, recipe, focuses);
         builder.addSlot(RecipeIngredientRole.INPUT, 33, 24).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 24).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
     }
-
 }

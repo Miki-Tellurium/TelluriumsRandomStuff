@@ -10,10 +10,6 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 public class ModRecipeSerializers {
-
-    public static final RegistryObject<RecipeSerializer<SoulFurnaceSmeltingRecipe>> SOUL_FURNACE_SMELTING =
-            registerSerializer(SoulFurnaceSmeltingRecipe.Type.ID, () -> SoulFurnaceSmeltingRecipe.Serializer.INSTANCE);
-
     public static final RegistryObject<RecipeSerializer<SoulLavaTransmutationRecipe>> SOUL_LAVA_TRANSMUTATION =
             registerSerializer(SoulLavaTransmutationRecipe.Type.ID, () -> SoulLavaTransmutationRecipe.Serializer.INSTANCE);
 
@@ -30,7 +26,6 @@ public class ModRecipeSerializers {
     protected static void register(IEventBus eventBus) {
         ModRegistries.RECIPE_SERIALIZERS.register(eventBus);
     }
-
 }
 
 

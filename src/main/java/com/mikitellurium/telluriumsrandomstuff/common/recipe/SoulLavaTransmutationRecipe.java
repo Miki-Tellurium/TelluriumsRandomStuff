@@ -18,7 +18,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 public class SoulLavaTransmutationRecipe extends TelluriumRecipe {
-
     public SoulLavaTransmutationRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient) {
         super(id, output, ingredient);
     }

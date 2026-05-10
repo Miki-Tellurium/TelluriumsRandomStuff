@@ -5,7 +5,6 @@ import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.SoulCompactorSc
 import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.SoulFurnaceScreen;
 import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.SoulInfuserScreen;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
-import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulFurnaceSmeltingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.category.*;
@@ -52,7 +51,6 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        registry.registerFiller(SoulFurnaceSmeltingRecipe.class, SoulFurnaceSmeltingDisplay::new);
         registry.registerFiller(SmeltingRecipe.class, SoulFurnaceSmeltingDisplay::new);
         registry.registerFiller(SoulInfusionRecipe.class, SoulInfusionDisplay::new);
         registry.registerFiller(CompactingRecipe.class, CompactingDisplay::new);

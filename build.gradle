@@ -104,9 +104,9 @@ dependencies {
     minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}") // implementation/compileOnly
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}") // implementation/compileOnly
 
     runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}") // runtimeOnly/compileOnly
     compileOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-api-forge:${rei_version}")
