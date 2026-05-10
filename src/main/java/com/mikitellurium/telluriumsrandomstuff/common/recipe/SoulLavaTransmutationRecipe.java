@@ -2,6 +2,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeTypes;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.core.NonNullList;
@@ -38,18 +39,11 @@ public class SoulLavaTransmutationRecipe extends TelluriumRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return Type.INSTANCE;
-    }
-
-    public static class Type implements RecipeType<SoulLavaTransmutationRecipe> {
-        private Type() { }
-        public static final Type INSTANCE = new Type();
-        public static final String ID = "soul_lava_transmutation";
+        return ModRecipeTypes.SOUL_LAVA_TRANSMUTATION;
     }
 
     public static class Serializer implements RecipeSerializer<SoulLavaTransmutationRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = FastLoc.modLoc("soul_lava_transmutation");
 
         @Override
         public SoulLavaTransmutationRecipe fromJson(ResourceLocation id, JsonObject recipe) {
@@ -77,5 +71,4 @@ public class SoulLavaTransmutationRecipe extends TelluriumRecipe {
             buf.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
         }
     }
-
 }

@@ -4,6 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.hud.menu.SoulInfuserMenu;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulInfuserBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulInfusionRecipe;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -56,7 +57,7 @@ public class SoulInfuserBlockEntity extends AbstractSoulSmeltingBlockEntity<Soul
 
     @SuppressWarnings("all")
     public SoulInfuserBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SOUL_INFUSER.get(), pos, state, 4000, SoulInfusionRecipe.Type.INSTANCE, 4,
+        super(ModBlockEntities.SOUL_INFUSER.get(), pos, state, 4000, ModRecipeTypes.SOUL_INFUSION, 4,
                 (i) -> i == INPUT_SLOT1 || i == INPUT_SLOT2,
                 (i) -> i == OUTPUT_SLOT,
                 BUCKET_SLOT);

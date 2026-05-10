@@ -3,6 +3,7 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.fluid.SoulLavaFluid;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.SoulLavaTransmutationRecipe;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -43,7 +44,7 @@ public class SoulLavaCauldronBlock extends AbstractCauldronBlock {
         if (this.isEntityInsideContent(blockState, pos, entity)) {
             if (entity instanceof ItemEntity item) {
                 Optional<SoulLavaTransmutationRecipe> recipe = level.getRecipeManager().getRecipeFor(
-                        SoulLavaTransmutationRecipe.Type.INSTANCE, new SimpleContainer(item.getItem()), level);
+                        ModRecipeTypes.SOUL_LAVA_TRANSMUTATION, new SimpleContainer(item.getItem()), level);
                 if (recipe.isPresent()) {
                     level.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
                     level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(blockState));

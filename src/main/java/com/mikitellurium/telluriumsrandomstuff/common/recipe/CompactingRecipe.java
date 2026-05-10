@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
 import com.google.gson.JsonObject;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeTypes;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.core.RegistryAccess;
@@ -16,7 +17,6 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class CompactingRecipe extends TelluriumRecipe {
-
     private final int recipeCost;
 
     public CompactingRecipe(ResourceLocation id, ItemStack output, Ingredient ingredient, int recipeCost) {
@@ -44,18 +44,11 @@ public class CompactingRecipe extends TelluriumRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return Type.INSTANCE;
-    }
-
-    public static class Type implements RecipeType<CompactingRecipe> {
-        private Type() { }
-        public static final Type INSTANCE = new Type();
-        public static final String ID = "compacting";
+        return ModRecipeTypes.COMPACTING;
     }
 
     public static class Serializer implements RecipeSerializer<CompactingRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = FastLoc.modLoc("compacting");
 
         @Override
         public CompactingRecipe fromJson(ResourceLocation id, JsonObject recipe) {
@@ -85,5 +78,4 @@ public class CompactingRecipe extends TelluriumRecipe {
             buf.writeInt(recipe.getRecipeCost());
         }
     }
-
 }

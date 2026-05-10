@@ -13,6 +13,7 @@ import com.mikitellurium.telluriumsrandomstuff.integration.util.PotionMixingHelp
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModFluids;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeTypes;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.MouseUtils;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
@@ -78,10 +79,9 @@ public class JeiIntegration implements IModPlugin {
         IVanillaRecipeFactory recipeFactory = registration.getVanillaRecipeFactory();
 
         List<SmeltingRecipe> smeltingRecipes = recipeManager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
-        //List<SoulFurnaceSmeltingRecipe> convertedRecipes = RecipeHelper.getConvertedVanillaRecipes(vanillaRecipes);
-        List<SoulLavaTransmutationRecipe> soulLavaTransmutationRecipes = recipeManager.getAllRecipesFor(SoulLavaTransmutationRecipe.Type.INSTANCE);
-        List<SoulInfusionRecipe> soulInfusionRecipes = recipeManager.getAllRecipesFor(SoulInfusionRecipe.Type.INSTANCE);
-        List<CompactingRecipe> compactingRecipes = recipeManager.getAllRecipesFor(CompactingRecipe.Type.INSTANCE);
+        List<SoulLavaTransmutationRecipe> soulLavaTransmutationRecipes = recipeManager.getAllRecipesFor(ModRecipeTypes.SOUL_LAVA_TRANSMUTATION);
+        List<SoulInfusionRecipe> soulInfusionRecipes = recipeManager.getAllRecipesFor(ModRecipeTypes.SOUL_INFUSION);
+        List<CompactingRecipe> compactingRecipes = recipeManager.getAllRecipesFor(ModRecipeTypes.COMPACTING);
 
         List<SoulLavaInfoCategory.Recipe> soulLavaInfoRecipes = List.of(new SoulLavaInfoCategory.Recipe());
         List<AmethystLensInfoCategory.Recipe> amethystLensInfoRecipes = List.of(
@@ -148,5 +148,4 @@ public class JeiIntegration implements IModPlugin {
     public void registerIngredients(IModIngredientRegistration registration) {
         registration.register(ModIngredientTypes.BLOCK_STATE, List.of(), new BlockIngredientHelper(), new BlockStateRenderer());
     }
-
 }

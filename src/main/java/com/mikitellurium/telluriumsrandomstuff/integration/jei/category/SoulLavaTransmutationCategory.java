@@ -27,7 +27,7 @@ import net.minecraft.world.level.material.Fluids;
 
 public class SoulLavaTransmutationCategory implements IRecipeCategory<SoulLavaTransmutationRecipe> {
 
-    public final static ResourceLocation UID = FastLoc.modLoc(SoulLavaTransmutationRecipe.Type.ID);
+    public final static ResourceLocation UID = FastLoc.modLoc("soul_lava_transmutation");
 
     private final IDrawable icon;
     private final IDrawable background;

@@ -1,6 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.recipe;
 
 import com.google.gson.JsonObject;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeTypes;
 import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import com.mikitellurium.telluriumsrandomstuff.util.RecipeHelper;
 import net.minecraft.core.NonNullList;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class SoulInfusionRecipe extends TelluriumRecipe {
-
     private final Ingredient catalyst;
     private final int recipeCost;
 
@@ -73,18 +73,11 @@ public class SoulInfusionRecipe extends TelluriumRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return Type.INSTANCE;
-    }
-
-    public static class Type implements RecipeType<SoulInfusionRecipe> {
-        private Type() { }
-        public static final Type INSTANCE = new Type();
-        public static final String ID = "soul_infusion";
+        return ModRecipeTypes.SOUL_INFUSION;
     }
 
     public static class Serializer implements RecipeSerializer<SoulInfusionRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = FastLoc.modLoc("soul_infusion");
 
         @Override
         public SoulInfusionRecipe fromJson(ResourceLocation recipeId, JsonObject recipe) {
@@ -115,5 +108,4 @@ public class SoulInfusionRecipe extends TelluriumRecipe {
             buf.writeInt(recipe.getRecipeCost());
         }
     }
-
 }

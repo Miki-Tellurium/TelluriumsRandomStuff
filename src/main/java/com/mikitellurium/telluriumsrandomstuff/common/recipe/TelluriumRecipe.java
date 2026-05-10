@@ -12,7 +12,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 public abstract class TelluriumRecipe implements Recipe<Container> {
-
     private final ResourceLocation id;
     private final ItemStack output;
     private final Ingredient ingredient;
@@ -70,5 +69,4 @@ public abstract class TelluriumRecipe implements Recipe<Container> {
 
     @Override
     public abstract RecipeType<?> getType();
-
 }

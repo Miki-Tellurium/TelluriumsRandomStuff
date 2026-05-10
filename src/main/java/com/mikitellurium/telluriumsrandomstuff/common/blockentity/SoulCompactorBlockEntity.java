@@ -5,6 +5,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.block.SoulCompactorBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.recipe.CompactingRecipe;
 import com.mikitellurium.telluriumsrandomstuff.lib.TickingBlockEntity;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -55,7 +56,7 @@ public class SoulCompactorBlockEntity extends AbstractSoulSmeltingBlockEntity<Co
     };
 
     public SoulCompactorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SOUL_COMPACTOR.get(), pos, state, 4000, CompactingRecipe.Type.INSTANCE, 3,
+        super(ModBlockEntities.SOUL_COMPACTOR.get(), pos, state, 4000, ModRecipeTypes.COMPACTING, 3,
                 (i) -> i == INPUT_SLOT,
                 (i) -> i == OUTPUT_SLOT,
                 BUCKET_SLOT);
