@@ -126,8 +126,7 @@ public class ModTranslationProvider extends LanguageProvider {
         addBlock(ModBlocks.SPIRITED_IRON_BLOCK, "Block of Spirited Iron");
         addBlock(ModBlocks.SOUL_ASSEMBLY_TABLE, "Soul Assembly Table (WIP)");
 
-        translation("block", "awakened_sculk_shrieker.tooltip.warning", "Warning!");
-        translation("block", "awakened_sculk_shrieker.tooltip.message", "This can spawn a Warden anywhere. Use with caution.");
+        translation("block", "awakened_sculk_shrieker.tooltip", "Use a soul cluster on this block to spawn a warden.");
         // Block Entities
         translation("blockentity", "soul_furnace", "Soul Furnace");
         translation("blockentity", "soul_anchor", "Soul Anchor");

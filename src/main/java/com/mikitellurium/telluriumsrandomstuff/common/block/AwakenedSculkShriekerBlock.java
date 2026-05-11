@@ -4,6 +4,7 @@ import com.mikitellurium.telluriumsrandomstuff.common.blockentity.AwakenedSculkS
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlockEntities;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -12,6 +13,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -29,8 +31,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
+import java.util.List;
 
+public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
     public AwakenedSculkShriekerBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.SCULK_SHRIEKER));
         this.registerDefaultState(this.stateDefinition.any()
@@ -47,8 +50,7 @@ public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState,
-                                                                  BlockEntityType<T> blockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
         return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.AWAKENED_SCULK_SHRIEKER.get(),
                 (tickLevel, pos, state, shrieker) -> shrieker.tick(level, pos, state));
     }
@@ -106,4 +108,8 @@ public class AwakenedSculkShriekerBlock extends SculkShriekerBlock {
         return blockState.getValue(CAN_SUMMON) ? 15 : 0;
     }
 
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> components, TooltipFlag tooltipFlag) {
+        components.add(Component.translatable("block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip"));
+    }
 }

@@ -1,8 +1,7 @@
 {
   "block.telluriumsrandomstuff.alchemixer": "Alchemixer",
   "block.telluriumsrandomstuff.awakened_sculk_shrieker": "Awakened Sculk Shrieker",
-  "block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.message": "This can spawn a Warden anywhere. Use with caution.",
-  "block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip.warning": "Warning!",
+  "block.telluriumsrandomstuff.awakened_sculk_shrieker.tooltip": "Use a soul cluster on this block to spawn a warden.",
   "block.telluriumsrandomstuff.blue_glowstone": "Blue Glowstone",
   "block.telluriumsrandomstuff.blue_redstone_lamp": "Blue Redstone Lamp",
   "block.telluriumsrandomstuff.bright_torchflower": "Bright Torchflower",
