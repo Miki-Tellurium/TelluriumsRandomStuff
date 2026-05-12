@@ -1,0 +1,10 @@
+{
+  "type": "telluriumsrandomstuff:loot_chest_modifier",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/ancient_city"
+    }
+  ],
+  "loot_table": "telluriumsrandomstuff:chests/add_to_ancient_city"
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:ender_chest"
+    },
+    "L": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "telluriumsrandomstuff:blue_glowstone"
+    },
+    "X": {
+      "item": "telluriumsrandomstuff:soul_obsidian"
+    }
+  },
+  "pattern": [
+    "XLX",
+    "X#X",
+    "XPX"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:soul_anchor"
+  },
+  "show_notification": true
+}

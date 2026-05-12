@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "telluriumsrandomstuff:block/extractor",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "telluriumsrandomstuff:block/extractor",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "telluriumsrandomstuff:block/extractor"
+    },
+    "facing=south": {
+      "model": "telluriumsrandomstuff:block/extractor",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "telluriumsrandomstuff:block/extractor",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "telluriumsrandomstuff:block/extractor",
+      "y": 270
+    }
+  }
+}

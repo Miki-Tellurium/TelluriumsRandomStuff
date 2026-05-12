@@ -1,0 +1,10 @@
+{
+  "type": "telluriumsrandomstuff:compacting",
+  "cost": 400,
+  "count": 1,
+  "ingredient": {
+    "count": 4,
+    "item": "minecraft:netherite_scrap"
+  },
+  "result": "minecraft:netherite_ingot"
+}

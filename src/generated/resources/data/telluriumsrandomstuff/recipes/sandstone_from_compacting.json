@@ -1,0 +1,10 @@
+{
+  "type": "telluriumsrandomstuff:compacting",
+  "cost": 50,
+  "count": 4,
+  "ingredient": {
+    "count": 4,
+    "item": "minecraft:sand"
+  },
+  "result": "minecraft:sandstone"
+}

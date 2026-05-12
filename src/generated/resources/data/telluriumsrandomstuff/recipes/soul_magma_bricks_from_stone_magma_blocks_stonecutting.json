@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "telluriumsrandomstuff:soul_magma_block"
+  },
+  "result": "telluriumsrandomstuff:soul_magma_bricks"
+}

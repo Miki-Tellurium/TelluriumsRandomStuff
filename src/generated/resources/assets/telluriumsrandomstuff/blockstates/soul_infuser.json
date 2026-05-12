@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "facing=east,lit=false": {
+      "model": "telluriumsrandomstuff:block/soul_infuser",
+      "y": 450
+    },
+    "facing=east,lit=true": {
+      "model": "telluriumsrandomstuff:block/soul_infuser_on",
+      "y": 450
+    },
+    "facing=north,lit=false": {
+      "model": "telluriumsrandomstuff:block/soul_infuser",
+      "y": 360
+    },
+    "facing=north,lit=true": {
+      "model": "telluriumsrandomstuff:block/soul_infuser_on",
+      "y": 360
+    },
+    "facing=south,lit=false": {
+      "model": "telluriumsrandomstuff:block/soul_infuser",
+      "y": 180
+    },
+    "facing=south,lit=true": {
+      "model": "telluriumsrandomstuff:block/soul_infuser_on",
+      "y": 180
+    },
+    "facing=west,lit=false": {
+      "model": "telluriumsrandomstuff:block/soul_infuser",
+      "y": 270
+    },
+    "facing=west,lit=true": {
+      "model": "telluriumsrandomstuff:block/soul_infuser_on",
+      "y": 270
+    }
+  }
+}

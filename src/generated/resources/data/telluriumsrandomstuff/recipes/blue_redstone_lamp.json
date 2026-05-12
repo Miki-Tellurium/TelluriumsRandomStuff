@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:redstone"
+    },
+    "g": {
+      "item": "telluriumsrandomstuff:blue_glowstone"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#g#",
+    " # "
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:blue_redstone_lamp"
+  },
+  "show_notification": true
+}

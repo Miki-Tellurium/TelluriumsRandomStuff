@@ -1,0 +1,11 @@
+{
+  "type": "telluriumsrandomstuff:soul_infusion",
+  "catalyst": {
+    "item": "telluriumsrandomstuff:small_soul_fragment"
+  },
+  "cost": 20,
+  "ingredient": {
+    "item": "minecraft:glowstone_dust"
+  },
+  "result": "telluriumsrandomstuff:blue_glowstone_dust"
+}

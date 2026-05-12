@@ -1,0 +1,11 @@
+{
+  "type": "telluriumsrandomstuff:soul_infusion",
+  "catalyst": {
+    "item": "telluriumsrandomstuff:soul_fragment"
+  },
+  "cost": 100,
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": "telluriumsrandomstuff:spirited_iron_ingot"
+}

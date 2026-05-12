@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "telluriumsrandomstuff:spirited_iron_rod"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    },
+    "v": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "pattern": [
+    " I ",
+    "XvX"
+  ],
+  "result": {
+    "item": "telluriumsrandomstuff:alchemixer"
+  },
+  "show_notification": true
+}

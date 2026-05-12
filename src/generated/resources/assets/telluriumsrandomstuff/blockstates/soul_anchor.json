@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "charged=false": {
+      "model": "telluriumsrandomstuff:block/soul_anchor_off"
+    },
+    "charged=true": {
+      "model": "telluriumsrandomstuff:block/soul_anchor_on"
+    }
+  }
+}

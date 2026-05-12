@@ -1,0 +1,10 @@
+{
+  "type": "telluriumsrandomstuff:loot_chest_modifier",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/nether_bridge"
+    }
+  ],
+  "loot_table": "telluriumsrandomstuff:chests/lava_googles"
+}

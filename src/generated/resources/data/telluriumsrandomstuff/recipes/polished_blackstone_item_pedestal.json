@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "I": {
+      "item": "minecraft:item_frame"
+    }
+  },
+  "pattern": [
+    " I ",
+    " # ",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "item": "telluriumsrandomstuff:polished_blackstone_item_pedestal"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,10 @@
+{
+  "type": "telluriumsrandomstuff:compacting",
+  "cost": 100,
+  "count": 1,
+  "ingredient": {
+    "count": 8,
+    "item": "minecraft:string"
+  },
+  "result": "minecraft:cobweb"
+}
