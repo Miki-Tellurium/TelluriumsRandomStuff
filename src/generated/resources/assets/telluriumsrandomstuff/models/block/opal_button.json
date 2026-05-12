@@ -1,6 +1,0 @@
-{
-  "parent": "telluriumsrandomstuff:block/button_tinted",
-  "textures": {
-    "texture": "telluriumsrandomstuff:block/opal"
-  }
-}

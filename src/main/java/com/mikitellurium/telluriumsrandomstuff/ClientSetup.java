@@ -8,6 +8,7 @@ import com.mikitellurium.telluriumsrandomstuff.client.entity.render.DummyPlayerR
 import com.mikitellurium.telluriumsrandomstuff.client.entity.render.GrapplingHookRenderer;
 import com.mikitellurium.telluriumsrandomstuff.client.hud.screen.*;
 import com.mikitellurium.telluriumsrandomstuff.client.item.GrapplingHookHandRenderer;
+import com.mikitellurium.telluriumsrandomstuff.common.block.OpalBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.item.LavaGooglesItem;
 import com.mikitellurium.telluriumsrandomstuff.common.particle.SoulLavaDripParticle;
 import com.mikitellurium.telluriumsrandomstuff.registry.*;
@@ -20,6 +21,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
@@ -65,31 +67,22 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
-        event.register(ColorsUtil.getOpalBlockColor(),
-                ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
-                ModBlocks.OPAL_TILES.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
-                ModBlocks.CRACKED_OPAL_TILES.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
-                ModBlocks.OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_TILES_SLAB.get(), ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(),
-                ModBlocks.CRACKED_OPAL_TILES_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
-                ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_TILES_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
-                ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.OPAL_TILES_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
-                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
-                ModBlocks.OPAL_TILES_ITEM_PEDESTAL.get());
+        event.register((state, level, pos, tintIndex) -> {
+            Block block = state.getBlock();
+            return block instanceof OpalBlock ? ((OpalBlock)block).getColor(state) : ColorsUtil.BLANK;
+        }, ModBlocks.OPAL.get());
     }
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.register(LavaGooglesItem::getItemTintColor, ModItems.LAVA_GOOGLES.get());
-        event.register(ColorsUtil.getOpalItemColor(),
-                ModBlocks.OPAL.get(), ModBlocks.OPAL_COBBLESTONE.get(), ModBlocks.OPAL_BRICKS.get(),
-                ModBlocks.OPAL_TILES.get(), ModBlocks.CHISELED_OPAL_BRICKS.get(), ModBlocks.CRACKED_OPAL_BRICKS.get(),
-                ModBlocks.CRACKED_OPAL_TILES.get(), ModBlocks.OPAL_SLAB.get(), ModBlocks.OPAL_COBBLESTONE_SLAB.get(),
-                ModBlocks.OPAL_BRICK_SLAB.get(), ModBlocks.OPAL_TILES_SLAB.get(), ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(),
-                ModBlocks.CRACKED_OPAL_TILES_SLAB.get(), ModBlocks.OPAL_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_STAIRS.get(),
-                ModBlocks.OPAL_BRICK_STAIRS.get(), ModBlocks.OPAL_TILES_STAIRS.get(), ModBlocks.OPAL_COBBLESTONE_WALL.get(),
-                ModBlocks.OPAL_BRICK_WALL.get(), ModBlocks.OPAL_TILES_WALL.get(), ModBlocks.OPAL_PRESSURE_PLATE.get(),
-                ModBlocks.OPAL_BUTTON.get(), ModBlocks.OPAL_ITEM_PEDESTAL.get(), ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get(),
-                ModBlocks.OPAL_TILES_ITEM_PEDESTAL.get());
+        event.register((stack, tintIndex) -> {
+                    Block block = Block.byItem(stack.getItem());
+                    if (block instanceof OpalBlock && stack.hasTag() && stack.getTag().contains("hue")) {
+                        return ColorsUtil.getOpalColor(stack.getTag().getInt("hue"));
+                    }
+                    return ColorsUtil.BLANK;
+                }, ModBlocks.OPAL.get());
     }
 
     @SubscribeEvent

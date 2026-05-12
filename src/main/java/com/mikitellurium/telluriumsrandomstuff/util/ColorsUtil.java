@@ -1,13 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.util;
 
-import com.mikitellurium.telluriumsrandomstuff.common.block.RGBTinted;
-import com.mikitellurium.telluriumsrandomstuff.common.block.RGBTintedBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.block.OpalBlock;
 import net.minecraft.Util;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 
@@ -16,32 +14,15 @@ import java.awt.*;
 public class ColorsUtil {
     public static final int BLANK = 0xFFFFFFFF;
     public static final int ALPHA_0 = 0x00FFFFFF;
-    private static final Integer[] OPAL_COLORS = Util.make(new Integer[RGBTinted.HUE_RANGE], (array) -> {
-        for (int i = 0; i < RGBTinted.HUE_RANGE; i++) {
-            float newHue = (float) i / 31;
+    private static final Integer[] OPAL_COLORS = Util.make(new Integer[OpalBlock.HUE_RANGE], (array) -> {
+        for (int i = 0; i < OpalBlock.HUE_RANGE; i++) {
+            float newHue = (float) i / (OpalBlock.HUE_RANGE - 1);
             array[i] = Color.getHSBColor(newHue, 0.55f, 0.9f).getRGB();
         }
     });
 
     public static int getOpalColor(int hue) {
         return OPAL_COLORS[hue];
-    }
-
-    public static BlockColor getOpalBlockColor() {
-        return (state, level, pos, tintIndex) -> {
-            Block block = state.getBlock();
-            return block instanceof RGBTinted ? ((RGBTinted)block).getColor(state) : BLANK;
-        };
-    }
-
-    public static ItemColor getOpalItemColor() {
-        return (stack, tintIndex) -> {
-            if (stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof RGBTinted &&
-                    stack.hasTag() && stack.getTag().contains("hue")) {
-                return getOpalColor(stack.getTag().getInt("hue"));
-            }
-            return BLANK;
-        };
     }
 
     public static float[] getRgbComponents(int rgb) {

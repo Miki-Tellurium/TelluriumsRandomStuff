@@ -15,9 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class VanillaTagProvider {
-
     public static class Blocks extends BlockTagsProvider {
-
         public Blocks(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
                       @Nullable ExistingFileHelper existingFileHelper) {
             super(output, lookupProvider, "minecraft", existingFileHelper);
@@ -34,27 +32,6 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_MAGMA_BRICKS.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get())
                     .add(ModBlocks.OPAL.get())
-                    .add(ModBlocks.OPAL_COBBLESTONE.get())
-                    .add(ModBlocks.OPAL_BRICKS.get())
-                    .add(ModBlocks.OPAL_TILES.get())
-                    .add(ModBlocks.CRACKED_OPAL_BRICKS.get())
-                    .add(ModBlocks.CHISELED_OPAL_BRICKS.get())
-                    .add(ModBlocks.CRACKED_OPAL_TILES.get())
-                    .add(ModBlocks.OPAL_SLAB.get())
-                    .add(ModBlocks.OPAL_STAIRS.get())
-                    .add(ModBlocks.OPAL_COBBLESTONE_SLAB.get())
-                    .add(ModBlocks.OPAL_COBBLESTONE_STAIRS.get())
-                    .add(ModBlocks.OPAL_COBBLESTONE_WALL.get())
-                    .add(ModBlocks.OPAL_BRICK_SLAB.get())
-                    .add(ModBlocks.OPAL_BRICK_STAIRS.get())
-                    .add(ModBlocks.OPAL_BRICK_WALL.get())
-                    .add(ModBlocks.OPAL_TILES_SLAB.get())
-                    .add(ModBlocks.OPAL_TILES_STAIRS.get())
-                    .add(ModBlocks.OPAL_TILES_WALL.get())
-                    .add(ModBlocks.CRACKED_OPAL_BRICK_SLAB.get())
-                    .add(ModBlocks.CRACKED_OPAL_TILES_SLAB.get())
-                    .add(ModBlocks.OPAL_PRESSURE_PLATE.get())
-                    .add(ModBlocks.OPAL_BUTTON.get())
                     .add(ModBlocks.SOUL_OBSIDIAN.get())
                     .add(ModBlocks.SOUL_ANCHOR.get())
                     .add(ModBlocks.EXTRACTOR.get())
@@ -77,9 +54,6 @@ public class VanillaTagProvider {
                     .add(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL.get())
                     .add(ModBlocks.PURPUR_ITEM_PEDESTAL.get())
                     .add(ModBlocks.QUARTZ_ITEM_PEDESTAL.get())
-                    .add(ModBlocks.OPAL_ITEM_PEDESTAL.get())
-                    .add(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get())
-                    .add(ModBlocks.OPAL_TILES_ITEM_PEDESTAL.get())
                     .add(ModBlocks.SOUL_INFUSER.get())
                     .add(ModBlocks.ALCHEMIXER.get())
                     .add(ModBlocks.SOUL_COMPACTOR.get())
@@ -95,12 +69,6 @@ public class VanillaTagProvider {
             this.tag(BlockTags.MINEABLE_WITH_HOE)
                     .add(ModBlocks.AWAKENED_SCULK_SHRIEKER.get());
 
-            this.tag(BlockTags.BUTTONS)
-                    .add(ModBlocks.OPAL_BUTTON.get());
-
-            this.tag(BlockTags.STONE_BUTTONS)
-                    .add(ModBlocks.OPAL_BUTTON.get());
-
             this.tag(BlockTags.CAULDRONS)
                     .add(ModBlocks.SOUL_LAVA_CAULDRON.get());
 
@@ -112,22 +80,13 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_OBSIDIAN.get())
                     .add(ModBlocks.SOUL_ANCHOR.get());
 
-            this.tag(BlockTags.PRESSURE_PLATES)
-                    .add(ModBlocks.OPAL_PRESSURE_PLATE.get());
-
-            this.tag(BlockTags.STONE_PRESSURE_PLATES)
-                    .add(ModBlocks.OPAL_PRESSURE_PLATE.get());
-
             this.tag(BlockTags.RAILS)
                     .add(ModBlocks.HYDRODYNAMIC_RAIL.get());
 
+            this.tag(BlockTags.BASE_STONE_OVERWORLD)
+                    .add(ModBlocks.OPAL.get());
+
             this.tag(BlockTags.SLABS)
-                    .add(ModBlocks.OPAL_SLAB.get())
-                    .add(ModBlocks.OPAL_COBBLESTONE_SLAB.get())
-                    .add(ModBlocks.OPAL_BRICK_SLAB.get())
-                    .add(ModBlocks.OPAL_TILES_SLAB.get())
-                    .add(ModBlocks.CRACKED_OPAL_BRICK_SLAB.get())
-                    .add(ModBlocks.CRACKED_OPAL_TILES_SLAB.get())
                     .add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get());
 
             this.tag(BlockTags.SOUL_FIRE_BASE_BLOCKS)
@@ -150,26 +109,8 @@ public class VanillaTagProvider {
                     .add(ModBlocks.SOUL_MAGMA_BRICK_SLAB.get())
                     .add(ModBlocks.INFUSED_SOUL_SAND.get());
 
-            this.tag(BlockTags.STAIRS)
-                    .add(ModBlocks.OPAL_STAIRS.get())
-                    .add(ModBlocks.OPAL_COBBLESTONE_STAIRS.get())
-                    .add(ModBlocks.OPAL_BRICK_STAIRS.get())
-                    .add(ModBlocks.OPAL_TILES_STAIRS.get());
-
-            this.tag(BlockTags.STONE_BRICKS)
-                    .add(ModBlocks.OPAL_BRICKS.get())
-                    .add(ModBlocks.OPAL_TILES.get())
-                    .add(ModBlocks.CHISELED_OPAL_BRICKS.get())
-                    .add(ModBlocks.CRACKED_OPAL_BRICKS.get())
-                    .add(ModBlocks.CRACKED_OPAL_TILES.get());
-
             this.tag(BlockTags.STRIDER_WARM_BLOCKS)
                     .add(ModBlocks.SOUL_LAVA_BLOCK.get());
-
-            this.tag(BlockTags.WALLS)
-                    .add(ModBlocks.OPAL_COBBLESTONE_WALL.get())
-                    .add(ModBlocks.OPAL_BRICK_WALL.get())
-                    .add(ModBlocks.OPAL_TILES_WALL.get());
 
             this.tag(BlockTags.INFINIBURN_OVERWORLD)
                     .add(ModBlocks.GRATE_MAGMA_BLOCK.get())
@@ -202,7 +143,6 @@ public class VanillaTagProvider {
     }
 
     public static class Items extends ItemTagsProvider {
-
         public Items(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> future,
                      CompletableFuture<TagLookup<Block>> blockLookup, @Nullable ExistingFileHelper existingFileHelper) {
             super(packOutput, future, blockLookup, "minecraft", existingFileHelper);
@@ -233,12 +173,6 @@ public class VanillaTagProvider {
             this.tag(ItemTags.SWORDS)
                     .add(ModItems.SPIRITED_IRON_SWORD.get());
 
-            this.tag(ItemTags.STONE_CRAFTING_MATERIALS)
-                    .add(ModBlocks.OPAL_COBBLESTONE.get().asItem());
-
-            this.tag(ItemTags.STONE_TOOL_MATERIALS)
-                    .add(ModBlocks.OPAL_COBBLESTONE.get().asItem());
-
             this.tag(ItemTags.TRIMMABLE_ARMOR)
                     .add(ModItems.SPIRITED_IRON_BOOTS.get())
                     .add(ModItems.SPIRITED_IRON_LEGGINGS.get())
@@ -252,18 +186,11 @@ public class VanillaTagProvider {
                     .add(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get())
                     .add(ModItems.SOUL_TORCHFLOWER_SEEDS.get());
 
-            this.copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
-            this.copy(BlockTags.STONE_BUTTONS, ItemTags.STONE_BUTTONS);
             this.copy(BlockTags.RAILS, ItemTags.RAILS);
-            this.copy(BlockTags.SLABS, ItemTags.SLABS);
-            this.copy(BlockTags.STAIRS, ItemTags.STAIRS);
-            this.copy(BlockTags.STONE_BRICKS, ItemTags.STONE_BRICKS);
-            this.copy(BlockTags.WALLS, ItemTags.WALLS);
             this.copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
             this.copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
             this.copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS);
             this.copy(BlockTags.SOUL_FIRE_BASE_BLOCKS, ItemTags.SOUL_FIRE_BASE_BLOCKS);
         }
     }
-
 }

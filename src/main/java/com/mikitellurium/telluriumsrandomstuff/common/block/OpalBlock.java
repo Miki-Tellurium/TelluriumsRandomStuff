@@ -1,30 +1,34 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
+import com.mikitellurium.telluriumsrandomstuff.util.ColorsUtil;
+import com.mojang.realmsclient.util.JsonUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
-public class RGBTintedPressurePlateBlock extends PressurePlateBlock implements RGBTinted {
-    public RGBTintedPressurePlateBlock(Sensitivity sensitivity, Properties properties, BlockSetType type) {
-        super(sensitivity, properties, type);
-        this.registerDefaultState(this.defaultBlockState().setValue(HUE, 0));
+public class OpalBlock extends Block {
+    public static final int HUE_RANGE = 32;
+    public static final IntegerProperty HUE = IntegerProperty.create("hue", 0, HUE_RANGE - 1);
+
+    public OpalBlock(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(HUE, 0));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
         builder.add(HUE);
     }
 
@@ -41,7 +45,7 @@ public class RGBTintedPressurePlateBlock extends PressurePlateBlock implements R
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
         List<ItemStack> drops = super.getDrops(state, params);
         for (ItemStack stack: drops) {
-            RGBTinted.setStackHue(stack, state.getValue(HUE));
+            setStackHue(stack, state.getValue(HUE));
         }
         return drops;
     }
@@ -49,7 +53,19 @@ public class RGBTintedPressurePlateBlock extends PressurePlateBlock implements R
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
         ItemStack stack = state.getBlock().asItem().getDefaultInstance();
-        RGBTinted.setStackHue(stack, state.getValue(HUE));
+        setStackHue(stack, state.getValue(HUE));
         return stack;
+    }
+
+    public int getColor(BlockState state) {
+        return ColorsUtil.getOpalColor(state.getValue(HUE));
+    }
+
+    public static void setStackHue(ItemStack stack, int hue) {
+        Block block = Block.byItem(stack.getItem());
+        if (block instanceof OpalBlock) {
+            CompoundTag tag = stack.getOrCreateTag();
+            tag.putInt("hue", hue);
+        }
     }
 }

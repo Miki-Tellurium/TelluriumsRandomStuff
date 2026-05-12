@@ -1,8 +1,0 @@
-{
-  "parent": "telluriumsrandomstuff:block/slab_tinted",
-  "textures": {
-    "bottom": "telluriumsrandomstuff:block/opal_tiles",
-    "side": "telluriumsrandomstuff:block/opal_tiles",
-    "top": "telluriumsrandomstuff:block/opal_tiles"
-  }
-}

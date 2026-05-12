@@ -6,7 +6,10 @@ import com.mikitellurium.telluriumsrandomstuff.util.FastLoc;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CarvedPumpkinBlock;
+import net.minecraft.world.level.block.RedstoneLampBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -130,39 +133,6 @@ public class ModBlockModelProvider extends BlockStateProvider {
                 .texture("content", modLoc("block/soul_lava_still"))
                 .texture("particle", mcLoc("block/cauldron_side")));
         this.tintedBlockWithItem(ModBlocks.OPAL);
-        this.tintedBlockWithItem(ModBlocks.OPAL_COBBLESTONE);
-        this.tintedBlockWithItem(ModBlocks.OPAL_BRICKS);
-        this.tintedBlockWithItem(ModBlocks.CHISELED_OPAL_BRICKS);
-        this.tintedBlockWithItem(ModBlocks.OPAL_TILES);
-        this.tintedBlockWithItem(ModBlocks.CRACKED_OPAL_BRICKS);
-        this.tintedBlockWithItem(ModBlocks.CRACKED_OPAL_TILES);
-        this.tintedSlabWithItem(ModBlocks.OPAL_SLAB, modLoc("block/opal"));
-        this.tintedSlabWithItem(ModBlocks.OPAL_COBBLESTONE_SLAB, modLoc("block/opal_cobblestone"));
-        this.tintedSlabWithItem(ModBlocks.OPAL_BRICK_SLAB, modLoc("block/opal_bricks"));
-        this.tintedSlabWithItem(ModBlocks.OPAL_TILES_SLAB, modLoc("block/opal_tiles"));
-        this.tintedSlabWithItem(ModBlocks.CRACKED_OPAL_BRICK_SLAB, modLoc("block/cracked_opal_bricks"));
-        this.tintedSlabWithItem(ModBlocks.CRACKED_OPAL_TILES_SLAB, modLoc("block/cracked_opal_tiles"));
-        this.tintedStairsWithItem(ModBlocks.OPAL_STAIRS, modLoc("block/opal"));
-        this.tintedStairsWithItem(ModBlocks.OPAL_COBBLESTONE_STAIRS, modLoc("block/opal_cobblestone"));
-        this.tintedStairsWithItem(ModBlocks.OPAL_BRICK_STAIRS, modLoc("block/opal_bricks"));
-        this.tintedStairsWithItem(ModBlocks.OPAL_TILES_STAIRS, modLoc("block/opal_tiles"));
-        this.tintedWallWithItem(ModBlocks.OPAL_COBBLESTONE_WALL, modLoc("block/opal_cobblestone"));
-        this.tintedWallWithItem(ModBlocks.OPAL_BRICK_WALL, modLoc("block/opal_bricks"));
-        this.tintedWallWithItem(ModBlocks.OPAL_TILES_WALL, modLoc("block/opal_tiles"));
-        this.pressurePlateBlock((PressurePlateBlock) ModBlocks.OPAL_PRESSURE_PLATE.get(),
-                this.models().withExistingParent(ModBlocks.OPAL_PRESSURE_PLATE.getId().getPath(), modLoc("block/pressure_plate_up_tinted"))
-                        .texture("texture", modLoc("block/opal")),
-                this.models().withExistingParent(ModBlocks.OPAL_PRESSURE_PLATE.getId().getPath() + "_down", modLoc("block/pressure_plate_down_tinted"))
-                        .texture("texture", modLoc("block/opal")));
-        this.blockItemModelFromParent(ModBlocks.OPAL_PRESSURE_PLATE, modLoc("block/" + ModBlocks.OPAL_PRESSURE_PLATE.getId().getPath()));
-        this.buttonBlock((ButtonBlock) ModBlocks.OPAL_BUTTON.get(),
-                this.models().withExistingParent(ModBlocks.OPAL_BUTTON.getId().getPath(), modLoc("block/button_tinted"))
-                        .texture("texture", modLoc("block/opal")),
-                this.models().withExistingParent(ModBlocks.OPAL_BUTTON.getId().getPath() + "_pressed", modLoc("block/button_pressed_tinted"))
-                        .texture("texture", modLoc("block/opal")));
-        this.models().withExistingParent(ModBlocks.OPAL_BUTTON.getId().getPath() + "_inventory", modLoc("block/button_inventory_tinted"))
-                .texture("texture", modLoc("block/opal"));
-        this.blockItemModelFromParent(ModBlocks.OPAL_BUTTON, modLoc("block/" + ModBlocks.OPAL_BUTTON.getId().getPath() + "_inventory"));
         this.simpleBlockWithItem(ModBlocks.SOUL_OBSIDIAN.get(), this.cubeAll(ModBlocks.SOUL_OBSIDIAN.get()));
         this.getVariantBuilder(ModBlocks.SOUL_ANCHOR.get())
                 .forAllStates((state) -> {
@@ -260,28 +230,25 @@ public class ModBlockModelProvider extends BlockStateProvider {
                         .rotationY((int) state.getValue(CarvedPumpkinBlock.FACING).toYRot() + 180)
                         .build());
         this.blockItemModelFromParent(ModBlocks.SOUL_JACK_O_LANTERN, modLoc("block/soul_jack_o_lantern"));
-        this.itemPedestalWithItem(ModBlocks.STONE_ITEM_PEDESTAL, mcLoc("block/stone"));
-        this.itemPedestalWithItem(ModBlocks.STONE_BRICK_ITEM_PEDESTAL, mcLoc("block/stone_bricks"));
-        this.itemPedestalWithItem(ModBlocks.MOSSY_STONE_BRICK_ITEM_PEDESTAL, mcLoc("block/mossy_stone_bricks"));
-        this.itemPedestalWithItem(ModBlocks.POLISHED_GRANITE_ITEM_PEDESTAL, mcLoc("block/polished_granite"));
-        this.itemPedestalWithItem(ModBlocks.POLISHED_DIORITE_ITEM_PEDESTAL, mcLoc("block/polished_diorite"));
-        this.itemPedestalWithItem(ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL, mcLoc("block/polished_andesite"));
-        this.itemPedestalWithItem(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL, mcLoc("block/polished_deepslate"));
-        this.itemPedestalWithItem(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL, mcLoc("block/deepslate_bricks"));
-        this.itemPedestalWithItem(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL, mcLoc("block/deepslate_tiles"));
-        this.itemPedestalWithItem(ModBlocks.CUT_SANDSTONE_ITEM_PEDESTAL, mcLoc("block/cut_sandstone"));
-        this.itemPedestalWithItem(ModBlocks.CUT_RED_SANDSTONE_ITEM_PEDESTAL, mcLoc("block/cut_red_sandstone"));
-        this.itemPedestalWithItem(ModBlocks.PRISMARINE_BRICK_ITEM_PEDESTAL, mcLoc("block/prismarine_bricks"));
-        this.itemPedestalWithItem(ModBlocks.NETHER_BRICK_ITEM_PEDESTAL, mcLoc("block/nether_bricks"));
-        this.itemPedestalWithItem(ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL, mcLoc("block/red_nether_bricks"));
-        this.itemPedestalWithItem(ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL, mcLoc("block/polished_blackstone"));
-        this.itemPedestalWithItem(ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL, mcLoc("block/polished_blackstone_bricks"));
-        this.itemPedestalWithItem(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL, mcLoc("block/end_stone_bricks"));
-        this.itemPedestalWithItem(ModBlocks.PURPUR_ITEM_PEDESTAL, mcLoc("block/purpur_block"));
-        this.itemPedestalWithItem(ModBlocks.QUARTZ_ITEM_PEDESTAL, mcLoc("block/quartz_block_top"));
-        this.tintedItemPedestalWithItem(ModBlocks.OPAL_ITEM_PEDESTAL, modLoc("block/opal"));
-        this.tintedItemPedestalWithItem(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL, modLoc("block/opal_bricks"));
-        this.tintedItemPedestalWithItem(ModBlocks.OPAL_TILES_ITEM_PEDESTAL, modLoc("block/opal_tiles"));
+        this.itemPedestal(ModBlocks.STONE_ITEM_PEDESTAL, mcLoc("block/stone"));
+        this.itemPedestal(ModBlocks.STONE_BRICK_ITEM_PEDESTAL, mcLoc("block/stone_bricks"));
+        this.itemPedestal(ModBlocks.MOSSY_STONE_BRICK_ITEM_PEDESTAL, mcLoc("block/mossy_stone_bricks"));
+        this.itemPedestal(ModBlocks.POLISHED_GRANITE_ITEM_PEDESTAL, mcLoc("block/polished_granite"));
+        this.itemPedestal(ModBlocks.POLISHED_DIORITE_ITEM_PEDESTAL, mcLoc("block/polished_diorite"));
+        this.itemPedestal(ModBlocks.POLISHED_ANDESITE_ITEM_PEDESTAL, mcLoc("block/polished_andesite"));
+        this.itemPedestal(ModBlocks.POLISHED_DEEPSLATE_ITEM_PEDESTAL, mcLoc("block/polished_deepslate"));
+        this.itemPedestal(ModBlocks.DEEPSLATE_BRICK_ITEM_PEDESTAL, mcLoc("block/deepslate_bricks"));
+        this.itemPedestal(ModBlocks.DEEPSLATE_TILE_ITEM_PEDESTAL, mcLoc("block/deepslate_tiles"));
+        this.itemPedestal(ModBlocks.CUT_SANDSTONE_ITEM_PEDESTAL, mcLoc("block/cut_sandstone"));
+        this.itemPedestal(ModBlocks.CUT_RED_SANDSTONE_ITEM_PEDESTAL, mcLoc("block/cut_red_sandstone"));
+        this.itemPedestal(ModBlocks.PRISMARINE_BRICK_ITEM_PEDESTAL, mcLoc("block/prismarine_bricks"));
+        this.itemPedestal(ModBlocks.NETHER_BRICK_ITEM_PEDESTAL, mcLoc("block/nether_bricks"));
+        this.itemPedestal(ModBlocks.RED_NETHER_BRICK_ITEM_PEDESTAL, mcLoc("block/red_nether_bricks"));
+        this.itemPedestal(ModBlocks.POLISHED_BLACKSTONE_ITEM_PEDESTAL, mcLoc("block/polished_blackstone"));
+        this.itemPedestal(ModBlocks.POLISHED_BLACKSTONE_BRICK_ITEM_PEDESTAL, mcLoc("block/polished_blackstone_bricks"));
+        this.itemPedestal(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL, mcLoc("block/end_stone_bricks"));
+        this.itemPedestal(ModBlocks.PURPUR_ITEM_PEDESTAL, mcLoc("block/purpur_block"));
+        this.itemPedestal(ModBlocks.QUARTZ_ITEM_PEDESTAL, mcLoc("block/quartz_block_top"));
         this.simpleBlockWithItem(ModBlocks.INFUSED_SOUL_SAND.get(), this.cubeAll(ModBlocks.INFUSED_SOUL_SAND.get()));
         this.getVariantBuilder(ModBlocks.SOUL_INFUSER.get())
                 .forAllStates((state) -> {
@@ -343,54 +310,6 @@ public class ModBlockModelProvider extends BlockStateProvider {
                 .texture("particle", model));
     }
 
-    private void tintedSlabWithItem(RegistryObject<Block> slab, ResourceLocation texture) {
-        String id = slab.getId().getPath();
-        this.slabBlock((SlabBlock) slab.get(),
-                this.models().withExistingParent(id, modLoc("block/slab_tinted"))
-                        .texture("bottom", texture)
-                        .texture("top", texture)
-                        .texture("side", texture),
-                this.models().withExistingParent(id + "_top", modLoc("block/slab_top_tinted"))
-                        .texture("bottom", texture)
-                        .texture("top", texture)
-                        .texture("side", texture),
-                this.models().getExistingFile(texture));
-        this.blockItemModelFromParent(slab, modLoc("block/" + id));
-    }
-
-    private void tintedStairsWithItem(RegistryObject<Block> stairs, ResourceLocation texture) {
-        String id = stairs.getId().getPath();
-        this.stairsBlock((StairBlock) stairs.get(),
-                this.models().withExistingParent(id, modLoc("block/stairs_tinted"))
-                        .texture("bottom", texture)
-                        .texture("top", texture)
-                        .texture("side", texture),
-                this.models().withExistingParent(id + "_inner", modLoc("block/inner_stairs_tinted"))
-                        .texture("bottom", texture)
-                        .texture("top", texture)
-                        .texture("side", texture),
-                this.models().withExistingParent(id + "_outer", modLoc("block/outer_stairs_tinted"))
-                        .texture("bottom", texture)
-                        .texture("top", texture)
-                        .texture("side", texture));
-        this.blockItemModelFromParent(stairs, modLoc("block/" + id));
-    }
-
-    private void tintedWallWithItem(RegistryObject<Block> wall, ResourceLocation texture) {
-        String id = wall.getId().getPath();
-        this.wallBlock((WallBlock) wall.get(),
-                this.models().withExistingParent(id + "_post", modLoc("block/template_wall_post_tinted"))
-                        .texture("wall", texture),
-                this.models().withExistingParent(id + "_side", modLoc("block/template_wall_side_tinted"))
-                        .texture("wall", texture),
-                this.models().withExistingParent(id + "_side_tall", modLoc("block/template_wall_side_tall_tinted"))
-                        .texture("wall", texture));
-        this.models().withExistingParent(id + "_inventory", modLoc("block/wall_inventory_tinted"))
-                .texture("wall", texture);
-        this.itemModels().withExistingParent(id, modLoc("block/wall_inventory_tinted"))
-                .texture("wall", texture);
-    }
-
     private void torchflower(RegistryObject<Block> flower, RegistryObject<Block> crop, RegistryObject<Block> pot) {
         this.simpleBlock(flower.get(), this.models().withExistingParent(flower.getId().getPath(), mcLoc("block/cross"))
                 .renderType("cutout")
@@ -410,18 +329,10 @@ public class ModBlockModelProvider extends BlockStateProvider {
                 .texture("plant", modLoc("block/" + flower.getId().getPath())));
     }
 
-    private void itemPedestalWithItem(RegistryObject<Block> pedestal, ResourceLocation texture) {
+    private void itemPedestal(RegistryObject<Block> pedestal, ResourceLocation texture) {
         this.simpleBlockWithItem(pedestal.get(), this.models()
                 .withExistingParent(pedestal.getId().getPath(), modLoc("block/item_pedestal"))
                 .texture("texture", texture));
         this.blockItemModelFromParent(pedestal, modLoc("block/" + pedestal.getId().getPath()));
     }
-
-    private void tintedItemPedestalWithItem(RegistryObject<Block> pedestal, ResourceLocation texture) {
-        this.simpleBlockWithItem(pedestal.get(), this.models()
-                .withExistingParent(pedestal.getId().getPath(), modLoc("block/item_pedestal_tinted"))
-                .texture("texture", texture));
-        this.blockItemModelFromParent(pedestal, modLoc("block/" + pedestal.getId().getPath()));
-    }
-
 }

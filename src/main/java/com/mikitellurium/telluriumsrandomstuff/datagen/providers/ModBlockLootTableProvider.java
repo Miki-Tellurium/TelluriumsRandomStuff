@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
-
     private ModBlockLootTableProvider() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
@@ -46,33 +45,12 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.BRIGHT_TORCHFLOWER.get());
         this.add(ModBlocks.BRIGHT_TORCHFLOWER_CROP.get(), this.applyExplosionDecay(ModBlocks.BRIGHT_TORCHFLOWER_CROP.get(),
                 LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.BRIGHT_TORCHFLOWER_SEEDS.get())))));
-        this.dropSelf(ModBlocks.CHISELED_OPAL_BRICKS.get());
-        this.add(ModBlocks.CRACKED_OPAL_TILES_SLAB.get(), this::createSlabItemTable);
-        this.dropSelf(ModBlocks.CRACKED_OPAL_TILES.get());
-        this.add(ModBlocks.CRACKED_OPAL_BRICK_SLAB.get(), this::createSlabItemTable);
-        this.dropSelf(ModBlocks.CRACKED_OPAL_BRICKS.get());
-        this.add(ModBlocks.OPAL_TILES_SLAB.get(), this::createSlabItemTable);
-        this.dropSelf(ModBlocks.OPAL_TILES_STAIRS.get());
-        this.dropSelf(ModBlocks.OPAL_TILES_WALL.get());
-        this.dropSelf(ModBlocks.OPAL_TILES.get());
         this.dropSelf(ModBlocks.EXTRACTOR.get());
         this.dropSelf(ModBlocks.GRATE_MAGMA_BLOCK.get());
         this.dropSelf(ModBlocks.GRATE_SOUL_MAGMA_BLOCK.get());
         this.dropSelf(ModBlocks.GRATE_SOUL_SAND.get());
         this.dropSelf(ModBlocks.HYDRODYNAMIC_RAIL.get());
-        this.add(ModBlocks.OPAL.get(), (block) -> this.createSingleItemTableWithSilkTouch(block, ModBlocks.OPAL_COBBLESTONE.get()));
-        this.add(ModBlocks.OPAL_BRICK_SLAB.get(), this::createSlabItemTable);
-        this.dropSelf(ModBlocks.OPAL_BRICK_STAIRS.get());
-        this.dropSelf(ModBlocks.OPAL_BRICK_WALL.get());
-        this.dropSelf(ModBlocks.OPAL_BRICKS.get());
-        this.dropSelf(ModBlocks.OPAL_BUTTON.get());
-        this.dropSelf(ModBlocks.OPAL_COBBLESTONE.get());
-        this.add(ModBlocks.OPAL_COBBLESTONE_SLAB.get(), this::createSlabItemTable);
-        this.dropSelf(ModBlocks.OPAL_COBBLESTONE_STAIRS.get());
-        this.dropSelf(ModBlocks.OPAL_COBBLESTONE_WALL.get());
-        this.dropSelf(ModBlocks.OPAL_PRESSURE_PLATE.get());
-        this.add(ModBlocks.OPAL_SLAB.get(), this::createSlabItemTable);
-        this.dropSelf(ModBlocks.OPAL_STAIRS.get());
+        this.dropSelf(ModBlocks.OPAL.get());
         this.dropPottedContents(ModBlocks.POTTED_BRIGHT_TORCHFLOWER.get());
         this.dropPottedContents(ModBlocks.POTTED_SOUL_TORCHFLOWER.get());
         this.dropSelf(ModBlocks.SOUL_ANCHOR.get());
@@ -107,9 +85,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.PURPUR_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.QUARTZ_ITEM_PEDESTAL.get());
-        this.dropSelf(ModBlocks.OPAL_ITEM_PEDESTAL.get());
-        this.dropSelf(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL.get());
-        this.dropSelf(ModBlocks.OPAL_TILES_ITEM_PEDESTAL.get());
         this.dropSelf(ModBlocks.INFUSED_SOUL_SAND.get());
         this.dropSelf(ModBlocks.SOUL_INFUSER.get());
         this.dropSelf(ModBlocks.ALCHEMIXER.get());
@@ -122,5 +97,4 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected Iterable<Block> getKnownBlocks() {
         return ModRegistries.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
     }
-
 }

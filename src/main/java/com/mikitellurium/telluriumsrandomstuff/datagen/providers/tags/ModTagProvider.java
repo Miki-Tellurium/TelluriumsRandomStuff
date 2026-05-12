@@ -19,9 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ModTagProvider {
-
     public static class Blocks extends BlockTagsProvider {
-
         public Blocks(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
                       @Nullable ExistingFileHelper existingFileHelper) {
             super(output, lookupProvider, FastLoc.modId(), existingFileHelper);
@@ -45,7 +43,6 @@ public class ModTagProvider {
     }
 
     public static class Items extends ItemTagsProvider {
-
         public Items(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider,
                      CompletableFuture<TagLookup<Block>> blockLookup, @Nullable ExistingFileHelper existingFileHelper) {
             super(packOutput, lookupProvider, blockLookup, FastLoc.modId(), existingFileHelper);
@@ -53,30 +50,6 @@ public class ModTagProvider {
 
         @Override
         protected void addTags(HolderLookup.Provider provider) {
-            this.tag(ModTags.Items.OPAL_STONES)
-                    .add(ModBlocks.OPAL.get().asItem())
-                    .add(ModBlocks.OPAL_COBBLESTONE.get().asItem())
-                    .add(ModBlocks.OPAL_BRICKS.get().asItem())
-                    .add(ModBlocks.OPAL_TILES.get().asItem())
-                    .add(ModBlocks.CHISELED_OPAL_BRICKS.get().asItem())
-                    .add(ModBlocks.CRACKED_OPAL_BRICKS.get().asItem())
-                    .add(ModBlocks.CRACKED_OPAL_TILES.get().asItem())
-                    .add(ModBlocks.OPAL_SLAB.get().asItem())
-                    .add(ModBlocks.OPAL_COBBLESTONE_SLAB.get().asItem())
-                    .add(ModBlocks.OPAL_BRICK_SLAB.get().asItem())
-                    .add(ModBlocks.OPAL_TILES_SLAB.get().asItem())
-                    .add(ModBlocks.CRACKED_OPAL_BRICK_SLAB.get().asItem())
-                    .add(ModBlocks.CRACKED_OPAL_TILES_SLAB.get().asItem())
-                    .add(ModBlocks.OPAL_STAIRS.get().asItem())
-                    .add(ModBlocks.OPAL_COBBLESTONE_STAIRS.get().asItem())
-                    .add(ModBlocks.OPAL_BRICK_STAIRS.get().asItem())
-                    .add(ModBlocks.OPAL_TILES_STAIRS.get().asItem())
-                    .add(ModBlocks.OPAL_COBBLESTONE_WALL.get().asItem())
-                    .add(ModBlocks.OPAL_BRICK_WALL.get().asItem())
-                    .add(ModBlocks.OPAL_TILES_WALL.get().asItem())
-                    .add(ModBlocks.OPAL_PRESSURE_PLATE.get().asItem())
-                    .add(ModBlocks.OPAL_BUTTON.get().asItem());
-
             this.tag(ModTags.Items.ALLAY_DUPLICATION_ITEMS)
                     .add(net.minecraft.world.item.Items.ECHO_SHARD)
                     .add(net.minecraft.world.item.Items.AMETHYST_SHARD);
@@ -89,7 +62,6 @@ public class ModTagProvider {
     }
 
     public static class EntityTypes extends EntityTypeTagsProvider {
-
         public EntityTypes(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider,
                            @Nullable ExistingFileHelper existingFileHelper) {
             super(packOutput, lookupProvider, FastLoc.modId(), existingFileHelper);
@@ -106,5 +78,4 @@ public class ModTagProvider {
                     .add(EntityType.ELDER_GUARDIAN);
         }
     }
-
 }

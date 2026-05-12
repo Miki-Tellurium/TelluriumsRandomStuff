@@ -7,7 +7,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -26,29 +25,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> SOUL_MAGMA_BRICKS = registerBlock("soul_magma_bricks", SoulMagmaBricksBlock::new);
     public static final RegistryObject<Block> SOUL_MAGMA_BRICK_SLAB = registerBlock("soul_magma_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ModBlocks.SOUL_MAGMA_BRICKS.get())));
     public static final RegistryObject<Block> SOUL_LAVA_CAULDRON = registerBlock("soul_lava_cauldron", SoulLavaCauldronBlock::new, false);
-
-    public static final RegistryObject<Block> OPAL = registerBlock("opal", () -> new RGBTintedBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> OPAL_COBBLESTONE = registerBlock("opal_cobblestone", () -> new RGBTintedBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> OPAL_BRICKS = registerBlock("opal_bricks", () -> new RGBTintedBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> OPAL_TILES = registerBlock("opal_tiles", () -> new RGBTintedBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> CHISELED_OPAL_BRICKS = registerBlock("chiseled_opal_bricks", () -> new RGBTintedBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> CRACKED_OPAL_BRICKS = registerBlock("cracked_opal_bricks", () -> new RGBTintedBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> CRACKED_OPAL_TILES = registerBlock("cracked_opal_tiles", () -> new RGBTintedBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> OPAL_SLAB = registerBlock("opal_slab", () -> new RGBTintedSlabBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> OPAL_COBBLESTONE_SLAB = registerBlock("opal_cobblestone_slab", () -> new RGBTintedSlabBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> OPAL_BRICK_SLAB = registerBlock("opal_brick_slab", () -> new RGBTintedSlabBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> OPAL_TILES_SLAB = registerBlock("opal_tiles_slab", () -> new RGBTintedSlabBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> CRACKED_OPAL_BRICK_SLAB = registerBlock("cracked_opal_brick_slab", () -> new RGBTintedSlabBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> CRACKED_OPAL_TILES_SLAB = registerBlock("cracked_opal_tiles_slab", () -> new RGBTintedSlabBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> OPAL_STAIRS = registerBlock("opal_stairs", () -> new RGBTintedStairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> OPAL_COBBLESTONE_STAIRS = registerBlock("opal_cobblestone_stairs", () -> new RGBTintedStairBlock(Blocks.COBBLESTONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> OPAL_BRICK_STAIRS = registerBlock("opal_brick_stairs", () -> new RGBTintedStairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> OPAL_TILES_STAIRS = registerBlock("opal_tiles_stairs", () -> new RGBTintedStairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> OPAL_COBBLESTONE_WALL = registerBlock("opal_cobblestone_wall", () -> new RGBTintedWallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> OPAL_BRICK_WALL = registerBlock("opal_brick_wall", () -> new RGBTintedWallBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> OPAL_TILES_WALL = registerBlock("opal_tiles_wall", () -> new RGBTintedWallBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-    public static final RegistryObject<Block> OPAL_PRESSURE_PLATE = registerBlock("opal_pressure_plate", () -> new RGBTintedPressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE), BlockSetType.STONE));
-    public static final RegistryObject<Block> OPAL_BUTTON = registerBlock("opal_button", () -> new RGBTintedButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON), BlockSetType.STONE, 20, false));
+    public static final RegistryObject<Block> OPAL = registerBlock("opal", () -> new OpalBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
     public static final RegistryObject<Block> SOUL_OBSIDIAN = registerBlock("soul_obsidian", SoulObsidianBlock::new);
     public static final RegistryObject<Block> SOUL_ANCHOR = registerBlock("soul_anchor", SoulAnchorBlock::new);
     public static final RegistryObject<Block> EXTRACTOR = registerBlock("extractor", ExtractorBlock::new);
@@ -81,9 +58,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> END_STONE_BRICK_ITEM_PEDESTAL = registerBlock("end_stone_brick_item_pedestal", () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.END_STONE_BRICKS).noOcclusion()));
     public static final RegistryObject<Block> PURPUR_ITEM_PEDESTAL = registerBlock("purpur_item_pedestal", () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.PURPUR_BLOCK).noOcclusion()));
     public static final RegistryObject<Block> QUARTZ_ITEM_PEDESTAL = registerBlock("quartz_item_pedestal", () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK).noOcclusion()));
-    public static final RegistryObject<Block> OPAL_ITEM_PEDESTAL = registerBlock("opal_item_pedestal", () -> new RGBTintedItemPedestalBlock(BlockBehaviour.Properties.copy(OPAL.get()).noOcclusion()));
-    public static final RegistryObject<Block> OPAL_BRICK_ITEM_PEDESTAL = registerBlock("opal_brick_item_pedestal", () -> new RGBTintedItemPedestalBlock(BlockBehaviour.Properties.copy(OPAL_BRICKS.get()).noOcclusion()));
-    public static final RegistryObject<Block> OPAL_TILES_ITEM_PEDESTAL = registerBlock("opal_tiles_item_pedestal", () -> new RGBTintedItemPedestalBlock(BlockBehaviour.Properties.copy(OPAL_TILES.get()).noOcclusion()));
     public static final RegistryObject<Block> INFUSED_SOUL_SAND = registerBlock("infused_soul_sand", InfusedSoulSandBlock::new);
     public static final RegistryObject<Block> SOUL_INFUSER = registerBlock("soul_infuser", SoulInfuserBlock::new);
     public static final RegistryObject<Block> ALCHEMIXER = registerBlock("alchemixer", AlchemixerBlock::new);

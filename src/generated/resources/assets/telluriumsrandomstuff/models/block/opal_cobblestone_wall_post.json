@@ -1,6 +1,0 @@
-{
-  "parent": "telluriumsrandomstuff:block/template_wall_post_tinted",
-  "textures": {
-    "wall": "telluriumsrandomstuff:block/opal_cobblestone"
-  }
-}

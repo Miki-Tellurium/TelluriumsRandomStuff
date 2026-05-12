@@ -1,13 +1,11 @@
 package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.TelluriumsRandomStuffMod;
-import com.mikitellurium.telluriumsrandomstuff.common.block.RGBTinted;
-import com.mikitellurium.telluriumsrandomstuff.common.block.RGBTintedBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.block.OpalBlock;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -44,9 +42,9 @@ public class ModCreativeTab {
             List<ItemStack> soulHarvesting = getEnchantedBooks(ModEnchantments.SOUL_HARVESTING.get());
             List<ItemStack> aerodynamics = getEnchantedBooks(ModEnchantments.AERODYNAMICS.get());
             List<ItemStack> opals = new ArrayList<>();
-            for (int i = 0; i < RGBTintedBlock.HUE_RANGE; i++) {
+            for (int i = 0; i < OpalBlock.HUE_RANGE; i++) {
                 ItemStack stack = ModBlocks.OPAL.get().asItem().getDefaultInstance();
-                RGBTinted.setStackHue(stack, i);
+                OpalBlock.setStackHue(stack, i);
                 opals.add(stack);
             }
 
@@ -68,27 +66,6 @@ public class ModCreativeTab {
                 event.acceptAll(soulHarvesting);
                 event.accept(ModItems.OPAL_COLOR_SHIFTER);
                 event.acceptAll(opals);
-                event.accept(withDefaultHue(ModBlocks.OPAL_COBBLESTONE));
-                event.accept(withDefaultHue(ModBlocks.OPAL_BRICKS));
-                event.accept(withDefaultHue(ModBlocks.OPAL_TILES));
-                event.accept(withDefaultHue(ModBlocks.CRACKED_OPAL_BRICKS));
-                event.accept(withDefaultHue(ModBlocks.CRACKED_OPAL_TILES));
-                event.accept(withDefaultHue(ModBlocks.CHISELED_OPAL_BRICKS));
-                event.accept(withDefaultHue(ModBlocks.OPAL_SLAB));
-                event.accept(withDefaultHue(ModBlocks.OPAL_COBBLESTONE_SLAB));
-                event.accept(withDefaultHue(ModBlocks.OPAL_BRICK_SLAB));
-                event.accept(withDefaultHue(ModBlocks.OPAL_TILES_SLAB));
-                event.accept(withDefaultHue(ModBlocks.CRACKED_OPAL_BRICK_SLAB));
-                event.accept(withDefaultHue(ModBlocks.CRACKED_OPAL_TILES_SLAB));
-                event.accept(withDefaultHue(ModBlocks.OPAL_STAIRS));
-                event.accept(withDefaultHue(ModBlocks.OPAL_COBBLESTONE_STAIRS));
-                event.accept(withDefaultHue(ModBlocks.OPAL_BRICK_STAIRS));
-                event.accept(withDefaultHue(ModBlocks.OPAL_TILES_STAIRS));
-                event.accept(withDefaultHue(ModBlocks.OPAL_COBBLESTONE_WALL));
-                event.accept(withDefaultHue(ModBlocks.OPAL_BRICK_WALL));
-                event.accept(withDefaultHue(ModBlocks.OPAL_TILES_WALL));
-                event.accept(withDefaultHue(ModBlocks.OPAL_PRESSURE_PLATE));
-                event.accept(withDefaultHue(ModBlocks.OPAL_BUTTON));
                 event.accept(ModItems.FILTER);
                 event.accept(ModBlocks.EXTRACTOR);
                 event.accept(ModBlocks.BRIGHT_TORCHFLOWER);
@@ -122,9 +99,6 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.END_STONE_BRICK_ITEM_PEDESTAL);
                 event.accept(ModBlocks.PURPUR_ITEM_PEDESTAL);
                 event.accept(ModBlocks.QUARTZ_ITEM_PEDESTAL);
-                event.accept(withDefaultHue(ModBlocks.OPAL_ITEM_PEDESTAL));
-                event.accept(withDefaultHue(ModBlocks.OPAL_BRICK_ITEM_PEDESTAL));
-                event.accept(withDefaultHue(ModBlocks.OPAL_TILES_ITEM_PEDESTAL));
                 event.accept(ModBlocks.SOUL_ASSEMBLY_TABLE);
                 event.accept(ModItems.SMALL_SOUL_FRAGMENT);
                 event.accept(ModItems.SOUL_FRAGMENT);
@@ -159,12 +133,6 @@ public class ModCreativeTab {
                 books.add(instance);
             }
             return books;
-        }
-
-        private static ItemStack withDefaultHue(Supplier<Block> block) {
-            ItemStack stack = block.get().asItem().getDefaultInstance();
-            RGBTinted.setStackHue(stack, 0);
-            return stack;
         }
     }
 }

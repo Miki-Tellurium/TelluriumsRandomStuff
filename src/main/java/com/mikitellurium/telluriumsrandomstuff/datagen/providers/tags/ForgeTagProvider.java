@@ -20,35 +20,25 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ForgeTagProvider {
-
     public static class Blocks extends BlockTagsProvider {
-
-        public Blocks(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                      @Nullable ExistingFileHelper existingFileHelper) {
+        public Blocks(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
             super(output, lookupProvider, "forge", existingFileHelper);
         }
 
         @Override
         protected void addTags(HolderLookup.Provider provider) {
-            this.tag(Tags.Blocks.STONE)
-                    .add(ModBlocks.OPAL.get());
-
-            this.tag(Tags.Blocks.COBBLESTONE)
-                    .add(ModBlocks.OPAL_COBBLESTONE.get());
-
-            this.tag(Tags.Blocks.COBBLESTONE_NORMAL)
-                    .add(ModBlocks.OPAL_COBBLESTONE.get());
-
             this.tag(Tags.Blocks.OBSIDIAN)
                     .add(ModBlocks.SOUL_OBSIDIAN.get());
 
             this.tag(Tags.Blocks.STORAGE_BLOCKS)
                     .add(ModBlocks.SPIRITED_IRON_BLOCK.get());
+
+            this.tag(Tags.Blocks.STONE)
+                    .add(ModBlocks.OPAL.get());
         }
     }
 
     public static class Items extends ItemTagsProvider {
-
         public Items(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider,
                      CompletableFuture<TagLookup<Block>> blockLookup, @Nullable ExistingFileHelper existingFileHelper) {
             super(packOutput, lookupProvider, blockLookup, "forge", existingFileHelper);
@@ -91,9 +81,7 @@ public class ForgeTagProvider {
             this.tag(Tags.Items.RODS)
                     .add(ModItems.SPIRITED_IRON_ROD.get());
 
-            this.copy(Tags.Blocks.COBBLESTONE, Tags.Items.COBBLESTONE);
             this.copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
         }
     }
-
 }

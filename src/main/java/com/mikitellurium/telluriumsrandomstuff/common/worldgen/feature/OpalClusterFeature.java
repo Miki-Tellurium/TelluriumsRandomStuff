@@ -1,7 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.worldgen.feature;
 
-import com.mikitellurium.telluriumsrandomstuff.common.block.RGBTinted;
-import com.mikitellurium.telluriumsrandomstuff.common.block.RGBTintedBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.block.OpalBlock;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -27,7 +26,7 @@ public class OpalClusterFeature extends Feature<OpalClusterConfiguration> {
         RandomSource random = context.random();
         BlockPos origin = context.origin();
         WorldGenLevel level = context.level();
-        BlockState finalState = withRandomHue(random);
+        BlockState finalState = ModBlocks.OPAL.get().defaultBlockState().setValue(OpalBlock.HUE, random.nextInt(32));
         OpalClusterConfiguration config = context.config();
         float f = random.nextFloat() * (float)Math.PI;
         float f1 = (float)config.size() / 8.0F;
@@ -151,9 +150,5 @@ public class OpalClusterFeature extends Feature<OpalClusterConfiguration> {
         }
 
         return i > 0;
-    }
-
-    private BlockState withRandomHue(RandomSource random) {
-        return ModBlocks.OPAL.get().defaultBlockState().setValue(RGBTinted.HUE, random.nextInt(32));
     }
 }
