@@ -80,6 +80,12 @@ public class FloatingWalkwayBlock extends Block implements BucketPickup {
     }
 
     @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        level.scheduleTick(pos, this, 10);
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+    }
+
+    @Override
     public FluidState getFluidState(BlockState state) {
         return Fluids.WATER.getSource(false);
     }
