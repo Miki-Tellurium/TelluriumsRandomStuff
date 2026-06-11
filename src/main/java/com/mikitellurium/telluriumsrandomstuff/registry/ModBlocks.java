@@ -64,6 +64,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> SOUL_COMPACTOR = registerBlock("soul_compactor", SoulCompactorBlock::new);
     public static final RegistryObject<Block> SPIRITED_IRON_BLOCK = registerBlock("spirited_iron_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> SOUL_ASSEMBLY_TABLE = registerBlock("soul_assembly_table", SoulAssemblyTableBlock::new);
+    public static final RegistryObject<Block> WALKWAY_TEST_BLOCK = registerBlock("walkway_test_block", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.WOOD)), false);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         return registerBlock(name, block, true);

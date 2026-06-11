@@ -9,6 +9,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -29,7 +30,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModRegistries {
-
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FastLoc.modId());
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FastLoc.modId());
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, FastLoc.modId());
@@ -38,7 +38,6 @@ public class ModRegistries {
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, FastLoc.modId());
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, FastLoc.modId());
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, FastLoc.modId());
-
     public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSORS = DeferredRegister.create(Registries.STRUCTURE_PROCESSOR, FastLoc.modId());
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, FastLoc.modId());
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, FastLoc.modId());
@@ -48,6 +47,7 @@ public class ModRegistries {
     public static final DeferredRegister<LootItemFunctionType> LOOT_ITEM_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, FastLoc.modId());
     public static final DeferredRegister<ArgumentTypeInfo<?, ?>> ARGUMENT_TYPES = DeferredRegister.create(ForgeRegistries.COMMAND_ARGUMENT_TYPES, FastLoc.modId());
     public static final DeferredRegister<PotionMixingFunction> POTION_MIXING_FUNCTIONS = DeferredRegister.create(CustomRegistries.Keys.POTION_MIXING, FastLoc.modId());
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, FastLoc.modId());
 
     public static void init(IEventBus modEventBus) {
         ModItems.register(modEventBus);
@@ -67,6 +67,7 @@ public class ModRegistries {
         ModLootItemFunctions.register(modEventBus);
         ModArgumentTypes.register(modEventBus);
         ModPotionMixingFunctions.register(modEventBus);
+        ModSounds.register(modEventBus);
 
         ModMessages.register();
         ModCommonConfig.register();

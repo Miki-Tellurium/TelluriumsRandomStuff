@@ -1,0 +1,10 @@
+{
+  "block.floating_walkway_sunk": {
+    "sounds": [
+      "telluriumsrandomstuff:floating_walkway_sunk_1",
+      "telluriumsrandomstuff:floating_walkway_sunk_2",
+      "telluriumsrandomstuff:floating_walkway_sunk_3"
+    ],
+    "subtitle": "subtitles.block.floating_walkway_sunk"
+  }
+}

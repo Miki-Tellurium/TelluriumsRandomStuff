@@ -1,7 +1,7 @@
 package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModParticles;
-import com.mikitellurium.telluriumsrandomstuff.registry.ModSoundTypes;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -26,7 +26,7 @@ public class GrateSoulSandBlock extends SoulSandBlock {
     public GrateSoulSandBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.SOUL_SAND)
                 .speedFactor(1.0f)
-                .sound(ModSoundTypes.GRATE_SOUL_SAND));
+                .sound(ModSounds.GRATE_SOUL_SAND_TYPE));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
