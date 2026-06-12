@@ -101,8 +101,20 @@ public class ModTranslationProvider extends LanguageProvider {
         addBlock(ModBlocks.SOUL_COMPACTOR, "Soul Compactor");
         addBlock(ModBlocks.SPIRITED_IRON_BLOCK, "Block of Spirited Iron");
         addBlock(ModBlocks.SOUL_ASSEMBLY_TABLE, "Soul Assembly Table (WIP)");
+        addBlock(ModBlocks.OAK_FLOATING_WALKWAY, "Oak Floating Walkway");
+        addBlock(ModBlocks.BIRCH_FLOATING_WALKWAY, "Birch Floating Walkway");
+        addBlock(ModBlocks.SPRUCE_FLOATING_WALKWAY, "Spruce Floating Walkway");
+        addBlock(ModBlocks.JUNGLE_FLOATING_WALKWAY, "Jungle Floating Walkway");
+        addBlock(ModBlocks.ACACIA_FLOATING_WALKWAY, "Acacia Floating Walkway");
+        addBlock(ModBlocks.DARK_OAK_FLOATING_WALKWAY, "Dark Oak Floating Walkway");
+        addBlock(ModBlocks.MANGROVE_FLOATING_WALKWAY, "Mangrove Floating Walkway");
+        addBlock(ModBlocks.CHERRY_FLOATING_WALKWAY, "Cherry Floating Walkway");
+        addBlock(ModBlocks.BAMBOO_FLOATING_WALKWAY, "Bamboo Floating Walkway");
+        addBlock(ModBlocks.CRIMSON_FLOATING_WALKWAY, "Crimson Floating Walkway");
+        addBlock(ModBlocks.WARPED_FLOATING_WALKWAY, "Warped Floating Walkway");
 
         translation("block", "awakened_sculk_shrieker.tooltip", "Use a soul cluster on this block to spawn a warden.");
+        translation("block", "floating_walkway.tooltip", "Can be placed on water.");
         // Block Entities
         translation("blockentity", "soul_furnace", "Soul Furnace");
         translation("blockentity", "soul_anchor", "Soul Anchor");

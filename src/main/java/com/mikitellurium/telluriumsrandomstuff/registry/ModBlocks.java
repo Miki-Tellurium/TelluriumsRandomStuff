@@ -2,14 +2,18 @@ package com.mikitellurium.telluriumsrandomstuff.registry;
 
 import com.mikitellurium.telluriumsrandomstuff.common.block.*;
 import com.mikitellurium.telluriumsrandomstuff.common.fluid.SoulLavaBlock;
+import com.mikitellurium.telluriumsrandomstuff.common.item.FloatingWalkwayBlockItem;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -64,7 +68,17 @@ public class ModBlocks {
     public static final RegistryObject<Block> SOUL_COMPACTOR = registerBlock("soul_compactor", SoulCompactorBlock::new);
     public static final RegistryObject<Block> SPIRITED_IRON_BLOCK = registerBlock("spirited_iron_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> SOUL_ASSEMBLY_TABLE = registerBlock("soul_assembly_table", SoulAssemblyTableBlock::new);
-    public static final RegistryObject<Block> WALKWAY_TEST_BLOCK = registerBlock("walkway_test_block", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.WOOD)), false);
+    public static final RegistryObject<Block> OAK_FLOATING_WALKWAY = registerBlock("oak_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.OAK_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> SPRUCE_FLOATING_WALKWAY = registerBlock("spruce_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.SPRUCE_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> BIRCH_FLOATING_WALKWAY = registerBlock("birch_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.BIRCH_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> JUNGLE_FLOATING_WALKWAY = registerBlock("jungle_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.JUNGLE_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> ACACIA_FLOATING_WALKWAY = registerBlock("acacia_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.ACACIA_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> DARK_OAK_FLOATING_WALKWAY = registerBlock("dark_oak_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.DARK_OAK_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> MANGROVE_FLOATING_WALKWAY = registerBlock("mangrove_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.MANGROVE_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> CHERRY_FLOATING_WALKWAY = registerBlock("cherry_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.CHERRY_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> BAMBOO_FLOATING_WALKWAY = registerBlock("bamboo_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.BAMBOO_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> CRIMSON_FLOATING_WALKWAY = registerBlock("crimson_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.CRIMSON_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
+    public static final RegistryObject<Block> WARPED_FLOATING_WALKWAY = registerBlock("warped_floating_walkway", () -> new FloatingWalkwayBlock(BlockBehaviour.Properties.of().mapColor(Blocks.WARPED_PLANKS.defaultMapColor()).strength(1.5F, 3.0F).sound(SoundType.WOOD).noOcclusion().requiresCorrectToolForDrops()), (block) -> new FloatingWalkwayBlockItem(block, new Item.Properties()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         return registerBlock(name, block, true);
@@ -76,9 +90,18 @@ public class ModBlocks {
         return object;
     }
 
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, Function<T, BlockItem> blockItemFunction) {
+        RegistryObject<T> object = ModRegistries.BLOCKS.register(name, block);
+        registerBlockItem(name, () -> blockItemFunction.apply(object.get()));
+        return object;
+    }
+
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return ModRegistries.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties()));
+        return registerBlockItem(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    private static <T extends Item> RegistryObject<Item> registerBlockItem(String name, Supplier<T> blockItem) {
+        return ModRegistries.ITEMS.register(name, blockItem);
     }
 
     protected static void register(IEventBus eventBus) {

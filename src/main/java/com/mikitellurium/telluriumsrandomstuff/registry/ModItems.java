@@ -8,7 +8,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
@@ -115,7 +114,6 @@ public class ModItems {
     public static final RegistryObject<Item> TOTEM_OF_BINDING = registerItem("totem_of_binding", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> SPIRIT_BOTTLE = registerItem("spirit_bottle", () -> new SpiritBottleItem(20000, new Item.Properties()));
     public static final RegistryObject<Item> OPAL_COLOR_SHIFTER = registerItem("opal_color_shifter", () -> new HueShifterItem(new Item.Properties()));
-    public static final RegistryObject<Item> FLOATING_WALKWAY_BLOCK_ITEM = registerItem("walkway_test_block", () -> new FloatingWalkwayBlockItem(ModBlocks.WALKWAY_TEST_BLOCK.get(), new Item.Properties()));
 
     // Items of block states used only for rendering purposes
     public static final RegistryObject<Item> SOUL_INFUSER_LIT = registerItem("soul_infuser_lit", () -> new Item(new Item.Properties()));

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,sunken=false": {
+      "model": "telluriumsrandomstuff:block/acacia_floating_walkway",
+      "y": 270
+    },
+    "facing=east,sunken=true": {
+      "model": "telluriumsrandomstuff:block/acacia_floating_walkway_sunken",
+      "y": 270
+    },
+    "facing=north,sunken=false": {
+      "model": "telluriumsrandomstuff:block/acacia_floating_walkway",
+      "y": 180
+    },
+    "facing=north,sunken=true": {
+      "model": "telluriumsrandomstuff:block/acacia_floating_walkway_sunken",
+      "y": 180
+    },
+    "facing=south,sunken=false": {
+      "model": "telluriumsrandomstuff:block/acacia_floating_walkway"
+    },
+    "facing=south,sunken=true": {
+      "model": "telluriumsrandomstuff:block/acacia_floating_walkway_sunken"
+    },
+    "facing=west,sunken=false": {
+      "model": "telluriumsrandomstuff:block/acacia_floating_walkway",
+      "y": 90
+    },
+    "facing=west,sunken=true": {
+      "model": "telluriumsrandomstuff:block/acacia_floating_walkway_sunken",
+      "y": 90
+    }
+  }
+}

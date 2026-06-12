@@ -28,12 +28,12 @@ public class ModBlockModelProvider extends BlockStateProvider {
         this.getVariantBuilder(ModBlocks.GRATE_SOUL_SAND.get())
                 .forAllStates((state) -> ConfiguredModel.builder()
                         .modelFile(this.models().cube(ModBlocks.GRATE_SOUL_SAND.getId().getPath(),
-                                mcLoc("block/soul_sand"),
-                                modLoc("block/grate_soul_sand_top"),
-                                modLoc("block/grate_soul_sand_side_1"),
-                                modLoc("block/grate_soul_sand_side_1"),
-                                modLoc("block/grate_soul_sand_side_2"),
-                                modLoc("block/grate_soul_sand_side_2"))
+                                        mcLoc("block/soul_sand"),
+                                        modLoc("block/grate_soul_sand_top"),
+                                        modLoc("block/grate_soul_sand_side_1"),
+                                        modLoc("block/grate_soul_sand_side_1"),
+                                        modLoc("block/grate_soul_sand_side_2"),
+                                        modLoc("block/grate_soul_sand_side_2"))
                                 .texture("particle", mcLoc("block/soul_sand")))
                         .rotationY((int) state.getValue(GrateSoulSandBlock.FACING).toYRot())
                         .build());
@@ -280,7 +280,7 @@ public class ModBlockModelProvider extends BlockStateProvider {
                     .part().modelFile(this.models().getExistingFile(modLoc("block/alchemixer_bottle2"))).rotationY(yRot).addModel().condition(AlchemixerBlock.HAS_BOTTLE[2], true).condition(AlchemixerBlock.FACING, direction).end();
         }
         this.itemModels().basicItem(ModBlocks.ALCHEMIXER.get().asItem());
-                this.getVariantBuilder(ModBlocks.SOUL_COMPACTOR.get())
+        this.getVariantBuilder(ModBlocks.SOUL_COMPACTOR.get())
                 .forAllStates((state) -> {
                     String model = "soul_compactor";
                     String lit = state.getValue(SoulCompactorBlock.LIT) ? "on" : "off";
@@ -296,6 +296,17 @@ public class ModBlockModelProvider extends BlockStateProvider {
         this.blockItemModelFromParent(ModBlocks.SOUL_COMPACTOR, modLoc("block/soul_compactor"));
         this.simpleBlockWithItem(ModBlocks.SPIRITED_IRON_BLOCK.get(), this.cubeAll(ModBlocks.SPIRITED_IRON_BLOCK.get()));
         this.simpleBlockWithItem(ModBlocks.SOUL_ASSEMBLY_TABLE.get(), this.models().withExistingParent("soul_assembly_table", mcLoc("block/crafting_table")));
+        this.floatingWalkway(ModBlocks.OAK_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.BIRCH_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.SPRUCE_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.JUNGLE_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.ACACIA_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.DARK_OAK_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.CHERRY_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.MANGROVE_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.BAMBOO_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.CRIMSON_FLOATING_WALKWAY);
+        this.floatingWalkway(ModBlocks.WARPED_FLOATING_WALKWAY);
     }
 
     private void blockItemModelFromParent(RegistryObject<Block> block, ResourceLocation parent) {
@@ -334,5 +345,22 @@ public class ModBlockModelProvider extends BlockStateProvider {
                 .withExistingParent(pedestal.getId().getPath(), modLoc("block/item_pedestal"))
                 .texture("texture", texture));
         this.blockItemModelFromParent(pedestal, modLoc("block/" + pedestal.getId().getPath()));
+    }
+
+    private void floatingWalkway(RegistryObject<Block> walkway) {
+        this.getVariantBuilder(walkway.get()).forAllStates((state) -> {
+            String id = walkway.getId().getPath();
+            String model = "block/floating_walkway";
+            if (state.getValue(FloatingWalkwayBlock.SUNKEN)) {
+                model = model + "_sunken";
+                id = id + "_sunken";
+            }
+            return ConfiguredModel.builder().modelFile(
+                            this.models().withExistingParent(id, modLoc(model))
+                                    .texture("texture", modLoc("block/" + walkway.getId().getPath())))
+                    .rotationY((int) state.getValue(FloatingWalkwayBlock.FACING).toYRot())
+                    .build();
+        });
+        this.blockItemModelFromParent(walkway, modLoc("block/" + walkway.getId().getPath()));
     }
 }

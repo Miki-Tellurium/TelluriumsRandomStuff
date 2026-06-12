@@ -63,7 +63,6 @@ public class ModCreativeTab {
                 event.accept(ModBlocks.SOUL_ANCHOR);
                 event.accept(ModItems.TOTEM_OF_BINDING);
                 event.accept(ModItems.MYSTIC_POTATO);
-                event.acceptAll(soulHarvesting);
                 event.accept(ModItems.OPAL_COLOR_SHIFTER);
                 event.acceptAll(opals);
                 event.accept(ModItems.FILTER);
@@ -120,6 +119,18 @@ public class ModCreativeTab {
                 event.accept(ModItems.SPIRITED_IRON_ROD);
                 event.accept(ModBlocks.ALCHEMIXER);
                 event.accept(ModItems.GRAPPLING_HOOK);
+                event.accept(ModBlocks.OAK_FLOATING_WALKWAY);
+                event.accept(ModBlocks.BIRCH_FLOATING_WALKWAY);
+                event.accept(ModBlocks.SPRUCE_FLOATING_WALKWAY);
+                event.accept(ModBlocks.JUNGLE_FLOATING_WALKWAY);
+                event.accept(ModBlocks.ACACIA_FLOATING_WALKWAY);
+                event.accept(ModBlocks.DARK_OAK_FLOATING_WALKWAY);
+                event.accept(ModBlocks.MANGROVE_FLOATING_WALKWAY);
+                event.accept(ModBlocks.CHERRY_FLOATING_WALKWAY);
+                event.accept(ModBlocks.BAMBOO_FLOATING_WALKWAY);
+                event.accept(ModBlocks.CRIMSON_FLOATING_WALKWAY);
+                event.accept(ModBlocks.WARPED_FLOATING_WALKWAY);
+                event.acceptAll(soulHarvesting);
                 event.acceptAll(aerodynamics);
             }
         }

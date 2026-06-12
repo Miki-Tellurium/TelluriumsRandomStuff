@@ -1,0 +1,6 @@
+{
+  "parent": "telluriumsrandomstuff:block/floating_walkway_sunken",
+  "textures": {
+    "texture": "telluriumsrandomstuff:block/cherry_floating_walkway"
+  }
+}

@@ -430,6 +430,72 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
                 .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
                 .save(consumer, modLoc("spirit_bottle"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.OAK_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.OAK_SLAB)
+                .unlockedBy("has_oak_slab", has(Items.OAK_SLAB))
+                .save(consumer, modLoc("oak_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BIRCH_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.BIRCH_SLAB)
+                .unlockedBy("has_birch_slab", has(Items.BIRCH_SLAB))
+                .save(consumer, modLoc("birch_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SPRUCE_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.SPRUCE_SLAB)
+                .unlockedBy("has_spruce_slab", has(Items.SPRUCE_SLAB))
+                .save(consumer, modLoc("spruce_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.JUNGLE_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.JUNGLE_SLAB)
+                .unlockedBy("has_jungle_slab", has(Items.JUNGLE_SLAB))
+                .save(consumer, modLoc("jungle_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ACACIA_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.ACACIA_SLAB)
+                .unlockedBy("has_acacia_slab", has(Items.ACACIA_SLAB))
+                .save(consumer, modLoc("acacia_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.DARK_OAK_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.DARK_OAK_SLAB)
+                .unlockedBy("has_dark_oak_slab", has(Items.DARK_OAK_SLAB))
+                .save(consumer, modLoc("dark_oak_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MANGROVE_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.MANGROVE_SLAB)
+                .unlockedBy("has_mangrove_slab", has(Items.MANGROVE_SLAB))
+                .save(consumer, modLoc("mangrove_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CHERRY_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.CHERRY_SLAB)
+                .unlockedBy("has_cherry_slab", has(Items.CHERRY_SLAB))
+                .save(consumer, modLoc("cherry_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BAMBOO_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.BAMBOO_SLAB)
+                .unlockedBy("has_bamboo_slab", has(Items.BAMBOO_SLAB))
+                .save(consumer, modLoc("bamboo_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CRIMSON_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.CRIMSON_SLAB)
+                .unlockedBy("has_crimson_slab", has(Items.CRIMSON_SLAB))
+                .save(consumer, modLoc("crimson_floating_walkway"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WARPED_FLOATING_WALKWAY.get(), 2)
+                .pattern("#x#")
+                .define('#', Items.STICK)
+                .define('x', Items.WARPED_SLAB)
+                .unlockedBy("has_warped_slab", has(Items.WARPED_SLAB))
+                .save(consumer, modLoc("warped_floating_walkway"));
     }
 
     private void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {

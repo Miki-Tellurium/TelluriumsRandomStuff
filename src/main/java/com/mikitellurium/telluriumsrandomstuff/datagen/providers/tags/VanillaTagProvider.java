@@ -64,7 +64,19 @@ public class VanillaTagProvider {
                     .add(ModBlocks.INFUSED_SOUL_SAND.get());
 
             this.tag(BlockTags.MINEABLE_WITH_AXE)
-                    .add(ModBlocks.SOUL_JACK_O_LANTERN.get());
+                    .add(ModBlocks.SOUL_JACK_O_LANTERN.get())
+                    .add(ModBlocks.OAK_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.BIRCH_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.SPRUCE_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.JUNGLE_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.ACACIA_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.DARK_OAK_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.MANGROVE_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.CHERRY_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.BAMBOO_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.CRIMSON_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.WARPED_FLOATING_WALKWAY.get())
+            ;
 
             this.tag(BlockTags.MINEABLE_WITH_HOE)
                     .add(ModBlocks.AWAKENED_SCULK_SHRIEKER.get());

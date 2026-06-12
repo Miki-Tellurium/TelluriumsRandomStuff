@@ -1,0 +1,6 @@
+{
+  "parent": "telluriumsrandomstuff:block/floating_walkway",
+  "textures": {
+    "texture": "telluriumsrandomstuff:block/mangrove_floating_walkway"
+  }
+}

@@ -39,6 +39,18 @@ public class ModTagProvider {
             this.tag(ModTags.Blocks.BUBBLE_COLUMN_GENERATOR)
                     .addTag(ModTags.Blocks.BUBBLE_COLUMN_DRAG_DOWN)
                     .addTag(ModTags.Blocks.BUBBLE_COLUMN_LIFT_UP);
+
+            this.tag(ModTags.Blocks.FLOATING_WALKWAYS)
+                    .add(ModBlocks.OAK_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.SPRUCE_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.JUNGLE_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.ACACIA_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.DARK_OAK_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.MANGROVE_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.CHERRY_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.BAMBOO_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.CRIMSON_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.WARPED_FLOATING_WALKWAY.get());
         }
     }
 

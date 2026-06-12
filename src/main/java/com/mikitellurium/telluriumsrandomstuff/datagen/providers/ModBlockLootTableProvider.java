@@ -91,6 +91,17 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.SOUL_COMPACTOR.get());
         this.dropSelf(ModBlocks.SPIRITED_IRON_BLOCK.get());
         this.dropSelf(ModBlocks.SOUL_ASSEMBLY_TABLE.get());
+        this.dropSelf(ModBlocks.OAK_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.BIRCH_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.SPRUCE_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.JUNGLE_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.ACACIA_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.DARK_OAK_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.MANGROVE_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.CHERRY_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.BAMBOO_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.CRIMSON_FLOATING_WALKWAY.get());
+        this.dropSelf(ModBlocks.WARPED_FLOATING_WALKWAY.get());
     }
 
     @Override

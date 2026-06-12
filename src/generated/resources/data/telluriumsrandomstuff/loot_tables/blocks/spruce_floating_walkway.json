@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "telluriumsrandomstuff:spruce_floating_walkway"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "telluriumsrandomstuff:blocks/spruce_floating_walkway"
+}
