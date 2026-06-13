@@ -42,6 +42,7 @@ public class ModTagProvider {
 
             this.tag(ModTags.Blocks.FLOATING_WALKWAYS)
                     .add(ModBlocks.OAK_FLOATING_WALKWAY.get())
+                    .add(ModBlocks.BIRCH_FLOATING_WALKWAY.get())
                     .add(ModBlocks.SPRUCE_FLOATING_WALKWAY.get())
                     .add(ModBlocks.JUNGLE_FLOATING_WALKWAY.get())
                     .add(ModBlocks.ACACIA_FLOATING_WALKWAY.get())

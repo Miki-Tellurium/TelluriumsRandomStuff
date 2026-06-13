@@ -1,5 +1,6 @@
 package com.mikitellurium.telluriumsrandomstuff.common.item;
 
+import com.mikitellurium.telluriumsrandomstuff.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -35,11 +36,15 @@ public class FloatingWalkwayBlockItem extends BlockItem {
         }
         BlockPos pos = context.getClickedPos().below();
         Level level = context.getLevel();
-        BlockState blockstate = level.getBlockState(pos);
-        if (!blockstate.is(this.getBlock())) {
+        BlockState blockState = level.getBlockState(pos);
+        if (!blockState.is(ModTags.Blocks.FLOATING_WALKWAYS)) {
             return context;
         }
         Direction direction = context.getHorizontalDirection();
-        return BlockPlaceContext.at(context, pos.relative(direction), direction);
+        BlockState blockState1 = level.getBlockState(pos.relative(direction));
+        if (blockState1.canBeReplaced(context)) {
+            return BlockPlaceContext.at(context, pos, direction);
+        }
+        return null;
     }
 }
