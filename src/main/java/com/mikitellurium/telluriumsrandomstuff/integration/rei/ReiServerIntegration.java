@@ -11,7 +11,6 @@ import me.shedaniel.rei.forge.REIPluginCommon;
 
 @REIPluginCommon
 public class ReiServerIntegration implements REIServerPlugin, ModDisplayCategories {
-
     @Override
     public void registerDisplaySerializer(DisplaySerializerRegistry registry) {
         registry.register(SOUL_FURNACE_SMELTING, SoulFurnaceSmeltingDisplay.serializer());
@@ -28,5 +27,4 @@ public class ReiServerIntegration implements REIServerPlugin, ModDisplayCategori
         registry.register(BlockStateEntryType.TYPE, new BlockStateEntryType());
         registry.register(FluidBlockEntryType.TYPE, new FluidBlockEntryType());
     }
-
 }

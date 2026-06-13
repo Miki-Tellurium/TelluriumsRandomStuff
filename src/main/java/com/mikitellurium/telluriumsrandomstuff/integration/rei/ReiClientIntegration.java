@@ -14,21 +14,30 @@ import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.ClickableSou
 import com.mikitellurium.telluriumsrandomstuff.integration.rei.util.ModDisplayCategories;
 import com.mikitellurium.telluriumsrandomstuff.integration.util.PotionMixingHelper;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModCreativeTab;
+import com.mikitellurium.telluriumsrandomstuff.registry.ModItems;
 import me.shedaniel.math.Rectangle;
+import me.shedaniel.rei.api.client.entry.filtering.base.BasicFilteringRule;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
+import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.common.entry.EntryStack;
+import me.shedaniel.rei.api.common.entry.type.EntryType;
+import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.validation.PathAllowList;
+
+import java.util.Collection;
 
 @REIPluginClient
 public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategories {
-
     @Override
     public void registerCategories(CategoryRegistry registry) {
         registry.add(
@@ -76,4 +85,22 @@ public class ReiClientIntegration implements REIClientPlugin, ModDisplayCategori
         registry.registerClickArea(AlchemixerScreen.class, new ClickableSoulLavaTank<>());
     }
 
+    @Override
+    public void registerEntries(EntryRegistry registry) {
+        Collection<ItemStack> items = ModCreativeTab.TAB_TELLURIUMSRANDOMSTUFF.get().getDisplayItems();
+        for (ItemStack stack : items) {
+            registry.removeEntryIf((entry) -> {
+                if (entry.getType() != VanillaEntryTypes.ITEM) return false;
+                return ItemStack.matches((ItemStack) entry.getValue(), stack);
+            });
+            registry.addEntry(EntryStack.of(VanillaEntryTypes.ITEM, stack));
+        }
+
+        registry.removeEntryIf((entry) -> {
+            if (entry.getType() != VanillaEntryTypes.ITEM) return false;
+            ItemStack stack = (ItemStack) entry.getValue();
+            return stack.is(ModItems.SOUL_INFUSER_LIT.get()) ||
+                    stack.is(ModItems.SOUL_COMPACTOR_LIT.get());
+        });
+    }
 }
