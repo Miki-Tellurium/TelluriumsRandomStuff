@@ -3,7 +3,6 @@ package com.mikitellurium.telluriumsrandomstuff;
 import com.mikitellurium.telluriumsrandomstuff.api.ModDispenserBehaviours;
 import com.mikitellurium.telluriumsrandomstuff.api.potionmixing.PotionMixingManager;
 import com.mikitellurium.telluriumsrandomstuff.common.block.AlchemixerBlock;
-import com.mikitellurium.telluriumsrandomstuff.common.block.CustomBubbleColumnBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.SoulAnchorBlock;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModCauldronInteractions;
 import com.mikitellurium.telluriumsrandomstuff.common.block.interaction.ModFluidInteractions;
@@ -35,7 +34,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 public class CommonSetup {
     public static void registerForgeBusEvents() {
         MinecraftForge.EVENT_BUS.addListener(CommonSetup::registerCommands);
-        MinecraftForge.EVENT_BUS.register(CustomBubbleColumnBlock.class);
         MinecraftForge.EVENT_BUS.register(SoulAnchorBlock.class);
         MinecraftForge.EVENT_BUS.register(LavaGooglesItem.class);
         MinecraftForge.EVENT_BUS.register(GrapplingHookItem.class);

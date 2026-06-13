@@ -8,8 +8,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -20,7 +18,6 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GRATE_SOUL_SAND = registerBlock("grate_soul_sand", GrateSoulSandBlock::new);
     public static final RegistryObject<Block> GRATE_MAGMA_BLOCK = registerBlock("grate_magma_block", GrateMagmaBlock::new);
-    public static final RegistryObject<Block> CUSTOM_BUBBLE_COLUMN = registerBlock("custom_bubble_column", CustomBubbleColumnBlock::new);
     public static final RegistryObject<Block> HYDRODYNAMIC_RAIL = registerBlock("hydrodynamic_rail", HydrodynamicRailBlock::new);
     public static final RegistryObject<LiquidBlock> SOUL_LAVA_BLOCK = registerBlock("soul_lava_block", () -> new SoulLavaBlock(ModFluids.SOUL_LAVA_SOURCE), false);
     public static final RegistryObject<Block> SOUL_MAGMA_BLOCK = registerBlock("soul_magma_block", SoulMagmaBlock::new);
@@ -62,7 +59,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> END_STONE_BRICK_ITEM_PEDESTAL = registerBlock("end_stone_brick_item_pedestal", () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.END_STONE_BRICKS).noOcclusion()));
     public static final RegistryObject<Block> PURPUR_ITEM_PEDESTAL = registerBlock("purpur_item_pedestal", () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.PURPUR_BLOCK).noOcclusion()));
     public static final RegistryObject<Block> QUARTZ_ITEM_PEDESTAL = registerBlock("quartz_item_pedestal", () -> new ItemPedestalBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK).noOcclusion()));
-    public static final RegistryObject<Block> INFUSED_SOUL_SAND = registerBlock("infused_soul_sand", InfusedSoulSandBlock::new);
+    public static final RegistryObject<Block> INFUSED_SOUL_SAND = registerBlock("infused_soul_sand", () -> new InfusedSoulSandBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_SAND).randomTicks()));
     public static final RegistryObject<Block> SOUL_INFUSER = registerBlock("soul_infuser", SoulInfuserBlock::new);
     public static final RegistryObject<Block> ALCHEMIXER = registerBlock("alchemixer", AlchemixerBlock::new);
     public static final RegistryObject<Block> SOUL_COMPACTOR = registerBlock("soul_compactor", SoulCompactorBlock::new);

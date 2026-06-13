@@ -20,7 +20,6 @@ import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 
 public class GrateSoulSandBlock extends SoulSandBlock {
-
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public GrateSoulSandBlock() {
@@ -42,11 +41,6 @@ public class GrateSoulSandBlock extends SoulSandBlock {
         }
     }
 
-    @Override
-    public void tick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
-        CustomBubbleColumnBlock.updateColumn(level, pos.above(), blockState);
-    }
-
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -57,5 +51,4 @@ public class GrateSoulSandBlock extends SoulSandBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
-
 }

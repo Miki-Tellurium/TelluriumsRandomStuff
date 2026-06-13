@@ -51,7 +51,6 @@ public class ModBlockModelProvider extends BlockStateProvider {
                         .rotationY((int) state.getValue(GrateMagmaBlock.FACING).toYRot())
                         .build());
         this.blockItemModelFromParent(ModBlocks.GRATE_MAGMA_BLOCK, modLoc("block/grate_magma_block"));
-        this.simpleBlock(ModBlocks.CUSTOM_BUBBLE_COLUMN.get(), this.models().getExistingFile(mcLoc("block/water")));
         this.getVariantBuilder(ModBlocks.HYDRODYNAMIC_RAIL.get())
                 .forAllStates((state) -> {
                     String model = "hydrodynamic_rail";

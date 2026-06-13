@@ -8,10 +8,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.MagmaBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -29,13 +26,7 @@ public class GrateMagmaBlock extends MagmaBlock {
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState blockState, Entity entity) {
-        //super.stepOn(level, pos, blockState, entity);
-        // Disabling the magma block stepOn method damage
-    }
-
-    @Override
-    public void tick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
-        CustomBubbleColumnBlock.updateColumn(level, pos.above(), blockState);
+        // Disable step damage
     }
 
     @Override

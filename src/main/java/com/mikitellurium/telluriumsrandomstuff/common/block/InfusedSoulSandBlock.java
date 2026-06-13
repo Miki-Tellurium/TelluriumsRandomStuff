@@ -2,7 +2,6 @@ package com.mikitellurium.telluriumsrandomstuff.common.block;
 
 import com.mikitellurium.telluriumsrandomstuff.registry.ModBlocks;
 import com.mikitellurium.telluriumsrandomstuff.registry.ModParticles;
-import com.mikitellurium.telluriumsrandomstuff.util.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -29,15 +28,12 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class InfusedSoulSandBlock extends SoulSandBlock {
+    private final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
+    private final static float SOUL_LAVA_DRIP_CHANCE = 0.032f;
+    private final static int DEPLETION_CHANCE = 10;
 
-    private final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK =
-            Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
-    private final float soulLavaDripChance = 0.032f;
-    private final int depletionChance = 10;
-
-    public InfusedSoulSandBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.SOUL_SAND)
-                .randomTicks());
+    public InfusedSoulSandBlock(Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -53,14 +49,9 @@ public class InfusedSoulSandBlock extends SoulSandBlock {
     }
 
     @Override
-    public void tick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
-        CustomBubbleColumnBlock.updateColumn(level, pos.above(), blockState);
-    }
-
-    @Override
     public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
         if (level.getFluidState(pos.above()).is(Fluids.LAVA)) {
-            if (random.nextFloat() < soulLavaDripChance) {
+            if (random.nextFloat() < SOUL_LAVA_DRIP_CHANCE) {
                 BlockPos maybeCauldronPos = this.findEmptyCauldronBelow(level, pos.below());
                 if (maybeCauldronPos != null) {
                     BlockState soulLavaCauldron = ModBlocks.SOUL_LAVA_CAULDRON.get().defaultBlockState();
@@ -68,7 +59,7 @@ public class InfusedSoulSandBlock extends SoulSandBlock {
                     level.setBlockAndUpdate(maybeCauldronPos, soulLavaCauldron);
                     level.gameEvent(GameEvent.BLOCK_CHANGE, maybeCauldronPos, GameEvent.Context.of(soulLavaCauldron));
                     level.playSound(null, maybeCauldronPos, SoundEvents.SOUL_ESCAPE, SoundSource.BLOCKS, 0.8f, 1.0f);
-                    if (random.nextInt(100) < depletionChance) {
+                    if (random.nextInt(100) < DEPLETION_CHANCE) {
                         level.setBlockAndUpdate(pos, Blocks.SOUL_SAND.defaultBlockState());
                         level.playSound(null, pos, SoundEvents.SOUL_ESCAPE, SoundSource.BLOCKS, 0.8f, 1.5f);
                     }
@@ -77,46 +68,44 @@ public class InfusedSoulSandBlock extends SoulSandBlock {
         }
     }
 
-    public BlockPos findEmptyCauldronBelow(Level pLevel, BlockPos pPos) {
+    public BlockPos findEmptyCauldronBelow(Level level, BlockPos pos) {
         Predicate<BlockState> predicate = (blockState) -> blockState.getBlock() instanceof CauldronBlock;
-        BiPredicate<BlockPos, BlockState> bipredicate = (blockPos, blockState) -> canDripThrough(pLevel, blockPos, blockState);
-        return findBlockVertical(pLevel, pPos, Direction.DOWN.getAxisDirection(), bipredicate, predicate, 11).orElse(null);
+        BiPredicate<BlockPos, BlockState> bipredicate = (blockPos, blockState) -> canDripThrough(level, blockPos, blockState);
+        return findBlockVertical(level, pos, Direction.DOWN.getAxisDirection(), bipredicate, predicate, 11).orElse(null);
     }
 
-    private boolean canDripThrough(BlockGetter pLevel, BlockPos pPos, BlockState pState) {
-        if (pState.isAir()) {
+    private boolean canDripThrough(BlockGetter level, BlockPos pos, BlockState state) {
+        if (state.isAir()) {
             return true;
-        } else if (pState.isSolidRender(pLevel, pPos)) {
+        } else if (state.isSolidRender(level, pos)) {
             return false;
-        } else if (!pState.getFluidState().isEmpty()) {
+        } else if (!state.getFluidState().isEmpty()) {
             return false;
         } else {
-            VoxelShape voxelshape = pState.getCollisionShape(pLevel, pPos);
+            VoxelShape voxelshape = state.getCollisionShape(level, pos);
             return !Shapes.joinIsNotEmpty(REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK, voxelshape, BooleanOp.AND);
         }
     }
 
     @SuppressWarnings("SameParameterValue")
-    private Optional<BlockPos> findBlockVertical(LevelAccessor pLevel, BlockPos pPos, Direction.AxisDirection pAxis,
-                                                        BiPredicate<BlockPos, BlockState> pPositionalStatePredicate,
-                                                        Predicate<BlockState> pStatePredicate, int pMaxIterations) {
-        Direction direction = Direction.get(pAxis, Direction.Axis.Y);
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = pPos.mutable();
+    private Optional<BlockPos> findBlockVertical(LevelAccessor level, BlockPos pos, Direction.AxisDirection axis,
+                                                 BiPredicate<BlockPos, BlockState> canDripThroughPredicate,
+                                                 Predicate<BlockState> statePredicate, int maxIterations) {
+        Direction direction = Direction.get(axis, Direction.Axis.Y);
+        BlockPos.MutableBlockPos blockpos$mutableblockpos = pos.mutable();
 
-        for(int i = 1; i < pMaxIterations; ++i) {
+        for(int i = 1; i < maxIterations; ++i) {
             blockpos$mutableblockpos.move(direction);
-            BlockState blockstate = pLevel.getBlockState(blockpos$mutableblockpos);
-            if (pStatePredicate.test(blockstate)) {
+            BlockState blockstate = level.getBlockState(blockpos$mutableblockpos);
+            if (statePredicate.test(blockstate)) {
                 return Optional.of(blockpos$mutableblockpos.immutable());
             }
 
-            if (pLevel.isOutsideBuildHeight(blockpos$mutableblockpos.getY()) ||
-                    !pPositionalStatePredicate.test(blockpos$mutableblockpos, blockstate)) {
+            if (level.isOutsideBuildHeight(blockpos$mutableblockpos.getY()) || !canDripThroughPredicate.test(blockpos$mutableblockpos, blockstate)) {
                 return Optional.empty();
             }
         }
 
         return Optional.empty();
     }
-
 }
