@@ -23,7 +23,7 @@ public class ModCreativeTab {
     public static final RegistryObject<CreativeModeTab> TAB_TELLURIUMSRANDOMSTUFF = registerTab(
             "creative_tab", () -> CreativeModeTab.builder()
                     .title(Component.translatable("creativemodetab.telluriumsrandomstuff_creative_tab"))
-                    .icon(() -> new ItemStack(ModBlocks.SOUL_FURNACE.get()))
+                    .icon(() -> new ItemStack(ModBlocks.SOUL_INFUSER.get()))
                     .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
                     .build());
 
