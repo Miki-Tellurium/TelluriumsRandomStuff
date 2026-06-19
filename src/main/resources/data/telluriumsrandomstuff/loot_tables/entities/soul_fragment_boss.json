@@ -14,10 +14,6 @@
               "chance": 1.0,
               "multiplier": 0.0,
               "looting": 0
-            },
-            {
-              "function": "telluriumsrandomstuff:add_stored_soul",
-              "count": 8
             }
           ]
         }
@@ -44,10 +40,6 @@
                 "max": 1.0,
                 "min": 0.0
               }
-            },
-            {
-              "function": "telluriumsrandomstuff:add_stored_soul",
-              "count": 1
             }
           ]
         }
